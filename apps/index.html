@@ -59,14 +59,39 @@
                 Login
             </button>
 <!-- User menu (shown when logged in) -->
-<div class="hidden items-center gap-2" data-auth="user-menu">
-<div class="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
-<span class="material-symbols-outlined text-primary text-sm">person</span>
-<span class="text-[10px] font-bold text-primary uppercase" id="userName">Usuario</span>
-</div>
-<button class="text-stone-400 hover:text-red-500 transition-colors" onclick="logout()" title="Cerrar sesión">
-<span class="material-symbols-outlined text-sm">logout</span>
+<div class="relative hidden items-center gap-2" data-auth="user-menu">
+<button class="flex items-center gap-2 bg-stone-100 hover:bg-stone-200 px-4 py-2 rounded-full transition-colors" onclick="toggleUserDropdown()" id="userMenuButton">
+<span class="material-symbols-outlined text-stone-600 text-sm">person</span>
+<span class="text-[10px] font-bold text-stone-800 uppercase" id="userName">Usuario</span>
+<span class="material-symbols-outlined text-stone-400 text-sm transition-transform" id="userDropdownArrow">expand_more</span>
 </button>
+<!-- User Dropdown Menu -->
+<div class="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden z-50" id="userDropdown">
+<div class="p-3 border-b border-outline bg-stone-50">
+<p class="text-xs font-bold text-stone-800" id="dropdownUserName">Usuario</p>
+<p class="text-[10px] text-stone-400" id="dropdownUserRole">Rol</p>
+</div>
+<div class="p-2">
+<a class="flex items-center gap-3 p-2 hover:bg-stone-50 rounded-lg transition-colors text-stone-700 hover:text-black" href="dashboard.html">
+<span class="material-symbols-outlined text-stone-400 text-sm">dashboard</span>
+<span class="text-xs font-bold uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-2 hover:bg-stone-50 rounded-lg transition-colors text-stone-700 hover:text-black" href="carrito_de_compras.html">
+<span class="material-symbols-outlined text-stone-400 text-sm">shopping_cart</span>
+<span class="text-xs font-bold uppercase tracking-wider">Mi Carrito</span>
+</a>
+<a class="flex items-center gap-3 p-2 hover:bg-stone-50 rounded-lg transition-colors text-stone-700 hover:text-black" href="mi_cuenta_pedidos_y_flotas.html">
+<span class="material-symbols-outlined text-stone-400 text-sm">account_circle</span>
+<span class="text-xs font-bold uppercase tracking-wider">Mi Cuenta</span>
+</a>
+</div>
+<div class="p-2 border-t border-outline">
+<button class="flex items-center gap-3 p-2 w-full hover:bg-red-50 rounded-lg transition-colors text-red-500" onclick="logout()">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span class="text-xs font-bold uppercase tracking-wider">Cerrar Sesión</span>
+</button>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -122,10 +147,25 @@
 </div>
 </div>
 <div class="p-4 flex flex-wrap gap-4 items-center justify-between bg-stone-50 border-t border-outline">
-<div class="flex-1">
+<div class="flex-1 relative">
 <div class="relative">
-<input class="w-full bg-white border-outline text-xs py-3 px-10 rounded-md focus:ring-primary focus:border-primary" placeholder="Búsqueda rápida por número de parte OEM o serie VIN..." type="text"/>
+<input class="w-full bg-white border-outline text-xs py-3 px-10 rounded-md focus:ring-primary focus:border-primary" id="heroSearchInput" placeholder="Búsqueda rápida por número de parte OEM o serie VIN..." type="text" oninput="handleHeroSearch()" onkeypress="if(event.key==='Enter') executeHeroSearch()"/>
 <span class="material-symbols-outlined absolute left-3 top-2.5 text-stone-400 text-lg">qr_code_scanner</span>
+</div>
+<!-- Hero Search Suggestions Dropdown -->
+<div class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden z-50" id="heroSearchSuggestions">
+<div class="p-3 border-b border-outline bg-stone-50 flex items-center justify-between">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Sugerencias</p>
+<span class="text-[10px] text-stone-400" id="heroResultsCount"></span>
+</div>
+<div id="heroSuggestionsList" class="max-h-64 overflow-y-auto">
+<!-- Suggestions populated by JS -->
+</div>
+<div class="p-3 border-t border-outline bg-stone-50">
+<button class="w-full text-center text-xs text-primary font-bold uppercase tracking-widest hover:text-primary-dim transition-colors" onclick="executeHeroSearch()">
+                            Ver Todos los Resultados →
+                        </button>
+</div>
 </div>
 </div>
 <div class="flex items-center gap-6">
@@ -435,7 +475,198 @@
                 const userMenu = document.querySelector('[data-auth="user-menu"]');
                 userMenu.style.display = 'flex';
                 userMenu.classList.remove('hidden');
-                document.getElementById('userName').textContent = user.name.split(' ')[0];
+                
+                // Update all user name displays
+                const displayName = user.name.split(' ')[0];
+                document.getElementById('userName').textContent = displayName;
+                document.getElementById('dropdownUserName').textContent = user.name;
+                document.getElementById('dropdownUserRole').textContent = user.role === 'admin' ? 'Administrador' : 'Usuario';
+            }
+        });
+
+        // Toggle user dropdown
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            const arrow = document.getElementById('userDropdownArrow');
+            
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                dropdown.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('userDropdown');
+            const button = document.getElementById('userMenuButton');
+            
+            if (button && !button.contains(e.target) && dropdown && !dropdown.contains(e.target)) {
+                dropdown.classList.add('hidden');
+                const arrow = document.getElementById('userDropdownArrow');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Product database for intelligent search
+        const productDatabase = [
+            { id: 'TRB-VGT-84521', name: 'Turboalimentador Variable VGT', oem: '28231-27000', category: 'Motor', brand: 'Toyota', vehicle: 'Hilux 2016-2020', price: '$845.00', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRn-wdKgaOpSBynFvnr0e_fmpdUwmPnpozU-NafufUaamlmKKGX6d-dkHr2aj7_nDx-AKznW0KzL5fIjYG7gtzalG2_9IuNT-hTRWpJiQeJzZ8511dZsT6tl5qkDqAo8LX7qK-hVKM713GcUlIo5wK0hJMgn8yJDs7Of6LasPy_8C4MbxFJrKC_7-xXWWCDrchCbWw_snA5feSSKqCid71lSKHG6-nFtzz1O8S3ya-CRGXCpluZVnH6mf88Zf6m9L0V_NoXpdkOA' },
+            { id: 'BRK-9004-HD', name: 'Pastillas de Freno Heavy Duty', oem: '04465-35290', category: 'Frenos', brand: 'Toyota', vehicle: 'Land Cruiser 2016+', price: '$129.50', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A' },
+            { id: 'KIT-MT-2024', name: 'Kit de Filtros Mantenimiento', oem: 'HF28953', category: 'Filtros', brand: 'Ford', vehicle: 'Ranger Raptor 2019+', price: '$54.00', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD1LXppgzwzoDNtBCTum-3mUotkQKZr4efvjDbwAOBjwjJE2xZCUgtXD8SPX-_Nrqm76VjHKjH7dT9dKprmE0OBFhJprM5FcDSVVREanO0F4r8SMiO-hTRsbWq77Oy4vN8Zk7C5pJiqCntBy0l2e0yWjv_L5WjI7HIX-r13bq1FI_0xFhYGlLvThi__IzNvRhTRxJ6WmLoXd6SFCDRN_G_2vR0jLH5i2il3DtSt1QLW1MmUWGZsxfKHSnOmdfpVN-ai4OREYR2giw' },
+            { id: 'OPT-8820-LED', name: 'Óptica Frontal LED Proyección', oem: '81110-02U80', category: 'Carrocería', brand: 'Toyota', vehicle: 'Corolla X50 2018-2022', price: '$210.00', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCrcJwmgPZi9HdRxqunTqDBpRfn4pF3cktXGtXeDeErJkw6Qr0CH6OOarSUXnpPzyA7DqT72dqcSy8u7-h3VsSX86XAAENjxgioCB4WNZwfXPtuR6AxXXTNotht--sFm_e7RL3FjkeUQfE-26tCftzD_frwFhDn1XAoncUkfQRnsU3VZ__P2TJjqMRUe7brF9pyOJYrpl2CyEHUYkAYbJ1zHE9sm8r21lspqmBh19bYhggjkEl8P1sXmOyTVSzh8pvZyxase_kxuQ' },
+            { id: 'DIS-4421-VTL', name: 'Kit de Discos de Freno Ventilados', oem: '43512-60290', category: 'Frenos', brand: 'Toyota', vehicle: 'Land Cruiser 2015+', price: '$85.00', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A' },
+            { id: 'INJ-CAT-882', name: 'Inyector de Combustible Heavy Duty', oem: 'CAT-882', category: 'Motor', brand: 'Caterpillar', vehicle: 'CAT C7/C9', price: '$320.00', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ' },
+            { id: 'SUS-101-DEL', name: 'Amortiguador Reforzado Delantero', oem: '48510-60440', category: 'Suspensión', brand: 'Toyota', vehicle: 'Land Cruiser 2015+', price: '$145.00', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw' },
+            { id: 'TRS-55-FIL', name: 'Filtro de Transmisión Automática', oem: '35330-60010', category: 'Transmisión', brand: 'Toyota', vehicle: 'Land Cruiser 2015+', price: '$42.50', image: '' },
+            { id: 'VIN-HTX-2020', name: 'Sensor de Oxígeno Lambda', oem: '89465-02190', category: 'Electrónica', brand: 'Toyota', vehicle: 'Hilux 2016-2020', price: '$95.00', image: '' },
+            { id: 'VIN-CLL-2019', name: 'Bomba de Agua', oem: '16100-59475', category: 'Motor', brand: 'Toyota', vehicle: 'Corolla 2019-2023', price: '$78.00', image: '' },
+            { id: 'OEM-F150-2021', name: 'Kit de Embrague Completo', oem: 'FL3Z-7550-A', category: 'Transmisión', brand: 'Ford', vehicle: 'F-150 2021+', price: '$285.00', image: '' },
+            { id: 'VIN-CAT-C15', name: 'Turbo Compresor C15', oem: '245-3932', category: 'Motor', brand: 'Caterpillar', vehicle: 'CAT C15', price: '$1,850.00', image: '' }
+        ];
+
+        let navSearchTimeout = null;
+        let heroSearchTimeout = null;
+
+        // Navbar Search Functions
+        function handleNavSearch() {
+            clearTimeout(navSearchTimeout);
+            const searchTerm = document.getElementById('navSearchInput').value.trim().toLowerCase();
+            const suggestions = document.getElementById('navSearchSuggestions');
+            const resultsCount = document.getElementById('navResultsCount');
+
+            if (!searchTerm) {
+                suggestions.classList.add('hidden');
+                return;
+            }
+
+            navSearchTimeout = setTimeout(() => {
+                const matches = productDatabase.filter(p => 
+                    p.id.toLowerCase().includes(searchTerm) ||
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.oem.toLowerCase().includes(searchTerm) ||
+                    p.category.toLowerCase().includes(searchTerm) ||
+                    p.brand.toLowerCase().includes(searchTerm) ||
+                    p.vehicle.toLowerCase().includes(searchTerm)
+                ).slice(0, 5);
+
+                resultsCount.textContent = `${matches.length} encontrado${matches.length !== 1 ? 's' : ''}`;
+
+                if (matches.length === 0) {
+                    document.getElementById('navSuggestionsList').innerHTML = `
+                        <div class="p-4 text-center">
+                            <span class="material-symbols-outlined text-stone-300 text-3xl mb-2">search_off</span>
+                            <p class="text-xs text-stone-400">No se encontraron resultados</p>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('navSuggestionsList').innerHTML = matches.map(p => `
+                        <div class="p-3 hover:bg-stone-50 cursor-pointer transition-colors border-b border-outline/50 last:border-b-0" onclick="selectNavProduct('${p.id}')">
+                            <div class="flex items-center gap-3">
+                                ${p.image ? `<img src="${p.image}" class="w-10 h-10 rounded object-cover flex-shrink-0" alt="${p.name}"/>` : `<div class="w-10 h-10 bg-stone-100 rounded flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-stone-400 text-sm">inventory</span></div>`}
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold text-black truncate">${p.name}</p>
+                                    <p class="text-[10px] text-stone-400">OEM: ${p.oem} | ${p.brand} ${p.vehicle}</p>
+                                </div>
+                                <span class="text-sm font-black text-primary">${p.price}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                suggestions.classList.remove('hidden');
+            }, 300);
+        }
+
+        function selectNavProduct(productId) {
+            document.getElementById('navSearchInput').value = productId;
+            document.getElementById('navSearchSuggestions').classList.add('hidden');
+            window.location.href = `busqueda_resultados.html?q=${encodeURIComponent(productId)}`;
+        }
+
+        function executeNavSearch() {
+            const searchTerm = document.getElementById('navSearchInput').value.trim();
+            if (searchTerm) {
+                window.location.href = `busqueda_resultados.html?q=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        // Hero Search Functions
+        function handleHeroSearch() {
+            clearTimeout(heroSearchTimeout);
+            const searchTerm = document.getElementById('heroSearchInput').value.trim().toLowerCase();
+            const suggestions = document.getElementById('heroSearchSuggestions');
+            const resultsCount = document.getElementById('heroResultsCount');
+
+            if (!searchTerm) {
+                suggestions.classList.add('hidden');
+                return;
+            }
+
+            heroSearchTimeout = setTimeout(() => {
+                const matches = productDatabase.filter(p => 
+                    p.id.toLowerCase().includes(searchTerm) ||
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.oem.toLowerCase().includes(searchTerm) ||
+                    p.category.toLowerCase().includes(searchTerm) ||
+                    p.brand.toLowerCase().includes(searchTerm) ||
+                    p.vehicle.toLowerCase().includes(searchTerm)
+                ).slice(0, 5);
+
+                resultsCount.textContent = `${matches.length} encontrado${matches.length !== 1 ? 's' : ''}`;
+
+                if (matches.length === 0) {
+                    document.getElementById('heroSuggestionsList').innerHTML = `
+                        <div class="p-4 text-center">
+                            <span class="material-symbols-outlined text-stone-300 text-3xl mb-2">search_off</span>
+                            <p class="text-xs text-stone-400">No se encontraron resultados</p>
+                        </div>
+                    `;
+                } else {
+                    document.getElementById('heroSuggestionsList').innerHTML = matches.map(p => `
+                        <div class="p-3 hover:bg-stone-50 cursor-pointer transition-colors border-b border-outline/50 last:border-b-0" onclick="selectHeroProduct('${p.id}')">
+                            <div class="flex items-center gap-3">
+                                ${p.image ? `<img src="${p.image}" class="w-12 h-12 rounded object-cover flex-shrink-0" alt="${p.name}"/>` : `<div class="w-12 h-12 bg-stone-100 rounded flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-stone-400 text-sm">inventory</span></div>`}
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold text-black truncate">${p.name}</p>
+                                    <p class="text-[10px] text-stone-400">OEM: ${p.oem} | ${p.brand} ${p.vehicle}</p>
+                                </div>
+                                <span class="text-sm font-black text-primary">${p.price}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                suggestions.classList.remove('hidden');
+            }, 300);
+        }
+
+        function selectHeroProduct(productId) {
+            document.getElementById('heroSearchInput').value = productId;
+            document.getElementById('heroSearchSuggestions').classList.add('hidden');
+            window.location.href = `busqueda_resultados.html?q=${encodeURIComponent(productId)}`;
+        }
+
+        function executeHeroSearch() {
+            const searchTerm = document.getElementById('heroSearchInput').value.trim();
+            if (searchTerm) {
+                window.location.href = `busqueda_resultados.html?q=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        // Close suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            const navSuggestions = document.getElementById('navSearchSuggestions');
+            const navInput = document.getElementById('navSearchInput');
+            const heroSuggestions = document.getElementById('heroSearchSuggestions');
+            const heroInput = document.getElementById('heroSearchInput');
+
+            if (navInput && !navInput.contains(e.target) && navSuggestions && !navSuggestions.contains(e.target)) {
+                navSuggestions.classList.add('hidden');
+            }
+            if (heroInput && !heroInput.contains(e.target) && heroSuggestions && !heroSuggestions.contains(e.target)) {
+                heroSuggestions.classList.add('hidden');
             }
         });
     </script>

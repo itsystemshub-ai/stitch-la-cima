@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard General | Zenith ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="tailwind-config.js"></script>
+<link href="styles.css" rel="stylesheet"/>
+<script src="auth.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            protectPage();
+            const user = getCurrentUser();
+            if (user) {
+                document.getElementById('dashboardUserName').textContent = user.name;
+                document.getElementById('dashboardUserRole').textContent = user.role === 'admin' ? 'Administrador' : 'Usuario';
+                document.getElementById('welcomeUserName').textContent = user.name.split(' ')[0];
+                document.getElementById('dropdownUserName').textContent = user.name;
+                document.getElementById('dropdownUserRole').textContent = user.role === 'admin' ? 'Administrador' : 'Usuario';
+            }
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleString('es-VE');
+        });
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            const arrow = document.getElementById('userDropdownArrow');
+            dropdown.classList.toggle('hidden');
+            arrow.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+    </script>
+<style>
+        .module-card { transition: all 0.3s ease; }
+        .module-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .kpi-card { transition: all 0.2s ease; }
+        .kpi-card:hover { transform: scale(1.02); }
+        .progress-bar { transition: width 1s ease; }
+        .module-under-construction { position: relative; overflow: hidden; }
+        .module-under-construction::after { content: 'EN CONSTRUCCIÓN'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 24px; font-weight: 900; color: rgba(0,0,0,0.05); white-space: nowrap; pointer-events: none; }
+        .module-section { display: none; }
+        .module-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-[#fafafa] text-on-surface selection:bg-primary/30">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-white flex flex-col py-6 border-r border-outline z-50">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+</div>
+<p class="text-[10px] text-stone-400 font-medium tracking-widest mt-2 uppercase">Panel de Control General</p>
+</div>
+<nav class="flex-1 space-y-1 px-3">
+<a class="flex items-center px-4 py-3 bg-primary/10 text-primary border-l-4 border-primary font-bold text-xs uppercase tracking-widest rounded-r-lg" href="dashboard.html">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="gesti_n_detallada_de_inventario.html">
+<span class="material-symbols-outlined mr-3">inventory</span>
+                    Inventario
+                </a>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="panel_de_ventas_y_crm_de_vendedores.html">
+<span class="material-symbols-outlined mr-3">point_of_sale</span>
+                    Ventas
+                </a>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined mr-3">attach_money</span>
+                    Finanzas
+                </a>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+                    RRHH
+                </a>
+<div class="h-px bg-outline my-4"></div>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="seguimiento_log_stico_y_despachos_en_tiempo_real.html">
+<span class="material-symbols-outlined mr-3">local_shipping</span>
+                    Logística
+                </a>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="directorio_de_clientes_b2b_talleres_y_flotas.html">
+<span class="material-symbols-outlined mr-3">business</span>
+                    Clientes B2B
+                </a>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="reportes_y_anal_tica_predictiva.html">
+<span class="material-symbols-outlined mr-3">bar_chart</span>
+                    Reportes
+                </a>
+<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="configuraci_n_avanzada_del_sistema.html">
+<span class="material-symbols-outlined mr-3">settings</span>
+                    Configuración
+                </a>
+</nav>
+<div class="px-3 mt-auto">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-stone-100 text-stone-600 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-stone-200 transition-colors" onclick="logout()">
+<span class="material-symbols-outlined text-sm">logout</span>
+                    Cerrar Sesión
+                </button>
+</div>
+</aside>
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- TopBar -->
+<header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-outline flex justify-between items-center px-8 h-16">
+<div class="flex items-center gap-4">
+<h1 class="text-xl font-black uppercase tracking-tighter text-black" id="pageTitle">Dashboard General</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="relative">
+<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" id="navSearchInput" placeholder="Buscar por OEM o VIN..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-stone-400 text-lg">search</span>
+</div>
+<div class="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden z-50" id="navSearchSuggestions">
+<div class="p-3 border-b border-outline bg-stone-50 flex items-center justify-between">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Sugerencias</p>
+<span class="text-[10px] text-stone-400" id="navResultsCount"></span>
+</div>
+<div id="navSuggestionsList" class="max-h-64 overflow-y-auto"></div>
+<div class="p-3 border-t border-outline bg-stone-50">
+<button class="w-full text-center text-xs text-primary font-bold uppercase tracking-widest hover:text-primary-dim transition-colors" onclick="executeSmartSearch(document.getElementById('navSearchInput').value.trim(), 'navSearchSuggestions')">Ver Todos los Resultados →</button>
+</div>
+</div>
+</div>
+<div class="relative flex items-center gap-2" data-auth="user-menu">
+<button class="flex items-center gap-2 bg-stone-100 hover:bg-stone-200 px-4 py-2 rounded-full transition-colors" onclick="toggleUserDropdown()" id="userMenuButton">
+<span class="material-symbols-outlined text-stone-600 text-sm">person</span>
+<span class="text-[10px] font-bold text-stone-800 uppercase" id="userName">Usuario</span>
+<span class="material-symbols-outlined text-stone-400 text-sm transition-transform" id="userDropdownArrow">expand_more</span>
+</button>
+<div class="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden z-50" id="userDropdown">
+<div class="p-3 border-b border-outline bg-stone-50">
+<p class="text-xs font-bold text-stone-800" id="dropdownUserName">Usuario</p>
+<p class="text-[10px] text-stone-400" id="dropdownUserRole">Rol</p>
+</div>
+<div class="p-2">
+<a class="flex items-center gap-3 p-2 hover:bg-stone-50 rounded-lg transition-colors text-stone-700 hover:text-black" href="dashboard.html">
+<span class="material-symbols-outlined text-stone-400 text-sm">dashboard</span>
+<span class="text-xs font-bold uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-2 hover:bg-stone-50 rounded-lg transition-colors text-stone-700 hover:text-black" href="carrito_de_compras.html">
+<span class="material-symbols-outlined text-stone-400 text-sm">shopping_cart</span>
+<span class="text-xs font-bold uppercase tracking-wider">Mi Carrito</span>
+</a>
+<a class="flex items-center gap-3 p-2 hover:bg-stone-50 rounded-lg transition-colors text-stone-700 hover:text-black" href="mi_cuenta_pedidos_y_flotas.html">
+<span class="material-symbols-outlined text-stone-400 text-sm">account_circle</span>
+<span class="text-xs font-bold uppercase tracking-wider">Mi Cuenta</span>
+</a>
+</div>
+<div class="p-2 border-t border-outline">
+<button class="flex items-center gap-3 p-2 w-full hover:bg-red-50 rounded-lg transition-colors text-red-500" onclick="logout()">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span class="text-xs font-bold uppercase tracking-wider">Cerrar Sesión</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Content -->
+<section class="p-8 flex-1">
+<div class="max-w-7xl mx-auto">
+
+<!-- ==================== OVERVIEW MODULE ==================== -->
+<div id="overview" class="module-section active">
+<!-- Welcome Banner -->
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Bienvenido, <span class="text-primary" id="welcomeUserName">Usuario</span></h2>
+<p class="text-stone-400 text-sm">Resumen ejecutivo de todos los módulos del sistema ERP. Última actualización: <span id="lastUpdate"></span></p>
+</div>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">ERP</div>
+</div>
+<!-- KPIs Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Total SKUs</span>
+<span class="material-symbols-outlined text-primary text-2xl">inventory</span>
+</div>
+<p class="text-3xl font-black text-black">15,240</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+120</span><span class="text-[10px] text-stone-400">esta semana</span></div>
+<div class="mt-3 h-1 bg-stone-100 rounded-full overflow-hidden"><div class="progress-bar h-full bg-primary rounded-full" style="width: 78%"></div></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Ventas del Mes</span>
+<span class="material-symbols-outlined text-primary text-2xl">trending_up</span>
+</div>
+<p class="text-3xl font-black text-black">$284,520</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+18.2%</span><span class="text-[10px] text-stone-400">vs mes anterior</span></div>
+<div class="mt-3 h-1 bg-stone-100 rounded-full overflow-hidden"><div class="progress-bar h-full bg-primary rounded-full" style="width: 85%"></div></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Pedidos Hoy</span>
+<span class="material-symbols-outlined text-primary text-2xl">shopping_cart</span>
+</div>
+<p class="text-3xl font-black text-black">48</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+8</span><span class="text-[10px] text-stone-400">vs ayer</span></div>
+<div class="mt-3 h-1 bg-stone-100 rounded-full overflow-hidden"><div class="progress-bar h-full bg-primary rounded-full" style="width: 65%"></div></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Stock Bajo</span>
+<span class="material-symbols-outlined text-yellow-500 text-2xl">warning</span>
+</div>
+<p class="text-3xl font-black text-black">23</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-red-500 font-bold">Requiere atención</span></div>
+<div class="mt-3 h-1 bg-stone-100 rounded-full overflow-hidden"><div class="progress-bar h-full bg-yellow-400 rounded-full" style="width: 25%"></div></div>
+</div>
+</div>
+<!-- Modules Grid -->
+<div class="mb-8">
+<h3 class="text-lg font-black uppercase tracking-tighter text-black mb-6">Módulos del Sistema</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Inventory Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden cursor-pointer" onclick="window.location.href='gesti_n_detallada_de_inventario.html'">
+<div class="h-2 bg-primary"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-primary text-2xl">inventory</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-black">Inventario</h4><p class="text-[10px] text-stone-400 uppercase">Gestión de Stock</p></div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[9px] font-bold uppercase rounded">Activo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Productos Activos</span><span class="text-xs font-bold text-black">12,450</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Categorías</span><span class="text-xs font-bold text-black">156</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Valor del Inventario</span><span class="text-xs font-bold text-black">$2.4M</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Rotación Mensual</span><span class="text-xs font-bold text-green-500">8.5%</span></div>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">open_in_new</span>Acceder al Módulo</button>
+</div>
+</div>
+<!-- Sales Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden cursor-pointer" onclick="window.location.href='panel_de_ventas_y_crm_de_vendedores.html'">
+<div class="h-2 bg-primary"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-primary text-2xl">point_of_sale</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-black">Ventas</h4><p class="text-[10px] text-stone-400 uppercase">CRM & Pedidos</p></div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[9px] font-bold uppercase rounded">Activo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Pedidos del Mes</span><span class="text-xs font-bold text-black">1,248</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Ticket Promedio</span><span class="text-xs font-bold text-black">$228.50</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Clientes Activos</span><span class="text-xs font-bold text-black">486</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Tasa de Conversión</span><span class="text-xs font-bold text-green-500">12.8%</span></div>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">open_in_new</span>Acceder al Módulo</button>
+</div>
+</div>
+<!-- Finance Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden module-under-construction opacity-75">
+<div class="h-2 bg-stone-300"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-stone-200 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-stone-400 text-2xl">attach_money</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-stone-400">Finanzas</h4><p class="text-[10px] text-stone-300 uppercase">Contabilidad & Reportes</p></div>
+</div>
+<span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[9px] font-bold uppercase rounded">En Desarrollo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Facturación</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Flujo de Caja</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Estados Financieros</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Proyecciones</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+</div>
+<button class="w-full bg-stone-200 text-stone-400 py-3 rounded-lg font-bold text-xs uppercase tracking-widest cursor-not-allowed flex items-center justify-center gap-2" disabled><span class="material-symbols-outlined text-sm">build</span>En Construcción</button>
+</div>
+</div>
+<!-- HR Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden module-under-construction opacity-75">
+<div class="h-2 bg-stone-300"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-stone-200 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-stone-400 text-2xl">group</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-stone-400">RRHH</h4><p class="text-[10px] text-stone-300 uppercase">Gestión de Personal</p></div>
+</div>
+<span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[9px] font-bold uppercase rounded">En Desarrollo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Nómina</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Asistencia</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Evaluaciones</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-400">Capacitación</span><span class="text-xs font-bold text-stone-300">Próximamente</span></div>
+</div>
+<button class="w-full bg-stone-200 text-stone-400 py-3 rounded-lg font-bold text-xs uppercase tracking-widest cursor-not-allowed flex items-center justify-center gap-2" disabled><span class="material-symbols-outlined text-sm">build</span>En Construcción</button>
+</div>
+</div>
+<!-- Logistics Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden cursor-pointer" onclick="window.location.href='seguimiento_log_stico_y_despachos_en_tiempo_real.html'">
+<div class="h-2 bg-primary"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-primary text-2xl">local_shipping</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-black">Logística</h4><p class="text-[10px] text-stone-400 uppercase">Despachos & Tracking</p></div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[9px] font-bold uppercase rounded">Activo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Envíos Activos</span><span class="text-xs font-bold text-black">36</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">En Tránsito</span><span class="text-xs font-bold text-black">28</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Entregados Hoy</span><span class="text-xs font-bold text-black">12</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Tasa de Entrega</span><span class="text-xs font-bold text-green-500">98.5%</span></div>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">open_in_new</span>Acceder al Módulo</button>
+</div>
+</div>
+<!-- B2B Clients Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden cursor-pointer" onclick="window.location.href='directorio_de_clientes_b2b_talleres_y_flotas.html'">
+<div class="h-2 bg-primary"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-primary text-2xl">business</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-black">Clientes B2B</h4><p class="text-[10px] text-stone-400 uppercase">Talleres & Flotas</p></div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[9px] font-bold uppercase rounded">Activo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Socios Activos</span><span class="text-xs font-bold text-black">1,402</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Crédito Pendiente</span><span class="text-xs font-bold text-black">$2.4M</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Facturas Pendientes</span><span class="text-xs font-bold text-black">84</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Volumen Mensual</span><span class="text-xs font-bold text-black">$894K</span></div>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">open_in_new</span>Acceder al Módulo</button>
+</div>
+</div>
+<!-- Reports Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden cursor-pointer" onclick="window.location.href='reportes_y_anal_tica_predictiva.html'">
+<div class="h-2 bg-primary"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-primary text-2xl">bar_chart</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-black">Reportes</h4><p class="text-[10px] text-stone-400 uppercase">Analítica Avanzada</p></div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[9px] font-bold uppercase rounded">Activo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Reportes Generados</span><span class="text-xs font-bold text-black">342</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Plantillas</span><span class="text-xs font-bold text-black">18</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Exportaciones</span><span class="text-xs font-bold text-black">PDF, Excel, CSV</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Programados</span><span class="text-xs font-bold text-green-500">12 activos</span></div>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">open_in_new</span>Acceder al Módulo</button>
+</div>
+</div>
+<!-- Configuration Module -->
+<div class="module-card bg-white border border-outline rounded-2xl overflow-hidden cursor-pointer" onclick="window.location.href='configuraci_n_avanzada_del_sistema.html'">
+<div class="h-2 bg-primary"></div>
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"><span class="material-symbols-outlined text-primary text-2xl">settings</span></div>
+<div><h4 class="font-black text-sm uppercase tracking-widest text-black">Configuración</h4><p class="text-[10px] text-stone-400 uppercase">Sistema & Usuarios</p></div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[9px] font-bold uppercase rounded">Activo</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Usuarios Activos</span><span class="text-xs font-bold text-black">24</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Roles Configurados</span><span class="text-xs font-bold text-black">6</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Backups Automáticos</span><span class="text-xs font-bold text-green-500">Habilitado</span></div>
+<div class="flex justify-between items-center"><span class="text-xs text-stone-500">Último Backup</span><span class="text-xs font-bold text-black">Hace 2h</span></div>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-sm">open_in_new</span>Acceder al Módulo</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="bg-white border border-outline rounded-2xl overflow-hidden">
+<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
+<h3 class="text-sm font-black uppercase tracking-widest text-black">Actividad Reciente</h3>
+<button class="text-xs text-primary font-bold uppercase tracking-widest hover:text-primary-dim">Ver Todo</button>
+</div>
+<table class="w-full text-left">
+<thead class="bg-stone-50">
+<tr>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Producto</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Acción</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Módulo</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Fecha</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline/50">
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-bold text-black">Disco de Freno Ventilado</td><td class="px-6 py-4 text-xs text-stone-500">Stock actualizado</td><td class="px-6 py-4"><span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase rounded">Inventario</span></td><td class="px-6 py-4 text-xs text-stone-400">Hace 5 min</td><td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">Completado</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-bold text-black">Pedido #4521</td><td class="px-6 py-4 text-xs text-stone-500">Nuevo pedido B2B</td><td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold uppercase rounded">Ventas</span></td><td class="px-6 py-4 text-xs text-stone-400">Hace 15 min</td><td class="px-6 py-4"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase rounded">Pendiente</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-bold text-black">Amortiguador Delantero</td><td class="px-6 py-4 text-xs text-stone-500">Despacho enviado</td><td class="px-6 py-4"><span class="px-2 py-1 bg-purple-100 text-purple-700 text-[10px] font-bold uppercase rounded">Logística</span></td><td class="px-6 py-4 text-xs text-stone-400">Hace 1 hora</td><td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold uppercase rounded">En Tránsito</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- ==================== INVENTORY MODULE ==================== -->
+<div id="inventory" class="module-section">
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Módulo de <span class="text-primary">Inventario</span></h2>
+<p class="text-stone-400 text-sm">Gestión detallada de stock, almacenes y distribución de repuestos.</p>
+</div>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">INV</div>
+</div>
+<!-- Inventory KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Total SKU</span><span class="material-symbols-outlined text-primary text-2xl">inventory</span></div>
+<p class="text-3xl font-black text-black">14,208</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+142</span><span class="text-[10px] text-stone-400">nuevos este mes</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Almacenes Activos</span><span class="material-symbols-outlined text-primary text-2xl">warehouse</span></div>
+<p class="text-3xl font-black text-black">04</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-stone-400">A-Norte, B-Oeste, C-Sur, D-Central</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Envíos Pendientes</span><span class="material-symbols-outlined text-yellow-500 text-2xl">local_shipping</span></div>
+<p class="text-3xl font-black text-black">12</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-yellow-500 font-bold">Requiere despacho</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Stock Bajo</span><span class="material-symbols-outlined text-red-500 text-2xl">warning</span></div>
+<p class="text-3xl font-black text-black">23</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-red-500 font-bold">Reorden necesario</span></div>
+</div>
+</div>
+<!-- Inventory Table -->
+<div class="bg-white border border-outline rounded-2xl overflow-hidden mb-8">
+<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
+<h3 class="text-sm font-black uppercase tracking-widest text-black">Inventario Ledger</h3>
+<div class="flex gap-2">
+<button class="bg-black text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-stone-800 transition-colors">Ajustar Stock</button>
+<button class="bg-primary text-black px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-primary-dim transition-colors">Recibir Envío</button>
+</div>
+</div>
+<table class="w-full text-left">
+<thead class="bg-stone-50">
+<tr>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Part ID / SKU</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Componente</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Almacén</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Stock Actual</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Precio Unit.</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Estado</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline/50">
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-mono font-bold text-stone-600">DIS-4421-VTL</td><td class="px-6 py-4 text-sm font-bold text-black">Disco de Freno Pro-Series</td><td class="px-6 py-4 text-xs text-stone-500">A-Norte</td><td class="px-6 py-4 text-sm font-bold text-black">1,420</td><td class="px-6 py-4 text-sm font-bold text-black">$42.50</td><td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">En Stock</span></td><td class="px-6 py-4"><span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-black">more_vert</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-mono font-bold text-stone-600">BEL-8832-KV</td><td class="px-6 py-4 text-sm font-bold text-black">Correa de Distribución Kevlar</td><td class="px-6 py-4 text-xs text-stone-500">B-Oeste</td><td class="px-6 py-4 text-sm font-bold text-black">12</td><td class="px-6 py-4 text-sm font-bold text-black">$28.00</td><td class="px-6 py-4"><span class="px-2 py-1 bg-red-100 text-red-700 text-[10px] font-bold uppercase rounded animate-pulse">Stock Bajo</span></td><td class="px-6 py-4"><span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-black">more_vert</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-mono font-bold text-stone-600">IGN-5521-CK</td><td class="px-6 py-4 text-sm font-bold text-black">Bobina de Encendido Pack</td><td class="px-6 py-4 text-xs text-stone-500">C-Sur</td><td class="px-6 py-4 text-sm font-bold text-black">0</td><td class="px-6 py-4 text-sm font-bold text-black">$65.00</td><td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold uppercase rounded">En Camino</span></td><td class="px-6 py-4"><span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-black">more_vert</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-mono font-bold text-stone-600">RAD-9901-AS</td><td class="px-6 py-4 text-sm font-bold text-black">Ensamble de Radiador</td><td class="px-6 py-4 text-xs text-stone-500">A-Norte</td><td class="px-6 py-4 text-sm font-bold text-black">450</td><td class="px-6 py-4 text-sm font-bold text-black">$185.00</td><td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">En Stock</span></td><td class="px-6 py-4"><span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-black">more_vert</span></td></tr>
+</tbody>
+</table>
+</div>
+<!-- Warehouse Distribution -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-white border border-outline rounded-2xl p-6">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Distribución Primaria</h3>
+<div class="space-y-4">
+<div><div class="flex justify-between text-xs mb-1"><span class="text-stone-500">Sector A-Norte Hub Principal</span><span class="font-bold text-black">88%</span></div><div class="h-2 bg-stone-100 rounded-full"><div class="h-full bg-primary rounded-full" style="width:88%"></div></div></div>
+<div><div class="flex justify-between text-xs mb-1"><span class="text-stone-500">Sector B-Oeste Secundario</span><span class="font-bold text-black">45%</span></div><div class="h-2 bg-stone-100 rounded-full"><div class="h-full bg-primary rounded-full" style="width:45%"></div></div></div>
+<div><div class="flex justify-between text-xs mb-1"><span class="text-stone-500">Sector C-Sur Externo</span><span class="font-bold text-black">98%</span></div><div class="h-2 bg-stone-100 rounded-full"><div class="h-full bg-red-400 rounded-full" style="width:98%"></div></div></div>
+</div>
+</div>
+<div class="bg-white border border-outline rounded-2xl p-6">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Gestión de Estantes</h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="text-center p-4 bg-stone-50 rounded-xl"><p class="text-lg font-black text-black">A-NORTE</p><p class="text-xs text-stone-400">82% ocupado</p></div>
+<div class="text-center p-4 bg-stone-50 rounded-xl"><p class="text-lg font-black text-black">B-OESTE</p><p class="text-xs text-stone-400">45% ocupado</p></div>
+<div class="text-center p-4 bg-red-50 rounded-xl"><p class="text-lg font-black text-red-600">C-SUR</p><p class="text-xs text-red-400">98% lleno</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== SALES MODULE ==================== -->
+<div id="sales" class="module-section">
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Módulo de <span class="text-primary">Ventas</span></h2>
+<p class="text-stone-400 text-sm">CRM, gestión de pedidos y seguimiento de leads comerciales.</p>
+</div>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">CRM</div>
+</div>
+<!-- Sales KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Volumen Total</span><span class="material-symbols-outlined text-primary text-2xl">trending_up</span></div>
+<p class="text-3xl font-black text-black">$1.24M</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+12.4%</span><span class="text-[10px] text-stone-400">vs mes anterior</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Leads Activos</span><span class="material-symbols-outlined text-primary text-2xl">group</span></div>
+<p class="text-3xl font-black text-black">482</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-yellow-500 font-bold">24 pendientes</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Tasa de Éxito</span><span class="material-symbols-outlined text-green-500 text-2xl">check_circle</span></div>
+<p class="text-3xl font-black text-black">68.2%</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-stone-400">Meta: 72%</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Ticket Promedio</span><span class="material-symbols-outlined text-primary text-2xl">receipt_long</span></div>
+<p class="text-3xl font-black text-black">$228.50</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+5.2%</span></div>
+</div>
+</div>
+<!-- Sales Pipeline -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="bg-white border border-outline rounded-2xl p-6">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Pipeline de Ventas</h3>
+<div class="space-y-4">
+<div><div class="flex justify-between text-xs mb-1"><span class="text-stone-500">Prospectos</span><span class="font-bold text-black">$420K</span></div><div class="h-2 bg-stone-100 rounded-full"><div class="h-full bg-green-400 rounded-full" style="width:85%"></div></div><p class="text-[10px] text-stone-400 mt-1">85% conversión</p></div>
+<div><div class="flex justify-between text-xs mb-1"><span class="text-stone-500">Negociación</span><span class="font-bold text-black">$185K</span></div><div class="h-2 bg-stone-100 rounded-full"><div class="h-full bg-yellow-400 rounded-full" style="width:45%"></div></div><p class="text-[10px] text-stone-400 mt-1">45% conversión</p></div>
+<div><div class="flex justify-between text-xs mb-1"><span class="text-stone-500">Cotizados</span><span class="font-bold text-black">$92K</span></div><div class="h-2 bg-stone-100 rounded-full"><div class="h-full bg-primary rounded-full" style="width:25%"></div></div><p class="text-[10px] text-stone-400 mt-1">25% conversión</p></div>
+</div>
+</div>
+<div class="bg-white border border-outline rounded-2xl p-6 lg:col-span-2">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Actividad Reciente</h3>
+<table class="w-full text-left">
+<thead class="bg-stone-50"><tr><th class="px-4 py-2 text-[10px] font-black text-stone-400 uppercase">Cotización</th><th class="px-4 py-2 text-[10px] font-black text-stone-400 uppercase">Cliente</th><th class="px-4 py-2 text-[10px] font-black text-stone-400 uppercase">Valor</th><th class="px-4 py-2 text-[10px] font-black text-stone-400 uppercase">Estado</th></tr></thead>
+<tbody class="divide-y divide-outline/50">
+<tr class="hover:bg-stone-50"><td class="px-4 py-3 text-xs font-mono font-bold">#QC-99420</td><td class="px-4 py-3 text-xs text-black">AutoMundo S.A.</td><td class="px-4 py-3 text-xs font-bold">$24,500</td><td class="px-4 py-3"><span class="px-2 py-1 bg-blue-100 text-blue-700 text-[9px] font-bold uppercase rounded">Enviado</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-4 py-3 text-xs font-mono font-bold">#QC-99388</td><td class="px-4 py-3 text-xs text-black">Transportes Rapid</td><td class="px-4 py-3 text-xs font-bold">$12,800</td><td class="px-4 py-3"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[9px] font-bold uppercase rounded">Borrador</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-4 py-3 text-xs font-mono font-bold">#QC-99372</td><td class="px-4 py-3 text-xs text-black">La Cima Express</td><td class="px-4 py-3 text-xs font-bold">$4,200</td><td class="px-4 py-3"><span class="px-2 py-1 bg-red-100 text-red-700 text-[9px] font-bold uppercase rounded">Vencido</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==================== LOGISTICS MODULE ==================== -->
+<div id="logistics" class="module-section">
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Módulo de <span class="text-primary">Logística</span></h2>
+<p class="text-stone-400 text-sm">Seguimiento de despachos en tiempo real y telemetría de vehículos.</p>
+</div>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">LOG</div>
+</div>
+<!-- Logistics KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Envíos Activos</span><span class="material-symbols-outlined text-primary text-2xl">local_shipping</span></div>
+<p class="text-3xl font-black text-black">36</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">28 en tránsito</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Entregados Hoy</span><span class="material-symbols-outlined text-green-500 text-2xl">check_circle</span></div>
+<p class="text-3xl font-black text-black">12</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-stone-400">98.5% tasa entrega</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">ETA Promedio</span><span class="material-symbols-outlined text-primary text-2xl">schedule</span></div>
+<p class="text-3xl font-black text-black">14:20</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">Hoy</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Vehículos Activos</span><span class="material-symbols-outlined text-primary text-2xl">directions_car</span></div>
+<p class="text-3xl font-black text-black">08</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">Todos operativos</span></div>
+</div>
+</div>
+<!-- Shipment Timeline -->
+<div class="bg-white border border-outline rounded-2xl overflow-hidden mb-8">
+<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
+<h3 class="text-sm font-black uppercase tracking-widest text-black">Envío SHP-99283-TRK</h3>
+<span class="px-3 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">En Tránsito</span>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-4 gap-4 mb-6">
+<div class="text-center"><div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2"><span class="material-symbols-outlined text-green-600">check</span></div><p class="text-xs font-bold text-black">Empaquetado</p></div>
+<div class="text-center"><div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2"><span class="material-symbols-outlined text-green-600">check</span></div><p class="text-xs font-bold text-black">Despachado</p></div>
+<div class="text-center"><div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-2 animate-pulse"><span class="material-symbols-outlined text-primary">local_shipping</span></div><p class="text-xs font-bold text-black">En Tránsito</p></div>
+<div class="text-center"><div class="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-2"><span class="material-symbols-outlined text-stone-400">done</span></div><p class="text-xs font-bold text-stone-400">Entregado</p></div>
+</div>
+<!-- Telematics Table -->
+<table class="w-full text-left">
+<thead class="bg-stone-50"><tr><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Componente</th><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Telemetría</th><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Estado</th><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Índice Seguridad</th></tr></thead>
+<tbody class="divide-y divide-outline/50">
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-bold text-black">Estabilizadores Chasis</td><td class="px-6 py-4 text-xs text-stone-500">98.4% Balance</td><td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">Óptimo</span></td><td class="px-6 py-4"><div class="h-2 bg-stone-100 rounded-full w-24"><div class="h-full bg-green-400 rounded-full" style="width:95%"></div></div></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-bold text-black">Temperatura Drivetrain</td><td class="px-6 py-4 text-xs text-stone-500">82°C Nominal</td><td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">Óptimo</td><td class="px-6 py-4"><div class="h-2 bg-stone-100 rounded-full w-24"><div class="h-full bg-green-400 rounded-full" style="width:88%"></div></div></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-sm font-bold text-black">Presión Neumáticos PSI</td><td class="px-6 py-4 text-xs text-stone-500">110/108/112</td><td class="px-6 py-4"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase rounded">Atención</td><td class="px-6 py-4"><div class="h-2 bg-stone-100 rounded-full w-24"><div class="h-full bg-yellow-400 rounded-full" style="width:72%"></div></div></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==================== CLIENTS B2B MODULE ==================== -->
+<div id="clients" class="module-section">
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Directorio <span class="text-primary">Clientes B2B</span></h2>
+<p class="text-stone-400 text-sm">Gestión de talleres, flotas y socios comerciales con líneas de crédito.</p>
+</div>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">B2B</div>
+</div>
+<!-- Clients KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Socios Activos</span><span class="material-symbols-outlined text-primary text-2xl">business</span></div>
+<p class="text-3xl font-black text-black">1,402</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+4.2%</span><span class="text-[10px] text-stone-400">crecimiento</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Crédito Pendiente</span><span class="material-symbols-outlined text-primary text-2xl">account_balance</span></div>
+<p class="text-3xl font-black text-black">$2.4M</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-stone-400">65% utilización</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Facturas Pendientes</span><span class="material-symbols-outlined text-yellow-500 text-2xl">warning</span></div>
+<p class="text-3xl font-black text-black">84</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-red-500 font-bold">12 alta prioridad</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Volumen Mensual</span><span class="material-symbols-outlined text-primary text-2xl">trending_up</span></div>
+<p class="text-3xl font-black text-black">$894K</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-stone-400">Promedio: $4.2K</span></div>
+</div>
+</div>
+<!-- Clients Table -->
+<div class="bg-white border border-outline rounded-2xl overflow-hidden">
+<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
+<h3 class="text-sm font-black uppercase tracking-widest text-black">Directorio de Clientes</h3>
+<div class="flex gap-2">
+<button class="bg-black text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-stone-800 transition-colors">Registrar Socio</button>
+<button class="bg-primary text-black px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-primary-dim transition-colors">Exportar XLS</button>
+</div>
+</div>
+<table class="w-full text-left">
+<thead class="bg-stone-50">
+<tr>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Socio</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Crédito</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Gasto Lifetime</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Líder Cuenta</th>
+<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline/50">
+<tr class="hover:bg-stone-50"><td class="px-6 py-4"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-primary text-sm">business</span></div><div><p class="text-sm font-bold text-black">Workshop Elite Santa Fe</p><p class="text-[10px] text-stone-400">W-10928</p></div></div></td><td class="px-6 py-4"><div class="h-2 bg-stone-100 rounded-full w-24 mb-1"><div class="h-full bg-green-400 rounded-full" style="width:78%"></div></div><p class="text-[10px] text-stone-400">$39K / $50K</p></td><td class="px-6 py-4 text-sm font-bold text-black">$142,500</td><td class="px-6 py-4 text-xs text-stone-500">Elena R.</td><td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">Platino</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-primary text-sm">local_shipping</span></div><div><p class="text-sm font-bold text-black">TransLogistics National</p><p class="text-[10px] text-stone-400">F-99201</p></div></div></td><td class="px-6 py-4"><div class="h-2 bg-stone-100 rounded-full w-24 mb-1"><div class="h-full bg-primary rounded-full" style="width:12%"></div></div><p class="text-[10px] text-stone-400">$18K / $150K</p></td><td class="px-6 py-4 text-sm font-bold text-black">$892,100</td><td class="px-6 py-4 text-xs text-stone-500">Marc V.</td><td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold uppercase rounded">Enterprise</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-red-500 text-sm">warning</span></div><div><p class="text-sm font-bold text-black">Express Auto Services</p><p class="text-[10px] text-stone-400">W-10852</p></div></div></td><td class="px-6 py-4"><div class="h-2 bg-stone-100 rounded-full w-24 mb-1"><div class="h-full bg-red-400 rounded-full" style="width:100%"></div></div><p class="text-[10px] text-red-500 font-bold">Límite alcanzado</p></td><td class="px-6 py-4 text-sm font-bold text-black">$45,200</td><td class="px-6 py-4 text-xs text-stone-500">S. Mendez</td><td class="px-6 py-4"><span class="px-2 py-1 bg-red-100 text-red-700 text-[10px] font-bold uppercase rounded">Estándar</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- ==================== REPORTS MODULE ==================== -->
+<div id="reports" class="module-section">
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Módulo de <span class="text-primary">Reportes</span></h2>
+<p class="text-stone-400 text-sm">Analítica predictiva y reportes avanzados del sistema.</p>
+</div>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">RPT</div>
+</div>
+<!-- Reports KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="kpi-card bg-white border border-outline rounded-xl p-6 border-l-4 border-l-primary">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Ventas Totales</span><span class="material-symbols-outlined text-primary text-2xl">trending_up</span></div>
+<p class="text-3xl font-black text-black">$2.48M</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+12.4%</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6 border-l-4 border-l-primary">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Rotación Inventario</span><span class="material-symbols-outlined text-primary text-2xl">inventory</span></div>
+<p class="text-3xl font-black text-black">8.42</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">+5.1%</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6 border-l-4 border-l-stone-300">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">SKUs OEM Activos</span><span class="material-symbols-outlined text-stone-400 text-2xl">inventory</span></div>
+<p class="text-3xl font-black text-black">14,208</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-red-500 font-bold">-0.8%</span></div>
+</div>
+<div class="kpi-card bg-white border border-outline rounded-xl p-6 border-l-4 border-l-primary">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Tiempo Cumplimiento</span><span class="material-symbols-outlined text-primary text-2xl">schedule</span></div>
+<p class="text-3xl font-black text-black">1.8 días</p>
+<div class="flex items-center gap-2 mt-2"><span class="text-xs text-green-500 font-bold">-14.2%</span></div>
+</div>
+</div>
+<!-- Top OEM Categories -->
+<div class="bg-white border border-outline rounded-2xl overflow-hidden mb-8">
+<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
+<h3 class="text-sm font-black uppercase tracking-widest text-black">Top Categorías OEM</h3>
+<button class="text-xs text-primary font-bold uppercase tracking-widest hover:text-primary-dim">Exportar</button>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex items-center gap-4"><span class="text-xs font-bold text-stone-500 w-32">01 Actuadores Hidráulicos</span><div class="flex-1 h-3 bg-stone-100 rounded-full"><div class="h-full bg-primary rounded-full" style="width:88%"></div></div><span class="text-xs font-bold text-black w-16 text-right">2.4k</span><span class="text-xs text-stone-400 w-12">88%</span></div>
+<div class="flex items-center gap-4"><span class="text-xs font-bold text-stone-500 w-32">02 Válvulas Neumáticas</span><div class="flex-1 h-3 bg-stone-100 rounded-full"><div class="h-full bg-primary rounded-full" style="width:65%"></div></div><span class="text-xs font-bold text-black w-16 text-right">1.8k</span><span class="text-xs text-stone-400 w-12">65%</span></div>
+<div class="flex items-center gap-4"><span class="text-xs font-bold text-stone-500 w-32">03 Sistemas Filtración</span><div class="flex-1 h-3 bg-stone-100 rounded-full"><div class="h-full bg-primary rounded-full" style="width:42%"></div></div><span class="text-xs font-bold text-black w-16 text-right">1.2k</span><span class="text-xs text-stone-400 w-12">42%</span></div>
+</div>
+</div>
+<!-- Inventory Aging Report -->
+<div class="bg-white border border-outline rounded-2xl overflow-hidden">
+<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
+<h3 class="text-sm font-black uppercase tracking-widest text-black">Reporte Envejecimiento Inventario</h3>
+</div>
+<table class="w-full text-left">
+<thead class="bg-stone-50"><tr><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Número Parte</th><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Descripción</th><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Días Stock</th><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Valor Actual</th><th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase">Riesgo Liquidez</th></tr></thead>
+<tbody class="divide-y divide-outline/50">
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-xs font-mono font-bold">#OEM-992-PX</td><td class="px-6 py-4 text-xs text-black">Kit Empacadura Transmisión</td><td class="px-6 py-4 text-xs font-bold text-black">182 días</td><td class="px-6 py-4 text-xs font-bold text-black">$12,450</td><td class="px-6 py-4"><span class="px-2 py-1 bg-red-100 text-red-700 text-[9px] font-bold uppercase rounded">Crítico Alto</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-xs font-mono font-bold">#HYD-110-V2</td><td class="px-6 py-4 text-xs text-black">Bomba Auxiliar</td><td class="px-6 py-4 text-xs font-bold text-black">145 días</td><td class="px-6 py-4 text-xs font-bold text-black">$4,820</td><td class="px-6 py-4"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[9px] font-bold uppercase rounded">Moderado</span></td></tr>
+<tr class="hover:bg-stone-50"><td class="px-6 py-4 text-xs font-mono font-bold">#CH-405-BR</td><td class="px-6 py-4 text-xs text-black">Calibrador de Freno</td><td class="px-6 py-4 text-xs font-bold text-black">120 días</td><td class="px-6 py-4 text-xs font-bold text-black">$32,110</td><td class="px-6 py-4"><span class="px-2 py-1 bg-red-100 text-red-700 text-[9px] font-bold uppercase rounded">Crítico Alto</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- ==================== SETTINGS MODULE ==================== -->
+<div id="settings" class="module-section">
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Módulo de <span class="text-primary">Configuración</span></h2>
+<p class="text-stone-400 text-sm">Configuración avanzada del sistema, API, roles y parámetros e-commerce.</p>
+</div>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">SET</div>
+</div>
+<!-- Settings Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<!-- API Integration -->
+<div class="bg-white border border-outline rounded-2xl p-6">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Integración API TecDoc</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between"><span class="text-xs text-stone-500">Protocolo</span><span class="text-xs font-bold text-black">v4.1</span></div>
+<div class="flex items-center justify-between"><span class="text-xs text-stone-500">Señal en Vivo</span><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span><span class="text-xs font-bold text-green-600">Activa</span></span></div>
+<div><label class="text-[10px] font-bold text-stone-400 uppercase mb-1 block">Webhook Endpoint</label><input class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-xs font-mono" value="https://api.lacima.parts/v1/sync/tecdoc" readonly/></div>
+<div><div class="flex justify-between text-xs mb-1"><span class="text-stone-500">Salud Sync</span><span class="font-bold text-black">99.8%</span></div><div class="h-2 bg-stone-100 rounded-full"><div class="h-full bg-green-400 rounded-full" style="width:99.8%"></div></div></div>
+<div class="flex justify-between text-xs"><span class="text-stone-500">Requests/Hr</span><span class="font-bold text-black">14,204</span></div>
+<div class="flex justify-between text-xs"><span class="text-stone-500">Latencia</span><span class="font-bold text-black">42ms</span></div>
+</div>
+</div>
+<!-- Event Signals -->
+<div class="bg-white border border-outline rounded-2xl p-6">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Señales de Eventos</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between"><span class="text-xs text-stone-500">Agotamiento Inventario</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" checked class="sr-only peer"/><div class="w-11 h-6 bg-stone-200 peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div></label></div>
+<div class="flex items-center justify-between"><span class="text-xs text-stone-500">Discrepancia Precios</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" checked class="sr-only peer"/><div class="w-11 h-6 bg-stone-200 peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div></label></div>
+<div class="flex items-center justify-between"><span class="text-xs text-stone-500">Audit Log Admin</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" class="sr-only peer"/><div class="w-11 h-6 bg-stone-200 peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div></label></div>
+<div class="pt-4 border-t border-outline"><a class="text-xs text-primary font-bold hover:underline" href="#">Configurar Servidor SMTP</a></div>
+</div>
+</div>
+</div>
+<!-- User Roles -->
+<div class="bg-white border border-outline rounded-2xl p-6 mb-8">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Matriz de Roles de Usuario</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-4 bg-stone-50 rounded-xl border-l-4 border-primary"><p class="text-sm font-bold text-black">Administrador</p><p class="text-[10px] text-stone-400">L3 Clearance</p><p class="text-xs text-stone-500 mt-2">Full System Write/Execute</p></div>
+<div class="p-4 bg-stone-50 rounded-xl border-l-4 border-primary"><p class="text-sm font-bold text-black">Líder Ventas</p><p class="text-[10px] text-stone-400">L2 Clearance</p><p class="text-xs text-stone-500 mt-2">Order Mgmt & Client Pricing</p></div>
+<div class="p-4 bg-stone-50 rounded-xl border-l-4 border-primary"><p class="text-sm font-bold text-black">Almacén</p><p class="text-[10px] text-stone-400">L1 Clearance</p><p class="text-xs text-stone-500 mt-2">Stock Verification & QR Flow</p></div>
+</div>
+</div>
+<!-- E-commerce Logic -->
+<div class="bg-white border border-outline rounded-2xl p-6">
+<h3 class="text-sm font-black uppercase tracking-widest text-black mb-4">Lógica E-commerce</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div><label class="text-[10px] font-bold text-stone-400 uppercase mb-1 block">Multiplicador Margen Global</label><input class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-xs" type="number" value="1.25" step="0.05"/></div>
+<div><label class="text-[10px] font-bold text-stone-400 uppercase mb-1 block">Lógica Moneda</label><select class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-xs"><option>VES (Auto)</option><option>USD (Fijo)</option></select></div>
+<div><label class="text-[10px] font-bold text-stone-400 uppercase mb-1 block">SLA Cumplimiento</label><input class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-xs" type="text" value="24 Horas"/></div>
+</div>
+<div class="mt-6 flex justify-end"><button class="bg-black text-white px-6 py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors">Desplegar Cambios</button></div>
+</div>
+</div>
+
+<!-- ==================== FINANCE MODULE (Under Construction) ==================== -->
+<div id="finance" class="module-section">
+<div class="flex items-center justify-center min-h-[60vh]">
+<div class="text-center">
+<div class="w-24 h-24 bg-stone-200 rounded-full flex items-center justify-center mx-auto mb-6"><span class="material-symbols-outlined text-stone-400 text-5xl">build</span></div>
+<h2 class="text-2xl font-black uppercase tracking-tighter text-stone-400 mb-2">Módulo en Construcción</h2>
+<p class="text-stone-400 text-sm">El módulo de Finanzas estará disponible próximamente.</p>
+</div>
+</div>
+</div>
+
+<!-- ==================== HR MODULE (Under Construction) ==================== -->
+<div id="hr" class="module-section">
+<div class="flex items-center justify-center min-h-[60vh]">
+<div class="text-center">
+<div class="w-24 h-24 bg-stone-200 rounded-full flex items-center justify-center mx-auto mb-6"><span class="material-symbols-outlined text-stone-400 text-5xl">build</span></div>
+<h2 class="text-2xl font-black uppercase tracking-tighter text-stone-400 mb-2">Módulo en Construcción</h2>
+<p class="text-stone-400 text-sm">El módulo de RRHH estará disponible próximamente.</p>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+</main>
+<script src="smart-search.js"></script>
+</body></html>

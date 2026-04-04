@@ -3,163 +3,359 @@
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dashboard | Mayor de Repuesto La Cima, C.A</title>
+<title>MAYOR DE REPUESTO LA CIMA, C.A - Dashboard de Inventario</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="tailwind-config.js"></script>
-<link href="styles.css" rel="stylesheet"/>
-<script src="auth.js"></script>
-<script>
-        // Protect this page - require login
-        document.addEventListener('DOMContentLoaded', function() {
-            protectPage();
-            // Display user info
-            const user = getCurrentUser();
-            if (user) {
-                document.getElementById('dashboardUserName').textContent = user.name;
-                document.getElementById('dashboardUserRole').textContent = user.role === 'admin' ? 'Administrador' : 'Usuario';
-                document.getElementById('welcomeUserName').textContent = user.name.split(' ')[0];
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#d4d4d7",
+                    "inverse-primary": "#ceff5e",
+                    "on-primary-container": "#465f00",
+                    "on-secondary-fixed": "#3e3f42",
+                    "on-primary-fixed": "#364b00",
+                    "on-error-container": "#520c00",
+                    "tertiary-fixed-dim": "#e1e5ee",
+                    "on-secondary-fixed-variant": "#5a5c5e",
+                    "secondary-container": "#e2e2e5",
+                    "tertiary-fixed": "#f0f4fd",
+                    "primary": "#4a6400",
+                    "surface-dim": "#d2d4d8",
+                    "outline": "#757779",
+                    "on-primary": "#deff95",
+                    "surface-tint": "#4a6400",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#2d2f31",
+                    "error-dim": "#b92902",
+                    "secondary-fixed": "#e2e2e5",
+                    "inverse-surface": "#0c0e10",
+                    "tertiary-container": "#f0f4fd",
+                    "on-surface-variant": "#5a5c5e",
+                    "on-error": "#ffefec",
+                    "primary-container": "#cbfc5c",
+                    "on-tertiary": "#eff3fc",
+                    "surface-container-high": "#e1e2e6",
+                    "secondary": "#5a5c5e",
+                    "error": "#b02500",
+                    "on-tertiary-fixed": "#454a51",
+                    "primary-dim": "#405700",
+                    "tertiary": "#575c63",
+                    "tertiary-dim": "#4b5057",
+                    "primary-fixed": "#cbfc5c",
+                    "surface-container": "#e7e8eb",
+                    "surface-container-low": "#f0f0f3",
+                    "on-tertiary-container": "#575c63",
+                    "outline-variant": "#acadaf",
+                    "secondary-dim": "#4e5052",
+                    "background": "#f6f6f9",
+                    "inverse-on-surface": "#9c9d9f",
+                    "on-secondary-container": "#505254",
+                    "on-secondary": "#f2f2f5",
+                    "surface-bright": "#f6f6f9",
+                    "on-primary-fixed-variant": "#4e6a00",
+                    "error-container": "#f95630",
+                    "surface": "#f6f6f9",
+                    "primary-fixed-dim": "#bded4f",
+                    "surface-variant": "#dbdde0",
+                    "on-tertiary-fixed-variant": "#62666e",
+                    "on-background": "#2d2f31",
+                    "surface-container-highest": "#dbdde0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
             }
-        });
+          },
+        },
+      }
     </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .technical-table-row:nth-child(even) { background-color: #f0f0f3; }
+    </style>
 </head>
 <body class="bg-background text-on-surface">
-<!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-white flex flex-col py-6 border-r border-outline z-50">
+<!-- SideNavBar Integration -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-stone-100 flex flex-col py-6 border-r border-stone-200/50 z-50">
 <div class="px-6 mb-10">
 <h1 class="text-lg font-bold text-stone-800 font-headline uppercase tracking-tighter">Zenith ERP</h1>
 <p class="text-[10px] text-stone-500 font-medium tracking-widest mt-1">LA CIMA, C.A.</p>
 </div>
 <nav class="flex-1 space-y-1">
-<a class="flex items-center px-6 py-3 bg-primary/10 text-primary border-r-4 border-primary font-bold text-xs uppercase tracking-widest" href="dashboard_de_inventario_avanzado.html">
-<span class="material-symbols-outlined mr-3">inventory</span>
-                    Inventario
-                </a>
-<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium" href="#">
-<span class="material-symbols-outlined mr-3">shopping_cart</span>
-                    Pedidos
-                </a>
-<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium" href="#">
-<span class="material-symbols-outlined mr-3">group</span>
-                    Clientes
-                </a>
-<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium" href="index.html">
-<span class="material-symbols-outlined mr-3">home</span>
-                    Inicio
-                </a>
+<!-- Active Tab: Inventario -->
+<a class="flex items-center px-6 py-3 bg-stone-200 text-lime-600 border-l-4 border-lime-500 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium text-sm">Inventario</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-200/50 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="payments">payments</span>
+<span class="font-medium text-sm">Ventas</span>
+</a>
+<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-200/50 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+<span class="font-medium text-sm">Reportes</span>
+</a>
+<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-200/50 transition-all duration-150 group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="font-medium text-sm">Configuración</span>
+</a>
 </nav>
 <div class="px-6 mt-auto">
-<button class="w-full flex items-center justify-center gap-2 py-3 bg-stone-100 text-stone-600 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-stone-200 transition-colors" onclick="logout()">
-<span class="material-symbols-outlined text-sm">logout</span>
-                    Cerrar Sesión
-                </button>
+<button class="w-full bg-primary text-on-primary py-2.5 px-4 rounded-md text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-primary-dim transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                Nuevo Pedido
+            </button>
+<div class="mt-8 flex items-center gap-3 pt-6 border-t border-stone-200">
+<img alt="Admin Avatar" class="w-10 h-10 rounded-full bg-stone-200" data-alt="professional portrait of an industrial warehouse manager wearing a subtle branded uniform in a clean studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkQVqdLxWkA7hnpIbYpIgtYECsDEYKLIBQ8sVYODXJRfbbSDWMvyXZcf5kIa26JwAzGo2Xq6cbzSdVmMEQv6N5Eo7gCM9SW4lyZwWuqWjM3SYj4nYeYh7LhneUkpGJLgWU2icf3kZbA2d7P6p_zK1ECRlOSx341tBOz4axc1Ff2aXS6AQedkHajA2_ZWZDFBupXwpDldkkfT5__ilaOp95SJ7f7qKtVwEBdXXfemVLHVLU_P1m1cCqaKBIS7mDEjR8FnLZEc9N8w"/>
+<div>
+<p class="text-sm font-bold text-stone-800">Panel de Control</p>
+<p class="text-[10px] text-stone-500">Administrador</p>
+</div>
+</div>
 </div>
 </aside>
-<main class="ml-64 flex-1 flex flex-col min-h-screen">
-<!-- TopBar -->
-<header class="w-full sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-outline flex justify-between items-center px-8 h-16">
-<div class="flex items-center gap-4">
-<h1 class="text-xl font-black uppercase tracking-tighter text-black">Dashboard de Inventario</h1>
-</div>
-<div class="flex items-center gap-4">
-<div class="flex items-center gap-3 bg-stone-50 px-4 py-2 rounded-lg">
-<div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-sm">person</span>
-</div>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopBar Header -->
+<header class="bg-stone-50/90 backdrop-blur-md sticky top-0 w-full z-40 px-8 py-6 flex justify-between items-center border-b border-stone-200/50">
 <div>
-<p class="text-xs font-bold text-black" id="dashboardUserName">Usuario</p>
-<p class="text-[10px] text-stone-400 uppercase" id="dashboardUserRole">Rol</p>
+<h2 class="text-3xl font-black italic text-stone-900 font-headline uppercase tracking-tighter">Inventario Avanzado</h2>
+<p class="text-xs text-stone-500 font-label tracking-widest mt-1">MAYOR DE REPUESTO LA CIMA, C.A.</p>
 </div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm w-80 focus:ring-2 focus:ring-primary/20 placeholder:text-stone-400" placeholder="Buscar SKU o Nombre..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-stone-400 text-lg" data-icon="search">search</span>
 </div>
+<button class="bg-primary-container text-on-primary-container font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest flex items-center gap-2 shadow-sm hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="upload_file">upload_file</span>
+                    Carga Masiva (Excel/TecDoc)
+                </button>
 </div>
 </header>
-<!-- Content -->
-<section class="p-8 flex-1">
-<div class="max-w-7xl mx-auto">
-<!-- Welcome Banner -->
-<div class="bg-black text-white rounded-xl p-8 mb-8 relative overflow-hidden">
+<div class="p-8 space-y-8">
+<!-- KPI Grid (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Total Value KPI -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary relative overflow-hidden group">
 <div class="relative z-10">
-<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Bienvenido, <span class="text-primary" id="welcomeUserName">Usuario</span></h2>
-<p class="text-stone-400 text-sm">Panel de gestión de inventario y logística.</p>
+<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Valor Total del Stock</p>
+<h3 class="text-4xl font-black text-stone-900 font-headline">$1,284,500.00</h3>
+<div class="mt-4 flex items-center text-primary font-bold text-xs">
+<span class="material-symbols-outlined text-xs mr-1" data-icon="trending_up">trending_up</span>
+                            +4.2% respecto al mes anterior
+                        </div>
 </div>
-<div class="absolute right-0 top-0 text-[120px] font-black tracking-tighter text-primary/10 leading-none select-none">
-                    ERP
-                </div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-stone-100 pointer-events-none group-hover:text-primary/5 transition-colors" data-icon="monetization_on">monetization_on</span>
 </div>
-<!-- Stats Grid -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-<div class="bg-white border border-outline rounded-xl p-6">
-<div class="flex items-center justify-between mb-4">
-<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Total SKUs</span>
-<span class="material-symbols-outlined text-primary text-2xl">inventory</span>
+<!-- Low Stock Alert KPI -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-error relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Ítems con bajo stock</p>
+<h3 class="text-4xl font-black text-error font-headline">42 Alert</h3>
+<p class="mt-4 text-xs text-stone-500 font-medium">12 críticos en Almacén Principal</p>
 </div>
-<p class="text-3xl font-black text-black">15,240</p>
-<p class="text-xs text-green-500 font-bold mt-1">+120 esta semana</p>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-error/5 pointer-events-none" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
 </div>
-<div class="bg-white border border-outline rounded-xl p-6">
-<div class="flex items-center justify-between mb-4">
-<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Pedidos Hoy</span>
-<span class="material-symbols-outlined text-primary text-2xl">shopping_cart</span>
+<!-- Pending Orders KPI -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-stone-800 relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Pedidos Pendientes</p>
+<h3 class="text-4xl font-black text-stone-900 font-headline">18 Activos</h3>
+<p class="mt-4 text-xs text-stone-500 font-medium">8 listos para despacho hoy</p>
 </div>
-<p class="text-3xl font-black text-black">48</p>
-<p class="text-xs text-green-500 font-bold mt-1">+8 vs ayer</p>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-stone-100 pointer-events-none" data-icon="local_shipping">local_shipping</span>
 </div>
-<div class="bg-white border border-outline rounded-xl p-6">
-<div class="flex items-center justify-between mb-4">
-<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Stock Bajo</span>
-<span class="material-symbols-outlined text-yellow-500 text-2xl">warning</span>
+</section>
+<!-- Filters & Actions Area -->
+<section class="flex flex-col md:flex-row gap-4 items-end justify-between bg-surface-container-low p-6 rounded-xl">
+<div class="flex gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-stone-500 uppercase tracking-widest block">Filtrar por Categoría</label>
+<select class="bg-surface-container-lowest border-none rounded-lg text-sm px-4 py-2 w-48 focus:ring-2 focus:ring-primary/20">
+<option>Todas las categorías</option>
+<option>Frenos</option>
+<option>Motor</option>
+<option>Suspensión</option>
+<option>Eléctrico</option>
+</select>
 </div>
-<p class="text-3xl font-black text-black">23</p>
-<p class="text-xs text-yellow-500 font-bold mt-1">Requiere atención</p>
-</div>
-<div class="bg-white border border-outline rounded-xl p-6">
-<div class="flex items-center justify-between mb-4">
-<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Despachos</span>
-<span class="material-symbols-outlined text-primary text-2xl">local_shipping</span>
-</div>
-<p class="text-3xl font-black text-black">36</p>
-<p class="text-xs text-stone-400 font-bold mt-1">En tránsito</p>
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-stone-500 uppercase tracking-widest block">Estado de Stock</label>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary text-[10px] font-bold px-3 py-2 rounded-lg uppercase tracking-wider">En Stock</button>
+<button class="bg-surface-container-lowest text-stone-500 text-[10px] font-bold px-3 py-2 rounded-lg uppercase tracking-wider hover:bg-stone-200">Crítico</button>
+<button class="bg-surface-container-lowest text-stone-500 text-[10px] font-bold px-3 py-2 rounded-lg uppercase tracking-wider hover:bg-stone-200">Sin Stock</button>
 </div>
 </div>
-<!-- Recent Activity -->
-<div class="bg-white border border-outline rounded-xl overflow-hidden">
-<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
-<h3 class="text-sm font-black uppercase tracking-widest text-black">Actividad Reciente</h3>
-<button class="text-xs text-primary font-bold uppercase tracking-widest hover:text-primary-dim">Ver Todo</button>
 </div>
-<table class="w-full text-left">
-<thead class="bg-stone-50">
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container-lowest rounded-lg hover:bg-stone-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-2 bg-surface-container-lowest rounded-lg hover:bg-stone-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</section>
+<!-- Technical Data Table -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-stone-200/30">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-stone-900 text-stone-100">
 <tr>
-<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Producto</th>
-<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Acción</th>
-<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Fecha</th>
-<th class="px-6 py-3 text-[10px] font-black text-stone-400 uppercase tracking-widest">Estado</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest">SKU / ID</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest">Descripción del Producto</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-center">Almacén Pral.</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-center">Suc. A</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-center">Suc. B</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest">Stock Total</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-right">Precio Mayorista</th>
+<th class="px-6 py-4"></th>
 </tr>
 </thead>
-<tbody class="divide-y divide-outline/50">
-<tr class="hover:bg-stone-50">
-<td class="px-6 py-4 text-sm font-bold text-black">Disco de Freno Ventilado</td>
-<td class="px-6 py-4 text-xs text-stone-500">Stock actualizado</td>
-<td class="px-6 py-4 text-xs text-stone-400">Hace 5 min</td>
-<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded">Completado</span></td>
+<tbody class="text-sm">
+<tr class="technical-table-row hover:bg-lime-50/50 transition-colors">
+<td class="px-6 py-4 font-mono text-stone-500 text-xs">BP-4509-X</td>
+<td class="px-6 py-4">
+<div class="font-bold text-stone-800">Pastillas de Freno Delanteras Cerámicas</div>
+<div class="text-[10px] text-stone-400">Marca: Brembo | Ref: 2024-X4</div>
+</td>
+<td class="px-6 py-4 text-center font-medium">150</td>
+<td class="px-6 py-4 text-center font-medium">45</td>
+<td class="px-6 py-4 text-center font-medium">12</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary-container text-on-primary-container font-bold text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                        207 UNID
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-bold text-stone-900">$45.50</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</td>
 </tr>
-<tr class="hover:bg-stone-50">
-<td class="px-6 py-4 text-sm font-bold text-black">Inyector de Combustible</td>
-<td class="px-6 py-4 text-xs text-stone-500">Pedido #4521</td>
-<td class="px-6 py-4 text-xs text-stone-400">Hace 15 min</td>
-<td class="px-6 py-4"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[10px] font-bold uppercase rounded">Pendiente</span></td>
+<tr class="technical-table-row hover:bg-lime-50/50 transition-colors">
+<td class="px-6 py-4 font-mono text-stone-500 text-xs">OL-FIL-99</td>
+<td class="px-6 py-4">
+<div class="font-bold text-stone-800">Filtro de Aceite Sintético Premium</div>
+<div class="text-[10px] text-stone-400">Marca: Bosch | Ref: FIL-B-99</div>
+</td>
+<td class="px-6 py-4 text-center font-medium">12</td>
+<td class="px-6 py-4 text-center font-medium">3</td>
+<td class="px-6 py-4 text-center font-medium">0</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-error/10 text-error font-bold text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                        15 UNID (CRÍTICO)
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-bold text-stone-900">$12.90</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</td>
 </tr>
-<tr class="hover:bg-stone-50">
-<td class="px-6 py-4 text-sm font-bold text-black">Amortiguador Delantero</td>
-<td class="px-6 py-4 text-xs text-stone-500">Despacho enviado</td>
-<td class="px-6 py-4 text-xs text-stone-400">Hace 1 hora</td>
-<td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold uppercase rounded">En Tránsito</span></td>
+<tr class="technical-table-row hover:bg-lime-50/50 transition-colors">
+<td class="px-6 py-4 font-mono text-stone-500 text-xs">SK-5521-T</td>
+<td class="px-6 py-4">
+<div class="font-bold text-stone-800">Kit de Distribución Completo</div>
+<div class="text-[10px] text-stone-400">Marca: Gates | Ref: KT-G-55</div>
+</td>
+<td class="px-6 py-4 text-center font-medium">85</td>
+<td class="px-6 py-4 text-center font-medium">20</td>
+<td class="px-6 py-4 text-center font-medium">15</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary-container text-on-primary-container font-bold text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                        120 UNID
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-bold text-stone-900">$185.00</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</td>
+</tr>
+<tr class="technical-table-row hover:bg-lime-50/50 transition-colors">
+<td class="px-6 py-4 font-mono text-stone-500 text-xs">AM-908-RT</td>
+<td class="px-6 py-4">
+<div class="font-bold text-stone-800">Amortiguador Trasero Hidráulico</div>
+<div class="text-[10px] text-stone-400">Marca: Monroe | Ref: MN-R-908</div>
+</td>
+<td class="px-6 py-4 text-center font-medium">40</td>
+<td class="px-6 py-4 text-center font-medium">10</td>
+<td class="px-6 py-4 text-center font-medium">5</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-tertiary-container text-on-tertiary-container font-bold text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        55 UNID
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-bold text-stone-900">$68.75</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors" data-icon="more_vert">more_vert</button>
+</td>
 </tr>
 </tbody>
 </table>
 </div>
+<div class="p-4 border-t border-stone-200 flex items-center justify-between">
+<p class="text-xs text-stone-500">Mostrando 4 de 1,250 productos</p>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 text-xs font-bold border border-stone-200 rounded-lg hover:bg-stone-50 disabled:opacity-50" disabled="">Anterior</button>
+<button class="px-3 py-1.5 text-xs font-bold border border-stone-200 rounded-lg bg-stone-900 text-white">1</button>
+<button class="px-3 py-1.5 text-xs font-bold border border-stone-200 rounded-lg hover:bg-stone-50">2</button>
+<button class="px-3 py-1.5 text-xs font-bold border border-stone-200 rounded-lg hover:bg-stone-50">Siguiente</button>
+</div>
 </div>
 </section>
+</div>
+<!-- Footer Integration -->
+<footer class="w-full py-12 px-8 bg-stone-950 border-t border-stone-800 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+<div>
+<h4 class="text-lime-500 font-black font-headline text-lg italic mb-4 uppercase tracking-tighter">MAYOR DE REPUESTO LA CIMA, C.A</h4>
+<p class="text-stone-500 text-xs font-label uppercase tracking-widest leading-relaxed">
+                        RIF.: J-40308741-5<br/>
+                        Sistema de Gestión de Inventario Avanzado
+                    </p>
+</div>
+<div class="flex flex-col gap-3">
+<h5 class="text-stone-300 text-[10px] font-bold uppercase tracking-widest mb-2">Contacto</h5>
+<p class="text-stone-500 text-xs uppercase tracking-widest">AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL</p>
+<p class="text-stone-500 text-xs uppercase tracking-widest">OFICINA NO. 2-3-C, URB. EL PARRAL, 2001</p>
+<p class="text-stone-500 text-xs uppercase tracking-widest">VALENCIA, EDO. CARABOBO</p>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-lime-400 transition-colors mt-2" href="mailto:LACIMA.REPUESTOS@GMAIL.COM">LACIMA.REPUESTOS@GMAIL.COM</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-lime-400 transition-colors" href="mailto:PEDIDOSLACIMA@GMAIL.COM">PEDIDOSLACIMA@GMAIL.COM</a>
+<p class="text-stone-500 text-xs uppercase tracking-widest mt-2">TELF.: +58 424-4582766 / +58 424-4042558</p>
+</div>
+<div class="flex flex-col items-end gap-4">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-stone-500 hover:text-lime-400 cursor-pointer" data-icon="help">help</span>
+<span class="material-symbols-outlined text-stone-500 hover:text-lime-400 cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-stone-500 hover:text-lime-400 cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-stone-600 uppercase tracking-widest">Sincronización TecDoc</p>
+<p class="text-xs text-lime-500 font-bold">Activa: Hace 5 minutos</p>
+</div>
+</div>
+</div>
+</footer>
 </main>
 </body></html>

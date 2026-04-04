@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="tailwind-config.js"></script>
 <link href="styles.css" rel="stylesheet"/>
+<script src="smart-search.js"></script>
 </head>
 <body class="bg-background text-on-surface selection:bg-primary/30">
 <!-- TopNavBar -->
@@ -24,8 +25,25 @@
 </div>
 <div class="flex items-center gap-4">
 <div class="relative hidden lg:block">
-<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+<div class="relative">
+<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64 focus:w-80 transition-all" id="navSearchInput" placeholder="Buscar por OEM o VIN..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+</div>
+<!-- Search Suggestions Dropdown -->
+<div class="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden z-50" id="navSearchSuggestions">
+<div class="p-3 border-b border-outline bg-stone-50 flex items-center justify-between">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Sugerencias</p>
+<span class="text-[10px] text-stone-400" id="navResultsCount"></span>
+</div>
+<div id="navSuggestionsList" class="max-h-64 overflow-y-auto">
+<!-- Suggestions populated by JS -->
+</div>
+<div class="p-3 border-t border-outline bg-stone-50">
+<button class="w-full text-center text-xs text-primary font-bold uppercase tracking-widest hover:text-primary-dim transition-colors" onclick="executeSmartSearch(document.getElementById('navSearchInput').value.trim(), 'navSearchSuggestions')">
+                        Ver Todos los Resultados →
+                    </button>
+</div>
+</div>
 </div>
 <button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors" onclick="window.location.href='carrito_de_compras_b2b_b2c.html'">
 <span class="material-symbols-outlined">shopping_cart</span>
@@ -244,7 +262,7 @@
 <div>
 <span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
 <nav class="flex flex-col gap-4">
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="dashboard_de_inventario_avanzado.html">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="dashboard.html">Portal ERP</a>
 <a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="arquitectura_t_cnica_ecommerce_repuestos.html">Términos B2B</a>
 <a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="centro_de_soporte_garant_as_rma_e_ia_de_compatibilidad.html">Soporte Técnico</a>
 <a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="login.html">Login</a>

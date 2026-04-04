@@ -5,7 +5,8 @@
       "Bash(dir *)",
       "Bash(findstr *)",
       "Bash(xcopy *)",
-      "Bash(rmdir *)"
+      "Bash(rmdir *)",
+      "Bash(ren *)"
     ]
   },
   "$version": 3

@@ -210,9 +210,9 @@
 
                 // Redirect based on role
                 if (user.role === 'admin') {
-                    window.location.href = 'dashboard_de_inventario_avanzado.html';
+                    window.location.href = 'dashboard.html';
                 } else {
-                    window.location.href = 'dashboard_de_inventario_avanzado.html';
+                    window.location.href = 'dashboard.html';
                 }
             } else {
                 // Login failed
@@ -241,7 +241,7 @@
             const session = JSON.parse(localStorage.getItem('currentSession') || 'null');
             if (session && new Date(session.expires) > new Date()) {
                 // Session is still valid
-                window.location.href = 'dashboard_de_inventario_avanzado.html';
+                window.location.href = 'dashboard.html';
             }
         }
 
