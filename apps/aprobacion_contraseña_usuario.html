@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Panel de Aprobación | Usuario Maestro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="tailwind-config.js"></script>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+        .status-pending { background-color: #fef3c7; color: #92400e; }
+        .status-approved { background-color: #d1fae5; color: #065f46; }
+        .status-rejected { background-color: #fee2e2; color: #991b1b; }
+        .action-btn { transition: all 0.2s ease; }
+        .action-btn:hover { transform: translateY(-1px); }
+        .search-input { transition: all 0.2s ease; }
+        .search-input:focus { box-shadow: 0 0 0 3px rgba(206, 255, 94, 0.3); }
+        .search-highlight { background-color: #ceff5e; color: #000; font-weight: bold; }
+    </style>
+</head>
+<body class="bg-[#fafafa] text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-xs uppercase tracking-widest font-bold text-primary border-b-2 border-primary pb-1">Panel Maestro</span>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="dashboard_de_inventario_avanzado.html">Dashboard</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Salir</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Admin Activo</span>
+</div>
+</div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="bg-black text-white py-10">
+<div class="container mx-auto px-6">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-2">
+                            Panel de <span class="text-primary">Aprobación</span>
+</h1>
+<p class="text-stone-400 text-sm">Gestión de solicitudes de recuperación de contraseñas.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-zinc-900 p-4 rounded-xl border-l-4 border-primary min-w-[140px]">
+<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Pendientes</p>
+<p class="text-2xl font-black text-primary" id="pendingCount">0</p>
+</div>
+<div class="bg-zinc-900 p-4 rounded-xl border-l-4 border-stone-700 min-w-[140px]">
+<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Resueltos</p>
+<p class="text-2xl font-black text-stone-300" id="resolvedCount">0</p>
+</div>
+</div>
+</div>
+<!-- Intelligent Search Bar -->
+<div class="relative max-w-2xl">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-stone-400 text-xl">search</span>
+</div>
+<input
+                    class="search-input w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-3 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-primary focus:bg-white/15 transition-all"
+                    id="adminSearchInput"
+                    placeholder="Buscar por Ticket ID, Email o Usuario..."
+                    type="text"
+                    oninput="handleAdminSearch()"
+                />
+<!-- Search Suggestions Dropdown -->
+<div class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden" id="searchSuggestions">
+<div class="p-3 border-b border-outline bg-stone-50">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Sugerencias</p>
+</div>
+<div id="suggestionsList" class="max-h-48 overflow-y-auto">
+<!-- Suggestions populated by JS -->
+</div>
+</div>
+<!-- Search Results Count -->
+<div class="absolute top-full right-0 mt-2 hidden" id="searchResultsCount">
+<span class="text-xs text-stone-400 bg-black/50 px-3 py-1 rounded-full" id="resultsCountText">0 resultados</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Admin Content -->
+<section class="py-8 bg-[#fafafa]">
+<div class="container mx-auto px-6">
+<div class="max-w-7xl mx-auto">
+<!-- Security Notice -->
+<div class="bg-primary/10 border border-primary/20 rounded-xl p-4 mb-8 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl flex-shrink-0">security</span>
+<div>
+<p class="text-sm text-stone-700">
+<strong>Acceso Restringido:</strong> Este panel es exclusivo para el Usuario Maestro. Todas las acciones son registradas y auditadas. Las contraseñas se muestran enmascaradas por defecto.
+</p>
+</div>
+</div>
+<!-- Active Search Filter Indicator -->
+<div class="hidden mb-4 flex items-center gap-2" id="activeSearchFilter">
+<span class="text-xs text-stone-500">Filtrando por:</span>
+<span class="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full" id="activeSearchTerm"></span>
+<button class="text-xs text-stone-400 hover:text-red-500 transition-colors" onclick="clearSearch()">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<!-- Requests Table -->
+<div class="bg-white border border-outline rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left">
+<thead class="bg-stone-50 border-b border-outline">
+<tr>
+<th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Ticket / Usuario</th>
+<th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Nueva Contraseña</th>
+<th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Fecha / IP</th>
+<th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Estado</th>
+<th class="px-6 py-4 text-right text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Acciones</th>
+</tr>
+</thead>
+<tbody id="requestsTableBody" class="divide-y divide-outline/50">
+<!-- Rows will be populated by JavaScript -->
+</tbody>
+</table>
+<!-- Empty State -->
+<div class="hidden py-16 text-center" id="emptyState">
+<span class="material-symbols-outlined text-stone-300 text-6xl mb-4">inbox</span>
+<p class="text-stone-400 font-bold text-sm uppercase tracking-widest">No hay solicitudes pendientes</p>
+<p class="text-stone-300 text-xs mt-1">Las solicitudes de recuperación aparecerán aquí.</p>
+</div>
+<!-- No Search Results State -->
+<div class="hidden py-16 text-center" id="noSearchResults">
+<span class="material-symbols-outlined text-stone-300 text-6xl mb-4">search_off</span>
+<p class="text-stone-400 font-bold text-sm uppercase tracking-widest">No se encontraron resultados</p>
+<p class="text-stone-300 text-xs mt-1">Intenta con otro término de búsqueda.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-8 px-8 border-t border-zinc-900">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. PANEL MAESTRO v4.2</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
+</div>
+</div>
+</footer>
+<script>
+        let allRequests = [];
+        let filteredRequests = [];
+        let searchTimeout = null;
+
+        function loadRequests() {
+            allRequests = JSON.parse(localStorage.getItem('passwordRecoveryRequests') || '[]');
+            filteredRequests = [...allRequests];
+
+            // Update counts
+            const pending = allRequests.filter(r => r.status === 'pending').length;
+            const resolved = allRequests.filter(r => r.status !== 'pending').length;
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('resolvedCount').textContent = resolved;
+
+            renderTable(filteredRequests);
+        }
+
+        function renderTable(requests) {
+            const tbody = document.getElementById('requestsTableBody');
+            const emptyState = document.getElementById('emptyState');
+            const noSearchResults = document.getElementById('noSearchResults');
+
+            if (requests.length === 0) {
+                tbody.innerHTML = '';
+                if (allRequests.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    noSearchResults.classList.add('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    noSearchResults.classList.remove('hidden');
+                }
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            noSearchResults.classList.add('hidden');
+
+            // Sort: pending first, then by date
+            const sorted = [...requests].sort((a, b) => {
+                if (a.status === 'pending' && b.status !== 'pending') return -1;
+                if (a.status !== 'pending' && b.status === 'pending') return 1;
+                return 0;
+            });
+
+            tbody.innerHTML = sorted.map((req, index) => {
+                const originalIndex = allRequests.indexOf(req);
+                return `
+                <tr class="hover:bg-stone-50 transition-colors ${index % 2 === 1 ? 'bg-stone-50/30' : ''}">
+                    <td class="px-6 py-5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-stone-400">person</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-black">${highlightSearchMatch(req.id)}</div>
+                                <div class="text-xs text-stone-400 font-mono">${highlightSearchMatch(req.email)}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <div class="flex items-center gap-2">
+                            <span class="font-mono text-sm text-stone-600" id="pwd-${originalIndex}">${'•'.repeat(req.newPassword.length)}</span>
+                            <button class="text-stone-400 hover:text-primary transition-colors" onclick="togglePasswordVisibility(${originalIndex}, '${req.newPassword}')">
+                                <span class="material-symbols-outlined text-lg" id="eye-${originalIndex}">visibility</span>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <div class="text-xs text-stone-500">${req.timestamp}</div>
+                        <div class="flex items-center gap-1 mt-1">
+                            <div class="w-1.5 h-1.5 rounded-full ${req.status === 'pending' ? 'bg-primary' : 'bg-stone-300'}"></div>
+                            <span class="text-[10px] text-stone-400 font-mono">${req.ip}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${getStatusClass(req.status)}">
+                            ${getStatusText(req.status)}
+                        </span>
+                    </td>
+                    <td class="px-6 py-5 text-right">
+                        ${req.status === 'pending' ? `
+                        <div class="flex justify-end gap-2">
+                            <button class="action-btn bg-primary text-black px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-primary-dim flex items-center gap-1" onclick="approveRequest(${originalIndex})">
+                                <span class="material-symbols-outlined text-sm">check_circle</span>
+                                Aprobar
+                            </button>
+                            <button class="action-btn bg-stone-100 text-stone-600 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-stone-200 flex items-center gap-1" onclick="rejectRequest(${originalIndex})">
+                                <span class="material-symbols-outlined text-sm">cancel</span>
+                                Rechazar
+                            </button>
+                        </div>
+                        ` : `
+                        <span class="text-xs text-stone-400">${req.status === 'approved' ? '✓ Aprobado' : '✗ Rechazado'}</span>
+                        `}
+                    </td>
+                </tr>
+            `;
+            }).join('');
+        }
+
+        function highlightSearchMatch(text) {
+            const searchTerm = document.getElementById('adminSearchInput').value.trim().toLowerCase();
+            if (!searchTerm) return text;
+
+            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
+        function handleAdminSearch() {
+            clearTimeout(searchTimeout);
+            const searchTerm = document.getElementById('adminSearchInput').value.trim().toLowerCase();
+            const suggestions = document.getElementById('searchSuggestions');
+            const activeFilter = document.getElementById('activeSearchFilter');
+            const activeTerm = document.getElementById('activeSearchTerm');
+            const resultsCount = document.getElementById('searchResultsCount');
+            const resultsText = document.getElementById('resultsCountText');
+
+            // Show/hide active filter indicator
+            if (searchTerm) {
+                activeFilter.classList.remove('hidden');
+                activeTerm.textContent = `"${searchTerm}"`;
+                resultsCount.classList.remove('hidden');
+            } else {
+                activeFilter.classList.add('hidden');
+                resultsCount.classList.add('hidden');
+                suggestions.classList.add('hidden');
+                filteredRequests = [...allRequests];
+                renderTable(filteredRequests);
+                return;
+            }
+
+            // Debounced search
+            searchTimeout = setTimeout(() => {
+                // Filter requests
+                filteredRequests = allRequests.filter(req => {
+                    return req.id.toLowerCase().includes(searchTerm) ||
+                           req.email.toLowerCase().includes(searchTerm) ||
+                           req.timestamp.toLowerCase().includes(searchTerm) ||
+                           req.ip.toLowerCase().includes(searchTerm);
+                });
+
+                // Update results count
+                resultsText.textContent = `${filteredRequests.length} resultado${filteredRequests.length !== 1 ? 's' : ''}`;
+
+                // Show suggestions
+                if (searchTerm.length >= 2) {
+                    showSuggestions(searchTerm);
+                } else {
+                    suggestions.classList.add('hidden');
+                }
+
+                renderTable(filteredRequests);
+            }, 300);
+        }
+
+        function showSuggestions(searchTerm) {
+            const suggestions = document.getElementById('searchSuggestions');
+            const suggestionsList = document.getElementById('suggestionsList');
+
+            // Get unique matching requests
+            const matches = allRequests.filter(req => {
+                return req.id.toLowerCase().includes(searchTerm) ||
+                       req.email.toLowerCase().includes(searchTerm);
+            }).slice(0, 5);
+
+            if (matches.length === 0) {
+                suggestions.classList.add('hidden');
+                return;
+            }
+
+            suggestionsList.innerHTML = matches.map(req => `
+                <div class="p-3 hover:bg-stone-50 cursor-pointer transition-colors border-b border-outline/50 last:border-b-0" onclick="selectSuggestion('${req.id}')">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-stone-400 text-sm">confirmation_number</span>
+                        <div>
+                            <p class="text-sm font-bold text-black">${req.id}</p>
+                            <p class="text-xs text-stone-400">${req.email}</p>
+                        </div>
+                        <span class="ml-auto px-2 py-1 rounded-full text-[9px] font-bold uppercase ${getStatusClass(req.status)}">${getStatusText(req.status)}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            suggestions.classList.remove('hidden');
+        }
+
+        function selectSuggestion(ticketId) {
+            document.getElementById('adminSearchInput').value = ticketId;
+            document.getElementById('searchSuggestions').classList.add('hidden');
+            handleAdminSearch();
+        }
+
+        function clearSearch() {
+            document.getElementById('adminSearchInput').value = '';
+            document.getElementById('activeSearchFilter').classList.add('hidden');
+            document.getElementById('searchResultsCount').classList.add('hidden');
+            document.getElementById('searchSuggestions').classList.add('hidden');
+            filteredRequests = [...allRequests];
+            renderTable(filteredRequests);
+        }
+
+        function getStatusClass(status) {
+            switch(status) {
+                case 'pending': return 'status-pending';
+                case 'approved': return 'status-approved';
+                case 'rejected': return 'status-rejected';
+                default: return 'bg-stone-100 text-stone-600';
+            }
+        }
+
+        function getStatusText(status) {
+            switch(status) {
+                case 'pending': return 'Pendiente';
+                case 'approved': return 'Aprobado';
+                case 'rejected': return 'Rechazado';
+                default: return status;
+            }
+        }
+
+        function togglePasswordVisibility(index, password) {
+            const pwdEl = document.getElementById(`pwd-${index}`);
+            const eyeEl = document.getElementById(`eye-${index}`);
+
+            if (pwdEl.textContent === '•'.repeat(password.length)) {
+                pwdEl.textContent = password;
+                eyeEl.textContent = 'visibility_off';
+            } else {
+                pwdEl.textContent = '•'.repeat(password.length);
+                eyeEl.textContent = 'visibility';
+            }
+        }
+
+        function approveRequest(index) {
+            allRequests[index].status = 'approved';
+            allRequests[index].approvedAt = new Date().toLocaleString('es-VE');
+            localStorage.setItem('passwordRecoveryRequests', JSON.stringify(allRequests));
+            loadRequests();
+            // Re-apply search filter if active
+            const searchTerm = document.getElementById('adminSearchInput').value.trim();
+            if (searchTerm) handleAdminSearch();
+        }
+
+        function rejectRequest(index) {
+            allRequests[index].status = 'rejected';
+            allRequests[index].rejectedAt = new Date().toLocaleString('es-VE');
+            localStorage.setItem('passwordRecoveryRequests', JSON.stringify(allRequests));
+            loadRequests();
+            // Re-apply search filter if active
+            const searchTerm = document.getElementById('adminSearchInput').value.trim();
+            if (searchTerm) handleAdminSearch();
+        }
+
+        // Close suggestions when clicking outside
+        document.addEventListener('click', function(e) {
+            const suggestions = document.getElementById('searchSuggestions');
+            const searchInput = document.getElementById('adminSearchInput');
+            if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+                suggestions.classList.add('hidden');
+            }
+        });
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadRequests);
+    </script>
+</body></html>

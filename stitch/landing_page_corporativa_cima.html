@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zenith ERP - Mayor de Repuesto La Cima, C.A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#d4d4d7",
+                    "inverse-primary": "#ceff5e",
+                    "on-primary-container": "#465f00",
+                    "on-secondary-fixed": "#3e3f42",
+                    "on-primary-fixed": "#364b00",
+                    "on-error-container": "#520c00",
+                    "tertiary-fixed-dim": "#e1e5ee",
+                    "on-secondary-fixed-variant": "#5a5c5e",
+                    "secondary-container": "#e2e2e5",
+                    "tertiary-fixed": "#f0f4fd",
+                    "primary": "#4a6400",
+                    "surface-dim": "#d2d4d8",
+                    "outline": "#757779",
+                    "on-primary": "#deff95",
+                    "surface-tint": "#4a6400",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#2d2f31",
+                    "error-dim": "#b92902",
+                    "secondary-fixed": "#e2e2e5",
+                    "inverse-surface": "#0c0e10",
+                    "tertiary-container": "#f0f4fd",
+                    "on-surface-variant": "#5a5c5e",
+                    "on-error": "#ffefec",
+                    "primary-container": "#cbfc5c",
+                    "on-tertiary": "#eff3fc",
+                    "surface-container-high": "#e1e2e6",
+                    "secondary": "#5a5c5e",
+                    "error": "#b02500",
+                    "on-tertiary-fixed": "#454a51",
+                    "primary-dim": "#405700",
+                    "tertiary": "#575c63",
+                    "tertiary-dim": "#4b5057",
+                    "primary-fixed": "#cbfc5c",
+                    "surface-container": "#e7e8eb",
+                    "surface-container-low": "#f0f0f3",
+                    "on-tertiary-container": "#575c63",
+                    "outline-variant": "#acadaf",
+                    "secondary-dim": "#4e5052",
+                    "background": "#f6f6f9",
+                    "inverse-on-surface": "#9c9d9f",
+                    "on-secondary-container": "#505254",
+                    "on-secondary": "#f2f2f5",
+                    "surface-bright": "#f6f6f9",
+                    "on-primary-fixed-variant": "#4e6a00",
+                    "error-container": "#f95630",
+                    "surface": "#f6f6f9",
+                    "primary-fixed-dim": "#bded4f",
+                    "surface-variant": "#dbdde0",
+                    "on-tertiary-fixed-variant": "#62666e",
+                    "on-background": "#2d2f31",
+                    "surface-container-highest": "#dbdde0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/90 dark:bg-stone-950/90 backdrop-blur-md border-b border-stone-200/50 dark:border-stone-800/50 shadow-sm flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black italic text-stone-900 dark:text-stone-50 tracking-tighter">Zenith ERP</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-['Manrope'] uppercase tracking-tighter font-bold text-lime-600 dark:text-lime-400 border-b-2 border-lime-500 hover:text-lime-500 transition-colors duration-200" href="#">Autos</a>
+<a class="font-['Manrope'] uppercase tracking-tighter font-bold text-stone-600 dark:text-stone-400 hover:text-lime-500 transition-colors duration-200" href="#">Camiones</a>
+<a class="font-['Manrope'] uppercase tracking-tighter font-bold text-stone-600 dark:text-stone-400 hover:text-lime-500 transition-colors duration-200" href="#">Agrícola</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Buscar Repuesto..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+</div>
+<button class="p-2 text-stone-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="bg-primary text-on-primary px-5 py-2 font-bold text-xs uppercase tracking-widest rounded-md hover:bg-primary-dim transition-all active:scale-95">
+                Login
+            </button>
+</div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section: Precision Search -->
+<section class="relative min-h-[870px] flex items-center justify-center py-20 overflow-hidden">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Industrial Warehouse Background" class="w-full h-full object-cover" data-alt="dramatic wide shot of a high-tech industrial warehouse with stacks of engine parts under cool artificial lighting and long shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs3Y7CL32i44Xn4shAtPpvk84XltJEiTJMuPlnBC17eJ-hj0QxChCl3Mw4I9HaJ-smmd4Qh9IEaHZDWU0qalgCeYzVP7bs-XpTH0VmqyPaTgeyzK50mSobQTpufhM77pTKAz7NvqIzaGhsHZyztZMkM3vQSMMSubCuh3hDRnpTBnZlJDVQ20RfnInSL0BZDsdLiYRbFXnqSNSpEuSySoXpas4o0m9MrpOONLRd6VeAnoImFPFwo0vS--4MNIW7yFAh20S0KTZzRQ"/>
+<div class="absolute inset-0 bg-stone-950/70"></div>
+</div>
+<div class="container mx-auto px-6 relative z-10">
+<div class="max-w-5xl mx-auto">
+<div class="text-center mb-12">
+<span class="inline-block px-3 py-1 bg-primary text-on-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4">Potencia &amp; Precisión</span>
+<h1 class="text-5xl md:text-7xl font-black text-white leading-tight tracking-tighter mb-6 uppercase">
+                            MAYOR DE REPUESTO <span class="text-primary-container">LA CIMA</span>
+</h1>
+<p class="text-stone-300 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                            Distribución mayorista de componentes industriales y automotrices de alto rendimiento. Localiza piezas críticas con precisión absoluta.
+                        </p>
+</div>
+<!-- Search Console -->
+<div class="bg-surface-container-lowest p-1 rounded-xl shadow-2xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-outline-variant/20 rounded-lg overflow-hidden">
+<div class="bg-surface-container-lowest p-4">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Año</label>
+<select class="w-full border-none bg-transparent font-medium p-0 focus:ring-0">
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+</select>
+</div>
+<div class="bg-surface-container-lowest p-4">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Marca</label>
+<select class="w-full border-none bg-transparent font-medium p-0 focus:ring-0">
+<option>Toyota</option>
+<option>Caterpillar</option>
+<option>Ford</option>
+</select>
+</div>
+<div class="bg-surface-container-lowest p-4">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Modelo</label>
+<select class="w-full border-none bg-transparent font-medium p-0 focus:ring-0">
+<option>Hilux</option>
+<option>Corolla</option>
+<option>F-150</option>
+</select>
+</div>
+<div class="bg-primary-container p-4 flex items-center justify-center cursor-pointer hover:bg-primary transition-colors group">
+<span class="material-symbols-outlined text-on-primary-container group-hover:text-white mr-2">search</span>
+<span class="font-bold uppercase tracking-widest text-on-primary-container group-hover:text-white">Buscar</span>
+</div>
+</div>
+<div class="p-4 flex flex-wrap gap-4 items-center justify-between bg-surface-container-low border-t border-stone-100">
+<div class="flex gap-4">
+<input class="bg-white border-outline-variant/30 text-xs py-2 px-4 rounded-md w-64 focus:ring-primary focus:border-primary" placeholder="Buscar por OEM / VIN / Part #" type="text"/>
+</div>
+<div class="flex items-center gap-2 text-xs font-bold text-stone-500 uppercase">
+<span class="material-symbols-outlined text-sm">settings_suggest</span>
+                                Configuración Avanzada
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Bento Grid -->
+<section class="py-24 bg-white">
+<div class="container mx-auto px-6">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="text-3xl font-black uppercase tracking-tighter text-on-surface">Categorías Destacadas</h2>
+<div class="h-1 w-24 bg-primary mt-2"></div>
+</div>
+<a class="text-xs font-black uppercase tracking-widest text-primary hover:underline" href="#">Ver Todo el Catálogo</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-[700px]">
+<!-- Large Feature: Motor -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container">
+<img alt="Engine Parts" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="close-up details of a clean, powerful truck engine with silver and black metallic surfaces and intricate wiring" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="text-primary-container text-xs font-black uppercase tracking-[0.3em]">Potencia Máxima</span>
+<h3 class="text-4xl font-black text-white uppercase tracking-tighter mt-2">Sistemas de Motor</h3>
+<p class="text-stone-300 mt-4 max-w-sm font-light">Pistones, árboles de levas y kits completos de reparación para servicio pesado.</p>
+</div>
+</div>
+<!-- Small Feature: Frenos -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-stone-900">
+<img alt="Brake Systems" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" data-alt="modern car brake disc and caliper with orange glowing heat effects on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A"/>
+<div class="absolute inset-0 flex flex-col justify-end p-8">
+<h3 class="text-2xl font-black text-white uppercase tracking-tighter">Frenado y Seguridad</h3>
+<button class="mt-4 w-fit bg-white/10 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 border border-white/20 hover:bg-white hover:text-black transition-all">Explorar</button>
+</div>
+</div>
+<!-- Small Feature: Transmisión -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-primary">
+<div class="p-8 h-full flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl text-on-primary">settings_input_component</span>
+<div>
+<h3 class="text-2xl font-black text-on-primary uppercase tracking-tighter">Transmisión</h3>
+<p class="text-on-primary/80 text-sm mt-2">Cajas, embragues y diferenciales industriales.</p>
+</div>
+</div>
+</div>
+<!-- Large Feature: Suspensión -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-high">
+<img alt="Suspension" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="heavy duty off-road shock absorber and spring assembly covered in a bit of dust for an authentic industrial feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw"/>
+<div class="absolute inset-0 bg-stone-900/40 group-hover:bg-stone-900/20 transition-colors"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<h3 class="text-5xl font-black text-white uppercase tracking-[0.1em] drop-shadow-lg">Suspensión</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- B2B Banner -->
+<section class="py-20 bg-stone-950 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary/10 -skew-x-12 translate-x-1/2"></div>
+<div class="container mx-auto px-6 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-6">
+                            SOLUCIONES <br/> <span class="text-primary">MAYORISTAS B2B</span>
+</h2>
+<p class="text-stone-400 mb-8 text-lg font-light leading-relaxed">
+                            Diseñado específicamente para Talleres, Flotas y Revendedores. Acceda a precios exclusivos por volumen, gestión de inventario en tiempo real y despacho prioritario a nivel nacional.
+                        </p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center text-white font-bold text-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-primary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Facturación Fiscal Personalizada
+                            </li>
+<li class="flex items-center text-white font-bold text-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-primary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Crédito Corporativo Disponible
+                            </li>
+<li class="flex items-center text-white font-bold text-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-primary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Soporte Técnico Especializado
+                            </li>
+</ul>
+<button class="bg-primary text-on-primary px-8 py-4 font-black uppercase tracking-[0.2em] rounded-sm hover:scale-105 transition-transform">
+                            Solicitar Registro B2B
+                        </button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-4 pt-12">
+<div class="aspect-square bg-stone-900 rounded-lg p-6 flex flex-col justify-center items-center text-center">
+<span class="text-4xl font-black text-primary mb-2">+15k</span>
+<span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">SKUs Disponibles</span>
+</div>
+<div class="aspect-square bg-stone-900 rounded-lg p-6 flex flex-col justify-center items-center text-center">
+<span class="text-4xl font-black text-primary mb-2">24h</span>
+<span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Tiempo Despacho</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="aspect-square bg-stone-800 rounded-lg p-6 flex flex-col justify-center items-center text-center">
+<span class="text-4xl font-black text-primary mb-2">100%</span>
+<span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Garantía OEM</span>
+</div>
+<div class="aspect-square bg-stone-900 rounded-lg p-6 flex flex-col justify-center items-center text-center">
+<span class="text-4xl font-black text-primary mb-2">FREE</span>
+<span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Entrega Corporativa</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Specs / Trust Markers -->
+<section class="py-12 bg-stone-100 border-y border-stone-200">
+<div class="container mx-auto px-6">
+<div class="flex flex-wrap justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all">
+<span class="text-xl font-black tracking-widest uppercase">Caterpillar</span>
+<span class="text-xl font-black tracking-widest uppercase">Bosch</span>
+<span class="text-xl font-black tracking-widest uppercase">Denso</span>
+<span class="text-xl font-black tracking-widest uppercase">Donaldson</span>
+<span class="text-xl font-black tracking-widest uppercase">Fleetguard</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-950 dark:bg-black w-full py-12 px-8 border-t border-stone-800">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl mx-auto">
+<div>
+<span class="text-lime-500 font-black text-xl block mb-4 uppercase tracking-tighter">Zenith ERP</span>
+<p class="text-stone-500 font-['Inter'] text-xs uppercase tracking-widest leading-relaxed">
+                    MAYOR DE REPUESTO LA CIMA, C.A<br/>
+                    RIF.: J-40308741-5
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-stone-400 font-bold text-xs uppercase tracking-widest">Enlaces Rápidos</span>
+<nav class="flex flex-col gap-2">
+<a class="text-stone-500 font-['Inter'] text-xs uppercase tracking-widest hover:text-lime-400 transition-colors" href="#">Contacto</a>
+<a class="text-stone-500 font-['Inter'] text-xs uppercase tracking-widest hover:text-lime-400 transition-colors" href="#">Soporte</a>
+<a class="text-stone-500 font-['Inter'] text-xs uppercase tracking-widest hover:text-lime-400 transition-colors" href="#">Términos</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<span class="text-stone-400 font-bold text-xs uppercase tracking-widest">Contacto</span>
+<p class="text-stone-500 font-['Inter'] text-xs uppercase tracking-widest">
+                    AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL,<br/>
+                    OFICINA NO. 2-3-C, URB. EL PARRAL,<br/>
+                    2001, VALENCIA, EDO. CARABOBO<br/>
+                    TELF.: +58 424-4582766 / +58 424-4042558<br/>
+                    LACIMA.REPUESTOS@GMAIL.COM<br/>
+                    PEDIDOSLACIMA@GMAIL.COM
+                </p>
+<div class="flex gap-4 mt-2">
+<span class="material-symbols-outlined text-stone-500 hover:text-lime-500 cursor-pointer">mail</span>
+<span class="material-symbols-outlined text-stone-500 hover:text-lime-500 cursor-pointer">phone_in_talk</span>
+<span class="material-symbols-outlined text-stone-500 hover:text-lime-500 cursor-pointer">location_on</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

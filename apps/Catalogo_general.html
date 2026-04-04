@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catálogo General | Mayor de Repuesto La Cima, C.A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="tailwind-config.js"></script>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contáctanos</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+</div>
+<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors" onclick="window.location.href='carrito_de_compras_b2b_b2c.html'">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+</button>
+<div class="h-6 w-px bg-outline mx-2"></div>
+<button class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all" onclick="window.location.href='login.html'">
+<span class="material-symbols-outlined text-primary text-sm">database</span>
+            Login
+        </button>
+</div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative min-h-[350px] flex items-center justify-center py-16 overflow-hidden bg-black">
+<div class="absolute inset-0 z-0">
+<img alt="Catalog Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ"/>
+<div class="absolute inset-0 bg-black/70"></div>
+</div>
+<div class="container mx-auto px-6 relative z-10">
+<div class="max-w-4xl mx-auto text-center">
+<span class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-4">Inventario Completo</span>
+<h1 class="text-5xl md:text-6xl font-black text-white leading-tight tracking-tighter mb-4 uppercase">
+                    CATÁLOGO <span class="text-primary">GENERAL</span>
+</h1>
+<p class="text-stone-300 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                    Explora nuestra amplia selección de repuestos automotrices e industriales.
+                </p>
+</div>
+</div>
+</section>
+<!-- Main Catalog Section -->
+<section class="py-16 bg-white">
+<div class="container mx-auto px-6">
+<div class="max-w-7xl mx-auto">
+<!-- Filter Bar -->
+<div class="bg-stone-50 border border-outline rounded-xl p-6 mb-10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Marca</label>
+<select class="w-full bg-white border border-outline rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+<option>Todas las Marcas</option>
+<option>Toyota</option>
+<option>Chevrolet</option>
+<option>Ford</option>
+<option>Caterpillar</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Categoría</label>
+<select class="w-full bg-white border border-outline rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+<option>Todas las Categorías</option>
+<option>Motor</option>
+<option>Frenos</option>
+<option>Suspensión</option>
+<option>Transmisión</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Código OEM</label>
+<input class="w-full bg-white border border-outline rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Ej: 12345-TYT" type="text"/>
+</div>
+<div class="flex items-end">
+<button class="w-full bg-black text-white py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors" onclick="window.location.href='busqueda_resultados.html'">
+                        Buscar
+                    </button>
+</div>
+</div>
+</div>
+<!-- Results Info -->
+<div class="flex justify-between items-center mb-8">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Mostrando 24 de 1,280 resultados</span>
+<div class="flex items-center gap-2">
+<span class="text-xs text-on-surface-variant font-medium">Ordenar por:</span>
+<select class="bg-transparent border-none text-xs font-bold text-on-surface focus:ring-0 p-0 cursor-pointer">
+<option>Más Relevantes</option>
+<option>Precio: Menor a Mayor</option>
+<option>Últimos Ingresos</option>
+</select>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group bg-stone-50 border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
+<img alt="Pistón Forjado Racing V8" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRn-wdKgaOpSBynFvnr0e_fmpdUwmPnpozU-NafufUaamlmKKGX6d-dkHr2aj7_nDx-AKznW0KzL5fIjYG7gtzalG2_9IuNT-hTRWpJiQeJzZ8511dZsT6tl5qkDqAo8LX7qK-hVKM713GcUlIo5wK0hJMgn8yJDs7Of6LasPy_8C4MbxFJrKC_7-xXWWCDrchCbWw_snA5feSSKqCid71lSKHG6-nFtzz1O8S3ya-CRGXCpluZVnH6mf88Zf6m9L0V_NoXpdkOA"/>
+<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">Motor</span>
+<span class="absolute top-2 right-2 bg-stone-200 text-stone-700 text-[9px] font-bold px-2 py-1">OEM: 12345-TYT</span>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">SKU: MON-44521</p>
+<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Pistón Forjado Racing V8</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-2">Compatible con series Toyota Land Cruiser 2018-2024. Aleación de alta temperatura.</p>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-lg font-black text-black">$145.90</span>
+</div>
+<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: +40</span>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
+<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
+</button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-stone-50 border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
+<img alt="Disco de Freno Cerámico" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ1uTKKI3hcg-UgclTUYS2lryfNW5z39vVMYSmQMUwjwGTocw-re_yfsLyRz8S0XrbYAv718wXDOEydIXKRnaqc0LqvpAuYLZ3tG0ClVlJWded0tLj7Ei5SYpK67kzn3SoMJm7F74PgYDNNnffPbUAml20wkjS1FYarCaJ8cyqF1Rf1pvIOtLbsn0vQGpXvDtgCCEoc07UzYCg_UUduEuPdDPVm1EpGqGG0N5LU_j3Xbu5K3Rgf5FLhT1nsM18Dmvwsuae2NrXWA"/>
+<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">Frenos</span>
+<span class="absolute top-2 right-2 bg-stone-200 text-stone-700 text-[9px] font-bold px-2 py-1">OEM: BK-9004</span>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">SKU: MON-88921</p>
+<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Disco de Freno Cerámico Ventilado</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-2">Uso intensivo. Compatibilidad universal para rines 17"+. Acabado anticorrosivo.</p>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-lg font-black text-black">$89.50</span>
+</div>
+<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: +85</span>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
+<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
+</button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-stone-50 border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
+<img alt="Amortiguador de Gas Nitrógeno" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1LXppgzwzoDNtBCTum-3mUotkQKZr4efvjDbwAOBjwjJE2xZCUgtXD8SPX-_Nrqm76VjHKjH7dT9dKprmE0OBFhJprM5FcDSVVREanO0F4r8SMiO-hTRsbWq77Oy4vN8Zk7C5pJiqCntBy0l2e0yWjv_L5WjI7HIX-r13bq1FI_0xFhYGlLvThi__IzNvRhTRxJ6WmLoXd6SFCDRN_G_2vR0jLH5i2il3DtSt1QLW1MmUWGZsxfKHSnOmdfpVN-ai4OREYR2giw"/>
+<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">Suspensión</span>
+<span class="absolute top-2 right-2 bg-stone-200 text-stone-700 text-[9px] font-bold px-2 py-1">OEM: SS-7721</span>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">SKU: MON-11204</p>
+<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Amortiguador de Gas Nitrógeno</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-2">Eje delantero. Chevrolet Tahoe / Silverado 2015-2022. Estabilidad reforzada.</p>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-lg font-black text-black">$62.00</span>
+</div>
+<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: +30</span>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
+<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
+</button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-stone-50 border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
+<img alt="Faro LED Matrix Gen 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrcJwmgPZi9HdRxqunTqDBpRfn4pF3cktXGtXeDeErJkw6Qr0CH6OOarSUXnpPzyA7DqT72dqcSy8u7-h3VsSX86XAAENjxgioCB4WNZwfXPtuR6AxXXTNotht--sFm_e7RL3FjkeUQfE-26tCftzD_frwFhDn1XAoncUkfQRnsU3VZ__P2TJjqMRUe7brF9pyOJYrpl2CyEHUYkAYbJ1zHE9sm8r21lspqmBh19bYhggjkEl8P1sXmOyTVSzh8pvZyxase_kxuQ"/>
+<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">Carrocería</span>
+<span class="absolute top-2 right-2 bg-stone-200 text-stone-700 text-[9px] font-bold px-2 py-1">OEM: HL-8820</span>
+</div>
+<div class="p-4">
+<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">SKU: MON-90923</p>
+<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Faro LED Matrix Gen 3</h4>
+<p class="text-xs text-stone-500 mb-4 line-clamp-2">Lado Izquierdo. Audi Q5 2021+. Proyección adaptativa inteligente.</p>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-lg font-black text-black">$512.00</span>
+</div>
+<span class="text-[10px] font-bold text-primary-dim uppercase">Bajo Pedido</span>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
+<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center gap-2">
+<button class="w-10 h-10 bg-black text-white rounded-lg font-bold text-sm hover:bg-stone-800 transition-colors">1</button>
+<button class="w-10 h-10 bg-stone-100 text-stone-600 rounded-lg font-bold text-sm hover:bg-stone-200 transition-colors">2</button>
+<button class="w-10 h-10 bg-stone-100 text-stone-600 rounded-lg font-bold text-sm hover:bg-stone-200 transition-colors">3</button>
+<span class="w-10 h-10 flex items-center justify-center text-stone-400">...</span>
+<button class="w-10 h-10 bg-stone-100 text-stone-600 rounded-lg font-bold text-sm hover:bg-stone-200 transition-colors">50</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<span class="text-primary font-black text-2xl block mb-6 uppercase tracking-tighter italic">Zenith ERP</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed mb-6">
+                MAYOR DE REPUESTO LA CIMA, C.A<br/>
+                RIF.: J-40308741-5
+            </p>
+<div class="flex gap-4">
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">facebook</span>
+</div>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_p_blico_de_repuestos.html">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Transmisión</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="dashboard_de_inventario_avanzado.html">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="arquitectura_t_cnica_ecommerce_repuestos.html">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="centro_de_soporte_garant_as_rma_e_ia_de_compatibilidad.html">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="login.html">Login</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Contacto</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">
+                AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL,<br/>
+                OFICINA NO. 2-3-C, URB. EL PARRAL,<br/>
+                2001, VALENCIA, EDO. CARABOBO<br/>
+<span class="text-white mt-2 block">TELF.: +58 424-4582766 / +58 424-4042558</span>
+</p>
+<div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">Emails:</p>
+<p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="text-primary text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#001e2e",
+                    "primary-fixed-dim": "#ffb783",
+                    "outline": "#897365",
+                    "on-tertiary-fixed-variant": "#004c6d",
+                    "surface-bright": "#f7f9ff",
+                    "surface-container-highest": "#d1e4fb",
+                    "surface": "#f7f9ff",
+                    "secondary-container": "#cfe2f9",
+                    "inverse-on-surface": "#e8f2ff",
+                    "tertiary-container": "#00a3e4",
+                    "primary-fixed": "#ffdcc5",
+                    "secondary-fixed": "#d1e4fb",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#301400",
+                    "surface-variant": "#d1e4fb",
+                    "secondary": "#4e6073",
+                    "on-surface-variant": "#564337",
+                    "on-primary-fixed-variant": "#713700",
+                    "background": "#f7f9ff",
+                    "surface-container-high": "#d9eaff",
+                    "surface-container-low": "#edf4ff",
+                    "on-secondary-container": "#526478",
+                    "surface-dim": "#c9dcf3",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-surface": "#091d2e",
+                    "error": "#ba1a1a",
+                    "primary-container": "#e67e22",
+                    "surface-tint": "#944a00",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#86cfff",
+                    "primary": "#944a00",
+                    "inverse-surface": "#203243",
+                    "secondary-fixed-dim": "#b5c8df",
+                    "on-secondary-fixed-variant": "#36485b",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#00658f",
+                    "surface-container": "#e3efff",
+                    "on-primary-container": "#502600",
+                    "on-tertiary-container": "#00354d",
+                    "on-secondary-fixed": "#091d2e",
+                    "outline-variant": "#dcc1b1",
+                    "tertiary-fixed": "#c7e7ff",
+                    "on-background": "#091d2e",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#ffb783"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #944a00 0%, #e67e22 100%);
+        }
+        .glass-nav {
+            background: rgba(247, 249, 255, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 z-50 glass-nav shadow-sm">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-[#091d2e] dark:text-white tracking-tighter font-headline">Industrial Precision Parts</span>
+<div class="hidden md:flex items-center gap-6 font-headline font-bold tracking-tight">
+<a class="text-[#091d2e]/70 hover:text-[#944a00] transition-all duration-200" href="Catalogo_general.html">Autos</a>
+<a class="text-[#091d2e]/70 hover:text-[#944a00] transition-all duration-200" href="Catalogo_general.html">Camiones</a>
+<a class="text-[#091d2e]/70 hover:text-[#944a00] transition-all duration-200" href="Catalogo_general.html">Tractores</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-[#d1e4fb] transition-all duration-200 scale-95 active:scale-90" onclick="window.location.href='login.html'">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-sm font-bold">Login / Registro</span>
+</button>
+<button class="relative p-2 rounded-md hover:bg-[#d1e4fb] transition-all duration-200 scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">3</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-[1440px] mx-auto px-8 py-12">
+<!-- Breadcrumbs / Flow Indicator -->
+<div class="mb-12 flex items-center gap-4 text-sm font-label uppercase tracking-widest text-on-surface-variant/60">
+<span>Carrito</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-bold">Finalizar Compra</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span>Confirmación</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Registration Form -->
+<section class="lg:col-span-7">
+<h1 class="text-4xl font-headline font-black tracking-tight mb-4 text-on-surface">Detalles de Facturación</h1>
+<p class="text-on-surface-variant mb-8 font-body">Complete sus datos para crear una cuenta profesional y procesar su pedido de alta precisión.</p>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-xs font-label font-bold uppercase tracking-widest text-on-surface">Nombre Completo</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-0 focus:border-primary border-b-2 border-transparent transition-all placeholder:text-on-surface/30" placeholder="Ej. Juan Pérez" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-label font-bold uppercase tracking-widest text-on-surface">Correo Electrónico</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-0 focus:border-primary border-b-2 border-transparent transition-all placeholder:text-on-surface/30" placeholder="juan.perez@empresa.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-xs font-label font-bold uppercase tracking-widest text-on-surface">Teléfono de Contacto</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-0 focus:border-primary border-b-2 border-transparent transition-all placeholder:text-on-surface/30" placeholder="+34 600 000 000" type="tel"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-label font-bold uppercase tracking-widest text-on-surface">Tipo de Cliente</label>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border-none rounded-lg p-4 appearance-none focus:ring-0 focus:border-primary border-b-2 border-transparent transition-all">
+<option value="taller">Taller Mecánico Especializado</option>
+<option value="flota">Gestor de Flota</option>
+<option value="particular">Particular</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<p class="text-sm font-bold text-on-surface">Ventaja Corporativa</p>
+<p class="text-xs text-on-surface-variant">Al registrarse como Taller o Flota, accederá automáticamente a tarifas B2B y soporte técnico prioritario.</p>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<label class="flex items-start gap-3 cursor-pointer group">
+<input class="mt-1 rounded-sm border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">He leído y acepto los términos de servicio y la política de garantía industrial.</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<input checked="" class="mt-1 rounded-sm border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Deseo recibir actualizaciones técnicas y ofertas de stock limitado.</span>
+</label>
+</div>
+</form>
+</section>
+<!-- Right Column: Order Summary -->
+<aside class="lg:col-span-5">
+<div class="bg-surface-container-low rounded-xl p-8 sticky top-28 shadow-sm">
+<h2 class="text-xl font-headline font-black tracking-tight mb-6">Resumen del Pedido</h2>
+<!-- Product List -->
+<div class="space-y-4 mb-8">
+<div class="flex gap-4 items-center p-3 bg-surface-container-lowest rounded-lg group">
+<div class="w-16 h-16 bg-surface-dim rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up of a high-performance diesel engine piston with precision machined grooves and metallic finish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFAjUEHKuI9Ae_-nK71S_5XJZdHlSs_c813jf3w_OPE9LNmBgfUNpG09andI44wWtl5NNyKOZzdSiWK6G2SqpkLPBpH56qhpXP6aelu91iBCR3N9QhY3iuXjF55pMJWZUQeLXpJpDmDgDBBngBqBIrJT9LUYm_sYtQNHUD3dUczk52WUnT-oGqDisdsHJlTZ5ZIzF7igu7OaGilnotrSvP-BkWKTQcl9vrJp7Qvj3FTaHjLBGeX9Upipg7-SieNru5A5sM2Rd1Rg"/>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-bold leading-tight">Pistón Forjado - Serie-K</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">SKU: IPP-99234-K</p>
+<p class="text-xs font-bold mt-1">2 x 145,00€</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">290,00€</p>
+</div>
+</div>
+<div class="flex gap-4 items-center p-3 bg-surface-container-lowest rounded-lg group">
+<div class="w-16 h-16 bg-surface-dim rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional automotive brake disc with cooling vents and high-quality metallic texture on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlSZBE1anrKWaQ-StQolMF6sxrzKGmOkE9dvnpJBw5XcCEPdRe7kreAL-gfOOcXgF1BZCGTSO7F_ZWr2pQr2FSl05f8ALLhUVq7ezLBFB_JZKg4Qe5R5CviJOOHxQMNQZBUpA3HeBf0YUnw20xOuGoXR1lTM1tL2r5-0ybrqOmVKBKCDiNEOh1nxyHt51tNiYSXqrHJaVlUY8IM3yF726vSulkmI8Cu5daWrYJfsjb-KMFdSwY9xQ96N5oFfwwAMjbaXK-306Uzw"/>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-bold leading-tight">Disco de Freno Ventilado</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">SKU: IPP-11209-D</p>
+<p class="text-xs font-bold mt-1">1 x 89,50€</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">89,50€</p>
+</div>
+</div>
+</div>
+<!-- Totals -->
+<div class="space-y-3 pt-6 border-t border-outline-variant/15 font-body">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="font-semibold">379,50€</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Impuestos (IVA 21%)</span>
+<span class="font-semibold">79,70€</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Envío Express</span>
+<span class="text-primary font-bold">GRATIS</span>
+</div>
+<div class="flex justify-between text-xl font-headline font-black pt-4 border-t border-outline-variant/30">
+<span>TOTAL</span>
+<span class="text-primary">459,20€</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full mt-8 py-4 kinetic-gradient text-white rounded-md font-headline font-bold text-lg shadow-lg hover:brightness-110 transition-all scale-100 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+                        Crear Cuenta y Pagar
+                    </button>
+<div class="mt-6 flex items-center justify-center gap-4">
+<img alt="Visa" class="h-4 opacity-50 grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP2T7AbVpCacFxsJwFl4cvColTQYFJZy_JO23-IiTQb07Mt5k4918zQDGyYT_i3vX8MElwe9aTnqxNMIRP9J8fQSVPFHx1J092B1tFJuYNQ-qUKy_kAYbY6DkU6sMdNMQ8K-laz1kkKnBBF4Xa4MCbrgAvEH8dlrWi_7UHkrZRWA_9Bm-eGALoRBcQ7FYPDmJyaaCoTrTWks9EWrQRRMq7bxPuyFFymSlwX2xHETbN8hA01GrUqKmpxadoAyrDNDL-aqI5FyBeuw"/>
+<img alt="Mastercard" class="h-6 opacity-50 grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUQ43RNU-DcodJ1ytFMggyNy9OpiUthR6WB9DwQ1fLAJan7PHs9w9UeYCsptg6GiLG8R4p_6Mbbd61ztJIZQzMGUeuNiVSGAudqmHBsd9pHokdcg2KcBPAwMT9zou_RyJW8-JIE2e9GLvjlxWpSKwJ6KOVM6h74FVQ-fK_xnO3Ih2FR0ISgsjkPcCOlpmris4lQbG5YuLqPIjPHpzjm4nA6qcsGOLOLeypZyoYw_UdZS0Fiqc0TK_CwZygUKLBVewK8-C1UdVueg"/>
+<img alt="Paypal" class="h-4 opacity-50 grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzshlBytULR7avlg-ARb3xhOPqMoQXshoJJJhW5eUrwlOCQFAPQnQ4ZD1eEV6_6jO3ME1eigtQsvmlmT3RTOX2SoqTfXBJ18aPuWcqYEdDOhMakeMOw5ylAB9C9MgmxlfiSR5qeckdIn9wP4olt1qcPBgTr9r0xRm2bS-vGSnaBatc6xmsRfFjGSKJbr8jaT8iS_7QKA8nDPu9yf4NIjdYZdRiSSUcP9Wj1GgAatK2QgIHM_AxLXhmLvymRHBf6v15K5xS219Q1A"/>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#091d2e] dark:bg-black full-width py-12 mt-20 border-t border-[#dcc1b1]/15">
+<div class="w-full grid grid-cols-1 md:grid-cols-4 gap-8 px-12 max-w-[1440px] mx-auto">
+<div>
+<span class="text-[#f7f9ff] font-black text-xl font-headline tracking-tighter">MAYOR DE REPUESTO LA CIMA, C.A</span>
+<p class="mt-4 text-[#f7f9ff]/60 text-sm leading-relaxed font-body">RIF.: J-40308741-5<br/>AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO</p>
+<p class="mt-2 text-[#f7f9ff]/60 text-sm">TELF.: +58 424-4582766 / +58 424-4042558</p>
+<p class="mt-1 text-[#f7f9ff]/60 text-sm">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="mt-1 text-[#f7f9ff]/60 text-sm">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+<div class="space-y-4">
+<p class="text-[#e67e22] font-bold font-headline uppercase tracking-widest text-xs">Recursos</p>
+<ul class="space-y-2">
+<li><a class="text-[#f7f9ff]/60 hover:text-[#f7f9ff] text-sm hover:translate-x-1 transition-transform inline-block" href="Catalogo_general.html">Almacenes</a></li>
+<li><a class="text-[#f7f9ff]/60 hover:text-[#f7f9ff] text-sm hover:translate-x-1 transition-transform inline-block" href="directorio_de_clientes_b2b_talleres_y_flotas.html">Métodos de Pago B2B</a></li>
+<li><a class="text-[#f7f9ff]/60 hover:text-[#f7f9ff] text-sm hover:translate-x-1 transition-transform inline-block" href="centro_de_soporte_garant_as_rma_e_ia_de_compatibilidad.html">Garantía</a></li>
+<li><a class="text-[#f7f9ff]/60 hover:text-[#f7f9ff] text-sm hover:translate-x-1 transition-transform inline-block" href="centro_de_soporte_garant_as_rma_e_ia_de_compatibilidad.html">Soporte Técnico</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="text-[#e67e22] font-bold font-headline uppercase tracking-widest text-xs">Contacto</p>
+<div class="text-[#f7f9ff]/60 text-sm space-y-2">
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-xs" data-icon="phone">phone</span> +34 900 123 456</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-xs" data-icon="mail">mail</span> info@precision-parts.com</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span> Polígono Ind. Norte, Madrid</p>
+</div>
+</div>
+<div class="space-y-4">
+<p class="text-[#e67e22] font-bold font-headline uppercase tracking-widest text-xs">Certificaciones</p>
+<div class="flex gap-4">
+<div class="w-10 h-10 bg-white/10 rounded flex items-center justify-center font-black text-[10px] text-white">ISO 9001</div>
+<div class="w-10 h-10 bg-white/10 rounded flex items-center justify-center font-black text-[10px] text-white">TÜV</div>
+<div class="w-10 h-10 bg-white/10 rounded flex items-center justify-center font-black text-[10px] text-white">CE</div>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-[#dcc1b1]/10 px-12 max-w-[1440px] mx-auto text-center">
+<p class="text-[#f7f9ff]/40 text-xs font-body">© 2024 Industrial Precision Parts. All Rights Reserved.</p>
+</div>
+</footer>
+
+```</body></html>

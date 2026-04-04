@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mayor de Repuesto La Cima - Advanced System Configuration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#465f00",
+                    "on-tertiary-container": "#575c63",
+                    "tertiary-fixed": "#f0f4fd",
+                    "tertiary-dim": "#4b5057",
+                    "inverse-on-surface": "#9c9d9f",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#364b00",
+                    "secondary-container": "#e2e2e5",
+                    "on-secondary-fixed": "#3e3f42",
+                    "primary-dim": "#405700",
+                    "on-error-container": "#520c00",
+                    "error-dim": "#b92902",
+                    "surface": "#f6f6f9",
+                    "on-surface": "#2d2f31",
+                    "primary-fixed-dim": "#bded4f",
+                    "error": "#b02500",
+                    "surface-dim": "#d2d4d8",
+                    "inverse-primary": "#ceff5e",
+                    "primary-fixed": "#cbfc5c",
+                    "on-primary-fixed-variant": "#4e6a00",
+                    "secondary": "#5a5c5e",
+                    "error-container": "#f95630",
+                    "surface-container": "#e7e8eb",
+                    "on-surface-variant": "#5a5c5e",
+                    "inverse-surface": "#0c0e10",
+                    "tertiary-fixed-dim": "#e1e5ee",
+                    "on-tertiary-fixed-variant": "#62666e",
+                    "on-primary": "#deff95",
+                    "on-tertiary-fixed": "#454a51",
+                    "on-error": "#ffefec",
+                    "surface-variant": "#dbdde0",
+                    "on-secondary-container": "#505254",
+                    "secondary-dim": "#4e5052",
+                    "secondary-fixed-dim": "#d4d4d7",
+                    "primary-container": "#cbfc5c",
+                    "tertiary-container": "#f0f4fd",
+                    "on-background": "#2d2f31",
+                    "outline-variant": "#acadaf",
+                    "on-tertiary": "#eff3fc",
+                    "on-secondary": "#f2f2f5",
+                    "surface-container-high": "#e1e2e6",
+                    "surface-container-highest": "#dbdde0",
+                    "background": "#f6f6f9",
+                    "primary": "#4a6400",
+                    "tertiary": "#575c63",
+                    "outline": "#757779",
+                    "surface-bright": "#f6f6f9",
+                    "secondary-fixed": "#e2e2e5",
+                    "surface-container-low": "#f0f0f3",
+                    "on-secondary-fixed-variant": "#5a5c5e",
+                    "surface-tint": "#4a6400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f0f0f3; }
+        ::-webkit-scrollbar-thumb { background: #acadaf; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 bottom-0 z-50 bg-neutral-950 dark:bg-black w-64 flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
+<div class="p-6 flex flex-col gap-1">
+<span class="text-xl font-black uppercase tracking-tighter text-[#A2D033]">TECHMONOLITH</span>
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-widest">Precision Parts Admin</span>
+</div>
+<nav class="flex-1 mt-4">
+<a class="flex items-center gap-3 px-6 py-3 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-100 transition-all duration-200" href="panel_de_ventas_y_crm_de_vendedores.html">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-medium text-sm">Sales</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-100 transition-all duration-200" href="gesti_n_detallada_de_inventario.html">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium text-sm">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-100 transition-all duration-200" href="directorio_de_clientes_b2b_talleres_y_flotas.html">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium text-sm">Customers</span>
+</a>
+<!-- Active State Navigation -->
+<a class="flex items-center gap-3 px-6 py-3 text-[#A2D033] bg-neutral-900 font-bold border-r-4 border-[#A2D033] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings_gear">settings</span>
+<span class="font-medium text-sm">Configuration</span>
+</a>
+</nav>
+<div class="p-4 border-t border-neutral-800">
+<div class="flex items-center gap-3 px-2 py-3 mb-4">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-on-primary font-bold text-xs">AD</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-white leading-none">Admin User</span>
+<span class="text-[10px] text-neutral-500">Super Administrator</span>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-2 text-neutral-400 hover:text-white transition-colors text-sm" onclick="logout()">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 flex justify-between items-center px-8 z-40 bg-white/80 backdrop-blur-xl border-b border-neutral-200/10">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-[#A2D033] outline-none" placeholder="Search system parameters..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer transition-colors" data-icon="history">history</span>
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer transition-colors" data-icon="help_outline">help_outline</span>
+</div>
+<div class="h-6 w-[1px] bg-outline-variant/30"></div>
+<span class="text-sm font-bold text-on-surface">PartsManager v2.4</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen p-8 bg-surface">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-2 block">System Engineering</span>
+<h1 class="text-5xl font-extrabold tracking-tighter text-on-surface">Configuration <span class="text-outline/40">Portal</span></h1>
+<p class="text-on-surface-variant mt-2 max-w-2xl font-medium">Manage e-commerce operational logic, API integrations, and organizational access controls for <span class="text-on-surface">Mayor de Repuesto La Cima</span>.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-md font-bold text-sm hover:bg-primary-dim transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="save">save</span>
+                    DEPLOY CHANGES
+                </button>
+</div>
+<!-- Bento Grid Settings Panels -->
+<div class="grid grid-cols-12 gap-6">
+<!-- API Integration & Sync Status (Large Featured Card) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-8 rounded-xl shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 -mr-16 -mt-16 rounded-full group-hover:scale-110 transition-transform duration-700"></div>
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="api">api</span>
+</div>
+<div>
+<h2 class="text-xl font-bold tracking-tight">TecDoc API Integration</h2>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold">Protocol: v4.1 Legacy Compatible</p>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-tertiary-container px-3 py-1 rounded-full">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="text-[10px] font-black uppercase text-on-tertiary-container">Live Signal</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div>
+<label class="text-[10px] font-bold text-outline-variant uppercase mb-2 block">API Secret Key</label>
+<div class="flex">
+<input class="bg-surface-container-low border-none rounded-l-md px-4 py-3 text-sm w-full font-mono" readonly="" type="password" value="********************************"/>
+<button class="bg-surface-container-high px-4 rounded-r-md hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div>
+<label class="text-[10px] font-bold text-outline-variant uppercase mb-2 block">Webhook Endpoint</label>
+<input class="bg-surface-container-low border-none rounded-md px-4 py-3 text-sm w-full font-mono text-primary" type="text" value="https://api.lacima.parts/v1/sync/tecdoc"/>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-lg">
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Sync Health</span>
+<span class="text-xs font-mono">99.8%</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full mb-6 overflow-hidden">
+<div class="h-full bg-primary w-[99.8%]"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<span class="block text-[10px] font-bold text-outline-variant uppercase">Requests/Hr</span>
+<span class="text-lg font-black tracking-tight">14,204</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-outline-variant uppercase">Latency</span>
+<span class="text-lg font-black tracking-tight">42ms</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification Preferences (Compact Card) -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-high p-8 rounded-xl flex flex-col">
+<h2 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+                        Event Signals
+                    </h2>
+<div class="space-y-6 flex-1">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-bold leading-none mb-1">Inventory Depletion</p>
+<p class="text-[11px] text-on-surface-variant">Alert when stock &lt; 5 units</p>
+</div>
+<div class="w-10 h-5 bg-primary-fixed-dim rounded-full relative cursor-pointer shadow-inner">
+<div class="absolute right-1 top-1 w-3 h-3 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-bold leading-none mb-1">Price Discrepancy</p>
+<p class="text-[11px] text-on-surface-variant">Auto-detect TecDoc mismatch</p>
+</div>
+<div class="w-10 h-5 bg-primary-fixed-dim rounded-full relative cursor-pointer shadow-inner">
+<div class="absolute right-1 top-1 w-3 h-3 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-bold leading-none mb-1">Admin Audit Log</p>
+<p class="text-[11px] text-on-surface-variant">Weekly digest export</p>
+</div>
+<div class="w-10 h-5 bg-outline-variant/30 rounded-full relative cursor-pointer">
+<div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+<button class="mt-8 text-xs font-bold text-primary uppercase tracking-widest hover:underline text-left">Configure SMTP Server →</button>
+</div>
+<!-- User Roles & Access Control (Asymmetric Layout) -->
+<div class="col-span-12 lg:col-span-5 bg-surface-container-lowest p-8 rounded-xl shadow-sm border-l-4 border-primary">
+<h2 class="text-xl font-bold mb-6">Matrix Architecture</h2>
+<div class="space-y-4">
+<!-- Role Row -->
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between group hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-neutral-900 text-white flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-sm" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<div>
+<span class="block text-sm font-bold">Administrator</span>
+<span class="text-[10px] text-on-surface-variant">Full System Write/Execute</span>
+</div>
+</div>
+<span class="text-[10px] font-black text-outline">L3 CLEARANCE</span>
+</div>
+<!-- Role Row -->
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between group hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest text-on-surface flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-sm" data-icon="sell">sell</span>
+</div>
+<div>
+<span class="block text-sm font-bold">Sales Lead</span>
+<span class="text-[10px] text-on-surface-variant">Order Mgmt &amp; Client Pricing</span>
+</div>
+</div>
+<span class="text-[10px] font-black text-outline">L2 CLEARANCE</span>
+</div>
+<!-- Role Row -->
+<div class="bg-surface-container-low p-4 rounded-lg flex items-center justify-between group hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest text-on-surface flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-sm" data-icon="warehouse">warehouse</span>
+</div>
+<div>
+<span class="block text-sm font-bold">Warehouse</span>
+<span class="text-[10px] text-on-surface-variant">Stock Verification &amp; QR Flow</span>
+</div>
+</div>
+<span class="text-[10px] font-black text-outline">L1 CLEARANCE</span>
+</div>
+</div>
+</div>
+<!-- E-commerce Operational Logic (Industrial Details) -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h2 class="text-xl font-bold tracking-tight">E-commerce Logic</h2>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mt-1">Transaction Parameters</p>
+</div>
+<span class="material-symbols-outlined text-outline/20 text-4xl" data-icon="shopping_cart_checkout">shopping_cart_checkout</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+<div class="space-y-6">
+<div>
+<label class="text-[10px] font-bold text-outline-variant uppercase mb-2 block">Global Margin Multiplier</label>
+<div class="flex items-center gap-4">
+<input class="flex-1 accent-primary h-1.5 bg-surface-container-high rounded-full appearance-none" type="range"/>
+<span class="text-sm font-black w-12 text-right">1.25x</span>
+</div>
+</div>
+<div>
+<label class="text-[10px] font-bold text-outline-variant uppercase mb-2 block">Currency Logic</label>
+<div class="flex gap-2">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-md text-xs font-bold">VES (Auto)</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-md text-xs font-bold">USD (Fixed)</button>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<label class="text-[10px] font-bold text-outline-variant uppercase mb-2 block">Fulfillment SLA (Hours)</label>
+<input class="bg-surface-container-low border-none rounded-md px-4 py-2 text-sm w-full font-bold" type="number" value="24"/>
+</div>
+<div class="bg-tertiary-container p-4 rounded-lg border border-outline-variant/10">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container text-lg" data-icon="info">info</span>
+<p class="text-[11px] leading-relaxed text-on-tertiary-container">Margins are calculated against the base TecDoc dealer price plus localized logistics surcharges.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Footer Stats (Asymmetric Full Width) -->
+<div class="col-span-12 flex flex-col md:flex-row gap-6 mt-4">
+<div class="flex-1 bg-neutral-900 text-white p-6 rounded-xl flex items-center justify-between">
+<div>
+<span class="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.2em]">System Uptime</span>
+<div class="text-2xl font-black tracking-tighter text-[#A2D033]">1,402:12:44</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.2em]">Active Nodes</span>
+<div class="text-2xl font-black tracking-tighter">08 <span class="text-xs text-neutral-500">/ 08</span></div>
+</div>
+</div>
+<div class="flex-[1.5] bg-surface-container-highest p-6 rounded-xl flex items-center justify-around border-b-4 border-primary">
+<div class="text-center">
+<span class="block text-2xl font-black">94.2k</span>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Parts Indexed</span>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant/30"></div>
+<div class="text-center">
+<span class="block text-2xl font-black">1.8s</span>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Avg Query Latency</span>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant/30"></div>
+<div class="text-center">
+<span class="block text-2xl font-black">3,401</span>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Active Sessions</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

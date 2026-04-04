@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Public Catalog | CIMA FORGE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#acadaf",
+                    "tertiary-dim": "#4b5057",
+                    "surface-tint": "#4a6400",
+                    "on-secondary-container": "#505254",
+                    "tertiary-fixed-dim": "#e1e5ee",
+                    "on-surface": "#2d2f31",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#f2f2f5",
+                    "secondary-fixed": "#e2e2e5",
+                    "primary-dim": "#405700",
+                    "error-container": "#f95630",
+                    "primary-fixed": "#cbfc5c",
+                    "surface-dim": "#d2d4d8",
+                    "on-primary-fixed": "#364b00",
+                    "surface": "#f6f6f9",
+                    "on-error": "#ffefec",
+                    "error-dim": "#b92902",
+                    "on-surface-variant": "#5a5c5e",
+                    "surface-container": "#e7e8eb",
+                    "on-tertiary-container": "#575c63",
+                    "tertiary-fixed": "#f0f4fd",
+                    "primary-fixed-dim": "#bded4f",
+                    "outline": "#757779",
+                    "surface-container-high": "#e1e2e6",
+                    "surface-container-highest": "#dbdde0",
+                    "on-tertiary-fixed-variant": "#62666e",
+                    "error": "#b02500",
+                    "secondary-dim": "#4e5052",
+                    "primary-container": "#cbfc5c",
+                    "inverse-primary": "#ceff5e",
+                    "tertiary-container": "#f0f4fd",
+                    "surface-container-low": "#f0f0f3",
+                    "on-primary": "#deff95",
+                    "on-tertiary": "#eff3fc",
+                    "on-error-container": "#520c00",
+                    "surface-bright": "#f6f6f9",
+                    "on-primary-container": "#465f00",
+                    "inverse-surface": "#0c0e10",
+                    "on-background": "#2d2f31",
+                    "secondary-container": "#e2e2e5",
+                    "primary": "#4a6400",
+                    "secondary-fixed-dim": "#d4d4d7",
+                    "secondary": "#5a5c5e",
+                    "background": "#f6f6f9",
+                    "on-primary-fixed-variant": "#4e6a00",
+                    "on-tertiary-fixed": "#454a51",
+                    "tertiary": "#575c63",
+                    "surface-variant": "#dbdde0",
+                    "on-secondary-fixed": "#3e3f42",
+                    "on-secondary-fixed-variant": "#5a5c5e",
+                    "inverse-on-surface": "#9c9d9f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-stone-950/90 dark:bg-stone-950/90 backdrop-blur-xl docked full-width top-0 z-50 sticky shadow-2xl shadow-black/20">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1920px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tighter text-[#A2D033]">CIMA FORGE</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-['Manrope'] uppercase tracking-tight text-sm font-bold text-[#A2D033] border-b-2 border-[#A2D033] pb-1" href="#">Catalog</a>
+<a class="font-['Manrope'] uppercase tracking-tight text-sm font-bold text-stone-400 hover:text-stone-100 transition-colors" href="#">B2B Portal</a>
+<a class="font-['Manrope'] uppercase tracking-tight text-sm font-bold text-stone-400 hover:text-stone-100 transition-colors" href="#">Solutions</a>
+<a class="font-['Manrope'] uppercase tracking-tight text-sm font-bold text-stone-400 hover:text-stone-100 transition-colors" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<input class="bg-stone-900 text-stone-300 text-xs py-2 pl-4 pr-10 w-80 rounded-sm border-none focus:ring-1 focus:ring-[#A2D033]" placeholder="Search OEM, VIN, or Part Name..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-stone-500 text-lg">search</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-[#A2D033] text-stone-950 px-4 py-2 font-bold text-xs uppercase tracking-wider rounded-sm scale-95 active:opacity-80 transition-transform">ERP Login</button>
+<div class="flex items-center gap-2 text-stone-300">
+<span class="material-symbols-outlined hover:text-[#A2D033] cursor-pointer transition-colors" data-icon="account_circle">account_circle</span>
+<div class="relative">
+<span class="material-symbols-outlined hover:text-[#A2D033] cursor-pointer transition-colors" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-[#A2D033] text-stone-950 text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1920px] mx-auto min-h-screen flex flex-col md:flex-row">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-72 bg-surface-container-low p-6 flex flex-col gap-8 shrink-0">
+<div>
+<h3 class="text-xs font-black uppercase tracking-[0.2em] text-secondary mb-4">Technical Filter</h3>
+<div class="space-y-6">
+<!-- Category -->
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant">Vehicle Category</label>
+<select class="w-full bg-surface-container-high border-none text-sm font-medium focus:ring-1 focus:ring-primary py-2 px-3">
+<option>Heavy Duty Trucks</option>
+<option>Industrial Machinery</option>
+<option>Passenger LCV</option>
+</select>
+</div>
+<!-- Brand -->
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant">Manufacturer</label>
+<div class="space-y-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="w-4 h-4 rounded-none border-outline bg-surface-container text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Caterpillar</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input checked="" class="w-4 h-4 rounded-none border-outline bg-surface-container text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Cummins</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="w-4 h-4 rounded-none border-outline bg-surface-container text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Detroit Diesel</span>
+</label>
+<label class="flex items-center gap-3 group cursor-pointer">
+<input class="w-4 h-4 rounded-none border-outline bg-surface-container text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Komatsu</span>
+</label>
+</div>
+</div>
+<!-- Engine Type -->
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant">Engine Family</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-surface-container-high text-[10px] font-bold py-2 hover:bg-primary-container transition-colors">V8-DIESEL</button>
+<button class="bg-primary-container text-on-primary-container text-[10px] font-bold py-2">L6-TURBO</button>
+<button class="bg-surface-container-high text-[10px] font-bold py-2 hover:bg-primary-container transition-colors">V12-IND</button>
+<button class="bg-surface-container-high text-[10px] font-bold py-2 hover:bg-primary-container transition-colors">ELECTRIC</button>
+</div>
+</div>
+<!-- Year Range -->
+<div class="space-y-3">
+<label class="block text-[10px] font-bold uppercase text-on-surface-variant">Production Year</label>
+<div class="flex items-center gap-2">
+<input class="w-full bg-surface-container-high border-none text-xs text-center py-2" placeholder="2010" type="text"/>
+<span class="text-outline">/</span>
+<input class="w-full bg-surface-container-high border-none text-xs text-center py-2" placeholder="2024" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-8 border-t border-surface-container">
+<button class="w-full bg-inverse-surface text-surface text-xs font-bold py-3 uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">Clear All Filters</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<section class="flex-1 bg-surface-bright p-8">
+<!-- Contextual Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<h1 class="text-4xl font-black tracking-tighter text-on-surface leading-none mb-2">PRECISION CATALOG</h1>
+<p class="text-sm text-on-surface-variant font-medium">Displaying 1,248 available components for Cummins &amp; Heavy Machinery</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-low p-1 rounded-sm">
+<button class="p-2 bg-surface-container-lowest shadow-sm"><span class="material-symbols-outlined text-xl">grid_view</span></button>
+<button class="p-2 text-on-surface-variant"><span class="material-symbols-outlined text-xl">view_list</span></button>
+</div>
+<select class="bg-surface-container-lowest border-none text-xs font-bold uppercase tracking-wider focus:ring-0 py-2 px-4 shadow-sm">
+<option>Sort by: OEM Number</option>
+<option>Sort by: Newest Arrival</option>
+<option>Sort by: Price High-Low</option>
+</select>
+</div>
+</div>
+<!-- Search bar (High Priority) -->
+<div class="mb-8 relative group">
+<input class="w-full bg-surface-container-lowest border-none shadow-xl shadow-black/5 py-6 px-8 text-lg font-headline font-bold placeholder:text-outline-variant focus:ring-b-2 focus:ring-primary rounded-sm transition-all" placeholder="Enter OEM Number, VIN Code or Serial ID for exact match..." type="text"/>
+<div class="absolute right-6 top-1/2 -translate-y-1/2 flex items-center gap-3">
+<span class="text-[10px] font-black bg-surface-container px-2 py-1 uppercase text-on-surface-variant">VIN IDENTIFIED</span>
+<button class="bg-primary hover:bg-primary-dim text-on-primary p-3 rounded-sm transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group bg-surface-container-lowest overflow-hidden flex flex-col transition-all hover:translate-y-[-4px]">
+<div class="relative aspect-square bg-surface-container-low overflow-hidden">
+<img alt="Heavy duty engine piston" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Technical close-up of a high-performance diesel engine piston on a clean industrial white background with sharp shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2Qnemtu6iDA-wJBIR9hv13Dw_CNPCJSO2yKzHy4JVEZcS5a3s3vcGeWLDXxd0-_q6fHesMZ59ETfePXBqtU2C_F80W1v5ttIBs9rvszSCGNjzwoadeuTb10bnUFQYwREDAaD2t-zU1zH2xulnExi5WKKv_XANf6elvXvpzk6VrPa-Z-hs3F1onRWUDFAri-EDqegiuct5iT7ivsfN5xaVRPxO2bCZ0RR2C9tsCvu-vMOTaOXlazJ1bHrWAR1-pPYHCy0BN7N7Xg"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-[#A2D033] text-stone-950 text-[10px] font-black px-2 py-1 uppercase">OEM Grade</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">SKU: CM-992-PX</span>
+<span class="text-[10px] font-bold text-on-tertiary-container bg-tertiary-container px-2 py-0.5">FORGED STEEL</span>
+</div>
+<h4 class="text-lg font-black tracking-tight text-on-surface mb-1 group-hover:text-primary transition-colors">Piston Assembly - 6BT Series</h4>
+<p class="text-xs text-on-surface-variant mb-4 font-medium">OEM NO: 3907163 / 3802332</p>
+<div class="mt-auto pt-4 flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black text-on-surface">$142.50</span>
+<span class="text-[10px] font-bold text-outline uppercase">/ UNIT</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-[10px] font-bold uppercase text-emerald-600">In Stock - Ready for Shipping</span>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container hover:bg-primary hover:text-on-primary font-bold py-3 text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 group/btn">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-surface-container-lowest overflow-hidden flex flex-col transition-all hover:translate-y-[-4px]">
+<div class="relative aspect-square bg-surface-container-low overflow-hidden">
+<img alt="Turbocharger unit" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Detailed studio shot of a massive industrial turbocharger showing turbine fins and polished metal casing under cool blue workshop lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlhfgAL0s9o2M6kw0JQ2x6nCMSHAwr_JjbRLRK9SgPMmo6HwXTePNGHZ5YEMabRZk9pyAhxo84UFYuv2aYrGNrGN73-sTAIdVnXyAmm2EXDBtp_0nnXiydZfLYcQZFUiBOsQTTNlXjr98QC_BP-QXNum0O14q5_SFy5nas-yFL95mr45UqVSAJTUctNBuhrZV3UGC5Wj5qbb3Sv5GFzrNXKyoTZZex65b84qLhJY4d_OhxdRyzWYZ4mfEyztIxvqAms0EH9cVbDg"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-inverse-surface text-surface text-[10px] font-black px-2 py-1 uppercase">Limited Stock</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">SKU: TRB-HX40-C</span>
+<span class="text-[10px] font-bold text-on-tertiary-container bg-tertiary-container px-2 py-0.5">TURBO SYSTEMS</span>
+</div>
+<h4 class="text-lg font-black tracking-tight text-on-surface mb-1 group-hover:text-primary transition-colors">Holset HX40W Turbocharger</h4>
+<p class="text-xs text-on-surface-variant mb-4 font-medium">OEM NO: 4038475 / 3592512</p>
+<div class="mt-auto pt-4 flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black text-on-surface">$895.00</span>
+<span class="text-[10px] font-bold text-outline uppercase">/ UNIT</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="text-[10px] font-bold uppercase text-amber-600">3 Units Left - Ships Today</span>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container hover:bg-primary hover:text-on-primary font-bold py-3 text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 group/btn">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-surface-container-lowest overflow-hidden flex flex-col transition-all hover:translate-y-[-4px]">
+<div class="relative aspect-square bg-surface-container-low overflow-hidden">
+<img alt="Crankshaft component" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Long exposure of a heavy-duty industrial crankshaft on a technical workbench, showing metallic textures and oil sheen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0sDMvPRRrvd354uxpyUNQragxf8j3vib_pvZquLlUS4aLOKy_zlX1p1p6Gva8rS3EwCYYKEOiHICIlriVbdl1pQBWJBCIxV_iG69Eq2cxO-h-uAjSKD0I0x0IIMqruRketns8CGycIHXdNGGFqtBoVhY7h8npmsdWNtFQ_GpJWvDOTKf2BCsn4563DzVRTpC5kfF4Evil-_HMLZi67iE4g9ogM__LabrG4UmLe4sGSE5RYpCeCPRt1GbLRJfUNHz0nJ2rMKmQfA"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-[#A2D033] text-stone-950 text-[10px] font-black px-2 py-1 uppercase">Certified Forge</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">SKU: CRNK-L10-HD</span>
+<span class="text-[10px] font-bold text-on-tertiary-container bg-tertiary-container px-2 py-0.5">FORGED STEEL</span>
+</div>
+<h4 class="text-lg font-black tracking-tight text-on-surface mb-1 group-hover:text-primary transition-colors">Crankshaft L10/M11 Engine</h4>
+<p class="text-xs text-on-surface-variant mb-4 font-medium">OEM NO: 3073707 / 3418888</p>
+<div class="mt-auto pt-4 flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black text-on-surface">$2,450.00</span>
+<span class="text-[10px] font-bold text-outline uppercase">/ UNIT</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-[10px] font-bold uppercase text-emerald-600">In Stock - Ready for Shipping</span>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container hover:bg-primary hover:text-on-primary font-bold py-3 text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 group/btn">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-surface-container-lowest overflow-hidden flex flex-col transition-all hover:translate-y-[-4px]">
+<div class="relative aspect-square bg-surface-container-low overflow-hidden">
+<img alt="Fuel injectors" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Macro photography of precision fuel injectors for diesel engines arranged in a technical grid pattern with sharp focus on nozzle tips" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOP2eAEHYRDtZe-31oPSWfzEsiwH4t6UV5dopR_elE_9M7H0unul1Wrc8OTkAaptSvYHytuqLEMwHwx9PIwvoIQk7FaJ2AdkRLPMhvEOezz_WQxJD5YTrpvKLJxGIny66jW_uIBlPiy58sZtxbweqSSZpdQsa-2meFyqWG_XL0q2fVwe_u5NESuj3omqoSREh_yH6C_X8QwoWDbhY91SkMc20sZqxEdZDA1LIdeV20xvrq3AM4B3O4EghECc_MMVjhCyqG9nkmWQ"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-[#A2D033] text-stone-950 text-[10px] font-black px-2 py-1 uppercase">Best Seller</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">SKU: INJ-ISX-15</span>
+<span class="text-[10px] font-bold text-on-tertiary-container bg-tertiary-container px-2 py-0.5">PRECISION FUEL</span>
+</div>
+<h4 class="text-lg font-black tracking-tight text-on-surface mb-1 group-hover:text-primary transition-colors">Fuel Injector Kit ISX15</h4>
+<p class="text-xs text-on-surface-variant mb-4 font-medium">OEM NO: 4954434 / 4954927</p>
+<div class="mt-auto pt-4 flex flex-col gap-4">
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black text-on-surface">$568.25</span>
+<span class="text-[10px] font-bold text-outline uppercase">/ UNIT</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-[10px] font-bold uppercase text-emerald-600">In Stock - Ready for Shipping</span>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container hover:bg-primary hover:text-on-primary font-bold py-3 text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 group/btn">
+<span class="material-symbols-outlined text-lg" data-icon="shopping_cart">shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between border-t border-surface-container py-8 gap-6">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Showing 1-12 of 1,248 components</p>
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary font-bold text-xs">01</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant font-bold text-xs transition-colors">02</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant font-bold text-xs transition-colors">03</button>
+<button class="w-10 h-10 flex items-center justify-center bg-transparent text-on-surface-variant font-bold text-xs">...</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant font-bold text-xs transition-colors">104</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-stone-950 dark:bg-stone-950 full-width py-12 px-8 border-t border-stone-800">
+<div class="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+<div class="space-y-4">
+<span class="text-lg font-bold text-stone-100">MAYOR DE REPUESTO LA CIMA, C.A</span>
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 leading-relaxed max-w-md">
+                    RIF.: J-40308741-5<br/>
+                    AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
+                </p>
+<div class="flex gap-4 pt-2">
+<p class="text-stone-500 text-xs">TELF.: +58 424-4582766 / +58 424-4042558</p>
+</div>
+<div class="flex gap-4 pt-2">
+<p class="text-stone-500 text-xs">LACIMA.REPUESTOS@GMAIL.COM</p>
+</div>
+<div class="flex gap-4 pt-2">
+<p class="text-stone-500 text-xs">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+<div class="flex flex-col md:items-end justify-between gap-6">
+<nav class="flex flex-wrap gap-x-8 gap-y-4 justify-start md:justify-end">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 hover:text-stone-300 hover:underline decoration-[#A2D033] transition-all" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 hover:text-stone-300 hover:underline decoration-[#A2D033] transition-all" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 hover:text-stone-300 hover:underline decoration-[#A2D033] transition-all" href="#">Technical Docs</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 hover:text-stone-300 hover:underline decoration-[#A2D033] transition-all" href="#">Contact Engineering</a>
+</nav>
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+</div>
+</div>
+</footer>
+</body></html>
