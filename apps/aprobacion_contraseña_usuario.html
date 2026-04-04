@@ -3,13 +3,35 @@
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Panel de Aprobación | Usuario Maestro</title>
+<title>Aprobación de Contraseñas | Zenith ERP</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="tailwind-config.js"></script>
 <link href="styles.css" rel="stylesheet"/>
+<script src="auth.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            protectPage();
+            const user = getCurrentUser();
+            if (user) {
+                document.getElementById('dashboardUserName').textContent = user.name;
+                document.getElementById('dashboardUserRole').textContent = user.role === 'admin' ? 'Administrador' : 'Usuario';
+            }
+            initSubmenu('configuracion');
+            loadRequests();
+        });
+    </script>
 <style>
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover { background-color: rgba(255,255,255,0.05); }
+        .sidebar-link.active { background-color: rgba(206,255,94,0.1); border-left: 3px solid #ceff5e; }
+        .submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .submenu.open { max-height: 200px; }
+        .submenu-link { transition: all 0.2s ease; }
+        .submenu-link:hover { background-color: rgba(255,255,255,0.03); color: #ceff5e; }
+        .submenu-link.active { color: #ceff5e; background-color: rgba(206,255,94,0.1); }
+        .rotate-chevron { transform: rotate(180deg); transition: transform 0.3s ease; }
         .status-pending { background-color: #fef3c7; color: #92400e; }
         .status-approved { background-color: #d1fae5; color: #065f46; }
         .status-rejected { background-color: #fee2e2; color: #991b1b; }
@@ -21,79 +43,135 @@
     </style>
 </head>
 <body class="bg-[#fafafa] text-on-surface selection:bg-primary/30">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
-<div class="flex items-center gap-8">
-<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
-<div class="hidden md:flex items-center gap-6">
-<span class="text-xs uppercase tracking-widest font-bold text-primary border-b-2 border-primary pb-1">Panel Maestro</span>
-<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="dashboard.html">Dashboard</a>
-<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Salir</a>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#1a1a1a] flex flex-col z-50">
+<div class="px-6 py-6 border-b border-white/10">
+<div class="flex items-center gap-3">
+<span class="text-2xl font-extrabold italic text-white tracking-tighter">Zenith <span class="text-primary">ERP</span></span>
+</div>
+<p class="text-[10px] text-stone-400 font-medium tracking-widest mt-2 uppercase">Panel de Control General</p>
+</div>
+<nav class="flex-1 py-4 overflow-y-auto">
+<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-400 hover:text-white" href="dashboard.html">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-xs font-bold uppercase tracking-widest">Dashboard</span>
+</a>
+<div class="mb-1">
+<button class="sidebar-link w-full flex items-center justify-between gap-3 px-6 py-3 text-stone-400 hover:text-white" onclick="toggleSubmenu('inventario')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl">inventory</span>
+<span class="text-xs font-bold uppercase tracking-widest">Inventario</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform" id="chevron-inventario">expand_more</span>
+</button>
+<div class="submenu" id="submenu-inventario">
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="gesti_n_detallada_de_inventario.html">Productos</a>
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="directorio_de_clientes_b2b_talleres_y_flotas1.html">Público</a>
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="gesti_n_detallada_de_inventario1.html">Ajustes</a>
 </div>
 </div>
-<div class="flex items-center gap-4">
-<div class="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
-<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Admin Activo</span>
+<div class="mb-1">
+<button class="sidebar-link w-full flex items-center justify-between gap-3 px-6 py-3 text-stone-400 hover:text-white" onclick="toggleSubmenu('ventas')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl">point_of_sale</span>
+<span class="text-xs font-bold uppercase tracking-widest">Ventas</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform" id="chevron-ventas">expand_more</span>
+</button>
+<div class="submenu" id="submenu-ventas">
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="directorio_de_clientes_b2b_talleres_y_flotas1.html">Directorio</a>
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="#">POS</a>
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="#">Historial de Ventas</a>
+</div>
+</div>
+<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-500 opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-xl">attach_money</span>
+<span class="text-xs font-bold uppercase tracking-widest">Finanzas</span>
+</a>
+<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-500 opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-xs font-bold uppercase tracking-widest">RRHH</span>
+</a>
+<div class="h-px bg-white/10 my-4 mx-6"></div>
+<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-400 hover:text-white" href="directorio_de_clientes_b2b_talleres_y_flotas.html">
+<span class="material-symbols-outlined text-xl">business</span>
+<span class="text-xs font-bold uppercase tracking-widest">Clientes B2B</span>
+</a>
+<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-400 hover:text-white" href="reportes_y_anal_tica_predictiva.html">
+<span class="material-symbols-outlined text-xl">bar_chart</span>
+<span class="text-xs font-bold uppercase tracking-widest">Reportes</span>
+</a>
+<div class="mb-1">
+<button class="sidebar-link w-full flex items-center justify-between gap-3 px-6 py-3 text-white bg-primary/10 border-l-3 border-primary" onclick="toggleSubmenu('configuracion')">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl text-primary">settings</span>
+<span class="text-xs font-bold uppercase tracking-widest">Configuración</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform rotate-chevron" id="chevron-configuracion">expand_more</span>
+</button>
+<div class="submenu open" id="submenu-configuracion">
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="configuraci_n_avanzada_del_sistema.html">Ajustes</a>
+<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-primary text-[10px] uppercase tracking-wider bg-primary/10" href="aprobacion_contraseña_usuario.html">Aprobación de Contraseñas</a>
 </div>
 </div>
 </nav>
-<main class="pt-16">
-<!-- Hero Section -->
-<section class="bg-black text-white py-10">
-<div class="container mx-auto px-6">
-<div class="max-w-7xl mx-auto">
-<div class="flex justify-between items-end mb-6">
+<div class="px-4 py-4 border-t border-white/10">
+<button class="w-full bg-primary text-black py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-dim transition-colors">Support Ticket</button>
+<div class="mt-4 flex items-center gap-3 px-2">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold text-white truncate" id="sidebarUserName">Administrador</p>
+<p class="text-[10px] text-stone-500 truncate">Master Access</p>
+</div>
+<button class="text-stone-500 hover:text-white" onclick="logout()">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- TopBar -->
+<header class="w-full sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-outline flex justify-between items-center px-8 h-16">
+<div class="flex items-center gap-4">
+<h1 class="text-xl font-black uppercase tracking-tighter text-black">Aprobación de Contraseñas</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3 bg-stone-50 px-4 py-2 rounded-lg">
+<div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
 <div>
-<h1 class="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-2">
-                            Panel de <span class="text-primary">Aprobación</span>
-</h1>
+<p class="text-xs font-bold text-black" id="dashboardUserName">Usuario</p>
+<p class="text-[10px] text-stone-400 uppercase" id="dashboardUserRole">Rol</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Content -->
+<section class="p-8 flex-1">
+<div class="max-w-7xl mx-auto">
+<!-- Hero Section -->
+<div class="bg-black text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-3xl font-black uppercase tracking-tighter mb-2">Panel de <span class="text-primary">Aprobación</span></h2>
 <p class="text-stone-400 text-sm">Gestión de solicitudes de recuperación de contraseñas.</p>
 </div>
-<div class="flex gap-4">
-<div class="bg-zinc-900 p-4 rounded-xl border-l-4 border-primary min-w-[140px]">
-<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Pendientes</p>
-<p class="text-2xl font-black text-primary" id="pendingCount">0</p>
+<div class="absolute right-0 top-0 text-[150px] font-black tracking-tighter text-primary/10 leading-none select-none">SEC</div>
 </div>
-<div class="bg-zinc-900 p-4 rounded-xl border-l-4 border-stone-700 min-w-[140px]">
-<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1">Resueltos</p>
-<p class="text-2xl font-black text-stone-300" id="resolvedCount">0</p>
+<!-- Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+<div class="bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Pendientes</span><span class="material-symbols-outlined text-yellow-500 text-2xl">pending</span></div>
+<p class="text-3xl font-black text-yellow-600" id="pendingCount">0</p>
 </div>
-</div>
-</div>
-<!-- Intelligent Search Bar -->
-<div class="relative max-w-2xl">
-<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-<span class="material-symbols-outlined text-stone-400 text-xl">search</span>
-</div>
-<input
-                    class="search-input w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-3 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-primary focus:bg-white/15 transition-all"
-                    id="adminSearchInput"
-                    placeholder="Buscar por Ticket ID, Email o Usuario..."
-                    type="text"
-                    oninput="handleAdminSearch()"
-                />
-<!-- Search Suggestions Dropdown -->
-<div class="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden" id="searchSuggestions">
-<div class="p-3 border-b border-outline bg-stone-50">
-<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Sugerencias</p>
-</div>
-<div id="suggestionsList" class="max-h-48 overflow-y-auto">
-<!-- Suggestions populated by JS -->
+<div class="bg-white border border-outline rounded-xl p-6">
+<div class="flex items-center justify-between mb-4"><span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Resueltos</span><span class="material-symbols-outlined text-green-500 text-2xl">check_circle</span></div>
+<p class="text-3xl font-black text-stone-400" id="resolvedCount">0</p>
 </div>
 </div>
-<!-- Search Results Count -->
-<div class="absolute top-full right-0 mt-2 hidden" id="searchResultsCount">
-<span class="text-xs text-stone-400 bg-black/50 px-3 py-1 rounded-full" id="resultsCountText">0 resultados</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Admin Content -->
-<section class="py-8 bg-[#fafafa]">
-<div class="container mx-auto px-6">
-<div class="max-w-7xl mx-auto">
 <!-- Security Notice -->
 <div class="bg-primary/10 border border-primary/20 rounded-xl p-4 mb-8 flex items-center gap-4">
 <span class="material-symbols-outlined text-primary text-2xl flex-shrink-0">security</span>
@@ -112,9 +190,16 @@
 </button>
 </div>
 <!-- Requests Table -->
-<div class="bg-white border border-outline rounded-xl overflow-hidden shadow-sm">
+<div class="bg-white border border-outline rounded-2xl overflow-hidden">
+<div class="px-6 py-4 border-b border-outline flex justify-between items-center">
+<h3 class="text-sm font-black uppercase tracking-widest text-black">Solicitudes de Recuperación</h3>
+<div class="relative">
+<input class="search-input bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" id="adminSearchInput" placeholder="Buscar por Ticket ID, Email..." type="text" oninput="handleAdminSearch()"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-stone-400 text-lg">search</span>
+</div>
+</div>
 <table class="w-full text-left">
-<thead class="bg-stone-50 border-b border-outline">
+<thead class="bg-stone-50">
 <tr>
 <th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Ticket / Usuario</th>
 <th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Nueva Contraseña</th>
@@ -141,23 +226,19 @@
 </div>
 </div>
 </div>
-</div>
 </section>
 </main>
-<!-- Footer -->
-<footer class="bg-black text-white w-full py-8 px-8 border-t border-zinc-900">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. PANEL MAESTRO v4.2</p>
-<div class="flex gap-6">
-<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
-<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
-</div>
-</div>
-</footer>
 <script>
         let allRequests = [];
         let filteredRequests = [];
         let searchTimeout = null;
+
+        function toggleSubmenu(module) {
+            const submenu = document.getElementById('submenu-' + module);
+            const chevron = document.getElementById('chevron-' + module);
+            submenu.classList.toggle('open');
+            chevron.classList.toggle('rotate-chevron');
+        }
 
         function loadRequests() {
             allRequests = JSON.parse(localStorage.getItem('passwordRecoveryRequests') || '[]');
@@ -266,29 +347,20 @@
         function handleAdminSearch() {
             clearTimeout(searchTimeout);
             const searchTerm = document.getElementById('adminSearchInput').value.trim().toLowerCase();
-            const suggestions = document.getElementById('searchSuggestions');
             const activeFilter = document.getElementById('activeSearchFilter');
             const activeTerm = document.getElementById('activeSearchTerm');
-            const resultsCount = document.getElementById('searchResultsCount');
-            const resultsText = document.getElementById('resultsCountText');
 
-            // Show/hide active filter indicator
             if (searchTerm) {
                 activeFilter.classList.remove('hidden');
                 activeTerm.textContent = `"${searchTerm}"`;
-                resultsCount.classList.remove('hidden');
             } else {
                 activeFilter.classList.add('hidden');
-                resultsCount.classList.add('hidden');
-                suggestions.classList.add('hidden');
                 filteredRequests = [...allRequests];
                 renderTable(filteredRequests);
                 return;
             }
 
-            // Debounced search
             searchTimeout = setTimeout(() => {
-                // Filter requests
                 filteredRequests = allRequests.filter(req => {
                     return req.id.toLowerCase().includes(searchTerm) ||
                            req.email.toLowerCase().includes(searchTerm) ||
@@ -296,62 +368,13 @@
                            req.ip.toLowerCase().includes(searchTerm);
                 });
 
-                // Update results count
-                resultsText.textContent = `${filteredRequests.length} resultado${filteredRequests.length !== 1 ? 's' : ''}`;
-
-                // Show suggestions
-                if (searchTerm.length >= 2) {
-                    showSuggestions(searchTerm);
-                } else {
-                    suggestions.classList.add('hidden');
-                }
-
                 renderTable(filteredRequests);
             }, 300);
-        }
-
-        function showSuggestions(searchTerm) {
-            const suggestions = document.getElementById('searchSuggestions');
-            const suggestionsList = document.getElementById('suggestionsList');
-
-            // Get unique matching requests
-            const matches = allRequests.filter(req => {
-                return req.id.toLowerCase().includes(searchTerm) ||
-                       req.email.toLowerCase().includes(searchTerm);
-            }).slice(0, 5);
-
-            if (matches.length === 0) {
-                suggestions.classList.add('hidden');
-                return;
-            }
-
-            suggestionsList.innerHTML = matches.map(req => `
-                <div class="p-3 hover:bg-stone-50 cursor-pointer transition-colors border-b border-outline/50 last:border-b-0" onclick="selectSuggestion('${req.id}')">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-stone-400 text-sm">confirmation_number</span>
-                        <div>
-                            <p class="text-sm font-bold text-black">${req.id}</p>
-                            <p class="text-xs text-stone-400">${req.email}</p>
-                        </div>
-                        <span class="ml-auto px-2 py-1 rounded-full text-[9px] font-bold uppercase ${getStatusClass(req.status)}">${getStatusText(req.status)}</span>
-                    </div>
-                </div>
-            `).join('');
-
-            suggestions.classList.remove('hidden');
-        }
-
-        function selectSuggestion(ticketId) {
-            document.getElementById('adminSearchInput').value = ticketId;
-            document.getElementById('searchSuggestions').classList.add('hidden');
-            handleAdminSearch();
         }
 
         function clearSearch() {
             document.getElementById('adminSearchInput').value = '';
             document.getElementById('activeSearchFilter').classList.add('hidden');
-            document.getElementById('searchResultsCount').classList.add('hidden');
-            document.getElementById('searchSuggestions').classList.add('hidden');
             filteredRequests = [...allRequests];
             renderTable(filteredRequests);
         }
@@ -392,7 +415,6 @@
             allRequests[index].approvedAt = new Date().toLocaleString('es-VE');
             localStorage.setItem('passwordRecoveryRequests', JSON.stringify(allRequests));
             loadRequests();
-            // Re-apply search filter if active
             const searchTerm = document.getElementById('adminSearchInput').value.trim();
             if (searchTerm) handleAdminSearch();
         }
@@ -402,21 +424,8 @@
             allRequests[index].rejectedAt = new Date().toLocaleString('es-VE');
             localStorage.setItem('passwordRecoveryRequests', JSON.stringify(allRequests));
             loadRequests();
-            // Re-apply search filter if active
             const searchTerm = document.getElementById('adminSearchInput').value.trim();
             if (searchTerm) handleAdminSearch();
         }
-
-        // Close suggestions when clicking outside
-        document.addEventListener('click', function(e) {
-            const suggestions = document.getElementById('searchSuggestions');
-            const searchInput = document.getElementById('adminSearchInput');
-            if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
-                suggestions.classList.add('hidden');
-            }
-        });
-
-        // Load on page load
-        document.addEventListener('DOMContentLoaded', loadRequests);
     </script>
 </body></html>

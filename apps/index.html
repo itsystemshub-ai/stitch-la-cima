@@ -10,6 +10,7 @@
 <script src="tailwind-config.js"></script>
 <link href="styles.css" rel="stylesheet"/>
 <script src="auth.js"></script>
+<script src="products-db.js"></script>
 </head>
 <body class="bg-background text-on-surface selection:bg-primary/30">
 <!-- TopNavBar -->
@@ -48,7 +49,7 @@
 <!-- Cart with counter -->
 <button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors" onclick="window.location.href='carrito_de_compras.html'">
 <span class="material-symbols-outlined">shopping_cart</span>
-<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white" id="cartBadge">0</span>
 </button>
 <div class="h-6 w-px bg-outline mx-2"></div>
 <!-- Auth Buttons -->
@@ -210,82 +211,8 @@
 </div>
 <a class="text-[10px] font-black uppercase tracking-widest text-black border-b-2 border-primary pb-1" href="Catalogo_general.html">Ver Catálogo Completo</a>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Product Card 1 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
-<img alt="Brake Disc" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A"/>
-<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">-15%</span>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Frenos / OEM-4421</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Kit de Discos de Freno Ventilados</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$85.00</span>
-<span class="text-[10px] text-stone-400 line-through ml-2">$102.00</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: +50</span>
-</div>
-<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
-<!-- Product Card 2 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
-<img alt="Engine Part" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ"/>
-<span class="absolute top-2 right-2 bg-primary text-black text-[9px] font-black px-2 py-1 uppercase">Top Ventas</span>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Motor / CAT-882</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Inyector de Combustible Heavy Duty</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$320.00</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Bajo Pedido</span>
-</div>
-<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
-<!-- Product Card 3 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
-<img alt="Suspension" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw"/>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Suspensión / SUS-101</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Amortiguador Reforzado Delantero</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$145.00</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: 12</span>
-</div>
-<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
-<!-- Product Card 4 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white flex items-center justify-center">
-<span class="material-symbols-outlined text-6xl text-stone-200">settings_input_component</span>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Transmisión / TRS-55</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Filtro de Transmisión Automática</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$42.50</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: +100</span>
-</div>
-<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
+<div class="product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Populated by JS from products-db.js -->
 </div>
 </div>
 </section>
@@ -669,5 +596,97 @@
                 heroSuggestions.classList.add('hidden');
             }
         });
+
+        // Cart functions
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const cartBadge = document.getElementById('cartBadge');
+            if (cartBadge) {
+                cartBadge.textContent = totalItems > 0 ? totalItems : '0';
+            }
+        }
+
+        function addToCartFromIndex(name, sku, price) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingIndex = cart.findIndex(item => item.sku === sku);
+            
+            if (existingIndex >= 0) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({
+                    id: 'CART-' + Date.now(),
+                    sku: sku,
+                    name: name,
+                    price: price,
+                    qty: 1,
+                    image: '',
+                    addedAt: new Date().toISOString()
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-24 right-8 z-[100] bg-primary text-black px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3';
+            toast.innerHTML = `
+                <span class="material-symbols-outlined text-2xl">check_circle</span>
+                <div>
+                    <p class="font-bold text-sm">Producto añadido al carrito</p>
+                    <p class="text-xs opacity-80">${name}</p>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            renderFeaturedProducts();
+        });
+
+        // Render featured products from database
+        function renderFeaturedProducts() {
+            const products = getVisibleProducts().slice(0, 4);
+            const grid = document.querySelector('.product-grid');
+            
+            if (products.length === 0) {
+                grid.innerHTML = '<p class="col-span-4 text-center text-stone-400 py-8">No hay productos disponibles</p>';
+                return;
+            }
+
+            grid.innerHTML = products.map(p => `
+                <div class="product-card group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
+                    <div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
+                        ${p.image ? `<img alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="${p.image}"/>` : `<div class="w-full h-full flex items-center justify-center bg-stone-100"><span class="material-symbols-outlined text-6xl text-stone-200">settings_input_component</span></div>`}
+                        ${p.oldPrice ? `<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">-${Math.round((1 - p.price/p.oldPrice) * 100)}%</span>` : ''}
+                        ${!p.image && p.category === 'Frenos' ? `<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">-15%</span>` : ''}
+                        ${p.stock === 0 ? `<span class="absolute top-2 right-2 bg-stone-400 text-white text-[9px] font-black px-2 py-1 uppercase">Agotado</span>` : ''}
+                        ${p.stock > 20 && !p.oldPrice ? `<span class="absolute top-2 right-2 bg-primary text-black text-[9px] font-black px-2 py-1 uppercase">Top Ventas</span>` : ''}
+                    </div>
+                    <p class="text-[10px] font-bold text-stone-400 uppercase mb-1">${p.category} / ${p.oem}</p>
+                    <h4 class="font-bold text-sm text-black mb-2 line-clamp-1">${p.name}</h4>
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <span class="text-lg font-black text-black">$${p.price.toFixed(2)}</span>
+                            ${p.oldPrice ? `<span class="text-[10px] text-stone-400 line-through ml-2">$${p.oldPrice.toFixed(2)}</span>` : ''}
+                        </div>
+                        <span class="text-[10px] font-bold ${p.stock > 10 ? 'text-green-500' : p.stock > 0 ? 'text-yellow-500' : 'text-red-500'} uppercase">${p.stock > 0 ? `Stock: ${p.stock}` : p.stockStatus || 'Agotado'}</span>
+                    </div>
+                    <button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn ${p.stock === 0 ? 'opacity-50 cursor-not-allowed' : ''}" onclick="${p.stock > 0 ? `addToCartFromIndex('${p.name.replace(/'/g, "\\'")}', '${p.sku}', ${p.price})` : ''}" ${p.stock === 0 ? 'disabled' : ''}>
+                        <span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest">${p.stock > 0 ? 'Añadir al Carrito' : 'Sin Stock'}</span>
+                    </button>
+                </div>
+            `).join('');
+        }
     </script>
 </body></html>

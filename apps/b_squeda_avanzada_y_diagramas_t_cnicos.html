@@ -88,9 +88,26 @@
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .qty-btn { transition: all 0.15s ease; cursor: pointer; }
+        .qty-btn:hover { background-color: #A2D033; color: #000; }
+        .add-cart-btn { transition: all 0.2s ease; }
+        .add-cart-btn:hover { transform: scale(1.1); }
+        .toast { animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
     </style>
 </head>
 <body class="bg-background font-body text-on-surface">
+<!-- Toast Notification -->
+<div id="cartToast" class="fixed top-24 right-8 z-[100] hidden">
+<div class="toast bg-primary text-black px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl">check_circle</span>
+<div>
+<p class="font-bold text-sm">Producto añadido al carrito</p>
+<p class="text-xs opacity-80" id="toastProductName"></p>
+</div>
+</div>
+</div>
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full flex items-center justify-between px-8 py-4 bg-zinc-950/90 backdrop-blur-md z-50 shadow-[0_4px_30px_rgba(0,0,0,0.4)]">
 <div class="flex items-center gap-8">
@@ -106,8 +123,9 @@
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">search</span>
 <input class="bg-zinc-900 border-none text-zinc-300 pl-10 pr-4 py-2 w-64 rounded-lg focus:ring-1 focus:ring-[#A2D033]" placeholder="Enter VIN or Part Number..." type="text"/>
 </div>
-<button class="p-2 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 rounded" onclick="window.location.href='carrito_de_compras.html'">
+<button class="relative p-2 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 rounded" onclick="window.location.href='carrito_de_compras.html'">
 <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-[#A2D033] text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full" id="cartCount">0</span>
 </button>
 <button class="p-2 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 rounded">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
@@ -227,7 +245,7 @@
 <aside class="w-96 bg-surface-container-low border-l border-outline-variant/15 flex flex-col">
 <div class="p-6 border-b border-outline-variant/15">
 <h3 class="font-headline font-extrabold text-sm uppercase tracking-tighter flex items-center justify-between">
-                        Assembly Parts list
+                        Assembly Parts List
                         <span class="text-[10px] bg-surface-container-highest px-2 py-0.5 rounded">12 Items</span>
 </h3>
 </div>
@@ -247,9 +265,18 @@
 </div>
 <div class="flex items-center justify-between mt-4">
 <span class="text-lg font-black font-headline text-on-surface">$248.50</span>
-<button class="bg-primary text-on-primary p-2 rounded-lg hover:bg-primary-dim transition-all">
+<div class="flex items-center gap-2">
+<!-- Quantity Input -->
+<div class="flex items-center border border-outline-variant/30 rounded-lg overflow-hidden">
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, -1)">−</button>
+<input class="w-10 h-8 text-center text-sm font-bold border-none bg-transparent qty-input" type="text" value="1" onchange="validateQty(this)"/>
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, 1)">+</button>
+</div>
+<!-- Add to Cart Button -->
+<button class="add-cart-btn bg-primary text-on-primary p-2 rounded-lg hover:bg-primary-dim transition-all" onclick="addToCart('Control Arm Upper Left (OEM)', '33326792553', 248.50, this)">
 <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
 </button>
+</div>
 </div>
 </div>
 <!-- Part Entry -->
@@ -261,9 +288,16 @@
 <h4 class="font-headline font-bold text-base text-on-surface leading-tight mb-2">Control Arm Upper Right (OEM)</h4>
 <div class="flex items-center justify-between mt-4">
 <span class="text-lg font-black font-headline text-on-surface">$248.50</span>
-<button class="bg-secondary text-on-secondary p-2 rounded-lg hover:bg-on-surface-variant transition-all">
+<div class="flex items-center gap-2">
+<div class="flex items-center border border-outline-variant/30 rounded-lg overflow-hidden">
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, -1)">−</button>
+<input class="w-10 h-8 text-center text-sm font-bold border-none bg-transparent qty-input" type="text" value="1" onchange="validateQty(this)"/>
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, 1)">+</button>
+</div>
+<button class="add-cart-btn bg-secondary text-on-secondary p-2 rounded-lg hover:bg-on-surface-variant transition-all" onclick="addToCart('Control Arm Upper Right (OEM)', '33326792554', 248.50, this)">
 <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
 </button>
+</div>
 </div>
 </div>
 <!-- Part Entry -->
@@ -275,9 +309,16 @@
 <h4 class="font-headline font-bold text-base text-on-surface leading-tight mb-2">Stabilizer Link Rear (Forged)</h4>
 <div class="flex items-center justify-between mt-4">
 <span class="text-lg font-black font-headline text-on-surface">$82.00</span>
-<button class="bg-secondary text-on-secondary p-2 rounded-lg hover:bg-on-surface-variant transition-all">
+<div class="flex items-center gap-2">
+<div class="flex items-center border border-outline-variant/30 rounded-lg overflow-hidden">
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, -1)">−</button>
+<input class="w-10 h-8 text-center text-sm font-bold border-none bg-transparent qty-input" type="text" value="1" onchange="validateQty(this)"/>
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, 1)">+</button>
+</div>
+<button class="add-cart-btn bg-secondary text-on-secondary p-2 rounded-lg hover:bg-on-surface-variant transition-all" onclick="addToCart('Stabilizer Link Rear (Forged)', '33326775552', 82.00, this)">
 <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
 </button>
+</div>
 </div>
 </div>
 <!-- Part Entry -->
@@ -289,9 +330,16 @@
 <h4 class="font-headline font-bold text-base text-on-surface leading-tight mb-2">Locking Plate Set (x4)</h4>
 <div class="flex items-center justify-between mt-4">
 <span class="text-lg font-black font-headline text-on-surface">$14.99</span>
-<button class="bg-secondary text-on-secondary p-2 rounded-lg hover:bg-on-surface-variant transition-all">
+<div class="flex items-center gap-2">
+<div class="flex items-center border border-outline-variant/30 rounded-lg overflow-hidden">
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, -1)">−</button>
+<input class="w-10 h-8 text-center text-sm font-bold border-none bg-transparent qty-input" type="text" value="1" onchange="validateQty(this)"/>
+<button class="qty-btn w-7 h-8 flex items-center justify-center text-stone-500 font-bold" onclick="updateQty(this, 1)">+</button>
+</div>
+<button class="add-cart-btn bg-secondary text-on-secondary p-2 rounded-lg hover:bg-on-surface-variant transition-all" onclick="addToCart('Locking Plate Set (x4)', '33306784941', 14.99, this)">
 <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
 </button>
+</div>
 </div>
 </div>
 </div>
@@ -299,10 +347,10 @@
 <div class="p-6 bg-zinc-950 text-white">
 <div class="flex justify-between items-center mb-4">
 <span class="text-xs font-headline uppercase font-bold text-zinc-500">Subtotal Selection</span>
-<span class="text-xl font-black text-[#A2D033]">$593.99</span>
+<span class="text-xl font-black text-[#A2D033]" id="cartSubtotal">$0.00</span>
 </div>
-<button class="w-full py-4 bg-[#A2D033] text-zinc-950 font-black font-headline uppercase tracking-tighter text-sm rounded-lg hover:scale-[1.02] active:scale-95 transition-all">
-                        Proceed to Checkout
+<button class="w-full py-4 bg-[#A2D033] text-zinc-950 font-black font-headline uppercase tracking-tighter text-sm rounded-lg hover:scale-[1.02] active:scale-95 transition-all" onclick="window.location.href='carrito_de_compras.html'">
+                        Ir al Carrito
                     </button>
 </div>
 </aside>
@@ -332,4 +380,84 @@
 <p class="font-body text-[10px] font-light text-zinc-500 leading-relaxed italic">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
 </div>
 </footer>
+<script>
+        // Initialize cart count from localStorage
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+        
+        // Update subtotal
+        function updateSubtotal() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('cartSubtotal').textContent = '$' + subtotal.toFixed(2);
+        }
+        
+        // Quantity control
+        function updateQty(btn, change) {
+            const input = btn.parentElement.querySelector('.qty-input');
+            let val = parseInt(input.value) || 1;
+            val = Math.max(1, val + change);
+            input.value = val;
+        }
+        
+        function validateQty(input) {
+            let val = parseInt(input.value) || 1;
+            val = Math.max(1, val);
+            input.value = val;
+        }
+        
+        // Add to cart function
+        function addToCart(name, sku, price, btn) {
+            // Get quantity from the same row
+            const row = btn.closest('.p-6');
+            const qtyInput = row.querySelector('.qty-input');
+            const qty = parseInt(qtyInput.value) || 1;
+            
+            // Get cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            
+            // Check if item already exists
+            const existingIndex = cart.findIndex(item => item.sku === sku);
+            
+            if (existingIndex >= 0) {
+                cart[existingIndex].qty += qty;
+            } else {
+                cart.push({
+                    id: 'CART-' + Date.now(),
+                    sku: sku,
+                    name: name,
+                    price: price,
+                    qty: qty,
+                    image: '',
+                    addedAt: new Date().toISOString()
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update UI
+            updateCartCount();
+            updateSubtotal();
+            
+            // Show toast notification
+            const toast = document.getElementById('cartToast');
+            document.getElementById('toastProductName').textContent = name + ' (x' + qty + ')';
+            toast.classList.remove('hidden');
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            updateSubtotal();
+        });
+    </script>
 </body></html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mayor de Repuesto La Cima | Customer Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#465f00",
+                        "on-tertiary-container": "#575c63",
+                        "tertiary-fixed": "#f0f4fd",
+                        "tertiary-dim": "#4b5057",
+                        "inverse-on-surface": "#9c9d9f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#364b00",
+                        "secondary-container": "#e2e2e5",
+                        "on-secondary-fixed": "#3e3f42",
+                        "primary-dim": "#405700",
+                        "on-error-container": "#520c00",
+                        "error-dim": "#b92902",
+                        "surface": "#f6f6f9",
+                        "on-surface": "#2d2f31",
+                        "primary-fixed-dim": "#bded4f",
+                        "error": "#b02500",
+                        "surface-dim": "#d2d4d8",
+                        "inverse-primary": "#ceff5e",
+                        "primary-fixed": "#cbfc5c",
+                        "on-primary-fixed-variant": "#4e6a00",
+                        "secondary": "#5a5c5e",
+                        "error-container": "#f95630",
+                        "surface-container": "#e7e8eb",
+                        "on-surface-variant": "#5a5c5e",
+                        "inverse-surface": "#0c0e10",
+                        "tertiary-fixed-dim": "#e1e5ee",
+                        "on-tertiary-fixed-variant": "#62666e",
+                        "on-primary": "#deff95",
+                        "on-tertiary-fixed": "#454a51",
+                        "on-error": "#ffefec",
+                        "surface-variant": "#dbdde0",
+                        "on-secondary-container": "#505254",
+                        "secondary-dim": "#4e5052",
+                        "secondary-fixed-dim": "#d4d4d7",
+                        "primary-container": "#cbfc5c",
+                        "tertiary-container": "#f0f4fd",
+                        "on-background": "#2d2f31",
+                        "outline-variant": "#acadaf",
+                        "on-tertiary": "#eff3fc",
+                        "on-secondary": "#f2f2f5",
+                        "surface-container-high": "#e1e2e6",
+                        "surface-container-highest": "#dbdde0",
+                        "background": "#f6f6f9",
+                        "primary": "#4a6400",
+                        "tertiary": "#575c63",
+                        "outline": "#757779",
+                        "surface-bright": "#f6f6f9",
+                        "secondary-fixed": "#e2e2e5",
+                        "surface-container-low": "#f0f0f3",
+                        "on-secondary-fixed-variant": "#5a5c5e",
+                        "surface-tint": "#4a6400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 bottom-0 z-50 bg-neutral-950 dark:bg-black w-64 flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
+<div class="p-6">
+<div class="text-xl font-black uppercase tracking-tighter text-[#A2D033]">TECHMONOLITH</div>
+<div class="text-[10px] text-neutral-500 font-label tracking-widest mt-1 uppercase">Precision Parts Admin</div>
+</div>
+<nav class="flex-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-400 hover:text-neutral-100 transition-colors hover:bg-neutral-800" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label text-sm uppercase tracking-wider">Sales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-400 hover:text-neutral-100 transition-colors hover:bg-neutral-800" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label text-sm uppercase tracking-wider">Inventory</span>
+</a>
+<!-- Active Tab: Customers -->
+<a class="flex items-center gap-3 px-4 py-3 text-[#A2D033] bg-neutral-900 font-bold border-r-4 border-[#A2D033]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label text-sm uppercase tracking-wider">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-400 hover:text-neutral-100 transition-colors hover:bg-neutral-800" href="#">
+<span class="material-symbols-outlined" data-icon="settings_gear">settings</span>
+<span class="font-label text-sm uppercase tracking-wider">Configuration</span>
+</a>
+</nav>
+<div class="p-4 border-t border-neutral-800">
+<button class="w-full py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-100 text-xs font-bold uppercase tracking-widest transition-all">
+                Support Ticket
+            </button>
+</div>
+<div class="mt-auto p-4 flex flex-col gap-2">
+<div class="flex items-center gap-3 mb-4 px-2">
+<img alt="Admin User Avatar" class="w-8 h-8 rounded-full border border-neutral-700" data-alt="Close-up portrait of a professional male administrator in a clean modern office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzUBVesCNNG_gwvAzVMkdRkrOr079IzynvGXhrwHzsCw_kK77SApfDigTW3J82IKV-XMl1Qxr_HrwxWuYUwyyWkmVaKiw3yNhP7j0kQKy12QA_ZmGyTCknvuAO75lVZt-PXfIjFIyxy8y1PlrgxO-VnweOvQLHOAN_ZG8eQNXy3GCYsYN9yysKnDlGPhHZHJdI0mEaSjuHqXFsRtiCvaiRf9FYj1rQtnrSVZUfiwW_IUXgMVeG-NiYWWUlNvVopDxm712nds1nww"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-neutral-200 truncate">S. Mendez</p>
+<p class="text-[10px] text-neutral-500 truncate">Account Lead</p>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-400 hover:text-red-400 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label text-sm uppercase tracking-wider">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 flex justify-between items-center px-8 z-40 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-200/10">
+<div class="flex items-center gap-6">
+<h1 class="text-lg font-bold text-neutral-900 dark:text-white tracking-tight">PartsManager v2.4</h1>
+<div class="relative focus-within:ring-1 focus-within:ring-[#A2D033] bg-surface-container-high px-4 py-1.5 rounded-lg flex items-center gap-2 w-96 transition-all">
+<span class="material-symbols-outlined text-neutral-500 scale-75" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm placeholder:text-neutral-500 w-full font-label" placeholder="Search Workshop or Fleet ID..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 border-r border-neutral-200 pr-4">
+<button class="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors rounded">
+<span class="material-symbols-outlined text-neutral-600" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors rounded">
+<span class="material-symbols-outlined text-neutral-600" data-icon="history">history</span>
+</button>
+<button class="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors rounded">
+<span class="material-symbols-outlined text-neutral-600" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="flex items-center gap-3 ml-2">
+<span class="text-[10px] font-bold text-neutral-400 font-label tracking-widest uppercase">Mayor de Repuesto La Cima</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-10 pb-12 min-h-screen">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<span class="text-primary font-bold text-xs uppercase tracking-widest mb-1 block">Commercial Directory</span>
+<h2 class="text-5xl font-extrabold tracking-tighter text-on-surface">Customer Ledger</h2>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-secondary-container text-on-secondary-container text-sm font-bold tracking-tight rounded-lg hover:bg-neutral-200 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined scale-75" data-icon="filter_list">filter_list</span>
+                    Advanced Filters
+                </button>
+<button class="px-6 py-3 bg-primary text-on-primary text-sm font-bold tracking-tight rounded-lg hover:bg-primary-dim transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined scale-75" data-icon="person_add">person_add</span>
+                    Register Partner
+                </button>
+</div>
+</div>
+<!-- Metrics Bento Grid -->
+<div class="grid grid-cols-4 gap-6 mb-10">
+<div class="col-span-1 bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-2">Active Commercial Partners</p>
+<p class="text-3xl font-black text-on-surface">1,402</p>
+<p class="text-[10px] text-primary font-bold mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> 4.2% growth
+                </p>
+</div>
+<div class="col-span-1 bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-2">Total Outstanding Credit</p>
+<p class="text-3xl font-black text-on-surface">$2.4M</p>
+<div class="w-full bg-surface-container-high h-1 rounded-full mt-4 overflow-hidden">
+<div class="bg-primary-dim w-[65%] h-full"></div>
+</div>
+</div>
+<div class="col-span-1 bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-2">Pending Invoices</p>
+<p class="text-3xl font-black text-on-surface">84</p>
+<p class="text-[10px] text-error font-bold mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="warning">warning</span> 12 high priority
+                </p>
+</div>
+<div class="col-span-1 bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-2">Monthly Transaction Vol</p>
+<p class="text-3xl font-black text-on-surface">$894K</p>
+<p class="text-[10px] text-outline font-medium mt-2 uppercase tracking-tight">Average order: $4.2K</p>
+</div>
+</div>
+<!-- Directory Table/List Container -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<!-- Table Header -->
+<div class="grid grid-cols-12 px-8 py-4 bg-surface-container text-[10px] font-black uppercase tracking-widest text-outline">
+<div class="col-span-4">Partner Identity</div>
+<div class="col-span-2">Credit Utilization</div>
+<div class="col-span-2 text-right pr-8">Lifetime Spend</div>
+<div class="col-span-2">Account Lead</div>
+<div class="col-span-2 text-right">Quick Actions</div>
+</div>
+<!-- Customer Row 1: Active Workshop -->
+<div class="grid grid-cols-12 px-8 py-6 items-center border-b border-surface-container-low hover:bg-primary-container/10 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Workshop Elite Santa Fe</h4>
+<p class="text-xs text-outline font-label">ID: W-10928 • Tier: Platinum</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 bg-primary-container text-on-primary-container text-[9px] font-black rounded uppercase tracking-tighter">Active Highlight</span>
+</div>
+</div>
+</div>
+<div class="col-span-2">
+<div class="flex justify-between text-[10px] font-bold mb-1">
+<span class="text-outline">78% Used</span>
+<span class="text-on-surface">$39,000 / $50,000</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary w-[78%] h-full"></div>
+</div>
+</div>
+<div class="col-span-2 text-right pr-8 font-mono font-bold text-on-surface">$142,500.00</div>
+<div class="col-span-2 flex items-center gap-2">
+<img class="w-6 h-6 rounded-full" data-alt="Close-up of a young professional female office manager with clear glasses and a friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0GnfUc4dUemRajgsoGPsQKEvAF939QYcHQ8AfTYIdDcoxdre3UjC_cvTMzHkthrFVqlrW19PnEwlXZj25BjVBKpuD4HoZRd5kx_QB2WJIyiGcH628RCvDHoAxx-1ZmwwYIfIAFLKE6h9aR_PSBErlJ2R-m5IBQwJYqrUHXoUqiFzYyGeRnhBm_vjluKJmDbqsfnrgqnlFKhwxD-jFuvVSDDlaffNHCIe8P_1y4VDcKBSNK1bkrPSiEp4TjQkniFSAXuvFiPC2LQ"/>
+<span class="text-xs font-medium">Elena R.</span>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="receipt_long">receipt_long</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Customer Row 2: Fleet -->
+<div class="grid grid-cols-12 px-8 py-6 items-center border-b border-surface-container-low hover:bg-neutral-50 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">TransLogistics National Fleet</h4>
+<p class="text-xs text-outline font-label">ID: F-99201 • Tier: Enterprise</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface-variant text-[9px] font-black rounded uppercase tracking-tighter">Net 60 Days</span>
+</div>
+</div>
+</div>
+<div class="col-span-2">
+<div class="flex justify-between text-[10px] font-bold mb-1">
+<span class="text-outline">12% Used</span>
+<span class="text-on-surface">$18,000 / $150,000</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary w-[12%] h-full"></div>
+</div>
+</div>
+<div class="col-span-2 text-right pr-8 font-mono font-bold text-on-surface">$892,100.00</div>
+<div class="col-span-2 flex items-center gap-2">
+<img class="w-6 h-6 rounded-full" data-alt="Portrait of a mature male executive in a professional business setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqA2f8EkJaAAnTc_F1Iv84qNRNdhrNQNsnHxDvxlQuAsqcLoBXEjxJFawsPIRCuq9aqQDeGDnFPeEJLOQogDI20pzI7Lxgk02E8tHxihCkYKDFtOfZbgFJyFcCbEFsCq3A1lLtY5xSwABpcoN8yAC7eXbwthPx0s1VWNCZxVQgmw6cs0HnSitHI4YwCr3fTce4otsr-8ytpwsxlKFPwF7bwY_oa5zPYmjMZejTcO7VhCof5Zecdo4BO5QHpgSqkNJYTdJFaBxwBg"/>
+<span class="text-xs font-medium">Marc V.</span>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="receipt_long">receipt_long</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Customer Row 3: Critical Status -->
+<div class="grid grid-cols-12 px-8 py-6 items-center border-b border-surface-container-low hover:bg-neutral-50 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-error-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="car_repair">car_repair</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Express Auto Services</h4>
+<p class="text-xs text-outline font-label">ID: W-10852 • Tier: Standard</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 bg-error text-white text-[9px] font-black rounded uppercase tracking-tighter">Credit Limit Reached</span>
+</div>
+</div>
+</div>
+<div class="col-span-2">
+<div class="flex justify-between text-[10px] font-bold mb-1">
+<span class="text-error">100% Used</span>
+<span class="text-on-surface">$15,000 / $15,000</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-error w-full h-full"></div>
+</div>
+</div>
+<div class="col-span-2 text-right pr-8 font-mono font-bold text-on-surface">$45,200.00</div>
+<div class="col-span-2 flex items-center gap-2">
+<img class="w-6 h-6 rounded-full" data-alt="Portrait of a professional man in a business suit with a focus on leadership" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdfzvDE3z9CdvbtZPJ145Z7Y31gyuUdX4bBBcuqu1h_RuKwhctNHJp50Ru4lxwFDpwX8SsBji7nCqTZ-6vC3qZJCAYIty2pRTLFAcvM2-CUSIdciZT6Khh51oxTSd_hODveHKN4qQz8kWw2R9WNzfd2g5S7XFFssuiWlryz7RUznA1t8TjyLTezt-iNzxa31twTTRHW8in5Hra7Iz4Ur-dIVq3VRqULne4Dhyypj3omCYcdXildHRrhtEeExTfKriinkD4WfIjtQ"/>
+<span class="text-xs font-medium">S. Mendez</span>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="receipt_long">receipt_long</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Customer Row 4: Workshop Active -->
+<div class="grid grid-cols-12 px-8 py-6 items-center border-b border-surface-container-low hover:bg-primary-container/10 transition-colors group">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Precision Motors Hub</h4>
+<p class="text-xs text-outline font-label">ID: W-10443 • Tier: Gold</p>
+<div class="flex gap-2 mt-1">
+<span class="px-2 py-0.5 bg-primary-container text-on-primary-container text-[9px] font-black rounded uppercase tracking-tighter">Active Highlight</span>
+</div>
+</div>
+</div>
+<div class="col-span-2">
+<div class="flex justify-between text-[10px] font-bold mb-1">
+<span class="text-outline">45% Used</span>
+<span class="text-on-surface">$13,500 / $30,000</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary w-[45%] h-full"></div>
+</div>
+</div>
+<div class="col-span-2 text-right pr-8 font-mono font-bold text-on-surface">$68,900.00</div>
+<div class="col-span-2 flex items-center gap-2">
+<img class="w-6 h-6 rounded-full" data-alt="Portrait of a female business professional smiling with soft light and professional wardrobe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc8Mg3wT01RBnWvrFDYJ2ZGJSxfx_QbkzOqbITn8JdqYQzMxk53HpEz1wirHYqAVlrFmoakAiOgCoDz82LllmPHVstjhv1KjqnS7VfOsqkRwPsWggkUy-5AqHhE9DiA5WHO8yOpfUSJBE89Tgt3Z4P3sY___FODVeAt6bweLZ53PSSxofqzzH3PLObvaGbdeQYdLG8jAZ6zAYU0vFsZ0ZXQzF-Y7dsfNUVZisrAKaLRehVBSdKtV2sr33XjhuGbC_du17ZS7QWrQ"/>
+<span class="text-xs font-medium">Elena R.</span>
+</div>
+<div class="col-span-2 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="receipt_long">receipt_long</span>
+</button>
+<button class="p-2 bg-surface hover:bg-primary-container rounded transition-colors text-outline hover:text-primary">
+<span class="material-symbols-outlined scale-90" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination / Footer Actions -->
+<div class="mt-8 flex justify-between items-center">
+<p class="text-xs text-outline font-label">Showing 4 of 1,402 commercial partners</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined scale-75" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors text-xs">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors text-xs">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined scale-75" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Contextual FAB for high-impact screens -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="flex items-center gap-3 bg-inverse-surface text-surface py-4 px-8 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span class="font-bold text-sm tracking-tight">Export Ledger (XLS)</span>
+</button>
+</div>
+</body></html>

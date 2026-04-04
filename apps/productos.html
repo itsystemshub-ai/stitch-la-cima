@@ -111,10 +111,19 @@
 <span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
 <span class="font-medium text-sm">Reportes</span>
 </a>
-<a class="flex items-center px-6 py-3 text-stone-500 hover:bg-stone-200/50 transition-all duration-150 group" href="#">
+<div class="mb-1">
+<button class="flex items-center justify-between w-full px-6 py-3 text-stone-500 hover:bg-stone-200/50 transition-all duration-150 group" onclick="toggleSubmenu('configuracion')">
+<div class="flex items-center gap-3">
 <span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
 <span class="font-medium text-sm">Configuración</span>
-</a>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform" id="chevron-configuracion">expand_more</span>
+</button>
+<div class="max-h-0 overflow-hidden transition-all" id="submenu-configuracion">
+<a class="flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 hover:bg-stone-200/50 text-[10px] uppercase tracking-wider" href="configuraci_n_avanzada_del_sistema.html">Ajustes</a>
+<a class="flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 hover:bg-stone-200/50 text-[10px] uppercase tracking-wider" href="aprobacion_contraseña_usuario.html">Aprobación de Contraseñas</a>
+</div>
+</div>
 </nav>
 <div class="px-6 mt-auto">
 <button class="w-full bg-primary text-on-primary py-2.5 px-4 rounded-md text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-primary-dim transition-colors">
