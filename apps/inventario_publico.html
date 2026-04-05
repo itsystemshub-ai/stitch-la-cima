@@ -37,89 +37,64 @@
 </head>
 <body class="bg-[#fafafa] text-on-surface selection:bg-primary/30">
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-[#1a1a1a] flex flex-col z-50">
+<aside class="fixed left-0 top-0 bottom-0 z-50 w-64 flex flex-col bg-neutral-950 shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
 <div class="px-6 py-6 border-b border-white/10">
 <div class="flex items-center gap-3">
 <span class="text-2xl font-extrabold italic text-white tracking-tighter">Zenith <span class="text-primary">ERP</span></span>
 </div>
-<p class="text-[10px] text-stone-400 font-medium tracking-widest mt-2 uppercase">Panel de Control General</p>
 </div>
-<nav class="flex-1 py-4 overflow-y-auto">
-<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-400 hover:text-white" href="dashboard.html">
-<span class="material-symbols-outlined text-xl">dashboard</span>
-<span class="text-xs font-bold uppercase tracking-widest">Dashboard</span>
+
+<nav class="flex-1 mt-4">
+<!-- Active State: Sales -->
+<a class="flex items-center gap-3 px-6 py-4 text-[#A2D033] bg-neutral-900 font-bold border-r-4 border-[#A2D033] transition-all duration-200" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="payments">dashboard</span>
+<span class="font-label text-sm uppercase tracking-wider">DASHBOARD</span>
 </a>
-<div class="mb-1">
-<button class="sidebar-link w-full flex items-center justify-between gap-3 px-6 py-3 text-white bg-primary/10 border-l-3 border-primary" onclick="toggleSubmenu('inventario')">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-xl text-primary">inventory</span>
-<span class="text-xs font-bold uppercase tracking-widest">Inventario</span>
-</div>
-<span class="material-symbols-outlined text-sm transition-transform rotate-chevron" id="chevron-inventario">expand_more</span>
-</button>
-<div class="submenu open" id="submenu-inventario">
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="gesti_n_detallada_de_inventario.html">Productos</a>
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-primary text-[10px] uppercase tracking-wider bg-primary/10" href="directorio_de_clientes_b2b_talleres_y_flotas1.html">Público</a>
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="gesti_n_detallada_de_inventario1.html">Ajustes</a>
-</div>
-</div>
-<div class="mb-1">
-<button class="sidebar-link w-full flex items-center justify-between gap-3 px-6 py-3 text-stone-400 hover:text-white" onclick="toggleSubmenu('ventas')">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-xl">point_of_sale</span>
-<span class="text-xs font-bold uppercase tracking-widest">Ventas</span>
-</div>
-<span class="material-symbols-outlined text-sm transition-transform" id="chevron-ventas">expand_more</span>
-</button>
-<div class="submenu" id="submenu-ventas">
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="directorio_de_clientes_b2b_talleres_y_flotas1.html">Directorio</a>
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="#">POS</a>
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="#">Historial de Ventas</a>
-</div>
-</div>
-<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-500 opacity-50 cursor-not-allowed" href="#">
-<span class="material-symbols-outlined text-xl">attach_money</span>
-<span class="text-xs font-bold uppercase tracking-widest">Finanzas</span>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label text-sm uppercase tracking-wider">Inventario</span>
 </a>
-<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-500 opacity-50 cursor-not-allowed" href="#">
-<span class="material-symbols-outlined text-xl">group</span>
-<span class="text-xs font-bold uppercase tracking-widest">RRHH</span>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label text-sm uppercase tracking-wider">Ventas</span>
 </a>
-<div class="h-px bg-white/10 my-4 mx-6"></div>
-<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-400 hover:text-white" href="directorio_de_clientes_b2b_talleres_y_flotas.html">
-<span class="material-symbols-outlined text-xl">business</span>
-<span class="text-xs font-bold uppercase tracking-widest">Clientes B2B</span>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label text-sm uppercase tracking-wider">RRHH</span>
 </a>
-<a class="sidebar-link flex items-center gap-3 px-6 py-3 text-stone-400 hover:text-white" href="reportes_y_anal_tica_predictiva.html">
-<span class="material-symbols-outlined text-xl">bar_chart</span>
-<span class="text-xs font-bold uppercase tracking-widest">Reportes</span>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">attach_money</span>
+<span class="font-label text-sm uppercase tracking-wider">Finanzas</span>
 </a>
-<div class="mb-1">
-<button class="sidebar-link w-full flex items-center justify-between gap-3 px-6 py-3 text-stone-400 hover:text-white" onclick="toggleSubmenu('configuracion')">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-xl">settings</span>
-<span class="text-xs font-bold uppercase tracking-widest">Configuración</span>
-</div>
-<span class="material-symbols-outlined text-sm transition-transform" id="chevron-configuracion">expand_more</span>
-</button>
-<div class="submenu" id="submenu-configuracion">
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="configuraci_n_avanzada_del_sistema.html">Ajustes</a>
-<a class="submenu-link flex items-center gap-3 px-6 py-2 pl-14 text-stone-400 text-[10px] uppercase tracking-wider" href="aprobacion_contraseña_usuario.html">Aprobación de Contraseñas</a>
-</div>
-</div>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label text-sm uppercase tracking-wider">Clientes</span>
+</a>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings_gear">settings</span>
+<span class="font-label text-sm uppercase tracking-wider">Configuración</span>
+</a>
+
 </nav>
-<div class="px-4 py-4 border-t border-white/10">
-<button class="w-full bg-primary text-black py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-dim transition-colors">Support Ticket</button>
+<div class="mt-auto p-4 border-t border-neutral-800/50">
+<button class="w-full flex items-center justify-center gap-2 bg-[#A2D033] text-black font-bold py-3 rounded-lg active:scale-95 transition-transform font-label text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                Soporte Técnico
+            </button>
 <div class="mt-4 flex items-center gap-3 px-2">
-<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-sm">person</span>
+<img alt="Admin User Avatar" class="w-8 h-8 rounded-full border border-neutral-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3pD1A7no8tXcvhVcrkyy0O3mTLzEgpuN6wmEQo206yyytWDgq9eyXYFFnM4-GqiY20PVIG6mRaHkLA82txFu7juZTu_pnkxbaZK-UkPKcmftm4NL0cHrR22rxWQZAdItCb2UldnsQ6Gf5g_Pwwwjig-3ohJlJoJqXF10AWLODvG8AxzksrtbFgLdhgSlMNFHE4DcL1uK5MlNDGHW9SZrVx9oS7X84mYsDtvl7P66sQggd-BBGRKMGZDEJUfktqvvjUKTiPWiRvw"/>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold text-neutral-200 truncate">LA CIMA ADMIN</p>
+<p class="text-[10px] text-neutral-500 truncate">master_control@cima.com</p>
 </div>
-<div class="flex-1 min-w-0">
-<p class="text-xs font-bold text-white truncate" id="sidebarUserName">Administrador</p>
-<p class="text-[10px] text-stone-500 truncate">Master Access</p>
-</div>
-<button class="text-stone-500 hover:text-white" onclick="logout()">
-<span class="material-symbols-outlined">logout</span>
+<button class="text-neutral-500 hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
 </button>
 </div>
 </div>
@@ -167,6 +142,18 @@
 </div>
 </div>
 </section>
+<!-- Footer -->
+<footer class="bg-[#1a1a1a] border-t border-white/5">
+<div class="ml-64 px-8 py-6">
+<div class="max-w-7xl mx-auto flex justify-between items-center">
+<p class="text-[10px] text-stone-500 uppercase tracking-wider">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<a class="text-[10px] text-stone-500 uppercase tracking-wider hover:text-white transition-colors" href="privacidad.html">Privacidad</a>
+<a class="text-[10px] text-stone-500 uppercase tracking-wider hover:text-white transition-colors" href="terminos.html">Legal</a>
+</div>
+</div>
+</div>
+</footer>
 </main>
 <script>
         function toggleSubmenu(module) {
@@ -179,7 +166,7 @@
         function renderProducts() {
             const products = getVisibleProducts();
             const tbody = document.getElementById('productsTableBody');
-            
+
             if (products.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-stone-400"><span class="material-symbols-outlined text-4xl mb-2">inventory</span><p>No hay productos públicos</p></td></tr>`;
                 return;

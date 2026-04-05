@@ -161,70 +161,63 @@
 </head>
 <body class="bg-[#fafafa] text-on-surface selection:bg-primary/30">
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-white flex flex-col py-6 border-r border-outline z-50">
-<div class="px-6 mb-8">
+<aside class="fixed left-0 top-0 bottom-0 z-50 w-64 flex flex-col bg-neutral-950 shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
+<div class="px-6 py-6 border-b border-white/10">
 <div class="flex items-center gap-3">
-<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
-</div>
-<p class="text-[10px] text-stone-400 font-medium tracking-widest mt-2 uppercase">Panel de Control General</p>
-</div>
-<nav class="flex-1 space-y-1 px-3">
-<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="dashboard.html">
-<span class="material-symbols-outlined mr-3">dashboard</span>
-                    Dashboard
-                </a>
-<a class="flex items-center px-4 py-3 bg-primary/10 text-primary border-l-4 border-primary font-bold text-xs uppercase tracking-widest rounded-r-lg" href="gesti_n_detallada_de_inventario.html">
-<span class="material-symbols-outlined mr-3">inventory</span>
-                    Inventario
-                </a>
-<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="panel_de_ventas_y_crm_de_vendedores.html">
-<span class="material-symbols-outlined mr-3">point_of_sale</span>
-                    Ventas
-                </a>
-<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg opacity-50 cursor-not-allowed" href="#">
-<span class="material-symbols-outlined mr-3">attach_money</span>
-                    Finanzas
-                </a>
-<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg opacity-50 cursor-not-allowed" href="#">
-<span class="material-symbols-outlined mr-3">group</span>
-                    RRHH
-                </a>
-<div class="h-px bg-outline my-4"></div>
-<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="directorio_de_clientes_b2b_talleres_y_flotas.html">
-<span class="material-symbols-outlined mr-3">business</span>
-                    Clientes B2B
-                </a>
-<a class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" href="reportes_y_anal_tica_predictiva.html">
-<span class="material-symbols-outlined mr-3">bar_chart</span>
-                    Reportes
-                </a>
-<div class="mb-1">
-<button class="flex items-center justify-between w-full px-4 py-3 text-stone-500 hover:bg-stone-100 transition-colors text-xs uppercase tracking-widest font-medium rounded-lg" onclick="toggleSubmenu('configuracion')">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined mr-3">settings</span>
-                        Configuración
-                    </div>
-<span class="material-symbols-outlined text-sm transition-transform" id="chevron-configuracion">expand_more</span>
-</button>
-<div class="max-h-0 overflow-hidden transition-all" id="submenu-configuracion">
-<a class="flex items-center gap-3 px-4 py-2 pl-14 text-stone-400 hover:bg-stone-100 transition-colors text-[10px] uppercase tracking-wider" href="configuraci_n_avanzada_del_sistema.html">Ajustes</a>
-<a class="flex items-center gap-3 px-4 py-2 pl-14 text-stone-400 hover:bg-stone-100 transition-colors text-[10px] uppercase tracking-wider" href="aprobacion_contraseña_usuario.html">Aprobación de Contraseñas</a>
+<span class="text-2xl font-extrabold italic text-white tracking-tighter">Zenith <span class="text-primary">ERP</span></span>
 </div>
 </div>
+
+<nav class="flex-1 mt-4">
+<!-- Active State: Sales -->
+<a class="flex items-center gap-3 px-6 py-4 text-[#A2D033] bg-neutral-900 font-bold border-r-4 border-[#A2D033] transition-all duration-200" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="payments">dashboard</span>
+<span class="font-label text-sm uppercase tracking-wider">DASHBOARD</span>
+</a>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label text-sm uppercase tracking-wider">Inventario</span>
+</a>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label text-sm uppercase tracking-wider">Ventas</span>
+</a>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label text-sm uppercase tracking-wider">RRHH</span>
+</a>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">attach_money</span>
+<span class="font-label text-sm uppercase tracking-wider">Finanzas</span>
+</a>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label text-sm uppercase tracking-wider">Clientes</span>
+</a>
+
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings_gear">settings</span>
+<span class="font-label text-sm uppercase tracking-wider">Configuración</span>
+</a>
+
 </nav>
-<div class="p-4 bg-neutral-900/50 mt-auto">
-<button class="w-full bg-[#A2D033] text-black font-bold py-2 rounded-lg text-sm transition-transform active:scale-95">
-                Support Ticket
+<div class="mt-auto p-4 border-t border-neutral-800/50">
+<button class="w-full flex items-center justify-center gap-2 bg-[#A2D033] text-black font-bold py-3 rounded-lg active:scale-95 transition-transform font-label text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                Soporte Técnico
             </button>
-<div class="mt-6 flex items-center gap-3 px-2">
-<div class="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center overflow-hidden border border-neutral-700">
-<img alt="Admin User Avatar" data-alt="Close-up professional portrait of a warehouse logistics manager in a high-tech office environment, soft cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBztigpa9rO0PfY-pvDLCJUmNOPTMFXz5SEWr_4Sbo7W03TATHsjPRLw8eoyzbphvHnaZwHbuZI3oNTnsuUjejWwAWmfc5IkW6OG5_dAeh3uaRfj5sk7QjvtSJ7SrwOmJI_G6wIZ7Da2X2MGytN1YK94ybiKaEueoWf9T4qgzESsN0MMsE_-O13ZGB-1e9H0yaNQm3HIc6qcQhtGu5T3hTDlrMJI56DW7uGXTndTJY-vQWA15vawZUN4kqZRsDbOi275Tu6EAjGPQ"/>
+<div class="mt-4 flex items-center gap-3 px-2">
+<img alt="Admin User Avatar" class="w-8 h-8 rounded-full border border-neutral-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3pD1A7no8tXcvhVcrkyy0O3mTLzEgpuN6wmEQo206yyytWDgq9eyXYFFnM4-GqiY20PVIG6mRaHkLA82txFu7juZTu_pnkxbaZK-UkPKcmftm4NL0cHrR22rxWQZAdItCb2UldnsQ6Gf5g_Pwwwjig-3ohJlJoJqXF10AWLODvG8AxzksrtbFgLdhgSlMNFHE4DcL1uK5MlNDGHW9SZrVx9oS7X84mYsDtvl7P66sQggd-BBGRKMGZDEJUfktqvvjUKTiPWiRvw"/>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold text-neutral-200 truncate">LA CIMA ADMIN</p>
+<p class="text-[10px] text-neutral-500 truncate">master_control@cima.com</p>
 </div>
-<div class="flex-1 min-w-0">
-<p class="text-xs font-bold text-white truncate">Administrator</p>
-<p class="text-[10px] text-neutral-500 truncate">Master Access</p>
-</div>
-<button class="text-neutral-500 hover:text-white">
+<button class="text-neutral-500 hover:text-error transition-colors">
 <span class="material-symbols-outlined" data-icon="logout">logout</span>
 </button>
 </div>
