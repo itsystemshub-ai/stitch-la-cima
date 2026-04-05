@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acceso Seguro | Mayor de Repuesto La Cima, C.A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="/src/js/utils/tailwind-config.js"></script>
+<link href="/src/scss/base/styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contáctanos</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-primary-dim transition-all" onclick="window.location.href='login.html'">
+<span class="material-symbols-outlined text-sm">login</span>
+            Login
+        </button>
+</div>
+</nav>
+<main class="pt-16 min-h-screen flex items-center justify-center bg-stone-100">
+<!-- Login Container -->
+<div class="w-full max-w-5xl mx-6 grid grid-cols-1 md:grid-cols-2 overflow-hidden shadow-2xl rounded-2xl">
+<!-- Left Side: Brand Panel -->
+<div class="bg-black text-white p-12 md:p-16 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 opacity-20">
+<img alt="Industrial Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc6_OZ_OC-JC12ANFxKa4zlqDGT1VmtU5GUQjrmH88MkSjndtoYZAdYom9yFE40HUxRZD603XbBlsdo1dNvf2GMRZB98jnbSBUS29zz0web6MCzJU2p5HRLl4PbU8QIyXWGxRtCpg0aTOizPte1yqp_BlXfg9n6VR6T-OAj5NE2n33KGcRhtLOvEFCSGwPBhQ7bQ0j4m8ZMSvIN_NW813rhFkG7rAKikbxTs1E6iqfqjZaaGmqZ5Y3od6CGC1dtZz1rLl176-NyA"/>
+</div>
+<div class="relative z-10">
+<span class="text-primary font-black text-3xl block mb-8 uppercase tracking-tighter italic">Zenith ERP</span>
+<h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
+                        Acceso<br/><span class="text-primary">Seguro</span>
+</h1>
+<p class="text-stone-400 text-sm leading-relaxed max-w-xs">
+                        Gestión técnica de repuestos y logística industrial. Ingrese con sus credenciales autorizadas.
+                    </p>
+</div>
+<div class="relative z-10 mt-12">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-zinc-900/50 backdrop-blur-sm p-4 rounded-lg">
+<span class="text-3xl font-black text-primary block">+15k</span>
+<span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">SKUs ERP</span>
+</div>
+<div class="bg-zinc-900/50 backdrop-blur-sm p-4 rounded-lg">
+<span class="text-3xl font-black text-primary block">24h</span>
+<span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Despacho</span>
+</div>
+</div>
+</div>
+<div class="relative z-10 mt-8">
+<div class="flex items-center gap-3">
+
+</div>
+</div>
+</div>
+<!-- Right Side: Login Form -->
+<div class="bg-white p-12 md:p-16 flex flex-col justify-center">
+<div class="max-w-md mx-auto w-full">
+<h2 class="text-2xl font-black uppercase tracking-tighter text-black mb-2">Iniciar Sesión</h2>
+<p class="text-stone-500 text-sm mb-8">Ingrese sus credenciales para acceder al sistema.</p>
+
+<!-- Login Form -->
+<form class="space-y-6" id="loginForm" onsubmit="handleLogin(event)">
+<div id="loginError" class="hidden bg-red-50 border border-red-200 rounded-lg p-3">
+<p class="text-xs text-red-600 font-bold" id="loginErrorText">Credenciales incorrectas.</p>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Correo Electrónico</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">mail</span>
+<input class="w-full pl-12 pr-4 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="loginEmail" placeholder="usuario@lacima.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Contraseña</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">lock</span>
+<input class="w-full pl-12 pr-12 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="loginPassword" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600" onclick="toggleLoginPassword()" type="button">
+<span class="material-symbols-outlined text-lg" id="loginEyeIcon">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" id="rememberMe" type="checkbox"/>
+<span class="text-xs text-stone-500">Recordarme</span>
+</label>
+<a class="text-xs font-bold text-primary hover:text-primary-dim transition-colors uppercase tracking-wider" href="recuperar_contrase_a.html">¿Olvidó su contraseña?</a>
+</div>
+<button class="w-full bg-black text-white py-4 rounded-lg font-bold text-xs uppercase tracking-[0.2em] hover:bg-stone-800 transition-colors flex items-center justify-center gap-2" type="submit">
+                        Ingresar
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</form>
+
+<!-- Access Types -->
+<div class="mt-8 pt-8 border-t border-outline">
+<p class="text-xs text-stone-400 text-center mb-4">¿No tiene una cuenta?</p>
+<a class="block w-full text-center bg-primary text-black py-3 rounded-lg font-bold text-xs uppercase tracking-[0.2em] hover:bg-primary-dim transition-colors mb-3" href="registro_personal.html">
+                    Crear Cuenta Personal
+                </a>
+<a class="block w-full text-center bg-stone-100 text-stone-600 py-3 rounded-lg font-bold text-xs uppercase tracking-[0.2em] hover:bg-stone-200 transition-colors" href="registro_corporativo_b2b.html">
+                    Registro Corporativo B2B
+                </a>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-8 px-8 border-t border-zinc-900">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
+</div>
+</div>
+</footer>
+<script>
+        // Initialize default users if not exists
+        function initDefaultUsers() {
+            if (!localStorage.getItem('users')) {
+                const defaultUsers = [
+                    {
+                        id: 'USR-001',
+                        email: 'admin@lacima.com',
+                        password: 'admin123',
+                        name: 'Administrador',
+                        role: 'admin',
+                        company: 'La Cima, C.A.',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'USR-002',
+                        email: 'usuario@lacima.com',
+                        password: 'user123',
+                        name: 'Usuario Demo',
+                        role: 'user',
+                        company: 'Taller El Parral',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                localStorage.setItem('users', JSON.stringify(defaultUsers));
+            }
+        }
+
+        function toggleLoginPassword() {
+            const input = document.getElementById('loginPassword');
+            const icon = document.getElementById('loginEyeIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            const errorDiv = document.getElementById('loginError');
+            const errorText = document.getElementById('loginErrorText');
+
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            
+            // Find user
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                // Login successful
+                errorDiv.classList.add('hidden');
+                
+                // Create session
+                const session = {
+                    userId: user.id,
+                    email: user.email,
+                    name: user.name,
+                    role: user.role,
+                    company: user.company,
+                    loginTime: new Date().toISOString(),
+                    expires: new Date(Date.now() + (rememberMe ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000)).toISOString()
+                };
+                
+                localStorage.setItem('currentSession', JSON.stringify(session));
+
+                // Log activity
+                logActivity(user.id, 'LOGIN', 'Inicio de sesión exitoso');
+
+                // Redirect based on role
+                if (user.role === 'admin') {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    window.location.href = 'dashboard.html';
+                }
+            } else {
+                // Login failed
+                errorText.textContent = 'Credenciales incorrectas. Verifique su email y contraseña.';
+                errorDiv.classList.remove('hidden');
+                
+                // Log failed attempt
+                logActivity('unknown', 'LOGIN_FAILED', `Intento fallido con email: ${email}`);
+            }
+        }
+
+        function logActivity(userId, action, details) {
+            let logs = JSON.parse(localStorage.getItem('activityLogs') || '[]');
+            logs.push({
+                userId: userId,
+                action: action,
+                details: details,
+                timestamp: new Date().toISOString(),
+                ip: '192.168.1.' + Math.floor(Math.random() * 255)
+            });
+            localStorage.setItem('activityLogs', JSON.stringify(logs));
+        }
+
+        // Check if user is already logged in
+        function checkExistingSession() {
+            const session = JSON.parse(localStorage.getItem('currentSession') || 'null');
+            if (session && new Date(session.expires) > new Date()) {
+                // Session is still valid
+                window.location.href = 'dashboard.html';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initDefaultUsers();
+            checkExistingSession();
+        });
+    </script>
+</body></html>

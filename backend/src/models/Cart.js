@@ -12,7 +12,7 @@ const Cart = sequelize.define('Cart', {
     allowNull: false,
   },
   items: {
-    type: DataTypes.JSONB,
+    type: DataTypes.JSON,
     defaultValue: [],
     comment: 'Array de items: [{ productId, name, sku, qty, price, image }]',
   },

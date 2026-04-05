@@ -64,6 +64,13 @@ const login = async (req, res) => {
     const token = generateToken(user.id);
     const refreshToken = generateRefreshToken(user.id);
 
+    // Set cookie for server-side rendering
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24h
+      sameSite: 'lax',
+    });
+
     res.json({
       success: true,
       data: {

@@ -30,7 +30,7 @@ const Order = sequelize.define('Order', {
     defaultValue: 'pending',
   },
   items: {
-    type: DataTypes.JSONB,
+    type: DataTypes.JSON,
     allowNull: false,
     comment: 'Array de items: [{ productId, name, sku, qty, price, subtotal }]',
   },
@@ -60,7 +60,7 @@ const Order = sequelize.define('Order', {
     defaultValue: 'pending',
   },
   billingAddress: {
-    type: DataTypes.JSONB,
+    type: DataTypes.JSON,
     allowNull: false,
   },
   rif: {

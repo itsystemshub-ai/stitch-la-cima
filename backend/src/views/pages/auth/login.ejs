@@ -1,0 +1,115 @@
+<div class="min-h-screen flex">
+  <!-- Left Panel -->
+  <div class="hidden lg:flex lg:w-1/2 bg-secondary text-white p-16 flex-col justify-between">
+    <div>
+      <h1 class="text-5xl font-extrabold italic mb-6">Zenith <span class="text-primary">ERP</span></h1>
+      <p class="text-stone-400 text-lg leading-relaxed">Sistema integral de gestión para distribución de repuestos automotrices.</p>
+    </div>
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary">verified</span>
+        <span class="text-sm">+30 años de experiencia</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary">inventory_2</span>
+        <span class="text-sm">+15,000 SKU disponibles</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary">group</span>
+        <span class="text-sm">+500 clientes activos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel - Login Form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-md">
+      <h2 class="text-3xl font-extrabold text-black mb-2">Bienvenido</h2>
+      <p class="text-stone-500 mb-8">Ingresa tus credenciales para acceder</p>
+
+      <div id="loginError" class="hidden mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+      </div>
+
+      <form id="loginForm" class="space-y-5">
+        <div>
+          <label class="block text-sm font-bold text-stone-700 mb-2">Email</label>
+          <input type="email" name="email" required class="w-full bg-stone-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary" placeholder="tu@email.com"/>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-stone-700 mb-2">Contraseña</label>
+          <div class="relative">
+            <input type="password" name="password" required class="w-full bg-stone-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary pr-10" placeholder="••••••••"/>
+            <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400">
+              <span class="material-symbols-outlined text-sm">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-primary text-black font-bold py-3 rounded-lg hover:bg-primary-dim transition-colors uppercase tracking-wider">
+          Iniciar Sesión
+        </button>
+      </form>
+
+      <div class="mt-6 space-y-3 text-sm">
+        <a href="/recuperar-password" class="block text-center text-stone-500 hover:text-primary transition-colors">¿Olvidaste tu contraseña?</a>
+        <div class="text-center text-stone-500">
+          ¿No tienes cuenta? 
+          <a href="/registro" class="text-primary font-bold hover:underline">Regístrate aquí</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function togglePassword() {
+  const input = document.querySelector('input[name="password"]');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const errorEl = document.getElementById('loginError');
+  errorEl.classList.add('hidden');
+
+  const formData = new FormData(e.target);
+  const data = {
+    email: formData.get('email'),
+    password: formData.get('password'),
+  };
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      // Store token for client-side API calls
+      localStorage.setItem('zenith_session', JSON.stringify({
+        user: result.data.user,
+        token: result.data.token,
+        expires: result.data.expires,
+      }));
+
+      // Notify socket
+      if (window.socket) {
+        window.socket.emit('join', result.data.user.id);
+      }
+
+      showToast('Inicio de sesión exitoso', 'success');
+      setTimeout(() => window.location.href = '/dashboard', 500);
+    } else {
+      errorEl.textContent = result.message;
+      errorEl.classList.remove('hidden');
+    }
+  } catch (err) {
+    errorEl.textContent = 'Error de conexión con el servidor';
+    errorEl.classList.remove('hidden');
+  }
+});
+</script>

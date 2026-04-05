@@ -61,22 +61,22 @@ const Product = sequelize.define('Product', {
     defaultValue: true,
   },
   warehouseStock: {
-    type: DataTypes.JSONB,
+    type: DataTypes.JSON,
     defaultValue: {},
     comment: 'Stock por almacén: { "warehouse-1": 50, "warehouse-2": 30 }',
   },
   specifications: {
-    type: DataTypes.JSONB,
+    type: DataTypes.JSON,
     defaultValue: {},
     comment: 'Especificaciones técnicas',
   },
   compatibility: {
-    type: DataTypes.JSONB,
+    type: DataTypes.JSON,
     defaultValue: [],
     comment: 'Vehículos compatibles',
   },
   crossReferences: {
-    type: DataTypes.JSONB,
+    type: DataTypes.JSON,
     defaultValue: [],
     comment: 'Referencias cruzadas OEM',
   },
@@ -91,7 +91,6 @@ const Product = sequelize.define('Product', {
     { fields: ['brand'] },
     { fields: ['categoryId'] },
     { fields: ['visible'] },
-    { fields: ['name'], using: 'GIN', operator: 'gin_trgm_ops' },
   ],
 });
 

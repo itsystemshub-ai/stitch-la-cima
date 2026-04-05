@@ -1,0 +1,58 @@
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+  <!-- Logo & Nav Links -->
+  <div class="flex items-center gap-8">
+    <a href="/" class="text-2xl font-extrabold italic text-black tracking-tighter hover:opacity-80 transition-opacity">
+      Zenith <span class="text-primary">ERP</span>
+    </a>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors">Inicio</a>
+      <a href="/catalogo" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors">Catálogo</a>
+      <a href="/nosotros" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors">Nosotros</a>
+      <a href="/contacto" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors">Contacto</a>
+    </div>
+  </div>
+
+  <!-- Right Side -->
+  <div class="flex items-center gap-4">
+    <!-- Search -->
+    <div class="relative hidden lg:block">
+      <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-sm">search</span>
+      <input 
+        type="text" 
+        id="navSearchInput"
+        placeholder="Buscar por OEM o VIN..."
+        class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64 focus:w-80 transition-all"
+      />
+    </div>
+
+    <% if (user) { %>
+      <!-- User Menu -->
+      <div class="flex items-center gap-2">
+        <a href="/carrito" class="relative p-2 hover:bg-stone-100 rounded-full transition-colors">
+          <span class="material-symbols-outlined text-stone-600">shopping_cart</span>
+          <% if (cartCount > 0) { %>
+            <span class="absolute -top-1 -right-1 bg-primary text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center" data-cart-badge>
+              <%= cartCount %>
+            </span>
+          <% } %>
+        </a>
+        <div class="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
+          <span class="material-symbols-outlined text-primary text-sm">person</span>
+          <span class="text-[10px] font-bold text-primary uppercase"><%= user.name.split(' ')[0] %></span>
+        </div>
+        <% if (user.role === 'admin') { %>
+          <a href="/dashboard" class="text-xs text-stone-500 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm">dashboard</span>
+          </a>
+        <% } %>
+      </div>
+    <% } else { %>
+      <!-- Login Button -->
+      <a href="/login" class="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+        <span class="material-symbols-outlined text-sm">person</span>
+        <span class="text-xs font-bold uppercase">Ingresar</span>
+      </a>
+    <% } %>
+  </div>
+</nav>

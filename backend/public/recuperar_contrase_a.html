@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recuperar Contraseña | Mayor de Repuesto La Cima, C.A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="tailwind-config.js"></script>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contáctanos</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-primary-dim transition-all" onclick="window.location.href='login.html'">
+<span class="material-symbols-outlined text-sm">login</span>
+            Login
+        </button>
+</div>
+</nav>
+<main class="pt-16 min-h-screen flex items-center justify-center bg-stone-100">
+<!-- Recovery Container -->
+<div class="w-full max-w-4xl mx-6 grid grid-cols-1 md:grid-cols-2 overflow-hidden shadow-2xl rounded-2xl">
+<!-- Left Side: Brand Panel -->
+<div class="bg-black text-white p-12 md:p-16 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 opacity-20">
+<img alt="Security Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoIXb0FA8eW5NermNiPiMQHoAP3Ipvoa1bTmzDGRV2BfGRq9uYp722BWCNeePb-cXL5acePUNa8FdUUexwjFSylFfRg_lpnVEdLg3ED5clIUzlp_0Rux3itVJhE7i90XhsL3MbS9nGf7Rduie35COjTJt7MmUJ2oG34TwS-A2uzHwHrDpTgU3tp5OfYtcmjhtBDt9YJUt535zLSv_c0zTElYBu9F49CBxQVI_KAFV9epn4iD3LxbO_O6rUVvjcDVMz2nJPJUH56Q"/>
+</div>
+<div class="relative z-10">
+<span class="text-primary font-black text-3xl block mb-8 uppercase tracking-tighter italic">Zenith ERP</span>
+<h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
+                        Recuperar<br/><span class="text-primary">Acceso</span>
+</h1>
+<p class="text-stone-400 text-sm leading-relaxed max-w-xs">
+                        Ingrese su correo y la nueva contraseña deseada. Un administrador validará su solicitud.
+                    </p>
+</div>
+<div class="relative z-10 mt-12">
+<div class="bg-zinc-900/50 backdrop-blur-sm p-6 rounded-lg">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">verified_user</span>
+<span class="text-sm font-bold uppercase tracking-widest">Seguridad Industrial</span>
+</div>
+<p class="text-stone-400 text-xs leading-relaxed">
+                        Por razones de seguridad, la recuperación requiere aprobación manual del Usuario Maestro.
+                    </p>
+</div>
+</div>
+<div class="relative z-10 mt-8">
+<div class="flex items-center gap-3">
+<div class="h-[2px] w-8 bg-primary"></div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Sistema v4.2</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Recovery Form -->
+<div class="bg-white p-12 md:p-16 flex flex-col justify-center">
+<!-- Form State -->
+<div class="max-w-md mx-auto w-full" id="recovery-form">
+<span class="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2 block">Seguridad del Sistema</span>
+<h2 class="text-2xl font-black uppercase tracking-tighter text-black mb-2">Nueva Contraseña</h2>
+<p class="text-stone-500 text-sm mb-8">Ingrese su correo y la contraseña que desea establecer. El administrador la aprobará o rechazará.</p>
+<form class="space-y-5" id="passwordRecoveryForm" onsubmit="submitRecovery(event)">
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Correo Electrónico</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">mail</span>
+<input class="w-full pl-12 pr-4 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="email" placeholder="usuario@lacima.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Nueva Contraseña</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">lock</span>
+<input class="w-full pl-12 pr-12 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="newPassword" placeholder="••••••••" required="" type="password" minlength="6"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600" onclick="togglePassword('newPassword', this)" type="button">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+</div>
+<p class="text-[10px] text-stone-400 mt-1">Mínimo 6 caracteres</p>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Confirmar Contraseña</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">lock</span>
+<input class="w-full pl-12 pr-12 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="confirmPassword" placeholder="••••••••" required="" type="password" minlength="6"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600" onclick="togglePassword('confirmPassword', this)" type="button">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+</div>
+</div>
+<div id="passwordError" class="hidden bg-red-50 border border-red-200 rounded-lg p-3">
+<p class="text-xs text-red-600 font-bold">Las contraseñas no coinciden. Por favor verifique.</p>
+</div>
+<button class="w-full bg-black text-white py-4 rounded-lg font-bold text-xs uppercase tracking-[0.2em] hover:bg-stone-800 transition-colors flex items-center justify-center gap-2" type="submit">
+                        Enviar Solicitud
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 pt-8 border-t border-outline text-center">
+<a class="text-xs font-bold text-primary hover:text-primary-dim transition-colors uppercase tracking-wider flex items-center justify-center gap-2" href="login.html">
+<span class="material-symbols-outlined text-sm">lock</span>
+                        Volver al Portal de Ingreso
+                    </a>
+</div>
+</div>
+<!-- Pending State (Initially Hidden) -->
+<div class="max-w-md mx-auto w-full hidden" id="pending-state">
+<div class="text-center mb-8">
+<div class="w-20 h-20 bg-primary/10 flex items-center justify-center rounded-xl mx-auto mb-6">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="inline-block bg-primary/10 px-3 py-1 rounded-sm mb-4">
+<span class="text-[10px] font-black text-primary uppercase tracking-tighter">Estado: Pendiente de Aprobación</span>
+</div>
+</div>
+<h2 class="text-2xl font-black uppercase tracking-tighter text-black mb-2 text-center">Solicitud Enviada</h2>
+<div class="bg-stone-50 border-l-4 border-primary rounded-r-lg p-6 mb-6">
+<p class="text-stone-600 text-sm leading-relaxed mb-3">
+                        Su solicitud de cambio de contraseña ha sido enviada al <span class="font-bold text-black">Usuario Maestro (Admin La Cima)</span>.
+                    </p>
+<p class="text-stone-600 text-sm leading-relaxed">
+                        Un administrador revisará y aprobará su nueva contraseña. Recibirá una confirmación una vez que el cambio sea autorizado.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-stone-100 p-4 rounded-lg">
+<span class="text-[9px] font-bold text-stone-400 uppercase tracking-widest block mb-1">Ticket ID</span>
+<span class="font-mono text-sm font-bold text-black" id="ticketId">LC-0000-XX</span>
+</div>
+<div class="bg-stone-100 p-4 rounded-lg">
+<span class="text-[9px] font-bold text-stone-400 uppercase tracking-widest block mb-1">Tiempo Est.</span>
+<span class="text-sm font-bold text-black">15 - 30 min</span>
+</div>
+</div>
+<button class="w-full bg-stone-100 text-stone-600 py-4 rounded-lg font-bold text-xs uppercase tracking-[0.2em] hover:bg-stone-200 transition-colors flex items-center justify-center gap-2" onclick="window.location.reload()">
+                    Entendido, Volver al Inicio
+                </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-8 px-8 border-t border-zinc-900">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
+</div>
+</div>
+</footer>
+<script>
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        function submitRecovery(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorDiv = document.getElementById('passwordError');
+
+            // Validate passwords match
+            if (newPassword !== confirmPassword) {
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            errorDiv.classList.add('hidden');
+
+            // Generate ticket ID
+            const ticketNum = Math.floor(1000 + Math.random() * 9000);
+            const ticketLetters = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + 
+                                  String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            const ticketId = `LC-${ticketNum}-${ticketLetters}`;
+
+            // Store request in localStorage for admin panel
+            const recoveryRequest = {
+                id: ticketId,
+                email: email,
+                newPassword: newPassword,
+                timestamp: new Date().toLocaleString('es-VE'),
+                status: 'pending',
+                ip: '192.168.1.' + Math.floor(Math.random() * 255)
+            };
+
+            // Get existing requests or initialize array
+            let requests = JSON.parse(localStorage.getItem('passwordRecoveryRequests') || '[]');
+            requests.push(recoveryRequest);
+            localStorage.setItem('passwordRecoveryRequests', JSON.stringify(requests));
+
+            // Show pending state
+            document.getElementById('ticketId').textContent = ticketId;
+            document.getElementById('recovery-form').classList.add('hidden');
+            document.getElementById('pending-state').classList.remove('hidden');
+        }
+    </script>
+</body></html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= typeof title !== 'undefined' ? title : 'La Cima, C.A' %> | <%= typeof siteName !== 'undefined' ? siteName : 'Zenith ERP' %></title>
+  <link href="/css/output.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="bg-surface-dim text-on-surface selection:bg-primary/30">
+
+  <!-- NAVBAR -->
+  <%- include('../partials/navbar', { user: typeof user !== 'undefined' ? user : null, cartCount: typeof cartCount !== 'undefined' ? cartCount : 0, siteName: typeof siteName !== 'undefined' ? siteName : 'La Cima' }) %>
+
+  <!-- MAIN CONTENT -->
+  <main class="min-h-screen pt-16">
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-20 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+    <%- body %>
+  </main>
+
+  <!-- FOOTER -->
+  <%- include('../partials/footer', { siteName: typeof siteName !== 'undefined' ? siteName : 'La Cima, C.A', year: new Date().getFullYear() }) %>
+
+  <!-- Socket.IO Client -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- App JS Modules -->
+  <script src="/src/js/utils/api-client.js"></script>
+  <script src="/src/js/utils/toast.js"></script>
+  <script src="/src/js/auth/auth.js"></script>
+  <script src="/src/js/products/products-db.js"></script>
+  <script src="/src/js/cart/cart.js"></script>
+  <script src="/src/js/search/smart-search.js"></script>
+  <script src="/src/js/orders/orders.js"></script>
+  <script src="/src/js/utils/nav-links.js"></script>
+
+  <!-- Socket.IO Setup -->
+  <script>
+    const socket = io();
+    <% if (typeof user !== 'undefined' && user) { %>
+    socket.emit('join', '<%= user.id %>');
+    <% } %>
+
+    socket.on('product:stock:changed', (data) => {
+      console.log('Stock updated:', data);
+      if (typeof showToast === 'function') showToast('Stock actualizado: ' + (data.productName || ''), 'info');
+    });
+
+    socket.on('order:new', (order) => {
+      console.log('New order:', order);
+      if (typeof showToast === 'function') showToast('Nueva orden: ' + (order.orderNumber || ''), 'success');
+    });
+
+    socket.on('stock:low', (data) => {
+      console.warn('Low stock:', data);
+      if (typeof showToast === 'function') showToast('⚠️ Stock bajo: ' + (data.productName || '') + ' (' + (data.stock || 0) + ' uds)', 'warning');
+    });
+
+    window.API_BASE = 'http://localhost:3000/api';
+    window.socket = socket;
+    window.currentUser = <%- typeof user !== 'undefined' && user ? JSON.stringify(typeof user.toJSON === 'function' ? user.toJSON() : user) : 'null' %>;
+    window.cartCount = <%= typeof cartCount !== 'undefined' ? cartCount : 0 %>;
+  </script>
+
+  <% if (typeof pageScripts !== 'undefined' && pageScripts) { %><%- pageScripts %><% } %>
+</body>
+</html>

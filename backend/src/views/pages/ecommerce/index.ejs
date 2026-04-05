@@ -1,0 +1,133 @@
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-surface via-surface-dim to-primary/5 py-20">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-black mb-4">
+        Repuestos <span class="text-primary">Automotrices</span> Premium
+      </h1>
+      <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+        Más de 15,000 SKU para tu vehículo. Calidad OEM garantizada.
+      </p>
+    </div>
+
+    <!-- Search Console -->
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-card p-6">
+      <div class="flex gap-4">
+        <input 
+          type="text" 
+          id="heroSearch"
+          placeholder="Buscar por nombre, SKU, OEM o marca..."
+          class="flex-1 bg-stone-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary"
+        />
+        <button onclick="window.location.href='/busqueda?q=' + document.getElementById('heroSearch').value" class="bg-primary text-black font-bold px-8 py-3 rounded-lg hover:bg-primary-dim transition-colors uppercase text-sm tracking-wider">
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="py-16 bg-surface">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-extrabold text-black">Productos Destacados</h2>
+      <a href="/catalogo" class="text-sm font-bold text-primary hover:underline">Ver todo →</a>
+    </div>
+
+    <% if (featuredProducts && featuredProducts.length > 0) { %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <% featuredProducts.forEach(function(product) { %>
+          <div class="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-card-hover transition-shadow group">
+            <!-- Product Image -->
+            <div class="relative h-48 bg-stone-100 overflow-hidden">
+              <% if (product.image) { %>
+                <img src="<%= product.image %>" alt="<%= product.name %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+              <% } else { %>
+                <div class="flex items-center justify-center h-full">
+                  <span class="material-symbols-outlined text-6xl text-stone-300">inventory_2</span>
+                </div>
+              <% } %>
+              <% if (product.oldPrice) { %>
+                <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                  -<%= Math.round((1 - product.price / product.oldPrice) * 100) %>%
+                </span>
+              <% } %>
+            </div>
+
+            <!-- Product Info -->
+            <div class="p-4">
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider mb-1"><%= product.brand %> • <%= product.categoryId %></div>
+              <h3 class="font-bold text-sm text-black mb-2 line-clamp-2"><%= product.name %></h3>
+              
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-lg font-extrabold text-black">$<%= product.price.toFixed(2) %></span>
+                <% if (product.oldPrice) { %>
+                  <span class="text-[10px] text-stone-400 line-through">$<%= product.oldPrice.toFixed(2) %></span>
+                <% } %>
+              </div>
+
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[10px] font-bold <%= product.stock > 10 ? 'text-green-500' : product.stock > 0 ? 'text-yellow-500' : 'text-red-500' %> uppercase">
+                  <%= product.stock > 0 ? 'Stock: ' + product.stock : 'Bajo Pedido' %>
+                </span>
+              </div>
+
+              <button 
+                onclick="addToCartServer('<%= product.id %>')"
+                class="w-full bg-black text-white py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn <%= product.stock === 0 ? 'opacity-50 cursor-not-allowed' : '' %>"
+                <%= product.stock === 0 ? 'disabled' : '' %>
+              >
+                <span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
+                <span class="text-[10px] font-black uppercase tracking-wider"><%= product.stock > 0 ? 'Añadir' : 'Agotado' %></span>
+              </button>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <div class="text-center py-20">
+        <span class="material-symbols-outlined text-6xl text-stone-300 mb-4">inventory_2</span>
+        <p class="text-stone-500">No hay productos disponibles aún</p>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- B2B CTA -->
+<section class="py-16 bg-secondary text-white">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-extrabold mb-4">¿Eres taller o flota?</h2>
+    <p class="text-lg text-stone-400 mb-8 max-w-2xl mx-auto">
+      Accede a precios mayoristas, crédito corporativo y gestión de flotas con nuestra plataforma ERP.
+    </p>
+    <a href="/registro" class="inline-block bg-primary text-black font-bold px-8 py-4 rounded-lg hover:bg-primary-dim transition-colors uppercase tracking-wider">
+      Registro Corporativo B2B
+    </a>
+  </div>
+</section>
+
+<script>
+function addToCartServer(productId) {
+  fetch('/api/cart', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + (localStorage.getItem('zenith_session')?.token || '')
+    },
+    body: JSON.stringify({ productId, qty: 1 })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      showToast('Producto agregado al carrito', 'success');
+      location.reload();
+    } else {
+      showToast(data.message || 'Error al agregar', 'error');
+    }
+  })
+  .catch(err => {
+    showToast('Error de conexión', 'error');
+  });
+}
+</script>

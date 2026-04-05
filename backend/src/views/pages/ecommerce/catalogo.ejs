@@ -1,0 +1,56 @@
+<div class="max-w-7xl mx-auto px-6 py-10">
+  <h1 class="text-3xl font-extrabold text-black mb-8"><%= title %></h1>
+  
+  <!-- Filters -->
+  <div class="bg-white rounded-xl p-6 shadow-card mb-8">
+    <form method="GET" class="flex gap-4 flex-wrap">
+      <input type="text" name="search" value="<%= filters.search || '' %>" placeholder="Buscar..." class="flex-1 bg-stone-100 border-none rounded-lg px-4 py-2 text-sm"/>
+      <select name="brand" class="bg-stone-100 border-none rounded-lg px-4 py-2 text-sm">
+        <option value="">Todas las marcas</option>
+        <% brands.forEach(function(b) { %>
+          <option value="<%= b %>" <%= filters.brand === b ? 'selected' : '' %>><%= b %></option>
+        <% }); %>
+      </select>
+      <button type="submit" class="bg-primary text-black font-bold px-6 py-2 rounded-lg text-sm uppercase">Filtrar</button>
+    </form>
+  </div>
+
+  <!-- Products Grid -->
+  <% if (products && products.length > 0) { %>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <% products.forEach(function(product) { %>
+        <a href="/producto/<%= product.id %>" class="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-card-hover transition-shadow block">
+          <div class="h-40 bg-stone-100 flex items-center justify-center">
+            <% if (product.image) { %>
+              <img src="<%= product.image %>" class="w-full h-full object-cover"/>
+            <% } else { %>
+              <span class="material-symbols-outlined text-5xl text-stone-300">inventory_2</span>
+            <% } %>
+          </div>
+          <div class="p-4">
+            <div class="text-[10px] text-stone-500 uppercase"><%= product.brand %></div>
+            <h3 class="font-bold text-sm text-black mt-1 line-clamp-2"><%= product.name %></h3>
+            <div class="flex items-center justify-between mt-3">
+              <span class="text-lg font-extrabold text-black">$<%= product.price.toFixed(2) %></span>
+              <span class="text-[10px] font-bold <%= product.stock > 0 ? 'text-green-500' : 'text-red-500' %>"><%= product.stock > 0 ? 'En stock' : 'Agotado' %></span>
+            </div>
+          </div>
+        </a>
+      <% }); %>
+    </div>
+
+    <!-- Pagination -->
+    <% if (pagination.pages > 1) { %>
+      <div class="flex justify-center gap-2 mt-8">
+        <% for (let i = 1; i <= pagination.pages; i++) { %>
+          <a href="?page=<%= i %>" class="px-4 py-2 rounded-lg <%= pagination.page === i ? 'bg-primary text-black font-bold' : 'bg-white text-stone-600 hover:bg-stone-100' %>"><%= i %></a>
+        <% } %>
+      </div>
+    <% } %>
+  <% } else { %>
+    <div class="text-center py-20">
+      <span class="material-symbols-outlined text-6xl text-stone-300 mb-4">search_off</span>
+      <p class="text-stone-500">No se encontraron productos</p>
+    </div>
+  <% } %>
+</div>

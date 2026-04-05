@@ -1,4 +1,5 @@
 const { Product, Category } = require('../models');
+const { Op } = require('sequelize');
 
 // GET /api/products
 const getAll = async (req, res) => {
@@ -45,6 +46,7 @@ const getAll = async (req, res) => {
       },
     });
   } catch (error) {
+    console.error('Error getAll products:', error);
     res.status(500).json({
       success: false,
       message: 'Error interno del servidor',
@@ -58,6 +60,7 @@ const getVisible = async (req, res) => {
     const products = await Product.findAll({ where: { visible: true } });
     res.json({ success: true, data: products });
   } catch (error) {
+    console.error('Error getVisible products:', error);
     res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 };
@@ -71,6 +74,7 @@ const getById = async (req, res) => {
     }
     res.json({ success: true, data: product });
   } catch (error) {
+    console.error('Error getById product:', error);
     res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 };
@@ -81,7 +85,8 @@ const create = async (req, res) => {
     const product = await Product.create(req.body);
     res.status(201).json({ success: true, data: product });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Error interno del servidor' });
+    console.error('Error create product:', error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -95,7 +100,8 @@ const update = async (req, res) => {
     await product.update(req.body);
     res.json({ success: true, data: product });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Error interno del servidor' });
+    console.error('Error update product:', error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -109,6 +115,7 @@ const remove = async (req, res) => {
     await product.destroy();
     res.json({ success: true, message: 'Producto eliminado' });
   } catch (error) {
+    console.error('Error delete product:', error);
     res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 };
@@ -123,6 +130,7 @@ const toggleVisibility = async (req, res) => {
     await product.update({ visible: !product.visible });
     res.json({ success: true, data: product });
   } catch (error) {
+    console.error('Error toggleVisibility product:', error);
     res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 };

@@ -7,7 +7,18 @@
       "Bash(xcopy *)",
       "Bash(rmdir *)",
       "Bash(ren *)",
-      "Bash(mkdir *)"
+      "Bash(mkdir *)",
+      "Bash(del *)",
+      "Bash(curl *)",
+      "Bash(timeout *)",
+      "Bash(tasklist *)",
+      "Bash(node *)",
+      "Bash(echo *)",
+      "Bash(taskkill *)",
+      "Bash(echo.)",
+      "Bash(=== *)",
+      "Bash(powershell *)",
+      "Bash(npx *)"
     ]
   },
   "$version": 3
