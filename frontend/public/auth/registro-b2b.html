@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro Corporativo B2B | Mayor de Repuesto La Cima, C.A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="../../src/js/utils/api-client.js"></script>
+<script src="../../src/js/utils/toast.js"></script>
+<script src="../../src/js/utils/nav-links.js"></script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contáctanos</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 bg-primary text-black px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-primary-dim transition-all" onclick="window.location.href='login.html'">
+<span class="material-symbols-outlined text-sm">login</span>
+            Login
+        </button>
+</div>
+</nav>
+<main class="pt-16 min-h-screen flex items-center justify-center bg-stone-100 py-12">
+<!-- Registration Container -->
+<div class="w-full max-w-5xl mx-6 grid grid-cols-1 md:grid-cols-2 overflow-hidden shadow-2xl rounded-2xl">
+<!-- Left Side: Brand Panel -->
+<div class="bg-black text-white p-12 md:p-16 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 opacity-20">
+<img alt="B2B Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc6_OZ_OC-JC12ANFxKa4zlqDGT1VmtU5GUQjrmH88MkSjndtoYZAdYom9yFE40HUxRZD603XbBlsdo1dNvf2GMRZB98jnbSBUS29zz0web6MCzJU2p5HRLl4PbU8QIyXWGxRtCpg0aTOizPte1yqp_BlXfg9n6VR6T-OAj5NE2n33KGcRhtLOvEFCSGwPBhQ7bQ0j4m8ZMSvIN_NW813rhFkG7rAKikbxTs1E6iqfqjZaaGmqZ5Y3od6CGC1dtZz1rLl176-NyA"/>
+</div>
+<div class="relative z-10">
+<span class="text-primary font-black text-3xl block mb-8 uppercase tracking-tighter italic">Zenith ERP</span>
+<h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
+                        Registro<br/><span class="text-primary">B2B</span>
+</h1>
+<p class="text-stone-400 text-sm leading-relaxed max-w-xs">
+                        Acceso exclusivo para talleres, flotas y distribuidores. Precios mayoristas y crédito industrial.
+                    </p>
+</div>
+<div class="relative z-10 mt-12">
+<div class="bg-zinc-900/50 backdrop-blur-sm p-6 rounded-lg">
+<h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-3">Beneficios B2B</h3>
+<ul class="text-stone-400 text-xs space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Precios mayoristas netos</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Línea de crédito industrial</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Pedidos masivos</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Soporte técnico dedicado</li>
+</ul>
+</div>
+</div>
+<div class="relative z-10 mt-8">
+<div class="flex items-center gap-3">
+<div class="h-[2px] w-8 bg-primary"></div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Sujeto a Aprobación</span>
+</div>
+</div>
+</div>
+<!-- Right Side: B2B Registration Form -->
+<div class="bg-white p-12 md:p-16 flex flex-col justify-center">
+<div class="max-w-md mx-auto w-full">
+<h2 class="text-2xl font-black uppercase tracking-tighter text-black mb-2">Registro Corporativo</h2>
+<p class="text-stone-500 text-sm mb-8">Complete el formulario. Su solicitud será revisada por nuestro equipo comercial.</p>
+<form class="space-y-5" id="b2bRegisterForm" onsubmit="handleB2BRegister(event)">
+<div id="b2bError" class="hidden bg-red-50 border border-red-200 rounded-lg p-3">
+<p class="text-xs text-red-600 font-bold" id="b2bErrorText"></p>
+</div>
+<div id="b2bSuccess" class="hidden bg-green-50 border border-green-200 rounded-lg p-3">
+<p class="text-xs text-green-600 font-bold">¡Solicitud enviada! Revisaremos su registro en 24-48 horas.</p>
+</div>
+<!-- Company Name -->
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Razón Social</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">business</span>
+<input class="w-full pl-12 pr-4 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="b2bCompany" placeholder="Taller El Parral, C.A." required="" type="text"/>
+</div>
+</div>
+<!-- RIF -->
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">RIF</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">badge</span>
+<input class="w-full pl-12 pr-4 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="b2bRif" placeholder="J-00000000-0" required="" type="text"/>
+</div>
+</div>
+<!-- Contact Name -->
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Nombre del Contacto</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">person</span>
+<input class="w-full pl-12 pr-4 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="b2bContactName" placeholder="Juan Pérez" required="" type="text"/>
+</div>
+</div>
+<!-- Email -->
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Correo Corporativo</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">mail</span>
+<input class="w-full pl-12 pr-4 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="b2bEmail" placeholder="contacto@empresa.com" required="" type="email"/>
+</div>
+</div>
+<!-- Phone -->
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Teléfono</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">phone</span>
+<input class="w-full pl-12 pr-4 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="b2bPhone" placeholder="+58 424-0000000" required="" type="tel"/>
+</div>
+</div>
+<!-- Business Type -->
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Tipo de Negocio</label>
+<select class="w-full bg-stone-50 border border-outline rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary" id="b2bBusinessType" required="">
+<option value="">Seleccione...</option>
+<option value="taller">Taller Mecánico</option>
+<option value="flota">Flota Vehicular</option>
+<option value="distribuidor">Distribuidor</option>
+<option value="concesionario">Concesionario</option>
+</select>
+</div>
+<!-- Password -->
+<div>
+<label class="block text-[10px] font-bold text-stone-400 uppercase mb-2 tracking-widest">Contraseña</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg">lock</span>
+<input class="w-full pl-12 pr-12 py-3 bg-stone-50 border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm transition-all" id="b2bPassword" placeholder="Mínimo 6 caracteres" required="" type="password" minlength="6"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600" onclick="toggleB2BPassword()" type="button">
+<span class="material-symbols-outlined text-lg" id="b2bEyeIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Terms -->
+<div class="flex items-start gap-2">
+<input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary mt-1" id="b2bTerms" required="" type="checkbox"/>
+<label class="text-xs text-stone-500">Acepto los <a class="text-primary font-bold hover:underline" href="terminos.html">Términos B2B</a> y la <a class="text-primary font-bold hover:underline" href="privacidad.html">Política de Privacidad</a>.</label>
+</div>
+<button class="w-full bg-black text-white py-4 rounded-lg font-bold text-xs uppercase tracking-[0.2em] hover:bg-stone-800 transition-colors flex items-center justify-center gap-2" type="submit">
+                        Enviar Solicitud B2B
+                        <span class="material-symbols-outlined text-lg">send</span>
+</button>
+</form>
+<div class="mt-6 pt-6 border-t border-outline text-center">
+<p class="text-xs text-stone-400 mb-2">¿Ya tiene cuenta B2B?</p>
+<a class="text-xs font-bold text-primary hover:text-primary-dim transition-colors uppercase tracking-wider" href="login.html">
+                    Iniciar Sesión
+                </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-8 px-8 border-t border-zinc-900">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
+</div>
+</div>
+</footer>
+<script>
+        function toggleB2BPassword() {
+            const input = document.getElementById('b2bPassword');
+            const icon = document.getElementById('b2bEyeIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        function handleB2BRegister(event) {
+            event.preventDefault();
+            
+            const company = document.getElementById('b2bCompany').value;
+            const rif = document.getElementById('b2bRif').value;
+            const contactName = document.getElementById('b2bContactName').value;
+            const email = document.getElementById('b2bEmail').value;
+            const phone = document.getElementById('b2bPhone').value;
+            const businessType = document.getElementById('b2bBusinessType').value;
+            const password = document.getElementById('b2bPassword').value;
+            const errorDiv = document.getElementById('b2bError');
+            const errorText = document.getElementById('b2bErrorText');
+            const successDiv = document.getElementById('b2bSuccess');
+
+            // Check if email already exists
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(u => u.email === email)) {
+                errorText.textContent = 'Este correo ya está registrado. Intente iniciar sesión.';
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+                return;
+            }
+
+            // Create pending B2B user
+            const newUser = {
+                id: 'B2B-' + String(users.length + 1).padStart(3, '0'),
+                email: email,
+                password: password,
+                name: contactName,
+                phone: phone,
+                role: 'pending_b2b',
+                company: company,
+                rif: rif,
+                businessType: businessType,
+                status: 'pending_approval',
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Store B2B requests for admin review
+            let b2bRequests = JSON.parse(localStorage.getItem('b2bRequests') || '[]');
+            b2bRequests.push(newUser);
+            localStorage.setItem('b2bRequests', JSON.stringify(b2bRequests));
+
+            // Show success
+            errorDiv.classList.add('hidden');
+            successDiv.classList.remove('hidden');
+
+            // Redirect to login after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 3000);
+        }
+    </script>
+</body></html>

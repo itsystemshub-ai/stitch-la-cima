@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resultados de Búsqueda | Mayor de Repuesto La Cima, C.A</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="../../src/js/utils/api-client.js"></script>
+<script src="../../src/js/utils/toast.js"></script>
+<script src="../../src/js/cart/cart.js"></script>
+<script src="../../src/js/search/smart-search.js"></script>
+<script src="../../src/js/utils/nav-links.js"></script>
+<style>
+        .view-toggle-btn { transition: all 0.2s ease; }
+        .view-toggle-btn.active { background-color: #000; color: #ceff5e; }
+        .view-toggle-btn:not(.active) { background-color: #f5f5f5; color: #737373; }
+        .view-toggle-btn:not(.active):hover { background-color: #e5e5e5; }
+        .product-card { transition: all 0.3s ease; }
+        .product-list-row { display: flex; flex-direction: row; gap: 20px; align-items: center; }
+        .product-list-row .product-image { width: 160px; height: 160px; flex-shrink: 0; }
+        .product-list-row .product-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .product-list-row .product-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; min-width: 140px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="Catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contáctanos</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<div class="relative">
+<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64 focus:w-80 transition-all" id="navSearchInput" placeholder="Buscar por OEM o VIN..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+</div>
+<!-- Search Suggestions Dropdown -->
+<div class="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-outline overflow-hidden hidden z-50" id="navSearchSuggestions">
+<div class="p-3 border-b border-outline bg-stone-50 flex items-center justify-between">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Sugerencias</p>
+<span class="text-[10px] text-stone-400" id="navResultsCount"></span>
+</div>
+<div id="navSuggestionsList" class="max-h-64 overflow-y-auto"></div>
+<div class="p-3 border-t border-outline bg-stone-50">
+<button class="w-full text-center text-xs text-primary font-bold uppercase tracking-widest hover:text-primary-dim transition-colors" onclick="executeSmartSearch(document.getElementById('navSearchInput').value.trim(), 'navSearchSuggestions')">Ver Todos los Resultados →</button>
+</div>
+</div>
+</div>
+<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors" onclick="window.location.href='carrito_de_compras.html'">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+</button>
+<div class="h-6 w-px bg-outline mx-2"></div>
+<button class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all" onclick="window.location.href='login.html'">
+<span class="material-symbols-outlined text-primary text-sm">database</span>
+            Login
+        </button>
+</div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="bg-stone-100 border-b border-outline">
+<div class="container mx-auto px-6 py-8">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-center gap-2 mb-2">
+<a class="text-xs text-stone-400 hover:text-primary transition-colors" href="index.html">Inicio</a>
+<span class="material-symbols-outlined text-stone-400 text-sm">chevron_right</span>
+<a class="text-xs text-stone-400 hover:text-primary transition-colors" href="Catalogo_general.html">Catálogo General</a>
+<span class="material-symbols-outlined text-stone-400 text-sm">chevron_right</span>
+<span class="text-xs text-primary font-bold">Resultados de Búsqueda</span>
+</div>
+<h1 class="text-2xl font-black uppercase tracking-tighter text-black">
+                    Resultados: <span class="text-primary">Turboalimentador</span>
+</h1>
+<p class="text-stone-500 text-sm mt-1">Mostrando 124 repuestos compatibles con sus criterios.</p>
+</div>
+</div>
+</section>
+<!-- Main Content with Sidebar -->
+<section class="py-8 bg-stone-50">
+<div class="container mx-auto px-6">
+<div class="max-w-7xl mx-auto flex gap-8">
+<!-- Sidebar Filters -->
+<aside class="w-72 flex-shrink-0">
+<div class="sticky top-24 space-y-6">
+<!-- Filters Card -->
+<div class="bg-white border border-outline rounded-xl p-6">
+<h3 class="font-black text-sm uppercase tracking-widest text-black mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">filter_list</span>
+                            Filtros Avanzados
+                        </h3>
+<!-- Year Filter -->
+<div class="mb-5">
+<label class="block text-[10px] font-bold text-stone-500 uppercase mb-2 tracking-widest">Año del Vehículo</label>
+<select class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+<option>Todos los Años</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+<option>2020</option>
+</select>
+</div>
+<!-- Brand Filter -->
+<div class="mb-5">
+<label class="block text-[10px] font-bold text-stone-500 uppercase mb-2 tracking-widest">Marca</label>
+<select class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+<option>Todas las Marcas</option>
+<option>Toyota</option>
+<option>Chevrolet</option>
+<option>Ford</option>
+<option>Caterpillar</option>
+</select>
+</div>
+<!-- Model Filter -->
+<div class="mb-5">
+<label class="block text-[10px] font-bold text-stone-500 uppercase mb-2 tracking-widest">Modelo</label>
+<select class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+<option>Todos los Modelos</option>
+<option>Hilux</option>
+<option>Corolla</option>
+<option>F-150</option>
+</select>
+</div>
+<!-- Motorization Filter -->
+<div class="mb-6">
+<label class="block text-[10px] font-bold text-stone-500 uppercase mb-2 tracking-widest">Motorización</label>
+<select class="w-full bg-stone-50 border border-outline rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-primary">
+<option>Todas las Motorizaciones</option>
+<option>2.5L Diesel</option>
+<option>3.0L V6</option>
+<option>4.0L V8</option>
+</select>
+</div>
+<button class="w-full bg-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors mb-3">
+                            Aplicar Filtros
+                        </button>
+<button class="w-full text-stone-400 py-2 font-bold text-[10px] uppercase tracking-widest hover:text-stone-600 transition-colors">
+                            Limpiar Búsqueda
+                        </button>
+</div>
+<!-- B2B Banner -->
+<div class="bg-black rounded-xl p-6 text-white">
+<div class="flex items-center gap-3 mb-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">corporate_fare</span>
+</div>
+<h4 class="font-black text-sm uppercase tracking-widest">Mantenimiento de Flotas</h4>
+</div>
+<p class="text-stone-400 text-xs leading-relaxed mb-4">Acceda a precios especiales por volumen y gestión logística dedicada.</p>
+<button class="w-full bg-primary text-black py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-dim transition-colors" onclick="window.location.href='login.html'">
+                            Consultar
+                        </button>
+</div>
+</div>
+</aside>
+<!-- Results Grid -->
+<div class="flex-1">
+<!-- Sort & Info Bar -->
+<div class="flex justify-between items-center mb-6 bg-white border border-outline rounded-xl px-6 py-4">
+<span class="text-xs font-bold text-stone-500 uppercase tracking-widest">Mostrando 124 de 1,280 resultados</span>
+<div class="flex items-center gap-4">
+<span class="text-xs text-stone-400 font-medium">Ordenar por:</span>
+<select class="bg-transparent border-none text-xs font-bold text-black focus:ring-0 p-0 cursor-pointer">
+<option>Más Relevante</option>
+<option>Precio: Menor a Mayor</option>
+<option>Precio: Mayor a Menor</option>
+<option>Últimos Ingresos</option>
+</select>
+<div class="h-6 w-px bg-outline mx-2"></div>
+<!-- View Toggle -->
+<div class="flex items-center gap-2 bg-stone-100 rounded-lg p-1">
+<button class="view-toggle-btn active w-9 h-9 flex items-center justify-center rounded-md" id="gridViewBtn" onclick="setView('grid')" title="Vista Cuadrícula">
+<span class="material-symbols-outlined text-lg">grid_view</span>
+</button>
+<button class="view-toggle-btn w-9 h-9 flex items-center justify-center rounded-md" id="listViewBtn" onclick="setView('list')" title="Vista Lista">
+<span class="material-symbols-outlined text-lg">format_list_bulleted</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Products Container -->
+<div id="productsContainer" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<div class="product-card group bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-[4/3] bg-gradient-to-br from-stone-100 to-stone-200 overflow-hidden product-image">
+<img alt="Turboalimentador Variable VGT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRn-wdKgaOpSBynFvnr0e_fmpdUwmPnpozU-NafufUaamlmKKGX6d-dkHr2aj7_nDx-AKznW0KzL5fIjYG7gtzalG2_9IuNT-hTRWpJiQeJzZ8511dZsT6tl5qkDqAo8LX7qK-hVKM713GcUlIo5wK0hJMgn8yJDs7Of6LasPy_8C4MbxFJrKC_7-xXWWCDrchCbWw_snA5feSSKqCid71lSKHG6-nFtzz1O8S3ya-CRGXCpluZVnH6mf88Zf6m9L0V_NoXpdkOA"/>
+<span class="absolute top-3 left-3 bg-primary/90 text-black text-[9px] font-black px-2 py-1 uppercase tracking-wider">OEM Garantía</span>
+</div>
+<div class="p-5 product-info">
+<div class="flex items-start justify-between mb-2">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">SKU: TRB-VGT-84521</span>
+<span class="text-lg font-black text-primary">$845.00</span>
+</div>
+<h4 class="font-bold text-sm text-black mb-3 line-clamp-2">Turboalimentador Variable VGT</h4>
+<div class="flex items-center gap-2 mb-3 flex-wrap">
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">Toyota Hilux 2016-2020</span>
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">Motor 2.8D / 2.5D</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-wider">Stock Disponible (12U)</span>
+</div>
+</div>
+<div class="px-5 pb-5 product-actions">
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir</span>
+</button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="product-card group bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-[4/3] bg-gradient-to-br from-stone-100 to-stone-200 overflow-hidden product-image">
+<img alt="Pastillas de Freno Heavy Duty" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A"/>
+<span class="absolute top-3 left-3 bg-primary/90 text-black text-[9px] font-black px-2 py-1 uppercase tracking-wider">OEM Replacement</span>
+</div>
+<div class="p-5 product-info">
+<div class="flex items-start justify-between mb-2">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">SKU: BRK-9004-HD</span>
+<span class="text-lg font-black text-primary">$129.50</span>
+</div>
+<h4 class="font-bold text-sm text-black mb-3 line-clamp-2">Pastillas de Freno Heavy Duty</h4>
+<div class="flex items-center gap-2 mb-3 flex-wrap">
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">Toyota Serie H / B</span>
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">2016-Presente</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-wider">Stock Disponible (45U)</span>
+</div>
+</div>
+<div class="px-5 pb-5 product-actions">
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir</span>
+</button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="product-card group bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-[4/3] bg-gradient-to-br from-stone-100 to-stone-200 overflow-hidden product-image">
+<img alt="Kit de Filtros Mantenimiento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1LXppgzwzoDNtBCTum-3mUotkQKZr4efvjDbwAOBjwjJE2xZCUgtXD8SPX-_Nrqm76VjHKjH7dT9dKprmE0OBFhJprM5FcDSVVREanO0F4r8SMiO-hTRsbWq77Oy4vN8Zk7C5pJiqCntBy0l2e0yWjv_L5WjI7HIX-r13bq1FI_0xFhYGlLvThi__IzNvRhTRxJ6WmLoXd6SFCDRN_G_2vR0jLH5i2il3DtSt1QLW1MmUWGZsxfKHSnOmdfpVN-ai4OREYR2giw"/>
+<span class="absolute top-3 left-3 bg-primary/90 text-black text-[9px] font-black px-2 py-1 uppercase tracking-wider">Pack Ahorro</span>
+</div>
+<div class="p-5 product-info">
+<div class="flex items-start justify-between mb-2">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">SKU: KIT-MT-2024</span>
+<span class="text-lg font-black text-primary">$54.00</span>
+</div>
+<h4 class="font-bold text-sm text-black mb-3 line-clamp-2">Kit de Filtros Mantenimiento</h4>
+<div class="flex items-center gap-2 mb-3 flex-wrap">
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">Ford Ranger Raptor</span>
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">Modelos 2019+</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<div class="w-2 h-2 rounded-full bg-stone-300"></div>
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">Stock Bajo (3U)</span>
+</div>
+</div>
+<div class="px-5 pb-5 product-actions">
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir</span>
+</button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="product-card group bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all">
+<div class="relative aspect-[4/3] bg-gradient-to-br from-stone-100 to-stone-200 overflow-hidden product-image">
+<img alt="Óptica Frontal LED Proyección" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrcJwmgPZi9HdRxqunTqDBpRfn4pF3cktXGtXeDeErJkw6Qr0CH6OOarSUXnpPzyA7DqT72dqcSy8u7-h3VsSX86XAAENjxgioCB4WNZwfXPtuR6AxXXTNotht--sFm_e7RL3FjkeUQfE-26tCftzD_frwFhDn1XAoncUkfQRnsU3VZ__P2TJjqMRUe7brF9pyOJYrpl2CyEHUYkAYbJ1zHE9sm8r21lspqmBh19bYhggjkEl8P1sXmOyTVSzh8pvZyxase_kxuQ"/>
+</div>
+<div class="p-5 product-info">
+<div class="flex items-start justify-between mb-2">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">SKU: OPT-8820-LED</span>
+<span class="text-lg font-black text-primary">$210.00</span>
+</div>
+<h4 class="font-bold text-sm text-black mb-3 line-clamp-2">Óptica Frontal LED Proyección</h4>
+<div class="flex items-center gap-2 mb-3 flex-wrap">
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">Toyota Corolla X50</span>
+<span class="text-[10px] text-stone-400 bg-stone-100 px-2 py-1 rounded">2018 - 2022</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-wider">En Almacén Central</span>
+</div>
+</div>
+<div class="px-5 pb-5 product-actions">
+<button class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+<span class="text-[10px] font-black uppercase tracking-widest">Añadir</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-10 flex justify-center gap-2">
+<button class="w-10 h-10 bg-black text-white rounded-lg font-bold text-sm hover:bg-stone-800 transition-colors">1</button>
+<button class="w-10 h-10 bg-stone-100 text-stone-600 rounded-lg font-bold text-sm hover:bg-stone-200 transition-colors">2</button>
+<button class="w-10 h-10 bg-stone-100 text-stone-600 rounded-lg font-bold text-sm hover:bg-stone-200 transition-colors">3</button>
+<span class="w-10 h-10 flex items-center justify-center text-stone-400">...</span>
+<button class="w-10 h-10 bg-stone-100 text-stone-600 rounded-lg font-bold text-sm hover:bg-stone-200 transition-colors">10</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<span class="text-primary font-black text-2xl block mb-6 uppercase tracking-tighter italic">Zenith ERP</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed mb-6">
+                MAYOR DE REPUESTO LA CIMA, C.A<br/>
+                RIF.: J-40308741-5
+            </p>
+<div class="flex gap-4">
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">facebook</span>
+</div>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_p_blico_de_repuestos.html">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Transmisión</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="dashboard.html">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="arquitectura_t_cnica_ecommerce_repuestos.html">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="centro_de_soporte_garant_as_rma_e_ia_de_compatibilidad.html">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="login.html">Login</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Contacto</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">
+                AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL,<br/>
+                OFICINA NO. 2-3-C, URB. EL PARRAL,<br/>
+                2001, VALENCIA, EDO. CARABOBO<br/>
+<span class="text-white mt-2 block">TELF.: +58 424-4582766 / +58 424-4042558</span>
+</p>
+<div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">Emails:</p>
+<p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="text-primary text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
+</div>
+</div>
+</footer>
+<script>
+        function setView(view) {
+            const container = document.getElementById('productsContainer');
+            const gridBtn = document.getElementById('gridViewBtn');
+            const listBtn = document.getElementById('listViewBtn');
+            const cards = document.querySelectorAll('.product-card');
+
+            if (view === 'grid') {
+                // Grid view
+                container.className = 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6';
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+                
+                cards.forEach(card => {
+                    card.className = 'product-card group bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all';
+                    card.querySelector('.product-image').className = 'relative aspect-[4/3] bg-gradient-to-br from-stone-100 to-stone-200 overflow-hidden product-image';
+                    card.querySelector('.product-info').className = 'p-5 product-info';
+                    card.querySelector('.product-actions').className = 'px-5 pb-5 product-actions';
+                });
+            } else {
+                // List view
+                container.className = 'flex flex-col gap-4';
+                listBtn.classList.add('active');
+                gridBtn.classList.remove('active');
+                
+                cards.forEach(card => {
+                    card.className = 'product-card group bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all product-list-row p-4';
+                    card.querySelector('.product-image').className = 'relative w-40 h-40 bg-gradient-to-br from-stone-100 to-stone-200 overflow-hidden product-image flex-shrink-0 rounded-lg';
+                    card.querySelector('.product-image').querySelector('img').className = 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500';
+                    card.querySelector('.product-info').className = 'product-info flex-1';
+                    card.querySelector('.product-actions').className = 'product-actions flex flex-col items-end justify-center min-w-[120px] gap-3';
+                    card.querySelector('.product-actions button').className = 'bg-black text-white py-2 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn whitespace-nowrap';
+                });
+            }
+        }
+    </script>
+</body></html>

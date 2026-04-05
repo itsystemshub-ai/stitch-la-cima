@@ -1,0 +1,32 @@
+// Main SCSS Entry Point
+// La Cima - Zenith ERP Design System
+
+// Utils
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/functions';
+
+// Base
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/utilities';
+
+// Layout
+@import 'layout/navbar';
+@import 'layout/sidebar';
+@import 'layout/footer';
+@import 'layout/grid';
+
+// Components
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/tables';
+@import 'components/modals';
+@import 'components/badges';
+@import 'components/toast';
+
+// Pages
+@import 'pages/ecommerce';
+@import 'pages/erp';
+@import 'pages/auth';

@@ -1,0 +1,17 @@
+{
+  "name": "zenith-erp-frontend",
+  "version": "1.0.0",
+  "description": "Frontend del sistema ERP y E-commerce La Cima, C.A.",
+  "private": true,
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/scss/pages/main.scss -o ./public/output.css --watch",
+    "build:css": "npx tailwindcss -i ./src/scss/pages/main.scss -o ./public/output.css --minify",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "sass": "^1.69.5",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16"
+  }
+}

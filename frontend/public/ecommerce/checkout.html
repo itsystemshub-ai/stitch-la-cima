@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mayor de Repuesto La Cima | Billing &amp; Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="../../src/js/utils/api-client.js"></script>
+<script src="../../src/js/utils/toast.js"></script>
+<script src="../../src/js/auth/auth.js"></script>
+<script src="../../src/js/products/products-db.js"></script>
+<script src="../../src/js/cart/cart.js"></script>
+<script src="../../src/js/orders/orders.js"></script>
+<script src="../../src/js/utils/nav-links.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#e1e5ee",
+                      "primary-fixed": "#cbfc5c",
+                      "on-tertiary-container": "#575c63",
+                      "secondary-dim": "#4e5052",
+                      "secondary-container": "#e2e2e5",
+                      "secondary": "#5a5c5e",
+                      "on-surface-variant": "#5a5c5e",
+                      "on-tertiary": "#eff3fc",
+                      "outline": "#757779",
+                      "error": "#b02500",
+                      "inverse-surface": "#0c0e10",
+                      "on-primary-fixed-variant": "#4e6a00",
+                      "on-primary-fixed": "#364b00",
+                      "error-container": "#f95630",
+                      "on-tertiary-fixed-variant": "#62666e",
+                      "inverse-primary": "#ceff5e",
+                      "on-error": "#ffefec",
+                      "surface-container-highest": "#dbdde0",
+                      "on-secondary": "#f2f2f5",
+                      "tertiary-fixed": "#f0f4fd",
+                      "inverse-on-surface": "#9c9d9f",
+                      "primary": "#4a6400",
+                      "tertiary-dim": "#4b5057",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#dbdde0",
+                      "on-secondary-fixed": "#3e3f42",
+                      "primary-dim": "#405700",
+                      "surface-tint": "#4a6400",
+                      "on-secondary-fixed-variant": "#5a5c5e",
+                      "primary-fixed-dim": "#bded4f",
+                      "surface": "#f6f6f9",
+                      "surface-container": "#e7e8eb",
+                      "surface-container-low": "#f0f0f3",
+                      "background": "#f6f6f9",
+                      "on-tertiary-fixed": "#454a51",
+                      "tertiary": "#575c63",
+                      "surface-container-high": "#e1e2e6",
+                      "on-background": "#2d2f31",
+                      "primary-container": "#cbfc5c",
+                      "on-error-container": "#520c00",
+                      "surface-bright": "#f6f6f9",
+                      "surface-dim": "#d2d4d8",
+                      "tertiary-container": "#f0f4fd",
+                      "on-surface": "#2d2f31",
+                      "error-dim": "#b92902",
+                      "secondary-fixed": "#e2e2e5",
+                      "outline-variant": "#acadaf",
+                      "on-secondary-container": "#505254",
+                      "on-primary-container": "#465f00",
+                      "on-primary": "#deff95",
+                      "secondary-fixed-dim": "#d4d4d7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          }
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-extrabold italic text-black tracking-tighter">Zenith <span class="text-primary-dim">ERP</span></span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="carrito_de_compras.html">Carrito</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contáctanos</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors" onclick="window.location.href='carrito_de_compras.html'">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+</button>
+<div class="h-6 w-px bg-outline mx-2"></div>
+<button class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all" onclick="window.location.href='login.html'">
+<span class="material-symbols-outlined text-primary text-sm">database</span>
+            Login
+        </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="mt-24 mb-12 px-6 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Order Configuration & Items (8 Columns) -->
+<div class="lg:col-span-8 space-y-8">
+<header class="space-y-2">
+
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter text-on-surface uppercase">Configuración de Orden y Facturación</h1>
+<p class="text-secondary text-sm font-label uppercase tracking-widest">Protocolo de Verificación de Inventario Industrial</p>
+</header>
+<!-- Itemized List -->
+<section class="space-y-4">
+<div class="bg-surface-container-low p-1">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-4 px-6 py-3 text-[10px] font-bold text-secondary uppercase tracking-widest border-b border-outline-variant/10">
+<div class="col-span-6">Componente / SKU</div>
+<div class="col-span-3 text-center">Cantidad</div>
+<div class="col-span-3 text-right">Precio Unitario</div>
+</div>
+<!-- Items -->
+<div class="space-y-1">
+<!-- Item 1 -->
+<div class="grid grid-cols-12 gap-4 px-6 py-6 items-center bg-surface-container-lowest">
+<div class="col-span-6 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high rounded flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500" data-alt="close-up of a high-performance turbocharger made of heavy steel on industrial workstation background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXfOGT4HvDG2cDQ3TFEAPXonwacck43kKSOhr9C_8Q-xTBPQMOskakNwILOl7PEUIyI4OQaDxqzamNwqo3oDKOfs89-yOxP5Ji5aBYkt_wZt0C0lwItL2XaH5I56IC6fdVWZ13l8VbPDjpGltL9F-v8vYQTZgWKnFHIgWQexwJJNGSAlVSMGVyULWMFx_ZV4EbivRetS1lcD34JZ97hLfHL0Slm50XZG12lGFxqSalyJkIb-lLAXzvVZ2nAnhIen1rf07gukU-ow"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface uppercase tracking-tight">Turboalimentador Variable VGT</h3>
+<span class="text-[10px] font-mono text-secondary bg-surface-container-high px-1 py-0.5">TRB-0442-JP</span>
+</div>
+</div>
+<div class="col-span-3 flex justify-center">
+<div class="flex items-center border border-outline-variant/20 rounded overflow-hidden">
+<button class="p-2 hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<input class="w-10 text-center bg-transparent border-none text-sm font-bold focus:ring-0" type="text" value="2"/>
+<button class="p-2 hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="col-span-3 text-right font-mono font-bold text-on-surface">$1,450.00</div>
+</div>
+<!-- Item 2 -->
+<div class="grid grid-cols-12 gap-4 px-6 py-6 items-center bg-surface">
+<div class="col-span-6 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high rounded flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500" data-alt="set of heavy duty brake pads for industrial trucks with rugged texture on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM0Dm7NB84fgyql-j5JSZUa7z5xIbJNE4jaIy7gT1gGIxK3rmE95xNTcH3kPsVEP-GQzkvNqHg_lpS8Ry9X7SpFwSufMYRdYKkHtVoCE49nJXxmafmsaaneEHZly_23S7oeUu9x7Tx1THxIAigD05qRRRhHL5G_MMI06_-_26lEaJwdLr2BufvojKupJ95CH9ihPIbyJxNi-UAWk16tpY6k8gQPlcsGtpC1fFewsJjGPZiNsjxCh7e1Zs2yjh__IrIzpcB5e-GPA"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface uppercase tracking-tight">Pastillas de Freno Heavy Duty</h3>
+<span class="text-[10px] font-mono text-secondary bg-surface-container-high px-1 py-0.5">BRK-9901-HD</span>
+</div>
+</div>
+<div class="col-span-3 flex justify-center">
+<div class="flex items-center border border-outline-variant/20 rounded overflow-hidden">
+<button class="p-2 hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<input class="w-10 text-center bg-transparent border-none text-sm font-bold focus:ring-0" type="text" value="4"/>
+<button class="p-2 hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="col-span-3 text-right font-mono font-bold text-on-surface">$285.50</div>
+</div>
+<!-- Item 3 -->
+<div class="grid grid-cols-12 gap-4 px-6 py-6 items-center bg-surface-container-lowest">
+<div class="col-span-6 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high rounded flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500" data-alt="industrial maintenance kit with various filters and gaskets organized on a technical blueprint" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5iyYA2-3Qj9EyeLj31YG2vDD6HvSdhm3VDdBnCERgUC5-9swrhTlvIIGd8S7PEfrZos2l90T2jhI_54OGpchPx3nQX7xf7ChdmRatzV1FNOPkjZ44jutota2hL0drqttGVqzDLKo83PijYcSZyC6634XiiDDDJWqw3RiIEtVtOSIpuBz_mMe1zCWHexXy-mK9wik48dGVWWHRgp9mVMW0qrblsFTjuXprJGfBiJpW-j-HIPPaBW8mXgdJoSYQA7EPa2bg39hP9w"/>
+</div>
+<div>
+<h3 class="font-bold text-on-surface uppercase tracking-tight">Kit de Filtros Mantenimiento</h3>
+<span class="text-[10px] font-mono text-secondary bg-surface-container-high px-1 py-0.5">KIT-MT-3302</span>
+</div>
+</div>
+<div class="col-span-3 flex justify-center">
+<div class="flex items-center border border-outline-variant/20 rounded overflow-hidden">
+<button class="p-2 hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<input class="w-10 text-center bg-transparent border-none text-sm font-bold focus:ring-0" type="text" value="1"/>
+<button class="p-2 hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="col-span-3 text-right font-mono font-bold text-on-surface">$412.00</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Billing Details Section -->
+<section class="bg-surface-container-high p-8 space-y-6">
+<h2 class="text-xl font-black uppercase tracking-tighter text-on-surface flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">description</span>
+                    Detalles de Facturación
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-[10px] font-bold text-secondary uppercase tracking-widest">Dirección de Facturación</label>
+<textarea class="w-full bg-surface border-none text-sm p-4 focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all" placeholder="Zona Industrial, Galpón 44..." rows="3"></textarea>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="block text-[10px] font-bold text-secondary uppercase tracking-widest">RIF/Cédula</label>
+<input class="w-full bg-surface border-none text-sm p-4 font-mono focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all" placeholder="J-12345678-9" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] font-bold text-secondary uppercase tracking-widest">Método de Pago</label>
+<div class="grid grid-cols-1 gap-2">
+<label class="flex items-center gap-3 p-3 bg-surface cursor-pointer hover:bg-surface-container-lowest transition-colors border-l-4 border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input checked="" class="text-primary focus:ring-primary h-4 w-4" name="payment" type="radio"/>
+<span class="text-xs font-bold uppercase">Transferencia B2B</span>
+</label>
+<label class="flex items-center gap-3 p-3 bg-surface cursor-pointer hover:bg-surface-container-lowest transition-colors border-l-4 border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="text-primary focus:ring-primary h-4 w-4" name="payment" type="radio"/>
+<span class="text-xs font-bold uppercase">Crédito Corporativo</span>
+</label>
+<label class="flex items-center gap-3 p-3 bg-surface cursor-pointer hover:bg-surface-container-lowest transition-colors border-l-4 border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="text-primary focus:ring-primary h-4 w-4" name="payment" type="radio"/>
+<span class="text-xs font-bold uppercase">Tarjeta de Crédito</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar Summary (4 Columns) -->
+<aside class="lg:col-span-4">
+<div class="sticky top-24 space-y-6">
+<div class="bg-neutral-900 text-white p-8 shadow-2xl relative overflow-hidden">
+<!-- Background texture hint -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0); background-size: 24px 24px;"></div>
+<h2 class="text-2xl font-black uppercase tracking-tighter mb-8 border-b border-white/10 pb-4">Resumen de la Orden</h2>
+<div class="space-y-4 font-mono">
+<div class="flex justify-between text-sm text-neutral-400">
+<span>Subtotal</span>
+<span>$4,454.00</span>
+</div>
+<div class="flex justify-between text-sm text-neutral-400">
+<span>Impuesto (IVA 16%)</span>
+<span>$712.64</span>
+</div>
+<div class="flex justify-between text-sm text-neutral-400 pb-4">
+<span>Logística Operativa</span>
+<span>$120.00</span>
+</div>
+<div class="flex justify-between text-xl font-black text-lime-400 border-t border-white/20 pt-4">
+<span>TOTAL</span>
+<span>$5,286.64</span>
+</div>
+</div>
+<div class="mt-10 space-y-4">
+<button class="w-full bg-lime-500 hover:bg-lime-400 text-black font-black py-4 px-6 tracking-widest text-sm uppercase transition-all flex items-center justify-center gap-3 active:scale-95">
+                            FINALIZAR Y GENERAR FACTURA
+                            <span class="material-symbols-outlined">receipt_long</span>
+</button>
+<button class="w-full border border-white/20 hover:bg-white/10 text-white font-bold py-4 px-6 tracking-widest text-xs uppercase transition-all">
+                            DESCARGAR COTIZACIÓN PDF
+                        </button>
+</div>
+<div class="mt-8 pt-8 border-t border-white/10 space-y-4">
+<div class="flex items-start gap-3 opacity-60">
+<span class="material-symbols-outlined text-lime-400 text-sm">verified_user</span>
+<p class="text-[10px] uppercase leading-relaxed tracking-wider">Garantía de fábrica aplicada a todos los componentes estructurales.</p>
+</div>
+<div class="flex items-start gap-3 opacity-60">
+<span class="material-symbols-outlined text-lime-400 text-sm">local_shipping</span>
+<p class="text-[10px] uppercase leading-relaxed tracking-wider">Despacho estimado: 24-48 horas hábiles tras validación de pago.</p>
+</div>
+</div>
+</div>
+<!-- Technical Assistance Card -->
+<div class="bg-surface-container-high p-6 border-l-4 border-primary">
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-2">Asistencia Técnica</p>
+<p class="text-xs font-semibold mb-4">¿Requiere ayuda con la configuración de su flota?</p>
+<a class="text-xs font-black text-primary uppercase border-b-2 border-primary/20 hover:border-primary transition-all" href="#">Contactar Especialista</a>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<span class="text-primary font-black text-2xl block mb-6 uppercase tracking-tighter italic">Zenith ERP</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed mb-6">
+                MAYOR DE REPUESTO LA CIMA, C.A<br/>
+                RIF.: J-40308741-5
+            </p>
+<div class="flex gap-4">
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">facebook</span>
+</div>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_p_blico_de_repuestos.html">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="cat_logo_de_repuestos_y_filtros_vin_oem.html">Transmisión</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="dashboard.html">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="arquitectura_t_cnica_ecommerce_repuestos.html">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="centro_de_soporte_garant_as_rma_e_ia_de_compatibilidad.html">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="login.html">Login</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Contacto</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">
+                AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL,<br/>
+                OFICINA NO. 2-3-C, URB. EL PARRAL,<br/>
+                2001, VALENCIA, EDO. CARABOBO<br/>
+<span class="text-white mt-2 block">TELF.: +58 424-4582766 / +58 424-4042558</span>
+</p>
+<div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">Emails:</p>
+<p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="text-primary text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='privacidad.html'">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" onclick="window.location.href='terminos.html'">Legal</span>
+</div>
+</div>
+</footer>
+</body></html>
