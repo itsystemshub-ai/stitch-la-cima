@@ -3,13 +3,14 @@
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Aprobación de Contraseñas | Zenith ERP</title>
+<title>Aprobación de Contraseñas | </title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=League Spartan:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="/src/js/utils/tailwind-config.js"></script>
-<link href="/src/scss/base/styles.css" rel="stylesheet"/>
-<script src="/src/js/auth/auth.js"></script>
+<link href="/css/styles.css" rel="stylesheet"/>
+
 <script>
         document.addEventListener('DOMContentLoaded', function() {
             protectPage();
@@ -41,13 +42,20 @@
         .search-input:focus { box-shadow: 0 0 0 3px rgba(206, 255, 94, 0.3); }
         .search-highlight { background-color: #ceff5e; color: #000; font-weight: bold; }
     </style>
+<script src="/src/js/utils/config.js"></script>
+<script src="/src/js/utils/api-client.js"></script>
+<script src="/src/js/utils/toast.js"></script>
+<script src="/src/js/auth/auth.js"></script>
+<script src="/src/js/products/products-db.js"></script>
+<script src="/src/js/utils/nav-links.js"></script>
+<script src="/src/js/pages/erp.js"></script>
 </head>
 <body class="bg-[#fafafa] text-on-surface selection:bg-primary/30">
 <!-- SideNavBar -->
 <aside class="fixed left-0 top-0 bottom-0 z-50 w-64 flex flex-col bg-neutral-950 shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
 <div class="px-6 py-6 border-b border-white/10">
 <div class="flex items-center gap-3">
-<span class="text-2xl font-extrabold italic text-white tracking-tighter">Zenith <span class="text-primary">ERP</span></span>
+
 </div>
 </div>
 

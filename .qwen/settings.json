@@ -18,7 +18,15 @@
       "Bash(echo.)",
       "Bash(=== *)",
       "Bash(powershell *)",
-      "Bash(npx *)"
+      "Bash(npx *)",
+      "Bash(copy *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(select-string *)",
+      "Bash(select-object *)",
+      "Bash(git stash *)",
+      "Bash(git reflog *)",
+      "Bash(git *)"
     ]
   },
   "$version": 3

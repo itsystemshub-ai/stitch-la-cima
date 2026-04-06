@@ -1,189 +1,162 @@
-// Sistema de gestión de productos - Zenith ERP
-// Este archivo sirve como base de datos centralizada para todos los módulos
+/**
+ * Product Service - La Cima Zenith ERP
+ * Product database with API integration and localStorage fallback
+ */
 
-const PRODUCTS_DB_KEY = 'zenith_products';
-const CATEGORIES_DB_KEY = 'zenith_categories';
+const API_BASE = window.API_BASE || 'http://localhost:3000/api';
+const CACHE_KEY = 'zenith_products_cache';
+const CATEGORIES_CACHE_KEY = 'zenith_categories_cache';
 
-// Productos iniciales del sistema
-const DEFAULT_PRODUCTS = [
-    {
-        id: 'PROD-001',
-        name: 'Kit de Discos de Freno Ventilados',
-        sku: 'DIS-4421-VTL',
-        oem: 'OEM-4421',
-        category: 'Frenos',
-        brand: 'Toyota',
-        vehicle: 'Land Cruiser 2015+',
-        price: 85.00,
-        oldPrice: 102.00,
-        stock: 50,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A',
-        visible: true, // Visible para usuarios no logueados
-        createdAt: new Date().toISOString()
+// Get all products from API or cache
+async function getAllProducts() {
+  try {
+    const response = await fetch(`${API_BASE}/products`);
+    const data = await response.json();
+    const products = data.data?.products || data.data || [];
+    localStorage.setItem(CACHE_KEY, JSON.stringify(products));
+    return products;
+  } catch (error) {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
+    return cached;
+  }
+}
+
+// Get only visible products
+async function getVisibleProducts() {
+  try {
+    const response = await fetch(`${API_BASE}/products/visible`);
+    const data = await response.json();
+    const products = data.data || [];
+    localStorage.setItem(CACHE_KEY, JSON.stringify(products));
+    return products;
+  } catch (error) {
+    const all = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
+    return all.filter(p => p.visible !== false);
+  }
+}
+
+// Get product by ID
+async function getProductById(id) {
+  try {
+    const response = await fetch(`${API_BASE}/products/${id}`);
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    const all = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
+    return all.find(p => p.id === id);
+  }
+}
+
+// Search products
+async function searchProducts(query) {
+  try {
+    const response = await fetch(`${API_BASE}/products?search=${encodeURIComponent(query)}`);
+    const data = await response.json();
+    return data.data?.products || [];
+  } catch (error) {
+    const all = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
+    const q = query.toLowerCase();
+    return all.filter(p =>
+      (p.name && p.name.toLowerCase().includes(q)) ||
+      (p.sku && p.sku.toLowerCase().includes(q)) ||
+      (p.oem && p.oem.toLowerCase().includes(q)) ||
+      (p.brand && p.brand.toLowerCase().includes(q))
+    );
+  }
+}
+
+// Get products with filters
+async function getFilteredProducts(filters = {}) {
+  try {
+    const params = new URLSearchParams();
+    if (filters.page) params.set('page', filters.page);
+    if (filters.limit) params.set('limit', filters.limit);
+    if (filters.search) params.set('search', filters.search);
+    if (filters.brand) params.set('brand', filters.brand);
+    if (filters.category) params.set('category', filters.category);
+    if (filters.stock) params.set('stock', filters.stock);
+    if (filters.sort) params.set('sort', filters.sort);
+
+    const response = await fetch(`${API_BASE}/products?${params}`);
+    const data = await response.json();
+    return data.data || { products: [], pagination: { total: 0, page: 1, pages: 0 } };
+  } catch (error) {
+    return { products: [], pagination: { total: 0, page: 1, pages: 0 } };
+  }
+}
+
+// Categories
+async function getCategories() {
+  try {
+    const response = await fetch(`${API_BASE}/categories`);
+    const data = await response.json();
+    const categories = data.data || [];
+    localStorage.setItem(CATEGORIES_CACHE_KEY, JSON.stringify(categories));
+    return categories;
+  } catch (error) {
+    return JSON.parse(localStorage.getItem(CATEGORIES_CACHE_KEY) || '[]');
+  }
+}
+
+// Admin CRUD operations
+async function addProduct(productData) {
+  const token = JSON.parse(localStorage.getItem('zenith_session'))?.token;
+  const response = await fetch(`${API_BASE}/products`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
-    {
-        id: 'PROD-002',
-        name: 'Inyector de Combustible Heavy Duty',
-        sku: 'INJ-CAT-882',
-        oem: 'CAT-882',
-        category: 'Motor',
-        brand: 'Caterpillar',
-        vehicle: 'CAT C7/C9',
-        price: 320.00,
-        oldPrice: null,
-        stock: 0,
-        stockStatus: 'Bajo Pedido',
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ',
-        visible: true,
-        createdAt: new Date().toISOString()
+    body: JSON.stringify(productData),
+  });
+  return response.json();
+}
+
+async function updateProduct(id, updates) {
+  const token = JSON.parse(localStorage.getItem('zenith_session'))?.token;
+  const response = await fetch(`${API_BASE}/products/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
-    {
-        id: 'PROD-003',
-        name: 'Amortiguador Reforzado Delantero',
-        sku: 'SUS-101-DEL',
-        oem: 'SUS-101',
-        category: 'Suspensión',
-        brand: 'Toyota',
-        vehicle: 'Land Cruiser 2015+',
-        price: 145.00,
-        oldPrice: null,
-        stock: 12,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw',
-        visible: true,
-        createdAt: new Date().toISOString()
-    },
-    {
-        id: 'PROD-004',
-        name: 'Filtro de Transmisión Automática',
-        sku: 'TRS-55-FIL',
-        oem: 'TRS-55',
-        category: 'Transmisión',
-        brand: 'Toyota',
-        vehicle: 'Land Cruiser 2015+',
-        price: 42.50,
-        oldPrice: null,
-        stock: 100,
-        image: '',
-        visible: true,
-        createdAt: new Date().toISOString()
-    },
-    {
-        id: 'PROD-005',
-        name: 'Turboalimentador Variable VGT',
-        sku: 'TRB-VGT-84521',
-        oem: '28231-27000',
-        category: 'Motor',
-        brand: 'Toyota',
-        vehicle: 'Hilux 2016-2020',
-        price: 845.00,
-        oldPrice: null,
-        stock: 8,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRn-wdKgaOpSBynFvnr0e_fmpdUwmPnpozU-NafufUaamlmKKGX6d-dkHr2aj7_nDx-AKznW0KzL5fIjYG7gtzalG2_9IuNT-hTRWpJiQeJzZ8511dZsT6tl5qkDqAo8LX7qK-hVKM713GcUlIo5wK0hJMgn8yJDs7Of6LasPy_8C4MbxFJrKC_7-xXWWCDrchCbWw_snA5feSSKqCid71lSKHG6-nFtzz1O8S3ya-CRGXCpluZVnH6mf88Zf6m9L0V_NoXpdkOA',
-        visible: true,
-        createdAt: new Date().toISOString()
-    },
-    {
-        id: 'PROD-006',
-        name: 'Pastillas de Freno Heavy Duty',
-        sku: 'BRK-9004-HD',
-        oem: '04465-35290',
-        category: 'Frenos',
-        brand: 'Toyota',
-        vehicle: 'Land Cruiser 2016+',
-        price: 129.50,
-        oldPrice: null,
-        stock: 45,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A',
-        visible: true,
-        createdAt: new Date().toISOString()
-    }
-];
-
-// Funciones CRUD de productos
-function getAllProducts() {
-    return JSON.parse(localStorage.getItem(PRODUCTS_DB_KEY) || '[]');
+    body: JSON.stringify(updates),
+  });
+  return response.json();
 }
 
-function getVisibleProducts() {
-    return getAllProducts().filter(p => p.visible === true);
+async function deleteProduct(id) {
+  const token = JSON.parse(localStorage.getItem('zenith_session'))?.token;
+  const response = await fetch(`${API_BASE}/products/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` },
+  });
+  return response.json();
 }
 
-function getProductById(id) {
-    return getAllProducts().find(p => p.id === id);
+async function toggleProductVisibility(id) {
+  const token = JSON.parse(localStorage.getItem('zenith_session'))?.token;
+  const response = await fetch(`${API_BASE}/products/${id}/toggle-visibility`, {
+    method: 'PATCH',
+    headers: { 'Authorization': `Bearer ${token}` },
+  });
+  return response.json();
 }
 
-function saveProducts(products) {
-    localStorage.setItem(PRODUCTS_DB_KEY, JSON.stringify(products));
-}
-
-function addProduct(product) {
-    const products = getAllProducts();
-    product.id = 'PROD-' + String(products.length + 1).padStart(3, '0');
-    product.createdAt = new Date().toISOString();
-    products.push(product);
-    saveProducts(products);
-    return product;
-}
-
-function updateProduct(id, updates) {
-    const products = getAllProducts();
-    const index = products.findIndex(p => p.id === id);
-    if (index >= 0) {
-        products[index] = { ...products[index], ...updates };
-        saveProducts(products);
-        return products[index];
-    }
-    return null;
-}
-
-function deleteProduct(id) {
-    let products = getAllProducts();
-    products = products.filter(p => p.id !== id);
-    saveProducts(products);
-}
-
-function toggleProductVisibility(id) {
-    const product = getProductById(id);
-    if (product) {
-        return updateProduct(id, { visible: !product.visible });
-    }
-    return null;
-}
-
-// Inicializar productos si no existen
-function initProducts() {
-    if (!localStorage.getItem(PRODUCTS_DB_KEY)) {
-        saveProducts(DEFAULT_PRODUCTS);
-    }
-}
-
-// Categorías
-function getCategories() {
-    return JSON.parse(localStorage.getItem(CATEGORIES_DB_KEY) || '[]');
-}
-
-function saveCategories(categories) {
-    localStorage.setItem(CATEGORIES_DB_KEY, JSON.stringify(categories));
-}
-
-const DEFAULT_CATEGORIES = [
-    { id: 'CAT-001', name: 'Motor', icon: 'settings', active: true },
-    { id: 'CAT-002', name: 'Frenos', icon: 'stop_circle', active: true },
-    { id: 'CAT-003', name: 'Suspensión', icon: 'build', active: true },
-    { id: 'CAT-004', name: 'Transmisión', icon: 'settings_input_component', active: true },
-    { id: 'CAT-005', name: 'Carrocería', icon: 'directions_car', active: true },
-    { id: 'CAT-006', name: 'Electrónica', icon: 'electrical_services', active: true },
-    { id: 'CAT-007', name: 'Filtros', icon: 'filter_alt', active: true }
-];
-
-function initCategories() {
-    if (!localStorage.getItem(CATEGORIES_DB_KEY)) {
-        saveCategories(DEFAULT_CATEGORIES);
-    }
-}
-
-// Inicializar todo al cargar
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    initProducts();
-    initCategories();
+  getVisibleProducts();
+  getCategories();
 });
+
+// Expose to global scope
+window.getAllProducts = getAllProducts;
+window.getVisibleProducts = getVisibleProducts;
+window.getProductById = getProductById;
+window.searchProducts = searchProducts;
+window.getFilteredProducts = getFilteredProducts;
+window.getCategories = getCategories;
+window.addProduct = addProduct;
+window.updateProduct = updateProduct;
+window.deleteProduct = deleteProduct;
+window.toggleProductVisibility = toggleProductVisibility;

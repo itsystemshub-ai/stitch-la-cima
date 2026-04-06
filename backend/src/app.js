@@ -63,9 +63,11 @@ app.use(expressLayouts);
 // Static files - Serve original HTML and assets from frontend/
 app.use(express.static(path.join(__dirname, '../../frontend/public/ecommerce')));
 app.use('/erp', express.static(path.join(__dirname, '../../frontend/public/erp')));
+app.use('/auth', express.static(path.join(__dirname, '../../frontend/public/auth')));
+app.use('/assets', express.static(path.join(__dirname, '../../frontend/assets')));
 app.use('/src/js', express.static(path.join(__dirname, '../../frontend/src/js')));
-app.use('/src/scss', express.static(path.join(__dirname, '../../frontend/src/scss')));
-app.use('/css', express.static(path.join(__dirname, '../public')));
+app.use('/css', express.static(path.join(__dirname, '../../frontend/public/css')));
+app.use('/js', express.static(path.join(__dirname, '../../frontend/public/js')));
 
 // Make io and sequelize available to routes
 app.use((req, res, next) => {
