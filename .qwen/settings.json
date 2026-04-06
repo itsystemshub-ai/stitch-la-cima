@@ -26,7 +26,8 @@
       "Bash(select-object *)",
       "Bash(git stash *)",
       "Bash(git reflog *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(pip install *)"
     ]
   },
   "$version": 3

@@ -1,6 +1,6 @@
 /**
  * Tailwind CSS Configuration - La Cima Zenith ERP
- * Design System: Colors from logo + League Spartan typography
+ * Design System: Colors extracted from logo + League Spartan typography
  */
 module.exports = {
   content: [
@@ -12,54 +12,83 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary - Logo Green
+        // Primary - Logo Blue (#2545BF, #1054D4)
         primary: {
-          DEFAULT: "#ceff5e",
-          dim: "#bded4f",
-          light: "#d4ff85",
-          dark: "#a8d64f",
-          50: "#f7fce6",
-          100: "#eef8d0",
-          200: "#d9f0a5",
-          300: "#c3e87a",
-          400: "#a8d64f",
-          500: "#ceff5e",
-          600: "#bded4f",
-          700: "#a8d64f",
-          800: "#8db83d",
-          900: "#6e8f2e",
+          DEFAULT: "#2545BF",
+          dim: "#1a3599",
+          light: "#3b5fd4",
+          dark: "#1a3599",
+          50: "#e8ebf8",
+          100: "#d1d7f1",
+          200: "#a3aee3",
+          300: "#7586d5",
+          400: "#475dc7",
+          500: "#2545BF",
+          600: "#1a3599",
+          700: "#1054D4",
+          800: "#0d3d9a",
+          900: "#0a2e75",
         },
-        // Secondary - Logo Dark
+        // Secondary - Logo Cyan (#00D0D0, #00FFFF)
         secondary: {
-          DEFAULT: "#1c1c1c",
-          light: "#2a2a2a",
-          dark: "#0f0f0f",
-          50: "#f5f5f5",
-          100: "#e5e5e5",
-          200: "#cccccc",
-          300: "#b3b3b3",
-          400: "#999999",
-          500: "#808080",
-          600: "#666666",
-          700: "#4d4d4d",
-          800: "#333333",
-          900: "#1c1c1c",
+          DEFAULT: "#00D0D0",
+          light: "#00FFFF",
+          dark: "#00a3a3",
+          50: "#e5fafa",
+          100: "#ccf5f5",
+          200: "#99ebeb",
+          300: "#66e0e0",
+          400: "#33d6d6",
+          500: "#00D0D0",
+          600: "#00a3a3",
+          700: "#007777",
+          800: "#004a4a",
+          900: "#002020",
         },
-        // Neutral/Surface
+        // Accent - Logo Green (#00FF00)
+        accent: {
+          DEFAULT: "#00FF00",
+          light: "#33ff33",
+          dark: "#00cc00",
+          50: "#e6ffe6",
+          100: "#ccffcc",
+          200: "#99ff99",
+          300: "#66ff66",
+          400: "#33ff33",
+          500: "#00FF00",
+          600: "#00cc00",
+          700: "#009900",
+          800: "#006600",
+          900: "#003300",
+        },
+        // Neutral tones from logo (#9BAC9A, #949AA2, #A4A292)
+        neutral: {
+          50: "#f5f5f5",
+          100: "#e8e8e8",
+          200: "#d1d1d1",
+          300: "#9BAC9A",
+          400: "#949AA2",
+          500: "#A4A292",
+          600: "#666666",
+          700: "#444444",
+          800: "#222222",
+          900: "#000000",
+        },
+        // Surface colors
         surface: {
           DEFAULT: "#ffffff",
-          dim: "#f6f6f9",
-          variant: "#e8e8eb",
+          dim: "#f5f7fa",
+          variant: "#e8ecef",
         },
         outline: {
-          DEFAULT: "#e2e2e5",
-          variant: "#d0d0d5",
+          DEFAULT: "#d1d7e0",
+          variant: "#b0b8c4",
         },
         // Semantic colors
         success: {
-          DEFAULT: "#22c55e",
-          light: "#4ade80",
-          dark: "#16a34a",
+          DEFAULT: "#00cc00",
+          light: "#00ff00",
+          dark: "#009900",
         },
         warning: {
           DEFAULT: "#f59e0b",
@@ -72,9 +101,9 @@ module.exports = {
           dark: "#dc2626",
         },
         info: {
-          DEFAULT: "#3b82f6",
-          light: "#60a5fa",
-          dark: "#2563eb",
+          DEFAULT: "#1054D4",
+          light: "#2545BF",
+          dark: "#0d3d9a",
         },
       },
       fontFamily: {
@@ -106,11 +135,11 @@ module.exports = {
         full: "9999px",
       },
       boxShadow: {
-        card: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
-        "card-hover": "0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04)",
+        card: "0 1px 3px rgba(37,69,191,0.08), 0 1px 2px rgba(37,69,191,0.04)",
+        "card-hover": "0 4px 12px rgba(37,69,191,0.12), 0 2px 4px rgba(37,69,191,0.06)",
         modal: "0 20px 60px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.1)",
-        dropdown: "0 4px 16px rgba(0,0,0,0.1)",
-        glass: "0 8px 32px rgba(0,0,0,0.08)",
+        dropdown: "0 4px 16px rgba(37,69,191,0.1)",
+        glass: "0 8px 32px rgba(0,208,208,0.08)",
       },
     },
   },

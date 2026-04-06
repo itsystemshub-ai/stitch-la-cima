@@ -1,6 +1,6 @@
 /**
- * Tailwind CSS Configuration - La Cima Zenith ERP
- * Design System: Colors from logo + League Spartan typography
+ * Tailwind CDN Config - La Cima Zenith ERP
+ * Colors extracted from logo + League Spartan typography
  */
 window.tailwind = {
   config: {
@@ -8,20 +8,40 @@ window.tailwind = {
     theme: {
       extend: {
         colors: {
+          // Primary - Logo Blue (#2545BF, #1054D4)
           primary: {
-            DEFAULT: "#ceff5e",
-            dim: "#bded4f",
-            light: "#d4ff85",
-            dark: "#a8d64f",
+            DEFAULT: "#2545BF",
+            dim: "#1a3599",
+            light: "#3b5fd4",
+            dark: "#0d3d9a",
           },
-          "primary-dim": "#bded4f",
-          "on-primary": "#000000",
-          secondary: "#1c1c1c",
-          background: "#f6f6f9",
+          "primary-dim": "#1a3599",
+          "on-primary": "#ffffff",
+          // Secondary - Logo Cyan (#00D0D0)
+          secondary: {
+            DEFAULT: "#00D0D0",
+            light: "#00FFFF",
+            dark: "#00a3a3",
+          },
+          // Accent - Logo Green
+          accent: {
+            DEFAULT: "#00FF00",
+            light: "#33ff33",
+            dark: "#00cc00",
+          },
+          // Neutral tones from logo
+          neutral: {
+            300: "#9BAC9A",
+            400: "#949AA2",
+            500: "#A4A292",
+          },
+          // Surface
+          background: "#f5f7fa",
           surface: "#ffffff",
-          "on-surface": "#0c0e10",
-          "on-surface-variant": "#5a5c5e",
-          outline: "#e2e2e5",
+          "surface-dim": "#f5f7fa",
+          "on-surface": "#222222",
+          "on-surface-variant": "#666666",
+          outline: "#d1d7e0",
           zinc: {
             50: "#fafafa", 100: "#f4f4f5", 200: "#e4e4e7", 300: "#d4d4d8",
             400: "#a1a1aa", 500: "#71717a", 600: "#52525b", 700: "#3f3f46",
@@ -43,6 +63,13 @@ window.tailwind = {
           headline: ["League Spartan", "sans-serif"],
           body: ["League Spartan", "sans-serif"],
           label: ["League Spartan", "sans-serif"],
+          sans: ["League Spartan", "sans-serif"],
+        },
+        boxShadow: {
+          card: "0 1px 3px rgba(37,69,191,0.08), 0 1px 2px rgba(37,69,191,0.04)",
+          "card-hover": "0 4px 12px rgba(37,69,191,0.12), 0 2px 4px rgba(37,69,191,0.06)",
+          modal: "0 20px 60px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.1)",
+          dropdown: "0 4px 16px rgba(37,69,191,0.1)",
         },
       },
     },
