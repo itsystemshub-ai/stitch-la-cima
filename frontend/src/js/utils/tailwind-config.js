@@ -1,6 +1,6 @@
 /**
  * Tailwind CSS Configuration - La Cima Zenith ERP
- * Design System: Colors extracted from logo + League Spartan typography
+ * Design System: Colors from AdobeColor - Logo QSP
  */
 module.exports = {
   content: [
@@ -12,98 +12,89 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary - Logo Blue (#2545BF, #1054D4)
+        // Primary - Logo Lime Green (#B3D92A)
         primary: {
-          DEFAULT: "#2545BF",
-          dim: "#1a3599",
-          light: "#3b5fd4",
-          dark: "#1a3599",
-          50: "#e8ebf8",
-          100: "#d1d7f1",
-          200: "#a3aee3",
-          300: "#7586d5",
-          400: "#475dc7",
-          500: "#2545BF",
-          600: "#1a3599",
-          700: "#1054D4",
-          800: "#0d3d9a",
-          900: "#0a2e75",
+          DEFAULT: "#B3D92A",
+          dim: "#9BC020",
+          light: "#C9E045",
+          dark: "#8AA619",
+          50: "#f5f9e6",
+          100: "#ebf3cc",
+          200: "#d7e799",
+          300: "#c4db66",
+          400: "#B3D92A",
+          500: "#9BC020",
+          600: "#8AA619",
+          700: "#6F8514",
+          800: "#556510",
+          900: "#3A450B",
         },
-        // Secondary - Logo Cyan (#00D0D0, #00FFFF)
+        // Secondary - Logo Lime Light (#C1D96B)
         secondary: {
-          DEFAULT: "#00D0D0",
-          light: "#00FFFF",
-          dark: "#00a3a3",
-          50: "#e5fafa",
-          100: "#ccf5f5",
-          200: "#99ebeb",
-          300: "#66e0e0",
-          400: "#33d6d6",
-          500: "#00D0D0",
-          600: "#00a3a3",
-          700: "#007777",
-          800: "#004a4a",
-          900: "#002020",
+          DEFAULT: "#C1D96B",
+          light: "#D4E690",
+          dark: "#A8C44A",
+          50: "#f6f9ee",
+          100: "#ecf3dd",
+          200: "#d9e7bb",
+          300: "#C1D96B",
+          400: "#A8C44A",
+          500: "#8AA619",
+          600: "#6F8514",
+          700: "#556510",
+          800: "#3A450B",
+          900: "#202506",
         },
-        // Accent - Logo Green (#00FF00)
+        // Accent - Logo Sage (#C9D990)
         accent: {
-          DEFAULT: "#00FF00",
-          light: "#33ff33",
-          dark: "#00cc00",
-          50: "#e6ffe6",
-          100: "#ccffcc",
-          200: "#99ff99",
-          300: "#66ff66",
-          400: "#33ff33",
-          500: "#00FF00",
-          600: "#00cc00",
-          700: "#009900",
-          800: "#006600",
-          900: "#003300",
+          DEFAULT: "#C9D990",
+          light: "#DDE8B3",
+          dark: "#A8BA5A",
         },
-        // Neutral tones from logo (#9BAC9A, #949AA2, #A4A292)
+        // Dark - Logo Black (#0D0D0D)
+        dark: {
+          DEFAULT: "#0D0D0D",
+          light: "#1A1A1A",
+          lighter: "#262626",
+        },
+        // Neutral - Logo Grays
         neutral: {
-          50: "#f5f5f5",
-          100: "#e8e8e8",
-          200: "#d1d1d1",
-          300: "#9BAC9A",
-          400: "#949AA2",
-          500: "#A4A292",
+          50: "#FEFEFE",
+          100: "#F7F7F7",
+          200: "#F2F2F2",
+          300: "#E8E8E8",
+          400: "#CCCCCC",
+          500: "#999999",
           600: "#666666",
-          700: "#444444",
-          800: "#222222",
-          900: "#000000",
+          700: "#333333",
+          800: "#1A1A1A",
+          900: "#0D0D0D",
         },
-        // Surface colors
+        // Surface
         surface: {
-          DEFAULT: "#ffffff",
-          dim: "#f5f7fa",
-          variant: "#e8ecef",
+          DEFAULT: "#FFFFFF",
+          dim: "#F7F7F7",
+          variant: "#F2F2F2",
         },
         outline: {
-          DEFAULT: "#d1d7e0",
-          variant: "#b0b8c4",
+          DEFAULT: "#E8E8E8",
+          variant: "#CCCCCC",
         },
-        // Semantic colors
+        // Semantic
         success: {
-          DEFAULT: "#00cc00",
-          light: "#00ff00",
-          dark: "#009900",
+          DEFAULT: "#B3D92A",
+          light: "#C9E045",
+          dark: "#8AA619",
         },
         warning: {
-          DEFAULT: "#f59e0b",
-          light: "#fbbf24",
-          dark: "#d97706",
+          DEFAULT: "#D4A52A",
+          light: "#E6B83D",
+          dark: "#B38A1E",
         },
         error: {
-          DEFAULT: "#ef4444",
-          light: "#f87171",
-          dark: "#dc2626",
-        },
-        info: {
-          DEFAULT: "#1054D4",
-          light: "#2545BF",
-          dark: "#0d3d9a",
+          DEFAULT: "#D92A2A",
+          light: "#E64545",
+          dark: "#B31E1E",
         },
       },
       fontFamily: {
@@ -135,11 +126,11 @@ module.exports = {
         full: "9999px",
       },
       boxShadow: {
-        card: "0 1px 3px rgba(37,69,191,0.08), 0 1px 2px rgba(37,69,191,0.04)",
-        "card-hover": "0 4px 12px rgba(37,69,191,0.12), 0 2px 4px rgba(37,69,191,0.06)",
-        modal: "0 20px 60px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.1)",
-        dropdown: "0 4px 16px rgba(37,69,191,0.1)",
-        glass: "0 8px 32px rgba(0,208,208,0.08)",
+        card: "0 1px 3px rgba(13,13,13,0.08), 0 1px 2px rgba(13,13,13,0.04)",
+        "card-hover": "0 4px 12px rgba(13,13,13,0.12), 0 2px 4px rgba(13,13,13,0.06)",
+        modal: "0 20px 60px rgba(13,13,13,0.15), 0 8px 20px rgba(13,13,13,0.1)",
+        dropdown: "0 4px 16px rgba(13,13,13,0.1)",
+        glass: "0 8px 32px rgba(179,217,42,0.08)",
       },
     },
   },

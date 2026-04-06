@@ -1,133 +1,63 @@
-<!-- Hero Section -->
-<section class="bg-gradient-to-br from-surface via-surface-dim to-primary/5 py-20">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-12">
-      <h1 class="text-5xl md:text-6xl font-extrabold text-black mb-4">
-        Repuestos <span class="text-primary">Automotrices</span> Premium
+<!-- HERO SECTION -->
+<section class="relative min-h-[700px] flex items-center justify-center py-20 overflow-hidden bg-gradient-to-br from-surface via-surface-dim to-primary/5">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-10">
+      <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full mb-4">E-Commerce Público</span>
+      <h1 class="text-5xl md:text-7xl font-black text-on-surface leading-tight tracking-tight mb-4">
+        MAYOR DE REPUESTOS <span class="text-primary">LA CIMA</span>
       </h1>
-      <p class="text-lg text-stone-600 max-w-2xl mx-auto">
-        Más de 15,000 SKU para tu vehículo. Calidad OEM garantizada.
-      </p>
+      <p class="text-stone-600 text-lg max-w-2xl mx-auto">Localice piezas críticas con precisión absoluta por VIN, OEM o aplicación.</p>
     </div>
-
     <!-- Search Console -->
-    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-card p-6">
-      <div class="flex gap-4">
-        <input 
-          type="text" 
-          id="heroSearch"
-          placeholder="Buscar por nombre, SKU, OEM o marca..."
-          class="flex-1 bg-stone-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary"
-        />
-        <button onclick="window.location.href='/busqueda?q=' + document.getElementById('heroSearch').value" class="bg-primary text-black font-bold px-8 py-3 rounded-lg hover:bg-primary-dim transition-colors uppercase text-sm tracking-wider">
-          Buscar
-        </button>
+    <div class="bg-white p-1 rounded-xl shadow-2xl max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-outline rounded-lg overflow-hidden">
+        <div class="bg-white p-4">
+          <label class="block text-[10px] font-bold text-stone-500 uppercase mb-2">Año</label>
+          <select class="w-full border-none bg-transparent font-bold text-sm focus:ring-0">
+            <option>Seleccionar Año</option>
+            <option>2024</option>
+            <option>2023</option>
+          </select>
+        </div>
+        <div class="bg-white p-4">
+          <label class="block text-[10px] font-bold text-stone-500 uppercase mb-2">Marca</label>
+          <select class="w-full border-none bg-transparent font-bold text-sm focus:ring-0">
+            <option>Seleccionar Marca</option>
+            <option>Toyota</option>
+            <option>Ford</option>
+            <option>Caterpillar</option>
+          </select>
+        </div>
+        <div class="bg-white p-4">
+          <label class="block text-[10px] font-bold text-stone-500 uppercase mb-2">Modelo</label>
+          <select class="w-full border-none bg-transparent font-bold text-sm focus:ring-0">
+            <option>Seleccionar Modelo</option>
+            <option>Hilux</option>
+            <option>Land Cruiser</option>
+          </select>
+        </div>
+        <div class="bg-primary p-2 flex items-center justify-center">
+          <button class="w-full bg-stone-900 text-white font-black text-xs uppercase tracking-widest py-4 rounded-lg hover:bg-stone-800 transition-colors">
+            <span class="material-symbols-outlined text-lg mr-2">search</span>
+            Buscar Repuesto
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Featured Products -->
-<section class="py-16 bg-surface">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex justify-between items-center mb-8">
-      <h2 class="text-3xl font-extrabold text-black">Productos Destacados</h2>
-      <a href="/catalogo" class="text-sm font-bold text-primary hover:underline">Ver todo →</a>
+<!-- B2B BANNER -->
+<section class="py-16 bg-stone-900 text-white">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+    <div>
+      <h2 class="text-3xl font-black uppercase tracking-tight mb-2">¿Eres Taller o Flota?</h2>
+      <p class="text-stone-400 text-sm">Acceso a precios de mayorista y stock en tiempo real.</p>
     </div>
-
-    <% if (featuredProducts && featuredProducts.length > 0) { %>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <% featuredProducts.forEach(function(product) { %>
-          <div class="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-card-hover transition-shadow group">
-            <!-- Product Image -->
-            <div class="relative h-48 bg-stone-100 overflow-hidden">
-              <% if (product.image) { %>
-                <img src="<%= product.image %>" alt="<%= product.name %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
-              <% } else { %>
-                <div class="flex items-center justify-center h-full">
-                  <span class="material-symbols-outlined text-6xl text-stone-300">inventory_2</span>
-                </div>
-              <% } %>
-              <% if (product.oldPrice) { %>
-                <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">
-                  -<%= Math.round((1 - product.price / product.oldPrice) * 100) %>%
-                </span>
-              <% } %>
-            </div>
-
-            <!-- Product Info -->
-            <div class="p-4">
-              <div class="text-[10px] text-stone-500 uppercase tracking-wider mb-1"><%= product.brand %> • <%= product.categoryId %></div>
-              <h3 class="font-bold text-sm text-black mb-2 line-clamp-2"><%= product.name %></h3>
-              
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-lg font-extrabold text-black">$<%= product.price.toFixed(2) %></span>
-                <% if (product.oldPrice) { %>
-                  <span class="text-[10px] text-stone-400 line-through">$<%= product.oldPrice.toFixed(2) %></span>
-                <% } %>
-              </div>
-
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-[10px] font-bold <%= product.stock > 10 ? 'text-green-500' : product.stock > 0 ? 'text-yellow-500' : 'text-red-500' %> uppercase">
-                  <%= product.stock > 0 ? 'Stock: ' + product.stock : 'Bajo Pedido' %>
-                </span>
-              </div>
-
-              <button 
-                onclick="addToCartServer('<%= product.id %>')"
-                class="w-full bg-black text-white py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-primary hover:text-black transition-colors group/btn <%= product.stock === 0 ? 'opacity-50 cursor-not-allowed' : '' %>"
-                <%= product.stock === 0 ? 'disabled' : '' %>
-              >
-                <span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-                <span class="text-[10px] font-black uppercase tracking-wider"><%= product.stock > 0 ? 'Añadir' : 'Agotado' %></span>
-              </button>
-            </div>
-          </div>
-        <% }); %>
-      </div>
-    <% } else { %>
-      <div class="text-center py-20">
-        <span class="material-symbols-outlined text-6xl text-stone-300 mb-4">inventory_2</span>
-        <p class="text-stone-500">No hay productos disponibles aún</p>
-      </div>
-    <% } %>
-  </div>
-</section>
-
-<!-- B2B CTA -->
-<section class="py-16 bg-secondary text-white">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-extrabold mb-4">¿Eres taller o flota?</h2>
-    <p class="text-lg text-stone-400 mb-8 max-w-2xl mx-auto">
-      Accede a precios mayoristas, crédito corporativo y gestión de flotas con nuestra plataforma ERP.
-    </p>
-    <a href="/registro" class="inline-block bg-primary text-black font-bold px-8 py-4 rounded-lg hover:bg-primary-dim transition-colors uppercase tracking-wider">
-      Registro Corporativo B2B
+    <a href="/registro_corporativo_b2b.html" class="bg-primary text-stone-900 font-black px-8 py-4 rounded-lg uppercase tracking-widest hover:bg-primary-light transition-colors">
+      Entrar al Portal ERP
     </a>
   </div>
 </section>
 
-<script>
-function addToCartServer(productId) {
-  fetch('/api/cart', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + (localStorage.getItem('zenith_session')?.token || '')
-    },
-    body: JSON.stringify({ productId, qty: 1 })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      showToast('Producto agregado al carrito', 'success');
-      location.reload();
-    } else {
-      showToast(data.message || 'Error al agregar', 'error');
-    }
-  })
-  .catch(err => {
-    showToast('Error de conexión', 'error');
-  });
-}
-</script>
+<%- include('../partials/scripts') %>

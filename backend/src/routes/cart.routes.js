@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { authMiddleware } = require('../middleware/auth');
+const cartController = require('../controllers/cart.controller');
 
-// Placeholder routes - implement as needed
-router.get('/', authMiddleware, (req, res) => {
-  res.json({ success: true, data: [] });
-});
+router.get('/', cartController.getCart);
+router.post('/', cartController.addToCart);
+router.put('/', cartController.updateCartItem);
+router.delete('/', cartController.clearCart);
 
 module.exports = router;

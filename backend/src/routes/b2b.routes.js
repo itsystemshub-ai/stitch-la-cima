@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const b2bController = require('../controllers/b2b.controller');
 const { authMiddleware, authorize } = require('../middleware/auth');
 
-// Placeholder routes - implement as needed
-router.get('/', authMiddleware, authorize('admin'), (req, res) => {
-  res.json({ success: true, data: [] });
-});
+router.get('/requests', authMiddleware, authorize('admin'), b2bController.getRequests);
+router.post('/register', b2bController.register);
+router.patch('/requests/:id/approve', authMiddleware, authorize('admin'), b2bController.approve);
+router.patch('/requests/:id/reject', authMiddleware, authorize('admin'), b2bController.reject);
 
 module.exports = router;
