@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catalogo Detallado | Mayor de Repuesto LA CIMA, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ceff5e", // Verde Lima Cima
+                    "primary-dim": "#bded4f",
+                    "on-primary": "#000000",
+                    "secondary": "#1c1c1c", // Negro/Gris Muy Oscuro
+                    "background": "#f6f6f9",
+                    "surface": "#ffffff",
+                    "on-surface": "#0c0e10",
+                    "on-surface-variant": "#5a5c5e",
+                    "outline": "#e2e2e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["League Spartan", "sans-serif"],
+                    "body": ["League Spartan", "sans-serif"],
+                    "label": ["League Spartan", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'League Spartan', sans-serif; }
+        
+        /* Grid View Styles */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* List View Styles */
+        .list-view {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .list-view article {
+            flex-direction: row;
+            height: auto;
+        }
+        
+        .list-view .aspect-square {
+            width: 240px;
+            min-width: 240px;
+            aspect-ratio: 1 / 1;
+        }
+        
+        .list-view .p-5 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .list-view h3 {
+            font-size: 1.25rem;
+        }
+        
+        /* Toggle Button Styles */
+        .view-btn.active {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<a href="index.html" class="flex items-center gap-2 group">
+    <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+    <div class="flex flex-col">
+        <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
+        <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
+    </div>
+</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+    <a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contacto</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+</div>
+<!-- Cart with counter -->
+<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+</button>
+<div class="h-6 w-px bg-outline mx-2"></div>
+<!-- ERP Access Toggle -->
+<a href="../auth/login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+<span class="material-symbols-outlined text-primary text-sm">database</span>
+            Login
+        </a>
+</div>
+</nav>
+<main class="flex-grow pt-24 pb-12 px-6 max-w-[1920px] mx-auto w-full">
+    <div class="flex flex-col md:flex-row gap-8">
+        
+        <!-- Sidebar Filters -->
+        <aside class="w-full md:w-72 flex-shrink-0 space-y-8">
+            <div class="bg-white border border-outline p-6 rounded-lg shadow-sm">
+                <h2 class="font-headline text-lg font-bold uppercase tracking-tighter mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">filter_list</span>
+                    Filtrado Técnico
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest">Tipo de Motor</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+                                <span class="text-sm font-medium group-hover:text-primary transition-colors">Diesel V8 Heavy Duty</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input checked="" class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+                                <span class="text-sm font-medium group-hover:text-primary transition-colors">Inline 6 Turbo</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+                                <span class="text-sm font-medium group-hover:text-primary transition-colors">Gas Turbine Aux</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest text-[#5a5c5e]">Marca / Fabricante</label>
+                        <select class="w-full bg-stone-100 border-none rounded-lg text-sm p-3 focus:ring-2 focus:ring-primary">
+                            <option>Cummins Engine Co.</option>
+                            <option>Volvo Penta</option>
+                            <option>Caterpillar Inc.</option>
+                            <option>Detroit Diesel</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest text-[#5a5c5e]">Tipo de Maquinaria</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button class="p-2 text-xs font-bold border border-outline rounded hover:bg-black hover:text-white transition-all uppercase">Excavator</button>
+                            <button class="p-2 text-xs font-bold border border-outline rounded bg-primary text-black uppercase">Truck</button>
+                            <button class="p-2 text-xs font-bold border border-outline rounded hover:bg-black hover:text-white transition-all uppercase">Marine</button>
+                            <button class="p-2 text-xs font-bold border border-outline rounded hover:bg-black hover:text-white transition-all uppercase">GenSet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Support Card -->
+            <div class="bg-black text-white p-6 rounded-lg relative overflow-hidden group">
+                <div class="relative z-10">
+                    <h3 class="font-headline text-xl font-black uppercase leading-none mb-2 text-primary">Soporte Técnico</h3>
+                    <p class="text-stone-400 text-xs mb-4">Piezas críticas y asistencia en instalación industrial.</p>
+                    <button class="text-primary text-xs font-bold uppercase flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Hablar con Ingeniero
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+                <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+                    <span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">engineering</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Product Listing -->
+        <section class="flex-grow">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-1">Precision Inventory</span>
+                    <h1 class="font-headline text-4xl font-black uppercase tracking-tighter">Catálogo Completo</h1>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Mostrando 12 de 842 Items</p>
+                    <div class="flex gap-2 mt-2 justify-end">
+                        <button id="gridViewBtn" class="view-btn active w-8 h-8 flex items-center justify-center bg-black text-white rounded" onclick="switchToGrid()"><span class="material-symbols-outlined text-sm">grid_view</span></button>
+                        <button id="listViewBtn" class="view-btn w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-stone-200 rounded transition-colors" onclick="switchToList()"><span class="material-symbols-outlined text-sm">list</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="productGrid" class="editorial-grid">
+                <!-- 1 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwVKDQ8J7uUIFrNwpCuRmbejTuDOgw9_vpIwmz0wCrb4RslhmWPIoHV-t9eB4FyM3zcmveZ6mYBdAXGjvwj1FHk7cEEzeYIktIFoXowi9VI-JA1CWSp_qrVPgv7Xb9_V6w8wnpIIJnoESwkpmJqeE9LP1q4_Wz96dbs7VcbstxzQiEDaxroiRcqohgVDXieSFSCkDwngw0mknMmsdwRC3JB4obyrVRzYkfHNUbN9wshqpV_XyeF9RIy3vmSk3NTwq-ekPZ-C2wVUQ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-xs font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CUM-9928-HJ</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Junta de culata Cummins QSB6.7</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$284.00</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQKD29s0z6GuS4uPSiUeQyw70ldIFl3871UjP1-u9TQTaoCIMjKqWVYf7vjLiRsk-6ggNcyvjOtMnh0Mdju6jWKG76OQKCbleekn-DTwlFAGhQGfIXROTK57Phh8C0XzugExcdoE7eGfV5Li66UjyA7Sw8tByNp7MulgucBI1tD5xgkPM-viyQr1WLFdmyQNTjZOo1QzliRygUM3ddoPLKdvFd6ifJrPGWai6WB6d2pnrTotXOVPtPuWBJu1GO7m7nCGbmB_13mek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: VOL-P901-LP</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Filtro de Aceite Volvo Penta D13</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$45.50</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbPP-XFkK6zkczQlnJ0syN052qGxQ9Rj-hlorwmbSZIobuLFXOel2ZMx0xu6dwLm9-7Ubl0F2lzgVQ9DmZ9aBpYK8U6OEIRoY7anE1Esb-iCtFH7QjfwnGbXQqUkSaEkdrFKthlP8ErjHnt8sdiQWx4hVhDWfz79PgQ5U5869M8Wvi6zCxv6CSXXNqnUgGKIIQF2s1hQvlIJcaEfVIfzhL9lTiMBPL-6dmN6QYh7jai-A4a8yMUvreZnN2WsiryiSjUCufA4sWu3I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CAT-T40-99</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Turbocargador Caterpillar C15</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$1,420.00</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIn0RkeL7SWo_eG05JQuzVMLn7doFBFF7OpIHfDkWl6wZNAvi_1ZRIdJaIVb7a4iDU4D_xMPMwP1PwALo5h5Ne8BeQ6IYJyR5Toi0SScObpCgrDYb9pJcmIDEu8LMBWvn4ErCt93id7lunEM7-qeA4b_9GAXvUPZ4R2NbJ2iwlpFpnmQqi9yDn3DX6RtOLX6S_nes72O7ZOPAzaUA_laYrmrxqNDUBi9HF74lajrW3XH8c3vNOglhQV_mA3b7yPUnw_7OzGx-fL4k" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: DEL-24V-HD</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Alternador 24V Detroit Diesel</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$312.00</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcq0FTn4sixsza9CVtPOnPKQJov8Ui8XYA3uGRpWC4LDD1Ze8Gg-2xj-O9jKECyJsf6PWKzcAP587qr46eOqqlv0ITwFAOGg9qxHstfdMaVcO13OY1Y43qVQhaQL0N9fEioYTxTcnUjuYC2VZLrFJAgMr_d9gGNwMWkd5tTzJ94ESTCuNWfpLOavRKnF76xuxrOANZKwOUUtEEqpu5exJOvPc5wGxgjew4_6X2fRisUN82VMogfrxsFPZqweCdlMiG8PcxWexovxQ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: BOS-6701-IN</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Inyector Bosch Common Rail</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$580.00</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWEohmAw6eWxzZ0isaHUZlU9cOvgrjklSgykQalVfOYZjL7qpFC9-FV6LmS9RIY5UcJfa-IDSmjpStTpdObb10qNTIOJuZpo-VXSDINLYw_NacgWn7-C6XvF7I6UnQoSXSOgNfqitJ1gcjbw5DdAiBmXQX89pAwFe1_5df3bM8k3-weKsaPWlmyLHvLBLkb0ywwgbPXjfB1kWHVmNfCx5gdA5eB-GuYD_aiBMLpQb2oSH1PQdn7qfRneQGFFuTAQUR1gzSjZQ4ahs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CUM-PIS-6</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Kit de Pistones Cummins N14</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$1,150.00</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 7 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvii9sNQqqDnze22RTwuNH4tSqUrMSJEXQ_FZFjPwG7dYtpNrQJAq0iwera4ziKWQKtyKYIL3Msi0Ss1lb_0rAdSz18URZSXeNKR778JJHXa9fh-w_0xuxoiVzGWVmi51yNMm5KiF0vGlydUl4uQOHa2rxq6mLGP-mxNA4hDD6OPLg6oq6Bc1XiiwKu8x-iLpFbE2WTYWPtUz4UsWUlPEbLEvWMu82shO_LQJ9o2VuAd2XKqP2YRA3aO_XtOwzJ8hZqiF8RgaCt5U" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: PER-BR-50</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Cojinetes de Bancada Perkins</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$185.00</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 8 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnCBaJGHx-KHBLQMmi3di8svfE3nGssoVmApRyiRUq5UrT_y5Pmr6_1ffSS1IY-q5a5uldF0WDPUwWSd54IKetwTlV9chBnwD3zo5BSzAt6P6ztwcNISdloAaVQmOHdN3yZEDhMG7zUUIvZIckDDA4jU0vV0JDZnPJkVr9QulcoKSKbKqwfuLrXrypbTwNii03VYK3j6peId5g5vf6YclbW5jlhIr8u00SlBVCPvoW_1L0z6FOb_TeDtNKLKbNdpjPqlAEdSaZkXA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: KOM-CAM-10</p>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Árbol de Levas Komatsu SAA6D</h3>
+                        <div class="mt-auto flex justify-between items-center">
+                            <span class="text-xl font-black text-black tracking-tighter">$940.00</span>
+                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-12 flex justify-center items-center gap-4">
+                <button class="w-10 h-10 flex items-center justify-center rounded border border-outline text-on-surface-variant hover:text-primary hover:border-primary transition-all">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <button class="w-10 h-10 flex items-center justify-center rounded bg-black text-primary font-bold">1</button>
+                    <button class="w-10 h-10 flex items-center justify-center rounded border border-outline hover:border-primary font-bold">2</button>
+                    <button class="w-10 h-10 flex items-center justify-center rounded border border-outline hover:border-primary font-bold">3</button>
+                    <span class="px-2 text-stone-400">...</span>
+                    <button class="w-10 h-10 flex items-center justify-center rounded border border-outline hover:border-primary font-bold">24</button>
+                </div>
+                <button class="w-10 h-10 flex items-center justify-center rounded border border-outline text-on-surface-variant hover:text-primary hover:border-primary transition-all">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+
+            <!-- Technical Compatibility Table (RESTORING DATA) -->
+            <div class="mt-24">
+                <h2 class="font-headline text-2xl font-bold uppercase tracking-widest mb-8 flex items-center gap-4">
+                    <span class="w-12 h-[2px] bg-primary"></span>
+                    Compatibilidad Técnica
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="font-headline uppercase text-xs tracking-widest text-on-surface-variant border-b border-outline">
+                            <tr>
+                                <th class="pb-4 px-4 font-black">Componente</th>
+                                <th class="pb-4 px-4 font-black">Marca Compatible</th>
+                                <th class="pb-4 px-4 font-black">Origen</th>
+                                <th class="pb-4 px-4 font-black">Certificación</th>
+                                <th class="pb-4 px-4 font-black">Disponibilidad</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="bg-white hover:bg-stone-50 transition-colors border-b border-outline">
+                                <td class="py-4 px-4 font-bold">Inyectores de Combustible</td>
+                                <td class="py-4 px-4">CAT / Perkins</td>
+                                <td class="py-4 px-4">USA / Germany</td>
+                                <td class="py-4 px-4 font-medium uppercase text-xs">OEM Specification</td>
+                                <td class="py-4 px-4 text-primary font-bold">In Stock</td>
+                            </tr>
+                            <tr class="bg-white hover:bg-stone-50 transition-colors border-b border-outline">
+                                <td class="py-4 px-4 font-bold">Kits de Empacadura</td>
+                                <td class="py-4 px-4">Detroit Diesel</td>
+                                <td class="py-4 px-4">USA</td>
+                                <td class="py-4 px-4 font-medium uppercase text-[10px]">SAE Standard</td>
+                                <td class="py-4 px-4 text-primary font-bold">In Stock</td>
+                            </tr>
+                            <tr class="bg-white hover:bg-stone-50 transition-colors">
+                                <td class="py-4 px-4 font-bold">Bombas de Agua</td>
+                                <td class="py-4 px-4">Mack / Volvo</td>
+                                <td class="py-4 px-4">Brazil</td>
+                                <td class="py-4 px-4 font-medium uppercase text-[10px]">Heavy Duty Grade</td>
+                                <td class="py-4 px-4 text-red-600 font-bold">Low Stock</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+    <img src="../../assets/images/logo.png" alt="Logo" class="h-12 w-auto">
+    
+    <div class="flex flex-col justify-center">
+        <span class="text-primary font-black text-sm block uppercase tracking-tighter leading-none">
+            MAYOR DE REPUESTO LA CIMA, C.A
+        </span>
+        <span class="text-primary font-black text-xs block uppercase tracking-tighter leading-none mt-1">
+            RIF.: J-40308741-5
+        </span>
+    </div>
+</div>
+
+<div class="flex gap-4">
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">facebook</span>
+</div>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Transmisión</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Contacto</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Sede Central</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">
+        AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
+</p>
+<div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">¿Necesitas ayuda?</p>
+<p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="text-white text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Legal</span>
+</div>
+</div>
+</footer>
+
+<script>
+    function switchToGrid() {
+        const grid = document.getElementById('productGrid');
+        const gridBtn = document.getElementById('gridViewBtn');
+        const listBtn = document.getElementById('listViewBtn');
+        
+        grid.classList.remove('list-view');
+        grid.classList.add('editorial-grid');
+        
+        gridBtn.classList.add('active', 'bg-black', 'text-white');
+        gridBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');
+        
+        listBtn.classList.remove('active', 'bg-black', 'text-white');
+        listBtn.classList.add('text-on-surface-variant', 'hover:bg-stone-200');
+    }
+    
+    function switchToList() {
+        const grid = document.getElementById('productGrid');
+        const gridBtn = document.getElementById('gridViewBtn');
+        const listBtn = document.getElementById('listViewBtn');
+        
+        grid.classList.remove('editorial-grid');
+        grid.classList.add('list-view');
+        
+        listBtn.classList.add('active', 'bg-black', 'text-white');
+        listBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');
+        
+        gridBtn.classList.remove('active', 'bg-black', 'text-white');
+        gridBtn.classList.add('text-on-surface-variant', 'hover:bg-stone-200');
+    }
+</script>
+
+</body></html>

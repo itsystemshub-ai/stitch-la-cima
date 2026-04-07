@@ -63,7 +63,7 @@
 </div>
 <div class="flex items-center gap-4">
 <div class="relative hidden lg:block">
-<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+<input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
 </div>
 <!-- Cart with counter -->
@@ -73,10 +73,10 @@
 </button>
 <div class="h-6 w-px bg-outline mx-2"></div>
 <!-- ERP Access Toggle -->
-<button class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+<a href="../auth/login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
 <span class="material-symbols-outlined text-primary text-sm">database</span>
             Login
-        </button>
+        </a>
 </div>
 </nav>
 <main class="pt-16">
@@ -160,9 +160,9 @@
 <p class="text-stone-400 text-[10px]">Acceso a precios de mayorista y stock ERP en tiempo real.</p>
 </div>
 </div>
-<button class="bg-white text-black px-6 py-2 rounded-md font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-all">
+<a href="../auth/login.html" class="bg-white text-black px-6 py-2 rounded-md font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-all">
                             Entrar al Portal ERP
-                        </button>
+                        </a>
 </div>
 </div>
 </div>
@@ -176,7 +176,7 @@
 <span class="text-primary font-black text-[10px] uppercase tracking-[0.3em]">Ofertas de la Semana</span>
 <h2 class="text-3xl font-black uppercase tracking-tighter text-black mt-1">Repuestos Destacados</h2>
 </div>
-<a class="text-[10px] font-black uppercase tracking-widest text-black border-b-2 border-primary pb-1" href="catalogo_general.html">Ver Catálogo Completo</a>
+<a class="text-[10px] font-black uppercase tracking-widest text-black border-b-2 border-primary pb-1" href="catalogo_detallado.html">Ver Catálogo Completo</a>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 <!-- Product Card 1 -->
@@ -439,4 +439,17 @@
 </div>
 </div>
 </footer>
+
+<script>
+    // Search functionality - redirect to catalogo_detallado.html with query
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+            }
+        });
+    }
+</script>
+
 </body></html>
