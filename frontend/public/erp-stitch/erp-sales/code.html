@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mayor de Repuesto La Cima - Sales CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#465f00",
+                        "on-tertiary-container": "#575c63",
+                        "tertiary-fixed": "#f0f4fd",
+                        "tertiary-dim": "#4b5057",
+                        "inverse-on-surface": "#9c9d9f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#364b00",
+                        "secondary-container": "#e2e2e5",
+                        "on-secondary-fixed": "#3e3f42",
+                        "primary-dim": "#405700",
+                        "on-error-container": "#520c00",
+                        "error-dim": "#b92902",
+                        "surface": "#f6f6f9",
+                        "on-surface": "#2d2f31",
+                        "primary-fixed-dim": "#bded4f",
+                        "error": "#b02500",
+                        "surface-dim": "#d2d4d8",
+                        "inverse-primary": "#ceff5e",
+                        "primary-fixed": "#cbfc5c",
+                        "on-primary-fixed-variant": "#4e6a00",
+                        "secondary": "#5a5c5e",
+                        "error-container": "#f95630",
+                        "surface-container": "#e7e8eb",
+                        "on-surface-variant": "#5a5c5e",
+                        "inverse-surface": "#0c0e10",
+                        "tertiary-fixed-dim": "#e1e5ee",
+                        "on-tertiary-fixed-variant": "#62666e",
+                        "on-primary": "#deff95",
+                        "on-tertiary-fixed": "#454a51",
+                        "on-error": "#ffefec",
+                        "surface-variant": "#dbdde0",
+                        "on-secondary-container": "#505254",
+                        "secondary-dim": "#4e5052",
+                        "secondary-fixed-dim": "#d4d4d7",
+                        "primary-container": "#cbfc5c",
+                        "tertiary-container": "#f0f4fd",
+                        "on-background": "#2d2f31",
+                        "outline-variant": "#acadaf",
+                        "on-tertiary": "#eff3fc",
+                        "on-secondary": "#f2f2f5",
+                        "surface-container-high": "#e1e2e6",
+                        "surface-container-highest": "#dbdde0",
+                        "background": "#f6f6f9",
+                        "primary": "#4a6400",
+                        "tertiary": "#575c63",
+                        "outline": "#757779",
+                        "surface-bright": "#f6f6f9",
+                        "secondary-fixed": "#e2e2e5",
+                        "surface-container-low": "#f0f0f3",
+                        "on-secondary-fixed-variant": "#5a5c5e",
+                        "surface-tint": "#4a6400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0c0e10; /* inverse-surface for that dark industrial feel */
+            color: #f2f2f5;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary selection:text-on-primary">
+<!-- Predicted Component: SideNavBar -->
+<aside class="fixed left-0 top-0 bottom-0 z-50 w-64 flex flex-col bg-neutral-950 shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
+<div class="p-6">
+<h1 class="text-xl font-black uppercase tracking-tighter text-[#A2D033] font-headline">TECHMONOLITH</h1>
+<p class="text-[10px] text-neutral-500 font-label tracking-widest mt-1">PRECISION PARTS ADMIN</p>
+</div>
+<nav class="flex-1 mt-4">
+<!-- Active State: Sales -->
+<a class="flex items-center gap-3 px-6 py-4 text-[#A2D033] bg-neutral-900 font-bold border-r-4 border-[#A2D033] transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label text-sm uppercase tracking-wider">Sales</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label text-sm uppercase tracking-wider">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label text-sm uppercase tracking-wider">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-4 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings_gear">settings</span>
+<span class="font-label text-sm uppercase tracking-wider">Configuration</span>
+</a>
+</nav>
+<div class="mt-auto p-4 border-t border-neutral-800/50">
+<button class="w-full flex items-center justify-center gap-2 bg-[#A2D033] text-black font-bold py-3 rounded-lg active:scale-95 transition-transform font-label text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                Support Ticket
+            </button>
+<div class="mt-4 flex items-center gap-3 px-2">
+<img alt="Admin User Avatar" class="w-8 h-8 rounded-full border border-neutral-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3pD1A7no8tXcvhVcrkyy0O3mTLzEgpuN6wmEQo206yyytWDgq9eyXYFFnM4-GqiY20PVIG6mRaHkLA82txFu7juZTu_pnkxbaZK-UkPKcmftm4NL0cHrR22rxWQZAdItCb2UldnsQ6Gf5g_Pwwwjig-3ohJlJoJqXF10AWLODvG8AxzksrtbFgLdhgSlMNFHE4DcL1uK5MlNDGHW9SZrVx9oS7X84mYsDtvl7P66sQggd-BBGRKMGZDEJUfktqvvjUKTiPWiRvw"/>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold text-neutral-200 truncate">LA CIMA ADMIN</p>
+<p class="text-[10px] text-neutral-500 truncate">master_control@cima.com</p>
+</div>
+<button class="text-neutral-500 hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Predicted Component: TopNavBar -->
+<header class="fixed top-0 right-0 left-64 h-16 flex justify-between items-center px-8 z-40 bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-800/40">
+<div class="flex items-center gap-6 flex-1">
+<span class="text-lg font-bold text-white font-headline tracking-tight">PartsManager v2.4</span>
+<div class="relative max-w-md w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 text-lg" data-icon="search">search</span>
+<input class="bg-neutral-900/50 border-none w-full pl-10 pr-4 py-2 rounded-lg text-xs font-label text-neutral-300 focus:ring-1 focus:ring-[#A2D033] placeholder:text-neutral-600 transition-all" placeholder="SEARCH SERIAL NUMS, QUOTES, OR CLIENTS..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-neutral-800 pr-6">
+<button class="text-neutral-400 hover:text-[#A2D033] transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-[#A2D033] rounded-full border-2 border-neutral-950"></span>
+</button>
+<button class="text-neutral-400 hover:text-[#A2D033] transition-colors">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<button class="text-neutral-400 hover:text-[#A2D033] transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-[10px] font-bold text-neutral-400 uppercase tracking-tighter leading-none">Market Open</p>
+<p class="text-xs font-black text-[#A2D033]">09:42:15 AM</p>
+</div>
+<div class="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center border border-neutral-700">
+<span class="material-symbols-outlined text-[#A2D033]" data-icon="precision_manufacturing" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 pt-24 p-8 min-h-screen">
+<!-- Dashboard Header -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="text-4xl font-black font-headline tracking-tighter text-white">MAYOR DE REPUESTO <span class="text-[#A2D033]">LA CIMA</span></h2>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-12 h-[2px] bg-[#A2D033]"></div>
+<p class="text-xs font-label uppercase tracking-[0.2em] text-neutral-400">Forge Performance Sales Dashboard // 2024-Q3</p>
+</div>
+</div>
+<button class="flex items-center gap-3 bg-[#A2D033] text-black px-6 py-3 rounded-lg font-bold font-label text-sm uppercase tracking-widest hover:shadow-[0_0_20px_rgba(162,208,51,0.3)] transition-all active:scale-95">
+<span class="material-symbols-outlined font-bold" data-icon="add">add</span>
+                New Quote
+            </button>
+</div>
+<div class="bento-grid">
+<!-- Row 1: KPI Overview -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-neutral-900/40 p-6 rounded-xl border-l-4 border-[#A2D033] flex flex-col justify-between">
+<p class="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.1em]">Total Sales Volume</p>
+<div class="mt-4">
+<h3 class="text-3xl font-black text-white">$1.24M</h3>
+<p class="text-[#A2D033] text-xs font-bold mt-1">+12.4% vs prev month</p>
+</div>
+</div>
+<div class="bg-neutral-900/40 p-6 rounded-xl border-l-4 border-neutral-700 flex flex-col justify-between">
+<p class="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.1em]">Active Leads</p>
+<div class="mt-4">
+<h3 class="text-3xl font-black text-white">482</h3>
+<p class="text-neutral-500 text-xs font-bold mt-1">24 pending validation</p>
+</div>
+</div>
+<div class="bg-neutral-900/40 p-6 rounded-xl border-l-4 border-neutral-700 flex flex-col justify-between">
+<p class="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.1em]">Win Rate</p>
+<div class="mt-4">
+<h3 class="text-3xl font-black text-white">68.2%</h3>
+<p class="text-neutral-500 text-xs font-bold mt-1">Target: 72%</p>
+</div>
+</div>
+</div>
+<!-- Lead Management / Sales Pipeline Visual -->
+<div class="col-span-12 lg:col-span-4 bg-neutral-900/60 p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-[#A2D033]/5 blur-3xl rounded-full"></div>
+<h4 class="text-sm font-bold text-white font-headline uppercase mb-6 tracking-widest">Sales Pipeline Status</h4>
+<div class="space-y-4">
+<div class="relative">
+<div class="flex justify-between text-[10px] font-bold text-neutral-400 mb-1">
+<span>PROSPECTING</span>
+<span class="text-[#A2D033]">$420K</span>
+</div>
+<div class="w-full h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+<div class="w-[85%] h-full bg-[#A2D033]"></div>
+</div>
+</div>
+<div class="relative">
+<div class="flex justify-between text-[10px] font-bold text-neutral-400 mb-1">
+<span>NEGOTIATION</span>
+<span class="text-white">$185K</span>
+</div>
+<div class="w-full h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+<div class="w-[45%] h-full bg-neutral-500"></div>
+</div>
+</div>
+<div class="relative">
+<div class="flex justify-between text-[10px] font-bold text-neutral-400 mb-1">
+<span>QUOTED</span>
+<span class="text-white">$92K</span>
+</div>
+<div class="w-full h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+<div class="w-[25%] h-full bg-neutral-700"></div>
+</div>
+</div>
+</div>
+<button class="mt-8 text-[10px] font-black text-[#A2D033] uppercase tracking-tighter flex items-center gap-2 group-hover:gap-4 transition-all">
+                    VIEW FULL ANALYTICS <span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+</button>
+</div>
+<!-- Recent Quotes Table -->
+<div class="col-span-12 lg:col-span-8 bg-neutral-950/40 rounded-xl overflow-hidden border border-neutral-900">
+<div class="p-6 border-b border-neutral-900 flex justify-between items-center">
+<h4 class="text-sm font-bold text-white font-headline uppercase tracking-widest">Recent Performance Activity</h4>
+<button class="text-xs text-neutral-500 hover:text-white transition-colors">EXPORT CSV</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-neutral-900/50">
+<tr>
+<th class="px-6 py-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest">Quote ID</th>
+<th class="px-6 py-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest">Client Name</th>
+<th class="px-6 py-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest">Value</th>
+<th class="px-6 py-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest">Status</th>
+<th class="px-6 py-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-900">
+<tr class="hover:bg-neutral-900/30 transition-colors">
+<td class="px-6 py-4">
+<p class="text-xs font-bold text-white">#QC-99420</p>
+<p class="text-[10px] text-neutral-500 font-label uppercase">Heavy Duty Axles</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-[10px] font-bold text-neutral-400">AM</div>
+<span class="text-xs font-semibold">AutoMundo S.A.</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-[#A2D033]">$24,500.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-bold bg-[#A2D033]/10 text-[#A2D033] uppercase">Sent</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-neutral-500 hover:text-white"><span class="material-symbols-outlined text-sm" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-neutral-900/30 transition-colors">
+<td class="px-6 py-4">
+<p class="text-xs font-bold text-white">#QC-99388</p>
+<p class="text-[10px] text-neutral-500 font-label uppercase">Transmission Kit X2</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-[10px] font-bold text-neutral-400">TR</div>
+<span class="text-xs font-semibold">Transportes Rapid</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-[#A2D033]">$12,800.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-bold bg-neutral-800 text-neutral-400 uppercase">Draft</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-neutral-500 hover:text-white"><span class="material-symbols-outlined text-sm" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-neutral-900/30 transition-colors">
+<td class="px-6 py-4">
+<p class="text-xs font-bold text-white">#QC-99372</p>
+<p class="text-[10px] text-neutral-500 font-label uppercase">Brake Assemblies</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-[10px] font-bold text-neutral-400">LC</div>
+<span class="text-xs font-semibold">La Cima Express</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-[#A2D033]">$4,200.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-1 rounded text-[10px] font-bold bg-error/10 text-error-dim uppercase">Overdue</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-neutral-500 hover:text-white"><span class="material-symbols-outlined text-sm" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Sales Team Performance -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-neutral-900/40 p-6 rounded-xl border border-neutral-800">
+<h4 class="text-sm font-bold text-white font-headline uppercase tracking-widest mb-6">Top Performers</h4>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Salesperson 1" class="w-10 h-10 rounded-lg grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTWGqkUajzxTKDfj17E5B7fmmjNIF-GfqzetA3afG5OU3EUOM_MWOGojjcz_j1SLP6mBB9v3YMq6fFHbFrPjdw68v2eYvyFK6FowoDNEfnoWxLuI7lzOgIhZRy0uCt5JJQRbez1xIefgosMl3OzbbTTKIYe_qfWGvjbmXURpML8vAlf9PdMaXeJJW6Sbe3D-m6LgWN9ElokAkmBwH5ivCN6dLZA4JLXsVp92bOF5k5m3iMYpdxNsKmWe78B0bUk79G0y4Um1Mr5g"/>
+<div>
+<p class="text-xs font-bold text-white">Carlos Rodriguez</p>
+<p class="text-[10px] text-neutral-500">12 Deals Closed</p>
+</div>
+</div>
+<p class="text-xs font-black text-[#A2D033]">$242K</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Salesperson 2" class="w-10 h-10 rounded-lg grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFwoeRaahf2lnFENecoRB7nENEV24TAC0I_Ux1s2Sr1M1-GPK0KJL3QoG1l1mX3WmIJ4tPBN1tfGv4RiOiA9CMyXexnVvXuCBpPABCB7K1C9smnARCzNRBHI2KqHRvVUrlhmPSsb_CpJmajp6AXr4BF4Z7omqDqreUzTsflDn1bZ9d_134yzJZ22rJoDpSIomAjrxwpvRrKV6puyoDABHwalY2hvmfnzyyt9HAdpkObgFncgpI7FbbNpZn7SQaJ2TJ0CDVs5ouaA"/>
+<div>
+<p class="text-xs font-bold text-white">Elena Martinez</p>
+<p class="text-[10px] text-neutral-500">09 Deals Closed</p>
+</div>
+</div>
+<p class="text-xs font-black text-neutral-400">$188K</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Salesperson 3" class="w-10 h-10 rounded-lg grayscale hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeRfRO_uatb4LlmTFB-prVvrDy5_oTOxS2YhIuOTMZH3GIKuJBa4RwwjoaJldaLjvR932BAeQNjTnrfvkR9I4dEM5TWK6tf-ZVSeh9taLzsxi-ZF4lHeHXX65S-wP-Ma3LAVRNrAwTBhUMOCsjrAbj2xb6NsFfcO-68DZo8ujgyD_HBLtcE0c5rnEkRt5YCHe5bM956SpcYPFg7kOfnDYLqK2Y6i_G7-op1oWVx8gn0xjqhgIooErEHcLmmqsBnLYOJNCLm2swEw"/>
+<div>
+<p class="text-xs font-bold text-white">Marcus Thorne</p>
+<p class="text-[10px] text-neutral-500">07 Deals Closed</p>
+</div>
+</div>
+<p class="text-xs font-black text-neutral-400">$156K</p>
+</div>
+</div>
+</div>
+<div class="bg-[#A2D033] p-6 rounded-xl relative overflow-hidden group cursor-pointer">
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-8xl text-black" data-icon="factory" style="font-variation-settings: 'FILL' 1;">factory</span>
+</div>
+<p class="text-[10px] font-black text-black uppercase tracking-widest mb-2">System Alert</p>
+<h5 class="text-lg font-black text-black leading-tight">Low Stock Alert on High Performance Gaskets.</h5>
+<p class="text-xs text-black/70 font-bold mt-2">Adjust lead times for pending quotes in Region B.</p>
+</div>
+</div>
+<!-- Lead Management Grid -->
+<div class="col-span-12 bg-neutral-900/20 p-8 rounded-2xl border border-neutral-900/60 backdrop-blur-sm">
+<div class="flex justify-between items-center mb-8">
+<h4 class="text-xl font-black text-white font-headline tracking-tight">ACTIVE LEAD CHANNEL</h4>
+<div class="flex gap-2">
+<button class="bg-neutral-800 text-neutral-400 text-[10px] font-bold px-4 py-2 rounded uppercase tracking-widest hover:text-white transition-colors">Filter</button>
+<button class="bg-neutral-800 text-neutral-400 text-[10px] font-bold px-4 py-2 rounded uppercase tracking-widest hover:text-white transition-colors">Sort</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Lead Card -->
+<div class="bg-neutral-900/60 p-5 rounded-lg border-t-2 border-transparent hover:border-[#A2D033] transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-black text-[#A2D033] uppercase">Hot Lead</span>
+<span class="text-[10px] text-neutral-600 font-bold">2H AGO</span>
+</div>
+<h6 class="text-sm font-bold text-white group-hover:text-[#A2D033] transition-colors">Industrial Mining Corp</h6>
+<p class="text-[10px] text-neutral-500 font-label mt-1">Requested: Hydraulic Package</p>
+<div class="mt-4 pt-4 border-t border-neutral-800 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="team member" class="w-5 h-5 rounded-full border border-neutral-900" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOd3TDeH0HsUPnj1nhdZZBt1BeVHtfyvl4yuZVgq50Ua7Ac5UVE3JYZyNUM7BXn-qxpOc-fgnjCoe0gx5q1pLMTRRxz1kRjx5ssovfGwplmJNYRDrV6BSxHS2WxlZbw0n8HcjfZgqpvOJcsAghDN73oMHQKyEaYXK35z4_0UHEbTndU1brwotyhhFSt_hch7PBqxKL6-_CXs2Xy1MILeA8eJotAM7wxHQK__0GmoLpk89lNFlwtYeuSI3RGOjyn_txg6uyS-1j2g"/>
+<img alt="team member" class="w-5 h-5 rounded-full border border-neutral-900" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMGLYScv-VwAkCjzTwcgHAQytE-PZaY_tLsWv6IeWSilOiuvs77DSbgM4IkRBkGE1BfyaJFsHxvY1PIj9U8Na7QhG9yB4MkMmyjKCT0bBM26-SkG57GKhRmVfTMUrbEP_1cGa4OWcnMDoc-FqeNNOUl5rhFM0tqfpjuWn2AC5ewViQEdkPzxirrzJy9tGtkE297pbE7t03KI4bD-c8y9maOBZYobzUK157nICArKuRAtXqWaw-XwRX6Yp6wUJ5BGilZkPMPF5F8g"/>
+</div>
+<span class="text-[10px] font-black text-white">$12.5K</span>
+</div>
+</div>
+<!-- Lead Card -->
+<div class="bg-neutral-900/60 p-5 rounded-lg border-t-2 border-transparent hover:border-[#A2D033] transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-black text-neutral-500 uppercase">Warm Lead</span>
+<span class="text-[10px] text-neutral-600 font-bold">5H AGO</span>
+</div>
+<h6 class="text-sm font-bold text-white group-hover:text-[#A2D033] transition-colors">Pacific Logistics</h6>
+<p class="text-[10px] text-neutral-500 font-label mt-1">Requested: Fleet Refit Quote</p>
+<div class="mt-4 pt-4 border-t border-neutral-800 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="team member" class="w-5 h-5 rounded-full border border-neutral-900" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxb5DY9T-Z8C6cjTxsTqsAeiiRJQ_Hl5KN11lrd95BpkrVASs8WlZPgEW5LLHg099Gg2WS0T88lbziVZ1yymR8o4D0v5G9fjGxZKjwlWtXkx3U1m7HM2Faabv38mNDmALxbaRbCojiZJ8RsU929Cn-77ZMy4BP8s9e8Qyfs250yqICRy59FplJNgP9Vas3QOjLpoTz4u52nSSA49yjDKVQ7f5m1G7WO2xqnC4AokGdR-izvFvzT4yc93ELnvb7Uw-IMzXKqh8W6w"/>
+</div>
+<span class="text-[10px] font-black text-white">$8.2K</span>
+</div>
+</div>
+<!-- Lead Card -->
+<div class="bg-neutral-900/60 p-5 rounded-lg border-t-2 border-transparent hover:border-[#A2D033] transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-black text-error/60 uppercase">Cold Lead</span>
+<span class="text-[10px] text-neutral-600 font-bold">1D AGO</span>
+</div>
+<h6 class="text-sm font-bold text-white group-hover:text-[#A2D033] transition-colors">Summit Parts Co</h6>
+<p class="text-[10px] text-neutral-500 font-label mt-1">Requested: General Catalog</p>
+<div class="mt-4 pt-4 border-t border-neutral-800 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="team member" class="w-5 h-5 rounded-full border border-neutral-900" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJsmaccRMLeTP2UnoTmC4MbWrK279_QPHSTP-i_FZC3N4tBL6UJCntqlTk3llpLL9b07FOo7l-rgutJmtNP8uW5ztVSJHoCSbes6bqrVVQNUbtZzBo1bOsWrO7PuD7Yh_WOR_rlchylii8p2IiukJwwR2ksWrIUExFaxKQkmnACJqsoi88kvS_sXvcCZ4A3wB_li_FiQ5fYOV613YUTrATLcyu5NYOnnY6ooc6NSOxjyRI1GF-6E-pApBSu_QbDFzSrZySa8ZkBg"/>
+</div>
+<span class="text-[10px] font-black text-white">$1.5K</span>
+</div>
+</div>
+<!-- Lead Card -->
+<div class="bg-neutral-900/60 p-5 rounded-lg border-t-2 border-transparent hover:border-[#A2D033] transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-black text-[#A2D033] uppercase">Discovery</span>
+<span class="text-[10px] text-neutral-600 font-bold">JUST NOW</span>
+</div>
+<h6 class="text-sm font-bold text-white group-hover:text-[#A2D033] transition-colors">AeroComponents Ltd</h6>
+<p class="text-[10px] text-neutral-500 font-label mt-1">Requested: Titanium Specs</p>
+<div class="mt-4 pt-4 border-t border-neutral-800 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-5 h-5 rounded-full bg-neutral-800 border border-neutral-900 flex items-center justify-center text-[8px]">+3</div>
+</div>
+<span class="text-[10px] font-black text-white">$45.0K</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Background Pattern -->
+<div class="fixed bottom-0 right-0 p-8 pointer-events-none z-0 opacity-10">
+<span class="material-symbols-outlined text-[300px] text-neutral-800 rotate-12" data-icon="construction">construction</span>
+</div>
+</body></html>

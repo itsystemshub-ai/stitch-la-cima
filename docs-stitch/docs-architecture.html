@@ -1,0 +1,73 @@
+# Arquitectura de Plataforma Ecommerce Aftermarket Automotriz
+
+## 1. Visión General
+Plataforma especializada en la venta de repuestos para autos, camiones, buses y maquinaria agrícola. El núcleo del sistema es el motor de búsqueda por compatibilidad y la gestión de datos maestros de piezas.
+
+## 2. Stack Tecnológico Sugerido
+- **Frontend:** Next.js (App Router) - Crítico para SEO de miles de páginas de productos (SSG/ISR).
+- **Backend:** Node.js con NestJS - Para una arquitectura modular y escalable.
+- **Base de Datos Principal:** PostgreSQL - Manejo de relaciones complejas y transacciones.
+- **Motor de Búsqueda:** ElasticSearch / Algolia - Búsqueda ultra rápida por SKU, OEM y compatibilidad.
+- **Caché/Sesiones:** Redis - Para carritos persistentes y caché de consultas de compatibilidad.
+- **Almacenamiento de Imágenes:** Cloudinary o AWS S3 + CloudFront - Optimización automática y entrega vía CDN.
+
+## 3. Modelo de Datos (ERD Simplificado)
+
+```sql
+-- Tabla de Productos (Repuestos)
+CREATE TABLE products (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    sku VARCHAR(50) UNIQUE NOT NULL,
+    oem_number VARCHAR(50),
+    brand_id UUID REFERENCES brands(id),
+    category_id UUID REFERENCES categories(id),
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(12,2),
+    weight DECIMAL(8,2),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Tabla de Vehículos (Árbol de Aplicación)
+CREATE TABLE vehicles (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    type ENUM('car', 'truck', 'bus', 'tractor'),
+    make VARCHAR(100),
+    model VARCHAR(100),
+    year_start INTEGER,
+    year_end INTEGER,
+    engine_code VARCHAR(100)
+);
+
+-- Tabla de Compatibilidad (Relación Muchos a Muchos)
+-- Una pieza sirve para muchos vehículos y viceversa.
+CREATE TABLE product_compatibilities (
+    product_id UUID REFERENCES products(id),
+    vehicle_id UUID REFERENCES vehicles(id),
+    notes TEXT, -- Observaciones específicas (ej. "Solo eje delantero")
+    PRIMARY KEY (product_id, vehicle_id)
+);
+
+-- Gestión Multi-Almacén
+CREATE TABLE warehouses (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(100),
+    location_code VARCHAR(20)
+);
+
+CREATE TABLE inventory (
+    product_id UUID REFERENCES products(id),
+    warehouse_id UUID REFERENCES warehouses(id),
+    stock_quantity INTEGER DEFAULT 0,
+    PRIMARY KEY (product_id, warehouse_id)
+);
+```
+
+## 4. Estrategia de Integración
+- **Catálogos Externos (TecDoc):** Sincronización vía API/FTP para actualizar referencias cruzadas y fotos técnicas.
+- **Pagos B2B/B2C:** Stripe o Adyen para pagos con tarjeta y transferencias bancarias (necesario para flotas/talleres).
+
+## 5. Estrategia de Imágenes
+- Uso de **WebP/AVIF** para reducción de peso.
+- **Lazy Loading** agresivo.
+- Transformaciones dinámicas en el edge (CDN) para ajustar el tamaño según el dispositivo del usuario.
