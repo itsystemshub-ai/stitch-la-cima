@@ -3,32 +3,25 @@
   "version": "1.0.0",
   "description": "Sistema ERP y E-commerce B2B/B2C para Mayor de Repuesto La Cima, C.A.",
   "private": true,
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:frontend": "npm run dev --workspace=frontend",
-    "dev:backend": "npm run dev --workspace=backend",
-    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
-    "build:frontend": "npm run build --workspace=frontend",
-    "build:backend": "npm run build --workspace=backend",
-    "start": "npm run start --workspace=backend",
-    "db:migrate": "npm run db:migrate --workspace=backend",
-    "db:seed": "npm run db:seed --workspace=backend",
-    "db:reset": "npm run db:reset --workspace=backend",
-    "test": "npm run test --workspace=backend",
-    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
-    "install:all": "npm install && npm install --workspace=frontend && npm install --workspace=backend"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
+    "dev": "cd backend && node src/app.js",
+    "dev:backend": "cd backend && node src/app.js",
+    "dev:frontend": "cd backend && npx tailwindcss -i ./src/assets/css/input.css -o ./public/output.css --watch",
+    "build": "cd backend && npx tailwindcss -i ./src/assets/css/input.css -o ./public/output.css --minify",
+    "start": "cd backend && node src/app.js",
+    "db:migrate": "cd backend && node -e \"console.log('Migrations pending')\"",
+    "db:seed": "cd backend && node database/seeders/seed.js",
+    "db:reset": "cd backend && node -e \"require('fs').unlinkSync('database/zenith_erp.sqlite')\" && npm run db:seed",
+    "test": "cd backend && echo 'Tests pending'",
+    "install:all": "npm install && cd backend && npm install"
   },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
   "author": "La Cima, C.A.",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

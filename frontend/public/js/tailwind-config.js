@@ -8,26 +8,26 @@ window.tailwind = {
     theme: {
       extend: {
         colors: {
-          // Primary - Logo Lime Green (#B3D92A)
+          // Primary - Logo Lime Green (#B3D92B)
           primary: {
-            DEFAULT: "#B3D92A",
-            dim: "#9BC020",
-            light: "#C9E045",
-            dark: "#8AA619",
+            DEFAULT: "#B3D92B",
+            dim: "#9BC021",
+            light: "#C9E046",
+            dark: "#8AA61A",
           },
-          "primary-dim": "#9BC020",
+          "primary-dim": "#9BC021",
           "on-primary": "#0D0D0D",
-          // Secondary - Logo Lime Light (#C1D96B)
+          // Secondary - Logo Lime Light (#C1D96A)
           secondary: {
-            DEFAULT: "#C1D96B",
-            light: "#D4E690",
-            dark: "#A8C44A",
+            DEFAULT: "#C1D96A",
+            light: "#D4E68F",
+            dark: "#A8C449",
           },
-          // Accent - Logo Sage (#C9D990)
+          // Accent - Logo Sage (#C9D98F)
           accent: {
-            DEFAULT: "#C9D990",
-            light: "#DDE8B3",
-            dark: "#A8BA5A",
+            DEFAULT: "#C9D98F",
+            light: "#DDE8B2",
+            dark: "#A8BA59",
           },
           // Dark - Logo Black (#0D0D0D)
           dark: {
@@ -35,9 +35,9 @@ window.tailwind = {
             light: "#1A1A1A",
           },
           // Neutrals
-          background: "#F7F7F7",
+          background: "#F2F2F2",
           surface: "#FFFFFF",
-          "surface-dim": "#F7F7F7",
+          "surface-dim": "#EFEFEF",
           "on-surface": "#0D0D0D",
           "on-surface-variant": "#666666",
           outline: "#E8E8E8",

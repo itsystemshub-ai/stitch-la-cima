@@ -4,90 +4,78 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>MAYOR DE REPUESTO LA CIMA, C.A - Dashboard de Inventario</title>
+<script id="tailwind-config">
+      tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#B3D92A',
+              dim: '#9BC020',
+              light: '#C9E045',
+              dark: '#8AA619',
+              50: '#f5f9e6',
+              100: '#ebf3cc',
+              200: '#d7e799',
+              300: '#c4db66',
+              400: '#B3D92A',
+              500: '#9BC020',
+              600: '#8AA619',
+              700: '#6F8514',
+              800: '#556510',
+              900: '#3A450B',
+            },
+            secondary: {
+              DEFAULT: '#C1D96B',
+              light: '#D4E690',
+              dark: '#A8C44A',
+            },
+            accent: {
+              DEFAULT: '#C9D990',
+              light: '#DDE8B3',
+              dark: '#A8BA5A',
+            },
+            dark: {
+              DEFAULT: '#0D0D0D',
+              light: '#1A1A1A',
+              lighter: '#262626',
+            },
+            background: '#F7F7F7',
+            surface: '#FFFFFF',
+            'surface-dim': '#F2F2F2',
+            'on-surface': '#0D0D0D',
+            'on-surface-variant': '#666666',
+            outline: '#E8E8E8',
+            zinc: {
+              50: '#FEFEFE', 100: '#F7F7F7', 200: '#F2F2F2', 300: '#E8E8E8',
+              400: '#CCCCCC', 500: '#999999', 600: '#666666', 700: '#333333',
+              800: '#1A1A1A', 900: '#0D0D0D',
+            },
+          },
+          fontFamily: {
+            sans: ['League Spartan', 'sans-serif'],
+            display: ['League Spartan', 'sans-serif'],
+            body: ['League Spartan', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=League Spartan:wght@400;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="/css/styles.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="/css/styles.css" rel="stylesheet"/>
 <script src="../../src/js/utils/api-client.js"></script>
 <script src="../../src/js/utils/toast.js"></script>
 <script src="../../src/js/auth/auth.js"></script>
 <script src="../../src/js/products/products-db.js"></script>
 <script src="../../src/js/utils/nav-links.js"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "secondary-fixed-dim": "#d4d4d7",
-                    "inverse-primary": "#ceff5e",
-                    "on-primary-container": "#465f00",
-                    "on-secondary-fixed": "#3e3f42",
-                    "on-primary-fixed": "#364b00",
-                    "on-error-container": "#520c00",
-                    "tertiary-fixed-dim": "#e1e5ee",
-                    "on-secondary-fixed-variant": "#5a5c5e",
-                    "secondary-container": "#e2e2e5",
-                    "tertiary-fixed": "#f0f4fd",
-                    "primary": "#4a6400",
-                    "surface-dim": "#d2d4d8",
-                    "outline": "#757779",
-                    "on-primary": "#deff95",
-                    "surface-tint": "#4a6400",
-                    "surface-container-lowest": "#ffffff",
-                    "on-surface": "#2d2f31",
-                    "error-dim": "#b92902",
-                    "secondary-fixed": "#e2e2e5",
-                    "inverse-surface": "#0c0e10",
-                    "tertiary-container": "#f0f4fd",
-                    "on-surface-variant": "#5a5c5e",
-                    "on-error": "#ffefec",
-                    "primary-container": "#cbfc5c",
-                    "on-tertiary": "#eff3fc",
-                    "surface-container-high": "#e1e2e6",
-                    "secondary": "#5a5c5e",
-                    "error": "#b02500",
-                    "on-tertiary-fixed": "#454a51",
-                    "primary-dim": "#405700",
-                    "tertiary": "#575c63",
-                    "tertiary-dim": "#4b5057",
-                    "primary-fixed": "#cbfc5c",
-                    "surface-container": "#e7e8eb",
-                    "surface-container-low": "#f0f0f3",
-                    "on-tertiary-container": "#575c63",
-                    "outline-variant": "#acadaf",
-                    "secondary-dim": "#4e5052",
-                    "background": "#f6f6f9",
-                    "inverse-on-surface": "#9c9d9f",
-                    "on-secondary-container": "#505254",
-                    "on-secondary": "#f2f2f5",
-                    "surface-bright": "#f6f6f9",
-                    "on-primary-fixed-variant": "#4e6a00",
-                    "error-container": "#f95630",
-                    "surface": "#f6f6f9",
-                    "primary-fixed-dim": "#bded4f",
-                    "surface-variant": "#dbdde0",
-                    "on-tertiary-fixed-variant": "#62666e",
-                    "on-background": "#2d2f31",
-                    "surface-container-highest": "#dbdde0"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "headline": ["League Spartan"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-            }
-          },
-        },
-      }
-    </script>
+
 <style>
         body { font-family: 'Inter', sans-serif; }
         .material-symbols-outlined {
@@ -102,10 +90,20 @@
 <script src="/src/js/products/products-db.js"></script>
 <script src="/src/js/utils/nav-links.js"></script>
 <script src="/src/js/pages/erp.js"></script>
+<script src="/src/js/utils/loading-states.js"></script>
 </head>
 <body class="bg-background text-on-surface">
 <!-- SideNavBar -->
 <aside class="fixed left-0 top-0 bottom-0 z-50 w-64 flex flex-col bg-neutral-950 shadow-[4px_0_24px_rgba(0,0,0,0.4)]">
+<div class="px-4 py-3 border-b border-stone-700">
+<div class="flex items-center gap-3">
+  <img src="/assets/images/logo.png" alt="Logo" class="h-10 w-auto"/>
+  <div class="text-[10px] leading-tight">
+    <p class="font-bold text-stone-800 tracking-wide">MAYOR DE REPUESTO LA CIMA, C.A</p>
+    <p class="text-stone-500">RIF: J-40308741-5</p>
+  </div>
+</div>
+</div>
 <div class="px-6 py-6 border-b border-white/10">
 <div class="flex items-center gap-3">
 

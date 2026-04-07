@@ -27,7 +27,9 @@
       "Bash(git stash *)",
       "Bash(git reflog *)",
       "Bash(git *)",
-      "Bash(pip install *)"
+      "Bash(pip install *)",
+      "Bash(type *)",
+      "Bash(npm run *)"
     ]
   },
   "$version": 3

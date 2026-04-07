@@ -12,91 +12,91 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary - Logo Lime Green (#B3D92A)
-        primary: {
-          DEFAULT: "#B3D92A",
-          dim: "#9BC020",
-          light: "#C9E045",
-          dark: "#8AA619",
-          50: "#f5f9e6",
-          100: "#ebf3cc",
-          200: "#d7e799",
-          300: "#c4db66",
-          400: "#B3D92A",
-          500: "#9BC020",
-          600: "#8AA619",
-          700: "#6F8514",
-          800: "#556510",
-          900: "#3A450B",
-        },
-        // Secondary - Logo Lime Light (#C1D96B)
-        secondary: {
-          DEFAULT: "#C1D96B",
-          light: "#D4E690",
-          dark: "#A8C44A",
-          50: "#f6f9ee",
-          100: "#ecf3dd",
-          200: "#d9e7bb",
-          300: "#C1D96B",
-          400: "#A8C44A",
-          500: "#8AA619",
-          600: "#6F8514",
-          700: "#556510",
-          800: "#3A450B",
-          900: "#202506",
-        },
-        // Accent - Logo Sage (#C9D990)
-        accent: {
-          DEFAULT: "#C9D990",
-          light: "#DDE8B3",
-          dark: "#A8BA5A",
-        },
-        // Dark - Logo Black (#0D0D0D)
-        dark: {
-          DEFAULT: "#0D0D0D",
-          light: "#1A1A1A",
-          lighter: "#262626",
-        },
-        // Neutral - Logo Grays
-        neutral: {
-          50: "#FEFEFE",
-          100: "#F7F7F7",
-          200: "#F2F2F2",
-          300: "#E8E8E8",
-          400: "#CCCCCC",
-          500: "#999999",
-          600: "#666666",
-          700: "#333333",
-          800: "#1A1A1A",
-          900: "#0D0D0D",
-        },
-        // Surface
-        surface: {
-          DEFAULT: "#FFFFFF",
-          dim: "#F7F7F7",
-          variant: "#F2F2F2",
-        },
-        outline: {
-          DEFAULT: "#E8E8E8",
-          variant: "#CCCCCC",
-        },
-        // Semantic
-        success: {
-          DEFAULT: "#B3D92A",
-          light: "#C9E045",
-          dark: "#8AA619",
-        },
-        warning: {
-          DEFAULT: "#D4A52A",
-          light: "#E6B83D",
-          dark: "#B38A1E",
-        },
-        error: {
-          DEFAULT: "#D92A2A",
-          light: "#E64545",
-          dark: "#B31E1E",
-        },
-      },
+         // Primary - Logo Lime Green (#B3D92B)
+         primary: {
+           DEFAULT: "#B3D92B",
+           dim: "#9BC021",
+           light: "#C9E046",
+           dark: "#8AA61A",
+           50: "#f5f9e7",
+           100: "#ebf3cd",
+           200: "#d7e79a",
+           300: "#c4db67",
+           400: "#B3D92B",
+           500: "#9BC021",
+           600: "#8AA61A",
+           700: "#6F8515",
+           800: "#556511",
+           900: "#3A450C",
+         },
+         // Secondary - Logo Lime Light (#C1D96A)
+         secondary: {
+           DEFAULT: "#C1D96A",
+           light: "#D4E68F",
+           dark: "#A8C449",
+           50: "#f6f9ed",
+           100: "#ecf3dc",
+           200: "#d9e7ba",
+           300: "#C1D96A",
+           400: "#A8C449",
+           500: "#8AA61A",
+           600: "#6F8515",
+           700: "#556511",
+           800: "#3A450C",
+           900: "#202507",
+         },
+         // Accent - Logo Sage (#C9D98F)
+         accent: {
+           DEFAULT: "#C9D98F",
+           light: "#DDE8B2",
+           dark: "#A8BA59",
+         },
+         // Dark - Logo Black (#0D0D0D)
+         dark: {
+           DEFAULT: "#0D0D0D",
+           light: "#1A1A1A",
+           lighter: "#262626",
+         },
+         // Neutral - Logo Grays
+         neutral: {
+           50: "#FEFEFE",
+           100: "#F2F2F2",
+           200: "#EFEFEF",
+           300: "#E8E8E8",
+           400: "#CCCCCC",
+           500: "#999999",
+           600: "#666666",
+           700: "#333333",
+           800: "#1A1A1A",
+           900: "#0D0D0D",
+         },
+         // Surface
+         surface: {
+           DEFAULT: "#FFFFFF",
+           dim: "#F2F2F2",
+           variant: "#EFEFEF",
+         },
+         outline: {
+           DEFAULT: "#E8E8E8",
+           variant: "#CCCCCC",
+         },
+         // Semantic
+         success: {
+           DEFAULT: "#B3D92B",
+           light: "#C9E046",
+           dark: "#8AA61A",
+         },
+         warning: {
+           DEFAULT: "#D4A52A",
+           light: "#E6B83D",
+           dark: "#B38A1E",
+         },
+         error: {
+           DEFAULT: "#D92A2A",
+           light: "#E64545",
+           dark: "#B31E1E",
+         },
+       },
       fontFamily: {
         display: ["League Spartan", "sans-serif"],
         body: ["League Spartan", "sans-serif"],

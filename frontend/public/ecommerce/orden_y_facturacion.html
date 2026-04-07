@@ -4,85 +4,73 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Mayor de Repuesto La Cima | Billing &amp; Review</title>
+<script id="tailwind-config">
+      tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#B3D92A',
+              dim: '#9BC020',
+              light: '#C9E045',
+              dark: '#8AA619',
+              50: '#f5f9e6',
+              100: '#ebf3cc',
+              200: '#d7e799',
+              300: '#c4db66',
+              400: '#B3D92A',
+              500: '#9BC020',
+              600: '#8AA619',
+              700: '#6F8514',
+              800: '#556510',
+              900: '#3A450B',
+            },
+            secondary: {
+              DEFAULT: '#C1D96B',
+              light: '#D4E690',
+              dark: '#A8C44A',
+            },
+            accent: {
+              DEFAULT: '#C9D990',
+              light: '#DDE8B3',
+              dark: '#A8BA5A',
+            },
+            dark: {
+              DEFAULT: '#0D0D0D',
+              light: '#1A1A1A',
+              lighter: '#262626',
+            },
+            background: '#F7F7F7',
+            surface: '#FFFFFF',
+            'surface-dim': '#F2F2F2',
+            'on-surface': '#0D0D0D',
+            'on-surface-variant': '#666666',
+            outline: '#E8E8E8',
+            zinc: {
+              50: '#FEFEFE', 100: '#F7F7F7', 200: '#F2F2F2', 300: '#E8E8E8',
+              400: '#CCCCCC', 500: '#999999', 600: '#666666', 700: '#333333',
+              800: '#1A1A1A', 900: '#0D0D0D',
+            },
+          },
+          fontFamily: {
+            sans: ['League Spartan', 'sans-serif'],
+            display: ['League Spartan', 'sans-serif'],
+            body: ['League Spartan', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=League Spartan:wght@200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="/css/styles.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "tertiary-fixed-dim": "#e1e5ee",
-                      "primary-fixed": "#cbfc5c",
-                      "on-tertiary-container": "#575c63",
-                      "secondary-dim": "#4e5052",
-                      "secondary-container": "#e2e2e5",
-                      "secondary": "#5a5c5e",
-                      "on-surface-variant": "#5a5c5e",
-                      "on-tertiary": "#eff3fc",
-                      "outline": "#757779",
-                      "error": "#b02500",
-                      "inverse-surface": "#0c0e10",
-                      "on-primary-fixed-variant": "#4e6a00",
-                      "on-primary-fixed": "#364b00",
-                      "error-container": "#f95630",
-                      "on-tertiary-fixed-variant": "#62666e",
-                      "inverse-primary": "#ceff5e",
-                      "on-error": "#ffefec",
-                      "surface-container-highest": "#dbdde0",
-                      "on-secondary": "#f2f2f5",
-                      "tertiary-fixed": "#f0f4fd",
-                      "inverse-on-surface": "#9c9d9f",
-                      "primary": "#4a6400",
-                      "tertiary-dim": "#4b5057",
-                      "surface-container-lowest": "#ffffff",
-                      "surface-variant": "#dbdde0",
-                      "on-secondary-fixed": "#3e3f42",
-                      "primary-dim": "#405700",
-                      "surface-tint": "#4a6400",
-                      "on-secondary-fixed-variant": "#5a5c5e",
-                      "primary-fixed-dim": "#bded4f",
-                      "surface": "#f6f6f9",
-                      "surface-container": "#e7e8eb",
-                      "surface-container-low": "#f0f0f3",
-                      "background": "#f6f6f9",
-                      "on-tertiary-fixed": "#454a51",
-                      "tertiary": "#575c63",
-                      "surface-container-high": "#e1e2e6",
-                      "on-background": "#2d2f31",
-                      "primary-container": "#cbfc5c",
-                      "on-error-container": "#520c00",
-                      "surface-bright": "#f6f6f9",
-                      "surface-dim": "#d2d4d8",
-                      "tertiary-container": "#f0f4fd",
-                      "on-surface": "#2d2f31",
-                      "error-dim": "#b92902",
-                      "secondary-fixed": "#e2e2e5",
-                      "outline-variant": "#acadaf",
-                      "on-secondary-container": "#505254",
-                      "on-primary-container": "#465f00",
-                      "on-primary": "#deff95",
-                      "secondary-fixed-dim": "#d4d4d7"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.125rem",
-                      "lg": "0.25rem",
-                      "xl": "0.5rem",
-                      "full": "0.75rem"
-              },
-              "fontFamily": {
-                      "headline": ["League Spartan"],
-                      "body": ["Inter"],
-                      "label": ["Inter"]
-              }
-            },
-          }
-        }
-      </script>
+<link href="/css/styles.css" rel="stylesheet"/>
+
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -95,6 +83,7 @@
 <script src="/src/js/utils/toast.js"></script>
 <script src="/src/js/auth/auth.js"></script>
 <script src="/src/js/products/products-db.js"></script>
+<script src="/src/js/utils/loading-states.js"></script>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col">
 <!-- TopNavBar -->
