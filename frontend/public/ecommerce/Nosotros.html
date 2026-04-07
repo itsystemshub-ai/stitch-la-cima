@@ -1,84 +1,84 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Nosotros | Mayor de Repuesto LA CIMA, C.A.</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#ceff5e", // Verde Lima Cima
-                        "primary-dim": "#bded4f",
-                        secondary: "#1c1c1c", // Negro Industrial
-                        background: "#f6f6f9",
-                        surface: "#ffffff",
-                        outline: "#e2e2e7",
-                        "on-surface": "#0c0e10",
-                        "on-surface-variant": "#5a5c5e"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.125rem",
-                        lg: "0.25rem",
-                        xl: "0.5rem",
-                        full: "9999px"
-                    },
-                    fontFamily: {
-                        sans: ['League Spartan', 'sans-serif'],
-                        headline: ['League Spartan', 'sans-serif']
-                    }
-                }
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inicio | Mayor de Repuesto LA CIMA, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ceff5e", // Verde Lima Cima
+                    "primary-dim": "#bded4f",
+                    "on-primary": "#000000",
+                    "secondary": "#1c1c1c", // Negro/Gris Muy Oscuro
+                    "background": "#f6f6f9",
+                    "surface": "#ffffff",
+                    "on-surface": "#0c0e10",
+                    "on-surface-variant": "#5a5c5e",
+                    "outline": "#e2e2e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["League Spartan", "sans-serif"],
+                    "body": ["League Spartan", "sans-serif"],
+                    "label": ["League Spartan", "sans-serif"]
             }
-        }
+          },
+        },
+      }
     </script>
-    <style>
-        body { font-family: 'League Spartan', sans-serif; }
+<style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+        body { font-family: 'League Spartan', sans-serif; }
     </style>
 </head>
-<body class="bg-background text-on-surface font-sans selection:bg-primary/30">
-
-<!-- Top Navigation -->
+<body class="bg-background text-on-surface selection:bg-primary/30">
+<!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
-    <div class="flex items-center gap-8">
-        <a href="index.html" class="flex items-center gap-2 group">
-            <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
-            <div class="flex flex-col">
-                <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
-                <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
-            </div>
-        </a>
-        <div class="hidden md:flex items-center gap-6">
-            <a href="index.html" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors">Inicio</a>
-            <a href="catalogo_general.html" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors">Catálogo</a>
-            <a href="Nosotros.html" class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary">Nosotros</a>
-            <a href="contacto.html" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors">Contacto</a>
-        </div>
+<a href="index.html" class="flex items-center gap-2 group">
+    <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+    <div class="flex flex-col">
+        <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
+        <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
     </div>
-    <div class="flex items-center gap-4">
-        <div class="relative hidden lg:block">
-            <input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
-            <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
-        </div>
-        <button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
-            <span class="material-symbols-outlined">shopping_cart</span>
-            <span id="cart-count" class="absolute top-0 right-0 bg-primary text-black text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
-        </button>
-        <div class="h-6 w-px bg-outline mx-2"></div>
-        <button class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-all">
-            <span class="material-symbols-outlined text-primary text-sm">database</span>
+</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="catalogo_general.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="Nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contacto</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+</div>
+<!-- Cart with counter -->
+<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+</button>
+<div class="h-6 w-px bg-outline mx-2"></div>
+<!-- ERP Access Toggle -->
+<button class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+<span class="material-symbols-outlined text-primary text-sm">database</span>
             Login
         </button>
-    </div>
+</div>
 </nav>
-
 <!-- Hero Section -->
 <section class="relative min-h-[90vh] flex items-center overflow-hidden bg-black pt-16">
     <div class="absolute inset-0 z-0 text-white">
@@ -259,58 +259,68 @@
         </div>
     </div>
 </section>
-
 <!-- Footer -->
-<footer class="bg-black text-white pt-16 pb-8 px-6">
-    <div class="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
-        <div class="md:col-span-1">
-            <div class="flex items-center gap-2 mb-6">
-                <img src="../../assets/images/logo.png" alt="Logo" class="h-6 w-auto">
-                <span class="text-primary font-black text-lg block uppercase tracking-tighter leading-none">LA CIMA, C.A</span>
-            </div>
-            <p class="text-stone-500 text-[10px] uppercase tracking-widest leading-relaxed">
-                MAYOR DE REPUESTO LA CIMA, C.A
-                RIF.: J-40308741-5
-                AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
-                TELF.: +58 424-4582766 / +58 424-4042558
-                E-MAIL: LACIMA.REPUESTOS@GMAIL.COM
-                E-MAIL PEDIDOS: PEDIDOSLACIMA@GMAIL.COM
-            </p>
-        </div>
-        <div>
-            <h4 class="text-primary text-[10px] uppercase font-black tracking-[0.3em] mb-6">Enlaces Rápidos</h4>
-            <ul class="space-y-3 text-stone-500 text-xs font-bold uppercase tracking-widest">
-                <li><a href="index.html" class="hover:text-white transition-colors">Inicio</a></li>
-                <li><a href="Nosotros.html" class="hover:text-white transition-colors text-white">Nosotros</a></li>
-                <li><a href="contacto.html" class="hover:text-white transition-colors">Contacto</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="text-primary text-[10px] uppercase font-black tracking-[0.3em] mb-6">Soporte</h4>
-            <ul class="space-y-3 text-stone-500 text-xs font-bold uppercase tracking-widest">
-                <li>LACIMA.REPUESTOS@GMAIL.COM</li>
-                <li>+58 424-4582766 / +58 424-4042558</li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="text-primary text-[10px] uppercase font-black tracking-[0.3em] mb-6">Sede Central</h4>
-            <p class="text-stone-500 text-xs font-bold uppercase tracking-widest leading-relaxed">
-                AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
-            </p>
-        </div>
+<footer class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+    <img src="../../assets/images/logo.png" alt="Logo" class="h-12 w-auto">
+    
+    <div class="flex flex-col justify-center">
+        <span class="text-primary font-black text-sm block uppercase tracking-tighter leading-none">
+            MAYOR DE REPUESTO LA CIMA, C.A
+        </span>
+        <span class="text-primary font-black text-xs block uppercase tracking-tighter leading-none mt-1">
+            RIF.: J-40308741-5
+        </span>
     </div>
-    <div class="max-w-[1920px] mx-auto border-t border-stone-800 mt-16 pt-8 text-center text-[9px] text-stone-600 uppercase tracking-widest">
-        © 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.
-    </div>
-</footer>
+</div>
 
-<script>
-    function updateCartCounter() {
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        const count = document.getElementById('cart-count');
-        if (count) count.textContent = cart.length;
-    }
-    document.addEventListener('DOMContentLoaded', updateCartCounter);
-</script>
-</body>
-</html>
+<div class="flex gap-4">
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">facebook</span>
+</div>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Transmisión</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Contacto</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Sede Central</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">
+        AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
+</p>
+<div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">¿Necesitas ayuda?</p>
+<p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="text-white text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Legal</span>
+</div>
+</div>
+</footer>
+</body></html>

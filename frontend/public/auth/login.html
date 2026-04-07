@@ -90,15 +90,33 @@
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
 <!-- TopNavBar (Shared Component) - Note: Navigation links suppressed for focused login journey -->
-<nav class="bg-zinc-950/90 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/50 docked full-width top-0 sticky z-50">
-<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1920px] mx-auto">
-<div class="text-xl font-bold tracking-tighter text-[#9ACD32] font-['Space_Grotesk'] uppercase">
-                MAYOR DE REPUESTO LA CIMA, C.A.
-            </div>
-<div class="flex items-center gap-6">
-<a class="text-zinc-400 font-medium font-['Space_Grotesk'] tracking-tight uppercase hover:text-white transition-colors duration-200" href="#">Help Center</a>
-<a class="text-[#9ACD32] border-b-2 border-[#9ACD32] pb-1 font-['Space_Grotesk'] tracking-tight uppercase" href="#">Portal Access</a>
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+<a href="index.html" class="flex items-center gap-2 group">
+    <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+    <div class="flex flex-col">
+        <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
+        <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
+    </div>
+</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="index.html">Inicio</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="catalog.html">Catálogo</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Nosotros.html">Nosotros</a>
+<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="#contacto">Contacto</a>
 </div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+</div>
+<!-- Cart with counter -->
+<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+</button>
+
+
 </div>
 </nav>
 <main class="min-h-screen flex items-center justify-center relative overflow-hidden bg-surface-container">
@@ -200,48 +218,67 @@
 </div>
 </div>
 </main>
-<!-- Footer (Shared Component) -->
-<footer class="bg-zinc-900 w-full mt-auto">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 py-12 w-full">
-<div class="space-y-4">
-<div class="font-['Space_Grotesk'] font-black text-zinc-100 text-lg uppercase tracking-tighter">
-                    MAYOR DE REPUESTO LA CIMA, C.A.
-                </div>
-<p class="text-zinc-500 font-['Inter'] text-sm antialiased">
-                    Superior industrial parts distribution. 
-                    Setting the standard for engine performance since 2014.
-                </p>
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+    <img src="../../assets/images/logo.png" alt="Logo" class="h-12 w-auto">
+
+    <div class="flex flex-col justify-center">
+        <span class="text-primary font-black text-sm block uppercase tracking-tighter leading-none">
+            MAYOR DE REPUESTO LA CIMA, C.A
+        </span>
+        <span class="text-primary font-black text-xs block uppercase tracking-tighter leading-none mt-1">
+            RIF.: J-40308741-5
+        </span>
+    </div>
 </div>
-<div class="space-y-4">
-<h4 class="text-zinc-100 font-headline font-bold uppercase text-xs tracking-[0.2em]">Contact Us</h4>
-<ul class="space-y-2">
-<li><a class="text-zinc-500 text-sm hover:text-[#9ACD32] transition-colors" href="mailto:info@lacima.com">General: info@lacima.com</a></li>
-<li><a class="text-zinc-500 text-sm hover:text-[#9ACD32] transition-colors" href="mailto:sales@lacima.com">Orders: sales@lacima.com</a></li>
-</ul>
-</div>
-<div class="space-y-4">
-<h4 class="text-zinc-100 font-headline font-bold uppercase text-xs tracking-[0.2em]">Emergency Support</h4>
-<ul class="space-y-2">
-<li><a class="text-zinc-500 text-sm hover:text-[#9ACD32] transition-colors" href="tel:+582415550101">Phone: +58 241-5550101</a></li>
-<li><a class="text-zinc-500 text-sm hover:text-[#9ACD32] transition-colors" href="tel:+584125550202">Phone: +58 412-5550202</a></li>
-</ul>
-</div>
-<div class="space-y-4">
-<h4 class="text-zinc-100 font-headline font-bold uppercase text-xs tracking-[0.2em]">Quick Links</h4>
-<ul class="space-y-2">
-<li><a class="text-zinc-500 text-sm hover:text-[#9ACD32] transition-colors" href="#">Privacy Policy</a></li>
-<li><a class="text-zinc-500 text-sm hover:text-[#9ACD32] transition-colors" href="#">Terms of Service</a></li>
-<li><a class="text-zinc-500 text-sm hover:text-[#9ACD32] transition-colors" href="#">Logistics Network</a></li>
-</ul>
-</div>
-</div>
-<div class="px-8 py-6 bg-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-zinc-500 font-['Inter'] text-sm antialiased">
-                © 2024 MAYOR DE REPUESTO LA CIMA, C.A. RIF: J-40308741-5. Valencia, Venezuela.
-            </p>
+
 <div class="flex gap-4">
-<span class="material-symbols-outlined text-zinc-500 text-xl cursor-pointer hover:text-[#9ACD32] transition-colors">share</span>
-<span class="material-symbols-outlined text-zinc-500 text-xl cursor-pointer hover:text-[#9ACD32] transition-colors">public</span>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">facebook</span>
+</div>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Transmisión</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Contacto</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Sede Central</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">
+        AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
+</p>
+<div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">¿Necesitas ayuda?</p>
+<p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="text-white text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Privacidad</span>
+<span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Legal</span>
 </div>
 </div>
 </footer>
