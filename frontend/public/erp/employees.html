@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "inverse-primary": "#a3d73c",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-container": "#4c4c4c",
+                    "inverse-on-surface": "#f1f1f1",
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-fixed": "#131f00",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-primary-container": "#3a5400",
+                    "secondary": "#5f5e5e",
+                    "outline": "#747a65",
+                    "tertiary": "#5e5e5e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "outline-variant": "#c3c9b1",
+                    "tertiary-container": "#bebcbc",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-surface-variant": "#434937",
+                    "surface-bright": "#f9f9f9",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e8e8e8",
+                    "on-secondary-fixed-variant": "#474746",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "secondary-container": "#e2dfde",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "surface-tint": "#496800",
+                    "primary": "#496800",
+                    "on-secondary-container": "#636262",
+                    "primary-fixed": "#bef456",
+                    "on-surface": "#1a1c1c",
+                    "background": "#f9f9f9",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed-variant": "#364e00",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "primary-container": "#9acd32",
+                    "surface-dim": "#dadada",
+                    "surface-container-highest": "#e2e2e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- Sidebar Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-neutral-50 dark:bg-neutral-950 flex flex-col border-r border-neutral-200 dark:border-neutral-800">
+<div class="px-6 py-8">
+<h1 class="font-['Space_Grotesk'] font-black text-lime-700 dark:text-lime-400 text-2xl tracking-tighter">HR MODULE</h1>
+<p class="font-['Inter'] font-semibold text-[10px] uppercase tracking-widest text-neutral-500 mt-1">Industrial Control</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center px-4 py-3 bg-lime-50 dark:bg-lime-900/20 text-lime-700 dark:text-lime-300 border-r-4 border-lime-600 font-['Inter'] font-semibold text-sm uppercase transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">badge</span> Employee Files
+            </a>
+<a class="flex items-center px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 font-['Inter'] font-semibold text-sm uppercase transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">payments</span> Payroll
+            </a>
+<a class="flex items-center px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 font-['Inter'] font-semibold text-sm uppercase transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">account_balance</span> Social Benefits
+            </a>
+<a class="flex items-center px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 font-['Inter'] font-semibold text-sm uppercase transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">event_busy</span> Leave Mgmt
+            </a>
+<a class="flex items-center px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 font-['Inter'] font-semibold text-sm uppercase transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">gavel</span> Legal Reports
+            </a>
+</nav>
+<div class="px-4 py-6 border-t border-neutral-200 dark:border-neutral-800">
+<button class="w-full bg-primary text-on-primary font-bold uppercase text-xs py-3 rounded-sm flex items-center justify-center gap-2 hover:scale-102 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">description</span> Generate Report
+            </button>
+<div class="mt-6 space-y-1">
+<a class="flex items-center px-4 py-2 text-neutral-500 text-xs font-bold uppercase" href="#">
+<span class="material-symbols-outlined mr-3 text-sm">help_center</span> Support
+                </a>
+<a class="flex items-center px-4 py-2 text-neutral-500 text-xs font-bold uppercase" href="#">
+<span class="material-symbols-outlined mr-3 text-sm">logout</span> Logout
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen flex flex-col bg-surface">
+<!-- Top Nav Bar -->
+<header class="fixed top-0 right-0 left-64 z-30 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl shadow-[0_24px_40px_rgba(26,28,28,0.06)] px-8 py-3 flex justify-between items-center border-b border-neutral-100">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] uppercase tracking-tight text-xl font-bold text-neutral-900 dark:text-neutral-50">FORGE INDUSTRIAL ERP</span>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-neutral-400">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-highest border-none rounded-md text-sm w-80 focus:ring-2 focus:ring-primary transition-all" placeholder="Search employee by name or ID..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-full transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-neutral-200">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">HR Manager</p>
+<p class="text-[10px] text-secondary">Operational Hub</p>
+</div>
+<img class="w-10 h-10 rounded-full object-cover grayscale brightness-90" data-alt="professional portrait of a high-level industrial manager in a clean warehouse office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3SKEFavsDc6pSxjK77Om-VTlK12VNvDO1KXsygl3bVVHvIx4xPx5gB2vgaRGFF-Uk9ZM7pj6ov1nBJfxNj-uPeCPqbUieJcplx5bZHwVUMWsy8B57p6cJumf-0YlRZP9bg00mMe9FFWIlZOf0sY-Nuc0hbaZh5YtHB2M4ZHQaAi6vXpDx94TrSW0rkcuI3aUwhX9CczdzcjEa9Suj9pPDzSgI25R22ilErtzimIqrJSZRKNvRsQ7zAar25EvcOmqcoG_hbU24Y_M"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="mt-20 px-10 pb-12 flex-1">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-4xl font-black uppercase tracking-tight text-on-surface">Expediente Digital</h2>
+<p class="text-secondary font-medium mt-1">Gestión Centralizada de Personal Industrial • Forge Industrial Group</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high px-6 py-2.5 font-bold uppercase text-xs flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span> Advanced Filters
+                    </button>
+<button class="bg-primary px-6 py-2.5 text-on-primary font-bold uppercase text-xs flex items-center gap-2 shadow-sm hover:scale-102 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">person_add</span> New Employee
+                    </button>
+</div>
+</div>
+<!-- Dashboard Overview Stats (Bento Grid Style) -->
+<div class="grid grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border-l-4 border-primary">
+<p class="text-[10px] uppercase font-bold text-secondary tracking-widest">Total Staff</p>
+<p class="text-3xl font-black text-on-surface mt-1">1,248</p>
+<p class="text-xs text-lime-600 font-bold mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12% this quarter
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm">
+<p class="text-[10px] uppercase font-bold text-secondary tracking-widest">Active Operations</p>
+<p class="text-3xl font-black text-on-surface mt-1">1,182</p>
+<p class="text-xs text-secondary mt-2">Plant Floor &amp; Logistics</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm">
+<p class="text-[10px] uppercase font-bold text-secondary tracking-widest">On Leave</p>
+<p class="text-3xl font-black text-on-surface mt-1">24</p>
+<p class="text-xs text-secondary mt-2">Vacation / Medical / Personal</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm">
+<p class="text-[10px] uppercase font-bold text-secondary tracking-widest">Pending Approvals</p>
+<p class="text-3xl font-black text-on-surface mt-1">08</p>
+<p class="text-xs text-error font-bold mt-2">Action required</p>
+</div>
+</div>
+<!-- Table Section -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden border border-surface-container">
+<!-- Filters Bar -->
+<div class="bg-surface-container-low px-6 py-4 flex gap-6 items-center border-b border-surface-container">
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold uppercase text-secondary">Department</label>
+<select class="bg-surface border-none text-xs font-bold py-1 px-3 focus:ring-1 focus:ring-primary">
+<option>All Departments</option>
+<option>Engineering</option>
+<option>Maintenance</option>
+<option>Quality Control</option>
+<option>Logistics</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold uppercase text-secondary">Role Level</label>
+<select class="bg-surface border-none text-xs font-bold py-1 px-3 focus:ring-1 focus:ring-primary">
+<option>All Roles</option>
+<option>Executive</option>
+<option>Team Lead</option>
+<option>Specialist</option>
+<option>Operator</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] font-bold uppercase text-secondary">Tenure</label>
+<select class="bg-surface border-none text-xs font-bold py-1 px-3 focus:ring-1 focus:ring-primary">
+<option>Any Duration</option>
+<option>5+ Years</option>
+<option>2-5 Years</option>
+<option>Under 2 Years</option>
+</select>
+</div>
+<div class="flex-1"></div>
+<div class="flex gap-2">
+<button class="p-2 bg-surface text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="p-2 bg-surface text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">print</span>
+</button>
+</div>
+</div>
+<!-- High-Density Table -->
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-secondary font-black uppercase text-[11px] tracking-widest border-b border-surface-container-high">
+<th class="px-6 py-4">Employee</th>
+<th class="px-4 py-4">ID (V/E)</th>
+<th class="px-4 py-4">Department</th>
+<th class="px-4 py-4">Role</th>
+<th class="px-4 py-4 text-right">Base Salary</th>
+<th class="px-4 py-4">Hire Date</th>
+<th class="px-4 py-4">Status</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<!-- Row 1 -->
+<tr class="border-b border-surface-container-low hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-sm object-cover grayscale" data-alt="professional male engineer portrait in workplace with neutral background and sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-88UcsuhJ4KSTkrT6_rfaBzKYxmLE3J6_jB52shodUxl7NO9VAg66GXUdoZKB7wGqZ5mBP_iPCN-j6os-aeTQjZupEj-g1R5uBFGSHwdB0h2bSc6VeWpdTzXzd1TX1XkNQREzo2hX4ppEf7r2qSfSzHdJqJ5P4TkJoWuQsfyM-eDOt4UsxRp2sw1oWwDmdp05ZSIWAUfh7Gc0ci5f6UB3Pkwl5kPF8u345ajNVht0RhS7ZUs2SBS6-p1y5xE1ez_7aYpPgJ6ef9A"/>
+<div>
+<p class="font-bold text-on-surface">Marcos Rodríguez</p>
+<p class="text-[10px] text-secondary">m.rodriguez@forge-ind.com</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 font-mono text-xs text-secondary">V-18.452.102</td>
+<td class="px-4 py-4">
+<span class="bg-surface-container-high px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase">Maintenance</span>
+</td>
+<td class="px-4 py-4 text-on-surface font-medium">Chief Technician</td>
+<td class="px-4 py-4 text-right font-bold">$2,850.00</td>
+<td class="px-4 py-4 text-secondary">15 Jan 2018</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-lime-600 font-bold text-[10px] uppercase">
+<span class="w-2 h-2 rounded-full bg-lime-500"></span> Active
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all" title="View File">
+<span class="material-symbols-outlined text-lg">folder_shared</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all" title="Edit">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all" title="Process Leave">
+<span class="material-symbols-outlined text-lg">flight_takeoff</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-surface-container-low hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-sm object-cover grayscale" data-alt="professional female office worker smiling in industrial office setting with soft focus machinery in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9anvCte6QHzYB9x8Ol2DyMoMy1jOfG6O0wGjH6UfRrYozEzzh5lRiW5Mz4f_l1RbtJgdjzXnqWA81n0Fte6gCIP95hfH9FybVjvWe63lBgyyJ-AYD3fuNOMz4GkorbZK2rBBAhw_btSA_FNDhs93IqvnsKqCqUoR-a6YQh1f-iO4YxMNh5nI3GqWbJNapzVo7g-53fRssdPzGlSXTR_XeDvzMN5A3u2N_vG_df3euk-A_DWpUwwVsDNvZYtlWpTJnJyfy6Th_7qs"/>
+<div>
+<p class="font-bold text-on-surface">Elena Vasquez</p>
+<p class="text-[10px] text-secondary">e.vasquez@forge-ind.com</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 font-mono text-xs text-secondary">V-22.109.443</td>
+<td class="px-4 py-4">
+<span class="bg-surface-container-high px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase">Logistics</span>
+</td>
+<td class="px-4 py-4 text-on-surface font-medium">Supply Chain Analyst</td>
+<td class="px-4 py-4 text-right font-bold">$3,100.00</td>
+<td class="px-4 py-4 text-secondary">03 May 2020</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-lime-600 font-bold text-[10px] uppercase">
+<span class="w-2 h-2 rounded-full bg-lime-500"></span> Active
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">folder_shared</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">flight_takeoff</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-surface-container-low hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-sm object-cover grayscale" data-alt="corporate male professional in a sharp suit standing in a modern architectural building with glass textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOnuCcqAnDzJLQQ_znS5x9uDnI_N8uz8xfkJbyD1cW7hrn-ZqkLH08ZMtnb1JM_2sLw8H3ijjVKJks_VmKOf-hWzO-O536mIYiZ-Ks9vc9ErIeRjrFa95Cmf54LCPp0MwY3KCl5r1jlL7H75PbhG6iIDTPD1j9MfHiegHHsENvrXGDkn4Ty1cHiWfhPIdSUkCmVLXZWbBAr3RNIy3ziTytnkXtvejjNuhwXMnG93VVTp_dFIV0Tn0qGxLZOlMJZcTy35p_9LoucO0"/>
+<div>
+<p class="font-bold text-on-surface">Javier Mendez</p>
+<p class="text-[10px] text-secondary">j.mendez@forge-ind.com</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 font-mono text-xs text-secondary">V-15.332.990</td>
+<td class="px-4 py-4">
+<span class="bg-surface-container-high px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase">Engineering</span>
+</td>
+<td class="px-4 py-4 text-on-surface font-medium">Systems Architect</td>
+<td class="px-4 py-4 text-right font-bold">$5,400.00</td>
+<td class="px-4 py-4 text-secondary">22 Nov 2015</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-neutral-400 font-bold text-[10px] uppercase">
+<span class="w-2 h-2 rounded-full bg-neutral-300"></span> Inactive
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">folder_shared</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">flight_takeoff</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-9 h-9 rounded-sm object-cover grayscale" data-alt="serious professional woman in an industrial control room looking directly at camera with blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHPOLRzJdOAaXumZmUSVeDNRIrCJPdG-7E0MTGI-mSID5suQKh69arwm2XcYobHcu_5IuVxCbzVhdbYjcBxY6hAnORkJw3wkiZHvXVf0Bb8XnbcwRwNb42KoPx-LTQm34HePyVF4nvhvNm2YwB74tGpPHkKqL_dq05aHsK_GpddKH2xgVuNfZt1PR80cibPADOXGqxwkbpRBli5-RMQoEW_ybJPdKs4y5qA7LUBJIm735K5C38i3U35E_r38dFPWYqY43G45mC6gI"/>
+<div>
+<p class="font-bold text-on-surface">Sofia Torres</p>
+<p class="text-[10px] text-secondary">s.torres@forge-ind.com</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-4 font-mono text-xs text-secondary">V-20.998.331</td>
+<td class="px-4 py-4">
+<span class="bg-surface-container-high px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase">Quality Control</span>
+</td>
+<td class="px-4 py-4 text-on-surface font-medium">Compliance Lead</td>
+<td class="px-4 py-4 text-right font-bold">$4,250.00</td>
+<td class="px-4 py-4 text-secondary">10 Feb 2019</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-lime-600 font-bold text-[10px] uppercase">
+<span class="w-2 h-2 rounded-full bg-lime-500"></span> Active
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-end gap-2">
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">folder_shared</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">edit_square</span>
+</button>
+<button class="p-1.5 hover:bg-primary-container/20 text-secondary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">flight_takeoff</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-surface-container-low flex justify-between items-center border-t border-surface-container">
+<p class="text-xs text-secondary font-medium">Showing 1-4 of 1,248 employees</p>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center bg-surface-container-high rounded text-secondary hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center bg-surface-container-high rounded text-secondary hover:bg-primary hover:text-on-primary transition-colors font-bold text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center bg-surface-container-high rounded text-secondary hover:bg-primary hover:text-on-primary transition-colors font-bold text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center bg-surface-container-high rounded text-secondary hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-neutral-900 text-neutral-400 py-12 px-10 border-t border-neutral-800">
+<div class="max-w-7xl mx-auto grid grid-cols-4 gap-12">
+<div class="col-span-1">
+<h3 class="font-['Space_Grotesk'] text-white font-bold text-lg mb-4 tracking-tighter">FORGE INDUSTRIAL</h3>
+<p class="text-xs leading-relaxed opacity-70">Sistemas Avanzados de Gestión para la Industria Pesada. Control de procesos, capital humano y logística integrada.</p>
+</div>
+<div class="col-span-1">
+<h4 class="text-white text-[10px] font-black uppercase tracking-widest mb-4">Legal</h4>
+<p class="text-xs mb-1">RIF: J-30459821-4</p>
+<p class="text-xs mb-1">© 2024 Forge Industrial ERP</p>
+<p class="text-xs">Todos los derechos reservados.</p>
+</div>
+<div class="col-span-1">
+<h4 class="text-white text-[10px] font-black uppercase tracking-widest mb-4">Contact Detail</h4>
+<p class="text-xs mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">call</span> +58 (212) 555-0199
+                    </p>
+<p class="text-xs mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">mail</span> support@forge-industrial.com
+                    </p>
+</div>
+<div class="col-span-1 flex flex-col items-end">
+<div class="flex gap-4">
+<a class="hover:text-lime-400 transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="hover:text-lime-400 transition-colors" href="#"><span class="material-symbols-outlined">shield</span></a>
+<a class="hover:text-lime-400 transition-colors" href="#"><span class="material-symbols-outlined">help</span></a>
+</div>
+<p class="mt-8 text-[10px] uppercase font-bold text-neutral-600">V. 4.8.2 - Build 2024.11</p>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

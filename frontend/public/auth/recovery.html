@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Password Recovery | MAYOR DE REPUESTO LA CIMA, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#e2dfde",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-tertiary-container": "#4c4c4c",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#3a5400",
+                        "outline-variant": "#c3c9b1",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "surface-tint": "#496800",
+                        "on-surface-variant": "#434937",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#bebcbc",
+                        "on-primary-fixed": "#131f00",
+                        "surface": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e4e2e2",
+                        "primary-fixed": "#bef456",
+                        "error": "#ba1a1a",
+                        "tertiary": "#5e5e5e",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-background": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "outline": "#747a65",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "primary": "#496800",
+                        "inverse-primary": "#a3d73c",
+                        "surface-container-low": "#f3f3f3",
+                        "on-secondary-container": "#636262",
+                        "surface-dim": "#dadada",
+                        "primary-container": "#9acd32",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#364e00",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#f9f9f9",
+                        "primary-fixed-dim": "#a3d73c",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "inverse-surface": "#2f3131",
+                        "secondary": "#5f5e5e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .industrial-grid {
+            background-image: radial-gradient(circle at 1px 1px, #e2e2e2 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col industrial-grid">
+<!-- Header Navigation (Simplified for Transactional Page) -->
+<header class="fixed top-0 w-full z-50 bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4">
+<div class="text-xl font-black tracking-tighter text-lime-500 font-headline uppercase">
+            APEX INDUSTRIAL
+        </div>
+<div class="flex items-center gap-4 text-stone-400">
+<span class="material-symbols-outlined text-stone-400">support_agent</span>
+<span class="material-symbols-outlined text-stone-400">help_outline</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4">
+<div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-0 overflow-hidden bg-surface-container-lowest shadow-2xl shadow-black/10 rounded-lg">
+<!-- Side Panel: Brand Identity -->
+<div class="md:col-span-5 bg-stone-900 p-8 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img alt="Industrial machinery texture" class="w-full h-full object-cover grayscale" data-alt="Close-up of industrial heavy machinery parts with metallic textures and dark shadows in an engineering workshop setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTkZtJSSNsIHQErzV1_9XzToxX14snaVh43pqwzxNW6Ysrohl30gc_ET3s2rbj_7xZPTRmQl6vkH5UscwLPkzzpOtsC8WKPHdFedPQRqjs9ltLOdAbPSm9OUkB0jAHwI5AVbjXmmuFCrQBtiUrmD9q5KNpxxK6zXS6ormvjXgxV_NL5LbNwo1zdKtlB8zFOOCA6tzK7QaADLxWIOQccfeV4ZjoVm0mtOIqsFO9_lx9JC9SkXIBSc515ARVcq2IuNoRbZXElNdOh48"/>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline text-3xl font-black text-lime-500 leading-none tracking-tighter uppercase mb-2">
+                        MAYOR DE REPUESTO LA CIMA, C.A.
+                    </h2>
+<div class="w-12 h-1 bg-lime-500 mb-6"></div>
+<p class="font-label text-stone-400 uppercase tracking-widest text-[10px] leading-relaxed">
+                        Security Layer: Protocol 04-B<br/>
+                        Industrial Asset Management<br/>
+                        Node Status: Operational
+                    </p>
+</div>
+<div class="relative z-10">
+<div class="p-4 bg-stone-800/50 border-l-4 border-lime-500">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-lime-500 text-sm">security</span>
+<span class="font-headline text-xs font-bold text-stone-100 tracking-widest uppercase">Encryption Active</span>
+</div>
+<p class="text-[11px] text-stone-400 leading-normal">
+                            All recovery requests are logged via unique hardware identifiers and subject to manual ERP audit.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Form Panel -->
+<div class="md:col-span-7 p-8 md:p-12 bg-white">
+<div class="mb-8">
+<h1 class="font-headline text-4xl font-extrabold text-stone-900 uppercase tracking-tighter mb-4 leading-none">
+                        Credential <span class="text-primary italic">Forge</span>
+</h1>
+<p class="text-secondary font-medium text-sm max-w-sm">
+                        Initialize password reset protocol. Identity must be verified against central industrial database.
+                    </p>
+</div>
+<form class="space-y-6">
+<!-- Email Input -->
+<div>
+<label class="block font-label text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">
+                            Registered Terminal Email
+                        </label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">alternate_email</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-0 text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="operator@lacima.repuestos.com" type="email"/>
+</div>
+</div>
+<!-- New Password Input -->
+<div>
+<label class="block font-label text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-2">
+                            New Desired Access Key
+                        </label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">lock_reset</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-0 text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+<!-- Information Box -->
+<div class="flex gap-4 items-start p-4 bg-surface-container rounded">
+<span class="material-symbols-outlined text-primary mt-0.5">hub</span>
+<p class="text-[12px] text-stone-600 leading-relaxed italic">
+                            Your request will be sent to the <span class="font-bold text-stone-900">ERP system</span> for manual approval by an administrator. Status updates will be transmitted to the provided email.
+                        </p>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary py-5 px-6 text-on-primary font-headline font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-primary-container hover:text-on-primary-container transition-all group" type="submit">
+                        Execute Recovery Protocol
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</button>
+</form>
+<div class="mt-8 pt-6 border-t border-stone-100 flex justify-between items-center">
+<a class="text-[10px] font-bold text-stone-400 uppercase hover:text-primary tracking-widest flex items-center gap-1 transition-colors" href="#">
+<span class="material-symbols-outlined text-xs">arrow_back</span>
+                        Return to Hub
+                    </a>
+<span class="text-[10px] font-medium text-stone-300 uppercase tracking-tighter">System Ref: 88-LXC</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Industrial Footer -->
+<footer class="bg-stone-900 py-12 px-6">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Brand Section -->
+<div class="flex flex-col">
+<div class="text-lime-500 font-headline font-black text-xl mb-6 tracking-tighter uppercase">
+                    LA CIMA <span class="text-stone-500">INDUSTRIAL</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-stone-400 group">
+<span class="material-symbols-outlined text-lime-500">location_on</span>
+<address class="not-italic text-xs font-medium uppercase tracking-wider leading-relaxed">
+                            AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL,<br/>
+                            Valencia, Edo. Carabobo, Venezuela.
+                        </address>
+</div>
+</div>
+</div>
+<!-- Contact Section -->
+<div class="flex flex-col">
+<h3 class="text-stone-500 font-headline font-bold text-xs uppercase tracking-[0.2em] mb-6">Communication Channels</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lime-500">call</span>
+<span class="text-stone-100 text-sm font-semibold tracking-tighter">+58 424-4582766</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lime-500">mail</span>
+<span class="text-stone-100 text-sm font-semibold tracking-tighter">LACIMA.REPUESTOS@GMAIL.COM</span>
+</div>
+</div>
+</div>
+<!-- Status Section -->
+<div class="flex flex-col md:items-end">
+<div class="text-right">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-stone-800 rounded mb-4">
+<span class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></span>
+<span class="text-[10px] font-bold text-stone-300 uppercase tracking-widest">Network Secure</span>
+</div>
+<p class="text-stone-600 text-[10px] uppercase font-medium leading-loose text-right">
+                        © 2024 MAYOR DE REPUESTO LA CIMA, C.A.<br/>
+                        All Industrial Rights Reserved.
+                    </p>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

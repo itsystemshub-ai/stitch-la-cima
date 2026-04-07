@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#5f5e5e",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "outline-variant": "#c3c9b1",
+                    "on-primary-fixed": "#131f00",
+                    "secondary-container": "#e2dfde",
+                    "surface-bright": "#f9f9f9",
+                    "primary-container": "#9acd32",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-variant": "#e2e2e2",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-surface-variant": "#434937",
+                    "outline": "#747a65",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "tertiary-container": "#bebcbc",
+                    "surface-dim": "#dadada",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-primary-fixed-variant": "#364e00",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-container": "#4c4c4c",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5e5e5e",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#636262",
+                    "surface-container-high": "#e8e8e8",
+                    "primary-fixed": "#bef456",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "inverse-surface": "#2f3131",
+                    "surface-tint": "#496800",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-container": "#3a5400",
+                    "surface-container": "#eeeeee",
+                    "on-surface": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "primary": "#496800",
+                    "surface": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "background": "#f9f9f9",
+                    "inverse-primary": "#a3d73c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      h1, h2, h3, h4, .headline-font {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-stone-50 dark:bg-stone-900 shadow-[4px_0px_24px_rgba(0,0,0,0.04)] flex flex-col h-full py-6">
+<div class="px-6 mb-10">
+<h1 class="font-['Space_Grotesk'] font-black text-stone-900 dark:text-white text-xl tracking-tighter">FORGE SYSTEMS</h1>
+<p class="font-['Inter'] font-semibold uppercase text-[10px] tracking-widest text-stone-500">High-Performance ERP</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<!-- Active Tab: Inventario -->
+<a class="flex items-center gap-3 px-4 py-3 bg-lime-500/10 text-lime-700 dark:text-lime-400 border-r-4 border-lime-600 font-['Inter'] font-semibold uppercase text-xs tracking-widest transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 font-['Inter'] font-semibold uppercase text-xs tracking-widest hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span>Ventas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 font-['Inter'] font-semibold uppercase text-xs tracking-widest hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span>Compras</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 font-['Inter'] font-semibold uppercase text-xs tracking-widest hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 font-['Inter'] font-semibold uppercase text-xs tracking-widest hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span>Contabilidad</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 font-['Inter'] font-semibold uppercase text-xs tracking-widest hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span>RRHH</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 font-['Inter'] font-semibold uppercase text-xs tracking-widest hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Administración</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-4">
+<button class="w-full bg-primary text-on-primary py-3 font-['Inter'] font-bold uppercase text-[10px] tracking-widest hover:scale-105 transition-all">
+                TECHNICAL REPORT
+            </button>
+<div class="pt-4 border-t border-stone-200 dark:border-stone-800">
+<a class="flex items-center gap-3 px-4 py-2 text-stone-600 dark:text-stone-400 text-xs font-semibold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="security">security</span>
+<span>Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error text-xs font-semibold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen relative overflow-hidden">
+<!-- TopNavBar (Execution from JSON) -->
+<header class="fixed top-0 left-64 right-0 z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl border-b-0 flex justify-between items-center px-8 py-4">
+<div class="flex items-center gap-8">
+<div class="text-xl font-black text-stone-900 dark:text-white tracking-tighter uppercase font-['Space_Grotesk']">
+                    AUDITORÍA DE ALMACÉN
+                </div>
+<nav class="hidden md:flex gap-6">
+<a class="text-lime-600 dark:text-lime-400 font-bold border-b-2 border-lime-600 font-['Space_Grotesk'] uppercase tracking-tight transition-colors" href="#">DASHBOARD</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">ANALYTICS</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">SUPPORT</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 material-symbols-outlined text-lg">search</span>
+<input class="bg-surface-container-highest border-none pl-10 pr-4 py-1.5 text-xs font-['Inter'] w-64 focus:ring-2 focus:ring-primary" placeholder="BUSCAR REPUESTO..." type="text"/>
+</div>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-stone-500 cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-stone-500 cursor-pointer" data-icon="settings">settings</span>
+<span class="material-symbols-outlined text-stone-500 cursor-pointer" data-icon="help">help</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-stone-200 overflow-hidden ml-2">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="profile photo of a professional warehouse manager in industrial setting with soft background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3yYs7vHfbt_BndXhmiEYp3ind66J80ZMRmoCBnApOTFZ-hTIVLXY0tgYVAC50rgvdTLaAup4h_ajLKDKty2UvVUACfMU1RaB-YC9mRi9vRUwLnxkqNDNRjJdOZkXicg0QRow11C8jWZ8zQGXRivmygyQETNwiBvhI7sWe06gjRuG_yuCim7WDU87uVu4KzY49eGW3AW-bFK-rwc0keuvufLOvrxsYXNAkJQScfzeDfvsd_KNvLDBfTbTnD_1dbWZmE76qjkTwQ5E"/>
+</div>
+</div>
+</header>
+<!-- Content Body -->
+<div class="pt-24 px-8 pb-12">
+<!-- Breadcrumbs / Context -->
+<div class="mb-8 flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 text-label-md text-secondary mb-2 uppercase tracking-widest font-bold">
+<span>MAYOR DE REPUESTO LA CIMA, C.A.</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>GESTIÓN DE INVENTARIO</span>
+</div>
+<h2 class="text-4xl font-black uppercase tracking-tighter text-on-surface leading-none">TOMA FÍSICA<br/><span class="text-primary-container bg-primary px-2">CONTEO CIEGO</span></h2>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high px-6 py-3 font-bold uppercase text-xs tracking-widest flex items-center gap-2 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined text-sm">download</span> EXPORTAR PDF
+                    </button>
+<button class="bg-primary text-on-primary px-8 py-3 font-bold uppercase text-xs tracking-widest flex items-center gap-2 shadow-xl hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined text-sm">sync_alt</span> SINCRONIZAR Y AJUSTAR
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Selection Panel -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Location Selector -->
+<div class="bg-surface-container-lowest p-6 shadow-sm border-l-4 border-primary">
+<h3 class="text-sm font-black uppercase tracking-widest mb-4">Parámetros de Auditoría</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">Seleccionar Pasillo</label>
+<select class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary py-3 text-sm font-semibold">
+<option>PASILLO A - MOTOR Y TRANSMISIÓN</option>
+<option>PASILLO B - SUSPENSIÓN Y FRENOS</option>
+<option>PASILLO C - ELÉCTRICO Y LUCES</option>
+<option>PASILLO D - ACCESORIOS Y CARROCERÍA</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">Categoría Crítica</label>
+<select class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary py-3 text-sm font-semibold">
+<option>TODAS LAS CATEGORÍAS</option>
+<option>REPUESTOS DE ALTA ROTACIÓN</option>
+<option>VALOR ALTO (PREMIUM)</option>
+</select>
+</div>
+<button class="w-full border-2 border-primary text-primary font-black py-3 uppercase tracking-tighter hover:bg-primary hover:text-on-primary transition-all">
+                                INICIAR AUDITORÍA DE ZONA
+                            </button>
+</div>
+</div>
+<!-- Stats Card -->
+<div class="bg-on-background text-white p-6 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-xs font-bold text-primary-container tracking-[0.2em] uppercase mb-6">Resumen de Sesión</h3>
+<div class="flex justify-between items-end mb-4">
+<span class="text-4xl font-black">42/120</span>
+<span class="text-[10px] font-bold text-stone-400">ITEMS CONTADOS</span>
+</div>
+<div class="w-full bg-stone-800 h-1 mb-6">
+<div class="bg-primary-container h-full w-[35%]"></div>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-stone-800 flex-1 p-3">
+<p class="text-[9px] text-stone-400 uppercase font-bold tracking-widest">Discrepancias</p>
+<p class="text-xl font-black text-error">12%</p>
+</div>
+<div class="bg-stone-800 flex-1 p-3">
+<p class="text-[9px] text-stone-400 uppercase font-bold tracking-widest">Valor Neto Diff</p>
+<p class="text-xl font-black">-$420.00</p>
+</div>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-9xl">analytics</span>
+</div>
+</div>
+</div>
+<!-- Main Entry Panel -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-black uppercase tracking-tighter">Entrada de Conteo Ciego</h3>
+<div class="flex items-center gap-2 bg-error-container text-on-error-container px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-xs">warning</span>
+                            Alerta: 3 diferencias críticas detectadas
+                        </div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-secondary">ID Repuesto</th>
+<th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-secondary">Descripción</th>
+<th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-secondary text-center">Teórico</th>
+<th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-secondary w-32">Conteo Físico</th>
+<th class="py-4 px-4 text-[10px] font-black uppercase tracking-widest text-secondary text-right">Diferencia</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Row 1 (Critical Discrepancy) -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-4">
+<div class="text-xs font-bold font-mono">KIT-3422-MX</div>
+<div class="text-[9px] text-secondary uppercase tracking-tight">Estante A-12</div>
+</td>
+<td class="py-5 px-4 font-bold text-sm uppercase">Bomba de Agua Toyota Hilux 2.5</td>
+<td class="py-5 px-4 text-center">
+<span class="bg-surface-container px-2 py-1 text-xs font-bold text-secondary">24 UND</span>
+</td>
+<td class="py-5 px-4">
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-error font-black text-center py-2 text-error" type="number" value="18"/>
+</td>
+<td class="py-5 px-4 text-right">
+<span class="text-error font-black">-6</span>
+<span class="material-symbols-outlined text-xs text-error ml-1 align-middle">error</span>
+</td>
+</tr>
+<!-- Row 2 (Balanced) -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-4">
+<div class="text-xs font-bold font-mono">FILT-900-OIL</div>
+<div class="text-[9px] text-secondary uppercase tracking-tight">Estante A-04</div>
+</td>
+<td class="py-5 px-4 font-bold text-sm uppercase">Filtro Aceite Premium Genérico</td>
+<td class="py-5 px-4 text-center">
+<span class="bg-surface-container px-2 py-1 text-xs font-bold text-secondary">150 UND</span>
+</td>
+<td class="py-5 px-4">
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary font-black text-center py-2 text-primary" type="number" value="150"/>
+</td>
+<td class="py-5 px-4 text-right">
+<span class="text-primary font-black">0</span>
+<span class="material-symbols-outlined text-xs text-primary ml-1 align-middle">check_circle</span>
+</td>
+</tr>
+<!-- Row 3 (Excess Discrepancy) -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-4">
+<div class="text-xs font-bold font-mono">FR-8821-PAD</div>
+<div class="text-[9px] text-secondary uppercase tracking-tight">Estante A-09</div>
+</td>
+<td class="py-5 px-4 font-bold text-sm uppercase">Pastillas de Freno Delanteras Ford Explorer</td>
+<td class="py-5 px-4 text-center">
+<span class="bg-surface-container px-2 py-1 text-xs font-bold text-secondary">42 UND</span>
+</td>
+<td class="py-5 px-4">
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary font-black text-center py-2 text-primary" type="number" value="44"/>
+</td>
+<td class="py-5 px-4 text-right">
+<span class="text-primary font-black">+2</span>
+<span class="material-symbols-outlined text-xs text-primary ml-1 align-middle">trending_up</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-4">
+<div class="text-xs font-bold font-mono">RAD-400-ALU</div>
+<div class="text-[9px] text-secondary uppercase tracking-tight">Estante A-15</div>
+</td>
+<td class="py-5 px-4 font-bold text-sm uppercase">Radiador Aluminio Chevrolet Silverado 2018</td>
+<td class="py-5 px-4 text-center">
+<span class="bg-surface-container px-2 py-1 text-xs font-bold text-secondary">8 UND</span>
+</td>
+<td class="py-5 px-4">
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary font-black text-center py-2" placeholder="--" type="number"/>
+</td>
+<td class="py-5 px-4 text-right">
+<span class="text-stone-400 font-bold italic">Pendiente</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Secondary Panel (Visual Guides & History) -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container p-6 relative">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-white shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl">qr_code_scanner</span>
+</div>
+<div>
+<h4 class="font-black uppercase tracking-tight text-sm mb-1">Escanear Manual</h4>
+<p class="text-[10px] text-secondary leading-relaxed font-medium">Use un escáner industrial para entradas masivas de conteo ciego sin ver teóricos.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-6 relative">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-white shadow-sm">
+<span class="material-symbols-outlined text-error text-3xl">verified_user</span>
+</div>
+<div>
+<h4 class="font-black uppercase tracking-tight text-sm mb-1">Aprobación de Supervisor</h4>
+<p class="text-[10px] text-secondary leading-relaxed font-medium">Las discrepancias mayores al 5% o $200 requieren token de seguridad.</p>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 p-6 relative border-2 border-dashed border-primary/20">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-primary text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">history</span>
+</div>
+<div>
+<h4 class="font-black uppercase tracking-tight text-sm mb-1">Historial de Ajustes</h4>
+<p class="text-[10px] text-secondary leading-relaxed font-medium">Ver auditorías pasadas del Pasillo A para detectar patrones de merma.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FAB - Only on relevant task screen (Action: Sync) -->
+<button class="fixed bottom-10 right-10 w-16 h-16 bg-on-background text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl text-primary-container" style="font-variation-settings: 'FILL' 1;">save</span>
+</button>
+</main>
+<!-- Modal Overlay (Mock for Supervisor Approval) -->
+<div class="hidden fixed inset-0 bg-stone-900/60 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+<div class="bg-surface-container-lowest max-w-md w-full p-8 shadow-2xl border-t-8 border-error">
+<div class="text-error flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-4xl">lock_open</span>
+<h3 class="text-2xl font-black uppercase tracking-tighter">Token de Supervisor</h3>
+</div>
+<p class="text-sm font-medium text-secondary mb-6 leading-relaxed">Se detectaron discrepancias críticas en <span class="font-black text-on-surface">3 items de alto valor</span>. Ingrese el código de autorización para proceder con el ajuste de inventario.</p>
+<div class="space-y-4">
+<input class="w-full bg-surface-container-high border-none py-4 text-center text-2xl tracking-[0.5em] focus:ring-2 focus:ring-error" placeholder="••••••••" type="password"/>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-surface-container-highest py-3 font-bold uppercase text-[10px] tracking-widest">CANCELAR</button>
+<button class="bg-error text-on-error py-3 font-bold uppercase text-[10px] tracking-widest">AUTORIZAR</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

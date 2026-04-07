@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advanced Search | MAYOR DE REPUESTO LA CIMA, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#4c4c4c",
+                        "tertiary-container": "#bebcbc",
+                        "surface-bright": "#f9f9f9",
+                        "on-surface": "#1a1c1c",
+                        "inverse-primary": "#a3d73c",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "surface": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "secondary-container": "#e2dfde",
+                        "tertiary-fixed": "#e4e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "surface-container-low": "#f3f3f3",
+                        "on-secondary-container": "#636262",
+                        "error-container": "#ffdad6",
+                        "secondary": "#5f5e5e",
+                        "tertiary": "#5e5e5e",
+                        "primary-fixed": "#bef456",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "outline-variant": "#c3c9b1",
+                        "surface-variant": "#e2e2e2",
+                        "primary": "#496800",
+                        "outline": "#747a65",
+                        "primary-container": "#9acd32",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-primary-container": "#3a5400",
+                        "error": "#ba1a1a",
+                        "on-background": "#1a1c1c",
+                        "primary-fixed-dim": "#a3d73c",
+                        "background": "#f9f9f9",
+                        "surface-tint": "#496800",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#434937",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-primary-fixed": "#131f00",
+                        "on-primary-fixed-variant": "#364e00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blueprint-bg {
+            background-image: linear-gradient(#e2e2e2 1px, transparent 1px), linear-gradient(90deg, #e2e2e2 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-zinc-950/90 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-white/5 shadow-2xl shadow-black/50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1920px] mx-auto">
+<div class="text-xl font-bold tracking-tighter text-[#9ACD32] font-['Space_Grotesk']">
+                MAYOR DE REPUESTO LA CIMA, C.A.
+            </div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-400 font-medium hover:text-white transition-colors duration-200" href="#">Engines</a>
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-400 font-medium hover:text-white transition-colors duration-200" href="#">Transmission</a>
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-400 font-medium hover:text-white transition-colors duration-200" href="#">Electrical</a>
+<a class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-400 font-medium hover:text-white transition-colors duration-200" href="#">Suspension</a>
+</nav>
+<div class="flex items-center gap-6">
+<div class="hidden lg:block relative group">
+<input class="bg-zinc-900 border-none text-white text-sm px-4 py-2 rounded-lg w-64 focus:ring-1 focus:ring-[#9ACD32] transition-all" placeholder="Quick search..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2 text-zinc-500 text-sm">search</span>
+</div>
+<button class="font-['Space_Grotesk'] tracking-tight uppercase text-zinc-400 font-medium hover:text-white transition-colors duration-200">My Account</button>
+<button class="bg-[#9ACD32] text-zinc-950 px-4 py-2 font-bold font-['Space_Grotesk'] uppercase tracking-tight scale-95 active:scale-90 transition-transform">Cart (0)</button>
+</div>
+</div>
+</header>
+<main class="min-h-screen blueprint-bg">
+<!-- Hero Search Section -->
+<section class="max-w-[1920px] mx-auto px-6 py-12 md:py-20 flex flex-col items-center">
+<div class="w-full max-w-4xl text-center mb-12">
+<h1 class="font-headline text-5xl md:text-7xl font-bold uppercase tracking-tighter text-on-surface mb-4">
+                    Technical <span class="text-primary">Component</span> Search
+                </h1>
+<p class="text-secondary text-lg max-w-2xl mx-auto font-light">
+                    Precision engineering requires exact specifications. Locate high-performance industrial parts through our advanced technical filtering system.
+                </p>
+</div>
+<!-- Main Search Interface -->
+<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Sidebar Filters -->
+<aside class="lg:col-span-3 space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm">
+<h3 class="font-headline font-bold text-sm uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">tune</span> Filter Matrix
+                        </h3>
+<!-- Brand -->
+<div class="mb-8">
+<label class="block font-headline text-xs font-bold uppercase tracking-wider text-secondary mb-3">Manufacturer</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Cummins</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded-sm border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Volvo Penta</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Detroit Diesel</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Caterpillar</span>
+</label>
+</div>
+</div>
+<!-- Engine Series -->
+<div class="mb-8">
+<label class="block font-headline text-xs font-bold uppercase tracking-wider text-secondary mb-3">Series / Platform</label>
+<select class="w-full bg-surface-container-highest border-none text-sm py-2 px-3 rounded focus:ring-2 focus:ring-primary">
+<option>All Series</option>
+<option>ISX15 / X15</option>
+<option>D13 / D16</option>
+<option>Series 60</option>
+<option>C15 / C18 ACERT</option>
+</select>
+</div>
+<!-- Category -->
+<div class="mb-8">
+<label class="block font-headline text-xs font-bold uppercase tracking-wider text-secondary mb-3">Part Category</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="border-outline-variant text-primary focus:ring-primary w-4 h-4" name="cat" type="radio"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Cylinder Heads</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="border-outline-variant text-primary focus:ring-primary w-4 h-4" name="cat" type="radio"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Fuel Systems</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="border-outline-variant text-primary focus:ring-primary w-4 h-4" name="cat" type="radio"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Turbochargers</span>
+</label>
+</div>
+</div>
+<!-- Price Range -->
+<div>
+<label class="block font-headline text-xs font-bold uppercase tracking-wider text-secondary mb-3">Price Range (USD)</label>
+<div class="flex gap-2 items-center">
+<input class="w-full bg-surface-container-highest border-none text-xs p-2 rounded" placeholder="Min" type="number"/>
+<span class="text-outline-variant">—</span>
+<input class="w-full bg-surface-container-highest border-none text-xs p-2 rounded" placeholder="Max" type="number"/>
+</div>
+</div>
+<button class="w-full mt-8 bg-on-surface text-surface py-3 font-headline font-bold text-xs uppercase tracking-widest hover:bg-primary transition-colors">
+                            Apply Parameters
+                        </button>
+</div>
+</aside>
+<!-- Search Results Area -->
+<div class="lg:col-span-9 space-y-8">
+<!-- Advanced Search Bar -->
+<div class="relative">
+<div class="flex items-center bg-surface-container-lowest shadow-xl rounded-lg overflow-hidden border-2 border-transparent focus-within:border-primary transition-all">
+<span class="material-symbols-outlined ml-6 text-outline">search</span>
+<input class="w-full border-none bg-transparent py-6 px-4 text-xl font-headline focus:ring-0 placeholder:text-outline/50" placeholder="Search by Part Number or Keyword..." type="text" value="High pressure fuel injector assembly"/>
+<button class="bg-primary text-on-primary px-10 py-6 font-headline font-black uppercase tracking-tighter hover:bg-on-primary-container transition-colors">
+                                Search
+                            </button>
+</div>
+<!-- Suggestions Dropdown (Demo State) -->
+<div class="absolute top-full left-0 right-0 mt-2 bg-surface-container-lowest shadow-2xl rounded-lg z-10 overflow-hidden border border-surface-container-highest">
+<div class="p-3 bg-surface-container-low text-[10px] font-bold uppercase tracking-widest text-secondary">Technical Suggestions</div>
+<div class="p-4 hover:bg-surface-container-high cursor-pointer flex justify-between items-center group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">settings_input_component</span>
+<div>
+<span class="text-on-surface font-medium">Injector 2872405</span>
+<p class="text-xs text-secondary">Cummins ISX15 Engine Series</p>
+</div>
+</div>
+<span class="text-[10px] font-headline bg-primary-container text-on-primary-container px-2 py-1 rounded-sm uppercase">In Stock</span>
+</div>
+<div class="p-4 hover:bg-surface-container-high cursor-pointer flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">settings_input_component</span>
+<div>
+<span class="text-on-surface font-medium">Fuel Rail High Pressure</span>
+<p class="text-xs text-secondary">Volvo D13 Platform</p>
+</div>
+</div>
+<span class="text-xs text-outline italic">2 variations available</span>
+</div>
+</div>
+</div>
+<!-- Active Filters Display -->
+<div class="flex flex-wrap gap-2 items-center mt-4">
+<span class="text-xs font-bold uppercase tracking-wider text-outline-variant mr-2">Active:</span>
+<div class="bg-primary-container/20 text-on-primary-container border border-primary-container flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium">
+                            Volvo Penta <button class="material-symbols-outlined text-sm">close</button>
+</div>
+<div class="bg-primary-container/20 text-on-primary-container border border-primary-container flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium">
+                            Fuel Systems <button class="material-symbols-outlined text-sm">close</button>
+</div>
+<button class="text-xs text-primary font-bold uppercase hover:underline ml-2">Clear All</button>
+</div>
+<!-- Results Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Part Card 1 -->
+<div class="bg-surface-container-lowest group relative p-1 rounded-lg overflow-hidden transition-all hover:shadow-2xl">
+<div class="relative aspect-video overflow-hidden rounded-md bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up of a high-precision metal engine fuel injector with intricate metallic details and mechanical precision lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdih3XW_e6_FAaQCp97gTQ45lzDlWb-bqNy-qbZPTpjtZq6aw5z4etnzjXUGKuQFlngtq3YdAaSTr87jAH8HHYJuRCDpo1EdUd6pt6ibpk2vkdqe_GECKhP9XhwhflYVuzRE_Fvt1FvFn03r5TzKgjhfH9f5i6v5Nr9FqWaWVluKsjoAFyzG1IUTKkrrqIETfK-A3RYRPnGOUL5ww9_DE7OkFQjFgW7Z9PGLbGwE35qH4qoQ27Wop-IhkehsRBlfC9sKM-fpgeFcQ"/>
+<div class="absolute top-4 left-4 bg-zinc-950 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1">PN: 2872405-X</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline font-bold text-lg leading-tight uppercase group-hover:text-primary transition-colors">Fuel Injector Assembly</h4>
+<span class="text-primary font-headline font-black text-xl tracking-tighter">$845.00</span>
+</div>
+<p class="text-secondary text-sm mb-6 line-clamp-2">High-performance fuel delivery system optimized for Volvo D13 engine architectures.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="bg-surface-container-low p-3 rounded">
+<span class="block text-[10px] uppercase tracking-wider text-outline font-bold">Manufacturer</span>
+<span class="text-xs font-bold text-on-surface">Volvo Penta</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded">
+<span class="block text-[10px] uppercase tracking-wider text-outline font-bold">Condition</span>
+<span class="text-xs font-bold text-on-surface">OEM New</span>
+</div>
+</div>
+<button class="w-full border-2 border-on-surface text-on-surface py-3 font-headline font-bold text-xs uppercase tracking-widest hover:bg-on-surface hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span> View Technical Specs
+                                </button>
+</div>
+</div>
+<!-- Part Card 2 -->
+<div class="bg-surface-container-lowest group relative p-1 rounded-lg overflow-hidden transition-all hover:shadow-2xl">
+<div class="relative aspect-video overflow-hidden rounded-md bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Technical view of heavy duty diesel engine components showing metallic textures and clean industrial engineering aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClaz8sOkb-CeOYvXAf4B8fgMsCxBzpFNHni0H_kNdeaJBOGQLb1EzqGXvAH7ikXhhnCau00uiD-9WodcYGIVBEJSMHQEY9WkURlQh1qqQ1HgwkdWM1B6XffpkPiio0llSYq0FPi32Q2J0I_0ExDvXP9kdQyiQ_hi8k7e1f3ZbiYRX0EdNzop6YKm4DaNp0zpEABZSwMR5AbFfdppRJo3IbN0OhY7nj3RSMfVHWYVkL05m_RfxCNhjkZC4BwMR34_EHnNCh-1O10Pc"/>
+<div class="absolute top-4 left-4 bg-zinc-950 text-white text-[10px] font-black uppercase tracking-widest px-2 py-1">PN: D16-FUEL-99</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline font-bold text-lg leading-tight uppercase group-hover:text-primary transition-colors">Common Rail Pump</h4>
+<span class="text-primary font-headline font-black text-xl tracking-tighter">$1,290.00</span>
+</div>
+<p class="text-secondary text-sm mb-6 line-clamp-2">Precision machined pressure pump for heavy-duty marine and industrial applications.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="bg-surface-container-low p-3 rounded">
+<span class="block text-[10px] uppercase tracking-wider text-outline font-bold">Manufacturer</span>
+<span class="text-xs font-bold text-on-surface">Volvo Penta</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded">
+<span class="block text-[10px] uppercase tracking-wider text-outline font-bold">Condition</span>
+<span class="text-xs font-bold text-on-surface">Refurbished</span>
+</div>
+</div>
+<button class="w-full border-2 border-on-surface text-on-surface py-3 font-headline font-bold text-xs uppercase tracking-widest hover:bg-on-surface hover:text-white transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span> View Technical Specs
+                                </button>
+</div>
+</div>
+</div>
+<!-- Pagination / View More -->
+<div class="pt-10 flex flex-col items-center">
+<button class="group flex items-center gap-4 bg-surface-container-highest px-8 py-4 rounded-full transition-all hover:bg-primary-container">
+<span class="text-xs font-headline font-bold uppercase tracking-widest">Load More Results</span>
+<span class="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+<p class="text-[10px] text-outline font-bold uppercase tracking-[0.2em] mt-6">Displaying 2 of 144 components found</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Specs Teaser -->
+<section class="bg-zinc-950 text-white py-24 overflow-hidden relative">
+<div class="absolute inset-0 opacity-10 blueprint-bg grayscale invert"></div>
+<div class="max-w-[1920px] mx-auto px-6 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-8 leading-none">
+                            Precision <br/><span class="text-primary-container">Documentation</span>
+</h2>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white/10 flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-primary-container">description</span>
+</div>
+<div>
+<h4 class="font-headline font-bold uppercase text-sm tracking-wide">Interactive CAD Views</h4>
+<p class="text-zinc-500 text-sm">View component diagrams and explosive views directly in your browser.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-white/10 flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-primary-container">verified</span>
+</div>
+<div>
+<h4 class="font-headline font-bold uppercase text-sm tracking-wide">OEM Cross-Reference</h4>
+<p class="text-zinc-500 text-sm">Validate part compatibility across major industrial manufacturers instantly.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -inset-4 bg-primary-container/20 blur-3xl rounded-full"></div>
+<img class="relative rounded-xl shadow-2xl border border-white/10 grayscale" data-alt="Macro photography of blueprinted mechanical plans with digital UI overlays highlighting precise engineering measurements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp_go7_XzNq6g-tmy9bpYLTd3_FBXd6B2kXx45Se-1-1Fgn2GasArxzKSx0cpR9a4A0wUur7EOKn0Lb-AV4Qy_mn96N86-SZYDhgs1RxIxsyp4XGlTSM-H2odaoKMCrl3yY6vTltIeNIK2XP0tOmRWCLqAjwkMLgkbAG1u1pHjCbZRYY_DIK1ARS2ZI6HlEBrk07jJqZOVZ3f4EvUOt5K1L5ttCmt9LF0Wz1DgbKDKBSV0KSa617nY1PRQVsew99Hv2CfGWqTzBow"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-900 w-full mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 py-12 w-full">
+<div class="flex flex-col gap-6">
+<div class="font-['Space_Grotesk'] font-black text-zinc-100 text-2xl tracking-tighter uppercase">
+                    LA CIMA, C.A.
+                </div>
+<p class="text-zinc-500 text-sm leading-relaxed max-w-xs">
+                    Leading distributor of high-performance heavy-duty engine components across Venezuela. Engineered for uptime.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-headline font-bold text-[#9ACD32] uppercase text-xs tracking-[0.2em]">Contact Channels</h4>
+<ul class="space-y-3">
+<li class="flex items-center gap-2 group transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xs text-zinc-500">mail</span>
+<span class="text-zinc-500 text-sm font-['Inter'] hover:text-[#9ACD32]">info@lacima.com</span>
+</li>
+<li class="flex items-center gap-2 group transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xs text-zinc-500">shopping_cart</span>
+<span class="text-zinc-500 text-sm font-['Inter'] hover:text-[#9ACD32]">sales@lacima.com</span>
+</li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-headline font-bold text-[#9ACD32] uppercase text-xs tracking-[0.2em]">Support Lines</h4>
+<ul class="space-y-3">
+<li class="flex items-center gap-2 group transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xs text-zinc-500">call</span>
+<span class="text-zinc-500 text-sm font-['Inter'] hover:text-[#9ACD32]">+58 241-5550101</span>
+</li>
+<li class="flex items-center gap-2 group transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xs text-zinc-500">call</span>
+<span class="text-zinc-500 text-sm font-['Inter'] hover:text-[#9ACD32]">+58 412-5550202</span>
+</li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-headline font-bold text-[#9ACD32] uppercase text-xs tracking-[0.2em]">Operations</h4>
+<p class="text-zinc-500 text-sm leading-relaxed">
+                    HQ: Valencia, Edo. Carabobo.<br/>
+                    Mon - Fri: 08:00 - 17:00<br/>
+                    Sat: 09:00 - 13:00
+                </p>
+</div>
+</div>
+<div class="bg-zinc-800 px-8 py-6 w-full flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-zinc-500 text-xs font-['Inter']">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. RIF: J-40308741-5. Valencia, Venezuela.</span>
+<div class="flex gap-6">
+<a class="text-zinc-500 text-xs hover:text-[#9ACD32] transition-colors" href="#">Privacy Policy</a>
+<a class="text-zinc-500 text-xs hover:text-[#9ACD32] transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

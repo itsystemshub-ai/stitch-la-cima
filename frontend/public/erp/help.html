@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Soporte Técnico | INDUSTRIAL FORGE ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#5f5e5e",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "outline-variant": "#c3c9b1",
+                    "on-primary-fixed": "#131f00",
+                    "secondary-container": "#e2dfde",
+                    "surface-bright": "#f9f9f9",
+                    "primary-container": "#9acd32",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-variant": "#e2e2e2",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-surface-variant": "#434937",
+                    "outline": "#747a65",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "tertiary-container": "#bebcbc",
+                    "surface-dim": "#dadada",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-primary-fixed-variant": "#364e00",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-container": "#4c4c4c",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5e5e5e",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#636262",
+                    "surface-container-high": "#e8e8e8",
+                    "primary-fixed": "#bef456",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "inverse-surface": "#2f3131",
+                    "surface-tint": "#496800",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-container": "#3a5400",
+                    "surface-container": "#eeeeee",
+                    "on-surface": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "primary": "#496800",
+                    "surface": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "background": "#f9f9f9",
+                    "inverse-primary": "#a3d73c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-stone-900 dark:text-white tracking-tighter uppercase font-['Space_Grotesk']">INDUSTRIAL FORGE ERP</span>
+<div class="hidden md:flex gap-6">
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Dashboard</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Analytics</a>
+<a class="text-lime-600 dark:text-lime-400 font-bold border-b-2 border-lime-600 font-['Space_Grotesk'] uppercase tracking-tight" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-highest border-none rounded-none text-xs font-label tracking-widest focus:ring-2 focus:ring-primary w-64" placeholder="BUSCAR MANUALES..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-on-surface">notifications</span></button>
+<button class="p-2 hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-on-surface">settings</span></button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User Profile Avatar" data-alt="close up professional headshot of a technical system administrator with a focused expression in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlalmvnTTm_DBu0vqaCqTSP6ISH_kdXoshdKf6H-TiEdbbOlyqxnbxsOJC0UykFuycGx3q-SSh4y6PwZw4mPR-dqoZ_Z0KR2LHc8ojeB05VbMy5gm1TXz-jFh9_B14EZr5_EJLRyaKxeuemLNWfdsEhaO4OlLWR7yZUfskOKgvWRA_TStN6jBdHVbe6wUWBg_U14wbVHgjN3q8OdqcDX4k4ncHg-wHnHzSGEd9RbOqyhBX2MM7I3fweOSaCAn6mWrf29-Cg2WlNgw"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Suppressed for Support Focus Canvas) -->
+<main class="pt-24 pb-12 px-6 max-w-7xl mx-auto">
+<!-- Hero Editorial Section -->
+<header class="relative mb-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+<div class="md:col-span-8">
+<div class="inline-block px-3 py-1 bg-primary text-on-primary text-[10px] font-bold tracking-[0.2em] mb-4 uppercase">Knowledge Base v4.2</div>
+<h1 class="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-[0.9] text-on-surface">CENTRO DE<br/><span class="text-primary">SOPORTE</span> TÉCNICO</h1>
+<p class="mt-6 text-lg text-secondary max-w-xl font-body">Portal de capacitación y asistencia para el personal de <span class="font-bold text-on-background">MAYOR DE REPUESTO LA CIMA, C.A.</span> Optimiza tu flujo de trabajo con nuestra documentación técnica.</p>
+</div>
+<div class="md:col-span-4 flex flex-col gap-4">
+<div class="bg-surface-container-low p-6 rounded-none relative overflow-hidden">
+<div class="relative z-10">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary block mb-1">Estado del Sistema</span>
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-lime-500 animate-pulse"></span>
+<span class="text-sm font-bold uppercase tracking-tight">OPERATIVO AL 100%</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid: Modules Documentation -->
+<section class="mb-20">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-2xl font-bold uppercase tracking-tight">Manuales por Módulo</h2>
+<p class="text-secondary text-sm uppercase tracking-widest">Documentación Técnica Detallada</p>
+</div>
+<button class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2 group">
+                    Ver todos los módulos <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<!-- Module Card 1 -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">inventory_2</span>
+<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">Inventario</h3>
+<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Gestión de stock, almacenes y repuestos pesados.</p>
+<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Descargar PDF</a>
+</div>
+<!-- Module Card 2 -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">point_of_sale</span>
+<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">Ventas</h3>
+<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Facturación, preventa y notas de entrega industriales.</p>
+<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Leer manual</a>
+</div>
+<!-- Module Card 3 (Video Feature) -->
+<div class="md:col-span-4 lg:col-span-2 row-span-2 relative bg-stone-900 overflow-hidden min-h-[300px]">
+<img alt="Video Tutorials" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="modern industrial factory workshop with engineers working on high tech engine components with cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5MGrguqHGUFiN9CKr-ZIaeATnnLbjWrerKKF4Jb43SyPX0bpOrh54OVuADX_bawcdHqBuex86aZ_WZNobEjrcCYkveBOr7GpFKlHth2CTmHDk2OegxEqJmqJmXzHHssWscyvaW1LIq0LhFqawrvixC66dfTVE5psaB6C2YYCSuijWKwOV2TZGwZFIkgDzC_ys8eIgJspsb5VCWdgAEr_AeRg5z0-VtRkGrWG07Cj1w77SJ126gSYu9gdtHRRNTdY_w_szBhLHlbU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-stone-950 to-transparent p-8 flex flex-col justify-end">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+<h3 class="text-2xl font-bold uppercase tracking-tight text-white mb-2">Video Tutoriales</h3>
+<p class="text-sm text-stone-300">Guías visuales paso a paso del sistema ERP Forge.</p>
+</div>
+</div>
+<!-- Module Card 4 -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">payments</span>
+<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">Finanzas</h3>
+<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Cuentas por cobrar y conciliación bancaria.</p>
+<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Consultar</a>
+</div>
+<!-- Module Card 5 -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">groups</span>
+<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">RRHH</h3>
+<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Gestión de nómina y asistencia del personal.</p>
+<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Ver guía</a>
+</div>
+</div>
+</section>
+<!-- FAQ Section: Editorial Layout -->
+<section class="mb-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
+<div class="lg:col-span-4">
+<h2 class="text-4xl font-bold uppercase tracking-tighter leading-none mb-6">Preguntas<br/>Frecuentes</h2>
+<p class="text-secondary text-sm font-body mb-8">Respuestas rápidas a las dudas operativas más comunes detectadas en planta.</p>
+<div class="p-6 border-l-4 border-primary bg-surface-container-low">
+<p class="text-sm italic text-on-surface-variant">"La precisión en el registro de datos es la base de nuestra eficiencia logística."</p>
+<span class="text-[10px] font-bold uppercase tracking-widest block mt-2 text-primary">— Control de Sistemas</span>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-4">
+<div class="bg-surface-container p-6 flex justify-between items-center cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="font-bold uppercase tracking-tight text-sm">¿Cómo anular una factura emitida por error?</span>
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+<div class="bg-surface-container-highest p-6">
+<div class="flex justify-between items-center mb-4">
+<span class="font-bold uppercase tracking-tight text-sm text-primary">¿Cómo reponer stock de un almacén secundario?</span>
+<span class="material-symbols-outlined text-primary">remove</span>
+</div>
+<p class="text-sm text-secondary leading-relaxed font-body">
+                        Debe dirigirse al módulo de <span class="font-bold text-on-background">Inventario &gt; Transferencias</span>. Seleccione el almacén de origen "Principal" y el destino correspondiente. Ingrese los códigos de las piezas y valide la firma digital del responsable de almacén.
+                    </p>
+</div>
+<div class="bg-surface-container p-6 flex justify-between items-center cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="font-bold uppercase tracking-tight text-sm">¿Mi clave ha expirado, cómo la recupero?</span>
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+<div class="bg-surface-container p-6 flex justify-between items-center cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="font-bold uppercase tracking-tight text-sm">¿Cómo generar el reporte de ventas del mes anterior?</span>
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+</div>
+</section>
+<!-- Ticket Reporting Form -->
+<section class="bg-stone-900 text-white p-8 md:p-12 relative overflow-hidden">
+<!-- Decorative Element -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary/10 -skew-x-12 translate-x-1/2"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div>
+<h2 class="text-4xl font-bold uppercase tracking-tighter mb-4">Reportar Incidencia</h2>
+<p class="text-stone-400 max-w-md mb-8">Si el problema persiste después de consultar los manuales, abra un ticket de soporte técnico. Nuestro equipo le responderá en un plazo máximo de 2 horas.</p>
+<div class="space-y-6">
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary">mail</span>
+<div>
+<span class="block text-[10px] font-bold uppercase tracking-widest text-stone-500">Email Directo</span>
+<span class="text-lg font-headline">sistemas@lacima.com.ve</span>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary">phone_in_talk</span>
+<div>
+<span class="block text-[10px] font-bold uppercase tracking-widest text-stone-500">Emergencias (Ext.)</span>
+<span class="text-lg font-headline">405 / 406</span>
+</div>
+</div>
+</div>
+</div>
+<form class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Nombre del Usuario</label>
+<input class="w-full bg-stone-800 border-none text-white p-3 focus:ring-2 focus:ring-primary rounded-none" placeholder="EJ. CARLOS PÉREZ" type="text"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Módulo Afectado</label>
+<select class="w-full bg-stone-800 border-none text-white p-3 focus:ring-2 focus:ring-primary rounded-none">
+<option>SELECCIONAR MÓDULO</option>
+<option>INVENTARIO</option>
+<option>VENTAS</option>
+<option>COMPRAS</option>
+<option>ERROR GENERAL</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Nivel de Prioridad</label>
+<div class="flex gap-4 mt-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary bg-stone-800 border-none" name="prio" type="radio"/>
+<span class="text-xs uppercase font-bold tracking-tight">Baja</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary bg-stone-800 border-none" name="prio" type="radio"/>
+<span class="text-xs uppercase font-bold tracking-tight">Media</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary bg-stone-800 border-none" name="prio" type="radio"/>
+<span class="text-xs uppercase font-bold tracking-tight text-primary">Crítica</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Descripción de la Falla</label>
+<textarea class="w-full bg-stone-800 border-none text-white p-3 focus:ring-2 focus:ring-primary rounded-none" placeholder="DESCRIBA EL ERROR O LA DUDA TÉCNICA DETALLADAMENTE..." rows="4"></textarea>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-bold uppercase tracking-widest hover:bg-primary-container transition-colors active:scale-[0.98]" type="submit">Enviar Ticket de Soporte</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer Technical Info -->
+<footer class="bg-surface-container-low px-6 py-8 border-t border-outline-variant/20">
+<div class="max-w-7xl mx-auto flex flex-col md:row justify-between items-center gap-6">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black tracking-tighter uppercase font-['Space_Grotesk'] opacity-50">FORGE SYSTEMS</span>
+<span class="h-4 w-px bg-stone-300"></span>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">La Cima ERP Documentation Portal © 2024</span>
+</div>
+<div class="flex gap-8">
+<a class="text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-primary" href="#">Políticas de Seguridad</a>
+<a class="text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-primary" href="#">Registro de Cambios</a>
+<a class="text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-primary" href="#">Versión 4.2.1-STABLE</a>
+</div>
+</div>
+</footer>
+<!-- Floating Action Button: Contextual Quick Help -->
+<button class="fixed bottom-8 right-8 h-14 w-14 bg-primary text-on-primary rounded-none flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+</button>
+</body></html>

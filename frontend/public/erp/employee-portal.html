@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portal del Empleado - TITAN INDUSTRIAL ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#364e00",
+                    "surface-variant": "#e2e2e2",
+                    "surface-container-highest": "#e2e2e2",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-secondary-container": "#636262",
+                    "inverse-primary": "#a3d73c",
+                    "surface-container": "#eeeeee",
+                    "on-primary-fixed": "#131f00",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#e2dfde",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-primary-container": "#3a5400",
+                    "inverse-on-surface": "#f1f1f1",
+                    "tertiary-fixed": "#e4e2e2",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "tertiary": "#5e5e5e",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-high": "#e8e8e8",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2f3131",
+                    "surface-dim": "#dadada",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "primary-container": "#9acd32",
+                    "on-tertiary-container": "#4c4c4c",
+                    "surface-tint": "#496800",
+                    "tertiary-container": "#bebcbc",
+                    "surface": "#f9f9f9",
+                    "primary-fixed": "#bef456",
+                    "outline": "#747a65",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#434937",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-low": "#f3f3f3",
+                    "primary": "#496800",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#474746",
+                    "secondary": "#5f5e5e",
+                    "on-error-container": "#93000a",
+                    "background": "#f9f9f9",
+                    "primary-fixed-dim": "#a3d73c",
+                    "outline-variant": "#c3c9b1",
+                    "on-background": "#1a1c1c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-950/90 backdrop-blur-md border-b border-stone-800/50 flex justify-between items-center h-16 px-6 w-full shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+<div class="text-2xl font-bold tracking-tighter text-lime-400 font-['Space_Grotesk'] uppercase tracking-tight">TITAN INDUSTRIAL ERP</div>
+<div class="hidden md:flex gap-8">
+<a class="text-stone-400 hover:text-stone-100 transition-all duration-200 font-['Space_Grotesk'] uppercase tracking-tight" href="#">Inventario</a>
+<a class="text-stone-400 hover:text-stone-100 transition-all duration-200 font-['Space_Grotesk'] uppercase tracking-tight" href="#">Ventas</a>
+<a class="text-stone-400 hover:text-stone-100 transition-all duration-200 font-['Space_Grotesk'] uppercase tracking-tight" href="#">Bancos</a>
+<a class="text-lime-400 border-b-2 border-lime-400 pb-1 font-['Space_Grotesk'] uppercase tracking-tight" href="#">RRHH</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-stone-400 hover:bg-stone-800/50 transition-all duration-200 p-2 rounded active:scale-95 duration-75">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-stone-400 hover:bg-stone-800/50 transition-all duration-200 p-2 rounded active:scale-95 duration-75">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-stone-400 hover:bg-stone-800/50 transition-all duration-200 p-2 rounded active:scale-95 duration-75">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-stone-900 flex flex-col pt-20 pb-6">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-stone-800 flex items-center justify-center overflow-hidden border border-stone-700">
+<img alt="Usuario Industrial" class="w-full h-full object-cover" data-alt="Close-up profile of a worker wearing safety glasses and a hard hat in a modern manufacturing facility environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6sqOCBZCcM9Cs7nu4tr5B44z4xO4oaMNqOBm5_qOCsoZm4T6d6gdHuu2cxOZNg6SA0BxpE65gY41z1ZfNuQ4M0Q4iDPMfv-bMr337L1EPSxQnMvGJFOrLGAE_JNnhgRF27FrNRHq_3pSkbb3Nt2XrUHv-hoUuNFF0mrcT0DKXlnNf8EJ9wvnF0Ntp0rt_vXvDPxsfNj95eSmQag-h6tvHxajvV7X7MSeWqE1NEF1W8rInYVb4FV8MWpk38DCfG9HFPvqufcelNbs"/>
+</div>
+<div>
+<p class="text-lime-500 font-headline text-xs font-bold tracking-widest uppercase">OPERACIONES</p>
+<p class="text-stone-400 text-[10px] uppercase font-medium">Terminal Central</p>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200 font-['Inter'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined">storefront</span> E-Commerce
+            </a>
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200 font-['Inter'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Inventario
+            </a>
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200 font-['Inter'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined">cancel_presentation</span> Ventas
+            </a>
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200 font-['Inter'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined">account_balance</span> Bancos
+            </a>
+<a class="bg-lime-900/20 text-lime-400 border-r-4 border-lime-500 px-4 py-3 flex items-center gap-3 font-['Inter'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined">badge</span> Portal Empleado
+            </a>
+</nav>
+<div class="px-4 mt-6">
+<button class="w-full bg-primary py-2 text-on-primary font-bold text-xs uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">
+                NUEVA ACTA
+            </button>
+</div>
+<div class="mt-auto border-t border-stone-800 pt-4">
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 hover:bg-stone-800 transition-colors duration-200 font-['Inter'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined">support_agent</span> Soporte
+            </a>
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 hover:bg-stone-800 transition-colors duration-200 font-['Inter'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined">logout</span> Cerrar Sesión
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="max-w-7xl mx-auto p-8">
+<!-- Welcome Header -->
+<header class="mb-12 relative overflow-hidden bg-stone-950 p-10 text-white rounded-lg">
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-20 pointer-events-none">
+<img alt="Industrial Blueprint" class="w-full h-full object-cover" data-alt="Technical schematic diagram of an engine part with precise lines and measurements on a dark technical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKF4RI8MZ9lzBxzxXJA23LBJG2OXjpDJYlb9Qk1-Wdmc15k3TJFbWlklBLM0y88og-ar1IVvNLOFvhtEMKbn67wO3OLLHVO6jvD8JWKSjBmypWeiP8TCykybzmCAu4XREgb7ZvYb_G5674wt673fP3roJPagIPRJlEqSAgP1DF_5VPX-yqM9usEfuy35prd8UUUnuuJK-_kHTdyWGTEasPKuI0MRdEVvNPt3NnEtfwS_Qc2KZaWOnh0HE8aNsirb-ZEJIFxsbv-Vg"/>
+</div>
+<div class="relative z-10">
+<span class="inline-block px-3 py-1 bg-lime-500 text-stone-950 font-bold text-[10px] tracking-widest uppercase mb-4">Panel del Trabajador</span>
+<h1 class="text-5xl font-black uppercase tracking-tighter mb-2 leading-none">BIENVENIDO, CARLOS ORTEGA</h1>
+<p class="text-stone-400 font-body text-lg max-w-xl">ID: TITAN-74492 | Operador Senior de Maquinaria Pesada | Planta Central</p>
+</div>
+</header>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+<!-- Vacation Card -->
+<div class="md:col-span-4 bg-surface-container-lowest p-8 flex flex-col justify-between min-h-[220px]">
+<div>
+<p class="text-stone-500 text-xs font-bold uppercase tracking-widest mb-1">Días de Vacaciones</p>
+<h2 class="text-6xl font-black text-primary leading-tight">18 <span class="text-lg font-medium text-stone-400 uppercase tracking-normal">Disponibles</span></h2>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 60%"></div>
+</div>
+<span class="text-[10px] font-bold text-stone-400">60%</span>
+</div>
+</div>
+<!-- Prestaciones Card (Art 142) -->
+<div class="md:col-span-8 bg-surface-container p-8 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-stone-500 text-xs font-bold uppercase tracking-widest mb-1">Garantía Prestaciones Sociales (Art. 142)</p>
+<h2 class="text-4xl font-black text-on-surface tracking-tighter">USD $12.450,82</h2>
+</div>
+<button class="bg-surface-container-highest p-3 rounded-full hover:bg-primary-container hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">receipt_long</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-8 border-t border-stone-300 pt-6">
+<div>
+<p class="text-[10px] text-stone-400 uppercase font-bold">Acumulado Trimestral</p>
+<p class="text-sm font-black">$1.200,00</p>
+</div>
+<div>
+<p class="text-[10px] text-stone-400 uppercase font-bold">Antigüedad</p>
+<p class="text-sm font-black">4 Años, 2 Meses</p>
+</div>
+<div>
+<p class="text-[10px] text-stone-400 uppercase font-bold">Última Actualización</p>
+<p class="text-sm font-black">30 SEP 2023</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Latest Receipts Section -->
+<div class="lg:col-span-2">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-black uppercase tracking-tight">ÚLTIMOS RECIBOS DE NÓMINA</h3>
+<a class="text-primary text-xs font-bold uppercase tracking-widest hover:underline" href="#">Ver Historial</a>
+</div>
+<div class="bg-surface-container-lowest overflow-hidden">
+<div class="divide-y divide-surface-container">
+<!-- Receipt Item -->
+<div class="p-5 flex items-center justify-between group hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-stone-400">description</span>
+</div>
+<div>
+<p class="font-black text-sm uppercase tracking-tighter">QUINCENA 2 - OCTUBRE 2023</p>
+<p class="text-xs text-stone-500 uppercase tracking-widest">Abonado el 30/10/2023</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<p class="font-black text-lime-700">$1.450,22</p>
+<button class="bg-stone-950 text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-primary transition-colors">DESCARGAR</button>
+</div>
+</div>
+<!-- Receipt Item -->
+<div class="p-5 flex items-center justify-between group hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-stone-400">description</span>
+</div>
+<div>
+<p class="font-black text-sm uppercase tracking-tighter">QUINCENA 1 - OCTUBRE 2023</p>
+<p class="text-xs text-stone-500 uppercase tracking-widest">Abonado el 15/10/2023</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<p class="font-black text-lime-700">$1.450,22</p>
+<button class="bg-stone-950 text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-primary transition-colors">DESCARGAR</button>
+</div>
+</div>
+<!-- Receipt Item -->
+<div class="p-5 flex items-center justify-between group hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-stone-400">description</span>
+</div>
+<div>
+<p class="font-black text-sm uppercase tracking-tighter">QUINCENA 2 - SEPTIEMBRE 2023</p>
+<p class="text-xs text-stone-500 uppercase tracking-widest">Abonado el 30/09/2023</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<p class="font-black text-lime-700">$1.485,50</p>
+<button class="bg-stone-950 text-white px-4 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-primary transition-colors">DESCARGAR</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Permissions -->
+<div class="lg:col-span-1">
+<h3 class="text-2xl font-black uppercase tracking-tight mb-6">SOLICITAR PERMISOS</h3>
+<div class="bg-stone-900 p-8 text-white">
+<form action="#" class="space-y-6">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Tipo de Permiso</label>
+<select class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-primary h-12 text-sm">
+<option>Día de Vacaciones</option>
+<option>Permiso Médico</option>
+<option>Asuntos Personales</option>
+<option>Familiar</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Desde</label>
+<input class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-primary h-12 text-sm px-4" type="date"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Hasta</label>
+<input class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-primary h-12 text-sm px-4" type="date"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Justificación (Opcional)</label>
+<textarea class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-primary text-sm p-4" rows="3"></textarea>
+</div>
+<button class="w-full bg-lime-500 py-4 text-stone-950 font-black uppercase tracking-widest hover:bg-lime-400 transition-all active:scale-95" type="submit">
+                                ENVIAR SOLICITUD
+                            </button>
+</form>
+</div>
+<div class="mt-6 p-4 border border-stone-200 bg-surface-container-low">
+<div class="flex items-center gap-3 text-stone-500">
+<span class="material-symbols-outlined">info</span>
+<p class="text-[10px] font-medium leading-relaxed uppercase tracking-tight">Las solicitudes de permisos médicos requieren cargar el justificante en un plazo máximo de 48h.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / System Info -->
+<footer class="mt-20 pt-8 border-t border-stone-200 flex justify-between items-center text-stone-400 text-[10px] font-bold uppercase tracking-widest">
+<div>© 2023 TITAN INDUSTRIAL ERP - SECCIÓN RRHH V4.2</div>
+<div class="flex gap-6">
+<a class="hover:text-stone-950" href="#">Políticas de Empresa</a>
+<a class="hover:text-stone-950" href="#">Reglamento Interno</a>
+<a class="hover:text-stone-950" href="#">Seguridad Industrial</a>
+</div>
+</footer>
+</div>
+</main>
+<!-- FAB for direct support - suppressing as per rules for settings/profile context, but since this is a Portal "Dashboard" it is allowed -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-stone-950 text-lime-400 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-90 transition-all z-50">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</body></html>

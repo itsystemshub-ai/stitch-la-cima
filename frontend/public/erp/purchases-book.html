@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>METALLIC_CORE_ERP - Libro de Compras Fiscal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#a3d73c",
+                    "tertiary": "#5e5e5e",
+                    "on-primary-fixed-variant": "#364e00",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#636262",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-container": "#3a5400",
+                    "background": "#f9f9f9",
+                    "surface-container-highest": "#e2e2e2",
+                    "outline": "#747a65",
+                    "surface-container-high": "#e8e8e8",
+                    "primary-container": "#9acd32",
+                    "primary-fixed": "#bef456",
+                    "on-background": "#1a1c1c",
+                    "surface-container": "#eeeeee",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-surface": "#1a1c1c",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9f9",
+                    "surface-variant": "#e2e2e2",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dadada",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#bebcbc",
+                    "on-tertiary-container": "#4c4c4c",
+                    "surface-tint": "#496800",
+                    "outline-variant": "#c3c9b1",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-fixed-variant": "#474746",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-surface-variant": "#434937",
+                    "secondary": "#5f5e5e",
+                    "inverse-primary": "#a3d73c",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary-fixed": "#131f00",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#496800",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f3f3f3",
+                    "secondary-container": "#e2dfde",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "tertiary-fixed": "#e4e2e2",
+                    "stone": {
+                        "800": "#292524",
+                        "900": "#1c1917",
+                        "950": "#0c0a09"
+                    },
+                    "lime": {
+                        "200": "#d9f99d",
+                        "400": "#a3e635"
+                    }
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0c0a09; color: #f1f1f1; }
+        .font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #1c1917; }
+        ::-webkit-scrollbar-thumb { background: #a3e635; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-stone-950/80 backdrop-blur-xl docked full-width top-0 z-50 fixed flex justify-between items-center w-full px-6 py-4 border-b border-stone-800">
+<div class="text-2xl font-bold tracking-tighter text-lime-400 font-headline">METALLIC_CORE_ERP</div>
+<nav class="hidden md:flex items-center gap-8 font-space-grotesk uppercase tracking-tighter">
+<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Dashboard</a>
+<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Inventario</a>
+<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Reportes</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 text-sm">search</span>
+<input class="bg-stone-900 border-none text-xs font-headline tracking-widest pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-lime-400 text-stone-300" placeholder="BUSCAR..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-stone-400 hover:text-lime-400 transition-colors">notifications</button>
+<button class="material-symbols-outlined text-stone-400 hover:text-lime-400 transition-colors">settings</button>
+<div class="h-8 w-8 bg-lime-400 flex items-center justify-center rounded-sm overflow-hidden border border-lime-500/50">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Abstract geometric industrial shape icon with sharp angles and high contrast lime and black colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcskIIxv-Eg5iirmseLJuCxaC1POuHZuj3aC_xzF3mXj_EWgvUpiLau3OCrjYqwBQ6Gn7BmUvUP-zvpStUH5uCdz88MCzAmUD04ahZqLJH9MSB6QKLTMFS6w2m6keGf9s-yOdoC_9bapu4bm7KGeaTKNi3PRdXopEDvm5iq41HhAeeg8bTYAfk_IxUgpnzM6bMYiss43qPXOGMU3nMGOLkmJ0XM0uwBXVs-zufIvNV0KKuqNbm1mW0r2OLE6bNLoIIOhnVqrt1jkA"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-screen w-64 left-0 top-0 fixed bg-stone-900 shadow-2xl py-8 gap-4 z-40 border-r border-stone-800 pt-24">
+<div class="px-6 mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-stone-800 flex items-center justify-center border border-lime-400/20">
+<span class="material-symbols-outlined text-lime-400" data-icon="factory">factory</span>
+</div>
+<div>
+<div class="text-lime-400 font-black font-headline text-sm tracking-tighter">COMPRAS_MOD</div>
+<div class="text-stone-500 text-[10px] font-mono">V1.0.2_ACTIVE</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-4">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Indicadores</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Facturación</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-950 text-lime-400 border-l-4 border-lime-400 transition-all duration-200 font-space-grotesk font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Libro SENIAT</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="factory">factory</span>
+<span>Proveedores</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Cuentas por Pagar</span>
+</a>
+</nav>
+<div class="mt-auto px-4 flex flex-col gap-2">
+<button class="w-full py-3 border border-lime-400/30 text-lime-400 font-headline uppercase text-xs tracking-widest hover:bg-lime-400/10 transition-colors">
+                Soporte Técnico
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-error transition-colors font-space-grotesk font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 pb-12 px-6 min-h-screen">
+<!-- Dashboard Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+<div class="space-y-1">
+<h1 class="text-4xl font-headline font-bold uppercase tracking-tighter text-white">Libro de Compras Fiscal</h1>
+<p class="text-stone-500 font-mono text-sm">CONTROL FISCAL PERIODICIDAD MENSUAL - ART. 75 RIVA</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-stone-800 hover:bg-stone-700 text-stone-200 px-6 py-2 font-headline uppercase text-xs tracking-widest transition-all scale-95 active:scale-90 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Exportar a Excel (SheetJS)
+                </button>
+<button class="bg-lime-400 hover:bg-lime-300 text-stone-950 px-6 py-2 font-headline font-bold uppercase text-xs tracking-widest transition-all scale-95 active:scale-90 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">lock</span>
+                    Cerrar Período Mensual
+                </button>
+</div>
+</div>
+<!-- Filter Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-stone-900 p-6 border-l-2 border-lime-400">
+<div class="text-stone-500 font-headline uppercase text-[10px] tracking-widest mb-1">Total Base Imponible</div>
+<div class="text-2xl font-headline font-bold text-white">45.290,50 <span class="text-stone-500 text-xs">VED</span></div>
+</div>
+<div class="bg-stone-900 p-6 border-l-2 border-stone-700">
+<div class="text-stone-500 font-headline uppercase text-[10px] tracking-widest mb-1">Total IVA (16%)</div>
+<div class="text-2xl font-headline font-bold text-white">7.246,48 <span class="text-stone-500 text-xs">VED</span></div>
+</div>
+<div class="bg-stone-900 p-6 border-l-2 border-stone-700">
+<div class="text-stone-500 font-headline uppercase text-[10px] tracking-widest mb-1">IVA Retenido</div>
+<div class="text-2xl font-headline font-bold text-lime-400">5.434,86 <span class="text-stone-500 text-xs">VED</span></div>
+</div>
+<div class="bg-stone-900 p-6 border-l-2 border-lime-400/50">
+<div class="text-stone-500 font-headline uppercase text-[10px] tracking-widest mb-1">Total Compras</div>
+<div class="text-2xl font-headline font-bold text-white">52.536,98 <span class="text-stone-500 text-xs">VED</span></div>
+</div>
+</div>
+<!-- Fiscal Table Section -->
+<div class="bg-stone-900 shadow-2xl overflow-hidden">
+<div class="p-4 border-b border-stone-800 flex justify-between items-center bg-stone-950/40">
+<div class="flex gap-4">
+<select class="bg-stone-800 border-none text-[10px] font-headline uppercase tracking-widest text-stone-300 focus:ring-1 focus:ring-lime-400 pr-8">
+<option>Octubre 2023</option>
+<option>Septiembre 2023</option>
+</select>
+<div class="flex items-center gap-2 px-3 py-1 bg-stone-800 text-[10px] font-headline uppercase tracking-widest text-lime-400">
+<span class="w-1.5 h-1.5 bg-lime-400 rounded-full animate-pulse"></span>
+                        Estado: Abierto
+                    </div>
+</div>
+<div class="text-stone-500 text-[10px] font-mono">MOSTRANDO 24 REGISTROS DE COMPRA</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-950 text-stone-400 font-headline text-[10px] uppercase tracking-widest">
+<th class="px-4 py-4 font-medium border-b border-stone-800">Fecha</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800">RIF Proveedor</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800">Nombre Proveedor</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800">Nro Factura</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800">Nro Control</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800 text-right">Base Imponible</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800 text-right">IVA (16%)</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800">Retención</th>
+<th class="px-4 py-4 font-medium border-b border-stone-800 text-right">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-800/50 font-mono text-[11px]">
+<!-- Row 1 -->
+<tr class="hover:bg-stone-800/40 transition-colors group">
+<td class="px-4 py-3 text-stone-300">12/10/2023</td>
+<td class="px-4 py-3 text-lime-400 font-bold">J-31456789-0</td>
+<td class="px-4 py-3 text-stone-300 uppercase">Siderúrgica del Turbo C.A.</td>
+<td class="px-4 py-3 text-stone-400">00045612</td>
+<td class="px-4 py-3 text-stone-400">00-998811</td>
+<td class="px-4 py-3 text-right text-stone-300">12.500,00</td>
+<td class="px-4 py-3 text-right text-stone-300">2.000,00</td>
+<td class="px-4 py-3">
+<span class="bg-stone-800 px-2 py-0.5 rounded text-[9px] text-lime-400">2023100045</span>
+</td>
+<td class="px-4 py-3 text-right text-white font-bold">14.500,00</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-stone-950/20 hover:bg-stone-800/40 transition-colors group">
+<td class="px-4 py-3 text-stone-300">15/10/2023</td>
+<td class="px-4 py-3 text-lime-400 font-bold">J-00123456-7</td>
+<td class="px-4 py-3 text-stone-300 uppercase">Tecnología de Motores V8</td>
+<td class="px-4 py-3 text-stone-400">00008922</td>
+<td class="px-4 py-3 text-stone-400">00-004512</td>
+<td class="px-4 py-3 text-right text-stone-300">5.200,00</td>
+<td class="px-4 py-3 text-right text-stone-300">832,00</td>
+<td class="px-4 py-3">
+<span class="bg-stone-800 px-2 py-0.5 rounded text-[9px] text-lime-400">2023100046</span>
+</td>
+<td class="px-4 py-3 text-right text-white font-bold">6.032,00</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-stone-800/40 transition-colors group">
+<td class="px-4 py-3 text-stone-300">18/10/2023</td>
+<td class="px-4 py-3 text-lime-400 font-bold">J-40552147-1</td>
+<td class="px-4 py-3 text-stone-300 uppercase">Lubricantes Industriales X</td>
+<td class="px-4 py-3 text-stone-400">00012399</td>
+<td class="px-4 py-3 text-stone-400">00-112233</td>
+<td class="px-4 py-3 text-right text-stone-300">2.100,50</td>
+<td class="px-4 py-3 text-right text-stone-300">336,08</td>
+<td class="px-4 py-3">
+<span class="bg-stone-800 px-2 py-0.5 rounded text-[9px] text-lime-400">2023100047</span>
+</td>
+<td class="px-4 py-3 text-right text-white font-bold">2.436,58</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-stone-950/20 hover:bg-stone-800/40 transition-colors group">
+<td class="px-4 py-3 text-stone-300">22/10/2023</td>
+<td class="px-4 py-3 text-lime-400 font-bold">G-20000001-1</td>
+<td class="px-4 py-3 text-stone-300 uppercase">Alcaldía de Municipio Industrial</td>
+<td class="px-4 py-3 text-stone-400">F-88120</td>
+<td class="px-4 py-3 text-stone-400">N/A</td>
+<td class="px-4 py-3 text-right text-stone-300">800,00</td>
+<td class="px-4 py-3 text-right text-stone-300">0,00</td>
+<td class="px-4 py-3 text-stone-600 italic">EXENTO</td>
+<td class="px-4 py-3 text-right text-white font-bold">800,00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="bg-stone-950 border-t-2 border-lime-400/50 font-headline uppercase text-[10px] tracking-widest text-white">
+<td class="px-4 py-4 text-right font-bold" colspan="5">Totales de Período</td>
+<td class="px-4 py-4 text-right font-bold border-l border-stone-800">45.290,50</td>
+<td class="px-4 py-4 text-right font-bold border-l border-stone-800">7.246,48</td>
+<td class="px-4 py-4 border-l border-stone-800"></td>
+<td class="px-4 py-4 text-right font-bold border-l border-stone-800 text-lime-400">52.536,98</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Footnotes / Compliance -->
+<div class="mt-8 flex flex-col md:flex-row justify-between items-start gap-6">
+<div class="max-w-2xl">
+<h3 class="text-xs font-headline font-bold text-stone-400 uppercase tracking-widest mb-2">Declaración de Cumplimiento</h3>
+<p class="text-[10px] text-stone-500 leading-relaxed font-body">
+                    Este reporte ha sido generado bajo los lineamientos establecidos en la Providencia Administrativa SNAT/2011/00071 dictada por el SENIAT. Los datos aquí contenidos reflejan la operatividad fiscal de la empresa según el Artículo 75 del Reglamento General de la Ley de Impuesto al Valor Agregado. Cualquier modificación posterior al cierre del período requerirá la emisión de una declaración sustitutiva ante el portal fiscal.
+                </p>
+</div>
+<div class="flex items-center gap-4 bg-stone-900 p-4 border border-stone-800">
+<div class="text-right">
+<div class="text-[9px] text-stone-500 uppercase tracking-widest">Sello Digital de Integridad</div>
+<div class="text-[10px] font-mono text-lime-400">SHA256: 8f2a...1e4c</div>
+</div>
+<div class="w-12 h-12 border border-stone-700 p-1">
+<img alt="Digital Seal" class="w-full h-full opacity-50" data-alt="Abstract geometric QR-like code icon in lime green and charcoal gray representing a digital fiscal security seal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeycSSCDPz1Rn_yViXxosODPq4PPfcufik4ezJTpsLut0PCx8anvncDVqhhltI_Xv3ci2NS7YXEjuRX4CxsC8sYD5tNIE21S-Mejz4iEQ67w5Zj6VcBcoztCJ1Lb1D-mubVuvpbka77_jbTqTEkMIbVOT7VdbzVstM0Km_KiO_DfUIUMehhpkxf7yiRhmf7HKvVO22gpfpgLLvPqpjG-7gACrbNTbAm8tBNYJL86uSsXjOpfNIY9pXijoqVD0Aw0m0504drjhnKDM"/>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for New Entry (Only on relevant pages) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-lime-400 hover:bg-lime-300 text-stone-950 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group z-50">
+<span class="material-symbols-outlined text-3xl font-bold" style="font-variation-settings: 'FILL' 1;">add</span>
+<span class="absolute right-16 bg-stone-900 text-white text-[10px] font-headline uppercase tracking-widest px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-stone-800">Cargar Factura</span>
+</button>
+</body></html>

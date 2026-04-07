@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INDUSTRIAL FORGE ERP - System Status</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f3f3f3",
+                        "tertiary-container": "#bebcbc",
+                        "on-primary-fixed": "#131f00",
+                        "primary": "#496800",
+                        "on-surface-variant": "#434937",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "outline-variant": "#c3c9b1",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2f3131",
+                        "inverse-primary": "#a3d73c",
+                        "primary-container": "#9acd32",
+                        "surface-variant": "#e2e2e2",
+                        "surface-bright": "#f9f9f9",
+                        "on-primary-container": "#3a5400",
+                        "surface": "#f9f9f9",
+                        "primary-fixed": "#bef456",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#474746",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-tertiary-container": "#4c4c4c",
+                        "surface-container": "#eeeeee",
+                        "primary-fixed-dim": "#a3d73c",
+                        "outline": "#747a65",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "tertiary": "#5e5e5e",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary-fixed-variant": "#364e00",
+                        "on-background": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-dim": "#dadada",
+                        "secondary-container": "#e2dfde",
+                        "on-surface": "#1a1c1c",
+                        "surface-tint": "#496800",
+                        "tertiary-fixed": "#e4e2e2",
+                        "background": "#1a1c1c",
+                        "on-secondary-container": "#636262",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1c1c;
+            color: #f1f1f1;
+        }
+        .stencil-text {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.02em;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-stone-50 dark:bg-stone-900 shadow-[4px_0px_24px_rgba(0,0,0,0.04)] flex flex-col h-full py-6">
+<div class="px-6 mb-10">
+<h1 class="font-['Space_Grotesk'] font-black text-stone-900 dark:text-white text-xl tracking-tighter">FORGE SYSTEMS</h1>
+<p class="font-['Inter'] font-semibold uppercase text-[10px] tracking-widest text-stone-500">High-Performance ERP</p>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="px-3">
+<a class="flex items-center px-3 py-2 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3">inventory_2</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Inventario</span>
+</a>
+<a class="flex items-center px-3 py-2 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3">point_of_sale</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Ventas</span>
+</a>
+<a class="flex items-center px-3 py-2 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3">shopping_cart</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Compras</span>
+</a>
+<a class="flex items-center px-3 py-2 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Finanzas</span>
+</a>
+<a class="flex items-center px-3 py-2 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3">account_balance</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Contabilidad</span>
+</a>
+<a class="flex items-center px-3 py-2 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">RRHH</span>
+</a>
+<a class="flex items-center px-3 py-2 bg-lime-500/10 text-lime-700 dark:text-lime-400 border-r-4 border-lime-600 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3">admin_panel_settings</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Administración</span>
+</a>
+</div>
+</nav>
+<div class="mt-auto px-6 space-y-4">
+<button class="w-full bg-primary py-3 px-4 text-white text-[10px] font-bold tracking-[0.2em] uppercase transition-transform active:scale-95">
+                TECHNICAL REPORT
+            </button>
+<div class="pt-4 border-t border-stone-200 dark:border-stone-800">
+<a class="flex items-center py-2 text-stone-500 text-xs font-semibold tracking-widest uppercase hover:text-white" href="#">
+<span class="material-symbols-outlined mr-3 text-sm">security</span> Security
+                </a>
+<a class="flex items-center py-2 text-stone-500 text-xs font-semibold tracking-widest uppercase hover:text-white" href="#">
+<span class="material-symbols-outlined mr-3 text-sm">logout</span> Log Out
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar (Authority: JSON) -->
+<header class="fixed top-0 right-0 left-64 z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-8 py-3">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] uppercase tracking-tight font-bold text-stone-900 dark:text-white">INDUSTRIAL FORGE ERP</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-lime-500 dark:hover:text-lime-300 transition-colors uppercase text-xs tracking-widest" href="#">Dashboard</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-lime-500 dark:hover:text-lime-300 transition-colors uppercase text-xs tracking-widest" href="#">Analytics</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium hover:text-lime-500 dark:hover:text-lime-300 transition-colors uppercase text-xs tracking-widest" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-stone-100 dark:bg-stone-900 px-4 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-stone-500 text-lg mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-[10px] tracking-widest uppercase text-stone-400 w-48" placeholder="SEARCH SYSTEM..." type="text"/>
+</div>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-stone-500 hover:text-white cursor-pointer p-2">notifications</span>
+<span class="material-symbols-outlined text-stone-500 hover:text-white cursor-pointer p-2">settings</span>
+<span class="material-symbols-outlined text-stone-500 hover:text-white cursor-pointer p-2">help</span>
+</div>
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-sm object-cover" data-alt="professional male engineer portrait in workshop environment with dramatic industrial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYE_ou131N3gmEkKpEI_NAAEAQtDWLZK_118lJkk_H9mJHwoC9y1N2PZNG_PVjZnsoMfF69r72PIUYreDazyN1GctYqeKE7unt-04n9dN45a8YuQpIT_WIVRI48E3n3Kkcj_sPBH4AgFw3ig-bFCnPYxlBHMTZo-T1JVYbUYtWwtSAWt00FBcTiQwtS_RZnrXwNopzOhQVwFG-hUh-BJkWCsqgzf1lgqG8DGpGGyuebA21wOnTUBZ5Qf679Nza0l8NpvmYpPrdmak"/>
+</div>
+</header>
+<!-- Page Content -->
+<section class="pt-24 px-12 pb-16">
+<!-- Hero Status -->
+<div class="relative overflow-hidden mb-12 bg-surface-container-lowest dark:bg-stone-900/50 p-12 rounded-sm border-l-4 border-lime-500">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">power_settings_new</span>
+</div>
+<div class="relative z-10">
+<p class="font-label text-xs tracking-[0.3em] text-primary uppercase mb-2">Operational Health Indicator</p>
+<h2 class="font-headline text-5xl font-black uppercase tracking-tighter mb-4 text-stone-900 dark:text-white">All Systems: <span class="text-primary">Nominal</span></h2>
+<div class="flex items-center gap-6 mt-8">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest text-stone-500 mb-1">Uptime (30d)</span>
+<span class="font-headline text-2xl font-bold text-stone-900 dark:text-white">99.98%</span>
+</div>
+<div class="w-px h-10 bg-stone-800"></div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest text-stone-500 mb-1">Avg Latency</span>
+<span class="font-headline text-2xl font-bold text-stone-900 dark:text-white">42ms</span>
+</div>
+<div class="ml-auto">
+<button class="bg-error hover:bg-error/90 text-white font-bold py-4 px-8 flex items-center gap-3 transition-transform active:scale-95 group">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">report_problem</span>
+<span class="uppercase tracking-widest text-xs">Incident Report</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Status Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+<!-- Module: Inventory -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 p-6 rounded-sm flex flex-col justify-between group hover:bg-stone-800 transition-colors">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-stone-500 group-hover:text-primary">inventory_2</span>
+<div class="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
+</div>
+<div>
+<h3 class="font-headline text-lg font-bold uppercase tracking-tight text-white">Inventario</h3>
+<p class="text-[10px] uppercase tracking-widest text-stone-500">Last Synced: 2m ago</p>
+</div>
+</div>
+<!-- Module: Sales -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 p-6 rounded-sm flex flex-col justify-between group hover:bg-stone-800 transition-colors">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-stone-500 group-hover:text-primary">point_of_sale</span>
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+</div>
+<div>
+<h3 class="font-headline text-lg font-bold uppercase tracking-tight text-white">Ventas</h3>
+<p class="text-[10px] uppercase tracking-widest text-stone-500">Live Transaction Stream</p>
+</div>
+</div>
+<!-- Module: Logistics (Yellow State) -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 p-6 rounded-sm border-b-2 border-amber-500 flex flex-col justify-between group hover:bg-stone-800 transition-colors">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-amber-500">local_shipping</span>
+<div class="h-2 w-2 rounded-full bg-amber-500"></div>
+</div>
+<div>
+<h3 class="font-headline text-lg font-bold uppercase tracking-tight text-white">Logística</h3>
+<p class="text-[10px] uppercase tracking-widest text-amber-500">High Latency Detected</p>
+</div>
+</div>
+<!-- Module: Finance -->
+<div class="bg-surface-container-lowest dark:bg-stone-900 p-6 rounded-sm flex flex-col justify-between group hover:bg-stone-800 transition-colors">
+<div class="flex justify-between items-start mb-8">
+<span class="material-symbols-outlined text-stone-500 group-hover:text-primary">payments</span>
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+</div>
+<div>
+<h3 class="font-headline text-lg font-bold uppercase tracking-tight text-white">Finanzas</h3>
+<p class="text-[10px] uppercase tracking-widest text-stone-500">Secure Ledger Verified</p>
+</div>
+</div>
+</div>
+<!-- Detailed Logs & Maintenance -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Maintenance Log (Authority: Editorial Table) -->
+<div class="lg:col-span-2">
+<div class="flex justify-between items-end mb-6">
+<h3 class="font-headline text-2xl font-black uppercase tracking-tighter text-white">Maintenance History</h3>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500">Audit Trail v2.4</span>
+</div>
+<div class="bg-stone-900 overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-950 border-b border-stone-800">
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-stone-400">Date/Time</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-stone-400">Module/System</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-stone-400">Action Type</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-stone-400">Technician</th>
+<th class="p-4 text-[10px] uppercase tracking-widest font-bold text-stone-400">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-800">
+<tr class="hover:bg-stone-800 transition-colors">
+<td class="p-4 font-label text-xs text-stone-300">2023-10-24 04:00</td>
+<td class="p-4 font-label text-xs text-stone-100 font-bold">Main DB Cluster</td>
+<td class="p-4 font-label text-xs text-stone-400 italic">Scheduled Optimization</td>
+<td class="p-4 font-label text-xs text-stone-300 uppercase">SYS-ADM-01</td>
+<td class="p-4">
+<span class="text-[9px] font-bold uppercase tracking-widest bg-lime-500/10 text-lime-400 px-2 py-1">Success</span>
+</td>
+</tr>
+<tr class="hover:bg-stone-800 transition-colors">
+<td class="p-4 font-label text-xs text-stone-300">2023-10-22 18:15</td>
+<td class="p-4 font-label text-xs text-stone-100 font-bold">API Gateway</td>
+<td class="p-4 font-label text-xs text-stone-400 italic">Emergency Hotfix</td>
+<td class="p-4 font-label text-xs text-stone-300 uppercase">DEV-SEC-09</td>
+<td class="p-4">
+<span class="text-[9px] font-bold uppercase tracking-widest bg-lime-500/10 text-lime-400 px-2 py-1">Success</span>
+</td>
+</tr>
+<tr class="hover:bg-stone-800 transition-colors">
+<td class="p-4 font-label text-xs text-stone-300">2023-10-21 02:00</td>
+<td class="p-4 font-label text-xs text-stone-100 font-bold">Inventario Node</td>
+<td class="p-4 font-label text-xs text-stone-400 italic">Hardware Migration</td>
+<td class="p-4 font-label text-xs text-stone-300 uppercase">INF-OPS-04</td>
+<td class="p-4">
+<span class="text-[9px] font-bold uppercase tracking-widest bg-stone-700 text-stone-300 px-2 py-1">Deferred</span>
+</td>
+</tr>
+<tr class="hover:bg-stone-800 transition-colors">
+<td class="p-4 font-label text-xs text-stone-300">2023-10-18 11:30</td>
+<td class="p-4 font-label text-xs text-stone-100 font-bold">RRHH Portal</td>
+<td class="p-4 font-label text-xs text-stone-400 italic">Security Patch 8.1</td>
+<td class="p-4 font-label text-xs text-stone-300 uppercase">AUT-SYS-01</td>
+<td class="p-4">
+<span class="text-[9px] font-bold uppercase tracking-widest bg-lime-500/10 text-lime-400 px-2 py-1">Success</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Live Performance Visualizer -->
+<div>
+<h3 class="font-headline text-2xl font-black uppercase tracking-tighter text-white mb-6">Traffic Load</h3>
+<div class="bg-stone-900 p-8 rounded-sm h-[320px] flex flex-col justify-end">
+<div class="flex items-end gap-1 h-full mb-4">
+<div class="flex-1 bg-stone-800 h-[20%]"></div>
+<div class="flex-1 bg-stone-800 h-[35%]"></div>
+<div class="flex-1 bg-stone-800 h-[45%]"></div>
+<div class="flex-1 bg-stone-800 h-[30%]"></div>
+<div class="flex-1 bg-stone-800 h-[60%]"></div>
+<div class="flex-1 bg-primary h-[85%]"></div>
+<div class="flex-1 bg-primary h-[95%]"></div>
+<div class="flex-1 bg-primary h-[75%]"></div>
+<div class="flex-1 bg-stone-800 h-[40%]"></div>
+<div class="flex-1 bg-stone-800 h-[25%]"></div>
+<div class="flex-1 bg-stone-800 h-[35%]"></div>
+<div class="flex-1 bg-stone-800 h-[50%]"></div>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-stone-800">
+<div>
+<p class="text-[9px] uppercase tracking-widest text-stone-500">Peak Load</p>
+<p class="font-headline text-lg font-bold text-white">842 req/s</p>
+</div>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Maintenance Schedule -->
+<div class="mt-12">
+<div class="bg-primary/5 p-8 border border-primary/20 flex flex-col md:flex-row items-center gap-8">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">calendar_clock</span>
+<span class="uppercase tracking-widest text-[10px] font-bold text-primary">Upcoming Window</span>
+</div>
+<h4 class="font-headline text-2xl font-black uppercase text-white">Core Engine Upgrade - v3.0 Staging</h4>
+</div>
+<div class="flex flex-col items-center px-8 border-x border-stone-800">
+<span class="text-[10px] uppercase tracking-widest text-stone-500">Days Remaining</span>
+<span class="font-headline text-4xl font-black text-white">04</span>
+</div>
+<div class="flex-1 text-right">
+<p class="text-stone-400 text-xs mb-4">Scheduled for Saturday, Oct 28 at 02:00 AM UTC. Expected downtime: 15 minutes.</p>
+<button class="text-primary hover:text-white transition-colors uppercase text-[10px] font-bold tracking-widest border-b border-primary pb-1">Review Technical Blueprint</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Industrial Footer -->
+<footer class="bg-stone-950 px-12 py-16 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-2">
+<h5 class="font-headline text-3xl font-black uppercase tracking-tighter text-white mb-6">FORGE<span class="text-primary">SYSTEMS</span></h5>
+<p class="text-stone-500 text-sm max-w-md leading-relaxed">
+                        The definitive operating system for modern heavy-duty manufacturing. Built for the grit of the shop floor and the precision of the executive suite.
+                    </p>
+</div>
+<div>
+<h6 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 mb-6">Contact Control</h6>
+<ul class="space-y-3 text-stone-500 text-xs font-semibold uppercase tracking-widest">
+<li><a class="hover:text-primary" href="#">Tech Support Hot-Line</a></li>
+<li><a class="hover:text-primary" href="#">Regional Data Centers</a></li>
+<li><a class="hover:text-primary" href="#">Security Protocols</a></li>
+</ul>
+</div>
+<div>
+<h6 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 mb-6">Location Authority</h6>
+<p class="text-stone-500 text-xs font-semibold uppercase tracking-widest leading-loose">
+                        Unit 412, Ironclad Industrial Estate<br/>
+                        Sheffield, United Kingdom<br/>
+                        S9 2TW
+                    </p>
+</div>
+</div>
+<div class="pt-12 border-t border-stone-900 flex justify-between items-center">
+<span class="text-[9px] uppercase tracking-[0.3em] text-stone-600">© 2023 INDUSTRIAL FORGE ERP. ALL CORE RIGHTS RESERVED.</span>
+<div class="flex gap-8">
+<span class="text-[9px] uppercase tracking-[0.3em] text-stone-600 hover:text-white cursor-pointer">PRIVACY_SHIELD</span>
+<span class="text-[9px] uppercase tracking-[0.3em] text-stone-600 hover:text-white cursor-pointer">SERVICE_SLA</span>
+<span class="text-[9px] uppercase tracking-[0.3em] text-stone-600 hover:text-white cursor-pointer">ISO_27001</span>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TITAN ENGINE ERP - Customer Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f9f9f9",
+                    "outline-variant": "#c3c9b1",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "outline": "#747a65",
+                    "surface-dim": "#dadada",
+                    "on-surface-variant": "#434937",
+                    "inverse-on-surface": "#f1f1f1",
+                    "background": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "primary": "#496800",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-container": "#636262",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-background": "#1a1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "inverse-surface": "#2f3131",
+                    "surface-tint": "#496800",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary-fixed-variant": "#364e00",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary-container": "#4c4c4c",
+                    "on-primary-container": "#3a5400",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed": "#131f00",
+                    "on-surface": "#1a1c1c",
+                    "primary-container": "#9acd32",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#e2dfde",
+                    "tertiary-fixed": "#e4e2e2",
+                    "secondary": "#5f5e5e",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#a3d73c",
+                    "tertiary": "#5e5e5e",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#a3d73c",
+                    "tertiary-container": "#bebcbc",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#bef456"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0c0a09; /* stone-950 equivalent for dark mode */
+            color: #f9f9f9;
+        }
+        .glass-header {
+            background: rgba(28, 25, 23, 0.8);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-stone-900/90 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full border-b border-stone-800">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-lime-400 tracking-tighter font-['Space_Grotesk'] uppercase tracking-tight">TITAN ENGINE ERP</span>
+<div class="hidden md:flex items-center bg-stone-800 px-3 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-stone-400 text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs font-headline uppercase tracking-widest text-stone-200 placeholder-stone-500 w-64" placeholder="SEARCH DATABASE..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-stone-400 hover:bg-stone-800 transition-colors duration-200 rounded-sm">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-stone-400 hover:bg-stone-800 transition-colors duration-200 rounded-sm">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-sm bg-stone-700 overflow-hidden ml-2 border border-stone-600">
+<img alt="User profile avatar" class="h-full w-full object-cover" data-alt="Close up of a professional male industrial engineer wearing high-visibility gear in a dimly lit technical environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtdo0bE_gk_hcOvjWlpfty-PcZ3dPn_cW40j6QfZT70rRq33J2nLel5KpGYQsyNUsdrCM5N1PY9E6KPS3Ax87TQHipseXk61p6mgAEcMWhEMudbAA9I-xZZ9IumJCq0krKxouE84DHJwwtf0SgZmpE1CkXKOeqgFRWxfcZovt1Lhc9snmndj1IkUrqCZgoMynPMvDcJClK9KaXBf_DP-uXLGNbw4Pb7tOaw1pWtmmBZlha3pljchW52kOa281M0pwh3agIWemPfLo"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-stone-950 flex flex-col py-8 px-4 gap-2 pt-24 border-r border-stone-900">
+<div class="mb-8 px-2">
+<h2 class="text-lg font-black text-white font-headline">ENGINE OPS</h2>
+<p class="text-[10px] text-stone-500 font-bold tracking-[0.2em] uppercase">High Performance Industrial</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+                New Sale
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined text-xl">history</span>
+                Sales History
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-lime-400 border-r-4 border-lime-500 bg-stone-900/50 font-['Inter'] text-sm font-semibold uppercase translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl">group</span>
+                Customers
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined text-xl">analytics</span>
+                Reports
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-stone-900 space-y-1">
+<button class="w-full bg-lime-500 text-stone-950 font-black py-3 text-xs tracking-widest hover:bg-lime-400 transition-colors mb-4 uppercase">
+                INITIATE SALE
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-stone-500 hover:text-stone-200 transition-colors text-xs font-bold uppercase" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-stone-500 hover:text-stone-200 transition-colors text-xs font-bold uppercase" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 pt-16 min-h-screen bg-stone-950">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Hero Header -->
+<div class="mb-12 flex justify-between items-end">
+<div>
+<h1 class="font-headline text-5xl font-extrabold uppercase tracking-tighter text-white leading-none">Customer <span class="text-lime-500">Registry</span></h1>
+<p class="text-stone-500 font-mono text-xs mt-4 tracking-widest uppercase">System Core: Engine_Module_v4.02 // B2B Management</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-stone-900 p-4 border-l-2 border-lime-500">
+<p class="text-[10px] text-stone-500 uppercase font-bold tracking-widest">Active Accounts</p>
+<p class="text-2xl font-headline font-bold text-white">1,429</p>
+</div>
+<div class="bg-stone-900 p-4 border-l-2 border-stone-700">
+<p class="text-[10px] text-stone-500 uppercase font-bold tracking-widest">Retention Ratio</p>
+<p class="text-2xl font-headline font-bold text-white">42%</p>
+</div>
+</div>
+</div>
+<!-- Bento Layout Content -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Registration Form - Left Column -->
+<div class="col-span-12 lg:col-span-5">
+<div class="bg-stone-900 p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-8xl">precision_manufacturing</span>
+</div>
+<h3 class="font-headline text-xl font-bold uppercase text-white mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-lime-500">person_add</span>
+                            Modify Database
+                        </h3>
+<form class="space-y-6">
+<div class="space-y-1">
+<label class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Full Corporate Name</label>
+<input class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-lime-500 p-3 text-sm font-medium" placeholder="E.G. TRANSPORTES VALENCIA C.A." type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">RIF / Tax ID</label>
+<input class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-lime-500 p-3 text-sm font-medium" placeholder="J-12345678-9" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Contact Number</label>
+<input class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-lime-500 p-3 text-sm font-medium" placeholder="+58 241-0000" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Operational Address</label>
+<textarea class="w-full bg-stone-800 border-none text-white focus:ring-2 focus:ring-lime-500 p-3 text-sm font-medium" placeholder="INDUSTRIAL ZONE II, SECTOR 4..." rows="2"></textarea>
+</div>
+<!-- Retention Toggles -->
+<div class="bg-stone-950 p-6 space-y-4">
+<p class="text-[10px] font-bold text-lime-500 uppercase tracking-[0.2em] mb-2">Tax Retention Configuration</p>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-bold text-white uppercase tracking-tight">Retention Agent</p>
+<p class="text-[10px] text-stone-500 uppercase">Global status for Seniat regulations</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-stone-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-lime-600"></div>
+</label>
+</div>
+<div class="h-[1px] bg-stone-800"></div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-stone-300 uppercase">VAT / IVA Retention</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-10 h-5 bg-stone-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-stone-400 after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-lime-500 peer-checked:after:bg-stone-950"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-stone-300 uppercase">ISLR Retention</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-10 h-5 bg-stone-800 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-stone-400 after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-lime-500 peer-checked:after:bg-stone-950"></div>
+</label>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 border border-stone-700 text-stone-400 font-bold py-3 text-xs tracking-widest hover:bg-stone-800 transition-colors uppercase" type="reset">Discard Changes</button>
+<button class="flex-1 bg-lime-500 text-stone-950 font-black py-3 text-xs tracking-widest hover:bg-lime-400 transition-colors uppercase" type="submit">Execute Update</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Customer List - Right Column -->
+<div class="col-span-12 lg:col-span-7 flex flex-col gap-6">
+<!-- Search & Filter Bar -->
+<div class="bg-stone-900 p-4 flex gap-4 items-center">
+<div class="flex-1 flex items-center bg-stone-950 px-4 py-2">
+<span class="material-symbols-outlined text-stone-500 mr-3">filter_list</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs font-headline uppercase tracking-widest text-stone-200 placeholder-stone-600 w-full" placeholder="FILTER BY NAME, RIF OR SECTOR..." type="text"/>
+</div>
+<button class="bg-stone-800 p-2 text-stone-400 hover:text-white">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- Customer Cards List -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="bg-stone-900 border-l-4 border-lime-500 group hover:bg-stone-800 transition-colors p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h4 class="text-lg font-bold text-white uppercase font-headline leading-none">Transporte Carabobo</h4>
+<span class="bg-lime-500/10 text-lime-500 text-[9px] font-black px-2 py-0.5 tracking-tighter uppercase">Retention Agent</span>
+</div>
+<div class="flex flex-wrap gap-4 text-xs text-stone-500 font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">id_card</span> J-30492834-0</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Zona Industrial II, Valencia, Carabobo</span>
+</div>
+</div>
+<div class="flex items-center gap-8 w-full md:w-auto">
+<div class="text-right">
+<p class="text-[9px] text-stone-500 uppercase font-bold tracking-widest mb-1 text-left md:text-right">Tax ID Status</p>
+<div class="flex gap-2">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-lime-500 mb-1">IVA</span>
+<div class="w-6 h-1 bg-lime-500"></div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-lime-500 mb-1">ISLR</span>
+<div class="w-6 h-1 bg-lime-500"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-2 ml-auto">
+<button class="w-10 h-10 flex items-center justify-center bg-stone-950 text-stone-400 hover:text-lime-500 hover:bg-stone-900 transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-stone-950 text-stone-400 hover:text-white hover:bg-stone-900 transition-all">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-stone-900 border-l-4 border-stone-700 group hover:bg-stone-800 transition-colors p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h4 class="text-lg font-bold text-white uppercase font-headline leading-none">Servicio El Parral</h4>
+<span class="bg-stone-800 text-stone-500 text-[9px] font-black px-2 py-0.5 tracking-tighter uppercase">Standard Entity</span>
+</div>
+<div class="flex flex-wrap gap-4 text-xs text-stone-500 font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">id_card</span> J-41223945-2</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Calle 114, Altos del Parral, Valencia</span>
+</div>
+</div>
+<div class="flex items-center gap-8 w-full md:w-auto">
+<div class="text-right">
+<p class="text-[9px] text-stone-500 uppercase font-bold tracking-widest mb-1 text-left md:text-right">Tax ID Status</p>
+<div class="flex gap-2">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-stone-700 mb-1">IVA</span>
+<div class="w-6 h-1 bg-stone-700"></div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-stone-700 mb-1">ISLR</span>
+<div class="w-6 h-1 bg-stone-700"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-2 ml-auto">
+<button class="w-10 h-10 flex items-center justify-center bg-stone-950 text-stone-400 hover:text-lime-500 hover:bg-stone-900 transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-stone-950 text-stone-400 hover:text-white hover:bg-stone-900 transition-all">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-stone-900 border-l-4 border-lime-500 group hover:bg-stone-800 transition-colors p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h4 class="text-lg font-bold text-white uppercase font-headline leading-none">Inversiones Heavy Duty</h4>
+<span class="bg-lime-500/10 text-lime-500 text-[9px] font-black px-2 py-0.5 tracking-tighter uppercase">Retention Agent</span>
+</div>
+<div class="flex flex-wrap gap-4 text-xs text-stone-500 font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">id_card</span> J-29955883-4</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Av. Michelena, C.C. Industrial</span>
+</div>
+</div>
+<div class="flex items-center gap-8 w-full md:w-auto">
+<div class="text-right">
+<p class="text-[9px] text-stone-500 uppercase font-bold tracking-widest mb-1 text-left md:text-right">Tax ID Status</p>
+<div class="flex gap-2">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-lime-500 mb-1">IVA</span>
+<div class="w-6 h-1 bg-lime-500"></div>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-bold text-stone-700 mb-1">ISLR</span>
+<div class="w-6 h-1 bg-stone-700"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-2 ml-auto">
+<button class="w-10 h-10 flex items-center justify-center bg-stone-950 text-stone-400 hover:text-lime-500 hover:bg-stone-900 transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-stone-950 text-stone-400 hover:text-white hover:bg-stone-900 transition-all">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Stats / Information Layer -->
+<div class="mt-auto grid grid-cols-2 gap-4">
+<div class="bg-stone-900 p-6 flex items-center gap-4">
+<div class="w-12 h-12 bg-lime-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-lime-500">verified</span>
+</div>
+<div>
+<p class="text-[10px] text-stone-500 uppercase font-bold tracking-widest">Database Sync</p>
+<p class="text-sm font-bold text-white uppercase">Last verified: 02m ago</p>
+</div>
+</div>
+<div class="bg-stone-900 p-6 flex items-center gap-4">
+<div class="w-12 h-12 bg-stone-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-stone-400">gavel</span>
+</div>
+<div>
+<p class="text-[10px] text-stone-500 uppercase font-bold tracking-widest">Compliance Status</p>
+<p class="text-sm font-bold text-white uppercase">100% Tax Compliant</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Action (Contextual) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-lime-500 text-stone-950 rounded-full flex items-center justify-center shadow-2xl scale-95 active:opacity-80 transition-transform z-50">
+<span class="material-symbols-outlined font-variation-settings: 'FILL' 1" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

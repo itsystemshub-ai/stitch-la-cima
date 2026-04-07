@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>METALLIC_CORE_ERP - Compras</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#a3d73c",
+                    "tertiary": "#5e5e5e",
+                    "on-primary-fixed-variant": "#364e00",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#636262",
+                    "surface-bright": "#f9f9f9",
+                    "on-primary-container": "#3a5400",
+                    "background": "#f9f9f9",
+                    "surface-container-highest": "#e2e2e2",
+                    "outline": "#747a65",
+                    "surface-container-high": "#e8e8e8",
+                    "primary-container": "#9acd32",
+                    "primary-fixed": "#bef456",
+                    "on-background": "#1a1c1c",
+                    "surface-container": "#eeeeee",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-surface": "#1a1c1c",
+                    "error": "#ba1a1a",
+                    "surface": "#f9f9f9",
+                    "surface-variant": "#e2e2e2",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dadada",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#bebcbc",
+                    "on-tertiary-container": "#4c4c4c",
+                    "surface-tint": "#496800",
+                    "outline-variant": "#c3c9b1",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-fixed-variant": "#474746",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-surface-variant": "#434937",
+                    "secondary": "#5f5e5e",
+                    "inverse-primary": "#a3d73c",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary-fixed": "#131f00",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#496800",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f3f3f3",
+                    "secondary-container": "#e2dfde",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "tertiary-fixed": "#e4e2e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass-nav { background: rgba(26, 28, 28, 0.8); backdrop-filter: blur(12px); }
+        .industrial-shadow { box-shadow: 0 24px 40px rgba(26, 28, 28, 0.06); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar (Authority: JSON & Design System) -->
+<aside class="fixed h-screen w-64 left-0 top-0 bg-stone-900 text-stone-500 font-medium z-40 hidden md:flex flex-col py-8 gap-4 shadow-2xl">
+<div class="px-6 mb-8">
+<h1 class="text-lime-400 font-black tracking-tighter text-xl uppercase leading-none">MAYOR DE REPUESTO<br/>LA CIMA</h1>
+<div class="mt-4 pt-4 border-t border-stone-800">
+<p class="text-lime-400 font-bold text-xs font-headline">COMPRAS_MOD</p>
+<p class="text-[10px] text-stone-500">V1.0.2_ACTIVE</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 gap-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-headline uppercase text-sm tracking-widest">Indicadores</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 bg-stone-950 text-lime-400 border-l-4 border-lime-400 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-headline uppercase text-sm tracking-widest">Facturación</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-headline uppercase text-sm tracking-widest">Libro SENIAT</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">factory</span>
+<span class="font-headline uppercase text-sm tracking-widest">Proveedores</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-headline uppercase text-sm tracking-widest">Cuentas por Pagar</span>
+</a>
+</nav>
+<div class="px-6 mt-auto flex flex-col gap-4">
+<button class="w-full bg-stone-800 text-stone-200 py-3 font-headline text-xs uppercase tracking-widest border border-stone-700 hover:bg-stone-700 transition-colors">
+                Soporte Técnico
+            </button>
+<a class="flex items-center gap-3 text-stone-500 hover:text-error transition-colors pb-4" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-headline uppercase text-xs tracking-widest">Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar (Authority: JSON & Design System) -->
+<header class="sticky top-0 z-50 bg-stone-950/80 backdrop-blur-xl flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-lime-400 font-headline uppercase">METALLIC_CORE_ERP</span>
+<nav class="hidden lg:flex gap-6 items-center font-headline uppercase tracking-tighter text-sm">
+<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Dashboard</a>
+<a class="text-lime-400 border-b-2 border-lime-400 pb-1" href="#">Inventario</a>
+<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Reportes</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-stone-900 px-3 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-stone-500 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs text-stone-300 w-40 placeholder:text-stone-600 font-headline" placeholder="BUSCAR REPUESTO..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-stone-400 hover:text-lime-400"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-stone-400 hover:text-lime-400"><span class="material-symbols-outlined">settings</span></button>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 font-headline font-bold uppercase text-xs tracking-widest hover:scale-[1.02] active:scale-95 transition-all">
+                    Nueva Factura
+                </button>
+<div class="w-8 h-8 bg-stone-800 rounded-full overflow-hidden border border-lime-400/30">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="portrait of a professional technician in a clean industrial uniform with workshop background in soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_mxr2VONm84ehp_nqKCROv3XKHyGLjuDs3ttLDUUTIJ3sp5xBi9OoruYjewv6JLb4pNyezkKm1DgiXx0jbYD0JjVRcDErF9EXcFnO5Olg8zeyxgviGC0XcOCLgcMOsUUoCJPuWB2GrHEooTtMvnV3n5I0YYtfkN6FLYaSsUhq-8Ih6w0p8ZCaQ1rV_l2uXAe_bIZzi-nNjFxZ_QawmiXueD3EXxFKXsi3cv29aCb05E135psZM67MQZLGMbKtaa6GXAe5I9inYVc"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 space-y-8 max-w-[1600px] mx-auto w-full">
+<!-- Hero Title & Main CTA -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="text-4xl font-black font-headline uppercase tracking-tighter text-on-surface leading-none mb-2">Módulo de Compras</h2>
+<p class="text-secondary font-medium uppercase tracking-widest text-xs">Gestión de suministros y cadena de partes críticas</p>
+</div>
+<button class="group relative flex items-center gap-4 bg-primary px-8 py-4 overflow-hidden transition-all hover:scale-[1.02] active:scale-95">
+<div class="absolute inset-0 bg-gradient-to-b from-primary to-primary-container opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<span class="relative font-headline font-bold uppercase text-on-primary tracking-[0.2em] z-10">Nueva Compra</span>
+<span class="material-symbols-outlined relative text-on-primary z-10" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+</button>
+</div>
+<!-- Bento Grid KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest p-6 industrial-shadow flex flex-col justify-between border-b-4 border-lime-400 h-40">
+<span class="text-secondary uppercase text-[10px] font-bold tracking-widest">Gasto Mensual (USD)</span>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-headline font-black tracking-tighter">$42,850.22</span>
+<div class="flex items-center text-primary-fixed-dim text-xs font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>12%</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest p-6 industrial-shadow flex flex-col justify-between border-b-4 border-stone-900 h-40">
+<span class="text-secondary uppercase text-[10px] font-bold tracking-widest">Cuentas por Pagar</span>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-headline font-black tracking-tighter">$128,400</span>
+<span class="bg-error-container text-on-error-container px-2 py-0.5 text-[10px] font-bold uppercase">Urgente</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest p-6 industrial-shadow flex flex-col justify-between border-b-4 border-stone-400 h-40">
+<span class="text-secondary uppercase text-[10px] font-bold tracking-widest">Variación Costo Promedio</span>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-headline font-black tracking-tighter">+4.8%</span>
+<span class="text-secondary text-[10px] font-medium uppercase italic">Tendencia Anual</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-stone-900 p-6 industrial-shadow flex flex-col justify-between h-40">
+<span class="text-lime-400 uppercase text-[10px] font-black tracking-widest">Estado de Órdenes</span>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-headline uppercase text-stone-400">
+<span>En Tránsito</span>
+<span class="text-lime-400">85%</span>
+</div>
+<div class="w-full bg-stone-800 h-1">
+<div class="bg-lime-400 h-full" style="width: 85%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dashboard Middle Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Weekly Purchase Chart (Simulated with Editorial Visuals) -->
+<div class="lg:col-span-8 bg-surface-container-low p-8 rounded-sm">
+<div class="flex justify-between items-center mb-10">
+<h3 class="font-headline font-black uppercase text-xl tracking-tighter flex items-center gap-3">
+<span class="w-2 h-8 bg-lime-400"></span>
+                            Compras Semanales
+                        </h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary"></span>
+<span class="text-[10px] font-bold uppercase text-secondary">Actual</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-stone-300"></span>
+<span class="text-[10px] font-bold uppercase text-secondary">Proyectado</span>
+</div>
+</div>
+</div>
+<div class="flex items-end justify-between h-64 gap-4 px-4 border-b border-stone-200">
+<!-- Bar 1 -->
+<div class="flex-1 group relative flex flex-col items-center">
+<div class="w-full bg-stone-300 h-24 absolute bottom-0"></div>
+<div class="w-full bg-primary h-16 absolute bottom-0 transition-all hover:h-20 cursor-pointer"></div>
+<span class="absolute -bottom-6 font-label text-[10px] font-bold text-secondary uppercase">Sem 01</span>
+</div>
+<!-- Bar 2 -->
+<div class="flex-1 group relative flex flex-col items-center">
+<div class="w-full bg-stone-300 h-40 absolute bottom-0"></div>
+<div class="w-full bg-primary h-28 absolute bottom-0 transition-all hover:h-32 cursor-pointer"></div>
+<span class="absolute -bottom-6 font-label text-[10px] font-bold text-secondary uppercase">Sem 02</span>
+</div>
+<!-- Bar 3 -->
+<div class="flex-1 group relative flex flex-col items-center">
+<div class="w-full bg-stone-300 h-32 absolute bottom-0"></div>
+<div class="w-full bg-primary h-48 absolute bottom-0 transition-all hover:h-52 cursor-pointer"></div>
+<span class="absolute -bottom-6 font-label text-[10px] font-bold text-secondary uppercase">Sem 03</span>
+</div>
+<!-- Bar 4 -->
+<div class="flex-1 group relative flex flex-col items-center">
+<div class="w-full bg-stone-300 h-56 absolute bottom-0"></div>
+<div class="w-full bg-primary h-52 absolute bottom-0 transition-all hover:h-60 cursor-pointer"></div>
+<span class="absolute -bottom-6 font-label text-[10px] font-bold text-secondary uppercase">Sem 04</span>
+</div>
+<!-- Bar 5 -->
+<div class="flex-1 group relative flex flex-col items-center">
+<div class="w-full bg-stone-300 h-20 absolute bottom-0"></div>
+<div class="w-full bg-primary h-12 absolute bottom-0 transition-all hover:h-16 cursor-pointer"></div>
+<span class="absolute -bottom-6 font-label text-[10px] font-bold text-secondary uppercase">Sem 05</span>
+</div>
+</div>
+</div>
+<!-- Top Proveedores (Asymmetric List) -->
+<div class="lg:col-span-4 space-y-6">
+<h3 class="font-headline font-black uppercase text-xl tracking-tighter">Top Proveedores</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-surface-container-highest p-4 group hover:bg-stone-900 transition-all">
+<div class="w-12 h-12 bg-stone-200 flex items-center justify-center font-headline font-bold text-stone-600 group-hover:bg-lime-400 group-hover:text-stone-900">01</div>
+<div class="flex-1">
+<p class="font-headline font-bold uppercase text-xs tracking-tighter group-hover:text-lime-400">Industrial Parts Corp</p>
+<p class="text-[10px] text-secondary group-hover:text-stone-400">Volumen: $85,000/mes</p>
+</div>
+<span class="material-symbols-outlined text-stone-400 group-hover:text-lime-400">arrow_forward</span>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-highest p-4 group hover:bg-stone-900 transition-all">
+<div class="w-12 h-12 bg-stone-200 flex items-center justify-center font-headline font-bold text-stone-600 group-hover:bg-lime-400 group-hover:text-stone-900">02</div>
+<div class="flex-1">
+<p class="font-headline font-bold uppercase text-xs tracking-tighter group-hover:text-lime-400">Heavy Duty Engine S.A.</p>
+<p class="text-[10px] text-secondary group-hover:text-stone-400">Volumen: $52,200/mes</p>
+</div>
+<span class="material-symbols-outlined text-stone-400 group-hover:text-lime-400">arrow_forward</span>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-highest p-4 group hover:bg-stone-900 transition-all">
+<div class="w-12 h-12 bg-stone-200 flex items-center justify-center font-headline font-bold text-stone-600 group-hover:bg-lime-400 group-hover:text-stone-900">03</div>
+<div class="flex-1">
+<p class="font-headline font-bold uppercase text-xs tracking-tighter group-hover:text-lime-400">Precision Gears Ltd</p>
+<p class="text-[10px] text-secondary group-hover:text-stone-400">Volumen: $41,800/mes</p>
+</div>
+<span class="material-symbols-outlined text-stone-400 group-hover:text-lime-400">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recepciones Recientes Table -->
+<section class="bg-surface-container-lowest industrial-shadow overflow-hidden">
+<div class="px-8 py-6 border-b border-surface-container flex justify-between items-center">
+<h3 class="font-headline font-black uppercase text-xl tracking-tighter">Recepciones Recientes</h3>
+<button class="text-xs font-bold uppercase tracking-widest text-primary border-b-2 border-primary hover:text-on-primary-container transition-colors">Exportar LOG</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-secondary font-label uppercase text-[10px] font-black tracking-[0.2em]">
+<th class="px-8 py-4">ID_RECEPCION</th>
+<th class="px-8 py-4">PROVEEDOR</th>
+<th class="px-8 py-4">CATEGORÍA</th>
+<th class="px-8 py-4">FECHA_ENTRADA</th>
+<th class="px-8 py-4">VALOR_GUÍA</th>
+<th class="px-8 py-4">ESTADO</th>
+<th class="px-8 py-4 text-right">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="text-xs font-label">
+<tr class="hover:bg-surface-container-low border-b border-surface-container-highest transition-colors">
+<td class="px-8 py-4 font-bold text-on-surface">#REC-99201</td>
+<td class="px-8 py-4 uppercase">Industrial Parts Corp</td>
+<td class="px-8 py-4"><span class="bg-stone-200 px-2 py-1 text-[10px] font-bold">MOTORES</span></td>
+<td class="px-8 py-4">24/05/2024</td>
+<td class="px-8 py-4 font-headline font-bold">$12,450.00</td>
+<td class="px-8 py-4">
+<span class="flex items-center gap-2 text-primary font-bold uppercase text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Verificado
+                                    </span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="material-symbols-outlined text-stone-400 hover:text-stone-900">more_vert</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low border-b border-surface-container-highest transition-colors">
+<td class="px-8 py-4 font-bold text-on-surface">#REC-99200</td>
+<td class="px-8 py-4 uppercase">Heavy Duty Engine S.A.</td>
+<td class="px-8 py-4"><span class="bg-stone-200 px-2 py-1 text-[10px] font-bold">TRANSMISIONES</span></td>
+<td class="px-8 py-4">23/05/2024</td>
+<td class="px-8 py-4 font-headline font-bold">$8,900.00</td>
+<td class="px-8 py-4">
+<span class="flex items-center gap-2 text-stone-400 font-bold uppercase text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-stone-300"></span> Pendiente
+                                    </span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="material-symbols-outlined text-stone-400 hover:text-stone-900">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low border-b border-surface-container-highest transition-colors">
+<td class="px-8 py-4 font-bold text-on-surface">#REC-99199</td>
+<td class="px-8 py-4 uppercase">Precision Gears Ltd</td>
+<td class="px-8 py-4"><span class="bg-stone-200 px-2 py-1 text-[10px] font-bold">PIÑONES</span></td>
+<td class="px-8 py-4">23/05/2024</td>
+<td class="px-8 py-4 font-headline font-bold">$3,120.50</td>
+<td class="px-8 py-4">
+<span class="flex items-center gap-2 text-primary font-bold uppercase text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Verificado
+                                    </span>
+</td>
+<td class="px-8 py-4 text-right">
+<button class="material-symbols-outlined text-stone-400 hover:text-stone-900">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- System Footer Metadata -->
+<footer class="mt-auto px-8 py-4 border-t border-surface-container flex justify-between text-[9px] font-bold uppercase tracking-widest text-secondary">
+<span>Server Status: <span class="text-primary">Optimized</span></span>
+<span>Uptime: 99.9% | Last Sync: 2 min ago</span>
+<span>MAYOR DE REPUESTO LA CIMA - Internal ERP</span>
+</footer>
+</main>
+<!-- Mobile Navigation Shell (Authority: JSON/Manual Filter) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full glass-nav flex justify-around items-center py-3 px-4 z-50 text-stone-400">
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[8px] uppercase font-bold tracking-tighter">Panel</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-lime-400" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="text-[8px] uppercase font-bold tracking-tighter">Compras</span>
+</a>
+<div class="relative -top-6 bg-primary p-3 rounded-full shadow-lg border-4 border-stone-900 text-on-primary">
+<span class="material-symbols-outlined">add</span>
+</div>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">factory</span>
+<span class="text-[8px] uppercase font-bold tracking-tighter">Prov</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[8px] uppercase font-bold tracking-tighter">Ajustes</span>
+</a>
+</nav>
+
+```</body></html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bandeja de Entrada de Aprobaciones | INDUSTRIAL FORGE ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#5f5e5e",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "outline-variant": "#c3c9b1",
+                    "on-primary-fixed": "#131f00",
+                    "secondary-container": "#e2dfde",
+                    "surface-bright": "#f9f9f9",
+                    "primary-container": "#9acd32",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-variant": "#e2e2e2",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-surface-variant": "#434937",
+                    "outline": "#747a65",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "tertiary-container": "#bebcbc",
+                    "surface-dim": "#dadada",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-primary-fixed-variant": "#364e00",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-container": "#4c4c4c",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5e5e5e",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#636262",
+                    "surface-container-high": "#e8e8e8",
+                    "primary-fixed": "#bef456",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "inverse-surface": "#2f3131",
+                    "surface-tint": "#496800",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-container": "#3a5400",
+                    "surface-container": "#eeeeee",
+                    "on-surface": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "primary": "#496800",
+                    "surface": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "background": "#f9f9f9",
+                    "inverse-primary": "#a3d73c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-3 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-stone-900 dark:text-white tracking-tighter uppercase font-['Space_Grotesk']">INDUSTRIAL FORGE ERP</span>
+<div class="hidden md:flex gap-6">
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Dashboard</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Analytics</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">settings</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">help</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a professional male executive in a neutral studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0yfdhljV_6FxoNTOK2-WxhsgRbwxAJAzGN4YAYYRcv9d0K76e-IgFr76q59nZfxfaQmg612FCg9SfVgcUeMhef297V3N0IneO6v9we4qgrB-RuWEzzyHraVILIVGVOzj11_306UwjsLmOPtd0irFUxrDkwwWHbLD_0419KRig1MMFzP-Xh8mG8c6uRj7VF27haswWcd-RE-K9kZ0xMjwipG_HxbopgxPM4Zj8NKyqTHfdeFUSkjsjnZEMNmmpt0GpORQW6u9JcSQ"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex h-screen w-64 fixed left-0 top-0 z-40 bg-stone-50 dark:bg-stone-900 flex-col h-full py-6 shadow-[4px_0px_24px_rgba(0,0,0,0.04)]">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">factory</span>
+</div>
+<span class="font-['Space_Grotesk'] font-black text-stone-900 dark:text-white tracking-tighter">FORGE SYSTEMS</span>
+</div>
+<p class="font-['Inter'] font-semibold uppercase text-[10px] tracking-widest text-secondary">High-Performance ERP</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">inventory_2</span> Inventario
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">point_of_sale</span> Ventas
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">shopping_cart</span> Compras
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">payments</span> Finanzas
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">account_balance</span> Contabilidad
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">groups</span> RRHH
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 bg-lime-500/10 text-lime-700 dark:text-lime-400 border-r-4 border-lime-600 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">admin_panel_settings</span> Administración
+            </a>
+</nav>
+<div class="px-6 mt-6">
+<button class="w-full bg-primary text-on-primary py-3 px-4 font-bold uppercase text-xs tracking-widest hover:scale-[1.02] active:scale-95 transition-all">
+                TECHNICAL REPORT
+            </button>
+</div>
+<div class="mt-auto px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">security</span> Security
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 font-['Inter'] font-semibold uppercase text-xs tracking-widest" href="#">
+<span class="material-symbols-outlined text-lg">logout</span> Log Out
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 pb-12 px-8 min-h-screen">
+<!-- Header Section -->
+<header class="mb-12 relative">
+<div class="absolute -top-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-5xl font-black uppercase tracking-tight text-on-surface mb-2">Administración Central</h1>
+<p class="text-lg text-secondary font-medium uppercase tracking-widest flex items-center gap-2">
+<span class="w-4 h-[2px] bg-primary"></span> Bandeja de Entrada de Aprobaciones
+                    </p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-high px-6 py-4 flex flex-col items-center">
+<span class="text-primary font-black text-3xl">12</span>
+<span class="text-[10px] uppercase tracking-tighter font-bold text-secondary">Pendientes</span>
+</div>
+<div class="bg-surface-container-high px-6 py-4 flex flex-col items-center border-l-4 border-error">
+<span class="text-error font-black text-3xl">04</span>
+<span class="text-[10px] uppercase tracking-tighter font-bold text-secondary">Críticos</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Search & Filter Bar -->
+<section class="bg-surface-container-low p-2 mb-8 flex flex-wrap items-center gap-4">
+<div class="flex-1 relative min-w-[280px]">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full bg-white border-none py-3 pl-12 pr-4 text-xs font-bold uppercase tracking-widest focus:ring-2 focus:ring-primary" placeholder="BUSCAR SOLICITUD O REFERENCIA..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest border-b-2 border-primary">Todas</button>
+<button class="hover:bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors">Compras</button>
+<button class="hover:bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors">Inventario</button>
+<button class="hover:bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors">Personal</button>
+</div>
+</section>
+<!-- Bento Grid Layout for Approval Cards -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+<!-- CRITICAL ITEM: Order Over $5000 -->
+<div class="xl:col-span-8 bg-surface-container-lowest p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-0.5 h-full bg-error/20"></div>
+<div class="flex justify-between items-start mb-8">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-error text-white text-[10px] px-2 py-1 font-black uppercase tracking-tighter">ALTA PRIORIDAD</span>
+<span class="text-secondary text-[10px] font-bold uppercase tracking-widest">ORDEN DE COMPRA #OC-29401</span>
+</div>
+<h3 class="text-3xl font-black uppercase tracking-tight mb-2">Importación Motores Caterpillar 3406</h3>
+<p class="text-secondary text-sm max-w-xl">Reposición de stock crítico para contratos mineros zona sur. Proveedor: HeavyEquipment Ltd (Miami).</p>
+</div>
+<div class="text-right">
+<span class="text-4xl font-black text-on-surface">$54,200.00</span>
+<p class="text-[10px] font-bold text-secondary uppercase mt-1">Total Neto (Exento IVA)</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-8 mb-10 py-6 border-y border-outline-variant/30">
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Solicitado por</p>
+<p class="font-bold text-sm">Ing. Marcos Rivas</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Almacén Destino</p>
+<p class="font-bold text-sm">Almacén Central (Puerto Ordaz)</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Fecha Límite</p>
+<p class="font-bold text-sm text-error">24h Restantes</p>
+</div>
+</div>
+<div class="flex flex-wrap justify-between items-center gap-6">
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-8 py-3 font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> Aprobar
+                        </button>
+<button class="bg-surface-container-high text-on-surface px-8 py-3 font-black text-xs uppercase tracking-widest border border-outline-variant/20 hover:bg-error hover:text-white transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">cancel</span> Rechazar
+                        </button>
+</div>
+<button class="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2 group">
+                        Ver Detalles Técnicos <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- SIDE ITEM: New User Access -->
+<div class="xl:col-span-4 bg-surface-container-lowest p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-1 font-black uppercase tracking-tighter">ACCESO SISTEMA</span>
+<span class="text-secondary text-[10px] font-bold uppercase tracking-widest">NUEVO USUARIO</span>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-secondary">person</span>
+</div>
+<div>
+<h3 class="text-xl font-black uppercase tracking-tight">Celia Ortega</h3>
+<p class="text-xs font-bold text-secondary uppercase">Analista de Compras Jr.</p>
+</div>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-2 text-xs font-bold text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">verified_user</span> Perfil: Operador Nivel 1
+                        </div>
+<div class="flex items-center gap-2 text-xs font-bold text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">lock</span> Módulos: Inventario, Compras
+                        </div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-primary-container text-on-primary-container py-3 font-black text-[10px] uppercase tracking-widest">Aprobar</button>
+<button class="bg-surface-container-high py-3 font-black text-[10px] uppercase tracking-widest">Detalle</button>
+</div>
+</div>
+<!-- FULL WIDTH ROW: Inventory Adjustment -->
+<div class="xl:col-span-12 bg-surface-container-high p-8 flex flex-col md:flex-row items-center gap-12 group">
+<div class="w-full md:w-48 h-48 bg-white p-4 shrink-0">
+<img class="w-full h-full object-cover" data-alt="Industrial machinery components laid out on a blueprint for technical inspection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7idQ8PO_25x_MgAF9Ebh6-OGGkL2vPBJ5ZFEb_hI0ZrsXWbjnd6tsbNb47yZigaOEt29RN7gH47_RuVFy7hAPXzYb_VIDu5H-l8JKy65IX4Vupj0FbHXMiGShIJztyuqdjhcKNCQS2oc0aaiazFee9rYaUPoXYnN2leGSZqVBv6AxkQv8ABxZVMl5OKGyha_RfpHbEMqh-gCGJWAMRyL3v0T7Mv0cOOiHDTmswJK4GFVkXsgPTikVZQ4pR-aeQP5GcnLr-zoBnnU"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-secondary text-white text-[10px] px-2 py-1 font-black uppercase tracking-tighter">AJUSTE CRÍTICO</span>
+<span class="text-secondary text-[10px] font-bold uppercase tracking-widest">INVENTARIO FISICO VS SISTEMA</span>
+</div>
+<h3 class="text-2xl font-black uppercase tracking-tight mb-4">Discrepancia Ejes de Transmisión (Z-40)</h3>
+<div class="flex flex-wrap gap-12">
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Teórico</p>
+<p class="text-2xl font-black">124 Unid.</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Real Hallado</p>
+<p class="text-2xl font-black text-error">98 Unid.</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Diferencia Costo</p>
+<p class="text-2xl font-black">-$2,860.00</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 w-full md:w-auto">
+<button class="bg-on-surface text-white px-8 py-3 font-black text-xs uppercase tracking-widest hover:bg-primary transition-colors">Aprobar Ajuste</button>
+<button class="bg-white text-on-surface px-8 py-3 font-black text-xs uppercase tracking-widest hover:bg-surface-container-highest transition-colors">Solicitar Recuento</button>
+<button class="text-[10px] font-black uppercase tracking-widest text-secondary mt-2 text-center">Ver Reporte Auditoría</button>
+</div>
+</div>
+<!-- ROW: Payroll Approval -->
+<div class="xl:col-span-12 bg-white p-8 grid grid-cols-1 md:grid-cols-4 gap-8 items-center border-l-[12px] border-primary">
+<div class="col-span-1">
+<span class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-2 block">CÓMPUTO DE NOMINA</span>
+<h3 class="text-xl font-black uppercase tracking-tight">MES: OCTUBRE 2023</h3>
+<p class="text-xs text-secondary font-medium">152 Empleados Activos</p>
+</div>
+<div class="col-span-1 border-l border-outline-variant/30 pl-8">
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Monto a Dispersar</p>
+<p class="text-2xl font-black">$31,450.00</p>
+</div>
+<div class="col-span-1 border-l border-outline-variant/30 pl-8">
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Estado Revisión</p>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary rounded-full"></span>
+<span class="text-xs font-bold uppercase">Validado por RRHH</span>
+</div>
+</div>
+<div class="col-span-1 flex justify-end gap-3">
+<button class="w-full md:w-auto bg-primary text-on-primary px-6 py-4 font-black text-xs uppercase tracking-widest">Emitir Pago</button>
+<button class="bg-surface-container-high p-4 flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination or Load More (Editorial Style) -->
+<div class="mt-16 flex items-center justify-between border-t-4 border-on-surface pt-6">
+<span class="text-[10px] font-black uppercase tracking-[0.2em] text-secondary">MOSTRANDO 04 DE 12 SOLICITUDES</span>
+<button class="flex items-center gap-4 group">
+<span class="text-xs font-black uppercase tracking-widest">Cargar más registros</span>
+<div class="w-10 h-10 bg-on-surface text-white flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined">add</span>
+</div>
+</button>
+</div>
+</main>
+<!-- FAB Suppression Logic: Not rendered on Admin/Details focused screen as per instructions -->
+</body></html>

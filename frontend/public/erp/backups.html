@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1a1c1c",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "outline": "#747a65",
+                    "surface-dim": "#dadada",
+                    "primary-container": "#9acd32",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#636262",
+                    "surface-container-low": "#f3f3f3",
+                    "primary": "#496800",
+                    "inverse-primary": "#a3d73c",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "inverse-surface": "#2f3131",
+                    "secondary": "#5f5e5e",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-primary-fixed-variant": "#364e00",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#3a5400",
+                    "on-tertiary-container": "#4c4c4c",
+                    "on-surface": "#1a1c1c",
+                    "secondary-container": "#e2dfde",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-variant": "#e2e2e2",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface-tint": "#496800",
+                    "on-surface-variant": "#434937",
+                    "outline-variant": "#c3c9b1",
+                    "surface": "#f9f9f9",
+                    "tertiary-container": "#bebcbc",
+                    "on-primary-fixed": "#131f00",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#5e5e5e",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "primary-fixed": "#bef456",
+                    "error": "#ba1a1a",
+                    "background": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #0c0d0d; color: #f9f9f9; font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .precision-border { border: 1px solid rgba(195, 201, 177, 0.15); }
+    </style>
+</head>
+<body class="bg-stone-950 overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="bg-stone-950/80 backdrop-blur-xl text-lime-500 font-['Space_Grotesk'] uppercase tracking-tight docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-6 py-3">
+<div class="text-xl font-bold text-lime-400 tracking-tighter">TITAN INDUSTRIAL ERP</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8 text-sm">
+<a class="text-stone-400 hover:text-stone-100 transition-colors" href="#">OPERACIONES</a>
+<a class="text-stone-400 hover:text-stone-100 transition-colors" href="#">REPORTES</a>
+<a class="text-lime-400 font-bold border-b-2 border-lime-400" href="#">Administración</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:bg-stone-800/50 p-2 rounded transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-stone-800/50 p-2 rounded transition-colors" data-icon="settings">settings</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-stone-800/50 p-2 rounded transition-colors" data-icon="help_outline">help_outline</span>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full border border-lime-500/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkQMnpSFtyqrthlNiY6UGGcrH1gvN5ylid-AKK-W8DdM-F95zs0mfFuoR6FTvnKxrS9Mh3431mKbY4qRt9INag7heozq9Djtuw7BFeT0vSzxJ2hDd-vK2NV1CaSuDmr1H0b2qhftmV5Af_hHym4dQ6HIesmgQ4RjgINt2wKEdNxHuXL2_ZPEOnhPCHuN_rIB-RrH6lgMrTf7rGuZfEuPcj6lGhHADGFUAzsS5bUw6ib3COmK672VnXpOTelQ4wia8_v4-oDMa_rso"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-16 bg-stone-900 dark:bg-stone-950 h-screen w-64 border-r border-stone-800/50 shadow-[40px_0_40px_-20px_rgba(0,0,0,0.3)] z-40 hidden md:flex">
+<div class="px-6 py-8 flex flex-col gap-1">
+<h2 class="text-stone-200 font-black font-['Inter'] text-sm tracking-wide">ADMINISTRACIÓN</h2>
+<p class="text-stone-500 text-[10px] font-mono">V2.4.0-STABLE</p>
+</div>
+<nav class="flex-1 px-2">
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="group">group</span>
+<span class="font-medium text-sm">Usuarios</span>
+</a>
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="verified_user">verified_user</span>
+<span class="font-medium text-sm">Roles</span>
+</a>
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="database">database</span>
+<span class="font-medium text-sm">Base de Datos</span>
+</a>
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="manage_search">manage_search</span>
+<span class="font-medium text-sm">Auditoría</span>
+</a>
+<a class="bg-stone-800/50 text-lime-400 border-l-4 border-lime-500 px-4 py-3 flex items-center gap-3 active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings_backup_restore">settings_backup_restore</span>
+<span class="font-medium text-sm">Backups</span>
+</a>
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-medium text-sm">Parámetros</span>
+</a>
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-3 flex items-center gap-3 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="account_tree">account_tree</span>
+<span class="font-medium text-sm">Flujos</span>
+</a>
+</nav>
+<div class="p-4 border-t border-stone-800/50">
+<button class="w-full bg-lime-500 text-stone-950 font-bold py-3 text-xs tracking-widest uppercase hover:bg-lime-400 transition-colors">
+                EJECUTAR DIAGNÓSTICO
+            </button>
+</div>
+<div class="p-2">
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-2 flex items-center gap-3 transition-all text-xs" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="support_agent">support_agent</span>
+<span>Soporte</span>
+</a>
+<a class="text-stone-400 hover:bg-stone-800/30 px-4 py-2 flex items-center gap-3 transition-all text-xs" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span>Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-6 px-4 md:px-10 pb-20">
+<!-- Header & Stats Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">
+<div class="lg:col-span-8">
+<h1 class="font-headline text-5xl font-extrabold uppercase tracking-tighter text-stone-100 mb-2 leading-none">
+                    Gestión de <span class="text-lime-400">Backups</span>
+</h1>
+<p class="text-stone-500 font-body max-w-xl">
+                    Administración de redundancia de datos y protocolos de recuperación ante desastres para infraestructuras críticas industriales.
+                </p>
+</div>
+<div class="lg:col-span-4 flex items-end justify-end gap-3">
+<button class="bg-stone-800/50 text-stone-100 px-6 py-3 font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-stone-700 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="history">history</span> Historial Completo
+                </button>
+<button class="bg-lime-500 text-stone-950 px-6 py-3 font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-lime-400 transition-all active:scale-95 shadow-[0_0_20px_rgba(154,205,50,0.2)]">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span> Ejecutar Backup
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<!-- Health Card -->
+<div class="bg-stone-900 p-8 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-stone-800 text-8xl absolute -top-4 -right-4" data-icon="storage">storage</span>
+</div>
+<div class="relative z-10">
+<span class="text-lime-400 font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Estado del Sistema</span>
+<h3 class="font-headline text-4xl font-bold text-stone-100 mb-2">94.2%</h3>
+<p class="text-stone-500 text-sm">Salud de redundancia operativa</p>
+</div>
+<div class="mt-6 flex items-center gap-2 text-lime-500 text-xs font-mono">
+<span class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></span>
+                    SISTEMA SINCRONIZADO
+                </div>
+</div>
+<!-- Storage Card -->
+<div class="bg-stone-900 p-8 flex flex-col justify-between">
+<div>
+<span class="text-lime-400 font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Almacenamiento Local</span>
+<div class="flex items-end gap-2 mb-4">
+<h3 class="font-headline text-4xl font-bold text-stone-100 leading-none">3.8</h3>
+<span class="text-stone-500 font-headline font-bold text-xl mb-1">/ 5.0 MB</span>
+</div>
+<div class="w-full bg-stone-800 h-1 mt-2">
+<div class="bg-lime-500 h-full w-[76%]"></div>
+</div>
+</div>
+<p class="text-stone-500 text-sm mt-4">localStorage asignado para estados temporales</p>
+</div>
+<!-- Schedule Card -->
+<div class="bg-stone-900 p-8 flex flex-col justify-between border-l-4 border-lime-500">
+<div>
+<span class="text-lime-400 font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Próximo Backup</span>
+<h3 class="font-headline text-2xl font-bold text-stone-100 mb-1">04:00 AM</h3>
+<p class="text-stone-500 text-sm italic">Programación Diaria Automática</p>
+</div>
+<div class="flex items-center gap-4 mt-6">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center border border-stone-900 text-[10px] font-bold">D</div>
+<div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center border border-stone-900 text-[10px] font-bold">L</div>
+<div class="w-8 h-8 rounded-full bg-lime-500 text-stone-950 flex items-center justify-center border border-stone-900 text-[10px] font-bold">M</div>
+<div class="w-8 h-8 rounded-full bg-lime-500 text-stone-950 flex items-center justify-center border border-stone-900 text-[10px] font-bold">X</div>
+</div>
+<span class="text-stone-500 text-[10px] uppercase font-bold tracking-widest">En curso</span>
+</div>
+</div>
+</div>
+<!-- Configuration Sections -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Controls Column -->
+<div class="xl:col-span-1 flex flex-col gap-8">
+<!-- Scheduling -->
+<div class="bg-stone-900 p-6">
+<h4 class="font-headline font-bold text-stone-100 uppercase tracking-wide mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-lime-400" data-icon="calendar_month">calendar_month</span>
+                        Programación
+                    </h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-stone-800/30 hover:bg-stone-800/50 transition-colors">
+<span class="text-sm font-medium">Backup Diario</span>
+<div class="w-10 h-5 bg-lime-500 rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-stone-950 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 bg-stone-800/30 hover:bg-stone-800/50 transition-colors">
+<span class="text-sm font-medium">Respaldo Semanal</span>
+<div class="w-10 h-5 bg-stone-700 rounded-full relative">
+<div class="absolute left-1 top-1 w-3 h-3 bg-stone-950 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 bg-stone-800/30 hover:bg-stone-800/50 transition-colors">
+<span class="text-sm font-medium">Cifrado AES-256</span>
+<div class="w-10 h-5 bg-lime-500 rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-stone-950 rounded-full"></div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-stone-700 text-stone-400 text-xs font-bold uppercase tracking-widest hover:text-lime-400 hover:border-lime-400 transition-all">
+                        MODIFICAR PARÁMETROS
+                    </button>
+</div>
+<!-- Disaster Recovery -->
+<div class="bg-stone-900/40 border border-red-900/30 p-6">
+<h4 class="font-headline font-bold text-red-400 uppercase tracking-wide mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+                        Zona de Recuperación
+                    </h4>
+<p class="text-stone-500 text-xs mb-6">Inicie el protocolo de restauración de punto anterior. Esta acción sobrescribirá los datos actuales.</p>
+<button class="w-full py-4 bg-red-950/50 border border-red-700 text-red-500 font-black text-xs uppercase tracking-tighter hover:bg-red-900/50 transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="restore">restore</span>
+                        RESTAURAR PUNTO DE CONTROL
+                    </button>
+</div>
+</div>
+<!-- Table Column -->
+<div class="xl:col-span-2">
+<div class="bg-stone-900 overflow-hidden">
+<div class="p-6 border-b border-stone-800 flex justify-between items-center">
+<h4 class="font-headline font-bold text-stone-100 uppercase tracking-wide">Registro de Actividad</h4>
+<div class="flex gap-2">
+<span class="text-[10px] text-stone-500 uppercase font-bold px-2 py-1 bg-stone-800">Filtrar: Todos</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body">
+<thead>
+<tr class="bg-stone-800/50 text-[10px] text-stone-400 uppercase tracking-[0.2em]">
+<th class="px-6 py-4 font-black">Timestamp</th>
+<th class="px-6 py-4 font-black">ID Hash</th>
+<th class="px-6 py-4 font-black">Tamaño</th>
+<th class="px-6 py-4 font-black">Tipo</th>
+<th class="px-6 py-4 font-black text-right">Estado</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-stone-800">
+<tr class="hover:bg-stone-800/20 transition-colors">
+<td class="px-6 py-4">
+<div class="text-stone-200">2023-10-24</div>
+<div class="text-[10px] text-stone-500">14:02:11 GMT-5</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-stone-400">#af82..192x</td>
+<td class="px-6 py-4 font-medium">124.8 MB</td>
+<td class="px-6 py-4">
+<span class="text-[10px] border border-stone-700 px-2 py-1 rounded-sm text-stone-400 font-bold uppercase">Manual</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-lime-500 font-black text-[10px] uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-lime-500"></span> Éxito
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-stone-800/20 transition-colors bg-stone-800/10">
+<td class="px-6 py-4">
+<div class="text-stone-200">2023-10-23</div>
+<div class="text-[10px] text-stone-500">04:00:00 GMT-5</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-stone-400">#bf11..722q</td>
+<td class="px-6 py-4 font-medium">119.2 MB</td>
+<td class="px-6 py-4">
+<span class="text-[10px] border border-stone-700 px-2 py-1 rounded-sm text-stone-400 font-bold uppercase">Auto</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-lime-500 font-black text-[10px] uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-lime-500"></span> Éxito
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-stone-800/20 transition-colors">
+<td class="px-6 py-4">
+<div class="text-stone-200">2023-10-22</div>
+<div class="text-[10px] text-stone-500">04:00:00 GMT-5</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-stone-400">#cc09..918p</td>
+<td class="px-6 py-4 font-medium">118.5 MB</td>
+<td class="px-6 py-4">
+<span class="text-[10px] border border-stone-700 px-2 py-1 rounded-sm text-stone-400 font-bold uppercase">Auto</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-red-500 font-black text-[10px] uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Fallo
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-stone-800/20 transition-colors bg-stone-800/10">
+<td class="px-6 py-4">
+<div class="text-stone-200">2023-10-21</div>
+<div class="text-[10px] text-stone-500">18:45:22 GMT-5</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-stone-400">#ee21..001z</td>
+<td class="px-6 py-4 font-medium">112.4 MB</td>
+<td class="px-6 py-4">
+<span class="text-[10px] border border-stone-700 px-2 py-1 rounded-sm text-stone-400 font-bold uppercase">Manual</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-lime-500 font-black text-[10px] uppercase tracking-widest flex items-center justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-lime-500"></span> Éxito
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Technical Footer Info -->
+<div class="mt-6 flex flex-wrap gap-8 items-center text-[10px] font-bold uppercase tracking-widest text-stone-500">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+                        Verificación de Integridad: OK
+                    </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="cloud_sync">cloud_sync</span>
+                        Mirror S3: Conectado
+                    </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="security">security</span>
+                        Encripción: AES-GCM 256
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Accent Element -->
+<div class="fixed bottom-0 right-0 p-10 pointer-events-none opacity-10">
+<span class="font-headline text-[15rem] font-black leading-none select-none">T-ERP</span>
+</div>
+</body></html>

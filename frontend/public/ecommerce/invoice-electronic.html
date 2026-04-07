@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TITAN ENGINE ERP - Digital Invoice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f9f9f9",
+                    "outline-variant": "#c3c9b1",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "outline": "#747a65",
+                    "surface-dim": "#dadada",
+                    "on-surface-variant": "#434937",
+                    "inverse-on-surface": "#f1f1f1",
+                    "background": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "primary": "#496800",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-container": "#636262",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-background": "#1a1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "inverse-surface": "#2f3131",
+                    "surface-tint": "#496800",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary-fixed-variant": "#364e00",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary-container": "#4c4c4c",
+                    "on-primary-container": "#3a5400",
+                    "surface": "#f9f9f9",
+                    "on-primary-fixed": "#131f00",
+                    "on-surface": "#1a1c1c",
+                    "primary-container": "#9acd32",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#e2dfde",
+                    "tertiary-fixed": "#e4e2e2",
+                    "secondary": "#5f5e5e",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#a3d73c",
+                    "tertiary": "#5e5e5e",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#a3d73c",
+                    "tertiary-container": "#bebcbc",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#bef456"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      @media print {
+        .no-print { display: none !important; }
+        body { background: white !important; }
+        .print-shadow { box-shadow: none !important; border: 1px solid #eeeeee !important; }
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-stone-900/90 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full no-print">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold text-lime-400 tracking-tighter font-['Space_Grotesk'] uppercase">TITAN ENGINE ERP</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-stone-400 font-['Space_Grotesk'] uppercase tracking-tight">
+<button class="hover:bg-stone-800 transition-colors duration-200 p-2 rounded-lg scale-95 active:opacity-80 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-stone-800 transition-colors duration-200 p-2 rounded-lg scale-95 active:opacity-80 transition-transform">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full border border-stone-700" data-alt="Professional studio portrait of an industrial manager wearing a dark uniform with high-end lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvwPAw3diWyu-Ic_lIlPu3QWInJyALZdP_a3SldaJc4QZ2oOCnPu1u5ardjh9usxgmK-vWs6Rig2XWDQ4i2F9ClraqT6tkfWkBf_oW8myvdzqlPYamgRAw3_HzvMIMYRqWORextmpTo0NiMaAjlIJPekWGTLyMTJiDr1xcNOL3WsSv-6Ganfr-Ucyf2AgjgitpOJe0J05KzR9OOmivpyKUDMJaXkjcf0vDvnO0yCkU0cXFnu9rT3dNidVNhoCFFMtiTBWVO79_UAw"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-stone-950 flex flex-col py-8 px-4 gap-2 no-print">
+<div class="mb-10 px-4">
+<h2 class="text-lg font-black text-white font-['Inter'] uppercase">ENGINE OPS</h2>
+<p class="text-[10px] text-stone-500 font-semibold tracking-widest uppercase">High Performance Industrial</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+                New Sale
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-lime-400 border-r-4 border-lime-500 bg-stone-900/50 translate-x-1 transition-transform font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined">history</span>
+                Sales History
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined">group</span>
+                Customers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-stone-200 hover:bg-stone-900 transition-all duration-300 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                Reports
+            </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-stone-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-200 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-200 font-['Inter'] text-sm font-semibold uppercase" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 pb-12 px-4 md:px-12 min-h-screen bg-surface">
+<!-- Action Header -->
+<div class="max-w-5xl mx-auto flex justify-between items-end mb-8 no-print">
+<div>
+<h1 class="font-headline text-4xl font-extrabold uppercase tracking-tighter text-on-surface">Invoice Detail</h1>
+<p class="text-secondary font-medium uppercase text-xs tracking-widest mt-1">Industrial Fulfillment Pipeline / Sale #77492</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high text-on-surface px-6 py-2.5 font-bold uppercase text-xs tracking-wider flex items-center gap-2 hover:bg-surface-dim transition-colors transition-transform active:scale-95" onclick="window.print()">
+<span class="material-symbols-outlined text-sm">print</span>
+                    Print Document
+                </button>
+<button class="bg-primary text-on-primary px-6 py-2.5 font-bold uppercase text-xs tracking-wider flex items-center gap-2 hover:opacity-90 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Export PDF
+                </button>
+</div>
+</div>
+<!-- The Invoice Container -->
+<div class="max-w-5xl mx-auto bg-surface-container-lowest print-shadow p-8 md:p-12 relative overflow-hidden">
+<!-- Decorative Accent -->
+<div class="absolute top-0 left-0 w-2 h-full bg-primary"></div>
+<!-- Invoice Header Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-surface-container pb-10">
+<div class="flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 bg-stone-900 flex items-center justify-center">
+<span class="material-symbols-outlined text-lime-400 text-4xl" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+</div>
+<div>
+<h2 class="font-headline text-2xl font-black uppercase leading-none text-on-surface">MAYOR DE REPUESTO LA CIMA, C.A.</h2>
+<p class="font-bold text-primary text-sm mt-1">RIF J-40308741-5</p>
+</div>
+</div>
+<div class="space-y-1 text-sm text-secondary font-medium">
+<p>Zona Industrial Municipal Norte</p>
+<p>Avenida Henry Ford, Galpón C-12</p>
+<p>Valencia, Edo. Carabobo 2001, Venezuela</p>
+<p class="pt-2 text-on-surface">+58 (241) 555-0198 | info@lacima-repuestos.com</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end text-right">
+<div class="bg-stone-950 text-white p-6 w-full max-w-xs">
+<p class="text-[10px] uppercase tracking-[0.2em] font-black text-stone-500 mb-2">Invoice Number</p>
+<p class="font-headline text-3xl font-bold tracking-tighter">#FE-2024-0892</p>
+<div class="mt-4 pt-4 border-t border-stone-800 grid grid-cols-2 gap-4">
+<div>
+<p class="text-[9px] uppercase tracking-widest text-stone-500">Emission Date</p>
+<p class="text-xs font-bold uppercase">24 OCT 2023</p>
+</div>
+<div>
+<p class="text-[9px] uppercase tracking-widest text-stone-500">Control Number</p>
+<p class="text-xs font-bold uppercase">00-998822</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer Details Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-10 border-b border-surface-container">
+<div class="col-span-2">
+<h3 class="text-[10px] uppercase tracking-widest font-black text-secondary mb-4 flex items-center gap-2">
+<span class="w-1 h-3 bg-primary"></span>
+                        Customer Information
+                    </h3>
+<div class="bg-surface-container-low p-6">
+<p class="text-xl font-bold uppercase text-on-surface mb-2">SIDERÚRGICA DEL TURBIO, S.A. (SIDETUR)</p>
+<div class="grid grid-cols-2 gap-6 mt-4">
+<div>
+<p class="text-[9px] uppercase font-bold text-secondary">RIF</p>
+<p class="text-sm font-semibold">J-00034567-0</p>
+</div>
+<div>
+<p class="text-[9px] uppercase font-bold text-secondary">Phone</p>
+<p class="text-sm font-semibold">+58 (251) 441-2090</p>
+</div>
+<div class="col-span-2">
+<p class="text-[9px] uppercase font-bold text-secondary">Fiscal Address</p>
+<p class="text-sm font-medium leading-relaxed">Zona Industrial II, Carrera 4 con Calle 2. Barquisimeto, Edo. Lara.</p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-[10px] uppercase tracking-widest font-black text-secondary mb-4 flex items-center gap-2">
+<span class="w-1 h-3 bg-primary"></span>
+                        Status &amp; Logistics
+                    </h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center border-b border-surface-container-high pb-2">
+<span class="text-xs font-bold text-secondary uppercase">Payment Terms</span>
+<span class="text-xs font-black uppercase">Net 15 Days</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-container-high pb-2">
+<span class="text-xs font-bold text-secondary uppercase">Dispatch Origin</span>
+<span class="text-xs font-black uppercase">VLC-WH-02</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-container-high pb-2">
+<span class="text-xs font-bold text-secondary uppercase">Priority Status</span>
+<span class="px-2 py-0.5 bg-primary text-on-primary text-[9px] font-black uppercase">Critical Part</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Items Table -->
+<div class="py-10">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-900 text-white">
+<th class="py-3 px-4 font-headline text-[10px] uppercase tracking-widest font-bold">SKU</th>
+<th class="py-3 px-4 font-headline text-[10px] uppercase tracking-widest font-bold">Description</th>
+<th class="py-3 px-4 font-headline text-[10px] uppercase tracking-widest font-bold text-right">Quantity</th>
+<th class="py-3 px-4 font-headline text-[10px] uppercase tracking-widest font-bold text-right">Unit Price</th>
+<th class="py-3 px-4 font-headline text-[10px] uppercase tracking-widest font-bold text-right">Tax Base</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-surface-container-high hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-bold text-primary">CUM-3972886</td>
+<td class="py-4 px-4">
+<p class="font-bold text-on-surface uppercase">Crankshaft Main Bearing Set</p>
+<p class="text-[10px] text-secondary font-medium">Standard Size - Heavy Duty Industrial Grade</p>
+</td>
+<td class="py-4 px-4 text-right font-semibold">12</td>
+<td class="py-4 px-4 text-right font-semibold">$ 450.00</td>
+<td class="py-4 px-4 text-right font-black">$ 5,400.00</td>
+</tr>
+<tr class="bg-surface-container-low/50 border-b border-surface-container-high hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-bold text-primary">DET-23530663</td>
+<td class="py-4 px-4">
+<p class="font-bold text-on-surface uppercase">Fuel Injector Assembly (Series 60)</p>
+<p class="text-[10px] text-secondary font-medium">Electronic Unit Injector - Precision Calibration</p>
+</td>
+<td class="py-4 px-4 text-right font-semibold">06</td>
+<td class="py-4 px-4 text-right font-semibold">$ 820.00</td>
+<td class="py-4 px-4 text-right font-black">$ 4,920.00</td>
+</tr>
+<tr class="border-b border-surface-container-high hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-4 font-bold text-primary">PER-U5ME0034</td>
+<td class="py-4 px-4">
+<p class="font-bold text-on-surface uppercase">Upper Gasket Kit - 1104D Series</p>
+<p class="text-[10px] text-secondary font-medium">High-Temperature Resistance Composite Material</p>
+</td>
+<td class="py-4 px-4 text-right font-semibold">03</td>
+<td class="py-4 px-4 text-right font-semibold">$ 215.50</td>
+<td class="py-4 px-4 text-right font-black">$ 646.50</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Summary Section -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 pt-6">
+<!-- Legal & Signatures -->
+<div class="md:col-span-7 space-y-8">
+<div class="flex gap-6 items-center bg-surface-container p-6">
+<div class="bg-white p-2">
+<div class="w-24 h-24 bg-stone-900 flex items-center justify-center relative overflow-hidden">
+<!-- Mock QR Code -->
+<div class="absolute inset-0 grid grid-cols-6 grid-rows-6 opacity-30">
+<div class="bg-white"></div><div class="bg-stone-900"></div><div class="bg-white"></div><div class="bg-stone-900"></div><div class="bg-white"></div><div class="bg-stone-900"></div>
+<div class="bg-stone-900"></div><div class="bg-white"></div><div class="bg-stone-900"></div><div class="bg-white"></div><div class="bg-stone-900"></div><div class="bg-white"></div>
+</div>
+<span class="material-symbols-outlined text-lime-400 text-4xl" style="font-variation-settings: 'FILL' 1;">qr_code_2</span>
+</div>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase text-secondary mb-1">Fiscal Authorization</p>
+<p class="font-headline text-sm font-bold text-on-surface">Código de Autorización SENIAT:</p>
+<p class="font-mono text-xs font-bold text-primary mt-1">SNT-2023-44092-VLC-001</p>
+<p class="text-[9px] text-secondary mt-3 leading-tight italic">Documento emitido según Providencia Administrativa N° SNAT/2011/00071 del Servicio Nacional Integrado de Administración Aduanera y Tributaria.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="border-t border-surface-container pt-4">
+<p class="text-[9px] font-bold text-secondary uppercase mb-8">Authorized Signature</p>
+<div class="w-full h-px bg-on-surface/10 mb-2"></div>
+<p class="text-[10px] font-black text-on-surface uppercase">Warehouse Manager</p>
+</div>
+<div class="border-t border-surface-container pt-4">
+<p class="text-[9px] font-bold text-secondary uppercase mb-8">Customer Acceptance</p>
+<div class="w-full h-px bg-on-surface/10 mb-2"></div>
+<p class="text-[10px] font-black text-on-surface uppercase">Receiving Department</p>
+</div>
+</div>
+</div>
+<!-- Financial Totals -->
+<div class="md:col-span-5 bg-stone-950 text-white p-8 self-start">
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-bold text-stone-400 uppercase">
+<span>Total Tax Base</span>
+<span>$ 10,966.50</span>
+</div>
+<div class="flex justify-between text-xs font-bold text-stone-400 uppercase">
+<span>VAT / IVA (16%)</span>
+<span>$ 1,754.64</span>
+</div>
+<div class="flex justify-between text-xs font-bold text-lime-500 uppercase">
+<span>IVA Retenido (75%)</span>
+<span>- $ 1,315.98</span>
+</div>
+<div class="border-t border-stone-800 pt-6 mt-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[9px] font-black uppercase tracking-[0.2em] text-stone-500 mb-1">Amount Due</p>
+<p class="text-xs text-stone-400 font-medium">Neto a Pagar</p>
+</div>
+<div class="text-right">
+<p class="font-headline text-3xl font-black text-lime-400 leading-none">$ 11,405.16</p>
+<p class="text-[9px] text-stone-500 mt-2 uppercase tracking-tighter">Rate: 1 USD = 35.40 VES</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Slogan -->
+<div class="mt-12 text-center border-t border-surface-container pt-8">
+<p class="text-[10px] font-black uppercase tracking-[0.4em] text-surface-container-highest">Performance Without Compromise • Industrial Uptime Guaranteed</p>
+</div>
+</div>
+<!-- System Metadata (External to Invoice) -->
+<div class="max-w-5xl mx-auto mt-8 flex justify-between items-center no-print">
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-[10px] font-bold text-secondary uppercase">Verified System Hash</span>
+</div>
+<p class="font-mono text-[9px] text-secondary">0x8892_BBAF_C12_9948_SYS_OK</p>
+</div>
+<p class="text-[10px] font-medium text-secondary uppercase tracking-widest">© 2024 TITAN ENGINE SYSTEMS • VALENCIA OPERATIONS</p>
+</div>
+</main>
+<!-- Contextual FAB (Suppressed on Details) -->
+</body></html>

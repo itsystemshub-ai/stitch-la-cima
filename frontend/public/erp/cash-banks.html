@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TITAN INDUSTRIAL ERP - Finanzas &amp; Bancos</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#364e00",
+                      "surface-variant": "#e2e2e2",
+                      "surface-container-highest": "#e2e2e2",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "secondary-fixed": "#e5e2e1",
+                      "on-secondary-container": "#636262",
+                      "inverse-primary": "#a3d73c",
+                      "surface-container": "#eeeeee",
+                      "on-primary-fixed": "#131f00",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#e2dfde",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "on-primary-container": "#3a5400",
+                      "inverse-on-surface": "#f1f1f1",
+                      "tertiary-fixed": "#e4e2e2",
+                      "tertiary-fixed-dim": "#c8c6c6",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "tertiary": "#5e5e5e",
+                      "on-surface": "#1a1c1c",
+                      "surface-container-high": "#e8e8e8",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#2f3131",
+                      "surface-dim": "#dadada",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "primary-container": "#9acd32",
+                      "on-tertiary-container": "#4c4c4c",
+                      "surface-tint": "#496800",
+                      "tertiary-container": "#bebcbc",
+                      "surface": "#f9f9f9",
+                      "primary-fixed": "#bef456",
+                      "outline": "#747a65",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface-variant": "#434937",
+                      "surface-bright": "#f9f9f9",
+                      "surface-container-low": "#f3f3f3",
+                      "primary": "#496800",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#474746",
+                      "secondary": "#5f5e5e",
+                      "on-error-container": "#93000a",
+                      "background": "#f9f9f9",
+                      "primary-fixed-dim": "#a3d73c",
+                      "outline-variant": "#c3c9b1",
+                      "on-background": "#1a1c1c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .nav-brand { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-stone-950/90 backdrop-blur-md border-b border-stone-800/50 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex justify-between items-center h-16 px-6 w-full">
+<div class="text-2xl font-bold tracking-tighter text-lime-400 font-['Space_Grotesk'] uppercase">TITAN INDUSTRIAL ERP</div>
+<nav class="hidden md:flex gap-8 items-center h-full">
+<a class="text-stone-400 hover:text-stone-100 font-['Space_Grotesk'] uppercase tracking-tight transition-all duration-200" href="#">Inventario</a>
+<a class="text-stone-400 hover:text-stone-100 font-['Space_Grotesk'] uppercase tracking-tight transition-all duration-200" href="#">Ventas</a>
+<a class="text-lime-400 border-b-2 border-lime-400 pb-1 font-['Space_Grotesk'] uppercase tracking-tight transition-all duration-200" href="#">Bancos</a>
+<a class="text-stone-400 hover:text-stone-100 font-['Space_Grotesk'] uppercase tracking-tight transition-all duration-200" href="#">RRHH</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 text-lime-500 hover:bg-stone-800/50 transition-all duration-200 active:scale-95 duration-75">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-lime-500 hover:bg-stone-800/50 transition-all duration-200 active:scale-95 duration-75">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-2 text-lime-500 hover:bg-stone-800/50 transition-all duration-200 active:scale-95 duration-75">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-stone-900 flex flex-col pt-20 pb-6">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 bg-stone-800 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-lime-500" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<div class="text-xs font-bold text-stone-500 tracking-widest font-['Inter'] uppercase">OPERACIONES</div>
+<div class="text-sm text-stone-200 font-medium">Terminal Central</div>
+</div>
+</div>
+<button class="w-full bg-lime-500 text-stone-950 font-bold py-2 tracking-tight transition-all hover:bg-lime-400 uppercase text-xs">
+                NUEVA ACTA
+            </button>
+</div>
+<nav class="flex-1">
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 font-['Inter'] font-medium text-sm hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span> E-Commerce
+            </a>
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 font-['Inter'] font-medium text-sm hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span> Inventario
+            </a>
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 font-['Inter'] font-medium text-sm hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="cancel_presentation">cancel_presentation</span> Ventas
+            </a>
+<a class="bg-lime-900/20 text-lime-400 border-r-4 border-lime-500 px-4 py-3 flex items-center gap-3 font-['Inter'] font-medium text-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span> Bancos
+            </a>
+<a class="text-stone-400 px-4 py-3 flex items-center gap-3 font-['Inter'] font-medium text-sm hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span> Portal Empleado
+            </a>
+</nav>
+<div class="mt-auto border-t border-stone-800 pt-4">
+<a class="text-stone-400 px-4 py-2 flex items-center gap-3 font-['Inter'] font-medium text-xs hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="support_agent">support_agent</span> Soporte
+            </a>
+<a class="text-stone-400 px-4 py-2 flex items-center gap-3 font-['Inter'] font-medium text-xs hover:bg-stone-800 hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span> Cerrar Sesión
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12">
+<!-- Header & Real-Time Balances -->
+<div class="flex flex-col gap-6 mb-12">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tighter uppercase text-on-surface">Gestión Bancaria &amp; Libro Caja</h1>
+<p class="text-secondary font-label text-sm uppercase tracking-widest mt-1">Saldos Consolidados a Tiempo Real</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high hover:bg-surface-container-highest px-4 py-2 text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="file_download">file_download</span> Exportar PDF
+                    </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="sync_alt">sync_alt</span> Nueva Conciliación
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest p-6 flex flex-col gap-2 border-l-4 border-primary">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">Banco Santander - Operativo</span>
+<span class="text-3xl font-headline font-bold text-on-surface">$1,452,380.00</span>
+<div class="flex items-center gap-1 text-xs text-primary font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span> +2.4% vs ayer
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 flex flex-col gap-2">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">BBVA - Reserva</span>
+<span class="text-3xl font-headline font-bold text-on-surface">$845,000.50</span>
+<div class="flex items-center gap-1 text-xs text-secondary font-bold">
+                        Conciliado hace 2h
+                    </div>
+</div>
+<div class="bg-surface-container-lowest p-6 flex flex-col gap-2">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">Caja Chica - Planta 1</span>
+<span class="text-3xl font-headline font-bold text-on-surface">$12,400.00</span>
+<div class="flex items-center gap-1 text-xs text-error font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span> Reponer fondos
+                    </div>
+</div>
+<div class="bg-primary text-on-primary p-6 flex flex-col gap-2">
+<span class="text-[10px] font-bold text-on-primary/70 uppercase tracking-widest">Consolidado Total</span>
+<span class="text-3xl font-headline font-bold">$2,309,780.50</span>
+<div class="flex items-center gap-1 text-xs text-on-primary/80 font-bold uppercase">
+                        Auditoría 100% OK
+                    </div>
+</div>
+</div>
+</div>
+<!-- Section 1: Libro de Movimientos & Conciliación -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+<div class="lg:col-span-2 space-y-4">
+<div class="flex justify-between items-center">
+<h2 class="text-xl font-bold uppercase tracking-tight">Registro de Movimientos</h2>
+<div class="flex gap-2">
+<input class="bg-surface-container-high border-none text-xs px-4 py-2 focus:ring-1 focus:ring-primary w-64" placeholder="Filtrar por concepto..." type="text"/>
+</div>
+</div>
+<div class="bg-surface-container-lowest overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container text-secondary text-[10px] uppercase font-bold tracking-widest">
+<tr>
+<th class="px-4 py-3">Fecha</th>
+<th class="px-4 py-3">Referencia</th>
+<th class="px-4 py-3">Concepto</th>
+<th class="px-4 py-3">Tipo</th>
+<th class="px-4 py-3 text-right">Monto</th>
+<th class="px-4 py-3 text-center">Estado</th>
+</tr>
+</thead>
+<tbody class="text-xs font-label">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-4 text-secondary">24/05/2024</td>
+<td class="px-4 py-4 font-mono">#TRF-9023</td>
+<td class="px-4 py-4 font-bold">Pago Proveedor Acero Inox</td>
+<td class="px-4 py-4"><span class="bg-surface-container-high px-2 py-1 text-[10px]">EGRESO</span></td>
+<td class="px-4 py-4 text-right font-bold text-error">-$250,000.00</td>
+<td class="px-4 py-4 text-center"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span></td>
+</tr>
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-4 text-secondary">24/05/2024</td>
+<td class="px-4 py-4 font-mono">#CHQ-4451</td>
+<td class="px-4 py-4 font-bold">Cobro Factura #V-998 (Cliente Ind.)</td>
+<td class="px-4 py-4"><span class="bg-primary-container/20 text-on-primary-container px-2 py-1 text-[10px]">INGRESO</span></td>
+<td class="px-4 py-4 text-right font-bold text-primary">+$180,500.00</td>
+<td class="px-4 py-4 text-center"><span class="material-symbols-outlined text-secondary text-lg" data-icon="history">history</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-4 text-secondary">23/05/2024</td>
+<td class="px-4 py-4 font-mono">#INT-0032</td>
+<td class="px-4 py-4 font-bold">Rendimientos Cuenta de Ahorro</td>
+<td class="px-4 py-4"><span class="bg-primary-container/20 text-on-primary-container px-2 py-1 text-[10px]">INGRESO</span></td>
+<td class="px-4 py-4 text-right font-bold text-primary">+$12,450.00</td>
+<td class="px-4 py-4 text-center"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span></td>
+</tr>
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-4 text-secondary">23/05/2024</td>
+<td class="px-4 py-4 font-mono">#TRF-8871</td>
+<td class="px-4 py-4 font-bold">Nómina Operarios Planta 2</td>
+<td class="px-4 py-4"><span class="bg-surface-container-high px-2 py-1 text-[10px]">EGRESO</span></td>
+<td class="px-4 py-4 text-right font-bold text-error">-$412,000.00</td>
+<td class="px-4 py-4 text-center"><span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Conciliación Rápida & Acciones -->
+<div class="space-y-6">
+<div class="bg-stone-900 text-stone-100 p-6 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-lime-500/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<h3 class="text-sm font-bold uppercase tracking-widest text-lime-400 mb-4">Conciliación Rápida AI</h3>
+<p class="text-xs text-stone-400 leading-relaxed mb-6">Hemos detectado 4 movimientos bancarios que coinciden con facturas pendientes de cobro.</p>
+<div class="space-y-3">
+<div class="bg-stone-800 p-3 flex justify-between items-center group cursor-pointer hover:bg-stone-700 transition-all">
+<div>
+<div class="text-[10px] text-stone-500 font-bold uppercase">Match 98%</div>
+<div class="text-xs font-bold">Depósito $45,000.00</div>
+</div>
+<span class="material-symbols-outlined text-lime-500 opacity-0 group-hover:opacity-100 transition-opacity" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<button class="w-full bg-lime-500 text-stone-950 text-xs font-bold py-3 uppercase tracking-widest mt-2">Ejecutar Auto-Conciliación</button>
+</div>
+</div>
+<div class="bg-surface-container p-6">
+<h3 class="text-xs font-bold uppercase tracking-widest text-secondary mb-4">Flujo Mensual</h3>
+<div class="h-32 flex items-end gap-2 px-2">
+<div class="flex-1 bg-primary/20 h-3/4 hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-primary/20 h-1/2 hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-primary/20 h-full hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-primary/20 h-2/3 hover:bg-primary transition-all"></div>
+<div class="flex-1 bg-primary h-5/6"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-secondary font-bold uppercase">
+<span>Ene</span><span>Feb</span><span>Mar</span><span>Abr</span><span>May</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Antigüedad de Saldos -->
+<section class="space-y-6">
+<div class="flex justify-between items-center">
+<div>
+<h2 class="text-xl font-bold uppercase tracking-tight">Antigüedad de Saldos de Clientes</h2>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest">Análisis de cartera vencida y riesgo</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary"></div>
+<span class="text-[10px] font-bold uppercase text-secondary">Corriente</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-secondary"></div>
+<span class="text-[10px] font-bold uppercase text-secondary">30-60 Días</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-error"></div>
+<span class="text-[10px] font-bold uppercase text-secondary">&gt;90 Días</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Cliente 1 -->
+<div class="border-l border-surface-container-high pl-4">
+<div class="text-sm font-bold uppercase mb-1">Industrial S.A.</div>
+<div class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-3">Total Deuda: $1.2M</div>
+<div class="flex gap-1 h-2 mb-2">
+<div class="w-[80%] bg-primary"></div>
+<div class="w-[15%] bg-secondary"></div>
+<div class="w-[5%] bg-error"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-primary">80% OK</span>
+<span class="text-error">Bajo Riesgo</span>
+</div>
+</div>
+<!-- Cliente 2 -->
+<div class="border-l border-surface-container-high pl-4">
+<div class="text-sm font-bold uppercase mb-1">Minera del Norte</div>
+<div class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-3">Total Deuda: $840k</div>
+<div class="flex gap-1 h-2 mb-2">
+<div class="w-[40%] bg-primary"></div>
+<div class="w-[40%] bg-secondary"></div>
+<div class="w-[20%] bg-error"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-secondary">40% Vencido</span>
+<span class="text-error">Alerta</span>
+</div>
+</div>
+<!-- Cliente 3 -->
+<div class="border-l border-surface-container-high pl-4">
+<div class="text-sm font-bold uppercase mb-1">Logística Global</div>
+<div class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-3">Total Deuda: $3.5M</div>
+<div class="flex gap-1 h-2 mb-2">
+<div class="w-[95%] bg-primary"></div>
+<div class="w-[5%] bg-secondary"></div>
+<div class="w-0 bg-error"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-primary">95% OK</span>
+<span class="text-primary">Excelente</span>
+</div>
+</div>
+<!-- Cliente 4 -->
+<div class="border-l border-surface-container-high pl-4">
+<div class="text-sm font-bold uppercase mb-1">Suministros Ferrosos</div>
+<div class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-3">Total Deuda: $150k</div>
+<div class="flex gap-1 h-2 mb-2">
+<div class="w-[10%] bg-primary"></div>
+<div class="w-[20%] bg-secondary"></div>
+<div class="w-[70%] bg-error"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold">
+<span class="text-error">70% &gt;90 Días</span>
+<span class="text-error">BLOQUEADO</span>
+</div>
+</div>
+</div>
+<!-- Resumen de Riesgo (Full Width) -->
+<div class="bg-surface-container-high p-4 flex justify-between items-center">
+<div class="flex gap-8">
+<div>
+<div class="text-[9px] font-bold text-secondary uppercase tracking-widest">Cartera Corriente</div>
+<div class="text-lg font-bold">$12,450,000.00</div>
+</div>
+<div>
+<div class="text-[9px] font-bold text-secondary uppercase tracking-widest">Monto en Riesgo</div>
+<div class="text-lg font-bold text-error">$842,000.00</div>
+</div>
+<div>
+<div class="text-[9px] font-bold text-secondary uppercase tracking-widest">Promedio Días Pago</div>
+<div class="text-lg font-bold">42 Días</div>
+</div>
+</div>
+<button class="bg-on-surface text-surface px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-stone-800 transition-all">Ver Reporte Analítico</button>
+</div>
+</section>
+</main>
+<!-- FAB Suppression: This page is Task-Focused/Details, FAB is hidden according to rules -->
+<div class="fixed bottom-0 left-64 right-0 h-1 bg-primary/20">
+<div class="h-full bg-primary w-2/3 shadow-[0_0_10px_#9acd32]"></div>
+</div>
+</body></html>

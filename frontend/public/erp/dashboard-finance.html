@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#5e5e5e",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "on-surface": "#1a1c1c",
+                    "surface-dim": "#dadada",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#496800",
+                    "tertiary-fixed": "#e4e2e2",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "primary-fixed": "#bef456",
+                    "surface-container": "#eeeeee",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-bright": "#f9f9f9",
+                    "surface-tint": "#496800",
+                    "inverse-primary": "#a3d73c",
+                    "surface": "#f9f9f9",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#364e00",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-primary-fixed": "#131f00",
+                    "inverse-on-surface": "#f1f1f1",
+                    "outline-variant": "#c3c9b1",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#747a65",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "tertiary-container": "#bebcbc",
+                    "secondary-fixed": "#e5e2e1",
+                    "inverse-surface": "#2f3131",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#e8e8e8",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#9acd32",
+                    "on-secondary-container": "#636262",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "secondary-container": "#e2dfde",
+                    "on-tertiary-container": "#4c4c4c",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-container": "#3a5400",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-background": "#1a1c1c",
+                    "background": "#f9f9f9",
+                    "on-surface-variant": "#434937",
+                    "primary-fixed-dim": "#a3d73c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #09090b; /* Zinc 950 for industrial dark mode */
+            color: #f4f4f5;
+        }
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-zinc-50 font-headline uppercase">FINANCE_ENGINE</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-amber-400 font-bold border-b-2 border-amber-500 font-headline uppercase tracking-tight py-1" href="#">Dashboard</a>
+<a class="text-zinc-400 hover:bg-zinc-800/50 transition-colors font-headline uppercase tracking-tight py-1 px-2 rounded" href="#">Reports</a>
+<a class="text-zinc-400 hover:bg-zinc-800/50 transition-colors font-headline uppercase tracking-tight py-1 px-2 rounded" href="#">Assets</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm">search</span>
+<input class="bg-zinc-900 border-none rounded-none text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 focus:ring-1 focus:ring-primary w-64" placeholder="SEARCH_ENGINE..." type="text"/>
+</div>
+<button class="p-2 text-zinc-400 hover:bg-zinc-800 transition-all rounded">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-zinc-400 hover:bg-zinc-800 transition-all rounded">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 bg-zinc-800 rounded-sm flex items-center justify-center overflow-hidden">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="professional male executive in dark suit against industrial office background high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0NpZISe2uvR3PXas5zidG3vBhqfwnoyCHGoEoFeAiCNMUwYaPv_A-DBjDXdXVfcdJjuJX-2Y0ZahuRIWcqjKNRIIiRyPbYGCc7sFgaekJ7z4n8L_OCRtF3h8MOdPIM_70YhI9vqtvpOGlZFs5jL9TC7WVHdhfYDD0fw0mxFEO2AURZ_mv9bxVpcko_2NTG9CaylkaKa7kvs2eu5PA831MHInF7E9N4MqCDjBjdN5nTX-u_jrRvPU_iRMfWgwZzHzbkKwHnXsxOXM"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-zinc-900 flex flex-col py-8 gap-4 shadow-[40px_0_40px_-40px_rgba(0,0,0,0.1)] z-40 hidden md:flex">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-black text-zinc-50 font-headline uppercase tracking-wider">Industrial ERP</h1>
+<p class="text-[10px] text-amber-500 font-label uppercase tracking-[0.2em] mt-1">Finance Module</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 bg-amber-500/10 text-amber-400 border-r-4 border-amber-500 transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-headline font-medium text-sm uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-headline font-medium text-sm uppercase tracking-wider">Financial Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-headline font-medium text-sm uppercase tracking-wider">Accounts Receivable</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-headline font-medium text-sm uppercase tracking-wider">Expenses</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-headline font-medium text-sm uppercase tracking-wider">Budgets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-headline font-medium text-sm uppercase tracking-wider">Taxes</span>
+</a>
+</nav>
+<div class="px-6 pt-4">
+<button class="w-full bg-primary text-on-primary font-headline uppercase font-bold py-3 text-xs tracking-widest hover:scale-[1.02] transition-transform">
+                New Transaction
+            </button>
+</div>
+<div class="px-3 mt-auto border-t border-zinc-800 pt-4">
+<a class="flex items-center gap-3 px-3 py-3 text-zinc-500 hover:text-zinc-300 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-headline font-medium text-[10px] uppercase tracking-wider">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-zinc-500 hover:text-zinc-300 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-headline font-medium text-[10px] uppercase tracking-wider">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-16 min-h-screen p-6 md:p-8 bg-zinc-950">
+<!-- Header Section -->
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-900 pb-8">
+<div>
+<span class="text-primary font-label text-xs uppercase tracking-[0.3em] font-bold">Consolidated Dashboard</span>
+<h2 class="text-4xl font-headline font-black uppercase text-zinc-50 mt-2 tracking-tighter">MAYOR DE REPUESTO LA CIMA, C.A.</h2>
+<p class="text-zinc-500 font-label text-sm mt-1 uppercase tracking-widest">RIF: J-40308741-5 • Financial Operations Console</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">System Status</p>
+<div class="flex items-center gap-2 justify-end">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-label uppercase text-zinc-300">Operational_LIVE</span>
+</div>
+</div>
+</div>
+</header>
+<!-- KPI Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Liquidez Corriente -->
+<div class="bg-zinc-900 p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">water_drop</span>
+</div>
+<h3 class="text-zinc-500 font-headline uppercase text-xs tracking-widest mb-2 font-bold">Liquidez Corriente</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline font-bold text-zinc-50">2.45</span>
+<span class="text-primary text-xs font-label">+12% vs LY</span>
+</div>
+<div class="mt-4 h-1 bg-zinc-800 w-full overflow-hidden">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+<p class="text-zinc-600 text-[10px] mt-2 font-label uppercase">Optimal Range: 1.5 - 3.0</p>
+</div>
+<!-- Prueba Ácida -->
+<div class="bg-zinc-900 p-6 relative overflow-hidden group border-l-2 border-zinc-800">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">science</span>
+</div>
+<h3 class="text-zinc-500 font-headline uppercase text-xs tracking-widest mb-2 font-bold">Prueba Ácida</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline font-bold text-zinc-50">1.12</span>
+<span class="text-amber-500 text-xs font-label">-2% vs LM</span>
+</div>
+<div class="mt-4 h-1 bg-zinc-800 w-full overflow-hidden">
+<div class="h-full bg-amber-500 w-[60%]"></div>
+</div>
+<p class="text-zinc-600 text-[10px] mt-2 font-label uppercase">Critical Floor: 1.0</p>
+</div>
+<!-- Margen Neto -->
+<div class="bg-zinc-900 p-6 relative overflow-hidden group border-l-2 border-zinc-800">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">trending_up</span>
+</div>
+<h3 class="text-zinc-500 font-headline uppercase text-xs tracking-widest mb-2 font-bold">Margen Neto</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline font-bold text-zinc-50">18.4%</span>
+<span class="text-primary text-xs font-label">+3.5%</span>
+</div>
+<div class="mt-4 h-1 bg-zinc-800 w-full overflow-hidden">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+<p class="text-zinc-600 text-[10px] mt-2 font-label uppercase">Efficiency Benchmark: 15%</p>
+</div>
+<!-- ROE -->
+<div class="bg-zinc-900 p-6 relative overflow-hidden group border-l-2 border-zinc-800">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">show_chart</span>
+</div>
+<h3 class="text-zinc-500 font-headline uppercase text-xs tracking-widest mb-2 font-bold">ROE</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline font-bold text-zinc-50">24.2%</span>
+<span class="text-primary text-xs font-label">Stable</span>
+</div>
+<div class="mt-4 h-1 bg-zinc-800 w-full overflow-hidden">
+<div class="h-full bg-primary w-[90%]"></div>
+</div>
+<p class="text-zinc-600 text-[10px] mt-2 font-label uppercase">Equity Yield: High Performance</p>
+</div>
+</section>
+<!-- Charts & Alerts Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Revenue vs Expenses Chart Area (8 cols) -->
+<div class="lg:col-span-8 bg-zinc-900 p-8 border border-zinc-900">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-xl font-headline font-bold uppercase tracking-tight text-zinc-50">Evolución Mensual Ingresos vs Gastos</h4>
+<p class="text-zinc-500 text-[10px] uppercase font-label tracking-widest">Financial Performance Index • Jan - Jun 2024</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary"></span>
+<span class="text-[10px] font-label uppercase text-zinc-400">Ingresos</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-zinc-700"></span>
+<span class="text-[10px] font-label uppercase text-zinc-400">Gastos</span>
+</div>
+</div>
+</div>
+<!-- Mock Chart Visualization -->
+<div class="h-64 flex items-end justify-between gap-4">
+<div class="flex-1 flex flex-col justify-end items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-full">
+<div class="w-1/3 bg-zinc-700 h-[60%]"></div>
+<div class="w-1/3 bg-primary h-[80%]"></div>
+</div>
+<span class="text-[10px] font-label text-zinc-500">JAN</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-full">
+<div class="w-1/3 bg-zinc-700 h-[65%]"></div>
+<div class="w-1/3 bg-primary h-[75%]"></div>
+</div>
+<span class="text-[10px] font-label text-zinc-500">FEB</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-full">
+<div class="w-1/3 bg-zinc-700 h-[50%]"></div>
+<div class="w-1/3 bg-primary h-[90%]"></div>
+</div>
+<span class="text-[10px] font-label text-zinc-500">MAR</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-full">
+<div class="w-1/3 bg-zinc-700 h-[70%]"></div>
+<div class="w-1/3 bg-primary h-[85%]"></div>
+</div>
+<span class="text-[10px] font-label text-zinc-500">APR</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-full">
+<div class="w-1/3 bg-zinc-700 h-[55%]"></div>
+<div class="w-1/3 bg-primary h-[95%]"></div>
+</div>
+<span class="text-[10px] font-label text-zinc-500">MAY</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-full">
+<div class="w-1/3 bg-zinc-700 h-[60%]"></div>
+<div class="w-1/3 bg-primary h-[88%]"></div>
+</div>
+<span class="text-[10px] font-label text-zinc-500">JUN</span>
+</div>
+</div>
+</div>
+<!-- Financial Alerts Section (4 cols) -->
+<div class="lg:col-span-4 bg-zinc-900 border-l-4 border-amber-500/50 p-6">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-amber-500">warning</span>
+<h4 class="text-lg font-headline font-bold uppercase tracking-tight text-zinc-50">Alertas Críticas</h4>
+</div>
+<div class="space-y-4">
+<!-- Alert 1 -->
+<div class="bg-zinc-800/40 p-4 flex items-start gap-4 hover:bg-zinc-800/60 transition-colors">
+<div class="p-2 bg-error/20 rounded">
+<span class="material-symbols-outlined text-error text-xl">payments</span>
+</div>
+<div>
+<p class="text-xs font-headline font-bold uppercase text-zinc-50">Saldo de caja bajo</p>
+<p class="text-[10px] text-zinc-400 font-label mt-1 uppercase">Threshold: $5,000 | Current: $3,240</p>
+<button class="mt-2 text-[10px] font-bold text-primary uppercase hover:underline">Review Transfers</button>
+</div>
+</div>
+<!-- Alert 2 -->
+<div class="bg-zinc-800/40 p-4 flex items-start gap-4 hover:bg-zinc-800/60 transition-colors">
+<div class="p-2 bg-amber-500/20 rounded">
+<span class="material-symbols-outlined text-amber-500 text-xl">event_busy</span>
+</div>
+<div>
+<p class="text-xs font-headline font-bold uppercase text-zinc-50">Vencimientos Cuentas por Pagar</p>
+<p class="text-[10px] text-zinc-400 font-label mt-1 uppercase">8 Invoices due in next 48 hours</p>
+<button class="mt-2 text-[10px] font-bold text-primary uppercase hover:underline">Schedule Payments</button>
+</div>
+</div>
+<!-- Alert 3 -->
+<div class="bg-zinc-800/40 p-4 flex items-start gap-4 hover:bg-zinc-800/60 transition-colors">
+<div class="p-2 bg-primary/20 rounded">
+<span class="material-symbols-outlined text-primary text-xl">inventory_2</span>
+</div>
+<div>
+<p class="text-xs font-headline font-bold uppercase text-zinc-50">Stock de Repuestos Crítico</p>
+<p class="text-[10px] text-zinc-400 font-label mt-1 uppercase">High Demand Expected for Q3</p>
+<button class="mt-2 text-[10px] font-bold text-primary uppercase hover:underline">View Inventory</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lower Section: Asset Composition & Recent Ledger -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
+<!-- Asset Composition (Dona Chart Mockup) -->
+<div class="lg:col-span-4 bg-zinc-900 p-8 flex flex-col items-center">
+<h4 class="w-full text-xs font-headline font-bold uppercase tracking-[0.2em] text-zinc-500 mb-8">Composición del Activo</h4>
+<div class="relative w-48 h-48 mb-8">
+<!-- Circular Progress Ring (Simulated with Borders) -->
+<div class="absolute inset-0 rounded-full border-[12px] border-zinc-800"></div>
+<div class="absolute inset-0 rounded-full border-[12px] border-t-primary border-r-primary border-l-transparent border-b-transparent transform rotate-45"></div>
+<div class="absolute inset-0 rounded-full border-[12px] border-t-amber-500 border-r-transparent border-l-transparent border-b-transparent transform -rotate-12"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-headline font-bold text-zinc-50">$2.8M</span>
+<span class="text-[10px] font-label text-zinc-500 uppercase tracking-widest">Total Assets</span>
+</div>
+</div>
+<div class="w-full space-y-3">
+<div class="flex items-center justify-between text-[10px] font-label uppercase">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-primary"></span>
+<span class="text-zinc-400">Inventory</span>
+</div>
+<span class="text-zinc-50 font-bold">55%</span>
+</div>
+<div class="flex items-center justify-between text-[10px] font-label uppercase">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-amber-500"></span>
+<span class="text-zinc-400">Accounts Receivable</span>
+</div>
+<span class="text-zinc-50 font-bold">25%</span>
+</div>
+<div class="flex items-center justify-between text-[10px] font-label uppercase">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-zinc-700"></span>
+<span class="text-zinc-400">Cash &amp; Equivalents</span>
+</div>
+<span class="text-zinc-50 font-bold">20%</span>
+</div>
+</div>
+</div>
+<!-- Recent Ledger Activity (8 cols) -->
+<div class="lg:col-span-8 bg-zinc-900 overflow-hidden">
+<div class="p-8 border-b border-zinc-800 flex items-center justify-between">
+<h4 class="text-xs font-headline font-bold uppercase tracking-[0.2em] text-zinc-500">Recent Ledger Activity</h4>
+<span class="material-symbols-outlined text-zinc-500 cursor-pointer">filter_list</span>
+</div>
+<table class="w-full text-left">
+<thead class="bg-zinc-800/30">
+<tr>
+<th class="px-8 py-4 text-[10px] font-headline uppercase text-zinc-400 tracking-widest">Reference</th>
+<th class="px-8 py-4 text-[10px] font-headline uppercase text-zinc-400 tracking-widest">Account</th>
+<th class="px-8 py-4 text-[10px] font-headline uppercase text-zinc-400 tracking-widest">Status</th>
+<th class="px-8 py-4 text-[10px] font-headline uppercase text-zinc-400 tracking-widest text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-800/50">
+<tr class="hover:bg-zinc-800/20 transition-colors">
+<td class="px-8 py-4">
+<p class="text-xs font-headline font-bold text-zinc-50 uppercase">INV-2024-089</p>
+<p class="text-[9px] text-zinc-600 font-label">2 hours ago</p>
+</td>
+<td class="px-8 py-4 text-xs font-label text-zinc-400 uppercase">Vendor: Bosch Heavy Duty</td>
+<td class="px-8 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-amber-500/10 text-amber-500 border border-amber-500/20 uppercase font-bold">Pending</span>
+</td>
+<td class="px-8 py-4 text-xs font-headline font-bold text-zinc-50 text-right">-$12,450.00</td>
+</tr>
+<tr class="hover:bg-zinc-800/20 transition-colors">
+<td class="px-8 py-4">
+<p class="text-xs font-headline font-bold text-zinc-50 uppercase">REC-2024-412</p>
+<p class="text-[9px] text-zinc-600 font-label">5 hours ago</p>
+</td>
+<td class="px-8 py-4 text-xs font-label text-zinc-400 uppercase">Client: Constructora S&amp;M</td>
+<td class="px-8 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 uppercase font-bold">Received</span>
+</td>
+<td class="px-8 py-4 text-xs font-headline font-bold text-primary text-right">+$4,200.00</td>
+</tr>
+<tr class="hover:bg-zinc-800/20 transition-colors">
+<td class="px-8 py-4">
+<p class="text-xs font-headline font-bold text-zinc-50 uppercase">TAX-VAT-JUL</p>
+<p class="text-[9px] text-zinc-600 font-label">Yesterday</p>
+</td>
+<td class="px-8 py-4 text-xs font-label text-zinc-400 uppercase">SENIAT Venezuela</td>
+<td class="px-8 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-zinc-700/50 text-zinc-400 uppercase font-bold">Processing</span>
+</td>
+<td class="px-8 py-4 text-xs font-headline font-bold text-zinc-50 text-right">-$8,120.50</td>
+</tr>
+<tr class="hover:bg-zinc-800/20 transition-colors">
+<td class="px-8 py-4">
+<p class="text-xs font-headline font-bold text-zinc-50 uppercase">SAL-WEEK-32</p>
+<p class="text-[9px] text-zinc-600 font-label">Yesterday</p>
+</td>
+<td class="px-8 py-4 text-xs font-label text-zinc-400 uppercase">Payroll Disbursement</td>
+<td class="px-8 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 uppercase font-bold">Completed</span>
+</td>
+<td class="px-8 py-4 text-xs font-headline font-bold text-zinc-50 text-right">-$22,300.00</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 bg-zinc-800/10 text-center">
+<button class="text-[10px] font-headline font-bold uppercase tracking-widest text-zinc-500 hover:text-primary transition-colors">View All Transactions (2,450+)</button>
+</div>
+</div>
+</div>
+<!-- System Footer -->
+<footer class="mt-12 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-600">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">precision_manufacturing</span>
+<span class="text-[10px] font-label uppercase tracking-widest">Powered by La Cima Finance_Engine v4.2</span>
+</div>
+<p class="text-[10px] font-label uppercase tracking-widest">© 2024 Mayor de Repuesto La Cima, C.A. All Rights Reserved.</p>
+</footer>
+</main>
+<!-- Floating Action Button (FAB) - For New Transactions -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

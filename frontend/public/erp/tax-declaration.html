@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FINANCE_ENGINE - Industrial ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#5e5e5e",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "on-surface": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#496800",
+                        "tertiary-fixed": "#e4e2e2",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "primary-fixed": "#bef456",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-bright": "#f9f9f9",
+                        "surface-tint": "#496800",
+                        "inverse-primary": "#a3d73c",
+                        "surface": "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#364e00",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-primary-fixed": "#131f00",
+                        "inverse-on-surface": "#f1f1f1",
+                        "outline-variant": "#c3c9b1",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#747a65",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "tertiary-container": "#bebcbc",
+                        "secondary-fixed": "#e5e2e1",
+                        "inverse-surface": "#2f3131",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e8e8e8",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#9acd32",
+                        "on-secondary-container": "#636262",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "secondary-container": "#e2dfde",
+                        "on-tertiary-container": "#4c4c4c",
+                        "surface-container-low": "#f3f3f3",
+                        "on-primary-container": "#3a5400",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-background": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "on-surface-variant": "#434937",
+                        "primary-fixed-dim": "#a3d73c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1c1c; /* Forced Dark Mode Base */
+            color: #f1f1f1;
+        }
+        .headline-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#1a1c1c] text-[#f1f1f1] selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-zinc-50 font-['Space_Grotesk'] uppercase tracking-tight">FINANCE_ENGINE</span>
+<div class="hidden md:flex gap-6">
+<a class="text-amber-400 font-bold border-b-2 border-amber-500 font-['Space_Grotesk'] uppercase tracking-tight py-1" href="#">Taxes</a>
+<a class="text-zinc-400 hover:bg-zinc-800/50 transition-colors font-['Space_Grotesk'] uppercase tracking-tight py-1 px-2 rounded" href="#">Dashboard</a>
+<a class="text-zinc-400 hover:bg-zinc-800/50 transition-colors font-['Space_Grotesk'] uppercase tracking-tight py-1 px-2 rounded" href="#">Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-zinc-400 p-2 cursor-pointer hover:bg-zinc-800/50 transition-colors rounded">notifications</span>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined text-zinc-400 p-2 cursor-pointer hover:bg-zinc-800/50 transition-colors rounded">settings</span>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-zinc-700">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a professional male administrator in a dark suit with a focused expression, high-end editorial lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHhhgFnG5WvD4qADS0zQk7ab3O30OV-fZ3s7Jnf30RbzhaUEYld0rkP6xVvJun78bPyoNkQyCIzzH5INOCndn-jbrU0XChDfKp0XNURFbsKRa8UPzlHWppTKF15efc3DFocCltSOkR6Jv5-UsY-cC5vQnfNWsjk4LpR7SeD55F3C6Ci_K1JxyLrE7D8aKF_pnAAYS8OKZ3HSUfz-8i1sh05ozKmCpnpSdv9SF233YrcZrSQHoRTvhm6seqXr_5qW4pMhm6Ft2pa6k"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-zinc-950 border-r border-zinc-800 py-8 gap-4 z-40 shadow-[40px_0_40px_-40px_rgba(0,0,0,0.1)]">
+<div class="px-6 mb-8">
+<h2 class="text-lg font-black text-zinc-50 font-['Space_Grotesk']">Industrial ERP</h2>
+<p class="text-xs uppercase tracking-widest text-amber-500 font-medium">Finance Module</p>
+</div>
+<div class="flex flex-col gap-1 px-3">
+<a class="flex items-center gap-3 px-3 py-3 rounded text-zinc-400 hover:bg-zinc-800 transition-all duration-200 font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded text-zinc-400 hover:bg-zinc-800 transition-all duration-200 font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span> Reports
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded bg-amber-500/10 text-amber-400 border-r-4 border-amber-500 font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">account_balance</span> Taxes
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded text-zinc-400 hover:bg-zinc-800 transition-all duration-200 font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined">receipt_long</span> Expenses
+            </a>
+</div>
+<div class="mt-auto px-6">
+<button class="w-full py-3 bg-amber-500 text-zinc-950 font-bold uppercase text-xs tracking-widest rounded hover:bg-amber-400 transition-colors">
+                New Transaction
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:pl-64 pt-20 p-6 min-h-screen bg-[#1a1c1c]">
+<!-- Header Section -->
+<header class="mb-12 relative">
+<div class="absolute -top-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
+<div>
+<span class="label-md text-amber-500 font-bold uppercase tracking-[0.2em] mb-2 block">Fiscal Oversight</span>
+<h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter headline-font text-white leading-none">
+                        MAYOR DE REPUESTO <br/><span class="text-zinc-600">LA CIMA, C.A.</span>
+</h1>
+</div>
+<div class="bg-zinc-900 p-4 border-l-4 border-amber-500">
+<p class="text-xs text-zinc-500 uppercase tracking-widest font-bold">Tax ID (RIF)</p>
+<p class="text-xl font-mono text-zinc-200">J-40592831-0</p>
+</div>
+</div>
+</header>
+<!-- Bento Grid Statistics -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<!-- Debt vs Credit Card -->
+<div class="md:col-span-2 bg-[#222424] p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="font-['Space_Grotesk'] uppercase text-zinc-400 tracking-wider text-sm mb-6">IVA Balance Analysis</h3>
+<div class="flex justify-between items-end gap-4">
+<div class="flex-1">
+<p class="text-xs text-zinc-500 uppercase mb-1">Debito Fiscal</p>
+<p class="text-3xl font-bold headline-font text-white">VES 425.890,00</p>
+<div class="w-full bg-zinc-800 h-1 mt-4">
+<div class="bg-amber-500 h-1 w-3/4"></div>
+</div>
+</div>
+<div class="flex-1">
+<p class="text-xs text-zinc-500 uppercase mb-1 text-right">Credito Fiscal</p>
+<p class="text-3xl font-bold headline-font text-amber-400 text-right">VES 312.440,00</p>
+<div class="w-full bg-zinc-800 h-1 mt-4">
+<div class="bg-zinc-600 h-1 w-1/2 ml-auto"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-between">
+<p class="text-xs uppercase font-bold text-zinc-500">Calculated Differential</p>
+<p class="text-lg font-bold headline-font text-white">+VES 113.450,00</p>
+</div>
+</div>
+<!-- Subtle Gradient Pattern -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50"></div>
+</div>
+<!-- Tax Retentions Card -->
+<div class="bg-zinc-900 p-8 flex flex-col justify-between border border-zinc-800/50">
+<span class="material-symbols-outlined text-amber-500 text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<div>
+<h3 class="font-['Space_Grotesk'] uppercase text-zinc-500 tracking-wider text-xs mb-1">IVA Practicadas</h3>
+<p class="text-2xl font-bold text-white headline-font">VES 84.120,50</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800">
+<p class="text-[10px] text-zinc-500 uppercase tracking-tighter">Last Update: May 24, 2024</p>
+</div>
+</div>
+<!-- ISLR Retentions Card -->
+<div class="bg-zinc-900 p-8 flex flex-col justify-between border border-zinc-800/50">
+<span class="material-symbols-outlined text-zinc-500 text-4xl mb-4">receipt_long</span>
+<div>
+<h3 class="font-['Space_Grotesk'] uppercase text-zinc-500 tracking-wider text-xs mb-1">ISLR Sufridas</h3>
+<p class="text-2xl font-bold text-white headline-font">VES 12.840,00</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800">
+<p class="text-xs text-amber-500 font-bold uppercase">View Ledger</p>
+</div>
+</div>
+</section>
+<!-- Form and Detail Split Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Declaration Form (Simulated) -->
+<section class="lg:col-span-2 bg-[#222424] p-10">
+<div class="flex items-center justify-between mb-10">
+<h2 class="text-2xl font-black uppercase headline-font text-white">Formulario 00030: <span class="text-amber-500">IVA Mensual</span></h2>
+<span class="px-3 py-1 bg-zinc-800 text-zinc-400 text-[10px] uppercase font-bold tracking-[0.2em]">Period: 05-2024</span>
+</div>
+<div class="space-y-8">
+<!-- Form Section: Sales -->
+<div>
+<div class="flex items-center gap-4 mb-4">
+<div class="h-px bg-zinc-800 flex-1"></div>
+<span class="text-xs font-bold text-zinc-500 uppercase">Sección A: Ventas y Debitos</span>
+<div class="h-px bg-zinc-800 flex-1"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] uppercase text-zinc-500 font-bold tracking-widest">Ventas Internas Gravadas Alícuota General</label>
+<div class="bg-zinc-950 border border-zinc-800 p-4 focus-within:border-amber-500 transition-colors">
+<input class="bg-transparent border-none focus:ring-0 text-white font-mono w-full text-lg" type="text" value="2.661.812,50"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase text-zinc-500 font-bold tracking-widest">Débito Fiscal Correspondiente (16%)</label>
+<div class="bg-zinc-800/30 border border-zinc-800 p-4">
+<input class="bg-transparent border-none focus:ring-0 text-amber-500 font-mono w-full text-lg opacity-80" readonly="" type="text" value="425.890,00"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Section: Purchases -->
+<div>
+<div class="flex items-center gap-4 mb-4">
+<div class="h-px bg-zinc-800 flex-1"></div>
+<span class="text-xs font-bold text-zinc-500 uppercase">Sección B: Compras y Créditos</span>
+<div class="h-px bg-zinc-800 flex-1"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] uppercase text-zinc-500 font-bold tracking-widest">Compras Internas Gravadas Alícuota General</label>
+<div class="bg-zinc-950 border border-zinc-800 p-4 focus-within:border-amber-500 transition-colors">
+<input class="bg-transparent border-none focus:ring-0 text-white font-mono w-full text-lg" type="text" value="1.952.750,00"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase text-zinc-500 font-bold tracking-widest">Crédito Fiscal Correspondiente (16%)</label>
+<div class="bg-zinc-800/30 border border-zinc-800 p-4">
+<input class="bg-transparent border-none focus:ring-0 text-amber-400 font-mono w-full text-lg opacity-80" readonly="" type="text" value="312.440,00"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Footer: Totals -->
+<div class="bg-zinc-950 p-8 border-l-8 border-primary mt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+<div>
+<p class="text-xs text-zinc-500 uppercase font-black mb-1">Total Impuesto a Pagar (Antes de Retenciones)</p>
+<p class="text-4xl font-bold headline-font text-white">VES 113.450,00</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-white hover:text-on-primary-container px-8 py-4 headline-font font-bold uppercase text-sm tracking-widest transition-all scale-100 hover:scale-[1.02] active:scale-95">
+                            Submit To Seniat
+                        </button>
+</div>
+</div>
+</section>
+<!-- Technical Breakdown Table -->
+<aside class="space-y-6">
+<div class="bg-zinc-900 overflow-hidden border border-zinc-800">
+<div class="p-6 bg-zinc-800/50">
+<h3 class="font-['Space_Grotesk'] uppercase text-sm font-bold text-white tracking-widest">Retenciones Sufridas (Detalle)</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-zinc-950 text-[10px] uppercase text-zinc-500 font-black">
+<th class="p-4">Provider / Client</th>
+<th class="p-4">Type</th>
+<th class="p-4 text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-800/50">
+<tr class="hover:bg-zinc-800/30 transition-colors">
+<td class="p-4">
+<p class="text-xs font-bold text-zinc-200">TRANS-CARIBE, C.A.</p>
+<p class="text-[10px] text-zinc-500">J-30922831-2</p>
+</td>
+<td class="p-4">
+<span class="text-[9px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded uppercase font-bold">IVA</span>
+</td>
+<td class="p-4 text-right font-mono text-xs text-zinc-300">12.500,00</td>
+</tr>
+<tr class="hover:bg-zinc-800/30 transition-colors">
+<td class="p-4">
+<p class="text-xs font-bold text-zinc-200">INVERSIONES 2020</p>
+<p class="text-[10px] text-zinc-500">J-29833100-1</p>
+</td>
+<td class="p-4">
+<span class="text-[9px] bg-zinc-700 text-zinc-300 px-2 py-0.5 rounded uppercase font-bold">ISLR</span>
+</td>
+<td class="p-4 text-right font-mono text-xs text-zinc-300">4.200,00</td>
+</tr>
+<tr class="hover:bg-zinc-800/30 transition-colors">
+<td class="p-4">
+<p class="text-xs font-bold text-zinc-200">DISTRIBUIDORA METAL</p>
+<p class="text-[10px] text-zinc-500">J-10293344-0</p>
+</td>
+<td class="p-4">
+<span class="text-[9px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded uppercase font-bold">IVA</span>
+</td>
+<td class="p-4 text-right font-mono text-xs text-zinc-300">8.950,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Industrial Visual Component -->
+<div class="h-48 relative overflow-hidden group">
+<img alt="Industrial Engine Parts" class="w-full h-full object-cover grayscale opacity-40 group-hover:opacity-60 transition-opacity" data-alt="High-precision industrial engine components made of polished chrome and steel, macro shot with dramatic lighting and dark technical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuActUuQtgonLoamFibDF_OZe113ue71JMMUoVXBtDr5bGio2Pjl9B8Km5KdxrXUp1xKzzZrwLg0Acw1-qUTKiSIMBnfKP7zo6U0VfvOMllldFvW-2XTxAlx7UKAadC426lEPzXJZwO_lYndUxLRez5y54d20fcenuMil4ojO3pG12NFR8W5tHGkgFAtBhJJk6e1Xjsr4y2ENvNTkqkQip_NAufaaCyvRQJVOasuWHHTIltECZhVKUUGUSkiFlhpb7lhiWv_4BCD5lY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1c1c] via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<p class="text-[10px] uppercase font-bold tracking-widest text-amber-500">Precision Asset Log</p>
+<p class="text-xs text-white headline-font">Stock Ref: 992-XC-MAX</p>
+</div>
+</div>
+<div class="bg-zinc-900 p-6 border-l border-zinc-800">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-zinc-500 text-sm">info</span>
+<span class="text-[10px] uppercase text-zinc-500 font-bold tracking-widest">Audit Status</span>
+</div>
+<p class="text-xs text-zinc-400 leading-relaxed italic">
+                        "Documentacion verificada según normativa Gaceta Oficial N° 42.100. Todos los cálculos están sujetos a conciliación bancaria final."
+                    </p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer Information -->
+<footer class="md:pl-64 p-8 border-t border-zinc-800 bg-zinc-950 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold headline-font text-zinc-500 uppercase tracking-widest">© 2024 FINANCE_ENGINE</span>
+<span class="h-1 w-1 bg-zinc-700 rounded-full"></span>
+<span class="text-xs text-zinc-600">SENIAT INTEGRATION ACTIVE v2.4.1</span>
+</div>
+<div class="flex gap-8">
+<a class="text-xs text-zinc-500 hover:text-white uppercase tracking-tighter" href="#">Support</a>
+<a class="text-xs text-zinc-500 hover:text-white uppercase tracking-tighter" href="#">Security Protocol</a>
+<a class="text-xs text-zinc-500 hover:text-white uppercase tracking-tighter" href="#">Legal Documentation</a>
+</div>
+</div>
+</footer>
+
+```</body></html>

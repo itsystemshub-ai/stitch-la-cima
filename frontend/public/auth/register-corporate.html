@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAYOR DE REPUESTO LA CIMA, C.A. - Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#e2dfde",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-tertiary-container": "#4c4c4c",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#3a5400",
+                        "outline-variant": "#c3c9b1",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "surface-tint": "#496800",
+                        "on-surface-variant": "#434937",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#bebcbc",
+                        "on-primary-fixed": "#131f00",
+                        "surface": "#f9f9f9",
+                        "background": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e4e2e2",
+                        "primary-fixed": "#bef456",
+                        "error": "#ba1a1a",
+                        "tertiary": "#5e5e5e",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "inverse-on-surface": "#f1f1f1",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-background": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "outline": "#747a65",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "primary": "#496800",
+                        "inverse-primary": "#a3d73c",
+                        "surface-container-low": "#f3f3f3",
+                        "on-secondary-container": "#636262",
+                        "surface-dim": "#dadada",
+                        "primary-container": "#9acd32",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#364e00",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#f9f9f9",
+                        "primary-fixed-dim": "#a3d73c",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "inverse-surface": "#2f3131",
+                        "secondary": "#5f5e5e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .stamped-text {
+            letter-spacing: -0.02em;
+        }
+        .industrial-glass {
+            background: rgba(249, 249, 249, 0.8);
+            backdrop-filter: blur(16px);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Top Navigation Anchor (Manual Suppression Check: This is a Registration Page, but keeping brand visibility) -->
+<nav class="fixed top-0 w-full z-50 bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 max-w-full">
+<div class="text-xl font-black tracking-tighter text-lime-500 font-headline uppercase">
+            APEX INDUSTRIAL
+        </div>
+<div class="flex gap-6 items-center">
+<span class="material-symbols-outlined text-stone-400 hover:text-lime-400 transition-colors duration-200 cursor-pointer">support_agent</span>
+<span class="material-symbols-outlined text-stone-400 hover:text-lime-400 transition-colors duration-200 cursor-pointer">help_outline</span>
+</div>
+</nav>
+<main class="min-h-screen pt-24 pb-12 px-4 md:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
+<!-- Left Column: Editorial Information & Branding -->
+<div class="flex-1 space-y-12">
+<header>
+<div class="inline-block bg-primary-container text-on-primary-container px-3 py-1 mb-6 text-[10px] font-bold tracking-[0.2em] font-headline uppercase">
+                    Registration Portal // Node 01
+                </div>
+<h1 class="text-5xl md:text-7xl font-headline font-bold text-on-surface uppercase stamped-text leading-[0.9]">
+                    MAYOR DE REPUESTO <span class="text-primary">LA CIMA, C.A.</span>
+</h1>
+<p class="mt-8 text-secondary text-lg max-w-lg leading-relaxed">
+                    Access our heavy-duty industrial network. We provide the structural foundation for your enterprise uptime through precision-engineered engine parts and OEM logistics.
+                </p>
+</header>
+<!-- Benefits Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-8 relative overflow-hidden group">
+<span class="material-symbols-outlined text-primary mb-4 text-4xl" data-icon="inventory_2">inventory_2</span>
+<h3 class="font-headline text-xl font-bold uppercase mb-2">Access to OEM Inventory</h3>
+<p class="text-sm text-secondary">Real-time availability of verified original manufacturer industrial components.</p>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl" data-icon="precision_manufacturing">precision_manufacturing</span>
+</div>
+</div>
+<div class="bg-surface-container-highest p-8 relative overflow-hidden group">
+<span class="material-symbols-outlined text-primary mb-4 text-4xl" data-icon="payments">payments</span>
+<h3 class="font-headline text-xl font-bold uppercase mb-2">Specialized B2B Pricing</h3>
+<p class="text-sm text-secondary">Volume-tiered procurement rates designed for industrial repair cycles.</p>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-9xl" data-icon="query_stats">query_stats</span>
+</div>
+</div>
+<div class="bg-on-surface text-surface p-8 md:col-span-2 flex items-center justify-between">
+<div>
+<h3 class="font-headline text-xl font-bold uppercase mb-1">Global Industrial Reach</h3>
+<p class="text-sm text-stone-400">Vetted supply chain for Valencia Edo. Carabobo region.</p>
+</div>
+<span class="material-symbols-outlined text-lime-500 text-5xl" data-icon="hub">hub</span>
+</div>
+</div>
+<!-- Image Asset -->
+<div class="aspect-video bg-surface-container overflow-hidden">
+<img alt="Industrial Engine Components" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close-up of precision engineered steel engine parts on a dark industrial workbench with technical lighting and shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN7JawDn7UHQ09I8cPmMcFXIka7vND22W_6JP4lPjm5jEYHFeiUB_bdiQaP31cWQnTrjuaEYaF9r4NV9-sXG_vQ356PjCXdd0l-O3tK1u8YWQHDoiXSROnYqlSRu9uw-Vsqq3IL-RhdNC9NMT2kikRQEbhGZb2Tzsh7gfMybuBsGQ-n5nXRyi5Md6AGq3KDFzBxSXbfekf3jgyF6Tr_xS4aqhK874_dM8gVpCh3XD4b5SPqH97SXdJqJV_gDn6tNOagNd21cfksZQ"/>
+</div>
+</div>
+<!-- Right Column: Registration Form -->
+<div class="w-full lg:w-[480px]">
+<div class="bg-surface-container-lowest p-8 md:p-12 shadow-[24px_24px_40px_-15px_rgba(26,28,28,0.06)] relative">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary-container/10 -z-10 clip-path-polygon"></div>
+<div class="mb-10">
+<h2 class="font-headline text-2xl font-bold uppercase tracking-tight">Enterprise Onboarding</h2>
+<p class="text-sm text-secondary mt-2 uppercase tracking-widest font-semibold">Step 01: Identity Verification</p>
+</div>
+<form class="space-y-6">
+<!-- Company Name -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Company Name</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none p-4 font-body text-sm placeholder:text-stone-400 focus:ring-2 focus:ring-primary transition-all" placeholder="e.g. METALURGICA CIMA S.A." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm" data-icon="factory">factory</span>
+</div>
+</div>
+<!-- RIF -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">RIF (Tax ID)</label>
+<input class="w-full bg-surface-container-highest border-none p-4 font-body text-sm placeholder:text-stone-400 focus:ring-2 focus:ring-primary transition-all" placeholder="J-12345678-0" type="text"/>
+</div>
+<!-- Work Email -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Work Email</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none p-4 font-body text-sm placeholder:text-stone-400 focus:ring-2 focus:ring-primary transition-all" placeholder="procurement@company.com" type="email"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm" data-icon="alternate_email">alternate_email</span>
+</div>
+</div>
+<!-- Phone -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Phone Number</label>
+<input class="w-full bg-surface-container-highest border-none p-4 font-body text-sm placeholder:text-stone-400 focus:ring-2 focus:ring-primary transition-all" placeholder="+58 412-000-0000" type="tel"/>
+</div>
+<!-- Password -->
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant block">Secure Password</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none p-4 font-body text-sm placeholder:text-stone-400 focus:ring-2 focus:ring-primary transition-all" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 text-sm" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-primary text-on-primary py-5 px-6 font-headline font-bold uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/20" type="submit">
+                            Create Account
+                        </button>
+</div>
+<p class="text-[10px] text-center text-stone-400 uppercase tracking-tighter leading-tight mt-6">
+                        By registering, you agree to the APEX INDUSTRIAL secure node protocols and data transmission policies.
+                    </p>
+</form>
+</div>
+</div>
+</main>
+<!-- Footer: Industrial Directory -->
+<footer class="bg-on-surface text-surface-variant py-16 px-6 mt-12">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-white/10 pb-16">
+<!-- Location -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<h4 class="font-headline font-bold uppercase tracking-widest text-xs">Headquarters</h4>
+</div>
+<p class="text-stone-400 text-sm leading-relaxed uppercase">
+                        AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL,<br/>
+                        Valencia, Edo. Carabobo.
+                    </p>
+</div>
+<!-- Contact Info -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="contact_phone">contact_phone</span>
+<h4 class="font-headline font-bold uppercase tracking-widest text-xs">Direct Support</h4>
+</div>
+<div class="space-y-1">
+<p class="text-surface-lowest text-sm font-bold">+58 424-4582766</p>
+<p class="text-stone-400 text-sm uppercase">LACIMA.REPUESTOS@GMAIL.COM</p>
+</div>
+</div>
+<!-- Map Hook -->
+<div class="bg-stone-900 aspect-video relative overflow-hidden group">
+<img alt="Location Map" class="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity" data-alt="Aerial topographic map of Valencia Venezuela with stylized industrial grid overlay" data-location="Valencia, Venezuela" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzNsXIeuycgnOoD0Wo2Jn8AgOePlLWcr0afQHUyElC4PnNaRKdQxl7CuqghUDKCZdFVAffstdGzXngwpdBhasPpf1LjFqi9x3sCA1Vcx1EhV_FsWJnyBr3EOqM18d6NoGvpaBHSqbB9dt2f-HVXr60LJ2Wr3E7JTVBlfP-yaCGYKUhERZsRnr5fcQKyGN2nO1oaNaffpn8VifcYcUAGXJ_eSdabX5ahnV5HHY77dyMCqvVtT8mHr1hi21ehet1UAceCGEJc-Ds2Do"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-primary px-3 py-1 text-[10px] font-bold text-on-primary uppercase">Geographic Node: Carabobo</div>
+</div>
+</div>
+</div>
+<div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="font-headline font-black text-xl tracking-tighter uppercase">
+                    MAYOR DE REPUESTO LA CIMA, C.A.
+                </div>
+<div class="text-[10px] text-stone-500 uppercase tracking-[0.3em]">
+                    © 2024 Industrial Supply Chain / Node Valencia
+                </div>
+</div>
+</div>
+</footer>
+</body></html>

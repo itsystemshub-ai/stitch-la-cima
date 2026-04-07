@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LA CIMA - ADMIN FORGE v2.4 | USER ACCESS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#3a5400",
+                        "primary-container": "#9acd32",
+                        "secondary-container": "#e2dfde",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#a3d73c",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-dim": "#dadada",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "on-tertiary-container": "#4c4c4c",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#131f00",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "on-surface": "#1a1c1c",
+                        "tertiary": "#5e5e5e",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-container": "#636262",
+                        "primary-fixed-dim": "#a3d73c",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "tertiary-container": "#bebcbc",
+                        "on-secondary-fixed-variant": "#474746",
+                        "primary": "#496800",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9f9f9",
+                        "inverse-surface": "#2f3131",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e4e2e2",
+                        "outline": "#747a65",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#364e00",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-background": "#1a1c1c",
+                        "outline-variant": "#c3c9b1",
+                        "surface-tint": "#496800",
+                        "surface-bright": "#f9f9f9",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "on-surface-variant": "#434937",
+                        "primary-fixed": "#bef456"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col border-r-0 bg-stone-950 dark:bg-black z-50 font-['Space_Grotesk'] uppercase tracking-tight">
+<div class="p-6">
+<h1 class="text-xl font-bold tracking-tighter text-lime-400 dark:text-lime-300">LA CIMA</h1>
+<p class="text-[10px] text-stone-500 tracking-widest mt-1">ADMIN FORGE v2.4</p>
+</div>
+<nav class="flex-1 mt-4 overflow-y-auto no-scrollbar">
+<div class="space-y-1 px-2">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-lime-200 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-xs font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-lime-200 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
+<span class="text-xs font-medium">Module Health</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-900 text-lime-400 border-l-4 border-lime-500 scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="text-xs font-medium">User Access</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-lime-200 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="text-xs font-medium">DB Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-lime-200 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="text-xs font-medium">Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-lime-200 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-xs font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<div class="mt-auto border-t border-stone-900/50 p-4 space-y-1">
+<button class="w-full flex items-center gap-3 px-4 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-lime-200 transition-colors text-xs font-medium uppercase">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span>Support</span>
+</button>
+<button class="w-full flex items-center gap-3 px-4 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-lime-200 transition-colors text-xs font-medium uppercase">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</button>
+<button class="mt-4 w-full bg-stone-900 py-3 text-[10px] font-bold text-error tracking-widest hover:bg-error/10 transition-colors">
+                SYSTEM LOCK
+            </button>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full h-16 flex justify-between items-center pl-64 pr-8 bg-stone-950/80 backdrop-blur-md z-40">
+<div class="flex items-center gap-8 pl-8">
+<span class="text-lg font-black tracking-widest text-white">MAYOR DE REPUESTO LA CIMA, C.A.</span>
+<nav class="hidden md:flex gap-6 font-['Space_Grotesk'] uppercase text-sm">
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">Global View</a>
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">System Health</a>
+<a class="text-lime-400 font-bold border-b-2 border-lime-500 pb-1" href="#">Security Ops</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<input class="bg-stone-900 border-none text-[10px] text-stone-300 px-4 py-2 w-64 focus:ring-1 focus:ring-lime-500 font-['Space_Grotesk']" placeholder="QUERY SYSTEM..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-lime-500">
+<span class="material-symbols-outlined cursor-pointer hover:text-amber-500 transition-colors" data-icon="notifications_active">notifications_active</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-amber-500 transition-colors" data-icon="terminal">terminal</span>
+<div class="h-8 w-8 bg-stone-800 rounded-full overflow-hidden border border-stone-700">
+<img class="w-full h-full object-cover" data-alt="Professional portrait of a male system administrator in a high-tech server room environment with cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv4SUKd_TwT3XT7akCGyAabqJOj3t8vWeBGkYc43ulydYsKQ05NGtj9GQOh4XgR9NmvBLWtyQ7ZpkVQtvow1LnDib88XZTJBnoZUsyDgV3AidB1TNnLsDFSxLbQHXNfh35BJsrvK6_1j21VyIpD8WYnbhYUK8HFaazr6-ywyzYzknf5ym86xC8lluCCvn2CNSxGBQH8lilY7bYioxEo3BuXcqDH7-ssalN0gdtD2pu_ITMVWcMlZ9UijqQO5dHh_6mPa4dgCDCwZA"/>
+</div>
+<button class="bg-error text-on-error px-4 py-1.5 text-[10px] font-bold uppercase tracking-tighter hover:opacity-80 transition-opacity">
+                    Emergency Shutdown
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-64 pt-24 p-8 min-h-screen">
+<!-- Header Section -->
+<div class="mb-12">
+<h2 class="text-5xl font-black uppercase tracking-tighter text-on-surface mb-2">User Access Control</h2>
+<div class="flex items-center gap-4">
+<div class="h-1 w-24 bg-primary"></div>
+<span class="text-xs font-bold uppercase tracking-widest text-secondary font-headline">Authorization Matrix Engine</span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- User Management Table (Large Section) -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-8 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl" data-icon="shield">shield</span>
+</div>
+<div class="flex justify-between items-end mb-8 relative z-10">
+<div>
+<h3 class="text-2xl font-bold uppercase tracking-tight text-on-surface">Active Directory</h3>
+<p class="text-sm text-secondary font-label">Managing 124 global identities</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+                        Add New Operator
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-secondary font-headline text-[10px] uppercase tracking-widest">
+<th class="p-4">Identity</th>
+<th class="p-4">Assigned Role</th>
+<th class="p-4">Node Affinity</th>
+<th class="p-4">Protocol Status</th>
+<th class="p-4 text-right">Direct Actions</th>
+</tr>
+</thead>
+<tbody class="font-label text-sm">
+<tr class="border-b border-surface-container hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-stone-200 rounded-sm">
+<img class="w-full h-full object-cover" data-alt="Headshot of a female executive in industrial engineering setting, sharp focus, professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiNzBYBGGHV-3VGpBGz1jVKKXPhqOojUzWl_Z44cLfi9fpHRnI5Y-CAfgagK5KqMiM_p9Sftg3dm4plqiQL7O1_tPEMOqjocVmyTQb6XedOetAaTUsy6N5QRJYcrJRvVS3jyBpdfSQpNYBhfHF07EMAUGOfvpBAS6vXq85-WS3MUaOqGnLUOzAdhbbmU-qmXYJB4d2TqDLasysi-mrpEl2Wj8hfgkyWG-I7X4LLdNVopx2cOUWH2osA_6mrAZt0pQE2gVnRdO-Agk"/>
+</div>
+<div>
+<span class="block font-bold">Elena Rodriguez</span>
+<span class="text-[10px] text-secondary">erodriguez@lacima.erp</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-primary-container text-on-primary-container text-[10px] font-bold uppercase">System Admin</span>
+</td>
+<td class="p-4 text-xs font-mono">HQ-MAIN-01</td>
+<td class="p-4">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> Encrypted
+                                    </span>
+</td>
+<td class="p-4 text-right space-x-2">
+<button class="text-[10px] font-bold uppercase text-secondary hover:text-primary underline">Edit</button>
+<button class="text-[10px] font-bold uppercase text-error hover:opacity-70">Reset 2FA</button>
+</td>
+</tr>
+<tr class="border-b border-surface-container bg-surface-container-low/20 hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-stone-200 rounded-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of a male accountant in a modern industrial office with steel elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcrPow-cvtcWz6iml-FcylCtZxh2yb5asHhqPTx-dVBuDVnba-ZXEwCB3-zBDm8GkZJ54mSTBxQhVOOS-4uM2botN1kP6MZx6NWIZvTxhhi495vWoO9lSuphyeRiZz35MghnDF0SkQ3c9gF72b0sroS2aWXSCYskkGcAzoOyNS3CrTNERegYAr-mMIDeOiEJtKvfchh5QGgFEEAvxaujvH5T2bkpp2pZU4-7zgKRDy0Qm_ySkudlScfy2ApDi0yMn-ol-QA0RfZ9U"/>
+</div>
+<div>
+<span class="block font-bold">Marcus Chen</span>
+<span class="text-[10px] text-secondary">mchen@lacima.erp</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-surface-container-highest text-secondary text-[10px] font-bold uppercase">Accountant</span>
+</td>
+<td class="p-4 text-xs font-mono">FIN-OPS-12</td>
+<td class="p-4">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> active
+                                    </span>
+</td>
+<td class="p-4 text-right space-x-2">
+<button class="text-[10px] font-bold uppercase text-secondary hover:text-primary underline">Edit</button>
+<button class="text-[10px] font-bold uppercase text-secondary/50">Reset 2FA</button>
+</td>
+</tr>
+<tr class="border-b border-surface-container hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-stone-200 rounded-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of a professional woman in a logistics environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4EvYkn-yBsocrAilYHDS_nZtN9sHjwmhL_-bA5QO_0hgl7agqsvqyMKwLORBLqNELKvy0rgaLvdPbDjVjNWE3kvDYf4Z72ewwpUOijwM6G8k4dDqVHkY1AjEPj6uZiWm7dLoO5lD-16tNQAvOZe93yUWxdC9EvWkBu_YSe3M0uPLOYQsZWxK7LfR9vGl9PhU4wWnrB4ICCokdx4lDfROa2qTWcymtTA5c3ivXYKmCvS1jz2VUIcDG5VLLtnzLirMhRUAA7o_OFEY"/>
+</div>
+<div>
+<span class="block font-bold">Sarah Jenkins</span>
+<span class="text-[10px] text-secondary">sjenkins@lacima.erp</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-surface-container-highest text-secondary text-[10px] font-bold uppercase">Seller</span>
+</td>
+<td class="p-4 text-xs font-mono">SALES-REM-04</td>
+<td class="p-4">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase text-error">
+<span class="w-2 h-2 rounded-full bg-error"></span> locked
+                                    </span>
+</td>
+<td class="p-4 text-right space-x-2">
+<button class="text-[10px] font-bold uppercase text-secondary hover:text-primary underline">Edit</button>
+<button class="text-[10px] font-bold uppercase text-primary font-black">Unlock</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Quick Stats / System Health -->
+<section class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-inverse-surface text-inverse-on-surface p-8 relative overflow-hidden">
+<div class="absolute -bottom-6 -right-6 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="lock_reset">lock_reset</span>
+</div>
+<h3 class="text-xl font-bold uppercase tracking-tight mb-6">Security Pulse</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center border-b border-white/10 pb-2">
+<span class="text-[10px] uppercase font-headline opacity-60">Auth Success Rate</span>
+<span class="text-lg font-bold text-lime-400">99.8%</span>
+</div>
+<div class="flex justify-between items-center border-b border-white/10 pb-2">
+<span class="text-[10px] uppercase font-headline opacity-60">Pending 2FA Resets</span>
+<span class="text-lg font-bold text-amber-400">03</span>
+</div>
+<div class="flex justify-between items-center border-b border-white/10 pb-2">
+<span class="text-[10px] uppercase font-headline opacity-60">Failed Login Attempts</span>
+<span class="text-lg font-bold text-error">12</span>
+</div>
+</div>
+<button class="mt-6 w-full py-2 border border-lime-500/30 text-lime-400 text-[10px] font-bold uppercase tracking-widest hover:bg-lime-500/10 transition-colors">
+                        Download Security Audit
+                    </button>
+</div>
+<div class="bg-surface-container-high p-8">
+<h3 class="text-xl font-bold uppercase tracking-tight text-on-surface mb-6">Global Roles</h3>
+<div class="grid grid-cols-2 gap-4 font-headline uppercase text-[10px] font-bold">
+<div class="p-4 bg-surface-container-lowest flex flex-col gap-2">
+<span class="text-secondary">Admins</span>
+<span class="text-3xl font-black text-primary">04</span>
+</div>
+<div class="p-4 bg-surface-container-lowest flex flex-col gap-2">
+<span class="text-secondary">Sellers</span>
+<span class="text-3xl font-black text-on-surface">42</span>
+</div>
+<div class="p-4 bg-surface-container-lowest flex flex-col gap-2">
+<span class="text-secondary">Logistics</span>
+<span class="text-3xl font-black text-on-surface">68</span>
+</div>
+<div class="p-4 bg-surface-container-lowest flex flex-col gap-2">
+<span class="text-secondary">Guests</span>
+<span class="text-3xl font-black text-secondary">10</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Permission Matrix (Engineered Element) -->
+<section class="col-span-12 bg-surface-container-low p-8 border-l-8 border-primary">
+<div class="flex items-center gap-4 mb-8">
+<h3 class="text-3xl font-black uppercase tracking-tighter">Permission Matrix</h3>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+<span class="text-[10px] font-bold uppercase text-secondary bg-surface-container-high px-3 py-1">Mode: Structural Editing</span>
+</div>
+<div class="bg-surface-container-lowest overflow-hidden shadow-sm">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-stone-900 text-stone-300 font-headline text-[10px] uppercase tracking-widest">
+<th class="p-6 w-1/4 border-r border-stone-800">Module / Segment</th>
+<th class="p-6 text-center">View</th>
+<th class="p-6 text-center">Create</th>
+<th class="p-6 text-center">Edit</th>
+<th class="p-6 text-center">Delete</th>
+<th class="p-6 text-right">Inheritance</th>
+</tr>
+</thead>
+<tbody class="font-label text-sm">
+<tr class="border-b border-surface-container">
+<td class="p-6 font-bold uppercase text-xs bg-surface-container-low/30 border-r border-surface-container">Inventory &amp; Warehouse</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</td>
+<td class="p-6 text-right text-[10px] uppercase font-bold text-secondary">Global Admin Default</td>
+</tr>
+<tr class="border-b border-surface-container bg-surface-container-low/10">
+<td class="p-6 font-bold uppercase text-xs bg-surface-container-low/30 border-r border-surface-container">Sales &amp; CRM Engine</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</td>
+<td class="p-6 text-right text-[10px] uppercase font-bold text-secondary">Role: Regional Seller</td>
+</tr>
+<tr class="border-b border-surface-container">
+<td class="p-6 font-bold uppercase text-xs bg-surface-container-low/30 border-r border-surface-container">Financial Ledger</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</td>
+<td class="p-6 text-right text-[10px] uppercase font-bold text-secondary">Custom Policy A1</td>
+</tr>
+<tr class="border-b border-surface-container bg-surface-container-low/10">
+<td class="p-6 font-bold uppercase text-xs bg-surface-container-low/30 border-r border-surface-container">System &amp; DB Access</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="cancel">cancel</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="cancel">cancel</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="cancel">cancel</span>
+</td>
+<td class="p-6 text-center">
+<span class="material-symbols-outlined text-outline-variant" data-icon="cancel">cancel</span>
+</td>
+<td class="p-6 text-right text-[10px] uppercase font-bold text-error">Access Forbidden</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-6 flex justify-end gap-4">
+<button class="bg-surface-container-high text-secondary px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-surface-dim transition-colors">
+                        Discard Changes
+                    </button>
+<button class="bg-on-surface text-surface-container-lowest px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-black transition-colors">
+                        Commit Access Schema
+                    </button>
+</div>
+</section>
+</div>
+<!-- Footer / System Meta -->
+<footer class="mt-12 pt-8 border-t border-surface-container flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+<div class="flex gap-8 mb-4 md:mb-0">
+<span>Core Engine: v4.22.0</span>
+<span>DB Latency: 12ms</span>
+<span>Uptime: 99.998%</span>
+</div>
+<div class="flex gap-4">
+<span class="text-primary-container bg-on-primary-container px-2 py-0.5">Production Environment</span>
+<span>© 2024 La Cima Industrial Systems</span>
+</div>
+</footer>
+</main>
+<!-- Background Pattern/Graphic -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-[0.03]">
+<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="grid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+</body></html>

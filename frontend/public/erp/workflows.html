@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LA CIMA - ADMIN FORGE v2.4</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#3a5400",
+                    "primary-container": "#9acd32",
+                    "secondary-container": "#e2dfde",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#a3d73c",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container-low": "#f3f3f3",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-tertiary-container": "#4c4c4c",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#131f00",
+                    "background": "#f9f9f9",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#5f5e5e",
+                    "on-surface": "#1a1c1c",
+                    "tertiary": "#5e5e5e",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-container": "#636262",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "tertiary-container": "#bebcbc",
+                    "on-secondary-fixed-variant": "#474746",
+                    "primary": "#496800",
+                    "error-container": "#ffdad6",
+                    "surface": "#f9f9f9",
+                    "inverse-surface": "#2f3131",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "outline": "#747a65",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#364e00",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-background": "#1a1c1c",
+                    "outline-variant": "#c3c9b1",
+                    "surface-tint": "#496800",
+                    "surface-bright": "#f9f9f9",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "on-surface-variant": "#434937",
+                    "primary-fixed": "#bef456"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass-panel {
+            background: rgba(249, 249, 249, 0.8);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col border-r-0 bg-stone-950 dark:bg-black z-50 font-['Space_Grotesk'] uppercase tracking-tight">
+<div class="p-6">
+<h1 class="text-xl font-bold tracking-tighter text-lime-400 dark:text-lime-300">LA CIMA</h1>
+<p class="text-[10px] text-stone-500 tracking-[0.2em] mt-1">ADMIN FORGE v2.4</p>
+</div>
+<nav class="flex-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span>Module Health</span>
+</a>
+<!-- Active State Logic for User Access / Org Structure -->
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-900 text-lime-400 border-l-4 border-lime-500 scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span>User Access</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined">database</span>
+<span>DB Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span>Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 flex flex-col gap-2">
+<button class="w-full py-2 bg-stone-900 text-stone-300 text-xs font-bold uppercase tracking-widest hover:bg-stone-800 transition-all border border-stone-800">
+                System Lock
+            </button>
+<div class="flex flex-col border-t border-stone-800 pt-4">
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-300 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-red-400 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar (Execution from JSON) -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-stone-950/80 backdrop-blur-md flex justify-between items-center px-8 z-40">
+<div class="flex items-center gap-8">
+<span class="text-lg font-black tracking-widest text-white uppercase">MAYOR DE REPUESTO LA CIMA, C.A.</span>
+<nav class="hidden lg:flex gap-6 font-['Space_Grotesk'] uppercase text-sm tracking-tight">
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">Global View</a>
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">System Health</a>
+<a class="text-lime-400 font-bold border-b-2 border-lime-500 pb-1" href="#">Security Ops</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center bg-stone-900 px-3 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-stone-500 text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-[10px] text-stone-300 font-mono w-48 uppercase" placeholder="SEARCH SYSTEM..." type="text"/>
+</div>
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-lime-500 hover:text-amber-500 transition-colors">notifications_active</button>
+<button class="material-symbols-outlined text-lime-500 hover:text-amber-500 transition-colors">terminal</button>
+</div>
+<button class="bg-red-950 text-red-500 border border-red-900 px-4 py-1.5 text-[10px] font-black uppercase tracking-tighter hover:bg-red-900 hover:text-red-200 transition-all opacity-80 active:opacity-100">
+                    Emergency Shutdown
+                </button>
+<img alt="Admin Avatar" class="w-8 h-8 rounded-full border-2 border-stone-800" data-alt="Professional headshot of a system administrator in technical attire, neutral lighting, high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX2eCKDVIr57X-gwAXgMEMfzOlJhFeDsDhpSGE0BlTF3xQ3H9j8NRRjXeKagDacywzT9lvdkb72wdtw2txh8vUvCqtjvz7enDniPK1A4Sjy-wK0c9uTd8ymJzU8C0H5tMhzXGJENMDfCnq5BgvpmRmYTREHAMABa3vXx53AYG6T_TaU8BjooKpY3cYhjNm4FTlypDbBx6-G7a57Cx-Kq87ZNcwsMdpa7xlepaMQD6S1hSxBVf11p1iRyhDytOKkQ2zAnIH9k27a0c"/>
+</div>
+</header>
+<!-- Canvas Content -->
+<section class="mt-16 p-8 flex flex-col gap-8 flex-1">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-4xl font-black uppercase tracking-tight text-on-surface">Organizational Forge</h2>
+<p class="text-secondary font-medium tracking-tight mt-1">DEPARTMENTAL STRUCTURE &amp; APPROVAL TOPOLOGY</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 bg-surface-container-high text-on-surface font-bold uppercase text-xs flex items-center gap-2 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined text-sm">download</span> Export Schema
+                    </button>
+<button class="px-6 py-2 bg-primary text-on-primary font-bold uppercase text-xs flex items-center gap-2 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined text-sm">add</span> New Department
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Departments List (CRUD) -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container-lowest p-8 flex flex-col gap-6 shadow-sm">
+<div class="flex justify-between items-center">
+<h3 class="headline text-xl font-bold uppercase tracking-tight">Active Departments</h3>
+<span class="text-[10px] bg-primary-container px-2 py-0.5 font-black text-on-primary-container">6 MODULES DETECTED</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-[10px] uppercase font-black text-secondary tracking-widest">
+<th class="p-4">Department ID</th>
+<th class="p-4">Entity Name</th>
+<th class="p-4">Managed By</th>
+<th class="p-4">Annual Budget</th>
+<th class="p-4 text-right">Utility</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium text-on-surface">
+<tr class="border-b border-surface-container transition-colors hover:bg-surface-container-low">
+<td class="p-4 font-mono text-primary">DEP-VNT-01</td>
+<td class="p-4">Ventas</td>
+<td class="p-4 flex items-center gap-2">
+<img alt="Manager" class="w-6 h-6 rounded-full" data-alt="Portrait of a business executive in professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJlRIUV_aMeyeBhsliUWLkcfpdxiUHxRFQagQ_pFnswEOff30bih_vwxa9iOVlNqw2aIV8RjNctEzWPRtqOJYTgp3PzBJgw8ObNtxqg5uFepadx0hy3NzQEOnQWtNZAuo4E6c2Dvn8gdOIwrAfUeJ6fv1GTvWrcsgI7EVMstBC5Y3daJUrQIQ9n8nfHh--NfWPt-COQHqnOiGMmIRkAcfJEWSV53GNbl9NDEJSiOiSXB1-NPYOeLP25TJp5ba4v2FcMnrxcAneVYQ"/>
+                                        Ricardo M.
+                                    </td>
+<td class="p-4 font-mono">$2.4M</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">edit</button>
+<button class="material-symbols-outlined text-secondary hover:text-error transition-colors">delete</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low/30 border-b border-surface-container transition-colors hover:bg-surface-container-low">
+<td class="p-4 font-mono text-primary">DEP-FIN-02</td>
+<td class="p-4">Finanzas</td>
+<td class="p-4 flex items-center gap-2">
+<img alt="Manager" class="w-6 h-6 rounded-full" data-alt="Portrait of a female finance director in professional studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL5Otv2XcxStCXzJzr1Hm5hK5vWhKJfCXMNQjn3clhEIZcKK2wqgqTEegAXE37rIfiEJZYWVdyfEPDD9WqRCjNFusdFRgyMsY46PMw5fzLu00VxEhzFNFxYAQcH0EEY-O6MQTTJSnCUe1AVJSv6gzVfn6hb2PrhAUSonKa_FRXffnoFL5Ilfuhb7hT5HUem-PTWgO0idxFlm8NoCm4gsomcOz1-fpoT5cUBqqDaFv7HaKQ1wKGZ2joqvZgBMs3Yue1cnNFDjmm7Hs"/>
+                                        Elena G.
+                                    </td>
+<td class="p-4 font-mono">$1.1M</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">edit</button>
+<button class="material-symbols-outlined text-secondary hover:text-error transition-colors">delete</button>
+</td>
+</tr>
+<tr class="border-b border-surface-container transition-colors hover:bg-surface-container-low">
+<td class="p-4 font-mono text-primary">DEP-ALM-03</td>
+<td class="p-4">Almacén</td>
+<td class="p-4 flex items-center gap-2">
+<img alt="Manager" class="w-6 h-6 rounded-full" data-alt="Industrial warehouse manager portrait with high-visibility gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTnATtUgD7dIsvFSLwget9WCdq0nxhOgarXxv2B2I1bX8zLKE8LqhtL-drdo2WbPlNwPUULGlsbqw2VWiAbbDlMNa50C0CqNVFDjsZ3IxF1EPboVx-CfAJhIouCOqH-tk8V9kZM2evpnfeqg5IRuKRUwE4hENGFSuV7AY59zC57HjlIaXuNeD4_oI6d1fWhFzA9iMQkF_kGusYCduOUy5IRVb6DepmX3zjry7HgJZWbEkARqlmUoofCkYlfY4M4AQfoEloJ4GKDr8"/>
+                                        Oscar L.
+                                    </td>
+<td class="p-4 font-mono">$3.8M</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">edit</button>
+<button class="material-symbols-outlined text-secondary hover:text-error transition-colors">delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Approval Flow Visualization -->
+<div class="col-span-12 lg:col-span-5 bg-surface-container p-8 flex flex-col gap-6">
+<h3 class="headline text-xl font-bold uppercase tracking-tight">Approval Chains</h3>
+<div class="relative border-l-2 border-dashed border-primary/30 ml-4 pl-8 py-4 space-y-8">
+<!-- Step 1 -->
+<div class="relative">
+<div class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-primary ring-4 ring-background"></div>
+<div class="bg-surface-container-lowest p-4 shadow-sm border-l-4 border-primary">
+<p class="text-[10px] font-black text-primary uppercase">Trigger Event</p>
+<p class="text-sm font-bold mt-1 uppercase">Purchase Requisition &gt; $1,000</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative">
+<div class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-stone-400 ring-4 ring-background"></div>
+<div class="bg-surface-container-lowest p-4 shadow-sm">
+<p class="text-[10px] font-black text-secondary uppercase">Level 01 Review</p>
+<p class="text-sm font-bold mt-1 uppercase">Direct Supervisor Approval</p>
+<p class="text-[10px] text-secondary mt-2">SLA: 24 Hours</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative">
+<div class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-stone-400 ring-4 ring-background"></div>
+<div class="bg-surface-container-lowest p-4 shadow-sm">
+<p class="text-[10px] font-black text-secondary uppercase">Level 02 Validation</p>
+<p class="text-sm font-bold mt-1 uppercase">Finance Dept. Verification</p>
+<p class="text-[10px] text-secondary mt-2">Required for: DEP-VNT, DEP-ALM</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative">
+<div class="absolute -left-[41px] top-0 w-4 h-4 rounded-full bg-stone-900 ring-4 ring-background"></div>
+<div class="bg-surface-container-highest p-4 shadow-sm">
+<p class="text-[10px] font-black text-on-surface uppercase">Final Execution</p>
+<p class="text-sm font-bold mt-1 uppercase">System Disbursement</p>
+</div>
+</div>
+</div>
+</div>
+<!-- RACI Matrix -->
+<div class="col-span-12 bg-surface-container-lowest p-8 flex flex-col gap-6 shadow-sm overflow-hidden">
+<div class="flex items-center gap-4">
+<h3 class="headline text-xl font-bold uppercase tracking-tight">RACI Assignment Matrix</h3>
+<div class="flex gap-2">
+<span class="text-[9px] px-2 py-0.5 border border-primary text-primary font-bold">R: Responsible</span>
+<span class="text-[9px] px-2 py-0.5 border border-stone-300 text-secondary font-bold">A: Accountable</span>
+<span class="text-[9px] px-2 py-0.5 border border-stone-300 text-secondary font-bold">C: Consulted</span>
+<span class="text-[9px] px-2 py-0.5 border border-stone-300 text-secondary font-bold">I: Informed</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-[11px] uppercase tracking-wider border-t border-surface-container">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="p-4 text-left font-black w-1/4">Process Activity</th>
+<th class="p-4 text-center">General Manager</th>
+<th class="p-4 text-center">Finance Lead</th>
+<th class="p-4 text-center">HR Admin</th>
+<th class="p-4 text-center">IT Ops</th>
+<th class="p-4 text-center">Logistics</th>
+</tr>
+</thead>
+<tbody class="font-medium text-secondary">
+<tr class="border-b border-surface-container">
+<td class="p-4 text-on-surface font-bold">Strategic Budget Planning</td>
+<td class="p-4 text-center font-black text-primary">A</td>
+<td class="p-4 text-center font-black text-primary">R</td>
+<td class="p-4 text-center">C</td>
+<td class="p-4 text-center">I</td>
+<td class="p-4 text-center">C</td>
+</tr>
+<tr class="border-b border-surface-container bg-surface-container-low/20">
+<td class="p-4 text-on-surface font-bold">Inventory Procurement</td>
+<td class="p-4 text-center">I</td>
+<td class="p-4 text-center">C</td>
+<td class="p-4 text-center">I</td>
+<td class="p-4 text-center">C</td>
+<td class="p-4 text-center font-black text-primary">R/A</td>
+</tr>
+<tr class="border-b border-surface-container">
+<td class="p-4 text-on-surface font-bold">Security Audit Protocol</td>
+<td class="p-4 text-center">I</td>
+<td class="p-4 text-center font-black text-primary">A</td>
+<td class="p-4 text-center">I</td>
+<td class="p-4 text-center font-black text-primary">R</td>
+<td class="p-4 text-center">C</td>
+</tr>
+<tr class="border-b border-surface-container bg-surface-container-low/20">
+<td class="p-4 text-on-surface font-bold">Employee Onboarding</td>
+<td class="p-4 text-center">I</td>
+<td class="p-4 text-center">I</td>
+<td class="p-4 text-center font-black text-primary">R/A</td>
+<td class="p-4 text-center">C</td>
+<td class="p-4 text-center">I</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Budget Tracking (Technical Visualization) -->
+<div class="col-span-12 lg:col-span-6 bg-stone-900 p-8 text-white">
+<h3 class="headline text-xl font-bold uppercase tracking-tight text-lime-400 mb-6">Budget Consumption Monitor</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-[10px] mb-2 uppercase font-bold tracking-widest">
+<span>Ventas (DEP-VNT-01)</span>
+<span class="text-lime-400">72% Consumed</span>
+</div>
+<div class="h-2 bg-stone-800 rounded-full overflow-hidden">
+<div class="h-full bg-lime-500" style="width: 72%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] mb-2 uppercase font-bold tracking-widest">
+<span>Almacén (DEP-ALM-03)</span>
+<span class="text-amber-500">91% Warning</span>
+</div>
+<div class="h-2 bg-stone-800 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500" style="width: 91%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] mb-2 uppercase font-bold tracking-widest">
+<span>Finanzas (DEP-FIN-02)</span>
+<span class="text-blue-400">34% Optimal</span>
+</div>
+<div class="h-2 bg-stone-800 rounded-full overflow-hidden">
+<div class="h-full bg-blue-400" style="width: 34%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Meta -->
+<div class="col-span-12 lg:col-span-6 flex flex-col gap-4">
+<div class="bg-primary-container p-6 flex items-center justify-between group cursor-pointer transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl text-on-primary-container">schema</span>
+<div>
+<p class="text-xs font-black uppercase text-on-primary-container">Topology View</p>
+<p class="text-sm font-medium">Render interactive org chart 3D</p>
+</div>
+</div>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward_ios</span>
+</div>
+<div class="bg-surface-container-highest p-6 flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl text-secondary">history</span>
+<div>
+<p class="text-xs font-black uppercase text-secondary">Change Log</p>
+<p class="text-sm font-medium">Last modification: 2h ago by r.mercado</p>
+</div>
+</div>
+<span class="material-symbols-outlined">description</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="mt-auto bg-stone-950 px-8 py-12 text-stone-500">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-2">
+<h4 class="text-white font-black text-xl tracking-tighter uppercase mb-4">MAYOR DE REPUESTO LA CIMA, C.A.</h4>
+<p class="text-xs leading-relaxed max-w-md uppercase tracking-tight">
+                        Engineered for heavy-duty industrial commerce. Specialized in precision engine parts and logistical excellence. 
+                        Operated under Admin Forge v2.4 protocols for maximum organizational efficiency.
+                    </p>
+</div>
+<div>
+<h5 class="text-[10px] font-black text-stone-300 uppercase tracking-widest mb-4">Legal Framework</h5>
+<ul class="text-[10px] space-y-2 uppercase tracking-tight font-medium">
+<li><a class="hover:text-lime-400 transition-colors" href="#">Privacy &amp; Data Governance</a></li>
+<li><a class="hover:text-lime-400 transition-colors" href="#">Terms of Digital Operation</a></li>
+<li><a class="hover:text-lime-400 transition-colors" href="#">Industrial Compliance 2024</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-[10px] font-black text-stone-300 uppercase tracking-widest mb-4">Registry Info</h5>
+<p class="text-[10px] uppercase font-mono">RIF: J-00000000-0</p>
+<p class="text-[10px] uppercase font-mono mt-1">SNC Registry: #LM-9942</p>
+<div class="mt-6 flex gap-4">
+<span class="material-symbols-outlined text-stone-600">verified</span>
+<span class="material-symbols-outlined text-stone-600">shield</span>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-stone-900 flex justify-between items-center">
+<p class="text-[10px] uppercase tracking-widest">© 2024 LA CIMA. ALL RIGHTS RESERVED. PRECISION SYSTEM INTERFACE.</p>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></div>
+<span class="text-[9px] uppercase font-bold text-lime-600">Secure Link Established</span>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

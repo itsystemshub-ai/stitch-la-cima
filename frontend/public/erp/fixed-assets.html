@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Módulo de Activos Fijos - INDUSTRIAL FORGE ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#5f5e5e",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "outline-variant": "#c3c9b1",
+                    "on-primary-fixed": "#131f00",
+                    "secondary-container": "#e2dfde",
+                    "surface-bright": "#f9f9f9",
+                    "primary-container": "#9acd32",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-variant": "#e2e2e2",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-surface-variant": "#434937",
+                    "outline": "#747a65",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "tertiary-container": "#bebcbc",
+                    "surface-dim": "#dadada",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1c",
+                    "on-primary-fixed-variant": "#364e00",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-container": "#4c4c4c",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5e5e5e",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#636262",
+                    "surface-container-high": "#e8e8e8",
+                    "primary-fixed": "#bef456",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "inverse-surface": "#2f3131",
+                    "surface-tint": "#496800",
+                    "surface-container-low": "#f3f3f3",
+                    "on-primary-container": "#3a5400",
+                    "surface-container": "#eeeeee",
+                    "on-surface": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "primary": "#496800",
+                    "surface": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "background": "#f9f9f9",
+                    "inverse-primary": "#a3d73c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-3 w-full border-b-0">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-stone-900 dark:text-white tracking-tighter uppercase brand-font">INDUSTRIAL FORGE ERP</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Dashboard</a>
+<a class="text-lime-600 dark:text-lime-400 font-bold border-b-2 border-lime-600 font-['Space_Grotesk'] uppercase tracking-tight" href="#">Analytics</a>
+<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-stone-600 hover:text-lime-600 cursor-pointer transition-all active:scale-95 duration-150" data-icon="notifications">notifications</span>
+</div>
+<span class="material-symbols-outlined text-stone-600 hover:text-lime-600 cursor-pointer transition-all active:scale-95 duration-150" data-icon="settings">settings</span>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="professional portrait of a middle-aged male executive in a industrial workshop setting with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkYG0of0ziUa7XEOnfSd4nj-ojttjLNWUVPgy22TRyv4RHwCkZC7JD389dNBIkGc2dHKknjtLmq0ZckwZhqEknQCm3XsH81JOKMZtQ6JyTPsvPn-8vSMd83P3fONVzovktxLDB4-lyRCb-lzKqWNF-_EEKA5cFq__5EpayqUfREKkilpRJOoWzQ5JbAHhnhDbCoOp6tkMqPM9CpA9fKs5zZIxpslhlnLc720sRPGG-7BAIRLBBtWY7tV3HzfP132KJgu_BgAkgWpU"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-stone-50 dark:bg-stone-900 shadow-[4px_0px_24px_rgba(0,0,0,0.04)] flex flex-col h-full py-6">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl" data-icon="factory" data-weight="fill" style="font-variation-settings: 'FILL' 1;">factory</span>
+</div>
+<div class="flex flex-col">
+<span class="font-['Space_Grotesk'] font-black text-stone-900 dark:text-white text-sm tracking-tighter">FORGE SYSTEMS</span>
+<span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest leading-none">High-Performance ERP</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 gap-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1 group" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Inventario</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Ventas</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Compras</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Finanzas</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 bg-lime-500/10 text-lime-700 dark:text-lime-400 border-r-4 border-lime-600 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Contabilidad</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">RRHH</span>
+</a>
+<a class="flex items-center px-6 py-3 gap-3 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-800 transition-transform duration-200 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="font-['Inter'] font-semibold uppercase text-xs tracking-widest">Administración</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-primary text-white py-3 font-bold uppercase text-[10px] tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20">TECHNICAL REPORT</button>
+<div class="mt-6 pt-6 border-t border-stone-200 dark:border-stone-800 space-y-1">
+<a class="flex items-center gap-3 py-2 text-stone-500 hover:text-stone-900 text-xs font-bold tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>Security</span>
+</a>
+<a class="flex items-center gap-3 py-2 text-error hover:text-red-700 text-xs font-bold tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 pt-20 p-8 min-h-screen">
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-4xl font-black tracking-tighter uppercase mb-2">Activos Fijos</h1>
+<p class="text-secondary font-medium tracking-tight">MAYOR DE REPUESTO LA CIMA, C.A. — Gestión de Maquinaria y Equipos</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-surface-container-high text-on-surface font-bold text-xs uppercase tracking-widest border border-outline-variant/15 hover:scale-102 transition-all">Exportar PDF</button>
+<button class="px-6 py-2 bg-primary text-white font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:scale-102 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Nuevo Activo
+                </button>
+</div>
+</header>
+<!-- Dashboard Widgets (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="md:col-span-1 bg-surface-container-lowest p-6 flex flex-col justify-between border-l-4 border-primary">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-4">Valor Total Activos</span>
+<div>
+<span class="text-3xl font-black tracking-tighter">$1,240,500.00</span>
+<div class="flex items-center gap-1 text-primary mt-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+<span class="text-[10px] font-bold uppercase">4.2% vs Año Anterior</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest p-6 flex flex-col justify-between border-l-4 border-stone-800">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-4">Depreciación Acumulada</span>
+<div>
+<span class="text-3xl font-black tracking-tighter">$412,280.45</span>
+<p class="text-[10px] text-stone-500 font-medium uppercase mt-1">33.2% del Valor Inicial</p>
+</div>
+</div>
+<div class="md:col-span-2 relative overflow-hidden bg-stone-900 p-6 flex flex-col justify-between">
+<img alt="Engine block industrial background" class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="close-up of a high-performance engine block with precision metallic textures and professional industrial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq7O27VBFiJ7hre-_UekW37sUGY9gbsCeijCX4wtGdTb8MS9apy31wwRWum97L3U5tdRhRhQEU0PqjSaKHeFU3jqrV-lKd3mpRJZds8wk710C9f6n6yjwNXITn6CBDRGeVGE-mzg9lVK7j7CORv1sPsBI6C54cHq_al0e-CFBtFMeOqKnjKJPp410uPgbx0PHiYvo38kImj8HVj09JWonuCRMTUgcMTD_B0KYi-mHPlHUbZy0NpOd9s5DtGQUYC4zBg5H1QjC-0bQ"/>
+<div class="relative z-10 flex flex-col h-full">
+<span class="text-[10px] font-bold uppercase tracking-widest text-lime-400 mb-4">Proyección Depreciación Mensual</span>
+<div class="flex items-end gap-2">
+<span class="text-4xl font-black tracking-tighter text-white">-$12,450</span>
+<span class="text-xs font-bold text-stone-400 uppercase tracking-widest pb-1">USD / Mes</span>
+</div>
+<div class="mt-4 flex items-center gap-4">
+<div class="flex-1 h-1.5 bg-stone-700 overflow-hidden">
+<div class="h-full bg-lime-500 w-[65%]"></div>
+</div>
+<span class="text-[10px] font-bold text-stone-400 uppercase">Período Fiscal Q3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Inventory Table -->
+<div class="bg-surface-container-lowest overflow-hidden">
+<div class="p-6 flex items-center justify-between">
+<h3 class="text-xl font-black tracking-tighter uppercase">Inventario de Activos</h3>
+<div class="flex gap-4">
+<div class="bg-surface-container px-3 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-stone-500 text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-[10px] font-bold uppercase w-64" placeholder="BUSCAR POR CÓDIGO O NOMBRE..." type="text"/>
+</div>
+<button class="material-symbols-outlined p-2 text-stone-600 hover:bg-surface-container transition-colors" data-icon="filter_list">filter_list</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant/15">
+<tr>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary">Código</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary">Descripción</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary">Fecha Compra</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary text-right">Valor Inicial</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary">Método</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary text-right">Dep. Acumulada</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary text-right">Valor Libros</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-secondary text-center">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-bold text-xs">AF-00214</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase">Torno CNC Precision X-900</span>
+<span class="text-[10px] text-stone-500 uppercase font-medium">Maquinaria Pesada</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs">12/05/2021</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$125,000.00</td>
+<td class="px-6 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-stone-200 font-black uppercase rounded-sm">Línea Recta</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right text-error">$31,250.00</td>
+<td class="px-6 py-4 text-xs font-black text-right text-primary">$93,750.00</td>
+<td class="px-6 py-4 text-center">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors text-lg" data-icon="visibility">visibility</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-bold text-xs">AF-00245</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase">Montacargas Caterpillar 5T</span>
+<span class="text-[10px] text-stone-500 uppercase font-medium">Equipos de Almacén</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs">15/09/2022</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$45,500.00</td>
+<td class="px-6 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-stone-200 font-black uppercase rounded-sm">Línea Recta</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right text-error">$8,450.00</td>
+<td class="px-6 py-4 text-xs font-black text-right text-primary">$37,050.00</td>
+<td class="px-6 py-4 text-center">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors text-lg" data-icon="visibility">visibility</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-bold text-xs">AF-00289</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase">Camión Distribución ISUZU NLR</span>
+<span class="text-[10px] text-stone-500 uppercase font-medium">Vehículos</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs">03/01/2023</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$68,200.00</td>
+<td class="px-6 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-stone-200 font-black uppercase rounded-sm">Línea Recta</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right text-error">$6,820.00</td>
+<td class="px-6 py-4 text-xs font-black text-right text-primary">$61,380.00</td>
+<td class="px-6 py-4 text-center">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors text-lg" data-icon="visibility">visibility</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-bold text-xs">AF-00312</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase">Compresor Aire Industrial 500L</span>
+<span class="text-[10px] text-stone-500 uppercase font-medium">Herramientas</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs">22/11/2023</td>
+<td class="px-6 py-4 text-xs font-bold text-right">$12,900.00</td>
+<td class="px-6 py-4">
+<span class="text-[9px] px-2 py-0.5 bg-stone-200 font-black uppercase rounded-sm">Línea Recta</span>
+</td>
+<td class="px-6 py-4 text-xs font-bold text-right text-error">$430.00</td>
+<td class="px-6 py-4 text-xs font-black text-right text-primary">$12,470.00</td>
+<td class="px-6 py-4 text-center">
+<button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors text-lg" data-icon="visibility">visibility</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between">
+<span class="text-[10px] font-bold uppercase text-stone-500">Mostrando 4 de 128 activos</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant bg-primary text-white text-[10px] font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant hover:bg-primary hover:text-white transition-colors text-[10px] font-bold">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant hover:bg-primary hover:text-white transition-colors text-[10px] font-bold">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Action Section (Right Overlay) -->
+<section class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-high p-6 flex items-start gap-4">
+<div class="w-10 h-10 bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+</div>
+<div>
+<h4 class="text-xs font-black uppercase tracking-widest mb-1">Cierre Mensual</h4>
+<p class="text-[10px] text-stone-600 font-medium mb-3">Generar asientos automáticos de depreciación para el período actual.</p>
+<button class="text-[10px] font-black uppercase text-primary border-b border-primary hover:text-primary-container transition-colors">Procesar Ahora</button>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 flex items-start gap-4">
+<div class="w-10 h-10 bg-stone-800 text-white flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="barcode_scanner">barcode_scanner</span>
+</div>
+<div>
+<h4 class="text-xs font-black uppercase tracking-widest mb-1">Auditoría Física</h4>
+<p class="text-[10px] text-stone-600 font-medium mb-3">Sincronizar etiquetas QR de activos con la base de datos central.</p>
+<button class="text-[10px] font-black uppercase text-stone-900 border-b border-stone-900 hover:text-primary transition-colors">Iniciar Escaneo</button>
+</div>
+</div>
+<div class="bg-primary-container p-6 flex items-start gap-4">
+<div class="w-10 h-10 bg-on-primary-container text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h4 class="text-xs font-black uppercase tracking-widest mb-1 text-on-primary-container">Reporte Fiscal</h4>
+<p class="text-[10px] text-on-primary-container/80 font-medium mb-3">Resumen detallado de activos y amortizaciones para declaración de ISLR.</p>
+<button class="text-[10px] font-black uppercase text-on-primary-container border-b border-on-primary-container hover:scale-105 transition-transform">Descargar XLSX</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Contextual FAB (Suppressing as per guidelines on Transactional/Detail pages, but keeping for Home/Dashboard context) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-stone-900 text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+</button>
+</body></html>

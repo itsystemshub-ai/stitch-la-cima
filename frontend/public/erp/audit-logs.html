@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#3a5400",
+                        "primary-container": "#9acd32",
+                        "secondary-container": "#e2dfde",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#a3d73c",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-dim": "#dadada",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-container-low": "#f3f3f3",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "on-tertiary-container": "#4c4c4c",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#131f00",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "on-surface": "#1a1c1c",
+                        "tertiary": "#5e5e5e",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-container": "#636262",
+                        "primary-fixed-dim": "#a3d73c",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "tertiary-container": "#bebcbc",
+                        "on-secondary-fixed-variant": "#474746",
+                        "primary": "#496800",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9f9f9",
+                        "inverse-surface": "#2f3131",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e4e2e2",
+                        "outline": "#747a65",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#364e00",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-background": "#1a1c1c",
+                        "outline-variant": "#c3c9b1",
+                        "surface-tint": "#496800",
+                        "surface-bright": "#f9f9f9",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "on-surface-variant": "#434937",
+                        "primary-fixed": "#bef456"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mask-encrypted {
+            font-family: monospace;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- SIDE NAV BAR -->
+<aside class="fixed left-0 top-0 h-full z-50 bg-stone-950 dark:bg-black font-['Space_Grotesk'] uppercase tracking-tight h-screen w-64 flex flex-col border-r-0">
+<div class="p-6 flex flex-col gap-1">
+<h1 class="text-xl font-bold tracking-tighter text-lime-400 dark:text-lime-300">LA CIMA</h1>
+<span class="text-[10px] text-stone-500 font-bold tracking-widest">ADMIN FORGE v2.4</span>
+</div>
+<nav class="flex-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
+<span class="text-sm font-medium">Module Health</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="text-sm font-medium">User Access</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="text-sm font-medium">DB Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-900 text-lime-400 border-l-4 border-lime-500 transition-transform duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="text-sm font-medium">Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 flex flex-col gap-2 border-t border-stone-800/50">
+<button class="w-full py-3 bg-stone-900 text-stone-400 text-xs font-bold tracking-widest hover:text-error transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+                System Lock
+            </button>
+<div class="flex flex-col">
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-200 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="support_agent">support_agent</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-200 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+                    Logout
+                </a>
+</div>
+</div>
+</aside>
+<!-- TOP APP BAR -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-stone-950/80 backdrop-blur-md z-40 flex justify-between items-center px-8 border-b-0">
+<div class="flex items-center gap-8">
+<h2 class="text-lg font-black tracking-widest text-white font-['Space_Grotesk'] uppercase">MAYOR DE REPUESTO LA CIMA, C.A.</h2>
+<nav class="hidden md:flex gap-6 font-['Space_Grotesk'] uppercase text-xs tracking-wider">
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">Global View</a>
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">System Health</a>
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">Security Ops</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-stone-400">
+<span class="material-symbols-outlined cursor-pointer hover:text-amber-500 transition-colors" data-icon="notifications_active">notifications_active</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-amber-500 transition-colors" data-icon="terminal">terminal</span>
+</div>
+<button class="bg-error text-white text-[10px] font-bold px-4 py-2 tracking-tighter uppercase hover:opacity-80 transition-opacity">Emergency Shutdown</button>
+<div class="h-8 w-8 rounded-full bg-stone-800 overflow-hidden ring-2 ring-lime-500/20">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="Cybersecurity professional portrait in dark lighting with green digital HUD elements reflecting on their face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqGP2C3jFcWElvSTOtRclBojTAaHjcAXzM4qdbZdb-ukcZeY3Tb0OdPBafiobNsqysHDw7RjOHOi0As0QnM81dzyZgrQUuR4mIN9J0Q3hhILCue8pYT17knh3rAEj5Igk-jLCiEKsRbQvunNX9NUsSddNQ7UuOlUyWR1lzPb8f2RBBdefmO0U-ew-Xu1wWM81MIZEhLBx-3ISVf4f6-JyY0cni8rD8H2h2u5l011Fyldj9LB5oOe1N47bihSm5_nB7_OiO2xq0PNg"/>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT CANVAS -->
+<main class="ml-64 pt-16 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- HEADER SECTION -->
+<div class="relative overflow-hidden bg-stone-950 p-8 rounded-lg flex flex-col md:flex-row justify-between items-end gap-6 border-l-8 border-lime-500">
+<div class="z-10">
+<span class="text-lime-500 font-headline font-bold text-xs tracking-widest uppercase mb-2 block">Level 4 Authorization Required</span>
+<h1 class="text-4xl font-headline font-bold text-white uppercase tracking-tighter leading-none mb-4">Security Audit &amp; Activity Logs</h1>
+<p class="text-stone-400 font-body text-sm max-w-xl leading-relaxed">
+                        Continuous monitoring of system-wide interactions. All cryptographic hashes and IP handshakes are recorded. Authorized access only. Unauthorized tampering triggers immediate lockout.
+                    </p>
+</div>
+<div class="flex gap-4 z-10">
+<div class="bg-stone-900 p-4 min-w-[120px]">
+<span class="text-[10px] text-stone-500 font-bold uppercase block mb-1">Live Events</span>
+<span class="text-2xl font-headline font-bold text-lime-400">1,204</span>
+</div>
+<div class="bg-stone-900 p-4 min-w-[120px]">
+<span class="text-[10px] text-stone-500 font-bold uppercase block mb-1">Risk Score</span>
+<span class="text-2xl font-headline font-bold text-amber-500">LOW</span>
+</div>
+</div>
+<!-- Subtle tech background element -->
+<div class="absolute right-0 top-0 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[200px] text-lime-500" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+</div>
+<!-- SEARCH & FILTERS -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-surface-container-low p-6 rounded-lg">
+<div class="md:col-span-2 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary pl-10 pr-4 py-3 font-headline text-xs tracking-widest uppercase placeholder:text-stone-400" placeholder="SEARCH LOGS BY USER, IP, OR ACTION..." type="text"/>
+</div>
+<div>
+<select class="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary py-3 font-headline text-xs tracking-widest uppercase">
+<option>ALL SEVERITY</option>
+<option>CRITICAL</option>
+<option>WARNING</option>
+<option>INFO</option>
+</select>
+</div>
+<button class="bg-stone-950 text-white font-headline text-xs tracking-widest uppercase py-3 hover:bg-stone-800 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                    Apply Filters
+                </button>
+</section>
+<!-- AUDIT LOG TABLE -->
+<div class="bg-surface-container-lowest overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-900 text-stone-400 font-headline text-[10px] tracking-widest uppercase">
+<th class="px-6 py-4 font-bold">Timestamp / Auth ID</th>
+<th class="px-6 py-4 font-bold">User Identity</th>
+<th class="px-6 py-4 font-bold">Network Vector</th>
+<th class="px-6 py-4 font-bold">System Action</th>
+<th class="px-6 py-4 font-bold">Payload Delta (JSON)</th>
+<th class="px-6 py-4 font-bold text-right">Status</th>
+</tr>
+</thead>
+<tbody class="font-body text-sm">
+<!-- Row 1 -->
+<tr class="border-b border-surface-container hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-stone-900">2023-10-24 14:22:01</span>
+<span class="text-[10px] text-stone-500 font-mono tracking-tighter uppercase">AUTH_X99_221</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="person">person</span>
+</div>
+<div class="flex flex-col">
+<span class="font-bold">admin.valencia</span>
+<span class="text-[10px] text-stone-500 uppercase">Superuser</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="mask-encrypted text-xs font-mono bg-stone-100 px-2 py-1 rounded">192.168.***.***</span>
+</td>
+<td class="px-6 py-5">
+<span class="font-headline text-xs font-bold tracking-tight bg-stone-950 text-lime-400 px-2 py-1 uppercase">LOGIN_SUCCESS</span>
+</td>
+<td class="px-6 py-5">
+<div class="bg-stone-50 p-2 rounded border-l-2 border-primary text-[10px] font-mono leading-tight max-w-[200px]">
+<span class="text-stone-400">OLD:</span> null<br/>
+<span class="text-stone-900 font-bold">NEW:</span> {"session_id":"S_881"}
+                                    </div>
+</td>
+<td class="px-6 py-5 text-right">
+<span class="material-symbols-outlined text-lime-600" data-icon="verified_user">verified_user</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/30 border-b border-surface-container hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-stone-900">2023-10-24 14:15:44</span>
+<span class="text-[10px] text-stone-500 font-mono tracking-tighter uppercase">AUTH_P01_990</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 bg-error-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-sm" data-icon="warning">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-bold">inventory.mgr</span>
+<span class="text-[10px] text-stone-500 uppercase">Standard Access</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="mask-encrypted text-xs font-mono bg-stone-100 px-2 py-1 rounded">201.248.***.***</span>
+</td>
+<td class="px-6 py-5">
+<span class="font-headline text-xs font-bold tracking-tight bg-error text-white px-2 py-1 uppercase">DELETE_PRODUCT</span>
+</td>
+<td class="px-6 py-5">
+<div class="bg-stone-50 p-2 rounded border-l-2 border-error text-[10px] font-mono leading-tight max-w-[200px]">
+<span class="text-stone-400">OLD:</span> {"pid":"CMA-502"}<br/>
+<span class="text-stone-900 font-bold">NEW:</span> null
+                                    </div>
+</td>
+<td class="px-6 py-5 text-right">
+<span class="material-symbols-outlined text-stone-400" data-icon="visibility">visibility</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-surface-container hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-stone-900">2023-10-24 13:58:12</span>
+<span class="text-[10px] text-stone-500 font-mono tracking-tighter uppercase">AUTH_X99_101</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="person">person</span>
+</div>
+<div class="flex flex-col">
+<span class="font-bold">sys.architect</span>
+<span class="text-[10px] text-stone-500 uppercase">Root</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="mask-encrypted text-xs font-mono bg-stone-100 px-2 py-1 rounded">LOCAL_LOOPBACK</span>
+</td>
+<td class="px-6 py-5">
+<span class="font-headline text-xs font-bold tracking-tight bg-stone-950 text-amber-400 px-2 py-1 uppercase">CONFIG_CHANGE</span>
+</td>
+<td class="px-6 py-5">
+<div class="bg-stone-50 p-2 rounded border-l-2 border-amber-500 text-[10px] font-mono leading-tight max-w-[200px]">
+<span class="text-stone-400">OLD:</span> {"encryption":"AES128"}<br/>
+<span class="text-stone-900 font-bold">NEW:</span> {"encryption":"AES256"}
+                                    </div>
+</td>
+<td class="px-6 py-5 text-right">
+<span class="material-symbols-outlined text-amber-600" data-icon="info">info</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer/Pagination -->
+<div class="bg-stone-50 px-6 py-4 flex items-center justify-between border-t border-surface-container">
+<span class="text-[10px] font-headline font-bold text-stone-500 uppercase">Showing 3 of 1,204 active audit records</span>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-stone-200 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<div class="flex items-center gap-1">
+<span class="bg-stone-950 text-white text-[10px] font-bold px-2 py-1">1</span>
+<span class="text-stone-400 text-[10px] font-bold px-2 py-1">2</span>
+<span class="text-stone-400 text-[10px] font-bold px-2 py-1">3</span>
+</div>
+<button class="p-1 hover:bg-stone-200 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- FORENSIC TOOLS -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-12">
+<div class="bg-surface-container-high p-6 rounded-lg relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="font-headline font-bold uppercase text-xs tracking-widest mb-4">Integrity Verification</h3>
+<p class="text-stone-500 text-xs mb-6">Run a cryptographic hash check against all logs to ensure no tampering has occurred.</p>
+<button class="w-full bg-stone-950 text-white font-headline text-[10px] tracking-widest uppercase py-3 group-hover:bg-primary transition-colors">Run SHA-256 Hash Audit</button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-stone-300 opacity-20 text-7xl group-hover:text-primary-container transition-colors" data-icon="fingerprint">fingerprint</span>
+</div>
+<div class="bg-surface-container-high p-6 rounded-lg relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="font-headline font-bold uppercase text-xs tracking-widest mb-4">Export Forensics</h3>
+<p class="text-stone-500 text-xs mb-6">Download activity logs in encrypted CSV or JSON formats for legal or compliance review.</p>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-stone-300 text-stone-700 font-headline text-[10px] font-bold uppercase py-2 hover:bg-stone-400">Download CSV</button>
+<button class="bg-stone-300 text-stone-700 font-headline text-[10px] font-bold uppercase py-2 hover:bg-stone-400">Download JSON</button>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-stone-300 opacity-20 text-7xl group-hover:text-amber-500 transition-colors" data-icon="file_download">file_download</span>
+</div>
+<div class="bg-stone-950 p-6 rounded-lg relative overflow-hidden">
+<h3 class="font-headline font-bold uppercase text-xs tracking-widest text-lime-400 mb-4">IP Blocklist Status</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-[10px] font-headline uppercase">
+<span class="text-stone-400">Active Blocks</span>
+<span class="text-white">42 Nodes</span>
+</div>
+<div class="w-full bg-stone-800 h-1">
+<div class="bg-lime-500 h-full w-[42%]"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-headline uppercase">
+<span class="text-stone-400">Last Synced</span>
+<span class="text-white">3 mins ago</span>
+</div>
+<button class="w-full mt-4 text-lime-500 text-[10px] font-bold uppercase underline underline-offset-4 hover:text-white transition-colors">Manage Global Blocklist</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- FOOTER -->
+<footer class="ml-64 bg-stone-950 border-t border-stone-900 py-8 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-1">
+<span class="text-white font-headline font-black tracking-[0.2em] text-sm uppercase leading-none">LA CIMA</span>
+<span class="text-stone-600 font-headline text-[10px] font-bold uppercase">REPUESTOS PESADOS &amp; TECNOLOGÍA</span>
+</div>
+<div class="flex gap-8 text-[10px] font-headline font-bold text-stone-500 uppercase tracking-widest">
+<div class="flex flex-col">
+<span class="text-stone-600">RIF NUMBER</span>
+<span class="text-stone-300">J-31422100-5</span>
+</div>
+<div class="flex flex-col">
+<span class="text-stone-600">LICENSE</span>
+<span class="text-stone-300">FORGE-X99-2024</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<div class="h-1 w-8 bg-lime-500"></div>
+<div class="h-1 w-4 bg-stone-800"></div>
+<div class="h-1 w-2 bg-stone-800"></div>
+</div>
+<span class="text-stone-700 font-headline text-[9px] uppercase tracking-widest">SECURE SESSION ENCRYPTED</span>
+</div>
+</div>
+</footer>
+</body></html>

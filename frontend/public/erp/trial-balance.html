@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#496800",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#a3d73c",
+                        "background": "#f9f9f9",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#364e00",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#434937",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-primary-fixed": "#131f00",
+                        "surface-container": "#eeeeee",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c3c9b1",
+                        "surface-variant": "#e2e2e2",
+                        "primary": "#496800",
+                        "outline": "#747a65",
+                        "tertiary": "#5e5e5e",
+                        "primary-fixed": "#bef456",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-background": "#1a1c1c",
+                        "inverse-on-surface": "#f1f1f1",
+                        "primary-container": "#9acd32",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-primary-container": "#3a5400",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e4e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-surface": "#2f3131",
+                        "surface-dim": "#dadada",
+                        "secondary-container": "#e2dfde",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "on-secondary-container": "#636262",
+                        "inverse-primary": "#a3d73c",
+                        "on-tertiary-container": "#4c4c4c",
+                        "surface-bright": "#f9f9f9",
+                        "on-surface": "#1a1c1c",
+                        "tertiary-container": "#bebcbc",
+                        "surface-container-highest": "#e2e2e2",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "surface": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 z-50 w-full px-6 py-3 flex justify-between items-center bg-stone-950/80 backdrop-blur-xl border-b-0 transition-all">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-stone-100 font-['Space_Grotesk'] uppercase tracking-tight">TITAN ERP: ACCOUNTING</span>
+<div class="hidden md:flex items-center bg-stone-900 px-3 py-1.5 rounded-lg border border-stone-800">
+<span class="material-symbols-outlined text-stone-400 text-sm mr-2">search</span>
+<input class="bg-transparent border-none text-sm text-stone-200 focus:ring-0 w-64 placeholder-stone-500" placeholder="Search accounts..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-stone-400 hover:bg-stone-800/50 transition-colors duration-200 rounded-lg active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-stone-400 hover:bg-stone-800/50 transition-colors duration-200 rounded-lg active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded bg-stone-800 flex items-center justify-center overflow-hidden">
+<img alt="User Profile" data-alt="close-up professional portrait of a financial officer in a modern industrial office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5Rf9xYoPU2mhEyYDPuHFtEJ6xagQJbHdTEdxHuCwiM0E6EuW4pGB-e0fzC3UOC1aZ9njANkI2W8bLqo_kYFDMeIzgKjWnfMDDPbPXREEfaPnTTbhEz6ceyw9yvI5SvsxUebk4D0IeXeph2d1s_FB3qlqwxeM7r_6AQxXUbIjcYmmmGg7YFH2Vxje6chVEfUTtQ81wRZHIMUbG4R4nSfH0VioW-Yx0FCVXVkHYsgRwPAJ58-1FlsqWwjHMkWxZIZJsJpC53G6Su88"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 pt-16 bg-stone-900 w-64 border-r-0 z-40 hidden md:flex">
+<div class="px-6 py-8 border-b border-stone-800/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-orange-500 flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-stone-900 font-bold">account_balance</span>
+</div>
+<div>
+<div class="text-orange-500 font-black font-['Inter'] text-sm font-semibold tracking-wide uppercase">FINANCE</div>
+<div class="text-[10px] text-stone-500 font-mono">Precision Ledger v4.2</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 py-6 overflow-y-auto">
+<a class="flex items-center gap-4 text-stone-500 hover:text-stone-200 py-3 px-6 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-stone-500 hover:text-stone-200 py-3 px-6 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Chart of Accounts</span>
+</a>
+<a class="flex items-center gap-4 text-stone-500 hover:text-stone-200 py-3 px-6 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Journal Entries</span>
+</a>
+<a class="flex items-center gap-4 text-stone-500 hover:text-stone-200 py-3 px-6 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Ledger</span>
+</a>
+<a class="flex items-center gap-4 bg-stone-800 text-orange-400 border-l-4 border-orange-500 py-3 px-6 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">balance</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Trial Balance</span>
+</a>
+<a class="flex items-center gap-4 text-stone-500 hover:text-stone-200 py-3 px-6 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Financial Statements</span>
+</a>
+</nav>
+<div class="p-6">
+<button class="w-full bg-orange-500 hover:bg-orange-400 text-stone-950 font-bold py-3 rounded flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined">add</span>
+<span class="text-xs uppercase tracking-widest">NEW ENTRY</span>
+</button>
+</div>
+<div class="px-6 py-6 border-t border-stone-800/50 mt-auto">
+<a class="flex items-center gap-4 text-stone-500 hover:text-stone-200 py-2 hover:bg-stone-800/80 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Support</span>
+</a>
+<a class="flex items-center gap-4 text-stone-500 hover:text-stone-200 py-2 hover:bg-stone-800/80 transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-['Inter'] text-sm font-semibold tracking-wide">Logs</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-24 px-8 pb-12">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<nav class="flex text-[10px] uppercase tracking-[0.2em] text-secondary mb-2">
+<span class="opacity-50">FINANCE</span>
+<span class="mx-2 opacity-30">/</span>
+<span class="text-primary font-bold">TRIAL BALANCE</span>
+</nav>
+<h1 class="text-4xl md:text-5xl font-bold uppercase tracking-tight text-on-background leading-none">Balance de Comprobación</h1>
+<p class="mt-4 text-secondary max-w-xl font-body leading-relaxed">
+                    Financial period overview for <span class="text-on-background font-semibold">Q3 Fiscal Year 2024</span>. 
+                    Ensuring equilibrium through high-precision ledger validation and automated reconciliation of all active accounts.
+                </p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex bg-surface-container rounded-lg p-1">
+<button class="flex items-center gap-2 px-4 py-2 rounded bg-surface-container-lowest text-on-surface text-xs font-bold uppercase tracking-wider shadow-sm transition-all">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+                        PDF
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded text-secondary text-xs font-bold uppercase tracking-wider hover:text-on-surface transition-all">
+<span class="material-symbols-outlined text-sm">table_view</span>
+                        EXCEL
+                    </button>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary font-bold text-xs uppercase tracking-[0.15em] px-6 py-3 rounded transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-sm">lock</span>
+                    CLOSE MONTH
+                </button>
+</div>
+</div>
+<!-- Dashboard Stats Overlap Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary">Accounts Verified</span>
+<span class="material-symbols-outlined text-primary">done_all</span>
+</div>
+<div>
+<div class="text-3xl font-bold font-headline tracking-tighter">142</div>
+<div class="text-[10px] text-primary font-bold uppercase mt-1">Status: Operational</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-stone-900 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary">Total Ledger Value</span>
+<span class="material-symbols-outlined text-stone-400">payments</span>
+</div>
+<div>
+<div class="text-3xl font-bold font-headline tracking-tighter">$4,289,500.00</div>
+<div class="text-[10px] text-stone-400 font-bold uppercase mt-1">Currency: USD</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-orange-500 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary">Integrity Check</span>
+<span class="material-symbols-outlined text-orange-500">verified_user</span>
+</div>
+<div>
+<div class="text-3xl font-bold font-headline tracking-tighter text-orange-500">BALANCED</div>
+<div class="text-[10px] text-stone-400 font-bold uppercase mt-1">Delta: 0.000</div>
+</div>
+</div>
+</div>
+<!-- Trial Balance Table -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest text-on-surface-variant">
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest w-24">Code</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest">Account Description</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-right">Opening Balance</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-right">Debit Total</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-right">Credit Total</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-right">Closing Balance</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/10">
+<tr class="bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 text-[11px] font-mono text-secondary font-bold">10100</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">CASH AND BANK EQUIVALENTS</td>
+<td class="px-6 py-4 text-sm font-mono text-right">$450,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-primary font-bold">$125,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-error">$85,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right font-bold">$490,000.00</td>
+</tr>
+<tr class="bg-surface hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 text-[11px] font-mono text-secondary font-bold">11200</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">ACCOUNTS RECEIVABLE</td>
+<td class="px-6 py-4 text-sm font-mono text-right">$820,500.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-primary font-bold">$340,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-error">$210,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right font-bold">$950,500.00</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 text-[11px] font-mono text-secondary font-bold">12100</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">INVENTORY: RAW MATERIALS</td>
+<td class="px-6 py-4 text-sm font-mono text-right">$1,200,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-primary font-bold">$450,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-error">$600,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right font-bold">$1,050,000.00</td>
+</tr>
+<tr class="bg-surface hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 text-[11px] font-mono text-secondary font-bold">20100</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">ACCOUNTS PAYABLE</td>
+<td class="px-6 py-4 text-sm font-mono text-right">$650,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-primary font-bold">$180,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-error">$240,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right font-bold">$710,000.00</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-4 text-[11px] font-mono text-secondary font-bold">30100</td>
+<td class="px-6 py-4 text-sm font-bold text-on-background">RETAINED EARNINGS</td>
+<td class="px-6 py-4 text-sm font-mono text-right">$1,169,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-primary font-bold">$0.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right text-error">$85,000.00</td>
+<td class="px-6 py-4 text-sm font-mono text-right font-bold">$1,084,000.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="bg-stone-900 text-stone-100">
+<td class="px-6 py-5" colspan="2">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs font-black uppercase tracking-[0.2em] font-headline">TOTALS VALIDATED</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right font-mono font-bold text-sm">$4,289,500.00</td>
+<td class="px-6 py-5 text-right font-mono font-bold text-sm text-primary-fixed">$1,095,000.00</td>
+<td class="px-6 py-5 text-right font-mono font-bold text-sm text-primary-fixed">$1,095,000.00</td>
+<td class="px-6 py-5 text-right font-mono font-bold text-sm">$4,289,500.00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Partida Doble Validation Badge -->
+<div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-6 bg-primary-container/10 p-10 rounded-2xl border-2 border-dashed border-primary/30">
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold uppercase tracking-tight text-on-background font-headline">Partida Doble Validation</h3>
+<p class="text-sm text-secondary font-body mt-1">The fundamental accounting equation is satisfied for this period.</p>
+</div>
+</div>
+<div class="flex items-center gap-8 divide-x divide-outline-variant/30">
+<div class="text-center">
+<div class="text-[10px] font-black text-secondary uppercase tracking-[0.2em] mb-1">Σ Total Debits</div>
+<div class="text-3xl font-headline font-bold text-on-background tracking-tighter">$1,095,000.00</div>
+</div>
+<div class="pl-8 flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-3xl font-bold">equalizer</span>
+<span class="text-[10px] font-black text-primary uppercase tracking-[0.2em] mt-1">VERIFIED</span>
+</div>
+<div class="pl-8 text-center">
+<div class="text-[10px] font-black text-secondary uppercase tracking-[0.2em] mb-1">Σ Total Credits</div>
+<div class="text-3xl font-headline font-bold text-on-background tracking-tighter">$1,095,000.00</div>
+</div>
+</div>
+</div>
+<!-- Footer Section (Industrial Style) -->
+<footer class="mt-20 pt-10 border-t border-surface-container-highest flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex items-center gap-4">
+<div class="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">Titan Accounting Module</div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<div class="text-[10px] font-medium text-stone-400">Node-A19 // Ledger ID: 899321</div>
+</div>
+<div class="flex gap-8">
+<div class="flex flex-col">
+<span class="text-[9px] font-black uppercase text-stone-400 tracking-widest">Last Sync</span>
+<span class="text-xs font-mono font-bold">2024-10-27 09:42:15 GMT</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9px] font-black uppercase text-stone-400 tracking-widest">Compliance</span>
+<span class="text-xs font-bold uppercase text-primary">ISO-9001 VALIDATED</span>
+</div>
+</div>
+</footer>
+</main>
+<!-- Contextual FAB Suppression: Hiding as per rules for Details/Settings screens -->
+</body></html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#4c4c4c",
+                    "tertiary-container": "#bebcbc",
+                    "surface-bright": "#f9f9f9",
+                    "on-surface": "#1a1c1c",
+                    "inverse-primary": "#a3d73c",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface": "#f9f9f9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-surface": "#2f3131",
+                    "surface-dim": "#dadada",
+                    "secondary-container": "#e2dfde",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "surface-container-low": "#f3f3f3",
+                    "on-secondary-container": "#636262",
+                    "error-container": "#ffdad6",
+                    "secondary": "#5f5e5e",
+                    "tertiary": "#5e5e5e",
+                    "primary-fixed": "#bef456",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "outline-variant": "#c3c9b1",
+                    "surface-variant": "#e2e2e2",
+                    "primary": "#496800",
+                    "outline": "#747a65",
+                    "primary-container": "#9acd32",
+                    "inverse-on-surface": "#f1f1f1",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary-container": "#3a5400",
+                    "error": "#ba1a1a",
+                    "on-background": "#1a1c1c",
+                    "primary-fixed-dim": "#a3d73c",
+                    "background": "#f9f9f9",
+                    "surface-tint": "#496800",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-error": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-surface-variant": "#434937",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-primary-fixed": "#131f00",
+                    "on-primary-fixed-variant": "#364e00",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .industrial-glass {
+            background: rgba(26, 28, 28, 0.9);
+            backdrop-filter: blur(16px);
+        }
+        .blueprint-bg {
+            background-image: radial-gradient(circle at 2px 2px, #e2e2e2 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col blueprint-bg">
+<!-- TopNavBar -->
+<header class="bg-zinc-950/90 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-white/5 shadow-2xl shadow-black/50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1920px] mx-auto">
+<div class="text-xl font-bold tracking-tighter text-[#9ACD32] font-headline uppercase">
+                MAYOR DE REPUESTO LA CIMA, C.A.
+            </div>
+<nav class="hidden lg:flex items-center space-x-8">
+<a class="text-zinc-400 font-medium font-['Space_Grotesk'] tracking-tight uppercase hover:text-white transition-colors duration-200" href="#">Engines</a>
+<a class="text-zinc-400 font-medium font-['Space_Grotesk'] tracking-tight uppercase hover:text-white transition-colors duration-200" href="#">Transmission</a>
+<a class="text-zinc-400 font-medium font-['Space_Grotesk'] tracking-tight uppercase hover:text-white transition-colors duration-200" href="#">Electrical</a>
+<a class="text-zinc-400 font-medium font-['Space_Grotesk'] tracking-tight uppercase hover:text-white transition-colors duration-200" href="#">Suspension</a>
+</nav>
+<div class="flex items-center space-x-6">
+<a class="text-zinc-400 font-medium font-['Space_Grotesk'] tracking-tight uppercase hover:text-white transition-colors duration-200" href="#">My Account</a>
+<button class="text-[#9ACD32] border-b-2 border-[#9ACD32] pb-1 font-['Space_Grotesk'] tracking-tight uppercase scale-95 active:scale-90 transition-transform">Cart (7)</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-6 py-12">
+<!-- Page Title -->
+<div class="mb-12">
+<h1 class="font-headline text-5xl font-bold uppercase tracking-tight mb-2">Shopping Cart</h1>
+<p class="text-secondary font-medium uppercase tracking-widest text-sm">Review Your High-Performance Parts Inventory</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Cart Items Table -->
+<div class="lg:col-span-8 space-y-4">
+<div class="bg-surface-container-low overflow-hidden rounded-lg">
+<div class="grid grid-cols-12 gap-4 p-6 bg-surface-container-highest font-headline text-xs uppercase tracking-widest font-bold">
+<div class="col-span-6">Component Specification</div>
+<div class="col-span-2 text-center">Qty</div>
+<div class="col-span-2 text-right">Unit Price</div>
+<div class="col-span-2 text-right">Subtotal</div>
+</div>
+<!-- Item 1 -->
+<div class="grid grid-cols-12 gap-4 p-6 items-center bg-surface-container-lowest hover:bg-surface-container transition-colors duration-200 border-b border-surface-container">
+<div class="col-span-6 flex gap-4 items-center">
+<div class="w-20 h-20 bg-surface-container-highest rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" data-alt="Close-up of a precision-engineered steel piston head with rings, sitting on a technical drawing blueprint" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR2j_XCTGq_-krpB_bYFq5TOHRkw1JArgMK0iRT3Y7nC6iFCc97XrgINbdx2shXLqwuRhAz4XQtQS6yEQvgUopwgXHpY-eN_EiyrIzkY_bcmUFHyh8ToF75F6A-nP2Htm-HvWqHfbCMGLwrIfMkokEvOT2UKDvgt8hcPB5POFBynm19koJedxF7VJ4NsPbRRrCQCXr53rWHySBusgbcd7YUAnPWoYwIofVkyL-RDn7nE20pt8Yyhci5mJoPvbm0-rYbAiLGy33Fs0"/>
+</div>
+<div>
+<h4 class="font-headline font-bold text-lg leading-tight uppercase">High-Pressure Piston Kit</h4>
+<p class="text-xs font-label text-secondary uppercase mt-1">Ref: HP-9004-X | V8 Engine Block</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="flex items-center border border-outline-variant rounded">
+<button class="px-2 py-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="px-3 font-bold text-sm">4</span>
+<button class="px-2 py-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="col-span-2 text-right font-headline text-sm">$245.00</div>
+<div class="col-span-2 text-right font-headline font-bold text-sm">$980.00</div>
+</div>
+<!-- Item 2 -->
+<div class="grid grid-cols-12 gap-4 p-6 items-center bg-surface-container-low hover:bg-surface-container transition-colors duration-200 border-b border-surface-container">
+<div class="col-span-6 flex gap-4 items-center">
+<div class="w-20 h-20 bg-surface-container-highest rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" data-alt="Macro photo of a complex engine gasket with precision-cut holes and synthetic material texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1nnrWSzPvKyOPQamSm3yFgw7ZcRBj7-iAa9TrISryWRJ-NzfAR_hcCGzCWhmNaB7EBgzhZQckIdMGIc-P7Z1SePcvFwrAr-iVmEO0af65AVc7sKU9PwpHmwU36ECTqZYQ4f-bJhC9LU0Gcpf8pLHHgpexj2fyvDGlv6jFbqcOsX3n4XcQ6fH_WImcD9elOxkC4gL_hi97aKppJEsATPACpTO4-cnJjpF9r5UT3tisQE2SMzsEoHbW1K_SxqP-_0us5VJJwcWHbvM"/>
+</div>
+<div>
+<h4 class="font-headline font-bold text-lg leading-tight uppercase">Cylinder Head Gasket</h4>
+<p class="text-xs font-label text-secondary uppercase mt-1">Ref: CHG-221 | Multi-Layer Steel</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="flex items-center border border-outline-variant rounded">
+<button class="px-2 py-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="px-3 font-bold text-sm">2</span>
+<button class="px-2 py-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="col-span-2 text-right font-headline text-sm">$89.50</div>
+<div class="col-span-2 text-right font-headline font-bold text-sm">$179.00</div>
+</div>
+<!-- Item 3 -->
+<div class="grid grid-cols-12 gap-4 p-6 items-center bg-surface-container-lowest hover:bg-surface-container transition-colors duration-200 border-b border-surface-container">
+<div class="col-span-6 flex gap-4 items-center">
+<div class="w-20 h-20 bg-surface-container-highest rounded flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300" data-alt="Industrial diesel fuel injector nozzle resting on a workbench with metallic glints and technical specs in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCImLKVCQ7HCL6FAEjT6D3U0Gek3Wctabw4q2PvzVJRtc8K7hRcTyc2VJMEsg5an65yRLK3_L5iqd5nrngdltFs5DUgh2eRyHNZP2CZ6CFT4GitTzfZvpAQIgoGWaT_WUlClKPIgr1CdJoc8d9txAigsQ2oMzpAIVaciDFh5mIgIWzQtiPiNrCdtzwMCIyi_-8TAW7p6iw0Js1kj6XigKexhI-Diu95QNpKq0I5CdetBFV1Cn6szDz2iHN0N4n0tV5ohwZDEZKzsOg"/>
+</div>
+<div>
+<h4 class="font-headline font-bold text-lg leading-tight uppercase">Fuel Injector Assembly</h4>
+<p class="text-xs font-label text-secondary uppercase mt-1">Ref: FI-V6-PRO | Common Rail</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="flex items-center border border-outline-variant rounded">
+<button class="px-2 py-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="px-3 font-bold text-sm">1</span>
+<button class="px-2 py-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<div class="col-span-2 text-right font-headline text-sm">$412.00</div>
+<div class="col-span-2 text-right font-headline font-bold text-sm">$412.00</div>
+</div>
+<!-- More items implied for total 7 -->
+<div class="p-6 bg-surface-container text-secondary text-xs uppercase tracking-widest text-center font-bold">
+                        + 4 Additional Technical Components In List
+                     </div>
+</div>
+<div class="flex items-center justify-between pt-6 border-t border-surface-container-highest">
+<a class="flex items-center gap-2 font-headline text-sm font-bold uppercase hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Continue Sourcing
+                    </a>
+<button class="flex items-center gap-2 font-headline text-sm font-bold uppercase text-error hover:text-error-container transition-colors">
+<span class="material-symbols-outlined">delete_sweep</span>
+                        Clear Inventory
+                    </button>
+</div>
+</div>
+<!-- Order Summary Sidebar -->
+<aside class="lg:col-span-4 sticky top-24">
+<div class="bg-surface-container-lowest p-8 rounded shadow-sm border border-surface-container-high">
+<h2 class="font-headline text-2xl font-bold uppercase mb-8 border-b-2 border-primary-container pb-4">Order Summary</h2>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center text-sm">
+<span class="font-label text-secondary uppercase tracking-wider">Subtotal</span>
+<span class="font-headline font-bold">$3,240.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="font-label text-secondary uppercase tracking-wider">Shipping (Freight)</span>
+<span class="font-headline font-bold text-primary">$45.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="font-label text-secondary uppercase tracking-wider">IVA (16% Taxes)</span>
+<span class="font-headline font-bold">$518.40</span>
+</div>
+<div class="pt-4 border-t border-surface-container-highest">
+<div class="flex justify-between items-end">
+<div>
+<span class="font-headline text-xs font-bold uppercase text-secondary">Total Amount</span>
+<div class="font-headline text-3xl font-black text-on-surface">USD $3,803.40</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-primary hover:bg-on-primary-fixed-variant text-on-primary py-4 font-headline font-bold uppercase tracking-widest flex items-center justify-center gap-3 transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20">
+                            Proceed to Checkout
+                            <span class="material-symbols-outlined">payments</span>
+</button>
+<p class="text-[10px] text-secondary text-center uppercase tracking-tighter leading-relaxed">
+                            Price includes VAT. International shipping subject to customs clearance and industrial inspection fees.
+                        </p>
+</div>
+<!-- Security Badge -->
+<div class="mt-8 pt-8 border-t border-surface-container flex items-center gap-4 opacity-50">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+<div class="font-label text-[10px] uppercase font-bold tracking-widest leading-none">
+                            Secure Encrypted <br/> Industrial Portal
+                        </div>
+</div>
+</div>
+<!-- Technical Support Card -->
+<div class="mt-6 bg-zinc-900 p-6 rounded text-white overflow-hidden relative group">
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">engineering</span>
+</div>
+<h4 class="font-headline font-bold uppercase text-xs text-[#9ACD32] mb-2">Technical Assistance</h4>
+<p class="text-sm font-label text-zinc-400 mb-4">Unsure about compatibility? Our engineering team is standing by.</p>
+<a class="text-xs font-bold uppercase border-b border-[#9ACD32] pb-0.5 hover:text-[#9ACD32] transition-colors" href="mailto:info@lacima.com">Request Catalog Verification</a>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-zinc-900 w-full mt-auto">
+<div class="bg-zinc-800 h-1 w-full"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 py-12 w-full max-w-[1920px] mx-auto">
+<div>
+<div class="font-['Space_Grotesk'] font-black text-zinc-100 text-xl mb-6">MAYOR DE REPUESTO LA CIMA, C.A.</div>
+<p class="text-zinc-500 font-['Inter'] text-sm antialiased leading-relaxed">
+                    Premier distributor of heavy-duty industrial engine parts and transmission components for the Venezuelan industrial sector.
+                </p>
+</div>
+<div class="space-y-4">
+<h5 class="text-[#9ACD32] font-bold font-['Inter'] text-sm uppercase tracking-widest">Connect</h5>
+<ul class="space-y-2">
+<li><a class="text-zinc-500 font-['Inter'] text-sm antialiased hover:text-[#9ACD32] transition-colors opacity-80 hover:opacity-100" href="#">General: info@lacima.com</a></li>
+<li><a class="text-zinc-500 font-['Inter'] text-sm antialiased hover:text-[#9ACD32] transition-colors opacity-80 hover:opacity-100" href="#">Orders: sales@lacima.com</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="text-[#9ACD32] font-bold font-['Inter'] text-sm uppercase tracking-widest">Support</h5>
+<ul class="space-y-2">
+<li><a class="text-zinc-500 font-['Inter'] text-sm antialiased hover:text-[#9ACD32] transition-colors opacity-80 hover:opacity-100" href="#">Phone: +58 241-5550101</a></li>
+<li><a class="text-zinc-500 font-['Inter'] text-sm antialiased hover:text-[#9ACD32] transition-colors opacity-80 hover:opacity-100" href="#">Phone: +58 412-5550202</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-[#9ACD32] font-bold font-['Inter'] text-sm uppercase tracking-widest mb-4">Location</h5>
+<div class="bg-zinc-800/50 p-4 rounded grayscale hover:grayscale-0 transition-all duration-500">
+<img class="w-full h-24 object-cover rounded mb-2" data-alt="Satellite map view of an industrial logistics park with warehouses and truck loading bays" data-location="Valencia, Venezuela" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWj7uQqDd8Lh8ODQM8Ef6Teb6iaUojII6ZuRE1O0EZY9hZx04yaua7Vz5G4BmxyItuee0hXs94J6voXznAIXUn7KQni25qNqo2nDDs7CmXRZhyqT8IS2I9NrlgqOUpA_S5XrQ2QNhVxh5NJRrx_jiiL4K7dURqTXG0jma7VC-yUATxxGnaohFoj7vKoJZRkdgyYTQuJglLhc1ut7yNjj4P8nUOFZKq9P5WEX-F5BANwcHicMfnzn7hRKM69qPHn-RsZAXqhIVhFTI"/>
+<p class="text-zinc-500 text-[10px] uppercase font-bold tracking-tighter">Valencia, Carabobo - Z.I. El Recreo</p>
+</div>
+</div>
+</div>
+<div class="border-t border-zinc-800 py-6 px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-zinc-500 font-['Inter'] text-xs antialiased uppercase tracking-widest">
+                © 2024 MAYOR DE REPUESTO LA CIMA, C.A. RIF: J-40308741-5. Valencia, Venezuela.
+            </p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-zinc-700 text-2xl">precision_manufacturing</span>
+<span class="material-symbols-outlined text-zinc-700 text-2xl">verified</span>
+<span class="material-symbols-outlined text-zinc-700 text-2xl">settings_input_component</span>
+</div>
+</div>
+</footer>
+</body></html>

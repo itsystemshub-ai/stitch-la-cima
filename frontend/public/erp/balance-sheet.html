@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Balance General - MAYOR DE REPUESTO LA CIMA, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#5e5e5e",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "on-surface": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#496800",
+                        "tertiary-fixed": "#e4e2e2",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "primary-fixed": "#bef456",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-bright": "#f9f9f9",
+                        "surface-tint": "#496800",
+                        "inverse-primary": "#a3d73c",
+                        "surface": "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#364e00",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-primary-fixed": "#131f00",
+                        "inverse-on-surface": "#f1f1f1",
+                        "outline-variant": "#c3c9b1",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#747a65",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "tertiary-container": "#bebcbc",
+                        "secondary-fixed": "#e5e2e1",
+                        "inverse-surface": "#2f3131",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e8e8e8",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#9acd32",
+                        "on-secondary-container": "#636262",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "secondary-container": "#e2dfde",
+                        "on-tertiary-container": "#4c4c4c",
+                        "surface-container-low": "#f3f3f3",
+                        "on-primary-container": "#3a5400",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-background": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "on-surface-variant": "#434937",
+                        "primary-fixed-dim": "#a3d73c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-stacking {
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+        }
+    </style>
+</head>
+<body class="bg-[#1a1c1c] text-white selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+<!-- Sidebar Navigation (Derived from Shared Components) -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-zinc-900 flex flex-col py-8 gap-4 shadow-[40px_0_40px_-40px_rgba(0,0,0,0.1)] z-40 hidden md:flex">
+<div class="px-6 mb-6">
+<h1 class="text-lg font-black text-zinc-50 uppercase tracking-tighter">Industrial ERP</h1>
+<p class="text-[10px] text-amber-500 font-bold uppercase tracking-[0.2em]">Finance Module</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center px-6 py-3 bg-amber-500/10 text-amber-400 border-r-4 border-amber-500 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">account_balance_wallet</span>
+<span class="font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider">Financial Reports</span>
+</a>
+<a class="flex items-center px-6 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider">Accounts Receivable</span>
+</a>
+<a class="flex items-center px-6 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">receipt_long</span>
+<span class="font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider">Expenses</span>
+</a>
+<a class="flex items-center px-6 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider">Budgets</span>
+</a>
+<a class="flex items-center px-6 py-3 text-zinc-400 hover:bg-zinc-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">account_balance</span>
+<span class="font-['Space_Grotesk'] font-medium text-sm uppercase tracking-wider">Taxes</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full bg-primary py-3 text-xs font-bold uppercase tracking-widest text-white hover:scale-105 transition-transform">
+                New Transaction
+            </button>
+<div class="mt-6 flex flex-col gap-2 opacity-50">
+<a class="flex items-center text-[10px] uppercase font-bold tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm mr-2">settings</span> Settings
+                </a>
+<a class="flex items-center text-[10px] uppercase font-bold tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm mr-2">help</span> Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 p-4 md:p-12 min-h-screen bg-[#1a1c1c] relative overflow-hidden">
+<!-- Technical Blueprint Decoration -->
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<pattern height="10" id="grid" patternunits="userSpaceOnUse" width="10">
+<path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"></path>
+</pattern>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<!-- Header Section -->
+<header class="relative z-10 mb-12 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-8">
+<div class="max-w-2xl">
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-primary px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white">Reporte Oficial</span>
+<span class="text-zinc-500 font-mono text-[10px]">FIN_ENG_v2.0.4</span>
+</div>
+<h1 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none mb-4">MAYOR DE REPUESTO LA CIMA, C.A.</h1>
+<p class="text-primary-container font-medium uppercase tracking-[0.3em] text-sm">Estado de Situación Financiera</p>
+<p class="text-zinc-500 text-xs mt-4 font-mono uppercase">Cierre de Periodo Fiscal: 31 de Octubre, 2023 | Moneda: Unidades Monetarias (UM)</p>
+</div>
+<div class="mt-8 md:mt-0 flex gap-4">
+<div class="text-right">
+<p class="text-zinc-500 text-[10px] uppercase tracking-widest">Uptime Operativo</p>
+<p class="text-2xl font-['Space_Grotesk'] font-bold text-primary-container">99.8%</p>
+</div>
+</div>
+</header>
+<!-- Financial Dashboard Summary -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 relative z-10">
+<div class="bg-zinc-900/50 backdrop-blur-md p-6 border-l-4 border-primary relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<p class="text-zinc-500 text-[10px] uppercase tracking-widest mb-1">Total Activos</p>
+<h3 class="text-3xl font-bold tracking-tighter">4.852.200,45</h3>
+</div>
+<div class="bg-zinc-900/50 backdrop-blur-md p-6 border-l-4 border-error relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<p class="text-zinc-500 text-[10px] uppercase tracking-widest mb-1">Total Pasivos</p>
+<h3 class="text-3xl font-bold tracking-tighter">1.240.550,12</h3>
+</div>
+<div class="bg-zinc-900/50 backdrop-blur-md p-6 border-l-4 border-zinc-500 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<p class="text-zinc-500 text-[10px] uppercase tracking-widest mb-1">Patrimonio Neto</p>
+<h3 class="text-3xl font-bold tracking-tighter text-primary-container">3.611.650,33</h3>
+</div>
+</section>
+<!-- Main Balance Table -->
+<div class="space-y-12 relative z-10">
+<!-- SECTION: ACTIVOS -->
+<section>
+<div class="flex items-baseline gap-4 mb-4">
+<h2 class="text-2xl font-bold uppercase tracking-tighter text-white">01 / Activos</h2>
+<div class="h-[1px] flex-1 bg-white/10"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Activo Corriente -->
+<div class="bg-zinc-900/30 p-6">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-white/5 pb-2">Activo Corriente</h3>
+<table class="w-full text-xs font-mono">
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Caja y Bancos</td>
+<td class="py-3 text-right tabular-nums">450.000,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Cuentas por Cobrar Comerciales</td>
+<td class="py-3 text-right tabular-nums">820.500,45</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group bg-primary/5">
+<td class="py-3 text-primary-container font-bold">Inventario de Repuestos (Valorizado)</td>
+<td class="py-3 text-right tabular-nums font-bold">1.840.300,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">IVA Crédito Fiscal</td>
+<td class="py-3 text-right tabular-nums">98.400,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Retenciones de IVA por Recuperar</td>
+<td class="py-3 text-right tabular-nums">42.000,00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="border-t-2 border-primary/20">
+<td class="pt-4 text-[10px] uppercase tracking-widest text-zinc-500">Subtotal Activo Corriente</td>
+<td class="pt-4 text-right text-lg font-bold tracking-tight">3.251.200,45</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<!-- Activo No Corriente -->
+<div class="bg-zinc-900/30 p-6">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-white/5 pb-2">Activo No Corriente</h3>
+<table class="w-full text-xs font-mono">
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Propiedad, Planta y Equipo</td>
+<td class="py-3 text-right tabular-nums">1.450.000,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Mobiliario y Equipos de Oficina</td>
+<td class="py-3 text-right tabular-nums21">320.000,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Depreciación Acumulada</td>
+<td class="py-3 text-right tabular-nums text-error">(-169.000,00)</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="border-t-2 border-primary/20">
+<td class="pt-4 text-[10px] uppercase tracking-widest text-zinc-500">Subtotal Activo No Corriente</td>
+<td class="pt-4 text-right text-lg font-bold tracking-tight">1.601.000,00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+</section>
+<!-- SECTION: PASIVOS -->
+<section>
+<div class="flex items-baseline gap-4 mb-4">
+<h2 class="text-2xl font-bold uppercase tracking-tighter text-white">02 / Pasivos</h2>
+<div class="h-[1px] flex-1 bg-white/10"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Pasivo Corriente -->
+<div class="bg-zinc-900/30 p-6">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-white/5 pb-2">Pasivo Corriente</h3>
+<table class="w-full text-xs font-mono">
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Cuentas por Pagar Proveedores</td>
+<td class="py-3 text-right tabular-nums">680.000,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group text-primary-container">
+<td class="py-3 font-bold">IVA por Pagar</td>
+<td class="py-3 text-right tabular-nums font-bold">124.550,12</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Retenciones de ISLR por Pagar</td>
+<td class="py-3 text-right tabular-nums">15.200,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Pasivos Laborales Acumulados</td>
+<td class="py-3 text-right tabular-nums">220.800,00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="border-t-2 border-error/20">
+<td class="pt-4 text-[10px] uppercase tracking-widest text-zinc-500">Subtotal Pasivo Corriente</td>
+<td class="pt-4 text-right text-lg font-bold tracking-tight">1.040.550,12</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<!-- Pasivo No Corriente -->
+<div class="bg-zinc-900/30 p-6">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-6 border-b border-white/5 pb-2">Pasivo No Corriente</h3>
+<table class="w-full text-xs font-mono">
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-3 text-zinc-400 group-hover:text-white">Préstamos Bancarios Largo Plazo</td>
+<td class="py-3 text-right tabular-nums">200.000,00</td>
+</tr>
+</tbody>
+<tfoot class="h-24">
+<!-- Empty space to align with the taller left table -->
+<tr class="border-t-2 border-error/20 align-bottom">
+<td class="pt-4 text-[10px] uppercase tracking-widest text-zinc-500">Subtotal Pasivo No Corriente</td>
+<td class="pt-4 text-right text-lg font-bold tracking-tight">200.000,00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+</section>
+<!-- SECTION: PATRIMONIO -->
+<section>
+<div class="flex items-baseline gap-4 mb-4">
+<h2 class="text-2xl font-bold uppercase tracking-tighter text-white">03 / Patrimonio</h2>
+<div class="h-[1px] flex-1 bg-white/10"></div>
+</div>
+<div class="bg-zinc-900/30 p-8 border border-white/5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div>
+<table class="w-full text-xs font-mono">
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-4 text-zinc-400 group-hover:text-white uppercase tracking-wider">Capital Social Suscrito y Pagado</td>
+<td class="py-4 text-right tabular-nums text-sm">2.000.000,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-4 text-zinc-400 group-hover:text-white uppercase tracking-wider">Reserva Legal</td>
+<td class="py-4 text-right tabular-nums text-sm">200.000,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="py-4 text-zinc-400 group-hover:text-white uppercase tracking-wider">Utilidades Acumuladas</td>
+<td class="py-4 text-right tabular-nums text-sm">950.000,00</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group bg-primary/10">
+<td class="py-4 text-primary-container font-bold uppercase tracking-wider">Utilidad del Ejercicio</td>
+<td class="py-4 text-right tabular-nums text-sm font-bold">461.650,33</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex flex-col items-center justify-center p-8 bg-zinc-950/50 rounded-lg border border-primary/20">
+<span class="text-[10px] text-zinc-500 uppercase tracking-[0.3em] mb-2">Total Capital y Reservas</span>
+<div class="text-5xl font-bold tracking-tighter text-primary-container mb-2">3.611.650,33</div>
+<div class="flex items-center gap-2 text-zinc-500 italic text-[10px]">
+<span class="material-symbols-outlined text-xs">verified</span>
+                                Certificado por el departamento contable
+                            </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Technical Footnote -->
+<footer class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 opacity-40 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-8">
+<div class="flex flex-col">
+<span class="text-[9px] uppercase tracking-widest font-black">Preparado por</span>
+<span class="text-xs uppercase">Dpto. Contabilidad Central</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9px] uppercase tracking-widest font-black">Revisado por</span>
+<span class="text-xs uppercase">Dirección de Finanzas</span>
+</div>
+</div>
+<div class="text-[9px] text-right max-w-sm uppercase leading-relaxed font-mono">
+                Este documento es una representación técnica de la salud financiera de MAYOR DE REPUESTO LA CIMA, C.A. La integridad de los datos de inventario está vinculada directamente al sistema ERP FINANCE_ENGINE Core.
+            </div>
+</footer>
+</main>
+<!-- Bottom Navigation for Mobile (Derived from Shared Components) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-zinc-950 border-t border-white/10 flex justify-around items-center h-16 z-50">
+<button class="flex flex-col items-center text-zinc-500">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[8px] uppercase font-bold mt-1">Dash</span>
+</button>
+<button class="flex flex-col items-center text-amber-500">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-[8px] uppercase font-bold mt-1">Reports</span>
+</button>
+<button class="flex flex-col items-center text-zinc-500">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-[8px] uppercase font-bold mt-1">Pay</span>
+</button>
+<button class="flex flex-col items-center text-zinc-500">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[8px] uppercase font-bold mt-1">Exp</span>
+</button>
+<button class="flex flex-col items-center text-zinc-500">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[8px] uppercase font-bold mt-1">Set</span>
+</button>
+</nav>
+</body></html>

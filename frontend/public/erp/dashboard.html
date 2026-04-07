@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LA CIMA - ADMIN FORGE v2.4</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#3a5400",
+                    "primary-container": "#9acd32",
+                    "secondary-container": "#e2dfde",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#a3d73c",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container-low": "#f3f3f3",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-tertiary-container": "#4c4c4c",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#131f00",
+                    "background": "#f9f9f9",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#5f5e5e",
+                    "on-surface": "#1a1c1c",
+                    "tertiary": "#5e5e5e",
+                    "inverse-on-surface": "#f1f1f1",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-container": "#636262",
+                    "primary-fixed-dim": "#a3d73c",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eeeeee",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "tertiary-container": "#bebcbc",
+                    "on-secondary-fixed-variant": "#474746",
+                    "primary": "#496800",
+                    "error-container": "#ffdad6",
+                    "surface": "#f9f9f9",
+                    "inverse-surface": "#2f3131",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#e4e2e2",
+                    "outline": "#747a65",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#364e00",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-background": "#1a1c1c",
+                    "outline-variant": "#c3c9b1",
+                    "surface-tint": "#496800",
+                    "surface-bright": "#f9f9f9",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "on-surface-variant": "#434937",
+                    "primary-fixed": "#bef456"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full z-50 h-screen w-64 flex flex-col border-r-0 bg-stone-950 dark:bg-black font-['Space_Grotesk'] uppercase tracking-tight">
+<div class="p-6">
+<div class="text-xl font-bold tracking-tighter text-lime-400 dark:text-lime-300">LA CIMA</div>
+<div class="text-[10px] text-stone-500 mt-1">ADMIN FORGE v2.4</div>
+</div>
+<nav class="flex-1 mt-4">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 bg-stone-900 text-lime-400 border-l-4 border-lime-500" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-sm font-bold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
+<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
+<span class="text-sm">Module Health</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="text-sm">User Access</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="text-sm">DB Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="text-sm">Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 border-t border-stone-800/50">
+<button class="w-full py-3 bg-stone-900 text-stone-300 text-xs font-bold border border-stone-700 hover:bg-red-900/20 hover:text-red-400 transition-all uppercase tracking-widest mb-4">
+                System Lock
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-300 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="support_agent">support_agent</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-300 text-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-0 h-16 z-40 bg-stone-950/80 backdrop-blur-md flex justify-between items-center pl-64 pr-8">
+<div class="flex items-center gap-8">
+<h2 class="text-lg font-black tracking-widest text-white font-headline">MAYOR DE REPUESTO LA CIMA, C.A.</h2>
+<nav class="hidden md:flex gap-6 font-['Space_Grotesk'] uppercase text-sm">
+<a class="text-lime-400 font-bold border-b-2 border-lime-500 pb-1" href="#">Global View</a>
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">System Health</a>
+<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">Security Ops</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 text-sm">search</span>
+<input class="bg-stone-900 border-none text-stone-300 text-xs py-2 pl-10 pr-4 w-48 focus:ring-1 focus:ring-lime-500/50" placeholder="CMD_SEARCH..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-lime-500">
+<button class="material-symbols-outlined hover:text-amber-500 transition-colors" data-icon="notifications_active">notifications_active</button>
+<button class="material-symbols-outlined hover:text-amber-500 transition-colors" data-icon="terminal">terminal</button>
+<div class="h-8 w-8 bg-stone-800 rounded-sm overflow-hidden border border-stone-700">
+<img alt="Admin Avatar" data-alt="professional corporate headshot of a system administrator in a dark studio setting with moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNxb8fQct9sHnPDbIkzyS8X-P7ZeoX2LNR5IknxIosezUCS3tr1MAvDvtY7BxB1j0OI7NlnxcHT8EUN5U0nfOVczW3P61zO-vX5cyic_irCoRI26K_KlqLb-SpSJN4jQbbT7nhHsn-4RbvOY20FwGMrK5MnqpDwe6Ut2ivdQIerQokK1j8H-KmEtZM6i5ZX4tdIiXAZ18vLm6ZVCGThp0D6-iQEtmK2dXLfcAI2EYu28G5HlqtZ26PoI8abw3Xq8D7LPugCe-XFBQ"/>
+</div>
+<button class="bg-red-950 text-red-500 text-[10px] font-bold px-3 py-1 border border-red-900/50 hover:bg-red-600 hover:text-white transition-all uppercase">
+                    Emergency Shutdown
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pl-72 pr-8 pb-12">
+<!-- Dashboard Header / Status Area -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-4xl font-black uppercase tracking-tighter text-on-surface">System Overview</h1>
+<p class="text-secondary text-sm mt-1 uppercase font-medium tracking-widest">Administrative Forge / Engine Room</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-primary-container/10 border-l-4 border-primary px-6 py-3 flex items-center gap-4">
+<div class="h-3 w-3 bg-primary rounded-full animate-pulse"></div>
+<div>
+<div class="text-[10px] text-primary font-bold uppercase tracking-widest">Status Engine</div>
+<div class="text-on-surface font-bold">System Integrity: OPTIMAL</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- System Health Visualization -->
+<div class="col-span-8 bg-surface-container-lowest p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-surface-container-highest text-8xl opacity-10 rotate-12 select-none" data-icon="settings_input_component">settings_input_component</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<h3 class="text-xl font-bold uppercase tracking-tight text-on-surface">Core Infrastructure Health</h3>
+<div class="flex gap-2">
+<span class="bg-surface-container-high px-2 py-1 text-[10px] font-bold">Uptime: 99.99%</span>
+<span class="bg-surface-container-high px-2 py-1 text-[10px] font-bold">Latency: 14ms</span>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-4">
+<div class="text-xs text-secondary uppercase font-bold mb-2">CPU Cluster</div>
+<div class="text-3xl font-headline font-bold text-on-surface">24%</div>
+<div class="w-full bg-surface-container-high h-1 mt-4">
+<div class="bg-primary h-full w-[24%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4">
+<div class="text-xs text-secondary uppercase font-bold mb-2">Memory Load</div>
+<div class="text-3xl font-headline font-bold text-on-surface">61%</div>
+<div class="w-full bg-surface-container-high h-1 mt-4">
+<div class="bg-amber-500 h-full w-[61%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-4">
+<div class="text-xs text-secondary uppercase font-bold mb-2">Active Users</div>
+<div class="text-3xl font-headline font-bold text-on-surface">842</div>
+<div class="text-[10px] text-primary mt-2 flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> +12%
+                            </div>
+</div>
+<div class="bg-surface-container-low p-4">
+<div class="text-xs text-secondary uppercase font-bold mb-2">IO Ops</div>
+<div class="text-3xl font-headline font-bold text-on-surface">1.2k</div>
+<div class="text-[10px] text-secondary mt-2 flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="sync">sync</span> SYNC_STABLE
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Storage Usage (LocalStorage Simulation) -->
+<div class="col-span-4 bg-surface-container-lowest p-8 border-r-8 border-amber-500/20">
+<h3 class="text-xl font-bold uppercase tracking-tight text-on-surface mb-6">Storage Matrix</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-[10px] font-bold uppercase text-secondary mb-2">
+<span>Main Warehouse DB</span>
+<span>4.2 / 5.0 GB</span>
+</div>
+<div class="w-full bg-surface-container-high h-2">
+<div class="bg-amber-500 h-full w-[84%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] font-bold uppercase text-secondary mb-2">
+<span>Attachment Repository</span>
+<span>12.8 / 50 GB</span>
+</div>
+<div class="w-full bg-surface-container-high h-2">
+<div class="bg-primary h-full w-[25%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[10px] font-bold uppercase text-secondary mb-2">
+<span>Local Cache Index</span>
+<span>256 / 512 MB</span>
+</div>
+<div class="w-full bg-surface-container-high h-2">
+<div class="bg-primary h-full w-[50%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-12 bg-surface-container p-4 rounded-sm">
+<div class="text-[10px] text-secondary uppercase font-bold mb-1">Last Maintenance Scan</div>
+<div class="text-sm font-bold text-on-surface">TODAY, 04:20 AM</div>
+<button class="mt-3 w-full text-[10px] font-bold uppercase py-2 border border-outline-variant hover:bg-surface-container-high transition-colors">Clear Expired Cache</button>
+</div>
+</div>
+<!-- Quick Access / Actions -->
+<div class="col-span-12 grid grid-cols-4 gap-6">
+<button class="group bg-surface-container-highest hover:bg-primary transition-all p-6 text-left relative overflow-hidden">
+<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="cloud_upload">cloud_upload</span>
+<div class="mt-4">
+<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Initiate Backup</div>
+<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Full System Snapshot</div>
+</div>
+</button>
+<button class="group bg-surface-container-highest hover:bg-primary transition-all p-6 text-left">
+<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="settings_backup_restore">settings_backup_restore</span>
+<div class="mt-4">
+<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Restore Point</div>
+<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Revert to Stable Version</div>
+</div>
+</button>
+<button class="group bg-surface-container-highest hover:bg-amber-600 transition-all p-6 text-left">
+<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="construction">construction</span>
+<div class="mt-4">
+<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Maintenance Mode</div>
+<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Toggle Public Access</div>
+</div>
+</button>
+<button class="group bg-surface-container-highest hover:bg-stone-900 transition-all p-6 text-left">
+<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="description">description</span>
+<div class="mt-4">
+<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Generate Report</div>
+<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Export PDF Audit</div>
+</div>
+</button>
+</div>
+<!-- Real-Time Activity Logs -->
+<div class="col-span-12 bg-surface-container-lowest overflow-hidden">
+<div class="bg-stone-900 px-6 py-3 flex justify-between items-center">
+<h3 class="text-xs font-bold text-lime-400 uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="developer_board">developer_board</span> Real-time Audit Terminal
+                    </h3>
+<div class="flex items-center gap-4">
+<div class="h-2 w-2 bg-lime-500 rounded-full animate-ping"></div>
+<span class="text-[10px] text-stone-500 font-bold">STREAM_ACTIVE</span>
+</div>
+</div>
+<div class="p-0">
+<table class="w-full text-left">
+<thead class="bg-surface-container text-[10px] font-black uppercase text-secondary">
+<tr>
+<th class="px-6 py-3">Timestamp</th>
+<th class="px-6 py-3">Event Type</th>
+<th class="px-6 py-3">Subject</th>
+<th class="px-6 py-3">Source Node</th>
+<th class="px-6 py-3 text-right">Severity</th>
+</tr>
+</thead>
+<tbody class="text-xs font-medium">
+<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-secondary">14:22:01:002</td>
+<td class="px-6 py-4 text-on-surface font-bold">USER_AUTH_SUCCESS</td>
+<td class="px-6 py-4">admin_root_jvalencia</td>
+<td class="px-6 py-4 font-mono">192.168.1.45</td>
+<td class="px-6 py-4 text-right"><span class="text-primary font-bold">INFO</span></td>
+</tr>
+<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-secondary">14:21:44:910</td>
+<td class="px-6 py-4 text-on-surface font-bold">INVENTORY_SYNC_START</td>
+<td class="px-6 py-4">Warehouse_A_Core</td>
+<td class="px-6 py-4 font-mono">Node_Cluster_7</td>
+<td class="px-6 py-4 text-right"><span class="text-primary font-bold">INFO</span></td>
+</tr>
+<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-secondary">14:21:12:005</td>
+<td class="px-6 py-4 text-on-surface font-bold">DB_QUERY_WARNING</td>
+<td class="px-6 py-4">SQL_LONG_RUNNING_PROC</td>
+<td class="px-6 py-4 font-mono">DB_SRV_02</td>
+<td class="px-6 py-4 text-right"><span class="text-amber-600 font-bold">WARN</span></td>
+</tr>
+<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-secondary">14:19:55:221</td>
+<td class="px-6 py-4 text-on-surface font-bold">API_TOKEN_EXPIRED</td>
+<td class="px-6 py-4">external_client_v3</td>
+<td class="px-6 py-4 font-mono">Gateway_01</td>
+<td class="px-6 py-4 text-right"><span class="text-error font-bold">ERR</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-container-low px-6 py-3 flex justify-center">
+<button class="text-[10px] font-bold text-secondary uppercase hover:text-on-surface transition-colors flex items-center gap-2">
+                        Load History Buffer <span class="material-symbols-outlined text-xs" data-icon="keyboard_double_arrow_down">keyboard_double_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Cluster -->
+<footer class="mt-16 pt-12 border-t border-surface-container-highest flex flex-col md:flex-row justify-between items-start gap-8">
+<div class="max-w-md">
+<div class="brand-font text-2xl font-black text-on-surface mb-2">LA CIMA</div>
+<p class="text-secondary text-xs leading-relaxed">
+                    MAYOR DE REPUESTO LA CIMA, C.A.<br/>
+                    R.I.F: J-00000000-0<br/>
+                    Av. Intercomunal, Zona Industrial II, Galpón 4-B<br/>
+                    Barquisimeto, Edo. Lara, Venezuela.
+                </p>
+</div>
+<div class="flex flex-col items-end gap-2 text-right">
+<div class="text-[10px] font-black uppercase text-secondary tracking-widest">Digital Infrastructure Management</div>
+<div class="text-[10px] font-medium text-stone-400">© 2024 MAYOR DE REPUESTO LA CIMA. ALL RIGHTS RESERVED.</div>
+<div class="flex gap-4 mt-4">
+<img alt="Industrial Tech" class="h-12 w-32 object-cover grayscale opacity-20" data-alt="close-up of futuristic computer circuitry with glowing green lights and complex technical architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwE1Cy5-OPd6h6OyRvbzUecQdmvyoB8c-ogDJBPmTAtlBJUViAVv9vd_ECP0cn4hBXOeIi2-gUSpScg71FKlc1FIL1XfBiKbv4VcT_UTVSz7L5Ied-ccVx7dsYB37JbWJP9oBMNHbCyUFGtHfLTfCGnYKq07cDb3bj1OQSAhKMiKi0nwnRbQ8fXffVgvwWUS40vzIQeSgDMofhnR-zxaaKTTzCbSXchiZVhagxduGq2f9VzSEqvHNu2qFYHR7vzVwJ_ESF0hvRP2A"/>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FORGE INDUSTRIAL ERP - HR MODULE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#e4e2e2",
+                      "inverse-primary": "#a3d73c",
+                      "secondary-fixed": "#e5e2e1",
+                      "on-tertiary-container": "#4c4c4c",
+                      "inverse-on-surface": "#f1f1f1",
+                      "inverse-surface": "#2f3131",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f3f3f3",
+                      "on-primary-fixed": "#131f00",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "on-background": "#1a1c1c",
+                      "on-primary-container": "#3a5400",
+                      "secondary": "#5f5e5e",
+                      "outline": "#747a65",
+                      "tertiary": "#5e5e5e",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#e2e2e2",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "outline-variant": "#c3c9b1",
+                      "tertiary-container": "#bebcbc",
+                      "primary-fixed-dim": "#a3d73c",
+                      "on-surface-variant": "#434937",
+                      "surface-bright": "#f9f9f9",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#e8e8e8",
+                      "on-secondary-fixed-variant": "#474746",
+                      "tertiary-fixed-dim": "#c8c6c6",
+                      "secondary-container": "#e2dfde",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "surface-tint": "#496800",
+                      "primary": "#496800",
+                      "on-secondary-container": "#636262",
+                      "primary-fixed": "#bef456",
+                      "on-surface": "#1a1c1c",
+                      "background": "#f9f9f9",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f9f9f9",
+                      "on-primary-fixed-variant": "#364e00",
+                      "on-primary": "#ffffff",
+                      "surface-container": "#eeeeee",
+                      "primary-container": "#9acd32",
+                      "surface-dim": "#dadada",
+                      "surface-container-highest": "#e2e2e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1c1c; /* Industrial Dark Base */
+            color: #f1f1f1;
+        }
+        .headline-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 overflow-x-hidden">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl shadow-[0_24px_40px_rgba(26,28,28,0.06)] flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] uppercase tracking-tight text-xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50">FORGE INDUSTRIAL ERP</span>
+<div class="hidden md:flex gap-6">
+<a class="text-lime-600 dark:text-lime-400 font-bold border-b-2 border-lime-600 uppercase text-xs tracking-widest font-['Space_Grotesk']" href="#">Dashboard</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200 px-3 py-1 rounded uppercase text-xs tracking-widest font-['Space_Grotesk']" href="#">Operations</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200 px-3 py-1 rounded uppercase text-xs tracking-widest font-['Space_Grotesk'] flex items-center gap-2" href="#">
+                    Finance <span class="bg-amber-500/20 text-amber-500 text-[10px] px-1.5 py-0.5 rounded font-bold">WIP</span>
+</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-neutral-400">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-lime-500 rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-neutral-400">cake</span>
+<span class="material-symbols-outlined text-neutral-400">settings</span>
+<img alt="HR Manager Profile" class="w-8 h-8 rounded-full border border-neutral-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdLBPS3JT8irFYlEMyosD8B7OJ-ixAa6C4P43NSe8yEEeDug9IBoSeTZpec-CPJFALvjZhkdgUxLPPFgw4F-LMWjrAnJMAPE1De5EPEnTZk_46z8ubIK3HQOrjImjV-0mfy_V7P1TfhZA8cJ8yY6wst6bJkK3imJQO0tpAXSVBVE7QxWzHnvovugkprtPHWa0jH-1oabUm1BC1R7iFKiQmq2rzbXezIKh9VTx0jEWzpjEWMOctoDrttpSK2mLqKTmIGQHsJNyctr4"/>
+</div>
+</nav>
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-neutral-50 dark:bg-neutral-950 flex flex-col border-r border-neutral-200 dark:border-neutral-800 pt-20">
+<div class="px-6 py-4">
+<h2 class="font-['Space_Grotesk'] font-black text-lime-700 dark:text-lime-400 text-lg">HR MODULE</h2>
+<p class="font-['Inter'] font-semibold text-xs uppercase text-neutral-500 dark:text-neutral-400 tracking-tighter">Industrial Control</p>
+</div>
+<nav class="flex-1 px-3 space-y-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 bg-lime-50 dark:bg-lime-900/20 text-lime-700 dark:text-lime-300 border-r-4 border-lime-600 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined">badge</span> Employee Files
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined">payments</span> Payroll
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined">account_balance</span> Social Benefits
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined">event_busy</span> Leave Mgmt
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined">gavel</span> Legal Reports
+            </a>
+</nav>
+<div class="p-6">
+<button class="w-full bg-primary text-on-primary py-3 font-bold uppercase tracking-widest text-xs hover:scale-102 active:scale-95 transition-all">
+                Generate Report
+            </button>
+</div>
+<div class="border-t border-neutral-200 dark:border-neutral-800 p-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-2 text-neutral-600 dark:text-neutral-400 text-xs font-bold uppercase" href="#">
+<span class="material-symbols-outlined text-lg">help_center</span> Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-neutral-600 dark:text-neutral-400 text-xs font-bold uppercase" href="#">
+<span class="material-symbols-outlined text-lg">logout</span> Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12">
+<!-- Hero Branding & Intro -->
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="font-headline font-extrabold text-4xl uppercase tracking-tighter text-on-surface">MAYOR DE REPUESTO LA CIMA, C.A.</h1>
+<p class="font-label text-secondary font-medium tracking-[0.2em] uppercase text-sm mt-1">RIF: J-40308741-5 • HR OPERATIONS CENTER</p>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-neutral-500 uppercase">System Integrity</div>
+<div class="flex items-center gap-2 text-lime-500 font-headline font-bold text-xl">
+<span class="material-symbols-outlined">verified</span> OPTIMAL
+                </div>
+</div>
+</header>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Key KPIs Column -->
+<div class="col-span-12 lg:col-span-3 space-y-6">
+<!-- Total Employees -->
+<div class="bg-surface-container-lowest p-6 rounded-md shadow-sm border-l-4 border-primary">
+<div class="text-secondary text-xs font-bold uppercase mb-4 tracking-wider">Total Workforce</div>
+<div class="text-5xl font-headline font-black text-on-surface mb-2">142</div>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-secondary uppercase font-bold">Active</span>
+<span class="text-lime-600 font-bold">138</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-secondary uppercase font-bold">Inactive</span>
+<span class="text-neutral-400 font-bold">4</span>
+</div>
+</div>
+</div>
+<!-- Monthly Payroll -->
+<div class="bg-surface-container-highest p-6 rounded-md">
+<div class="text-secondary text-xs font-bold uppercase mb-4 tracking-wider">Masa Salarial (Mensual)</div>
+<div class="text-3xl font-headline font-bold text-on-surface mb-1">$42,850.00</div>
+<div class="text-[10px] text-lime-600 font-bold uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +2.4% vs last month
+                    </div>
+</div>
+<!-- Social Benefits Accrued -->
+<div class="bg-surface-container-highest p-6 rounded-md">
+<div class="text-secondary text-xs font-bold uppercase mb-4 tracking-wider">Pasivo Laboral Acumulado</div>
+<div class="text-3xl font-headline font-bold text-on-surface mb-1">$156,210.00</div>
+<div class="text-[10px] text-secondary font-bold uppercase">Prestaciones Sociales Totales</div>
+</div>
+<!-- Turnover Rate -->
+<div class="bg-surface-container-lowest p-6 rounded-md shadow-sm border-l-4 border-error">
+<div class="text-secondary text-xs font-bold uppercase mb-4 tracking-wider">Turnover Rate</div>
+<div class="text-4xl font-headline font-black text-on-surface mb-2">1.8%</div>
+<div class="w-full bg-neutral-200 h-1 mt-2">
+<div class="bg-error h-full" style="width: 1.8%"></div>
+</div>
+</div>
+</div>
+<!-- Visual Data Column -->
+<div class="col-span-12 lg:col-span-6 space-y-6">
+<!-- Payroll Trend Chart Shell -->
+<div class="bg-surface-container-low p-8 rounded-md relative overflow-hidden h-[340px] flex flex-col">
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div>
+<h3 class="font-headline font-bold text-xl uppercase tracking-tight">Payroll Cost Trend</h3>
+<p class="text-xs text-secondary font-bold uppercase">Year-to-date projection</p>
+</div>
+<span class="material-symbols-outlined text-neutral-400">monitoring</span>
+</div>
+<!-- Chart Simulation -->
+<div class="flex-1 flex items-end justify-between gap-2 relative z-10">
+<div class="w-full bg-primary/20 hover:bg-primary transition-all rounded-t-sm h-[40%]" title="Jan"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all rounded-t-sm h-[45%]" title="Feb"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all rounded-t-sm h-[42%]" title="Mar"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all rounded-t-sm h-[55%]" title="Apr"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all rounded-t-sm h-[60%]" title="May"></div>
+<div class="w-full bg-primary/20 hover:bg-primary transition-all rounded-t-sm h-[75%]" title="Jun"></div>
+<div class="w-full bg-primary h-full" title="Jul"></div>
+</div>
+<!-- Background Grid Effect -->
+<div class="absolute inset-0 opacity-5 pointer-events-none">
+<div class="h-full w-full" style="background-image: radial-gradient(#000 1px, transparent 0); background-size: 20px 20px;"></div>
+</div>
+</div>
+<!-- Department Distribution & Attendance -->
+<div class="grid grid-cols-2 gap-6">
+<div class="bg-surface-container-low p-6 rounded-md">
+<div class="text-xs font-bold text-secondary uppercase mb-4">Department Load</div>
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center text-xs">
+<span class="font-bold">Logistics</span>
+<span class="text-neutral-500">45%</span>
+</div>
+<div class="w-full bg-neutral-200 h-1.5"><div class="bg-primary h-full" style="width: 45%"></div></div>
+<div class="flex justify-between items-center text-xs">
+<span class="font-bold">Sales</span>
+<span class="text-neutral-500">30%</span>
+</div>
+<div class="w-full bg-neutral-200 h-1.5"><div class="bg-primary-container h-full" style="width: 30%"></div></div>
+<div class="flex justify-between items-center text-xs">
+<span class="font-bold">Admin</span>
+<span class="text-neutral-500">25%</span>
+</div>
+<div class="w-full bg-neutral-200 h-1.5"><div class="bg-secondary h-full" style="width: 25%"></div></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-md flex flex-col items-center justify-center text-center">
+<div class="text-xs font-bold text-secondary uppercase mb-4 w-full text-left">Attendance Rate</div>
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-neutral-200" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-lime-600" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="12.5" stroke-width="8"></circle>
+</svg>
+<span class="absolute text-xl font-headline font-black">95%</span>
+</div>
+<div class="mt-4 text-[10px] font-bold text-secondary uppercase tracking-widest">Absenteeism: 5%</div>
+</div>
+</div>
+</div>
+<!-- Notifications / Feed Column -->
+<div class="col-span-12 lg:col-span-3 space-y-6">
+<!-- Upcoming Events -->
+<div class="bg-surface-container-low p-6 rounded-md h-full">
+<h3 class="font-headline font-bold text-sm uppercase tracking-wider mb-6 border-b border-neutral-200 dark:border-neutral-800 pb-2">Upcoming Schedule</h3>
+<div class="space-y-6">
+<!-- Vacation Item -->
+<div class="flex gap-4">
+<div class="bg-lime-100 dark:bg-lime-900/30 p-2 rounded flex flex-col items-center justify-center min-w-[50px] h-[50px]">
+<span class="text-[10px] font-bold uppercase text-lime-700 dark:text-lime-400">JUL</span>
+<span class="text-lg font-headline font-bold text-lime-800 dark:text-lime-200">12</span>
+</div>
+<div>
+<div class="text-xs font-bold uppercase">Vacation Start</div>
+<div class="text-sm font-medium text-on-surface">Carlos Mendoza</div>
+<div class="text-[10px] text-secondary font-bold uppercase mt-1">Warehouse Ops • 15 Days</div>
+</div>
+</div>
+<!-- Birthday Item -->
+<div class="flex gap-4">
+<div class="bg-secondary-container p-2 rounded flex flex-col items-center justify-center min-w-[50px] h-[50px]">
+<span class="text-[10px] font-bold uppercase text-secondary">JUL</span>
+<span class="text-lg font-headline font-bold text-on-surface">15</span>
+</div>
+<div>
+<div class="text-xs font-bold uppercase">Employee Birthday</div>
+<div class="text-sm font-medium text-on-surface">Elena Rodriguez</div>
+<div class="text-[10px] text-secondary font-bold uppercase mt-1">HR Generalist</div>
+</div>
+</div>
+<!-- Legal Deadline -->
+<div class="flex gap-4">
+<div class="bg-error-container p-2 rounded flex flex-col items-center justify-center min-w-[50px] h-[50px]">
+<span class="text-[10px] font-bold uppercase text-error">JUL</span>
+<span class="text-lg font-headline font-bold text-error">20</span>
+</div>
+<div>
+<div class="text-xs font-bold uppercase">IVSS Filing</div>
+<div class="text-sm font-medium text-on-surface">Monthly Contribution</div>
+<div class="text-[10px] text-error font-bold uppercase mt-1">Status: Urgent</div>
+</div>
+</div>
+</div>
+<div class="mt-10 p-4 bg-surface-container-highest border border-dashed border-outline-variant rounded">
+<div class="flex items-center gap-2 text-secondary mb-2">
+<span class="material-symbols-outlined text-sm">precision_manufacturing</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Module Status</span>
+</div>
+<div class="text-xs font-medium text-on-surface-variant">Accounting &amp; Finance integration is currently in development.</div>
+<div class="mt-3 flex items-center gap-2">
+<span class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
+<span class="text-[10px] font-black uppercase text-amber-600">Work in Progress</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Section -->
+<footer class="mt-20 border-t border-neutral-200 dark:border-neutral-800 pt-12 pb-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+<div>
+<h4 class="font-headline font-black text-xl text-primary mb-4">LA CIMA ERP</h4>
+<p class="text-xs text-secondary leading-relaxed uppercase font-medium">Precision industrial parts management and human capital administration. Built for the high-performance demands of modern industry.</p>
+</div>
+<div class="space-y-4">
+<div class="text-[10px] font-bold text-secondary uppercase tracking-[0.3em]">Legal Entity</div>
+<div class="text-sm font-headline font-bold uppercase">MAYOR DE REPUESTO LA CIMA, C.A.</div>
+<div class="text-xs font-mono text-neutral-500">RIF: J-40308741-5</div>
+</div>
+<div class="space-y-4 text-right">
+<div class="text-[10px] font-bold text-secondary uppercase tracking-[0.3em]">Corporate Contact</div>
+<div class="text-xs font-bold">INFO@LACIMAREPUESTOS.COM</div>
+<div class="text-xs font-bold">+58 (212) 555-0199</div>
+<div class="text-[10px] text-neutral-500 uppercase mt-4">Valencia, Edo. Carabobo, Venezuela</div>
+</div>
+</div>
+<div class="mt-16 flex justify-between items-center text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
+<span>© 2024 FORGE INDUSTRIAL SYSTEMS</span>
+<span class="flex items-center gap-4">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Term of Service</a>
+</span>
+</div>
+</footer>
+</main>
+<!-- FAB Action (Contextual to Dashboard/Files) -->
+<button class="fixed bottom-8 right-8 bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

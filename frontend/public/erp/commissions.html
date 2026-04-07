@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TITAN ERP | Gestión de Vendedores</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e2dfde",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e22e2",
+                        "on-primary-fixed-variant": "#364e00",
+                        "outline": "#747a65",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-fixed": "#131f00",
+                        "on-primary-container": "#3a5400",
+                        "on-surface-variant": "#434937",
+                        "secondary": "#5f5e5e",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "surface-tint": "#496800",
+                        "primary-container": "#9acd32",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#4c4c4c",
+                        "on-secondary-container": "#636262",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-container": "#eeeeee",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c3c9b1",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-dim": "#dadada",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "inverse-surface": "#2f3131",
+                        "on-background": "#1a1c1c",
+                        "primary": "#496800",
+                        "tertiary": "#5e5e5e",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "inverse-primary": "#a3d73c",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed-dim": "#a3d73c",
+                        "surface": "#f9f9f9",
+                        "primary-fixed": "#bef456",
+                        "tertiary-fixed": "#e4e2e2",
+                        "tertiary-container": "#bebcbc",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1a1c1c",
+                        "tertiary-fixed-dim": "#c8c6c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 28, 28, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(195, 201, 177, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#0f1111] text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Sidebar Navigation -->
+<aside class="flex flex-col fixed left-0 top-0 h-full z-50 bg-[#161818] w-64 border-r border-outline-variant/10">
+<div class="p-6">
+<h1 class="font-headline font-black text-white text-2xl tracking-tighter">TITAN ERP</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-primary mt-1 font-bold">Precision Module v2.4</p>
+</div>
+<nav class="flex-1 mt-4 px-2 space-y-1">
+<div class="text-stone-600 dark:text-stone-400 py-3 px-4 opacity-80 hover:bg-stone-800 transition-colors flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-sm font-medium tracking-wide">Dashboard</span>
+</div>
+<div class="text-stone-600 dark:text-stone-400 py-3 px-4 opacity-80 hover:bg-stone-800 transition-colors flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-label text-sm font-medium tracking-wide">POS</span>
+</div>
+<!-- Active State -->
+<div class="bg-[#1a1c1c] text-lime-400 border-l-4 border-lime-500 py-3 px-4 flex items-center gap-3 cursor-default">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label text-sm font-bold tracking-wide">Sellers</span>
+</div>
+<div class="text-stone-600 dark:text-stone-400 py-3 px-4 opacity-80 hover:bg-stone-800 transition-colors flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label text-sm font-medium tracking-wide">Customers</span>
+</div>
+<div class="text-stone-600 dark:text-stone-400 py-3 px-4 opacity-80 hover:bg-stone-800 transition-colors flex items-center gap-3 cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label text-sm font-medium tracking-wide">Reports</span>
+</div>
+</nav>
+<div class="p-4 border-t border-outline-variant/5">
+<button class="w-full bg-primary py-3 px-4 text-on-primary font-headline font-bold uppercase text-xs tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary/10 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                New Sale
+            </button>
+<div class="mt-6 flex flex-col gap-1">
+<div class="text-stone-500 hover:text-white py-2 px-4 flex items-center gap-3 text-xs cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm">help</span>
+                    Support
+                </div>
+<div class="text-stone-500 hover:text-error py-2 px-4 flex items-center gap-3 text-xs cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm">logout</span>
+                    Logout
+                </div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 left-64 h-16 glass-panel z-40 flex justify-between items-center px-8 border-b border-outline-variant/10">
+<div class="flex items-center gap-4">
+<span class="text-white/50 font-label text-xs uppercase tracking-widest">Navigation /</span>
+<h2 class="text-white font-headline font-bold text-sm tracking-tight uppercase">Gestión de Vendedores y Comisiones</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center bg-white/5 px-4 py-1.5 rounded-lg border border-white/10">
+<span class="material-symbols-outlined text-stone-400 text-lg">search</span>
+<input class="bg-transparent border-none text-xs text-white focus:ring-0 w-48" placeholder="Search sellers..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-white transition-colors">notifications</span>
+<span class="material-symbols-outlined text-stone-400 cursor-pointer hover:text-white transition-colors">settings</span>
+<div class="w-8 h-8 rounded bg-primary/20 border border-primary/30 overflow-hidden">
+<img alt="Manager Profile" class="w-full h-full object-cover" data-alt="professional portrait of a manager in a high-tech industrial office setting with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOulNFI4GYXmMfki0DfdUZS0zT55PdZkSYijOggfluE5OZZKnLs1GlfDa34g6onlVdv0kipl9LdzZhbugs2czZM-Rrj_6u7wxHMRxB5ft6fD81WkTuxO6o6W4a7BSMyh0EwyMrq-bfKvI9fN3He-aJOTWJO6IWBtTSHx67zxXitH3_Rq_pxl-FJA59jDkXoxq2fdRuMjfG3JKKC_bdEr6gjUtzVY9SxZoquhz1Z4GYXw2OiCFGznTIyVpZFi6E8eoxJadh1BTMiYk"/>
+</div>
+</div>
+</div>
+</header>
+<div class="pt-24 pb-12 px-8 max-w-7xl mx-auto">
+<!-- Branding Header -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h3 class="font-headline text-primary font-black text-4xl uppercase tracking-tighter">MAYOR DE REPUESTO LA CIMA, C.A.</h3>
+<p class="font-label text-stone-500 text-sm mt-1">Industrial Distribution Management System</p>
+</div>
+<div class="text-right">
+<p class="font-headline text-stone-400 text-xs tracking-widest uppercase">Registry ID</p>
+<p class="font-headline text-white font-bold text-xl">J-40308741-5</p>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<!-- Registration/Edit Form (Bento Style) -->
+<section class="col-span-12 lg:col-span-4 space-y-6">
+<div class="p-6 bg-[#1a1c1c] rounded-lg shadow-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 -mr-8 -mt-8 rotate-45 group-hover:bg-primary/10 transition-colors"></div>
+<h4 class="font-headline text-white font-bold text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person_add</span>
+                            REPRESENTATIVE REGISTRY
+                        </h4>
+<form class="space-y-4">
+<div class="space-y-1">
+<label class="font-label text-[10px] text-stone-500 uppercase tracking-widest">Full Name</label>
+<input class="w-full bg-stone-900 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary text-sm font-medium" placeholder="e.g. ALEJANDRO RAMIREZ" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-label text-[10px] text-stone-500 uppercase tracking-widest">ID / RIF</label>
+<input class="w-full bg-stone-900 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary text-sm font-medium" placeholder="V-00.000.000" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label text-[10px] text-stone-500 uppercase tracking-widest">Commission %</label>
+<div class="relative">
+<input class="w-full bg-stone-900 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary text-sm font-medium" placeholder="5.0" type="number"/>
+<span class="absolute right-3 top-3 text-stone-600">%</span>
+</div>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label text-[10px] text-stone-500 uppercase tracking-widest">Assigned Region</label>
+<select class="w-full bg-stone-900 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary text-sm font-medium">
+<option>Región Central</option>
+<option>Región Occidente</option>
+<option>Región Oriente</option>
+<option>Región Los Andes</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label text-[10px] text-stone-500 uppercase tracking-widest">Active Customers Base</label>
+<input class="w-full bg-stone-900 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary text-sm font-medium" placeholder="0" type="number"/>
+</div>
+<button class="w-full bg-stone-100 hover:bg-primary py-3 rounded text-stone-950 hover:text-white font-headline font-black uppercase text-xs tracking-[0.2em] transition-all mt-4">
+                                Save Representative
+                            </button>
+</form>
+</div>
+<div class="p-6 bg-primary-container rounded-lg relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-multiply" data-alt="extreme close up of precision engineered metal gear parts with dramatic industrial lighting and grease texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVsTqe-D9tiMD8dHYhbCCtdFQGPitHOlk5Tk-np0UAt3wUAaMg43Ocba14N4sGhQw7ImbRBpMOehvND_i9YERvN8TMyXenJdpMcp25x_yf-b9ljlHCoPbpjm-8ssxv4iO7gvenFjOQgPm8G0li-Ne0GDiQ12DA14mTo39VQTtB68S2hLPD-PAF83aGPc_VLfJB37cXbHJsTOTfNKwZ647G0AYgMXAjmfLiC_h2rppAyx2yBAPArD41siWhdopuL5R9XFtf6xM4WCU"/>
+<div class="relative z-10">
+<h5 class="font-headline text-on-primary-container font-black text-xl uppercase italic tracking-tighter">Performance Targets</h5>
+<p class="text-on-primary-container/80 text-xs font-bold uppercase mt-2">Current Quarter: Q3 2024</p>
+<div class="mt-4 flex items-baseline gap-1">
+<span class="text-3xl font-headline font-black text-on-primary-container">$450K</span>
+<span class="text-xs font-bold text-on-primary-container/60 uppercase">Threshold</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Sellers List (Industrial Table) -->
+<section class="col-span-12 lg:col-span-8">
+<div class="bg-[#1a1c1c] rounded-lg overflow-hidden border border-white/5">
+<div class="px-6 py-4 bg-stone-900/50 flex justify-between items-center border-b border-white/5">
+<h4 class="font-headline text-white font-bold text-sm tracking-widest uppercase">Active Sales Force</h4>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors">
+<span class="material-symbols-outlined text-stone-400 text-sm">filter_list</span>
+</button>
+<button class="p-1.5 hover:bg-white/10 rounded transition-colors">
+<span class="material-symbols-outlined text-stone-400 text-sm">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-stone-900/20 text-[10px] text-stone-500 uppercase tracking-widest font-bold">
+<tr>
+<th class="px-6 py-4">Seller Details</th>
+<th class="px-6 py-4">Region</th>
+<th class="px-6 py-4">Commission</th>
+<th class="px-6 py-4">Customers</th>
+<th class="px-6 py-4">Performance</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5 text-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-white/[0.02] transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-stone-800 flex items-center justify-center font-headline font-bold text-primary">RM</div>
+<div>
+<p class="text-white font-bold uppercase tracking-tight">Ricardo Mendoza</p>
+<p class="text-[10px] text-stone-500">ID: V-14.822.391</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-stone-800 text-stone-400 text-[10px] font-bold uppercase tracking-tighter">Región Central</span>
+</td>
+<td class="px-6 py-5 text-white font-mono">8.5%</td>
+<td class="px-6 py-5 text-white font-bold">142</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-stone-800 rounded-full overflow-hidden w-24">
+<div class="h-full bg-primary w-[82%]"></div>
+</div>
+<span class="text-[10px] text-primary font-black tracking-tighter">82%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="material-symbols-outlined text-stone-600 hover:text-white transition-colors">edit_note</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-white/[0.02] transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-stone-800 flex items-center justify-center font-headline font-bold text-primary">SC</div>
+<div>
+<p class="text-white font-bold uppercase tracking-tight">Sofia Castellanos</p>
+<p class="text-[10px] text-stone-500">ID: V-20.119.504</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-stone-800 text-stone-400 text-[10px] font-bold uppercase tracking-tighter">Región Oriente</span>
+</td>
+<td class="px-6 py-5 text-white font-mono">10.0%</td>
+<td class="px-6 py-5 text-white font-bold">89</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-stone-800 rounded-full overflow-hidden w-24">
+<div class="h-full bg-primary w-[95%]"></div>
+</div>
+<span class="text-[10px] text-primary font-black tracking-tighter">95%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="material-symbols-outlined text-stone-600 hover:text-white transition-colors">edit_note</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-white/[0.02] transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-stone-800 flex items-center justify-center font-headline font-bold text-primary">JP</div>
+<div>
+<p class="text-white font-bold uppercase tracking-tight">Javier Peraza</p>
+<p class="text-[10px] text-stone-500">ID: V-17.443.109</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-stone-800 text-stone-400 text-[10px] font-bold uppercase tracking-tighter">Región Occidente</span>
+</td>
+<td class="px-6 py-5 text-white font-mono">6.5%</td>
+<td class="px-6 py-5 text-white font-bold">215</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-stone-800 rounded-full overflow-hidden w-24">
+<div class="h-full bg-stone-600 w-[45%]"></div>
+</div>
+<span class="text-[10px] text-stone-500 font-black tracking-tighter">45%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="material-symbols-outlined text-stone-600 hover:text-white transition-colors">edit_note</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-white/[0.02] transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-stone-800 flex items-center justify-center font-headline font-bold text-primary">EL</div>
+<div>
+<p class="text-white font-bold uppercase tracking-tight">Elena Lugo</p>
+<p class="text-[10px] text-stone-500">ID: V-23.900.221</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-stone-800 text-stone-400 text-[10px] font-bold uppercase tracking-tighter">Región Central</span>
+</td>
+<td class="px-6 py-5 text-white font-mono">7.5%</td>
+<td class="px-6 py-5 text-white font-bold">110</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-stone-800 rounded-full overflow-hidden w-24">
+<div class="h-full bg-primary w-[68%]"></div>
+</div>
+<span class="text-[10px] text-primary font-black tracking-tighter">68%</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="material-symbols-outlined text-stone-600 hover:text-white transition-colors">edit_note</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-stone-900/50 flex justify-between items-center">
+<p class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Showing 4 of 12 sales agents</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-stone-800 text-stone-400 text-xs font-bold rounded disabled:opacity-50" disabled="">PREV</button>
+<button class="px-3 py-1 bg-stone-800 text-white text-xs font-bold rounded">NEXT</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto border-t border-white/5 py-8 px-8 bg-[#0f1111]">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start">
+<p class="font-headline font-black text-white tracking-tight">TITAN INDUSTRIAL FORGE</p>
+<p class="text-[10px] text-stone-600 font-medium tracking-[0.2em] uppercase">Supply Chain Precision Engine</p>
+</div>
+<div class="flex flex-col items-center">
+<p class="text-stone-500 text-[10px] uppercase tracking-widest font-bold">Official Registry</p>
+<p class="text-primary font-headline font-bold text-sm tracking-widest">RIF J-40308741-5</p>
+</div>
+<div class="text-right">
+<p class="text-stone-600 text-[10px] font-medium">© 2024 MAYOR DE REPUESTO LA CIMA, C.A.</p>
+<p class="text-stone-600 text-[10px] font-medium">All rights reserved. Engineering Division.</p>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

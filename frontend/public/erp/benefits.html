@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#e4e2e2",
+                        "inverse-primary": "#a3d73c",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-container": "#4c4c4c",
+                        "inverse-on-surface": "#f1f1f1",
+                        "inverse-surface": "#2f3131",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f3f3",
+                        "on-primary-fixed": "#131f00",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "on-background": "#1a1c1c",
+                        "on-primary-container": "#3a5400",
+                        "secondary": "#5f5e5e",
+                        "outline": "#747a65",
+                        "tertiary": "#5e5e5e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "outline-variant": "#c3c9b1",
+                        "tertiary-container": "#bebcbc",
+                        "primary-fixed-dim": "#a3d73c",
+                        "on-surface-variant": "#434937",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary-fixed-variant": "#474746",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "secondary-container": "#e2dfde",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "surface-tint": "#496800",
+                        "primary": "#496800",
+                        "on-secondary-container": "#636262",
+                        "primary-fixed": "#bef456",
+                        "on-surface": "#1a1c1c",
+                        "background": "#f9f9f9",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed-variant": "#364e00",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eeeeee",
+                        "primary-container": "#9acd32",
+                        "surface-dim": "#dadada",
+                        "surface-container-highest": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-neutral-950 flex flex-col border-r border-neutral-800">
+<div class="p-6">
+<div class="font-['Space_Grotesk'] font-black text-lime-400 text-2xl tracking-tighter uppercase">FORGE INDUSTRIAL</div>
+<div class="mt-8 space-y-1">
+<div class="flex items-center gap-3 p-3 transition-colors duration-200 hover:bg-neutral-800 text-neutral-400 font-semibold text-sm uppercase font-['Inter']">
+<span class="material-symbols-outlined">badge</span>
+                    Employee Files
+                </div>
+<div class="flex items-center gap-3 p-3 transition-colors duration-200 hover:bg-neutral-800 text-neutral-400 font-semibold text-sm uppercase font-['Inter']">
+<span class="material-symbols-outlined">payments</span>
+                    Payroll
+                </div>
+<!-- Active Item: Social Benefits -->
+<div class="flex items-center gap-3 p-3 bg-lime-900/20 text-lime-300 border-r-4 border-lime-600 font-semibold text-sm uppercase font-['Inter']">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                    Social Benefits
+                </div>
+<div class="flex items-center gap-3 p-3 transition-colors duration-200 hover:bg-neutral-800 text-neutral-400 font-semibold text-sm uppercase font-['Inter']">
+<span class="material-symbols-outlined">event_busy</span>
+                    Leave Mgmt
+                </div>
+<div class="flex items-center gap-3 p-3 transition-colors duration-200 hover:bg-neutral-800 text-neutral-400 font-semibold text-sm uppercase font-['Inter']">
+<span class="material-symbols-outlined">gavel</span>
+                    Legal Reports
+                </div>
+</div>
+</div>
+<div class="mt-auto p-6 border-t border-neutral-800 space-y-1">
+<div class="flex items-center gap-3 p-3 transition-colors duration-200 hover:bg-neutral-800 text-neutral-400 font-semibold text-sm uppercase font-['Inter']">
+<span class="material-symbols-outlined">help_center</span>
+                Support
+            </div>
+<div class="flex items-center gap-3 p-3 transition-colors duration-200 hover:bg-neutral-800 text-neutral-400 font-semibold text-sm uppercase font-['Inter']">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 p-8">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 left-64 right-0 z-50 bg-neutral-900/80 backdrop-blur-xl px-6 py-3 flex justify-between items-center shadow-[0_24px_40px_rgba(26,28,28,0.06)]">
+<div class="flex items-center gap-4">
+<div class="font-['Space_Grotesk'] uppercase tracking-tight text-xl font-bold tracking-tighter text-neutral-50">HR MODULE / <span class="text-lime-400">BENEFITS MGMT</span></div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-neutral-400">
+<span class="material-symbols-outlined hover:text-lime-400 transition-colors">notifications</span>
+<span class="material-symbols-outlined hover:text-lime-400 transition-colors">cake</span>
+<span class="material-symbols-outlined hover:text-lime-400 transition-colors">settings</span>
+</div>
+<div class="h-8 w-8 bg-neutral-800 rounded shadow-sm border border-neutral-700 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up professional portrait of a male human resources manager in a dark industrial office setting with soft backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpY_YYrRuSfID0hOqVWTlCQoByEz9lT9haPckC5SCuJdij6sLMXQ53jBqEB6zWhpv_5s5gBj2_LafvzS33A-xj6RafPW8qjkJHitvw9SV-rdTDsV-KEcmWd72aTcEMM4TY_wwWqtI_G7igwgowVdPQm9RkPlF8lf768BumB5enfdOn7sNX4JwcQobvMbpe1b55HvNgcuhgDMDqSfOQG_cKeSOBgwtN5TMHsVu5-uB9NGUugvnJgk5hWBP1LoGlyI7K4fuSw--yVCU"/>
+</div>
+</div>
+</header>
+<div class="mt-16 space-y-8">
+<!-- Summary Stats Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-neutral-900 p-6 rounded shadow-sm border-l-4 border-lime-600">
+<div class="text-neutral-500 font-bold text-xs uppercase tracking-widest mb-1">Total Accrued (Garantía)</div>
+<div class="text-3xl font-black font-headline text-neutral-100">$ 428,590.00</div>
+</div>
+<div class="bg-neutral-900 p-6 rounded shadow-sm border-l-4 border-neutral-700">
+<div class="text-neutral-500 font-bold text-xs uppercase tracking-widest mb-1">Interests Provision</div>
+<div class="text-3xl font-black font-headline text-neutral-100">$ 12,402.15</div>
+</div>
+<div class="bg-neutral-900 p-6 rounded shadow-sm border-l-4 border-neutral-700">
+<div class="text-neutral-500 font-bold text-xs uppercase tracking-widest mb-1">Active Liquidation Simulations</div>
+<div class="text-3xl font-black font-headline text-lime-400">03</div>
+</div>
+<div class="bg-neutral-900 p-6 rounded shadow-sm border-l-4 border-neutral-700">
+<div class="text-neutral-500 font-bold text-xs uppercase tracking-widest mb-1">BCV Rate (TAM)</div>
+<div class="text-3xl font-black font-headline text-neutral-100">54.2%</div>
+</div>
+</section>
+<!-- Main Interactive Area: Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Employee Benefits List -->
+<section class="lg:col-span-8 space-y-4">
+<div class="flex justify-between items-end mb-4">
+<h2 class="text-2xl font-black font-headline uppercase tracking-tighter">Accrued Benefits Ledger (Art. 142)</h2>
+<button class="bg-neutral-800 hover:bg-neutral-700 text-neutral-100 text-[10px] font-bold uppercase py-2 px-4 flex items-center gap-2 tracking-widest">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter Data
+                        </button>
+</div>
+<div class="bg-neutral-900 overflow-hidden">
+<table class="w-full text-left">
+<thead class="bg-neutral-800 text-neutral-400">
+<tr>
+<th class="p-4 text-[10px] font-black uppercase tracking-widest">Employee</th>
+<th class="p-4 text-[10px] font-black uppercase tracking-widest text-right">Integral Salary</th>
+<th class="p-4 text-[10px] font-black uppercase tracking-widest text-right">Garantía Days</th>
+<th class="p-4 text-[10px] font-black uppercase tracking-widest text-right">Total Accrued</th>
+<th class="p-4 text-[10px] font-black uppercase tracking-widest text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-800">
+<tr class="hover:bg-neutral-800/50 transition-colors">
+<td class="p-4">
+<div class="font-bold text-sm">CARLOS MARTINEZ</div>
+<div class="text-xs text-neutral-500">ID: V-18.293.XXX</div>
+</td>
+<td class="p-4 text-right font-mono text-sm text-lime-400">$ 2,450.00</td>
+<td class="p-4 text-right font-mono text-sm">180 + 12</td>
+<td class="p-4 text-right font-mono text-sm">$ 16,340.50</td>
+<td class="p-4 text-center">
+<span class="material-symbols-outlined text-neutral-500 hover:text-lime-400 cursor-pointer">calculate</span>
+</td>
+</tr>
+<tr class="bg-neutral-900/50 hover:bg-neutral-800/50 transition-colors">
+<td class="p-4">
+<div class="font-bold text-sm">ANA RODRIGUEZ</div>
+<div class="text-xs text-neutral-500">ID: V-20.104.XXX</div>
+</td>
+<td class="p-4 text-right font-mono text-sm text-lime-400">$ 1,890.00</td>
+<td class="p-4 text-right font-mono text-sm">60 + 2</td>
+<td class="p-4 text-right font-mono text-sm">$ 4,120.25</td>
+<td class="p-4 text-center">
+<span class="material-symbols-outlined text-neutral-500 hover:text-lime-400 cursor-pointer">calculate</span>
+</td>
+</tr>
+<tr class="hover:bg-neutral-800/50 transition-colors">
+<td class="p-4">
+<div class="font-bold text-sm">MARCOS PERNIA</div>
+<div class="text-xs text-neutral-500">ID: V-15.882.XXX</div>
+</td>
+<td class="p-4 text-right font-mono text-sm text-lime-400">$ 3,100.00</td>
+<td class="p-4 text-right font-mono text-sm">320 + 24</td>
+<td class="p-4 text-right font-mono text-sm">$ 38,400.00</td>
+<td class="p-4 text-center">
+<span class="material-symbols-outlined text-neutral-500 hover:text-lime-400 cursor-pointer">calculate</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Liquidation Simulation Form -->
+<section class="lg:col-span-4 space-y-6">
+<div class="bg-lime-600 p-6 rounded-t shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-xl font-black font-headline uppercase text-neutral-950 leading-tight">Simulation Engine</h3>
+<p class="text-neutral-950/80 text-[10px] font-bold uppercase tracking-wider">Liquidation &amp; Settlement</p>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-20 text-neutral-950 font-black">precision_manufacturing</span>
+</div>
+<div class="bg-neutral-900 p-6 space-y-4 border-b border-neutral-800">
+<div class="space-y-1">
+<label class="text-[10px] font-black uppercase text-neutral-500 tracking-widest">Select Employee</label>
+<select class="w-full bg-neutral-800 border-none text-neutral-100 text-sm focus:ring-2 focus:ring-lime-600 uppercase font-bold py-3">
+<option>MARCOS PERNIA</option>
+<option>CARLOS MARTINEZ</option>
+<option>ANA RODRIGUEZ</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] font-black uppercase text-neutral-500 tracking-widest">Resignation Date</label>
+<input class="w-full bg-neutral-800 border-none text-neutral-100 text-xs focus:ring-2 focus:ring-lime-600 py-3" type="date"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] font-black uppercase text-neutral-500 tracking-widest">Type of Exit</label>
+<select class="w-full bg-neutral-800 border-none text-neutral-100 text-xs focus:ring-2 focus:ring-lime-600 py-3">
+<option>Voluntary Resignation</option>
+<option>Justified Dismissal</option>
+<option>Unjustified Dismissal</option>
+</select>
+</div>
+</div>
+<div class="p-4 bg-neutral-950 border border-neutral-800 rounded space-y-3">
+<div class="flex justify-between text-xs">
+<span class="text-neutral-500 font-bold">Antiquity (Art. 142)</span>
+<span class="text-neutral-100 font-mono">$ 38,400.00</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-neutral-500 font-bold">Accrued Interests</span>
+<span class="text-neutral-100 font-mono">$ 2,120.10</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-neutral-500 font-bold">Indemnity (Art. 92)</span>
+<span class="text-neutral-100 font-mono">$ 0.00</span>
+</div>
+<div class="flex justify-between text-xs border-t border-neutral-800 pt-3">
+<span class="text-lime-400 font-black uppercase tracking-widest">Total Payable</span>
+<span class="text-lime-400 font-mono font-black">$ 40,520.10</span>
+</div>
+</div>
+<div class="pt-4 space-y-3">
+<button class="w-full bg-lime-600 hover:bg-lime-500 text-neutral-950 font-black uppercase text-sm py-4 tracking-tighter flex items-center justify-center gap-2 scale-102 active:scale-95 transition-all">
+<span class="material-symbols-outlined font-black">picture_as_pdf</span>
+                                Generate Finiquito PDF
+                            </button>
+<button class="w-full bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-bold uppercase text-[10px] py-3 tracking-widest transition-all">
+                                Save Simulation Draft
+                            </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Salario Integral & Legal Context -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-neutral-900/50 p-8 border border-neutral-800 flex flex-col gap-4">
+<h4 class="text-lg font-black font-headline uppercase tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-lime-400">info</span>
+                        LOTTT Art. 142 Compliance
+                    </h4>
+<p class="text-sm text-neutral-400 leading-relaxed">
+                        The "Garantía de Prestaciones" consists of 15 days of integral salary per quarter, totaling 60 days per year. Additionally, after the first year, employees accrue 2 additional days per year (up to 30 days). The system automatically compares the <span class="text-neutral-100 font-bold">Accrued Account</span> vs <span class="text-neutral-100 font-bold">Calculation by Time</span> at the end of the relationship, paying whichever is more favorable.
+                    </p>
+</div>
+<div class="bg-neutral-900/50 p-8 border border-neutral-800">
+<h4 class="text-lg font-black font-headline uppercase tracking-tight mb-4">Salario Integral Structure</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-lime-900/20 text-lime-400 flex items-center justify-center rounded">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<div class="font-bold text-sm uppercase">Base Salary</div>
+<div class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Monthly fixed amount</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-neutral-800 text-neutral-400 flex items-center justify-center rounded">
+<span class="material-symbols-outlined">beach_access</span>
+</div>
+<div>
+<div class="font-bold text-sm uppercase">Vacation Bonus</div>
+<div class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Annual fractional impact</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-neutral-800 text-neutral-400 flex items-center justify-center rounded">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<div class="font-bold text-sm uppercase">Utilities (Utilidades)</div>
+<div class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Statutory profit sharing</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Shell -->
+<footer class="mt-16 py-8 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center text-neutral-500">
+<div class="text-[10px] font-black uppercase tracking-[0.2em] mb-4 md:mb-0">
+                FORGE INDUSTRIAL ERP © 2024 | RIF: J-40392811-0
+            </div>
+<div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest">
+<a class="hover:text-lime-400 transition-colors" href="#">Legal Compliance</a>
+<a class="hover:text-lime-400 transition-colors" href="#">Technical Support</a>
+<a class="hover:text-lime-400 transition-colors" href="#">Contact System Admin</a>
+</div>
+</footer>
+</main>
+<!-- FAB Action (Suppressed as per rules for Details/Settings screens, but kept for main dashboard intent) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="h-14 w-14 bg-lime-600 hover:bg-lime-500 text-neutral-950 rounded-full shadow-2xl flex items-center justify-center scale-102 active:scale-95 transition-all">
+<span class="material-symbols-outlined font-black">add</span>
+</button>
+</div>
+</body></html>

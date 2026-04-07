@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#496800",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#a3d73c",
+                    "background": "#f9f9f9",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#364e00",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-surface-variant": "#434937",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-primary-fixed": "#131f00",
+                    "surface-container": "#eeeeee",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c3c9b1",
+                    "surface-variant": "#e2e2e2",
+                    "primary": "#496800",
+                    "outline": "#747a65",
+                    "tertiary": "#5e5e5e",
+                    "primary-fixed": "#bef456",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-background": "#1a1c1c",
+                    "inverse-on-surface": "#f1f1f1",
+                    "primary-container": "#9acd32",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary-container": "#3a5400",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#e4e2e2",
+                    "surface-container-high": "#e8e8e8",
+                    "inverse-surface": "#2f3131",
+                    "surface-dim": "#dadada",
+                    "secondary-container": "#e2dfde",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f3f3f3",
+                    "on-secondary-container": "#636262",
+                    "inverse-primary": "#a3d73c",
+                    "on-tertiary-container": "#4c4c4c",
+                    "surface-bright": "#f9f9f9",
+                    "on-surface": "#1a1c1c",
+                    "tertiary-container": "#bebcbc",
+                    "surface-container-highest": "#e2e2e2",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "surface": "#f9f9f9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #eeeeee;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #496800;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 z-50 flex justify-between items-center w-full px-6 py-3 bg-stone-950/80 backdrop-blur-xl border-b-0 flat no shadows">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-stone-100 font-['Space_Grotesk'] uppercase tracking-tight">TITAN ERP: ACCOUNTING</span>
+<div class="hidden md:flex items-center bg-stone-900 px-3 py-1.5 rounded-lg border border-stone-800">
+<span class="material-symbols-outlined text-stone-500 text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs text-stone-300 font-label placeholder:text-stone-600 w-64 uppercase tracking-widest" placeholder="GLOBAL COMMAND SEARCH" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-stone-400 hover:bg-stone-800/50 transition-colors duration-200 p-2 rounded active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-stone-400 hover:bg-stone-800/50 transition-colors duration-200 p-2 rounded active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded bg-stone-800 flex items-center justify-center overflow-hidden border border-stone-700">
+<img alt="User Profile" data-alt="close-up portrait of a professional accountant in a high-tech industrial office, cool lighting, metallic accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdf7LWIBeutoDA4LlP-bZqDpTOAm4KMWLz6x96C7FhpCoRxfXGXEE1dook2xL_6hoblFaiWPA3JApXJDnLSO3nZPQuWGiRSTC4H-UDxnkO-7aJuDPNOdmLNlF0r9DJXbQMS4h3rr4L1E0Yl733IcVcYfTpZbRFTTcTNLoH1JImxUQr3I10It5ONHmPh00OOjRwT8OSsY0FMKdWnPJJiwpA8KY97dOPkl4FvrYhtd2Vqib2GXWrnfYV0QRI8RV52MaBJgFG5ozvRqE"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar Shell -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 pt-16 bg-stone-900 w-64 border-r-0 docked h-full flat no shadows z-40 hidden md:flex">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="bg-orange-500 w-2 h-8"></div>
+<div>
+<h2 class="text-orange-500 font-black font-['Inter'] text-sm font-semibold tracking-wide uppercase">FINANCE</h2>
+<p class="text-[10px] text-stone-500 font-label uppercase tracking-[0.2em]">Precision Ledger v4.2</p>
+</div>
+</div>
+<button class="w-full mt-6 bg-orange-500 text-stone-950 font-bold py-3 px-4 flex items-center justify-center gap-2 active:translate-x-1 duration-150 transition-all hover:bg-orange-400">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="font-headline tracking-tighter uppercase text-sm">NEW ENTRY</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar px-2 space-y-1">
+<a class="flex items-center gap-3 text-stone-500 hover:text-stone-200 py-3 px-4 hover:bg-stone-800/80 transition-all font-['Inter'] text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:text-stone-200 py-3 px-4 hover:bg-stone-800/80 transition-all font-['Inter'] text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span>Chart of Accounts</span>
+</a>
+<a class="bg-stone-800 text-orange-400 border-l-4 border-orange-500 py-3 px-4 flex items-center gap-3 font-['Inter'] text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Journal Entries</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:text-stone-200 py-3 px-4 hover:bg-stone-800/80 transition-all font-['Inter'] text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Ledger</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:text-stone-200 py-3 px-4 hover:bg-stone-800/80 transition-all font-['Inter'] text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="balance">balance</span>
+<span>Trial Balance</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:text-stone-200 py-3 px-4 hover:bg-stone-800/80 transition-all font-['Inter'] text-sm font-semibold tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Financial Statements</span>
+</a>
+</div>
+<div class="p-4 border-t border-stone-800 bg-stone-950/30">
+<a class="flex items-center gap-3 text-stone-500 hover:text-stone-200 py-2 px-4 text-xs font-semibold" href="#">
+<span class="material-symbols-outlined scale-75" data-icon="help">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 text-stone-500 hover:text-stone-200 py-2 px-4 text-xs font-semibold" href="#">
+<span class="material-symbols-outlined scale-75" data-icon="history">history</span>
+<span>Logs</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 pb-12 px-6 lg:px-10 bg-surface">
+<!-- Header & Stats -->
+<div class="mb-10">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div>
+<span class="text-primary font-bold font-label tracking-widest text-[10px] uppercase">Transaction Ledger</span>
+<h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tighter uppercase mt-1">General Journal</h1>
+<div class="h-1 w-24 bg-primary mt-4"></div>
+</div>
+<!-- Quick Filter Stats -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-1">
+<div class="bg-surface-container-high p-4 flex flex-col min-w-[140px]">
+<span class="text-[10px] font-bold text-stone-500 uppercase tracking-tighter">Total Debits</span>
+<span class="text-xl font-headline font-bold">$1,240,502.50</span>
+</div>
+<div class="bg-surface-container-high p-4 flex flex-col min-w-[140px]">
+<span class="text-[10px] font-bold text-stone-500 uppercase tracking-tighter">Total Credits</span>
+<span class="text-xl font-headline font-bold">$1,240,502.50</span>
+</div>
+<div class="bg-primary/10 border-l-2 border-primary p-4 flex flex-col min-w-[140px]">
+<span class="text-[10px] font-bold text-primary uppercase tracking-tighter">Auto-Generated</span>
+<span class="text-xl font-headline font-bold">142</span>
+</div>
+<div class="bg-surface-container-high p-4 flex flex-col min-w-[140px]">
+<span class="text-[10px] font-bold text-stone-500 uppercase tracking-tighter">Manual Entries</span>
+<span class="text-xl font-headline font-bold">18</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Controls Area -->
+<div class="bg-surface-container-low p-6 mb-8 flex flex-wrap items-end gap-6 shadow-sm">
+<div class="flex-1 min-w-[280px]">
+<label class="block text-[10px] font-bold text-stone-500 uppercase mb-2 tracking-widest">Search by Account / Description</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-primary h-12 px-10 text-sm font-label tracking-wide uppercase" placeholder="ENTER KEYWORDS..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" data-icon="search">search</span>
+</div>
+</div>
+<div class="flex gap-4">
+<div>
+<label class="block text-[10px] font-bold text-stone-500 uppercase mb-2 tracking-widest">Date From</label>
+<input class="bg-surface-container-highest border-none focus:ring-2 focus:ring-primary h-12 px-4 text-sm font-label uppercase" type="date"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold text-stone-500 uppercase mb-2 tracking-widest">Date To</label>
+<input class="bg-surface-container-highest border-none focus:ring-2 focus:ring-primary h-12 px-4 text-sm font-label uppercase" type="date"/>
+</div>
+</div>
+<button class="bg-on-background text-surface h-12 px-8 font-headline font-bold uppercase tracking-widest hover:bg-stone-800 transition-colors">
+                Apply Filter
+            </button>
+</div>
+<!-- Journal Entries Table -->
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-stone-900 text-stone-100 font-headline uppercase text-xs tracking-widest">
+<th class="px-6 py-4 text-left font-medium">Date</th>
+<th class="px-6 py-4 text-left font-medium">Seat #</th>
+<th class="px-6 py-4 text-left font-medium">Account</th>
+<th class="px-6 py-4 text-left font-medium">Description</th>
+<th class="px-6 py-4 text-right font-medium">Debit</th>
+<th class="px-6 py-4 text-right font-medium">Credit</th>
+<th class="px-6 py-4 text-center font-medium">Type</th>
+</tr>
+</thead>
+<tbody class="text-sm font-body">
+<!-- Seat Group 1: Automatic -->
+<tr class="bg-surface-container-lowest border-l-4 border-primary">
+<td class="px-6 py-5 text-stone-500 font-medium">2023-10-24</td>
+<td class="px-6 py-5 font-bold">#GJ-8842</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">1100-00</span>
+<span class="text-[10px] text-stone-500 uppercase">Cash &amp; Bank</span>
+</div>
+</td>
+<td class="px-6 py-5 text-stone-600">Sales Receipt: INV-9901 / Customer: ForgeWorks Ltd</td>
+<td class="px-6 py-5 text-right font-mono font-bold">$ 12,500.00</td>
+<td class="px-6 py-5 text-right font-mono text-stone-400">—</td>
+<td class="px-6 py-5 text-center">
+<span class="inline-block px-2 py-1 bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest rounded-sm border border-primary/20">Automatic</span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest border-l-4 border-primary">
+<td class="px-6 py-5 text-stone-500 font-medium opacity-0">2023-10-24</td>
+<td class="px-6 py-5 font-bold opacity-0">#GJ-8842</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface pl-4">4000-01</span>
+<span class="text-[10px] text-stone-500 uppercase pl-4">Product Sales - Domestic</span>
+</div>
+</td>
+<td class="px-6 py-5 text-stone-600 italic">Corresponding Credit Entry</td>
+<td class="px-6 py-5 text-right font-mono text-stone-400">—</td>
+<td class="px-6 py-5 text-right font-mono font-bold">$ 12,500.00</td>
+<td class="px-6 py-5 text-center opacity-0"></td>
+</tr>
+<!-- Seat Group 2: Manual -->
+<tr class="bg-surface-container border-l-4 border-stone-400">
+<td class="px-6 py-5 text-stone-500 font-medium">2023-10-23</td>
+<td class="px-6 py-5 font-bold">#GJ-8841</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">6100-05</span>
+<span class="text-[10px] text-stone-500 uppercase">Office Maintenance</span>
+</div>
+</td>
+<td class="px-6 py-5 text-stone-600">Quarterly AC Service Adjustment - Manual Correction</td>
+<td class="px-6 py-5 text-right font-mono font-bold">$ 850.00</td>
+<td class="px-6 py-5 text-right font-mono text-stone-400">—</td>
+<td class="px-6 py-5 text-center">
+<span class="inline-block px-2 py-1 bg-stone-200 text-stone-600 text-[9px] font-black uppercase tracking-widest rounded-sm">Manual</span>
+</td>
+</tr>
+<tr class="bg-surface-container border-l-4 border-stone-400">
+<td class="px-6 py-5 text-stone-500 font-medium opacity-0">2023-10-23</td>
+<td class="px-6 py-5 font-bold opacity-0">#GJ-8841</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface pl-4">1100-00</span>
+<span class="text-[10px] text-stone-500 uppercase pl-4">Cash &amp; Bank</span>
+</div>
+</td>
+<td class="px-6 py-5 text-stone-600 italic">Corresponding Credit Entry</td>
+<td class="px-6 py-5 text-right font-mono text-stone-400">—</td>
+<td class="px-6 py-5 text-right font-mono font-bold">$ 850.00</td>
+<td class="px-6 py-5 text-center opacity-0"></td>
+</tr>
+<!-- Seat Group 3: Automatic (Purchase) -->
+<tr class="bg-surface-container-lowest border-l-4 border-primary">
+<td class="px-6 py-5 text-stone-500 font-medium">2023-10-22</td>
+<td class="px-6 py-5 font-bold">#GJ-8840</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">1500-00</span>
+<span class="text-[10px] text-stone-500 uppercase">Inventory - Raw Materials</span>
+</div>
+</td>
+<td class="px-6 py-5 text-stone-600">Purchase Order: PO-4552 / Supplier: SteelCore Ind.</td>
+<td class="px-6 py-5 text-right font-mono font-bold">$ 45,200.00</td>
+<td class="px-6 py-5 text-right font-mono text-stone-400">—</td>
+<td class="px-6 py-5 text-center">
+<span class="inline-block px-2 py-1 bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest rounded-sm border border-primary/20">Automatic</span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest border-l-4 border-primary">
+<td class="px-6 py-5 text-stone-500 font-medium opacity-0">2023-10-22</td>
+<td class="px-6 py-5 font-bold opacity-0">#GJ-8840</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface pl-4">2100-00</span>
+<span class="text-[10px] text-stone-500 uppercase pl-4">Accounts Payable</span>
+</div>
+</td>
+<td class="px-6 py-5 text-stone-600 italic">Corresponding Credit Entry</td>
+<td class="px-6 py-5 text-right font-mono text-stone-400">—</td>
+<td class="px-6 py-5 text-right font-mono font-bold">$ 45,200.00</td>
+<td class="px-6 py-5 text-center opacity-0"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Status Footer -->
+<div class="mt-12 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<button class="p-2 border border-stone-300 hover:bg-stone-200"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<div class="flex gap-1">
+<span class="px-3 py-1 bg-on-background text-surface font-bold">1</span>
+<span class="px-3 py-1 bg-surface-container hover:bg-stone-200 cursor-pointer">2</span>
+<span class="px-3 py-1 bg-surface-container hover:bg-stone-200 cursor-pointer">3</span>
+<span class="px-3 py-1">...</span>
+<span class="px-3 py-1 bg-surface-container hover:bg-stone-200 cursor-pointer">24</span>
+</div>
+<button class="p-2 border border-stone-300 hover:bg-stone-200"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+<div class="flex items-center gap-8 text-[10px] font-bold uppercase tracking-widest text-stone-400">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span>System Sync Active</span>
+</div>
+<div>Showing 50 of 1,242 entries</div>
+<button class="flex items-center gap-1 text-primary hover:underline">
+<span class="material-symbols-outlined text-[14px]" data-icon="download">download</span>
+<span>Export Ledger (PDF/CSV)</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-stone-950 border-t border-stone-800 flex justify-around py-3 z-50">
+<button class="flex flex-col items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold uppercase">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-orange-400">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-[10px] font-bold uppercase">Journal</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="text-[10px] font-bold uppercase">Ledger</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-stone-500">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-[10px] font-bold uppercase">Stats</span>
+</button>
+</nav>
+<!-- Floating Action Button (Only relevant on main list screens) -->
+<div class="md:hidden fixed bottom-20 right-6">
+<button class="w-14 h-14 bg-orange-500 text-stone-950 rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+</div>
+</body></html>

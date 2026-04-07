@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 28, 28, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .industrial-grid {
+            background-image: radial-gradient(circle at 2px 2px, rgba(154, 205, 50, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#e4e2e2",
+                      "inverse-primary": "#a3d73c",
+                      "secondary-fixed": "#e5e2e1",
+                      "on-tertiary-container": "#4c4c4c",
+                      "inverse-on-surface": "#f1f1f1",
+                      "inverse-surface": "#2f3131",
+                      "on-secondary-fixed": "#1c1b1b",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f3f3f3",
+                      "on-primary-fixed": "#131f00",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "on-background": "#1a1c1c",
+                      "on-primary-container": "#3a5400",
+                      "secondary": "#5f5e5e",
+                      "outline": "#747a65",
+                      "tertiary": "#5e5e5e",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#e2e2e2",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "outline-variant": "#c3c9b1",
+                      "tertiary-container": "#bebcbc",
+                      "primary-fixed-dim": "#a3d73c",
+                      "on-surface-variant": "#434937",
+                      "surface-bright": "#f9f9f9",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#e8e8e8",
+                      "on-secondary-fixed-variant": "#474746",
+                      "tertiary-fixed-dim": "#c8c6c6",
+                      "secondary-container": "#e2dfde",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "surface-tint": "#496800",
+                      "primary": "#496800",
+                      "on-secondary-container": "#636262",
+                      "primary-fixed": "#bef456",
+                      "on-surface": "#1a1c1c",
+                      "background": "#1a1c1c",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#1a1c1c",
+                      "on-primary-fixed-variant": "#364e00",
+                      "on-primary": "#ffffff",
+                      "surface-container": "#2f3131",
+                      "primary-container": "#9acd32",
+                      "surface-dim": "#dadada",
+                      "surface-container-highest": "#434937"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          }
+        }
+      </script>
+</head>
+<body class="bg-neutral-950 text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container industrial-grid min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-neutral-900/80 backdrop-blur-xl shadow-[0_24px_40px_rgba(26,28,28,0.06)] flex justify-between items-center w-full px-6 py-3">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-neutral-50 font-headline uppercase">FORGE INDUSTRIAL ERP</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-neutral-500 font-['Inter'] font-semibold text-sm uppercase transition-all duration-200 hover:bg-neutral-800 px-3 py-1" href="#">Dashboard</a>
+<a class="text-lime-400 font-bold border-b-2 border-lime-600 font-['Inter'] text-sm uppercase px-3 py-1" href="#">Payroll</a>
+<a class="text-neutral-500 font-['Inter'] font-semibold text-sm uppercase transition-all duration-200 hover:bg-neutral-800 px-3 py-1" href="#">Inventory</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-neutral-400 hover:text-lime-400 cursor-pointer transition-colors">notifications</span>
+<span class="material-symbols-outlined text-neutral-400 hover:text-lime-400 cursor-pointer transition-colors">settings</span>
+<div class="w-8 h-8 bg-neutral-800 rounded-full flex items-center justify-center overflow-hidden border border-neutral-700">
+<img alt="HR Manager Profile" data-alt="Professional HR manager portrait in industrial office setting, soft professional lighting, sharp suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkRM1CyCqP_kXy4-iFpQxI8ifwU9z_S4_Auq_gd505SPnV_B_cU1BqjpYvh0ysy1_6JTH2oKXZOxdjLauNPpa40rh1ueIZqCvcR2txDOu7jDv6erYTELm4QEkkWCfGUP01bOaCGsIRd5-jhKMO_5LwZNJKcGqc0-4i_EemsE0rufeAfodcWWeT2WAUNqevv0DxzHWpsbHhYSboqTHOBL1Jjs2S8HfZrt-cTnXW87PZ1qiBIrtenTkAlBUEtHmYczWQPwoIr5fTU4o"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 z-40 bg-neutral-950 border-r border-neutral-800 pt-20">
+<div class="px-6 py-4">
+<span class="font-headline font-black text-lime-400 text-xs tracking-widest uppercase">HR MODULE</span>
+<p class="text-[10px] text-neutral-500 font-bold uppercase tracking-tighter">Industrial Control</p>
+</div>
+<div class="flex-1 flex flex-col mt-4">
+<a class="flex items-center gap-3 px-6 py-3 text-neutral-400 hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined text-sm">badge</span> Employee Files
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 bg-lime-900/20 text-lime-300 border-r-4 border-lime-600 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined text-sm">payments</span> Payroll
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-neutral-400 hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined text-sm">account_balance</span> Social Benefits
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-neutral-400 hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined text-sm">event_busy</span> Leave Mgmt
+            </a>
+<a class="flex items-center gap-3 px-6 py-3 text-neutral-400 hover:bg-neutral-800 transition-colors duration-200 font-['Inter'] font-semibold text-sm uppercase" href="#">
+<span class="material-symbols-outlined text-sm">gavel</span> Legal Reports
+            </a>
+</div>
+<div class="p-6 border-t border-neutral-800">
+<button class="w-full bg-primary text-on-primary py-3 font-headline font-bold uppercase text-xs tracking-widest hover:scale-102 active:scale-95 transition-all">
+                Generate Report
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 p-6 min-h-screen">
+<!-- Header Section -->
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline text-4xl font-extrabold uppercase tracking-tighter text-white">Payroll Calculation</h1>
+<p class="text-neutral-500 font-label text-sm uppercase tracking-widest mt-1">Industrial Processing Unit • V.2.4.0</p>
+</div>
+<!-- Date Selector (Bento Style) -->
+<div class="bg-neutral-900 p-1 flex items-center rounded-lg border border-neutral-800">
+<div class="px-4 py-2 flex flex-col border-r border-neutral-800">
+<span class="text-[10px] text-lime-400 font-bold uppercase tracking-tighter">Period Start</span>
+<input class="bg-transparent border-none text-white p-0 text-sm focus:ring-0" type="date" value="2023-11-01"/>
+</div>
+<div class="px-4 py-2 flex flex-col border-r border-neutral-800">
+<span class="text-[10px] text-lime-400 font-bold uppercase tracking-tighter">Period End</span>
+<input class="bg-transparent border-none text-white p-0 text-sm focus:ring-0" type="date" value="2023-11-15"/>
+</div>
+<button class="px-4 py-2 hover:bg-neutral-800 transition-colors">
+<span class="material-symbols-outlined text-neutral-400">refresh</span>
+</button>
+</div>
+</header>
+<!-- KPI Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-neutral-900 p-6 border-l-4 border-lime-500">
+<p class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Gross Total</p>
+<h3 class="text-2xl font-headline font-bold text-white mt-1">245.890,00 <span class="text-xs text-neutral-500 uppercase">VED</span></h3>
+</div>
+<div class="bg-neutral-900 p-6 border-l-4 border-neutral-700">
+<p class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Deductions Sum</p>
+<h3 class="text-2xl font-headline font-bold text-white mt-1">12.340,50 <span class="text-xs text-neutral-500 uppercase">VED</span></h3>
+</div>
+<div class="bg-neutral-900 p-6 border-l-4 border-lime-500">
+<p class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Net Payable</p>
+<h3 class="text-2xl font-headline font-bold text-lime-400 mt-1">233.549,50 <span class="text-xs text-neutral-500 uppercase">VED</span></h3>
+</div>
+<div class="bg-neutral-900 p-6 border-l-4 border-neutral-700">
+<p class="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Patronal Costs</p>
+<h3 class="text-2xl font-headline font-bold text-white mt-1">34.120,00 <span class="text-xs text-neutral-500 uppercase">VED</span></h3>
+</div>
+</div>
+<!-- Employee Payroll Table -->
+<div class="bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 mb-8">
+<div class="px-6 py-4 border-b border-neutral-800 flex justify-between items-center">
+<h2 class="font-headline font-bold uppercase text-sm tracking-widest text-neutral-300">Detailed Payroll Worksheet</h2>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-lime-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">filter_alt</span> Filter Employees
+                    </button>
+<button class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">download</span> CSV Export
+                    </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-neutral-950/50">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-neutral-500">Employee Details</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-neutral-500">Base Salary</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-neutral-500">LOTTT Recargos</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-neutral-500">Deductions (IVSS/FAOV)</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-neutral-500">Cesta Ticket</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-neutral-500">Net Total</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-neutral-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-800">
+<!-- Employee Row 1 -->
+<tr class="hover:bg-neutral-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center font-bold text-lime-400 text-xs">RM</div>
+<div>
+<p class="text-sm font-bold text-white">RICARDO MENDOZA</p>
+<p class="text-[10px] text-neutral-500 uppercase font-medium">Operations Lead • ID: 402231</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-neutral-300">45.000,00</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded w-fit">OT 50%: 12.5h</span>
+<span class="text-[10px] px-2 py-0.5 bg-lime-900/30 text-lime-400 rounded w-fit">Bonus: 5.000,00</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-error/80">
+<p>-1.250,40 <span class="text-[9px] text-neutral-500 block uppercase">IVSS (0.5%) + FAOV (0.25%)</span></p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-neutral-300">1.000,00</p>
+<p class="text-[9px] text-neutral-500 uppercase">22 Days Active</p>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-lime-400">49.749,60</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-neutral-700 rounded-lg transition-all" title="View Details">
+<span class="material-symbols-outlined text-sm text-neutral-400">visibility</span>
+</button>
+<button class="p-2 hover:bg-neutral-700 rounded-lg transition-all" title="Download Receipt">
+<span class="material-symbols-outlined text-sm text-neutral-400">file_download</span>
+</button>
+</td>
+</tr>
+<!-- Employee Row 2 -->
+<tr class="hover:bg-neutral-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center font-bold text-lime-400 text-xs">AS</div>
+<div>
+<p class="text-sm font-bold text-white">ANA SÁNCHEZ</p>
+<p class="text-[10px] text-neutral-500 uppercase font-medium">Mechanical Engineer • ID: 402245</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-neutral-300">62.000,00</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded w-fit">OT 75%: 4.0h</span>
+<span class="text-[10px] px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded w-fit">Comm: 8.500,00</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-error/80">
+<p>-1.860,00 <span class="text-[9px] text-neutral-500 block uppercase">PF (1%) + IVSS/FAOV</span></p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-neutral-300">1.000,00</p>
+<p class="text-[9px] text-neutral-500 uppercase">22 Days Active</p>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-lime-400">69.640,00</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-neutral-700 rounded-lg transition-all" title="View Details">
+<span class="material-symbols-outlined text-sm text-neutral-400">visibility</span>
+</button>
+<button class="p-2 hover:bg-neutral-700 rounded-lg transition-all" title="Download Receipt">
+<span class="material-symbols-outlined text-sm text-neutral-400">file_download</span>
+</button>
+</td>
+</tr>
+<!-- Employee Row 3 -->
+<tr class="hover:bg-neutral-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-neutral-800 flex items-center justify-center font-bold text-lime-400 text-xs">JV</div>
+<div>
+<p class="text-sm font-bold text-white">JOSE VILLALOBOS</p>
+<p class="text-[10px] text-neutral-500 uppercase font-medium">Technician II • ID: 402289</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-neutral-300">38.500,00</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded w-fit">OT 100%: 8.0h</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-error/80">
+<p>-962,50 <span class="text-[9px] text-neutral-500 block uppercase">Full Deductions</span></p>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm font-medium text-neutral-300">850,00</p>
+<p class="text-[9px] text-neutral-500 uppercase">18 Days Active</p>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-lime-400">42.387,50</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-neutral-700 rounded-lg transition-all" title="View Details">
+<span class="material-symbols-outlined text-sm text-neutral-400">visibility</span>
+</button>
+<button class="p-2 hover:bg-neutral-700 rounded-lg transition-all" title="Download Receipt">
+<span class="material-symbols-outlined text-sm text-neutral-400">file_download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+<!-- Summary Card -->
+<div class="bg-neutral-900 p-8 rounded-lg border border-neutral-800 flex flex-col justify-between">
+<div>
+<h3 class="font-headline font-extrabold text-2xl uppercase tracking-tighter text-white mb-6">Accounting Summary</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm font-medium">
+<span class="text-neutral-500 uppercase tracking-widest text-[11px]">Total Basic Wage</span>
+<span class="text-white">145.500,00</span>
+</div>
+<div class="flex justify-between items-center text-sm font-medium">
+<span class="text-neutral-500 uppercase tracking-widest text-[11px]">Overtime (50/75/100)</span>
+<span class="text-white">28.400,00</span>
+</div>
+<div class="flex justify-between items-center text-sm font-medium">
+<span class="text-neutral-500 uppercase tracking-widest text-[11px]">Legal Deductions</span>
+<span class="text-error/80">-12.340,50</span>
+</div>
+<div class="pt-4 border-t border-neutral-800 flex justify-between items-center">
+<span class="font-headline font-black text-lime-400 uppercase tracking-widest">Net Liability</span>
+<span class="font-headline font-black text-2xl text-lime-400">233.549,50</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Actions -->
+<div class="flex flex-col gap-4">
+<button class="flex-1 bg-primary text-on-primary p-6 flex flex-col items-center justify-center gap-2 group hover:scale-[1.01] active:scale-95 transition-all shadow-[0_10px_20px_rgba(73,104,0,0.2)]">
+<span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+<span class="font-headline font-bold text-xl uppercase tracking-tight">Process &amp; Generate Accounting Seats</span>
+<p class="text-[10px] font-medium uppercase tracking-widest opacity-70">Automatic Ledger Entry Posting</p>
+</button>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-neutral-800 border border-neutral-700 p-4 flex flex-col items-center gap-2 hover:bg-neutral-700 transition-all uppercase font-headline font-bold text-xs tracking-widest text-white">
+<span class="material-symbols-outlined">description</span>
+                        Download Receipts
+                    </button>
+<button class="bg-neutral-800 border border-neutral-700 p-4 flex flex-col items-center gap-2 hover:bg-neutral-700 transition-all uppercase font-headline font-bold text-xs tracking-widest text-white">
+<span class="material-symbols-outlined">print</span>
+                        Print Summary
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="md:ml-64 bg-neutral-950 border-t border-neutral-900 py-12 px-8">
+<div class="flex flex-col md:flex-row justify-between items-start gap-8">
+<div>
+<span class="font-headline font-black text-2xl text-neutral-50 uppercase tracking-tighter">FORGE<span class="text-lime-500">.ERP</span></span>
+<p class="text-neutral-500 text-sm mt-2 max-w-xs">Industrial-grade resource planning for high-performance engineering sectors.</p>
+</div>
+<div class="grid grid-cols-2 gap-12">
+<div>
+<p class="text-[10px] text-lime-400 font-bold uppercase tracking-widest mb-4">Identification</p>
+<ul class="text-sm text-neutral-400 space-y-2">
+<li>RIF: J-30495821-0</li>
+<li>NIT: 0049283120</li>
+<li>SENCAMER: R-49502</li>
+</ul>
+</div>
+<div>
+<p class="text-[10px] text-lime-400 font-bold uppercase tracking-widest mb-4">Technical Support</p>
+<ul class="text-sm text-neutral-400 space-y-2">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px]">mail</span> support@forge-erp.io</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px]">phone</span> +58 (241) 555-0199</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px]">location_on</span> Valencia, Edo. Carabobo</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-neutral-900 flex justify-between items-center">
+<p class="text-[10px] text-neutral-600 uppercase font-bold tracking-widest">© 2023 Forge Industrial ERP Systems. All Rights Reserved.</p>
+<div class="flex gap-4">
+<div class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></div>
+<span class="text-[10px] text-neutral-600 uppercase font-bold tracking-widest">System Status: Operational</span>
+</div>
+</div>
+</footer>
+</body></html>
