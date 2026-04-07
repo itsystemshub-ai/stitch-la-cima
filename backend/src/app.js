@@ -8,7 +8,8 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 require('dotenv').config();
 
-const sequelize = require('./config/database');
+const { sequelize, initDatabase } = require('./config/database');
+const { apiLimiter, authLimiter, writeLimiter } = require('./middleware/rateLimiter');
 
 // Routes
 const authRoutes = require('./routes/auth.routes');
@@ -32,7 +33,7 @@ const io = new Server(server, {
   },
 });
 
-// Middleware - Configure CSP to allow Tailwind CDN, inline scripts, and external images
+// Middleware - Security and CORS
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -49,10 +50,27 @@ app.use(helmet({
   },
   crossOriginEmbedderPolicy: false,
 }));
-app.use(cors());
+
+// CORS - Restrict to frontend URL in production
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? (process.env.FRONTEND_URL || 'https://lacima.com.ve')
+    : ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:3000', 'http://127.0.0.1:5500'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+}));
+
+// Rate Limiting
+app.use('/api/', apiLimiter); // General API: 100 req/15min
+app.use('/api/auth', authLimiter); // Auth: 5 req/15min
+app.use('/api/products', writeLimiter); // Products: 30 req/15min
+app.use('/api/orders', writeLimiter); // Orders: 30 req/15min
+app.use('/api/cart', writeLimiter); // Cart: 30 req/15min
+
 app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' })); // Limit request size
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // View engine setup
 app.set('view engine', 'ejs');
@@ -151,20 +169,24 @@ const PORT = process.env.PORT || 3000;
 
 async function start() {
   try {
-    await sequelize.authenticate();
-    console.log('✅ Base de datos conectada');
-    
+    const { sequelize: db, dialect } = await initDatabase();
+    console.log(`📊 Base de datos: ${dialect === 'postgres' ? 'PostgreSQL' : 'SQLite'}`);
+
     if (process.env.NODE_ENV === 'development') {
-      await sequelize.sync({ force: false });
+      await db.sync({ force: false });
       console.log('✅ Base de datos sincronizada');
     }
-    
+
     server.listen(PORT, () => {
       console.log(`\n🚀 Zenith ERP corriendo en http://localhost:${PORT}`);
       console.log(`📊 Entorno: ${process.env.NODE_ENV || 'development'}`);
       console.log(`📦 API: http://localhost:${PORT}/api/health`);
       console.log(`🖥️  Web: http://localhost:${PORT}/\n`);
       console.log(`🔌 Socket.IO activo para actualizaciones en tiempo real\n`);
+      console.log(`🛡️  Rate limiting activo:`);
+      console.log(`   - API: 100 req/15min`);
+      console.log(`   - Auth: 5 req/15min`);
+      console.log(`   - Write ops: 30 req/15min\n`);
     });
   } catch (error) {
     console.error('❌ Error al iniciar el servidor:', error);
