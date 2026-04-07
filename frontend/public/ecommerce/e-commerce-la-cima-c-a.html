@@ -46,30 +46,39 @@
 <body class="bg-background text-on-surface selection:bg-primary/30 min-h-screen flex flex-col">
 
 <!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md border-b border-white/10 shadow-sm flex justify-between items-center px-6 py-3">
-    <div class="flex items-center gap-8">
-        <a href="index.html" class="text-2xl font-black italic text-primary tracking-tighter uppercase">TITAN <span class="text-white font-light italic">INDUSTRIAL</span></a>
-        <div class="hidden md:flex items-center gap-6">
-            <a href="index.html" class="text-[10px] uppercase tracking-widest font-bold text-primary border-b border-primary pb-1">Home</a>
-            <a href="#catalog" class="text-[10px] uppercase tracking-widest font-bold text-stone-400 hover:text-white transition-colors">Products</a>
-            <a href="#" class="text-[10px] uppercase tracking-widest font-bold text-stone-400 hover:text-white transition-colors">Cart</a>
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
+    <a href="index.html" class="flex items-center gap-2 group">
+        <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+        <div class="flex flex-col">
+            <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
+            <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
         </div>
+    </a>
+    <div class="hidden md:flex items-center gap-6">
+    <a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="index.html">Inicio</a>
+    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="catalog.html">Catálogo</a>
+    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Nosotros.html">Nosotros</a>
+    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="#contacto">Contacto</a>
+    </div>
     </div>
     <div class="flex items-center gap-4">
-        <div class="relative hidden lg:block">
-            <input class="bg-stone-900 border-none text-white pl-10 pr-4 py-2 text-xs uppercase tracking-widest font-bold focus:ring-1 focus:ring-primary w-64" placeholder="Search components..." type="text"/>
-            <span class="material-symbols-outlined absolute left-3 top-2 text-stone-500 text-lg">search</span>
-        </div>
-        <button class="flex items-center gap-2 text-stone-400 hover:text-white transition-colors text-xs uppercase tracking-widest font-bold">
-            <span class="material-symbols-outlined text-lg">person</span>
-            <span class="hidden sm:inline">My Account</span>
-        </button>
-        <button class="relative p-2 text-primary hover:text-white transition-colors">
-            <span class="material-symbols-outlined">shopping_cart</span>
-            <span id="cart-count" class="absolute top-0 right-0 bg-primary text-black text-[10px] font-black h-4 w-4 flex items-center justify-center rounded-full">0</span>
-        </button>
+    <div class="relative hidden lg:block">
+    <input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+    <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
     </div>
-</nav>
+    <!-- Cart with counter -->
+    <button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+    <span class="material-symbols-outlined">shopping_cart</span>
+    <span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
+    </button>
+    <div class="h-6 w-px bg-outline mx-2"></div>
+    <!-- ERP Access Toggle -->
+    <button class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+    <span class="material-symbols-outlined text-primary text-sm">database</span>
+                Login
+            </button>
+    </div>
+    </nav>
 
 <!-- Hero Section -->
 <header class="relative min-h-[85vh] flex items-center overflow-hidden bg-black pt-16">
@@ -369,8 +378,8 @@
                 </div>
                 <div class="pt-12 border-t border-stone-800">
                     <p class="text-[9px] text-stone-600 font-black uppercase tracking-[0.2em] leading-relaxed">
-                        © TITAN INDUSTRIAL. ALL RIGHTS RESERVED. <br/>
-                        POWERED BY HIGH-PERFORMANCE LOGISTICS.
+                        © 2024 MAYOR DE REPUESTO LA CIMA, C.A. RIF: J-40308741-5. Valencia, Venezuela. <br/>
+                        DISTRIBUIDOR LÍDER DE REPUESTOS INDUSTRIALES.
                     </p>
                 </div>
             </div>
