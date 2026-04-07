@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Inicio de Sesión y Registro | MAYOR DE REPUESTO LA CIMA, C.A.高度</title>
+    <title>Login | Mayor de Repuesto LA CIMA, C.A.</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -148,7 +148,7 @@
                     <h1 class="text-4xl font-headline font-bold text-on-surface mt-2 tracking-tight uppercase">Login de Cliente</h1>
                     <p class="text-secondary mt-2">Acceda a su inventario de repuestos industriales e historial de pedidos.</p>
                 </header>
-                <form class="space-y-6">
+                <form class="space-y-6" onsubmit="event.preventDefault(); window.location.href='../../erp/dashboard_principal.html';">
                     <div class="space-y-1.5">
                         <label class="text-xs font-bold uppercase tracking-wider text-secondary">Correo Laboral</label>
                         <div class="relative">

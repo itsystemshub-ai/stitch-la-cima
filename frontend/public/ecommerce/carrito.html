@@ -1,266 +1,226 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="light" lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Carrito de Compras (7 Items) | LA CIMA Industrial</title>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <title>Carrito | Mayor de Repuesto LA CIMA, C.A.</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#ceff5e", // Verde Lima Cima
-                        secondary: "#1c1c1c", // Negro Industrial
-                        background: "#f6f6f9",
-                        surface: "#ffffff",
-                        outline: "#e2e2e7",
-                        "on-surface": "#0c0e10",
-                        "on-surface-variant": "#5a5c5e"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.125rem",
-                        lg: "0.25rem",
-                        xl: "0.5rem",
-                        full: "9999px"
-                    },
-                    fontFamily: {
-                        sans: ['League Spartan', 'sans-serif'],
-                        headline: ['League Spartan', 'sans-serif']
-                    }
-                }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ceff5e",
+                    "primary-dim": "#bded4f",
+                    "on-primary": "#000000",
+                    "secondary": "#1c1c1c",
+                    "background": "#f6f6f9",
+                    "surface": "#ffffff",
+                    "on-surface": "#0c0e10",
+                    "on-surface-variant": "#5a5c5e",
+                    "outline": "#e2e2e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["League Spartan", "sans-serif"],
+                    "body": ["League Spartan", "sans-serif"],
+                    "label": ["League Spartan", "sans-serif"]
             }
-        }
+          },
+        },
+      }
     </script>
     <style>
-        body { font-family: 'League Spartan', sans-serif; }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        .blueprint-dots {
-            background-image: radial-gradient(#000 0.5px, transparent 0.5px);
-            background-size: 24px 24px;
-            opacity: 0.03;
+        body { font-family: 'League Spartan', sans-serif; }
+        .cart-item {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quantity-btn {
+            transition: all 0.2s ease;
+        }
+        .quantity-btn:hover {
+            transform: scale(1.1);
+        }
+        .quantity-btn:active {
+            transform: scale(0.95);
+        }
+        .remove-btn {
+            transition: all 0.2s ease;
+        }
+        .remove-btn:hover {
+            color: #ef4444;
+        }
+        .cart-empty {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
-<body class="bg-background text-on-surface selection:bg-primary/30 min-h-screen flex flex-col relative">
+<body class="bg-background text-on-surface selection:bg-primary/30 min-h-screen flex flex-col">
 
-<div class="fixed inset-0 blueprint-dots pointer-events-none"></div>
-
-<!-- Top Navigation (AutoPro/Industrial Style) -->
+<!-- Top Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
-    <a href="index.html" class="flex items-center gap-2 group">
-        <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
-        <div class="flex flex-col">
-            <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
-            <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
-        </div>
-    </a>
-    <div class="hidden md:flex items-center gap-6">
-    <a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="index.html">Inicio</a>
-    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="catalog.html">Catálogo</a>
+<a href="index.html" class="flex items-center gap-2 group">
+    <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+    <div class="flex flex-col">
+        <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
+        <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
+    </div>
+</a>
+<div class="hidden md:flex items-center gap-6">
+    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="catalogo_general.html">Catálogo</a>
     <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Nosotros.html">Nosotros</a>
-    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="#contacto">Contacto</a>
-    </div>
-    </div>
-    <div class="flex items-center gap-4">
-    <div class="relative hidden lg:block">
-    <input class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+    <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contacto</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+    <input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
     <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
-    </div>
-    <!-- Cart with counter -->
-    <button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+</div>
+<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
     <span class="material-symbols-outlined">shopping_cart</span>
-    <span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
-    </button>
-    <div class="h-6 w-px bg-outline mx-2"></div>
-    <!-- ERP Access Toggle -->
-    <a href="../auth/login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+    <span id="cart-count" class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">0</span>
+</button>
+<div class="h-6 w-px bg-outline mx-2"></div>
+<a href="../auth/login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
     <span class="material-symbols-outlined text-primary text-sm">database</span>
-                Login
-            </a>
-    </div>
-    </nav>
+    Login
+</a>
+</div>
+</nav>
 
+<!-- Main Content -->
 <main class="flex-grow w-full max-w-screen-2xl mx-auto px-6 md:px-12 pt-32 pb-24 relative z-10">
     <!-- Page Header -->
     <div class="mb-16">
-        <h1 class="text-6xl font-black text-black uppercase tracking-tighter leading-none mb-4 italic">Shopping <span class="text-primary italic">Cart</span></h1>
-        <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.4em]">Review Your High-Performance Parts Inventory</p>
+        <h1 class="text-6xl font-black text-black uppercase tracking-tighter leading-none mb-4 italic">Carrito de <span class="text-primary italic">Compras</span></h1>
+        <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.4em]">Revisa tu inventario de repuestos industriales</p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-        <!-- Cart Items -->
-        <div class="lg:col-span-8 space-y-4">
-            <div class="bg-white border border-outline overflow-hidden">
-                <!-- Header -->
-                <div class="grid grid-cols-12 gap-6 p-6 bg-black text-primary font-black text-xs uppercase tracking-[0.3em] items-center">
-                    <div class="col-span-6">Component Specification</div>
-                    <div class="col-span-2 text-center">Qty</div>
-                    <div class="col-span-2 text-right">Unit Price</div>
-                    <div class="col-span-2 text-right">Subtotal</div>
-                </div>
+    <!-- Empty Cart Message (shown when cart is empty) -->
+    <div id="emptyCartMessage" class="hidden cart-empty text-center py-24">
+        <span class="material-symbols-outlined text-8xl text-stone-300 mb-8">shopping_cart_off</span>
+        <h2 class="text-3xl font-black text-black uppercase tracking-tight mb-4">Tu carrito está vacío</h2>
+        <p class="text-on-surface-variant mb-8">Agrega repuestos industriales de alta calidad para comenzar tu pedido.</p>
+        <a href="catalogo_general.html" class="inline-flex items-center gap-3 bg-black text-primary hover:bg-primary hover:text-black font-black uppercase py-4 px-10 tracking-[0.3em] text-xs transition-all">
+            <span class="material-symbols-outlined">storefront</span>
+            Explorar Catálogo
+        </a>
+    </div>
 
-                <!-- Items Container (RESTORING DATA) -->
-                <div class="divide-y divide-outline">
-                    <!-- Item 1: Piston Kit -->
-                    <div class="grid grid-cols-12 gap-6 p-6 items-center hover:bg-background transition-colors group">
-                        <div class="col-span-6 flex gap-6 items-center">
-                            <div class="w-24 h-24 bg-background border border-outline p-2 overflow-hidden flex items-center justify-center flex-shrink-0">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR2j_XCTGq_-krpB_bYFq5TOHRkw1JArgMK0iRT3Y7nC6iFCc97XrgINbdx2shXLqwuRhAz4XQtQS6yEQvgUopwgXHpY-eN_EiyrIzkY_bcmUFHyh8ToF75F6A-nP2Htm-HvWqHfbCMGLwrIfMkokEvOT2UKDvgt8hcPB5POFBynm19koJedxF7VJ4NsPbRRrCQCXr53rWHySBusgbcd7YUAnPWoYwIofVkyL-RDn7nE20pt8Yyhci5mJoPvbm0-rYbAiLGy33Fs0" class="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110">
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-black text-black uppercase tracking-tight leading-none mb-2">High-Pressure Piston Kit</h4>
-                                <p class="text-xs font-black text-on-surface-variant uppercase tracking-[0.2em]">Ref: HP-9004-X | V8 Engine Block</p>
-                                <button class="mt-4 text-xs font-black text-red-500 hover:text-black uppercase tracking-widest flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">delete</span> Remove
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            <div class="flex items-center border border-outline bg-background p-1">
-                                <button class="w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors">-</button>
-                                <span class="w-10 text-center font-black text-sm">4</span>
-                                <button class="w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors">+</button>
-                            </div>
-                        </div>
-                        <div class="col-span-2 text-right font-black text-on-surface-variant tracking-tighter text-sm">$245.00</div>
-                        <div class="col-span-2 text-right font-black text-black tracking-widest text-sm">$980.00</div>
+    <!-- Cart Content (shown when cart has items) -->
+    <div id="cartContent" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            <!-- Cart Items -->
+            <div class="lg:col-span-8 space-y-4">
+                <div class="bg-white border border-outline overflow-hidden rounded-lg">
+                    <!-- Header -->
+                    <div class="grid grid-cols-12 gap-6 p-6 bg-black text-primary font-black text-xs uppercase tracking-[0.3em] items-center rounded-t-lg">
+                        <div class="col-span-6">Especificación del Componente</div>
+                        <div class="col-span-2 text-center">Cant.</div>
+                        <div class="col-span-2 text-right">Precio Unit.</div>
+                        <div class="col-span-2 text-right">Subtotal</div>
                     </div>
 
-                    <!-- Item 2: Head Gasket -->
-                    <div class="grid grid-cols-12 gap-6 p-6 items-center hover:bg-background transition-colors group">
-                        <div class="col-span-6 flex gap-6 items-center">
-                            <div class="w-24 h-24 bg-background border border-outline p-2 overflow-hidden flex items-center justify-center flex-shrink-0">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1nnrWSzPvKyOPQamSm3yFgw7ZcRBj7-iAa9TrISryWRJ-NzfAR_hcCGzCWhmNaB7EBgzhZQckIdMGIc-P7Z1SePcvFwrAr-iVmEO0af65AVc7sKU9PwpHmwU36ECTqZYQ4f-bJhC9LU0Gcpf8pLHHgpexj2fyvDGlv6jFbqcOsX3n4XcQ6fH_WImcD9elOxkC4gL_hi97aKppJEsATPACpTO4-cnJjpF9r5UT3tisQE2SMzsEoHbW1K_SxqP-_0us5VJJwcWHbvM" class="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110">
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-black text-black uppercase tracking-tight leading-none mb-2">Cylinder Head Gasket</h4>
-                                <p class="text-[9px] font-black text-on-surface-variant uppercase tracking-[0.2em]">Ref: CHG-221 | Multi-Layer Steel</p>
-                                <button class="mt-4 text-[9px] font-black text-red-500 hover:text-black uppercase tracking-widest flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">delete</span> Remove
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            <div class="flex items-center border border-outline bg-background p-1">
-                                <button class="w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors">-</button>
-                                <span class="w-10 text-center font-black text-sm">2</span>
-                                <button class="w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors">+</button>
-                            </div>
-                        </div>
-                        <div class="col-span-2 text-right font-black text-on-surface-variant tracking-tighter text-sm">$89.50</div>
-                        <div class="col-span-2 text-right font-black text-black tracking-widest text-sm">$179.00</div>
+                    <!-- Items Container -->
+                    <div id="cartItemsContainer" class="divide-y divide-outline">
+                        <!-- Items will be dynamically inserted here -->
                     </div>
 
-                    <!-- Item 3: Fuel Injector -->
-                    <div class="grid grid-cols-12 gap-6 p-6 items-center hover:bg-background transition-colors group">
-                        <div class="col-span-6 flex gap-6 items-center">
-                            <div class="w-24 h-24 bg-background border border-outline p-2 overflow-hidden flex items-center justify-center flex-shrink-0">
-                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCImLKVCQ7HCL6FAEjT6D3U0Gek3Wctabw4q2PvzVJRtc8K7hRcTyc2VJMEsg5an65yRLK3_L5iqd5nrngdltFs5DUgh2eRyHNZP2CZ6CFT4GitTzfZvpAQIgoGWaT_WUlClKPIgr1CdJoc8d9txAigsQ2oMzpAIVaciDFh5mIgIWzQtiPiNrCdtzwMCIyi_-8TAW7p6iw0Js1kj6XigKexhI-Diu95QNpKq0I5CdetBFV1Cn6szDz2iHN0N4n0tV5ohwZDEZKzsOg" class="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110">
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-black text-black uppercase tracking-tight leading-none mb-2">Fuel Injector Assembly</h4>
-                                <p class="text-[9px] font-black text-on-surface-variant uppercase tracking-[0.2em]">Ref: FI-V6-PRO | Common Rail</p>
-                                <button class="mt-4 text-[9px] font-black text-red-500 hover:text-black uppercase tracking-widest flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">delete</span> Remove
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            <div class="flex items-center border border-outline bg-background p-1">
-                                <button class="w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors">-</button>
-                                <span class="w-10 text-center font-black text-sm">1</span>
-                                <button class="w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors">+</button>
-                            </div>
-                        </div>
-                        <div class="col-span-2 text-right font-black text-on-surface-variant tracking-tighter text-sm">$412.00</div>
-                        <div class="col-span-2 text-right font-black text-black tracking-widest text-sm">$412.00</div>
-                    </div>
-
-                    <!-- Additional Context -->
-                    <div class="p-6 bg-background/50 border-t border-outline flex items-center justify-center gap-4 group cursor-pointer hover:bg-white transition-all">
-                        <span class="material-symbols-outlined text-primary font-black animate-bounce">expand_more</span>
-                        <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.3em] group-hover:text-black transition-colors">+ 4 Additional Technical Components In List</p>
+                    <!-- Cart Summary Bar -->
+                    <div class="p-6 bg-background/50 border-t border-outline flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <a href="catalogo_general.html" class="flex items-center gap-3 font-black text-[10px] uppercase tracking-[0.3em] hover:text-primary transition-colors group">
+                            <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
+                            Continuar Comprando
+                        </a>
+                        <button onclick="clearCart()" class="flex items-center gap-3 font-black text-[10px] uppercase tracking-[0.3em] text-red-500 hover:text-black transition-colors group">
+                            <span class="material-symbols-outlined group-hover:scale-125 transition-transform">delete_sweep</span>
+                            Vaciar Carrito
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Cart Actions -->
-            <div class="flex items-center justify-between pt-8">
-                <a href="catalogo_general.html" class="flex items-center gap-3 font-black text-[10px] uppercase tracking-[0.3em] hover:text-primary transition-colors group">
-                    <span class="material-symbols-outlined group-hover:-translate-x-2 transition-transform">arrow_back</span>
-                    Continue Sourcing
-                </a>
-                <button class="flex items-center gap-3 font-black text-[10px] uppercase tracking-[0.3em] text-red-500 hover:text-black transition-colors group">
-                    <span class="material-symbols-outlined group-hover:scale-125 transition-transform">delete_sweep</span>
-                    Clear Inventory
-                </button>
-            </div>
-        </div>
-
-        <!-- Summary -->
-        <aside class="lg:col-span-4 sticky top-32">
-            <div class="bg-white border border-outline p-10 shadow-sm relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 -mr-12 -mt-12 rotate-45 pointer-events-none"></div>
-                
-                <h2 class="text-3xl font-black text-black uppercase tracking-tighter mb-10 pb-4 border-b-4 border-primary italic">Summary</h2>
-                
-                <div class="space-y-6 mb-12">
-                    <div class="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant">
-                        <span>Subtotal</span>
-                        <span class="text-black text-lg tracking-tighter">$3,240.00</span>
-                    </div>
-                    <div class="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant">
-                        <span>Shipping (Freight)</span>
-                        <span class="text-primary text-lg tracking-tighter">$45.00</span>
-                    </div>
-                    <div class="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant">
-                        <span>IVA (16% Taxes)</span>
-                        <span class="text-black text-lg tracking-tighter">$518.40</span>
-                    </div>
+            <!-- Order Summary -->
+            <aside class="lg:col-span-4 sticky top-32 space-y-6">
+                <!-- Summary Card -->
+                <div class="bg-white border border-outline p-10 shadow-sm relative overflow-hidden rounded-lg">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 -mr-12 -mt-12 rotate-45 pointer-events-none"></div>
                     
-                    <div class="pt-8 border-t-2 border-outline mt-8">
-                        <div class="flex flex-col gap-2">
-                            <span class="text-[10px] font-black uppercase tracking-[0.4em] text-on-surface-variant italic">Total Amount Due</span>
-                            <div class="text-5xl font-black text-black tracking-tighter tabular-nums leading-none">USD $3,803.40</div>
+                    <h2 class="text-3xl font-black text-black uppercase tracking-tighter mb-10 pb-4 border-b-4 border-primary italic">Resumen del Pedido</h2>
+                    
+                    <div class="space-y-6 mb-12">
+                        <div class="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant">
+                            <span>Subtotal</span>
+                            <span id="subtotal" class="text-black text-lg tracking-tighter">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant">
+                            <span>Envío (Flete)</span>
+                            <span id="shipping" class="text-primary text-lg tracking-tighter">$45.00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant">
+                            <span>IVA (16%)</span>
+                            <span id="tax" class="text-black text-lg tracking-tighter">$0.00</span>
+                        </div>
+                        
+                        <div class="pt-8 border-t-2 border-outline mt-8">
+                            <div class="flex flex-col gap-2">
+                                <span class="text-[10px] font-black uppercase tracking-[0.4em] text-on-surface-variant italic">Total a Pagar</span>
+                                <div id="total" class="text-5xl font-black text-black tracking-tighter tabular-nums leading-none">$0.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <button onclick="checkout()" class="w-full bg-black text-primary hover:bg-white hover:text-black border-2 border-black font-black uppercase py-5 px-10 tracking-[0.3em] text-[11px] shadow-2xl transition-all flex items-center justify-center gap-4 group">
+                            Proceder al Pago
+                            <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">payments</span>
+                        </button>
+                        <p class="text-[9px] text-on-surface-variant text-center font-bold uppercase tracking-widest leading-relaxed">
+                            Precios incluyen IVA. Envío internacional sujeto a inspección aduanera.
+                        </p>
+                    </div>
+
+                    <!-- Security Badge -->
+                    <div class="mt-12 pt-8 border-t border-outline flex items-center gap-4 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+                        <span class="material-symbols-outlined text-4xl">verified_user</span>
+                        <div class="text-[9px] font-black uppercase tracking-widest leading-tight">
+                            Portal Industrial <br/> Encriptado y Seguro
                         </div>
                     </div>
                 </div>
 
-                <div class="space-y-4">
-                    <button class="w-full bg-black text-primary hover:bg-white hover:text-black border-2 border-black font-black uppercase py-5 px-10 tracking-[0.3em] text-[11px] shadow-2xl transition-all flex items-center justify-center gap-4 group">
-                        Proceed to Checkout
-                        <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">payments</span>
-                    </button>
-                    <p class="text-[9px] text-on-surface-variant text-center font-bold uppercase tracking-widest leading-relaxed">
-                        Price includes VAT. International shipping subject to customs clearance and industrial inspection fees.
-                    </p>
-                </div>
-
-                <!-- Security Portal -->
-                <div class="mt-12 pt-8 border-t border-outline flex items-center gap-4 opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all cursor-help">
-                    <span class="material-symbols-outlined text-4xl">verified_user</span>
-                    <div class="text-[9px] font-black uppercase tracking-widest leading-tight">
-                        Secure Encrypted <br/> Industrial Portal
+                <!-- Support Card -->
+                <div class="bg-black p-8 group relative overflow-hidden rounded-lg">
+                    <div class="relative z-10">
+                        <h4 class="text-primary text-lg font-black uppercase tracking-tighter mb-2 italic">¿Necesitas Soporte?</h4>
+                        <p class="text-stone-500 text-[10px] font-bold uppercase tracking-widest mb-6 leading-relaxed">Nuestro equipo de ingeniería está disponible para verificación de catálogo en tiempo real.</p>
+                        <a href="mailto:info@lacima.com" class="text-white text-[10px] font-black uppercase tracking-[0.2em] border-b-2 border-primary pb-1 hover:text-primary transition-colors">Solicitar Verificación de Catálogo</a>
                     </div>
+                    <span class="material-symbols-outlined absolute right-[-20px] bottom-[-20px] text-white/5 text-[120px] transform group-hover:scale-110 transition-transform">engineering</span>
                 </div>
-            </div>
-
-            <!-- Support -->
-            <div class="mt-8 bg-black p-8 group relative overflow-hidden">
-                <div class="relative z-10">
-                    <h4 class="text-primary text-lg font-black uppercase tracking-tighter mb-2 italic">Support Required?</h4>
-                    <p class="text-stone-500 text-[10px] font-bold uppercase tracking-widest mb-6 leading-relaxed">Our engineering team is available for real-time catalog verification.</p>
-                    <a href="mailto:info@lacima.com" class="text-white text-[10px] font-black uppercase tracking-[0.2em] border-b-2 border-primary pb-1 hover:text-primary transition-colors">Request Catalog Verification</a>
-                </div>
-                <span class="material-symbols-outlined absolute right-[-20px] bottom-[-20px] text-white/5 text-[120px] transform group-hover:scale-110 transition-transform">engineering</span>
-            </div>
-        </aside>
+            </aside>
+        </div>
     </div>
 </main>
 
@@ -270,7 +230,6 @@
 <div class="md:col-span-1">
 <div class="flex items-center gap-3 mb-6">
     <img src="../../assets/images/logo.png" alt="Logo" class="h-12 w-auto">
-
     <div class="flex flex-col justify-center">
         <span class="text-primary font-black text-sm block uppercase tracking-tighter leading-none">
             MAYOR DE REPUESTO LA CIMA, C.A
@@ -280,7 +239,6 @@
         </span>
     </div>
 </div>
-
 <div class="flex gap-4">
 <div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
 <span class="material-symbols-outlined text-sm">facebook</span>
@@ -328,6 +286,163 @@
 </div>
 </div>
 </footer>
+
+<script>
+    // Sample product data for demo purposes
+    const products = [
+        {
+            id: 1,
+            name: "Kit de Pistones Alta Presión",
+            ref: "HP-9004-X | Bloque Motor V8",
+            price: 245.00,
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDR2j_XCTGq_-krpB_bYFq5TOHRkw1JArgMK0iRT3Y7nC6iFCc97XrgINbdx2shXLqwuRhAz4XQtQS6yEQvgUopwgXHpY-eN_EiyrIzkY_bcmUFHyh8ToF75F6A-nP2Htm-HvWqHfbCMGLwrIfMkokEvOT2UKDvgt8hcPB5POFBynm19koJedxF7VJ4NsPbRRrCQCXr53rWHySBusgbcd7YUAnPWoYwIofVkyL-RDn7nE20pt8Yyhci5mJoPvbm0-rYbAiLGy33Fs0",
+            qty: 4
+        },
+        {
+            id: 2,
+            name: "Junta de Culata",
+            ref: "CHG-221 | Acero Multicapa",
+            price: 89.50,
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC1nnrWSzPvKyOPQamSm3yFgw7ZcRBj7-iAa9TrISryWRJ-NzfAR_hcCGzCWhmNaB7EBgzhZQckIdMGIc-P7Z1SePcvFwrAr-iVmEO0af65AVc7sKU9PwpHmwU36ECTqZYQ4f-bJhC9LU0Gcpf8pLHHgpexj2fyvDGlv6jFbqcOsX3n4XcQ6fH_WImcD9elOxkC4gL_hi97aKppJEsATPACpTO4-cnJjpF9r5UT3tisQE2SMzsEoHbW1K_SxqP-_0us5VJJwcWHbvM",
+            qty: 2
+        },
+        {
+            id: 3,
+            name: "Inyector de Combustible",
+            ref: "FI-V6-PRO | Riel Común",
+            price: 412.00,
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCImLKVCQ7HCL6FAEjT6D3U0Gek3Wctabw4q2PvzVJRtc8K7hRcTyc2VJMEsg5an65yRLK3_L5iqd5nrngdltFs5DUgh2eRyHNZP2CZ6CFT4GitTzfZvpAQIgoGWaT_WUlClKPIgr1CdJoc8d9txAigsQ2oMzpAIVaciDFh5mIgIWzQtiPiNrCdtzwMCIyi_-8TAW7p6iw0Js1kj6XigKexhI-Diu95QNpKq0I5CdetBFV1Cn6szDz2iHN0N4n0tV5ohwZDEZKzsOg",
+            qty: 1
+        }
+    ];
+
+    // Initialize cart from localStorage or use default products
+    let cart = JSON.parse(localStorage.getItem('cart')) || products.map(p => ({...p}));
+    
+    // Save cart to localStorage
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Update cart count badge
+    function updateCartCount() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        document.getElementById('cart-count').textContent = count;
+    }
+
+    // Render cart items
+    function renderCart() {
+        const container = document.getElementById('cartItemsContainer');
+        const emptyMessage = document.getElementById('emptyCartMessage');
+        const cartContent = document.getElementById('cartContent');
+        
+        if (cart.length === 0) {
+            emptyMessage.classList.remove('hidden');
+            cartContent.classList.add('hidden');
+            return;
+        }
+        
+        emptyMessage.classList.add('hidden');
+        cartContent.classList.remove('hidden');
+        
+        container.innerHTML = cart.map((item, index) => `
+            <div class="cart-item grid grid-cols-12 gap-6 p-6 items-center hover:bg-background transition-colors group" style="animation-delay: ${index * 0.1}s">
+                <div class="col-span-6 flex gap-6 items-center">
+                    <div class="w-24 h-24 bg-background border border-outline p-2 overflow-hidden flex items-center justify-center flex-shrink-0 rounded">
+                        <img src="${item.image}" class="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110" alt="${item.name}">
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-black text-black uppercase tracking-tight leading-none mb-2">${item.name}</h4>
+                        <p class="text-[9px] font-black text-on-surface-variant uppercase tracking-[0.2em]">Ref: ${item.ref}</p>
+                        <button onclick="removeItem(${item.id})" class="mt-4 text-[9px] font-black text-stone-400 hover:text-red-500 uppercase tracking-widest flex items-center gap-2 remove-btn transition-colors">
+                            <span class="material-symbols-outlined text-sm">delete</span> Eliminar
+                        </button>
+                    </div>
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <div class="flex items-center border border-outline bg-background p-1 rounded">
+                        <button onclick="updateQuantity(${item.id}, -1)" class="quantity-btn w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors rounded">-</button>
+                        <span class="w-10 text-center font-black text-sm">${item.qty}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)" class="quantity-btn w-8 h-8 flex items-center justify-center text-black font-black hover:bg-white transition-colors rounded">+</button>
+                    </div>
+                </div>
+                <div class="col-span-2 text-right font-black text-on-surface-variant tracking-tighter text-sm">$${item.price.toFixed(2)}</div>
+                <div class="col-span-2 text-right font-black text-black tracking-widest text-sm">$${(item.price * item.qty).toFixed(2)}</div>
+            </div>
+        `).join('');
+        
+        updateSummary();
+    }
+
+    // Update quantity
+    function updateQuantity(id, change) {
+        const item = cart.find(i => i.id === id);
+        if (item) {
+            item.qty = Math.max(1, item.qty + change);
+            saveCart();
+            renderCart();
+            updateCartCount();
+        }
+    }
+
+    // Remove item
+    function removeItem(id) {
+        cart = cart.filter(i => i.id !== id);
+        saveCart();
+        renderCart();
+        updateCartCount();
+    }
+
+    // Clear cart
+    function clearCart() {
+        if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
+            cart = [];
+            saveCart();
+            renderCart();
+            updateCartCount();
+        }
+    }
+
+    // Update summary
+    function updateSummary() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const shipping = subtotal > 0 ? 45.00 : 0;
+        const tax = subtotal * 0.16;
+        const total = subtotal + shipping + tax;
+        
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('shipping').textContent = shipping > 0 ? `$${shipping.toFixed(2)}` : '$0.00';
+        document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('total').textContent = `USD $${total.toFixed(2)}`;
+    }
+
+    // Checkout
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Tu carrito está vacío');
+            return;
+        }
+        alert('Procediendo al pago...\nTotal: ' + document.getElementById('total').textContent);
+        // Here you would redirect to checkout page
+        // window.location.href = 'checkout.html';
+    }
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+            }
+        });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCart();
+        updateCartCount();
+    });
+</script>
 
 </body>
 </html>
