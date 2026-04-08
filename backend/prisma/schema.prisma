@@ -62,19 +62,43 @@ model InventoryLog {
 }
 
 model Sale {
-  id            Int        @id @default(autoincrement())
-  userId        Int?       @map("user_id")
-  user          User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
-  total         Float
-  status        String     @default("COMPLETED") @db.VarChar(20) // PENDING, COMPLETED, CANCELLED
-  paymentMethod String     @map("payment_method") @db.VarChar(50)
-  createdAt     DateTime   @default(now()) @map("created_at")
-  items         SaleItem[]
+  id                Int        @id @default(autoincrement())
+  userId            Int?       @map("user_id")
+  user              User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  invoiceNumber     String?    @unique @map("invoice_number") @db.VarChar(50)
+  subtotal          Float      @default(0)
+  tax               Float      @default(0)
+  discount          Float      @default(0)
+  paymentReference  String?    @map("payment_reference") @db.VarChar(100)
+  total             Float
+  status            String     @default("COMPLETED") @db.VarChar(20) // PENDING, COMPLETED, CANCELLED
+  paymentMethod     String     @map("payment_method") @db.VarChar(50)
+  createdAt         DateTime   @default(now()) @map("created_at")
+  items             SaleItem[]
+  creditNotes       CreditNote[]
 
   @@index([userId])
   @@index([status])
   @@index([createdAt])
+  @@index([invoiceNumber])
   @@map("sales")
+}
+
+model CreditNote {
+  id                 Int      @id @default(autoincrement())
+  creditNoteNumber   String   @unique @map("credit_note_number") @db.VarChar(50)
+  saleId             Int      @map("sale_id")
+  sale               Sale     @relation(fields: [saleId], references: [id], onDelete: Restrict)
+  userId             Int      @map("user_id")
+  amount             Float
+  reason             String?  @db.Text
+  status             String   @default("ISSUED") @db.VarChar(20) // ISSUED, APPLIED, CANCELLED
+  createdAt          DateTime @default(now()) @map("created_at")
+
+  @@index([saleId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("credit_notes")
 }
 
 model SaleItem {
@@ -127,6 +151,22 @@ model Payroll {
   @@map("payrolls")
 }
 
+model Attendance {
+  id          Int      @id @default(autoincrement())
+  employeeId  Int      @map("employee_id")
+  date        DateTime @db.Date
+  checkIn     DateTime @map("check_in")
+  checkOut    DateTime? @map("check_out")
+  hours       Float?
+  notes       String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@unique([employeeId, date])
+  @@index([employeeId])
+  @@index([date])
+  @@map("attendance")
+}
+
 model Category {
   id          Int       @id @default(autoincrement())
   name        String    @db.VarChar(100)
@@ -134,8 +174,151 @@ model Category {
   description String?   @db.Text
   active      Boolean   @default(true)
   createdAt   DateTime  @default(now()) @map("created_at")
-  products    Product[] // Future: for product-category relationships
 
   @@index([name])
   @@map("categories")
+}
+
+model Supplier {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  rif         String   @unique @db.VarChar(20)  // Tax ID (Venezuela)
+  email       String?  @db.VarChar(255)
+  phone       String?  @db.VarChar(20)
+  address     String?  @db.Text
+  contact     String?  @db.VarChar(255)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  purchases   PurchaseOrder[]
+
+  @@index([rif])
+  @@index([name])
+  @@map("suppliers")
+}
+
+model PurchaseOrder {
+  id          Int      @id @default(autoincrement())
+  number      String   @unique @db.VarChar(20)  // PO number
+  supplierId  Int      @map("supplier_id")
+  supplier    Supplier @relation(fields: [supplierId], references: [id])
+  total       Float
+  status      String   @default("PENDING") @db.VarChar(20) // PENDING, APPROVED, RECEIVED, CANCELLED
+  orderDate   DateTime @map("order_date")
+  receivedAt  DateTime? @map("received_at")
+  notes       String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  items       PurchaseItem[]
+
+  @@index([supplierId])
+  @@index([status])
+  @@index([orderDate])
+  @@map("purchase_orders")
+}
+
+model PurchaseItem {
+  id              Int           @id @default(autoincrement())
+  purchaseOrderId Int           @map("purchase_order_id")
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  productId       Int?
+  productName     String        @db.VarChar(255)
+  sku             String?       @db.VarChar(50)
+  quantity        Int
+  unitCost        Float         @map("unit_cost")
+  total           Float
+  received        Int           @default(0)
+
+  @@index([purchaseOrderId])
+  @@map("purchase_items")
+}
+
+// ============================================================
+// Accounting & Finance Models
+// ============================================================
+
+model Account {
+  id          Int      @id @default(autoincrement())
+  code        String   @unique @db.VarChar(20)  // Account code (e.g., "1.01.01")
+  name        String   @db.VarChar(255)
+  type        String   @db.VarChar(20)  // ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE
+  parentCode  String?  @map("parent_code") @db.VarChar(20)
+  balance     Float    @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  journalEntries JournalEntryLine[]
+
+  @@index([type])
+  @@index([code])
+  @@map("accounts")
+}
+
+model JournalEntry {
+  id          Int      @id @default(autoincrement())
+  number      String   @unique @db.VarChar(20)  // Entry number
+  date        DateTime @db.Date
+  description String   @db.Text
+  totalDebit  Float    @default(0) @map("total_debit")
+  totalCredit Float    @default(0) @map("total_credit")
+  posted      Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map("created_at")
+  lines       JournalEntryLine[]
+
+  @@index([date])
+  @@index([posted])
+  @@map("journal_entries")
+}
+
+model JournalEntryLine {
+  id              Int            @id @default(autoincrement())
+  entryId         Int            @map("entry_id")
+  entry           JournalEntry   @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  accountId       Int            @map("account_id")
+  account         Account        @relation(fields: [accountId], references: [id])
+  debit           Float          @default(0)
+  credit          Float          @default(0)
+  description     String?        @db.Text
+
+  @@index([entryId])
+  @@index([accountId])
+  @@map("journal_entry_lines")
+}
+
+model FixedAsset {
+  id              Int      @id @default(autoincrement())
+  name            String   @db.VarChar(255)
+  code            String   @unique @db.VarChar(20)
+  category        String   @db.VarChar(100)
+  acquisitionDate DateTime @map("acquisition_date") @db.Date
+  acquisitionCost Float    @map("acquisition_cost")
+  usefulLife      Int      @map("useful_life")  // years
+  depreciationMethod String @default("STRAIGHT_LINE") @map("depreciation_method") @db.VarChar(20) // STRAIGHT_LINE, DECLINING
+  salvageValue    Float    @default(0) @map("salvage_value")
+  currentBookValue Float   @map("current_book_value")
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@index([category])
+  @@map("fixed_assets")
+}
+
+model AccountsReceivable {
+  id          Int      @id @default(autoincrement())
+  customerId  String   @map("customer_id") @db.VarChar(50)
+  customerName String  @map("customer_name") @db.VarChar(255)
+  saleId      Int?
+  invoiceNumber String @map("invoice_number") @db.VarChar(20)
+  amount      Float
+  paidAmount  Float    @default(0) @map("paid_amount")
+  dueDate     DateTime @map("due_date") @db.Date
+  status      String   @default("PENDING") @db.VarChar(20) // PENDING, PARTIAL, PAID, OVERDUE
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([customerId])
+  @@index([status])
+  @@index([dueDate])
+  @@map("accounts_receivable")
 }
