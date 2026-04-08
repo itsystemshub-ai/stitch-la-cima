@@ -20,6 +20,14 @@ router.use('/purchases', require('./purchaseRoutes'));
 // HR & Payroll
 router.use('/hr', require('./hrRoutes'));
 
+// Accounting & Finance (ERP)
+router.use('/accounting', require('./accountingRoutes'));
+router.use('/finance', require('./financeRoutes'));
+
+// System Configuration & Administration (ERP)
+router.use('/admin/config', require('./configRoutes'));
+router.use('/admin/users', require('./userManagementRoutes'));
+
 // Health Check
 router.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date(), version: '1.0.0-zenith' });

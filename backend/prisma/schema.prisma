@@ -322,3 +322,45 @@ model AccountsReceivable {
   @@index([dueDate])
   @@map("accounts_receivable")
 }
+
+model SystemConfig {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique @db.VarChar(100)
+  value       String   @db.Text
+  description String?  @db.Text
+  category    String   @db.VarChar(50)  // GENERAL, FISCAL, INVENTORY, SALES, HR
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([category])
+  @@map("system_configs")
+}
+
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  action    String   @db.VarChar(100)  // LOGIN, CREATE, UPDATE, DELETE, APPROVE, CANCEL
+  entity    String   @db.VarChar(50)   // Entity type (User, Product, Sale, etc.)
+  entityId  String?  @map("entity_id") @db.VarChar(50)
+  details   String?  @db.Text         // JSON with old/new values
+  ip        String?  @db.VarChar(45)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model Backup {
+  id          Int      @id @default(autoincrement())
+  filename    String   @db.VarChar(255)
+  size        Int
+  status      String   @default("PENDING") @db.VarChar(20) // PENDING, COMPLETED, FAILED
+  notes       String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  completedAt DateTime? @map("completed_at")
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("backups")
+}
