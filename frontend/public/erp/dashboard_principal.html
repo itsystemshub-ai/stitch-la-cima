@@ -83,6 +83,15 @@
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
+    <script>
+        // Verificar autenticación antes de cargar el dashboard
+        (function() {
+            const isLoggedIn = localStorage.getItem('erp_session') === 'true';
+            if (!isLoggedIn) {
+                window.location.href = '/frontend/public/auth/login.html';
+            }
+        })();
+    </script>
 </head>
 <body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
 <!-- Sidebar Navigation Shell -->
@@ -102,59 +111,63 @@
 </div>
 <nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
 <!-- Active Item -->
-<a class="flex items-center gap-3 px-3 py-2.5 bg-lime-500/10 text-lime-700 font-bold border-r-4 border-lime-500 transition-transform duration-150" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 bg-lime-500/10 text-lime-700 font-bold border-r-4 border-lime-500 transition-transform duration-150" href="frontend/public/erp/dashboard_principal.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
-<span class="text-sm font-medium tracking-wide">Dashboard</span>
+<span class="text-sm font-medium tracking-wide">Panel Principal</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="frontend/public/erp/dashboard-inventory.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="inventory_2">inventory_2</span>
-<span class="text-sm font-medium tracking-wide">Inventory</span>
+<span class="text-sm font-medium tracking-wide">Inventario</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="frontend/public/erp/dashboard-de-ventas.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="payments">payments</span>
-<span class="text-sm font-medium tracking-wide">Sales</span>
+<span class="text-sm font-medium tracking-wide">Ventas</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="frontend/public/erp/dashboard-de-compras.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="shopping_cart">shopping_cart</span>
-<span class="text-sm font-medium tracking-wide">Purchases</span>
+<span class="text-sm font-medium tracking-wide">Compras</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-600 hover:bg-stone-200 transition-transform duration-150" href="frontend/public/erp/dashboard-configuracion.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="settings_input_component">settings_input_component</span>
-<span class="text-sm font-medium tracking-wide">Configuration</span>
+<span class="text-sm font-medium tracking-wide">Configuración</span>
 </a>
 <!-- WIP Sections -->
 <div class="pt-4 pb-2 px-3">
-<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Internal / WIP</span>
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Interno / En Desarrollo</span>
 </div>
-<a class="flex items-center gap-3 px-3 py-2.5 text-stone-400 cursor-not-allowed group" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-400 cursor-not-allowed group" href="frontend/public/erp/dashboard-de-contabilidad.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="account_balance">account_balance</span>
-<span class="text-sm font-medium tracking-wide">Accounting (WIP)</span>
-<span class="ml-auto text-[8px] bg-stone-200 px-1 rounded">PROJ</span>
+<span class="text-sm font-medium tracking-wide">Contabilidad (En Desarrollo)</span>
+<span class="ml-auto text-[8px] bg-stone-200 px-1 rounded">PROY</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-stone-400 cursor-not-allowed group" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-400 cursor-not-allowed group" href="frontend/public/erp/dashboard-financiero.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="monetization_on">monetization_on</span>
-<span class="text-sm font-medium tracking-wide">Finance (WIP)</span>
+<span class="text-sm font-medium tracking-wide">Finanzas (En Desarrollo)</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 text-stone-400 cursor-not-allowed group" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 text-stone-400 cursor-not-allowed group" href="frontend/public/erp/dashboard-de-rrhh.html">
 <span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
-<span class="text-sm font-medium tracking-wide">HR (WIP)</span>
+<span class="text-sm font-medium tracking-wide">RRHH (En Desarrollo)</span>
 </a>
 </nav>
 <div class="mt-auto border-t border-stone-200 pt-6">
 <button class="w-full bg-stone-900 text-primary-container font-headline font-bold py-3 px-4 flex items-center justify-center gap-2 hover:bg-stone-800 transition-all active:scale-95 mb-4">
 <span class="material-symbols-outlined text-sm" data-icon="article">article</span>
-                    GENERATE REPORT
+                    GENERAR REPORTE
                 </button>
 <div class="space-y-1">
 <a class="flex items-center gap-3 px-3 py-1.5 text-stone-500 hover:text-stone-900 transition-colors" href="#">
 <span class="material-symbols-outlined text-[18px]" data-icon="help">help</span>
-<span class="text-xs font-medium">Support</span>
+<span class="text-xs font-medium">Soporte</span>
 </a>
 <a class="flex items-center gap-3 px-3 py-1.5 text-stone-500 hover:text-stone-900 transition-colors" href="#">
 <span class="material-symbols-outlined text-[18px]" data-icon="sensors">sensors</span>
-<span class="text-xs font-medium">System Status</span>
+<span class="text-xs font-medium">Estado del Sistema</span>
 </a>
 </div>
+<button onclick="localStorage.removeItem('erp_session'); window.location.href='/frontend/public/auth/login.html';" class="w-full mt-4 bg-red-600/10 text-red-600 font-headline font-bold py-3 px-4 flex items-center justify-center gap-2 hover:bg-red-600 hover:text-white transition-all active:scale-95 rounded-lg">
+<span class="material-symbols-outlined text-sm">logout</span>
+                    CERRAR SESIÓN
+                </button>
 </div>
 </div>
 </aside>
@@ -162,11 +175,11 @@
 <header class="fixed top-0 left-64 right-0 bg-stone-50/80 backdrop-blur-xl z-40 border-b border-stone-200">
 <div class="flex justify-between items-center w-full px-8 py-4">
 <div class="flex items-center gap-8">
-<h1 class="text-2xl font-headline font-black text-stone-900 tracking-tighter">FORGE ERP</h1>
+<h1 class="text-2xl font-headline font-black text-stone-900 tracking-tighter">ERP LA CIMA</h1>
 <div class="hidden lg:flex items-center gap-6">
-<a class="text-lime-600 font-headline uppercase tracking-tight font-bold border-b-2 border-lime-600 pb-1" href="#">Dashboard</a>
-<a class="text-stone-500 font-headline uppercase tracking-tight font-bold hover:text-stone-900 transition-colors" href="#">Analytics</a>
-<a class="text-stone-500 font-headline uppercase tracking-tight font-bold hover:text-stone-900 transition-colors" href="#">Reports</a>
+<a class="text-lime-600 font-headline uppercase tracking-tight font-bold border-b-2 border-lime-600 pb-1" href="#">Panel</a>
+<a class="text-stone-500 font-headline uppercase tracking-tight font-bold hover:text-stone-900 transition-colors" href="#">Analítica</a>
+<a class="text-stone-500 font-headline uppercase tracking-tight font-bold hover:text-stone-900 transition-colors" href="#">Reportes</a>
 </div>
 </div>
 <div class="flex items-center gap-4">
@@ -210,8 +223,8 @@
 <span class="text-xl font-headline font-bold text-stone-900">99.98%</span>
 </div>
 <div class="bg-primary text-white px-4 py-2 flex flex-col">
-<span class="text-[10px] font-bold text-primary-container uppercase tracking-widest">System Load</span>
-<span class="text-xl font-headline font-bold">OPTIMAL</span>
+<span class="text-[10px] font-bold text-primary-container uppercase tracking-widest">Carga del Sistema</span>
+<span class="text-xl font-headline font-bold">ÓPTIMO</span>
 </div>
 </div>
 </div>
@@ -239,7 +252,7 @@
 </div>
 <div class="border-l-4 border-error-container pl-4 py-2">
 <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Alertas Críticas</p>
-<p class="text-3xl font-headline font-bold text-error">05 <span class="text-sm font-medium text-stone-500">Items</span></p>
+<p class="text-3xl font-headline font-bold text-error">05 <span class="text-sm font-medium text-stone-500">Artículos</span></p>
 </div>
 <div class="border-l-4 border-primary pl-4 py-2">
 <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Tasa de Rotación</p>
@@ -390,9 +403,7 @@
 <a class="text-[10px] font-bold text-stone-500 hover:text-stone-900" href="#">Términos de Servicio</a>
 </div>
 </div>
+<!-- Simple ERP Footer -->
+
 </main>
-<!-- Contextual FAB (Only for main modules) -->
-<button class="fixed bottom-8 right-8 w-14 h-14 bg-stone-900 text-primary-container shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
-<span class="material-symbols-outlined text-2xl" data-icon="add" style="font-variation-settings: 'wght' 700;">add</span>
-</button>
 </body></html>

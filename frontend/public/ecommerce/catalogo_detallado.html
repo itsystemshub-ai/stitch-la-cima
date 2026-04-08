@@ -2,7 +2,15 @@
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Catalogo Detallado | Mayor de Repuesto LA CIMA, C.A.</title>
+<meta name="description" content="Catálogo detallado de repuestos industriales. MAYOR DE REPUESTO LA CIMA, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LA CIMA">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/png" href="../../assets/images/logo.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<title>Catálogo Detallado | Mayor de Repuesto LA CIMA, C.A.</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -86,40 +94,68 @@
     </style>
 </head>
 <body class="bg-background text-on-surface selection:bg-primary/30">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm flex justify-between items-center px-6 py-3">
-<a href="index.html" class="flex items-center gap-2 group">
-    <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
-    <div class="flex flex-col">
-        <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
-        <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
-    </div>
-</a>
-<div class="hidden md:flex items-center gap-6">
-<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
-    <a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="catalogo_general.html">Catálogo</a>
-<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Nosotros.html">Nosotros</a>
-<a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contacto</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="relative hidden lg:block">
-<input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
-<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
-</div>
-<!-- Cart with counter -->
-<button class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
-<span class="material-symbols-outlined">shopping_cart</span>
-<span class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">3</span>
-</button>
-<div class="h-6 w-px bg-outline mx-2"></div>
-<!-- ERP Access Toggle -->
-<a href="../auth/login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
-<span class="material-symbols-outlined text-primary text-sm">database</span>
-            Login
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm">
+    <div class="flex justify-between items-center px-6 py-3">
+        <button onclick="openMobileMenu()" class="md:hidden p-2 hover:bg-stone-100 rounded-full">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="index.html" class="flex items-center gap-2 group">
+            <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+            <div class="flex flex-col">
+                <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
+                <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
+            </div>
         </a>
-</div>
+        <div class="hidden md:flex items-center gap-6">
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="catalogo_general.html">Catálogo</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Nosotros.html">Nosotros</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contacto</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="relative hidden lg:block">
+                <input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+                <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+            </div>
+            <a href="carrito.html" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span id="cart-count" class="cart-badge absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">0</span>
+            </a>
+            <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
+            <a href="../auth/login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+                <span class="material-symbols-outlined text-primary text-sm">database</span>
+                Login
+            </a>
+        </div>
+    </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden md:hidden" onclick="closeMobileMenu()"></div>
+<div id="mobileNav" class="mobile-menu fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 md:hidden">
+    <div class="p-6 border-b border-outline flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 w-auto">
+            <span class="text-xs font-black uppercase">LA CIMA, C.A</span>
+        </div>
+        <button onclick="closeMobileMenu()" class="p-2 hover:bg-stone-100 rounded-full">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+    <nav class="p-6 space-y-4">
+        <a href="index.html" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
+        <a href="catalogo_general.html" class="block text-sm font-bold uppercase tracking-widest text-black border-l-4 border-primary pl-4 py-2">Catálogo</a>
+        <a href="Nosotros.html" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Nosotros</a>
+        <a href="contacto.html" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Contacto</a>
+    </nav>
+    <div class="p-6 border-t border-outline">
+        <a href="../auth/login.html" class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest">
+            <span class="material-symbols-outlined text-primary text-sm">database</span>
+            Login ERP
+        </a>
+    </div>
+</div>
 <main class="flex-grow pt-24 pb-12 px-6 max-w-[1920px] mx-auto w-full">
     <div class="flex flex-col md:flex-row gap-8">
         

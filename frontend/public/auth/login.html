@@ -148,7 +148,7 @@
                     <h1 class="text-4xl font-headline font-bold text-on-surface mt-2 tracking-tight uppercase">Login de Cliente</h1>
                     <p class="text-secondary mt-2">Acceda a su inventario de repuestos industriales e historial de pedidos.</p>
                 </header>
-                <form class="space-y-6" onsubmit="event.preventDefault(); window.location.href='../../erp/dashboard_principal.html';">
+                <form class="space-y-6" onsubmit="event.preventDefault(); localStorage.setItem('erp_session', 'true'); window.location.href='/frontend/public/erp/dashboard_principal.html';">
                     <div class="space-y-1.5">
                         <label class="text-xs font-bold uppercase tracking-wider text-secondary">Correo Laboral</label>
                         <div class="relative">
