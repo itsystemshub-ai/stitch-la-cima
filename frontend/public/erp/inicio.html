@@ -43,38 +43,38 @@
   .sidebar { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
   .sidebar.open { transform: translateX(0); }
   @media (min-width: 1024px) { .sidebar { transform: translateX(0); } }
+  
   /* Menu Items */
-  .menu-item { @apply flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 cursor-pointer select-none; }
-  .menu-item-active { @apply bg-primary/10 text-stone-900 font-bold border-r-4 border-primary; }
-  .menu-item-inactive { @apply text-stone-600 hover:bg-stone-100; }
-  .menu-group { @apply text-[10px] font-bold text-stone-400 uppercase tracking-widest px-3 py-2 mt-4 first:mt-0; }
+  .menu-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s ease; cursor: pointer; user-select: none; color: #555; }
+  .menu-item:hover { background: #f5f5f5; }
+  .menu-item-active { background: rgba(206, 255, 94, 0.15); color: #1c1c1c; font-weight: 700; border-right: 4px solid #ceff5e; }
+  .menu-item-inactive { color: #555; }
+  .menu-group { font-size: 10px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.1em; padding: 12px 12px 6px; margin-top: 8px; }
+  .menu-group:first-child { margin-top: 0; }
   
-  /* Dropdown flotante hacia la DERECHA */
+  /* Dropdown hacia la DERECHA */
   .menu-parent { position: relative; }
-  .menu-parent .dropdown-arrow {
-    @apply ml-auto text-stone-400 transition-transform duration-200;
-    font-size: 18px;
-  }
-  .menu-parent.open .dropdown-arrow { @apply rotate-90 text-stone-900; }
-  .menu-parent.open > .menu-item { @apply bg-stone-50 text-stone-900 font-semibold; }
+  .dropdown-arrow { margin-left: auto; color: #999; transition: transform 0.2s ease; font-size: 18px !important; }
+  .menu-parent.open .dropdown-arrow { transform: rotate(90deg); color: #1c1c1c; }
+  .menu-parent.open > .menu-item { background: #f5f5f5; color: #1c1c1c; font-weight: 600; }
   
-  /* Submenu flotante - estilo card dropdown hacia la derecha */
+  /* Submenu flotante */
   .submenu {
     position: absolute;
     left: calc(100% + 8px);
-    top: 0;
-    min-width: 200px;
+    top: 4px;
+    min-width: 220px;
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 6px;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 8px;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-8px) scale(0.96);
-    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-10px) scale(0.97);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
-    z-index: 100;
+    z-index: 200;
   }
   .menu-parent.open > .submenu {
     opacity: 1;
@@ -86,32 +86,32 @@
   .submenu a {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 10px;
+    gap: 10px;
+    padding: 9px 12px;
     font-size: 13px;
     font-weight: 500;
-    color: #555;
-    border-radius: 8px;
+    color: #666;
+    border-radius: 10px;
     transition: all 0.15s ease;
     text-decoration: none;
   }
   .submenu a:hover {
-    background: #f5f7fa;
+    background: #f8f9fa;
     color: #1c1c1c;
   }
   .submenu a .material-symbols-outlined {
-    font-size: 18px;
-    color: #999;
+    font-size: 18px !important;
+    color: #aaa;
     transition: color 0.15s ease;
   }
   .submenu a:hover .material-symbols-outlined {
-    color: #555;
+    color: #666;
   }
   
   .submenu-divider {
     height: 1px;
-    background: #f0f0f0;
-    margin: 4px 8px;
+    background: #eee;
+    margin: 6px 10px;
   }
 </style>
 <script>
@@ -149,7 +149,7 @@
   </div>
 
   <!-- Menu Principal -->
-  <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-1">
+  <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
 
     <!-- INICIO -->
     <div class="menu-group">Principal</div>
@@ -158,9 +158,9 @@
       <span>Inicio</span>
     </a>
 
-    <!-- INVENTARIO (con dropdown) -->
+    <!-- INVENTARIO -->
     <div class="menu-group">Inventario</div>
-    <div class="menu-parent" data-module="inventario">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">inventory_2</span>
         <span>Inventario</span>
@@ -175,9 +175,9 @@
       </div>
     </div>
 
-    <!-- VENTAS (con dropdown) -->
+    <!-- VENTAS -->
     <div class="menu-group">Ventas</div>
-    <div class="menu-parent" data-module="ventas">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">payments</span>
         <span>Ventas</span>
@@ -196,9 +196,9 @@
       </div>
     </div>
 
-    <!-- COMPRAS (con dropdown) -->
+    <!-- COMPRAS -->
     <div class="menu-group">Compras</div>
-    <div class="menu-parent" data-module="compras">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
         <span>Compras</span>
@@ -213,9 +213,9 @@
       </div>
     </div>
 
-    <!-- CONTABILIDAD (con dropdown) -->
+    <!-- CONTABILIDAD -->
     <div class="menu-group">Contabilidad</div>
-    <div class="menu-parent" data-module="contabilidad">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">account_balance</span>
         <span>Contabilidad</span>
@@ -237,9 +237,9 @@
       </div>
     </div>
 
-    <!-- FINANZAS (con dropdown) -->
+    <!-- FINANZAS -->
     <div class="menu-group">Finanzas</div>
-    <div class="menu-parent" data-module="finanzas">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">monetization_on</span>
         <span>Finanzas</span>
@@ -252,9 +252,9 @@
       </div>
     </div>
 
-    <!-- RRHH (con dropdown) -->
+    <!-- RRHH -->
     <div class="menu-group">Recursos Humanos</div>
-    <div class="menu-parent" data-module="rrhh">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">groups</span>
         <span>RRHH</span>
@@ -270,9 +270,9 @@
       </div>
     </div>
 
-    <!-- CONFIGURACIÓN (con dropdown) -->
+    <!-- SISTEMA -->
     <div class="menu-group">Sistema</div>
-    <div class="menu-parent" data-module="configuracion">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">settings</span>
         <span>Configuración</span>
@@ -291,9 +291,9 @@
       </div>
     </div>
 
-    <!-- AYUDA (con dropdown) -->
+    <!-- AYUDA -->
     <div class="menu-group">Ayuda</div>
-    <div class="menu-parent" data-module="ayuda">
+    <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">help</span>
         <span>Ayuda</span>
@@ -311,7 +311,7 @@
     </div>
   </nav>
 
-  <!-- Boton Cerrar Sesion -->
+  <!-- Cerrar Sesion -->
   <div class="mt-auto border-t border-stone-200 p-4">
     <button onclick="localStorage.removeItem('erp_session'); window.location.href='/frontend/public/auth/login.html';" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
       <span class="material-symbols-outlined text-[18px]">logout</span>
@@ -323,7 +323,6 @@
 <!-- ========== TOP BAR ========== -->
 <header class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200">
   <div class="flex justify-between items-center px-6 py-3">
-    <!-- Breadcrumb -->
     <div class="flex items-center gap-4">
       <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
         <span class="material-symbols-outlined">menu</span>
@@ -334,32 +333,23 @@
         <span class="text-stone-900 font-medium">Inicio</span>
       </div>
     </div>
-
-    <!-- Acciones -->
     <div class="flex items-center gap-3">
-      <!-- Busqueda Global -->
       <div class="hidden lg:block relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
           <span class="material-symbols-outlined text-lg">search</span>
         </span>
         <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar repuestos, ventas, clientes..." type="text"/>
       </div>
-
-      <!-- Notificaciones -->
       <button class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative">
         <span class="material-symbols-outlined">notifications</span>
         <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
       </button>
-
-      <!-- Perfil -->
       <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
         <div class="text-right hidden md:block">
           <p class="text-sm font-bold text-stone-900 leading-none">Administrador</p>
           <p class="text-[10px] text-stone-500">Rol: Admin</p>
         </div>
-        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
-          A
-        </div>
+        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">A</div>
       </div>
     </div>
   </div>
@@ -387,11 +377,9 @@
     </div>
   </div>
 
-  <!-- Tarjetas de Resumen por Modulo -->
+  <!-- Tarjetas Resumen -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-
-    <!-- Inventario -->
-    <a href="inventario.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="inventario.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-blue-600">inventory_2</span>
@@ -402,8 +390,7 @@
       <p class="text-xs text-stone-500 mt-1">Productos en Stock</p>
     </a>
 
-    <!-- Ventas -->
-    <a href="ventas.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="ventas.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-green-600">payments</span>
@@ -414,8 +401,7 @@
       <p class="text-xs text-stone-500 mt-1">Ventas del Mes</p>
     </a>
 
-    <!-- Compras -->
-    <a href="compras.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="compras.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-purple-600">shopping_cart</span>
@@ -426,8 +412,7 @@
       <p class="text-xs text-stone-500 mt-1">Compras Pendientes</p>
     </a>
 
-    <!-- Clientes -->
-    <a href="clientes.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="clientes.html" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-orange-600">people</span>
@@ -437,271 +422,6 @@
       <p class="text-2xl font-headline font-bold text-stone-900">342</p>
       <p class="text-xs text-stone-500 mt-1">Clientes Activos</p>
     </a>
-  </div>
-
-  <!-- Seccion Principal: Inventario + Ventas -->
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-
-    <!-- Inventario (2/3) -->
-    <div class="lg:col-span-2 bg-white border border-stone-200 rounded-xl p-6">
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-            <span class="material-symbols-outlined text-blue-600">inventory_2</span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-stone-900">Control de Inventario</h3>
-            <p class="text-xs text-stone-500">Resumen general del stock</p>
-          </div>
-        </div>
-        <a href="inventario.html" class="text-xs font-bold text-stone-500 hover:text-stone-900 flex items-center gap-1">
-          Ver completo
-          <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
-      </div>
-
-      <div class="grid grid-cols-3 gap-6 mb-6">
-        <div class="border-l-4 border-green-500 pl-4">
-          <p class="text-[10px] font-bold text-stone-400 uppercase">Stock Activo</p>
-          <p class="text-2xl font-headline font-bold text-stone-900">14,204</p>
-        </div>
-        <div class="border-l-4 border-red-500 pl-4">
-          <p class="text-[10px] font-bold text-stone-400 uppercase">Alertas Críticas</p>
-          <p class="text-2xl font-headline font-bold text-red-500">5</p>
-        </div>
-        <div class="border-l-4 border-primary pl-4">
-          <p class="text-[10px] font-bold text-stone-400 uppercase">Rotación</p>
-          <p class="text-2xl font-headline font-bold text-stone-900">12.4%</p>
-        </div>
-      </div>
-
-      <!-- Grafica de Barras Simulada -->
-      <div class="h-32 bg-stone-50 rounded-lg flex items-end gap-1 px-3 py-2 overflow-hidden">
-        <div class="flex-1 bg-stone-200 h-[40%] rounded-t"></div>
-        <div class="flex-1 bg-stone-300 h-[60%] rounded-t"></div>
-        <div class="flex-1 bg-stone-200 h-[55%] rounded-t"></div>
-        <div class="flex-1 bg-blue-400 h-[85%] rounded-t"></div>
-        <div class="flex-1 bg-stone-300 h-[45%] rounded-t"></div>
-        <div class="flex-1 bg-stone-200 h-[30%] rounded-t"></div>
-        <div class="flex-1 bg-stone-900 h-[95%] rounded-t"></div>
-        <div class="flex-1 bg-stone-200 h-[50%] rounded-t"></div>
-        <div class="flex-1 bg-stone-300 h-[70%] rounded-t"></div>
-        <div class="flex-1 bg-primary h-[100%] rounded-t"></div>
-        <div class="flex-1 bg-stone-200 h-[65%] rounded-t"></div>
-        <div class="flex-1 bg-stone-300 h-[75%] rounded-t"></div>
-      </div>
-      <div class="flex justify-between text-[10px] text-stone-400 mt-2 px-3">
-        <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
-      </div>
-    </div>
-
-    <!-- Ventas Rapidas (1/3) -->
-    <div class="bg-stone-900 text-white rounded-xl p-6 relative overflow-hidden">
-      <div class="absolute top-0 right-0 opacity-10">
-        <span class="material-symbols-outlined text-9xl">trending_up</span>
-      </div>
-      <div class="relative">
-        <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">Ingresos del Mes</p>
-        <h3 class="text-4xl font-headline font-black text-primary tracking-tighter mb-4">$128,450</h3>
-        <div class="flex items-center gap-2 mb-6">
-          <span class="text-sm font-medium text-stone-300">24 órdenes pendientes</span>
-          <span class="ml-auto text-xs text-green-400">+12% vs mes anterior</span>
-        </div>
-
-        <div class="space-y-3 mb-6">
-          <div class="flex items-center justify-between bg-white/5 rounded-lg p-3">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-green-400">check_circle</span>
-              <div>
-                <p class="text-xs font-bold">FAC-001</p>
-                <p class="text-[10px] text-stone-400">Discos de Freno x2</p>
-              </div>
-            </div>
-            <span class="text-sm font-bold">$170.00</span>
-          </div>
-          <div class="flex items-center justify-between bg-white/5 rounded-lg p-3">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-yellow-400">pending</span>
-              <div>
-                <p class="text-xs font-bold">FAC-002</p>
-                <p class="text-[10px] text-stone-400">Turbo VGT x1</p>
-              </div>
-            </div>
-            <span class="text-sm font-bold">$845.00</span>
-          </div>
-          <div class="flex items-center justify-between bg-white/5 rounded-lg p-3">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-green-400">check_circle</span>
-              <div>
-                <p class="text-xs font-bold">FAC-003</p>
-                <p class="text-[10px] text-stone-400">Amortiguador + Pastillas</p>
-              </div>
-            </div>
-            <span class="text-sm font-bold">$274.50</span>
-          </div>
-        </div>
-
-        <div class="flex gap-2">
-          <a href="ventas.html" class="flex-1 bg-primary text-stone-900 py-2.5 font-bold text-sm rounded-lg hover:brightness-110 transition-all text-center">
-            VER VENTAS
-          </a>
-          <a href="pos.html" class="w-10 h-10 border border-stone-700 flex items-center justify-center hover:bg-stone-800 rounded-lg transition-colors">
-            <span class="material-symbols-outlined text-sm">add</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Compras + Estado del Sistema -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-
-    <!-- Compras Recientes -->
-    <div class="bg-white border border-stone-200 rounded-xl p-6">
-      <div class="flex justify-between items-center mb-5">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
-            <span class="material-symbols-outlined text-purple-600">local_shipping</span>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-stone-900">Compras Recientes</h3>
-            <p class="text-xs text-stone-500">Órdenes en tránsito</p>
-          </div>
-        </div>
-        <a href="compras.html" class="text-xs font-bold text-stone-500 hover:text-stone-900 flex items-center gap-1">
-          Ver todas
-          <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
-      </div>
-
-      <div class="space-y-3">
-        <div class="flex items-center justify-between bg-stone-50 rounded-lg p-3 border-l-4 border-yellow-400">
-          <div>
-            <p class="text-sm font-bold text-stone-900">Repuestos Cummins #402</p>
-            <p class="text-[10px] text-stone-500">Proveedor: Cummins Venezuela</p>
-          </div>
-          <span class="text-[10px] font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded">ETA: 24h</span>
-        </div>
-        <div class="flex items-center justify-between bg-stone-50 rounded-lg p-3 border-l-4 border-blue-400">
-          <div>
-            <p class="text-sm font-bold text-stone-900">Ensamblajes Volvo</p>
-            <p class="text-[10px] text-stone-500">Proveedor: Volvo Parts</p>
-          </div>
-          <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">ETA: 4d</span>
-        </div>
-        <div class="flex items-center justify-between bg-stone-50 rounded-lg p-3 border-l-4 border-green-400">
-          <div>
-            <p class="text-sm font-bold text-stone-900">Filtros Bosch Lote #15</p>
-            <p class="text-[10px] text-stone-500">Proveedor: Bosch Auto Parts</p>
-          </div>
-          <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded">Recibido</span>
-        </div>
-      </div>
-
-      <div class="mt-5 pt-4 border-t border-stone-100 flex justify-between items-center">
-        <span class="text-sm text-stone-500">Total pendiente</span>
-        <span class="text-xl font-headline font-bold text-stone-900">$12,400.00</span>
-      </div>
-    </div>
-
-    <!-- Estado del Sistema -->
-    <div class="bg-white border border-stone-200 rounded-xl p-6">
-      <div class="flex items-center gap-3 mb-5">
-        <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
-          <span class="material-symbols-outlined text-green-600">health_and_safety</span>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold text-stone-900">Estado del Sistema</h3>
-          <p class="text-xs text-stone-500">Monitoreo en tiempo real</p>
-        </div>
-      </div>
-
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-stone-600">API Central</span>
-          <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full">OPERATIVO</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-stone-600">Base de Datos</span>
-          <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full">CONECTADO</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-stone-600">Usuarios Activos</span>
-          <span class="text-sm font-bold text-stone-900">12 administradores</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-stone-600">Último Backup</span>
-          <span class="text-xs text-stone-500">Hace 45 minutos</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-stone-600">Espacio en Disco</span>
-          <div class="flex items-center gap-2">
-            <div class="w-24 h-2 bg-stone-100 rounded-full overflow-hidden">
-              <div class="h-full bg-green-500 w-[45%]"></div>
-            </div>
-            <span class="text-xs font-bold text-stone-900">45%</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-5 pt-4 border-t border-stone-100 flex gap-2">
-        <a href="estado-sistema.html" class="flex-1 border border-stone-300 text-stone-700 py-2 text-xs font-bold rounded-lg hover:bg-stone-50 transition-all text-center">
-          DETALLES
-        </a>
-        <a href="backups.html" class="flex-1 bg-stone-900 text-white py-2 text-xs font-bold rounded-lg hover:bg-stone-800 transition-all text-center">
-          BACKUP AHORA
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modulos en Desarrollo -->
-  <div class="bg-white border border-stone-200 rounded-xl p-6 mb-6">
-    <h3 class="text-lg font-bold text-stone-900 mb-4">Módulos Disponibles</h3>
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-      <!-- Inventario -->
-      <a href="inventario.html" class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-blue-300 group">
-        <span class="material-symbols-outlined text-blue-600 text-3xl mb-2 group-hover:scale-110 transition-transform">inventory_2</span>
-        <p class="text-xs font-bold text-stone-900">Inventario</p>
-        <p class="text-[10px] text-stone-500">7 módulos</p>
-      </a>
-      <!-- Ventas -->
-      <a href="ventas.html" class="bg-green-50 border border-green-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-green-300 group">
-        <span class="material-symbols-outlined text-green-600 text-3xl mb-2 group-hover:scale-110 transition-transform">payments</span>
-        <p class="text-xs font-bold text-stone-900">Ventas</p>
-        <p class="text-[10px] text-stone-500">8 módulos</p>
-      </a>
-      <!-- Compras -->
-      <a href="compras.html" class="bg-purple-50 border border-purple-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-purple-300 group">
-        <span class="material-symbols-outlined text-purple-600 text-3xl mb-2 group-hover:scale-110 transition-transform">shopping_cart</span>
-        <p class="text-xs font-bold text-stone-900">Compras</p>
-        <p class="text-[10px] text-stone-500">6 módulos</p>
-      </a>
-      <!-- Contabilidad -->
-      <a href="contabilidad.html" class="bg-orange-50 border border-orange-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-orange-300 group">
-        <span class="material-symbols-outlined text-orange-600 text-3xl mb-2 group-hover:scale-110 transition-transform">account_balance</span>
-        <p class="text-xs font-bold text-stone-900">Contabilidad</p>
-        <p class="text-[10px] text-stone-500">11 módulos</p>
-      </a>
-      <!-- Finanzas -->
-      <a href="finanzas.html" class="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-yellow-300 group">
-        <span class="material-symbols-outlined text-yellow-600 text-3xl mb-2 group-hover:scale-110 transition-transform">monetization_on</span>
-        <p class="text-xs font-bold text-stone-900">Finanzas</p>
-        <p class="text-[10px] text-stone-500">4 módulos</p>
-      </a>
-      <!-- RRHH -->
-      <a href="rrhh.html" class="bg-pink-50 border border-pink-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-pink-300 group">
-        <span class="material-symbols-outlined text-pink-600 text-3xl mb-2 group-hover:scale-110 transition-transform">groups</span>
-        <p class="text-xs font-bold text-stone-900">RRHH</p>
-        <p class="text-[10px] text-stone-500">6 módulos</p>
-      </a>
-      <!-- Configuracion -->
-      <a href="configuracion.html" class="bg-stone-50 border border-stone-200 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-stone-300 group">
-        <span class="material-symbols-outlined text-stone-600 text-3xl mb-2 group-hover:scale-110 transition-transform">settings</span>
-        <p class="text-xs font-bold text-stone-900">Sistema</p>
-        <p class="text-[10px] text-stone-500">15 módulos</p>
-      </a>
-    </div>
   </div>
 
   <!-- Footer -->
@@ -715,15 +435,14 @@
   </div>
 </main>
 
-<!-- Overlay para mobile sidebar -->
+<!-- Overlay mobile -->
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
 
 <script>
-  // Toggle sidebar en mobile
+  // Toggle sidebar mobile
   const menuToggle = document.getElementById('menuToggle');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebarOverlay');
-
   if (menuToggle) {
     menuToggle.addEventListener('click', () => {
       sidebar.classList.toggle('open');
@@ -731,48 +450,42 @@
     });
   }
 
-  // Toggle Dropdown Menu (hacia la derecha)
-  function toggleDropdown(menuItem) {
-    const parent = menuItem.closest('.menu-parent');
-    const isOpen = parent.classList.contains('open');
+  // Toggle dropdown hacia la derecha
+  function toggleDropdown(item) {
+    const parent = item.closest('.menu-parent');
+    const wasOpen = parent.classList.contains('open');
     
-    // Cerrar todos los demás dropdowns
-    document.querySelectorAll('.menu-parent.open').forEach(el => {
-      if (el !== parent) el.classList.remove('open');
-    });
+    // Cerrar todos
+    document.querySelectorAll('.menu-parent.open').forEach(el => el.classList.remove('open'));
     
-    // Toggle el actual
-    parent.classList.toggle('open', !isOpen);
+    // Abrir el clickeado si estaba cerrado
+    if (!wasOpen) parent.classList.add('open');
   }
 
-  // Cerrar dropdowns al hacer clic fuera
+  // Cerrar al hacer clic fuera
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.menu-parent')) {
-      document.querySelectorAll('.menu-parent.open').forEach(el => {
-        el.classList.remove('open');
-      });
+      document.querySelectorAll('.menu-parent.open').forEach(el => el.classList.remove('open'));
     }
   });
 
-  // Resaltar página actual en sidebar
+  // Highlight página actual
   const currentPage = window.location.pathname.split('/').pop();
   if (currentPage) {
-    // Highlight en sub-items
     document.querySelectorAll('.submenu a').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href === currentPage) {
-        link.classList.add('bg-primary/10', 'text-stone-900', 'font-medium');
-        link.classList.remove('text-stone-500');
-        
-        // Abrir el dropdown padre automáticamente
+      if (link.getAttribute('href') === currentPage) {
+        link.style.background = 'rgba(206, 255, 94, 0.15)';
+        link.style.color = '#1c1c1c';
+        link.style.fontWeight = '600';
         const parent = link.closest('.menu-parent');
-        if (parent) parent.classList.add('open');
-        
-        // Highlight en el item principal
-        const mainItem = parent.querySelector('.menu-item');
-        if (mainItem) {
-          mainItem.classList.add('bg-stone-50', 'text-stone-900', 'font-semibold');
-          mainItem.classList.remove('text-stone-600');
+        if (parent) {
+          parent.classList.add('open');
+          const mainItem = parent.querySelector('.menu-item');
+          if (mainItem) {
+            mainItem.style.background = '#f5f5f5';
+            mainItem.style.color = '#1c1c1c';
+            mainItem.style.fontWeight = '600';
+          }
         }
       }
     });
