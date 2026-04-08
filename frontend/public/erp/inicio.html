@@ -67,8 +67,8 @@
     pointer-events: none;
     z-index: 200;
   }
-  /* Mostrar submenu cuando el item hermano anterior tiene .open */
-  .menu-item.open + .submenu {
+  /* Mostrar submenu cuando el menu-parent tiene .open */
+  .menu-parent.open .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateX(0) scale(1);
