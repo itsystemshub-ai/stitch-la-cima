@@ -50,41 +50,87 @@
   .menu-item-inactive { @apply text-stone-600 hover:bg-stone-100; }
   .menu-group { @apply text-[10px] font-bold text-stone-400 uppercase tracking-widest px-3 py-2 mt-2 first:mt-0; }
   
-  /* Flyout Submenu - Despliegue hacia la DERECHA */
+  /* Flyout Submenu - Estilo Dropdown flotante hacia la DERECHA */
   .menu-parent { position: relative; }
   .menu-parent .submenu-arrow { @apply ml-auto text-stone-400 transition-transform duration-200; font-size: 18px; }
-  .menu-parent:hover .submenu-arrow { @apply text-stone-900 rotate-90; }
+  .menu-parent:hover .submenu-arrow { @apply text-stone-900; }
   
   .submenu {
-    @apply absolute left-full top-0 ml-1 w-56 bg-white border border-stone-200 rounded-xl shadow-2xl py-2 opacity-0 invisible;
-    transition: all 0.2s ease-in-out;
+    position: absolute;
+    left: 100%;
+    top: 4px;
+    margin-left: 8px;
+    min-width: 240px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 0 2px 10px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-8px) scale(0.96);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
     z-index: 100;
-  }
-  .submenu::before {
-    content: '';
-    @apply absolute left-0 top-0 -ml-1 w-2 h-full;
+    overflow: hidden;
   }
   .menu-parent:hover > .submenu {
-    @apply opacity-100 visible;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
     pointer-events: auto;
-    animation: slideInRight 0.2s ease-out;
   }
-  @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(-8px); }
-    to { opacity: 1; transform: translateX(0); }
+  
+  .submenu-header {
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 6px;
+  }
+  .submenu-header h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1c1c1c;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .submenu-header p {
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
   }
   
   .submenu a {
-    @apply flex items-center gap-3 px-4 py-2.5 text-sm text-stone-600 hover:bg-stone-50 hover:text-stone-900 transition-all;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    border-radius: 10px;
+    transition: all 0.15s ease;
+    text-decoration: none;
   }
-  .submenu a:hover { @apply bg-primary/10 text-stone-900 font-medium; }
-  .submenu a .material-symbols-outlined { @apply text-[18px] text-stone-400; }
-  .submenu a:hover .material-symbols-outlined { @apply text-stone-700; }
+  .submenu a:hover {
+    background: #f5f7fa;
+    color: #1c1c1c;
+  }
+  .submenu a .material-symbols-outlined {
+    font-size: 18px;
+    color: #999;
+    transition: color 0.15s ease;
+  }
+  .submenu a:hover .material-symbols-outlined {
+    color: #555;
+  }
+  .submenu a:last-child { margin-bottom: 0; }
   
-  .submenu-header { @apply px-4 py-2 border-b border-stone-100 mb-1; }
-  .submenu-header h4 { @apply text-xs font-bold text-stone-900 uppercase tracking-wide; }
-  .submenu-header p { @apply text-[10px] text-stone-500; }
+  /* Divider dentro del submenu */
+  .submenu-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 6px 12px;
+  }
 </style>
 <script>
   (function() {
