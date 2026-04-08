@@ -13,7 +13,9 @@
     "db:seed": "cd backend && node database/seeders/seed.js",
     "db:reset": "cd backend && node -e \"require('fs').unlinkSync('database/zenith_erp.sqlite')\" && npm run db:seed",
     "test": "cd backend && echo 'Tests pending'",
-    "install:all": "npm install && cd backend && npm install"
+    "install:all": "npm install && cd backend && npm install",
+    "build:netlify": "cd backend && npx tailwindcss -i ./src/assets/css/input.css -o ./public/output.css --minify && npm run db:generate",
+    "db:generate": "cd backend && prisma generate"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -23,5 +25,10 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "serverless-http": "^3.2.0",
+    "tailwindcss": "^4.2.2"
   }
 }
