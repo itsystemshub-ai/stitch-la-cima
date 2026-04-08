@@ -1,0 +1,11 @@
+@media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+            .print-area { border: none !important; box-shadow: none !important; margin: 0 !important; width: 100% !important; }
+            .page-break { page-break-after: always; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .technical-border { border: 1px solid #1a1c1c; }
+        .dashed-divider { border-top: 1px dashed #1a1c1c; }

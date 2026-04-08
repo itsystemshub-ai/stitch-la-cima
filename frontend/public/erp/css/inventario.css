@@ -1,0 +1,7 @@
+.material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #09090b; /* Zinc 950 */
+            color: #f4f4f5; /* Zinc 100 */
+        }

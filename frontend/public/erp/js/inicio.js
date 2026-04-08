@@ -3,6 +3,8 @@
    Archivo: inicio.js
    ============================================ */
 
+
+   
 // Verificar autenticación al cargar
 (function() {
   const isLoggedIn = localStorage.getItem('erp_session') === 'true';
