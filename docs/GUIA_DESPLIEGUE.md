@@ -1,4 +1,4 @@
-# Guía de Despliegue en la Nube
+# 🚀 Guía de Despliegue en la Nube
 ## Zenith ERP - Mayor de Repuesto La Cima, C.A.
 
 ---
@@ -6,9 +6,45 @@
 ## 📋 Resumen del Sistema
 
 **Backend:** Node.js + Express.js + Prisma (PostgreSQL)  
-**Frontend:** HTML/CSS/JS estático con Tailwind CSS  
+**Frontend:** 68 páginas ERP en HTML + Tailwind CSS (todo en español)  
 **API:** REST con autenticación JWT  
 **Base de Datos:** PostgreSQL (producción) / SQLite (desarrollo)
+
+### Módulos del ERP
+
+| Módulo | Páginas | Endpoints API |
+|--------|---------|---------------|
+| 📦 Inventario | 7 | 12 |
+| 💰 Ventas/POS | 8 | 11 |
+| 🛒 Compras | 6 | 10 |
+| 📒 Contabilidad | 11 | 12 |
+| 📈 Finanzas | 4 | 9 |
+| 👷 RRHH/Nómina | 6 | 14 |
+| ⚙️ Sistema | 15 | 17 |
+| ❓ Ayuda | 5 | - |
+| **TOTAL** | **68** | **77** |
+
+---
+
+## 🎯 Estructura de Archivos ERP
+
+Todos los archivos están en `frontend/public/erp/` con **nombres cortos en español**:
+
+```
+erp/
+├── inicio.html              ← Dashboard principal
+├── inventario.html          ← Dashboard de inventario
+├── productos.html           ← Gestión de productos
+├── kardex.html              ← Kardex valorizado
+├── ventas.html              ← Dashboard de ventas
+├── pos.html                 ← Punto de venta
+├── compras.html             ← Dashboard de compras
+├── contabilidad.html        ← Dashboard contable
+├── finanzas.html            ← Dashboard financiero
+├── rrhh.html                ← Dashboard de RRHH
+├── configuracion.html       ← Configuración del sistema
+└── ... (57 páginas más)
+```
 
 ---
 
