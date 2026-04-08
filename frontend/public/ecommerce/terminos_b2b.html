@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Términos B2B - MAYOR DE REPUESTO LA CIMA, C.A. Condiciones comerciales para empresas."/>
+    <meta name="theme-color" content="#ceff5e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LA CIMA">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png">
+    <link rel="apple-touch-icon" href="../../assets/images/logo.png">
+    <title>Términos B2B | Mayor de Repuesto LA CIMA, C.A.</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#ceff5e",
+                        "primary-dim": "#bded4f",
+                        "on-primary": "#000000",
+                        secondary: "#1c1c1c",
+                        background: "#f6f6f9",
+                        surface: "#ffffff",
+                        "on-surface": "#0c0e10",
+                        "on-surface-variant": "#5a5c5e",
+                        outline: "#e2e2e5"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        sans: ['League Spartan', 'sans-serif'],
+                        headline: ['League Spartan', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'League Spartan', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30 min-h-screen flex flex-col">
+
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm">
+    <div class="flex justify-between items-center px-6 py-3">
+        <button onclick="openMobileMenu()" class="md:hidden p-2 hover:bg-stone-100 rounded-full">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="index.html" class="flex items-center gap-2 group">
+            <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+            <div class="flex flex-col">
+                <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
+                <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
+            </div>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="index.html">Inicio</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="catalogo_general.html">Catálogo</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="Nosotros.html">Nosotros</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="contacto.html">Contacto</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="relative hidden lg:block">
+                <input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
+                <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
+            </div>
+            <a href="carrito.html" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span id="cart-count" class="cart-badge absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">0</span>
+            </a>
+            <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
+            <a href="../auth/login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+                <span class="material-symbols-outlined text-primary text-sm">database</span>
+                Login
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden md:hidden" onclick="closeMobileMenu()"></div>
+<div id="mobileNav" class="mobile-menu fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 md:hidden">
+    <div class="p-6 border-b border-outline flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <img src="../../assets/images/logo.png" alt="LA CIMA" class="h-8 w-auto">
+            <span class="text-xs font-black uppercase">LA CIMA, C.A</span>
+        </div>
+        <button onclick="closeMobileMenu()" class="p-2 hover:bg-stone-100 rounded-full">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+    <nav class="p-6 space-y-4">
+        <a href="index.html" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
+        <a href="catalogo_general.html" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Catálogo</a>
+        <a href="Nosotros.html" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Nosotros</a>
+        <a href="contacto.html" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Contacto</a>
+    </nav>
+    <div class="p-6 border-t border-outline">
+        <a href="../auth/login.html" class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest">
+            <span class="material-symbols-outlined text-primary text-sm">database</span>
+            Login ERP
+        </a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="pt-24 pb-12 flex-grow">
+    <!-- Hero Section -->
+    <section class="relative min-h-[300px] flex items-center overflow-hidden bg-black">
+        <div class="absolute inset-0 z-0">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAXDDoopL1vJGvj43_2EcixnT0qcffP-8sugqc3PJmetlM42HxR7EiDaACitBpmwFEGPY-d0LPOMheDO8XJC_vDkZ0NGhadXT3P0f67reZI-WnouLsKv14pyDyoOT8dU2KDqwTVwiQO7apJ_kQ5mUQ43bKNXlPy0n8itI7-GxJBnEoLXqAGm4Lc218ApwlfA93ICa2tzs84XoB3YvCguieK7UMsUIQ6QITRFgZwmKhnd-3jYDRMGtcZ5G-7Alrjd3kFtkJEppsOsA" class="w-full h-full object-cover opacity-40 grayscale mix-blend-luminosity">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-3xl">
+                <span class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-4">Acuerdo Comercial Empresarial</span>
+                <h1 class="text-5xl md:text-6xl font-headline font-black text-white tracking-tighter uppercase leading-[0.95] mb-6">
+                    TÉRMINOS <span class="text-primary">B2B</span>
+                </h1>
+                <p class="text-stone-300 text-lg max-w-xl leading-relaxed">
+                    Condiciones comerciales para empresas, talleres y flotas que deseen establecer una relación comercial con MAYOR DE REPUESTO LA CIMA, C.A.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms Content -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="space-y-16">
+                <!-- Section 1 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-2xl">business</span>
+                        </div>
+                        <h2 class="text-3xl font-headline font-black text-black uppercase tracking-tight">1. Registro Empresarial</h2>
+                    </div>
+                    <div class="pl-16 space-y-4">
+                        <p class="text-stone-600 text-sm leading-relaxed">1.1. Para acceder a los precios y condiciones B2B, la empresa debe registrarse proporcionando documentación válida que acredite su existencia legal (RIF vigente, acta constitutiva).</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">1.2. MAYOR DE REPUESTO LA CIMA, C.A. se reserva el derecho de aprobar o rechazar solicitudes de registro B2B según criterios comerciales internos.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">1.3. La información proporcionada durante el registro debe ser verídica y actualizada. Cualquier cambio debe ser notificado dentro de los 15 días hábiles siguientes.</p>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-2xl">payments</span>
+                        </div>
+                        <h2 class="text-3xl font-headline font-black text-black uppercase tracking-tight">2. Condiciones de Pago</h2>
+                    </div>
+                    <div class="pl-16 space-y-4">
+                        <p class="text-stone-600 text-sm leading-relaxed">2.1. Los pagos pueden realizarse mediante transferencia bancaria, cheque certificado o efectivo en nuestras oficinas.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">2.2. Para clientes B2B con historial comprobado de al menos 6 meses, se podrán establecer líneas de crédito sujetas a aprobación gerencial.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">2.3. Los pagos fuera de término generarán un interés moratorio del 3% mensual sobre el saldo pendiente.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">2.4. Todos los precios están expresados en dólares estadounidenses (USD) y están sujetos a variación sin previo aviso.</p>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-2xl">local_shipping</span>
+                        </div>
+                        <h2 class="text-3xl font-headline font-black text-black uppercase tracking-tight">3. Envíos y Entregas</h2>
+                    </div>
+                    <div class="pl-16 space-y-4">
+                        <p class="text-stone-600 text-sm leading-relaxed">3.1. Los envíos nacionales se realizan a través de empresas de carga certificadas. El tiempo de entrega estimado es de 2 a 5 días hábiles.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">3.2. Los costos de envío corren por cuenta del comprador, salvo promociones específicas que indiquen envío gratuito.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">3.3. MAYOR DE REPUESTO LA CIMA, C.A. no se hace responsable por retrasos causados por terceros (empresas de carga, aduanas, fuerza mayor).</p>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-2xl">verified</span>
+                        </div>
+                        <h2 class="text-3xl font-headline font-black text-black uppercase tracking-tight">4. Garantías y Devoluciones</h2>
+                    </div>
+                    <div class="pl-16 space-y-4">
+                        <p class="text-stone-600 text-sm leading-relaxed">4.1. Todos los productos cuentan con garantía de 12 meses contra defectos de fabricación a partir de la fecha de compra.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">4.2. Para aplicar la garantía, el cliente debe presentar la factura de compra original y evidencia fotográfica del defecto.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">4.3. Las devoluciones por error en el pedido deben notificarse dentro de los 5 días hábiles siguientes a la recepción.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">4.4. No se aceptan devoluciones de productos que hayan sido instalados, modificados o cuyo empaque original haya sido alterado.</p>
+                    </div>
+                </div>
+
+                <!-- Section 5 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-2xl">shield</span>
+                        </div>
+                        <h2 class="text-3xl font-headline font-black text-black uppercase tracking-tight">5. Confidencialidad</h2>
+                    </div>
+                    <div class="pl-16 space-y-4">
+                        <p class="text-stone-600 text-sm leading-relaxed">5.1. Ambas partes se comprometen a mantener la confidencialidad de la información comercial intercambiada durante la relación contractual.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">5.2. Los datos personales de los contactos empresariales serán tratados conforme a la Ley de Protección de Datos vigente en Venezuela.</p>
+                    </div>
+                </div>
+
+                <!-- Section 6 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-2xl">gavel</span>
+                        </div>
+                        <h2 class="text-3xl font-headline font-black text-black uppercase tracking-tight">6. Jurisdicción</h2>
+                    </div>
+                    <div class="pl-16 space-y-4">
+                        <p class="text-stone-600 text-sm leading-relaxed">6.1. Estos términos se rigen por las leyes de la República Bolivariana de Venezuela.</p>
+                        <p class="text-stone-600 text-sm leading-relaxed">6.2. Cualquier disputa derivada de estos términos será sometida a los tribunales competentes de Valencia, Estado Carabobo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Box -->
+            <div class="mt-16 bg-stone-50 border border-outline rounded-xl p-8">
+                <h3 class="text-xl font-headline font-bold text-black uppercase mb-4">¿Dudas sobre los términos?</h3>
+                <p class="text-stone-500 text-sm mb-6">Nuestro equipo comercial está disponible para aclarar cualquier pregunta sobre las condiciones B2B.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="mailto:LACIMA.REPUESTOS@GMAIL.COM" class="bg-primary text-black px-6 py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary-dim transition-colors">Contactar Comercial</a>
+                    <a href="tel:+584244582766" class="bg-black text-white px-6 py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors">Llamar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Scroll to Top Button -->
+<button id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-primary text-black p-4 shadow-xl hover:bg-white transition-all z-30 border border-black/10 hidden">
+    <span class="material-symbols-outlined font-black">arrow_upward</span>
+</button>
+
+<!-- Footer -->
+<footer class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+    <img src="../../assets/images/logo.png" alt="Logo" class="h-12 w-auto">
+    <div class="flex flex-col justify-center">
+        <span class="text-primary font-black text-sm block uppercase tracking-tighter leading-none">MAYOR DE REPUESTO LA CIMA, C.A</span>
+        <span class="text-primary font-black text-xs block uppercase tracking-tighter leading-none mt-1">RIF.: J-40308741-5</span>
+    </div>
+</div>
+<div class="flex gap-4">
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">facebook</span>
+</div>
+<div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</div>
+</div>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Transmisión</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<nav class="flex flex-col gap-4">
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="../auth/login.html">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="terminos_b2b.html">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="soporte.html">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="contacto.html">Contacto</a>
+</nav>
+</div>
+<div>
+<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Sede Central</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO</p>
+<div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+<p class="text-[10px] text-primary font-bold uppercase tracking-widest">¿Necesitas ayuda?</p>
+<p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
+<p class="text-white text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
+<p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2026 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
+<div class="flex gap-6">
+<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="soporte.html">Soporte</a>
+<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="terminos_b2b.html">Legal</a>
+</div>
+</div>
+</footer>
+
+<script>
+    // ==================== CART ====================
+    function getCart() { return JSON.parse(localStorage.getItem('cart')) || []; }
+    function updateCartCount() {
+        const cart = getCart();
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        const badge = document.getElementById('cart-count');
+        if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'flex' : 'none'; }
+    }
+
+    // ==================== MOBILE MENU ====================
+    function openMobileMenu() {
+        document.getElementById('mobileMenu').classList.remove('hidden');
+        document.getElementById('mobileNav').classList.remove('-translate-x-full');
+        document.getElementById('mobileNav').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+        document.getElementById('mobileMenu').classList.add('hidden');
+        document.getElementById('mobileNav').classList.add('-translate-x-full');
+        document.getElementById('mobileNav').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // ==================== SEARCH ====================
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+            }
+        });
+    }
+
+    // ==================== SCROLL TO TOP ====================
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 500) scrollTopBtn.classList.remove('hidden');
+            else scrollTopBtn.classList.add('hidden');
+        });
+    }
+
+    // ==================== PWA INSTALL ====================
+    let deferredPrompt;
+    const installContainer = document.getElementById('pwaInstallContainer');
+    const installBtn = document.getElementById('pwaInstallBtn');
+    if (installBtn) {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            if (installContainer) installContainer.classList.remove('hidden');
+        });
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
+            if (installContainer) installContainer.classList.add('hidden');
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+</script>
+
+</body>
+</html>

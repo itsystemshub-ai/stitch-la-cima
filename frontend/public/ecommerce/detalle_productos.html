@@ -158,8 +158,8 @@
                         <span id="discountBadge" class="bg-primary text-black px-4 py-2 text-[10px] font-black uppercase tracking-widest rounded-full hidden">-15% OFF</span>
                     </div>
                     <div class="absolute top-6 right-6">
-                        <button class="w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-primary transition-colors shadow-lg">
-                            <span class="material-symbols-outlined text-lg">favorite_border</span>
+                        <button id="favoriteBtn" onclick="toggleFavorite()" class="w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-primary transition-colors shadow-lg">
+                            <span id="favoriteIcon" class="material-symbols-outlined text-lg">favorite_border</span>
                         </button>
                     </div>
                 </div>
@@ -342,11 +342,11 @@
 <div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all"><span class="material-symbols-outlined text-sm">alternate_email</span></div>
 </div>
 </div>
-<div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span><nav class="flex flex-col gap-4"><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Nuevos Ingresos</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Sistemas de Motor</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Frenado</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Transmisión</a></nav></div>
-<div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span><nav class="flex flex-col gap-4"><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Portal ERP</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Términos B2B</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Soporte Técnico</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Contacto</a></nav></div>
+<div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span><nav class="flex flex-col gap-4"><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Nuevos Ingresos</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Sistemas de Motor</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Frenado</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="catalogo_general.html">Transmisión</a></nav></div>
+<div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span><nav class="flex flex-col gap-4"><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="../auth/login.html">Portal ERP</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="terminos_b2b.html">Términos B2B</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="soporte.html">Soporte Técnico</a><a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="contacto.html">Contacto</a></nav></div>
 <div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Sede Central</span><p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO</p><div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5"><p class="text-[10px] text-primary font-bold uppercase tracking-widest">¿Necesitas ayuda?</p><p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p><p class="text-white text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p></div></div>
 </div>
-<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center"><p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2024 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p><div class="flex gap-6"><span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Privacidad</span><span class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white">Legal</span></div></div>
+<div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center"><p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2026 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p><div class="flex gap-6"><a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="soporte.html">Soporte</a><a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="terminos_b2b.html">Legal</a></div></div>
 </footer>
 
 <script>
@@ -827,7 +827,7 @@
             <button onclick="changeImage(this)" class="${i === 0 ? 'thumb-active' : 'opacity-60'} aspect-square bg-white border-2 ${i === 0 ? 'border-primary' : 'border-outline'} rounded-xl p-2 overflow-hidden flex items-center justify-center hover:border-primary transition-all">
                 <img src="${img}" class="w-full h-full object-contain mix-blend-multiply">
             </button>
-        `).join('') + `<button class="aspect-square bg-stone-100 border-2 border-outline rounded-xl flex items-center justify-center text-on-surface-variant hover:text-black hover:border-primary transition-colors cursor-pointer"><span class="material-symbols-outlined text-3xl">360</span></button>`;
+        `).join('') + `<button onclick="handle360View()" class="aspect-square bg-stone-100 border-2 border-outline rounded-xl flex items-center justify-center text-on-surface-variant hover:text-black hover:border-primary transition-colors cursor-pointer"><span class="material-symbols-outlined text-3xl">360</span></button>`;
         
         // Update technical note
         document.getElementById('technicalNoteText').textContent = product.technicalNote;
@@ -990,7 +990,52 @@
         const product = getProductFromURL();
         renderProduct(product);
         updateCartCount();
+        checkFavorite(product.id);
     });
+
+    // ==================== FAVORITES ====================
+    function toggleFavorite() {
+        if (!currentProduct) return;
+        let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const index = favorites.indexOf(currentProduct.id);
+        const icon = document.getElementById('favoriteIcon');
+        if (index > -1) {
+            favorites.splice(index, 1);
+            icon.textContent = 'favorite_border';
+            showNotification('Eliminado de favoritos');
+        } else {
+            favorites.push(currentProduct.id);
+            icon.textContent = 'favorite';
+            showNotification('Agregado a favoritos');
+        }
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+
+    function checkFavorite(productId) {
+        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const icon = document.getElementById('favoriteIcon');
+        if (favorites.includes(productId)) {
+            icon.textContent = 'favorite';
+        }
+    }
+
+    // ==================== 360 VIEW ====================
+    function handle360View() {
+        showNotification('Vista 360 disponible próximamente');
+    }
+
+    // ==================== NOTIFICATIONS ====================
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'fixed top-24 right-6 bg-black text-white px-6 py-4 rounded-lg shadow-2xl z-50 flex items-center gap-3';
+        notification.innerHTML = '<span class="material-symbols-outlined text-primary">info</span><span class="text-sm font-bold">' + message + '</span>';
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transition = 'opacity 0.3s';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
 </script>
 
 </body></html>
