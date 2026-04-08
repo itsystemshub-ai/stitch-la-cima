@@ -49,7 +49,7 @@
   .menu-item-inactive { @apply text-stone-600 hover:bg-stone-100; }
   .menu-group { @apply text-[10px] font-bold text-stone-400 uppercase tracking-widest px-3 py-2 mt-4 first:mt-0; }
   
-  /* Dropdown Menu - Acordeón hacia abajo */
+  /* Dropdown flotante hacia la DERECHA */
   .menu-parent { position: relative; }
   .menu-parent .dropdown-arrow {
     @apply ml-auto text-stone-400 transition-transform duration-200;
@@ -58,24 +58,61 @@
   .menu-parent.open .dropdown-arrow { @apply rotate-90 text-stone-900; }
   .menu-parent.open > .menu-item { @apply bg-stone-50 text-stone-900 font-semibold; }
   
+  /* Submenu flotante - estilo card dropdown hacia la derecha */
   .submenu {
-    @apply overflow-hidden;
-    max-height: 0;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 0;
+    min-width: 200px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-8px) scale(0.96);
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 100;
   }
-  .menu-parent.open > .submenu { max-height: 500px; }
-  
-  .submenu-inner { @apply pl-5 pr-2 py-1 space-y-0.5; }
+  .menu-parent.open > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+  }
   
   .submenu a {
-    @apply flex items-center gap-2.5 pl-3 pr-3 py-2 text-sm text-stone-500 rounded-lg transition-all duration-150;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    text-decoration: none;
   }
-  .submenu a:hover { @apply bg-primary/10 text-stone-900 font-medium; }
-  .submenu a .material-symbols-outlined { @apply text-[17px] text-stone-400; }
-  .submenu a:hover .material-symbols-outlined { @apply text-stone-700; }
+  .submenu a:hover {
+    background: #f5f7fa;
+    color: #1c1c1c;
+  }
+  .submenu a .material-symbols-outlined {
+    font-size: 18px;
+    color: #999;
+    transition: color 0.15s ease;
+  }
+  .submenu a:hover .material-symbols-outlined {
+    color: #555;
+  }
   
-  /* Divider entre secciones */
-  .submenu-divider { @apply h-px bg-stone-100 my-1 mx-3; }
+  .submenu-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 4px 8px;
+  }
 </style>
 <script>
   (function() {
@@ -130,13 +167,11 @@
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="productos.html"><span class="material-symbols-outlined">category</span> Productos</a>
-          <a href="kardex.html"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
-          <a href="auditoria-inventario.html"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
-          <a href="ajustes-inventario.html"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
-          <a href="reportes-inventario.html"><span class="material-symbols-outlined">analytics</span> Reportes</a>
-        </div>
+        <a href="productos.html"><span class="material-symbols-outlined">category</span> Productos</a>
+        <a href="kardex.html"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
+        <a href="auditoria-inventario.html"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
+        <a href="ajustes-inventario.html"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
+        <a href="reportes-inventario.html"><span class="material-symbols-outlined">analytics</span> Reportes</a>
       </div>
     </div>
 
@@ -149,17 +184,15 @@
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="pos.html"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
-          <a href="registro-ventas.html"><span class="material-symbols-outlined">list_alt</span> Registro de Ventas</a>
-          <a href="factura-electronica.html"><span class="material-symbols-outlined">receipt</span> Factura Electrónica</a>
-          <a href="facturas-emitidas.html"><span class="material-symbols-outlined">description</span> Facturas Emitidas</a>
-          <div class="submenu-divider"></div>
-          <a href="notas-credito.html"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
-          <a href="clientes.html"><span class="material-symbols-outlined">people</span> Clientes</a>
-          <a href="vendedores.html"><span class="material-symbols-outlined">badge</span> Vendedores</a>
-          <a href="reportes-ventas.html"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
-        </div>
+        <a href="pos.html"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
+        <a href="registro-ventas.html"><span class="material-symbols-outlined">list_alt</span> Registro</a>
+        <a href="factura-electronica.html"><span class="material-symbols-outlined">receipt</span> Factura Electrónica</a>
+        <a href="facturas-emitidas.html"><span class="material-symbols-outlined">description</span> Facturas Emitidas</a>
+        <div class="submenu-divider"></div>
+        <a href="notas-credito.html"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
+        <a href="clientes.html"><span class="material-symbols-outlined">people</span> Clientes</a>
+        <a href="vendedores.html"><span class="material-symbols-outlined">badge</span> Vendedores</a>
+        <a href="reportes-ventas.html"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
       </div>
     </div>
 
@@ -172,13 +205,11 @@
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="proveedores.html"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
-          <a href="historial-compras.html"><span class="material-symbols-outlined">history</span> Historial</a>
-          <a href="factura-compra.html"><span class="material-symbols-outlined">request_quote</span> Factura de Compra</a>
-          <a href="libro-compras.html"><span class="material-symbols-outlined">book</span> Libro de Compras</a>
-          <a href="reportes-compras.html"><span class="material-symbols-outlined">stacked_bar_chart</span> Reportes</a>
-        </div>
+        <a href="proveedores.html"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
+        <a href="historial-compras.html"><span class="material-symbols-outlined">history</span> Historial</a>
+        <a href="factura-compra.html"><span class="material-symbols-outlined">request_quote</span> Factura Compra</a>
+        <a href="libro-compras.html"><span class="material-symbols-outlined">book</span> Libro Compras</a>
+        <a href="reportes-compras.html"><span class="material-symbols-outlined">stacked_bar_chart</span> Reportes</a>
       </div>
     </div>
 
@@ -191,20 +222,18 @@
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="plan-cuentas.html"><span class="material-symbols-outlined">format_list_numbered</span> Plan de Cuentas</a>
-          <a href="libro-diario.html"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
-          <a href="libro-ventas.html"><span class="material-symbols-outlined">chrome_reader_mode</span> Libro de Ventas</a>
-          <a href="libro-caja.html"><span class="material-symbols-outlined">savings</span> Libro de Caja</a>
-          <div class="submenu-divider"></div>
-          <a href="balance-general.html"><span class="material-symbols-outlined">balance</span> Balance General</a>
-          <a href="balance-comprobacion.html"><span class="material-symbols-outlined">scale</span> Balance Comprobación</a>
-          <a href="estado-resultados.html"><span class="material-symbols-outlined">monitoring</span> Estado de Resultados</a>
-          <a href="declaracion-iva.html"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
-          <a href="cierre-contable.html"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
-          <a href="libros-legales.html"><span class="material-symbols-outlined">law</span> Libros Legales</a>
-          <a href="reportes-contables.html"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
-        </div>
+        <a href="plan-cuentas.html"><span class="material-symbols-outlined">format_list_numbered</span> Plan Cuentas</a>
+        <a href="libro-diario.html"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
+        <a href="libro-ventas.html"><span class="material-symbols-outlined">chrome_reader_mode</span> Libro Ventas</a>
+        <a href="libro-caja.html"><span class="material-symbols-outlined">savings</span> Libro Caja</a>
+        <div class="submenu-divider"></div>
+        <a href="balance-general.html"><span class="material-symbols-outlined">balance</span> Balance General</a>
+        <a href="balance-comprobacion.html"><span class="material-symbols-outlined">scale</span> Balance Comprob.</a>
+        <a href="estado-resultados.html"><span class="material-symbols-outlined">monitoring</span> Estado Resultados</a>
+        <a href="declaracion-iva.html"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
+        <a href="cierre-contable.html"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
+        <a href="libros-legales.html"><span class="material-symbols-outlined">law</span> Libros Legales</a>
+        <a href="reportes-contables.html"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
       </div>
     </div>
 
@@ -217,11 +246,9 @@
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="activos-fijos.html"><span class="material-symbols-outlined">corporate_fare</span> Activos Fijos</a>
-          <a href="cuentas-cobrar.html"><span class="material-symbols-outlined">account_balance_wallet</span> Cuentas por Cobrar</a>
-          <a href="reportes-financieros.html"><span class="material-symbols-outlined">show_chart</span> Reportes Financieros</a>
-        </div>
+        <a href="activos-fijos.html"><span class="material-symbols-outlined">corporate_fare</span> Activos Fijos</a>
+        <a href="cuentas-cobrar.html"><span class="material-symbols-outlined">account_balance_wallet</span> Cuentas Cobrar</a>
+        <a href="reportes-financieros.html"><span class="material-symbols-outlined">show_chart</span> Reportes</a>
       </div>
     </div>
 
@@ -234,14 +261,12 @@
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="empleados.html"><span class="material-symbols-outlined">person</span> Empleados</a>
-          <a href="nomina.html"><span class="material-symbols-outlined">payments</span> Nómina</a>
-          <a href="prestaciones.html"><span class="material-symbols-outlined">savings</span> Prestaciones</a>
-          <a href="portal-empleado.html"><span class="material-symbols-outlined">person_outline</span> Portal del Empleado</a>
-          <a href="rendimiento-anual.html"><span class="material-symbols-outlined">emoji_events</span> Rendimiento Anual</a>
-          <a href="reportes-rrhh.html"><span class="material-symbols-outlined">group_work</span> Reportes</a>
-        </div>
+        <a href="empleados.html"><span class="material-symbols-outlined">person</span> Empleados</a>
+        <a href="nomina.html"><span class="material-symbols-outlined">payments</span> Nómina</a>
+        <a href="prestaciones.html"><span class="material-symbols-outlined">savings</span> Prestaciones</a>
+        <a href="portal-empleado.html"><span class="material-symbols-outlined">person_outline</span> Portal Empleado</a>
+        <a href="rendimiento-anual.html"><span class="material-symbols-outlined">emoji_events</span> Rendimiento</a>
+        <a href="reportes-rrhh.html"><span class="material-symbols-outlined">group_work</span> Reportes</a>
       </div>
     </div>
 
@@ -254,17 +279,15 @@
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="parametros.html"><span class="material-symbols-outlined">tune</span> Parámetros</a>
-          <a href="config-fiscal.html"><span class="material-symbols-outlined">policy</span> Configuración Fiscal</a>
-          <a href="usuarios-roles.html"><span class="material-symbols-outlined">admin_panel_settings</span> Usuarios y Roles</a>
-          <a href="base-datos.html"><span class="material-symbols-outlined">storage</span> Base de Datos</a>
-          <div class="submenu-divider"></div>
-          <a href="backups.html"><span class="material-symbols-outlined">backup</span> Backups</a>
-          <a href="estado-sistema.html"><span class="material-symbols-outlined">health_and_safety</span> Estado del Sistema</a>
-          <a href="tareas-programadas.html"><span class="material-symbols-outlined">schedule</span> Tareas Programadas</a>
-          <a href="auditoria-seguridad.html"><span class="material-symbols-outlined">security</span> Auditoría de Seguridad</a>
-        </div>
+        <a href="parametros.html"><span class="material-symbols-outlined">tune</span> Parámetros</a>
+        <a href="config-fiscal.html"><span class="material-symbols-outlined">policy</span> Config Fiscal</a>
+        <a href="usuarios-roles.html"><span class="material-symbols-outlined">admin_panel_settings</span> Usuarios</a>
+        <a href="base-datos.html"><span class="material-symbols-outlined">storage</span> Base Datos</a>
+        <div class="submenu-divider"></div>
+        <a href="backups.html"><span class="material-symbols-outlined">backup</span> Backups</a>
+        <a href="estado-sistema.html"><span class="material-symbols-outlined">health_and_safety</span> Estado Sistema</a>
+        <a href="tareas-programadas.html"><span class="material-symbols-outlined">schedule</span> Tareas</a>
+        <a href="auditoria-seguridad.html"><span class="material-symbols-outlined">security</span> Auditoría</a>
       </div>
     </div>
 
@@ -273,19 +296,17 @@
     <div class="menu-parent" data-module="ayuda">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">help</span>
-        <span>Ayuda y Soporte</span>
+        <span>Ayuda</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <div class="submenu-inner">
-          <a href="ayuda.html"><span class="material-symbols-outlined">help</span> Centro de Ayuda</a>
-          <a href="tickets-soporte.html"><span class="material-symbols-outlined">confirmation_number</span> Tickets de Soporte</a>
-          <a href="crear-ticket.html"><span class="material-symbols-outlined">add_circle</span> Crear Ticket</a>
-          <div class="submenu-divider"></div>
-          <a href="chat-asistencia.html"><span class="material-symbols-outlined">chat</span> Chat de Asistencia</a>
-          <a href="base-conocimiento.html"><span class="material-symbols-outlined">school</span> Base de Conocimiento</a>
-          <a href="manual-tecnico.html"><span class="material-symbols-outlined">description</span> Manual Técnico</a>
-        </div>
+        <a href="ayuda.html"><span class="material-symbols-outlined">help</span> Centro Ayuda</a>
+        <a href="tickets-soporte.html"><span class="material-symbols-outlined">confirmation_number</span> Tickets</a>
+        <a href="crear-ticket.html"><span class="material-symbols-outlined">add_circle</span> Crear Ticket</a>
+        <div class="submenu-divider"></div>
+        <a href="chat-asistencia.html"><span class="material-symbols-outlined">chat</span> Chat</a>
+        <a href="base-conocimiento.html"><span class="material-symbols-outlined">school</span> Conocimiento</a>
+        <a href="manual-tecnico.html"><span class="material-symbols-outlined">description</span> Manual</a>
       </div>
     </div>
   </nav>
@@ -710,7 +731,7 @@
     });
   }
 
-  // Toggle Dropdown Menu (acordeón)
+  // Toggle Dropdown Menu (hacia la derecha)
   function toggleDropdown(menuItem) {
     const parent = menuItem.closest('.menu-parent');
     const isOpen = parent.classList.contains('open');
@@ -723,6 +744,15 @@
     // Toggle el actual
     parent.classList.toggle('open', !isOpen);
   }
+
+  // Cerrar dropdowns al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.menu-parent')) {
+      document.querySelectorAll('.menu-parent.open').forEach(el => {
+        el.classList.remove('open');
+      });
+    }
+  });
 
   // Resaltar página actual en sidebar
   const currentPage = window.location.pathname.split('/').pop();
@@ -738,7 +768,7 @@
         const parent = link.closest('.menu-parent');
         if (parent) parent.classList.add('open');
         
-        // Highlight en el item principal del dropdown
+        // Highlight en el item principal
         const mainItem = parent.querySelector('.menu-item');
         if (mainItem) {
           mainItem.classList.add('bg-stone-50', 'text-stone-900', 'font-semibold');
