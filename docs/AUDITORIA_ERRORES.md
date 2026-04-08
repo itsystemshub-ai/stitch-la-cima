@@ -126,6 +126,20 @@
 |---|----------|--------|
 | 1 | Enlace "Volver al inicio" agregado | ✅ |
 
+### dashboard_principal.html (10 correcciones)
+| # | Solución | Estado |
+|---|----------|--------|
+| 1 | Meta description + PWA tags | ✅ |
+| 2 | Colores unificados a #ceff5e | ✅ |
+| 3 | Sidebar responsive con openSidebar/closeSidebar | ✅ |
+| 4 | Botón hamburger para móvil | ✅ |
+| 5 | Overlay para sidebar en móvil | ✅ |
+| 6 | handleLogout() con limpieza de sesión | ✅ |
+| 7 | generateReport() con notificación | ✅ |
+| 8 | showNotification() implementada | ✅ |
+| 9 | Copyright actualizado a 2026 | ✅ |
+| 10 | Rutas de soporte y términos actualizadas | ✅ |
+
 ### catalog-7-items-selected.html (2 correcciones)
 | # | Solución | Estado |
 |---|----------|--------|
@@ -144,16 +158,7 @@
 
 | # | Problema | Archivos | Prioridad |
 |---|----------|----------|-----------|
-| 1 | Logo `../../assets/images/logo.png` NO EXISTE | TODOS (12 archivos) | **Alta** |
-
----
-
-## 🟡 ERRORES MEDIOS PENDIENTES
-
-| # | Problema | Archivos |
-|---|----------|----------|
-| 2 | Dirección inconsistente en contacto | contacto |
-| 3 | Auth insegura: acepta cualquier input sin validación real | login.html |
+| 1 | Logo `../../assets/images/logo.png` NO EXISTE | TODOS (13 archivos) | **Alta** |
 
 ---
 
@@ -162,12 +167,24 @@
 | Estado | Cantidad |
 |--------|----------|
 | Errores críticos solucionados | 7 |
-| Errores críticos pendientes | 1 |
-| Errores medios solucionados | 4 |
-| Errores medios pendientes | 2 |
-| **Total soluciones** | **81** |
-| **Funciones nuevas generadas** | **15** |
+| Errores críticos pendientes | 1 (Logo inexistente) |
+| Errores medios solucionados | 6 |
+| Errores medios pendientes | 0 |
+| **Total soluciones** | **91** |
+| **Funciones nuevas generadas** | **21** |
 | **Páginas nuevas creadas** | **2** |
+| **Archivos actualizados** | **13** |
+
+---
+
+### ✅ PENDIENTES RESUELTOS
+- Dirección inconsistente → contacto.html ✅
+- Dashboard sin funciones → dashboard_principal.html ✅
+- Dashboard sin responsive → dashboard_principal.html ✅
+- Dashboard sin sidebar móvil → dashboard_principal.html ✅
+
+### 🔴 ÚNICO PENDIENTE
+- Logo `../../assets/images/logo.png` NO EXISTE → Requiere crear carpeta assets/images/ con logo.png
 
 ---
 

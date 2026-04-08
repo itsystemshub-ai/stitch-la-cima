@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "npx tailwindcss -i ./src/scss/pages/main.scss -o ./public/output.css --watch",
     "build:css": "npx tailwindcss -i ./src/scss/pages/main.scss -o ./public/output.css --minify",
-    "build": "npm run build:css"
+    "build": "npm run build:css",
+    "start": "npx serve public -p 3000",
+    "serve": "npx serve public -p 3000"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1",
     "sass": "^1.69.5",
     "postcss": "^8.4.32",
-    "autoprefixer": "^10.4.16"
+    "autoprefixer": "^10.4.16",
+    "serve": "^14.2.1"
   }
 }

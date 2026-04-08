@@ -1,0 +1,35 @@
+services:
+  backend:
+    source: ./backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: npx prisma migrate deploy && npm start
+    healthcheckPath: /api/health
+    envVars:
+      - name: NODE_ENV
+        value: production
+      - name: DATABASE_URL
+        fromService: postgresql
+      - name: JWT_SECRET
+        generate: true
+      - name: PORT
+        value: 3000
+      - name: CORS_ORIGIN
+        fromService: frontend
+
+  frontend:
+    source: ./frontend
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s public -l ${PORT}
+    envVars:
+      - name: API_URL
+        fromService: backend
+
+  postgresql:
+    image: postgres:16
+    envVars:
+      - name: POSTGRES_DB
+        value: zenith_erp_lacima
+      - name: POSTGRES_USER
+        value: postgres
+      - name: POSTGRES_PASSWORD
+        generate: true

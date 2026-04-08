@@ -40,11 +40,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Database
+# Database (SQLite no se usa en producción)
 *.sqlite
 *.sqlite3
-*.db
-prisma/migrations/
+dev.db
+
+# Prisma (migraciones se generan, no se commitean manualmente)
+# EXCEPTO la migración inicial que sí está en el repo
 
 # Build artifacts
 *.tsbuildinfo
