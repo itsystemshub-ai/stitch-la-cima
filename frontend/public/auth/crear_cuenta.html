@@ -15,53 +15,8 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "primary": "#ceff5e",
-                        "primary-dim": "#bded4f",
-                        "on-primary": "#000000",
-                        "secondary": "#1c1c1c",
-                        "background": "#f6f6f9",
-                        "surface": "#ffffff",
-                        "on-surface": "#0c0e10",
-                        "on-surface-variant": "#5a5c5e",
-                        "outline": "#e2e2e5"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Space Grotesk"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    }
-                },
-            },
-        }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .stamped-text {
-            letter-spacing: -0.02em;
-        }
-        .industrial-glass {
-            background: rgba(249, 249, 249, 0.8);
-            backdrop-filter: blur(16px);
-        }
-        input:focus {
-            outline: none;
-            box-shadow: none;
-        }
-    </style>
+<script src="js/crear_cuenta.js"></script>
+<link rel="stylesheet" href="css/crear_cuenta.css">
 </head>
 <body class="bg-surface font-body text-on-surface">
 <!-- Top Navigation -->
@@ -275,61 +230,6 @@
 </div>
 </footer>
 
-<script>
-    // ==================== FORM HANDLER ====================
-    function handleRegister() {
-        const company = document.getElementById('companyName')?.value?.trim();
-        const rif = document.getElementById('rif')?.value?.trim();
-        const email = document.getElementById('workEmail')?.value?.trim();
-        const password = document.getElementById('password')?.value?.trim();
-
-        if (!company || !rif || !email || !password) {
-            showNotification('Por favor complete todos los campos obligatorios', 'error');
-            return;
-        }
-        if (password.length < 6) {
-            showNotification('La contraseña debe tener al menos 6 caracteres', 'error');
-            return;
-        }
-
-        // Simulate registration (in production, this would call an API)
-        localStorage.setItem('erp_session', 'true');
-        localStorage.setItem('user_company', company);
-        localStorage.setItem('user_email', email);
-
-        showNotification('¡Cuenta creada exitosamente! Redirigiendo...', 'success');
-        setTimeout(() => {
-            window.location.href = '/frontend/public/erp/dashboard_principal.html';
-        }, 2000);
-    }
-
-    function showNotification(message, type = 'success') {
-        const notification = document.createElement('div');
-        const bgColor = type === 'error' ? 'bg-red-600' : 'bg-green-600';
-        notification.className = `fixed top-24 right-6 ${bgColor} text-white px-6 py-4 rounded-lg shadow-2xl z-50 flex items-center gap-3`;
-        const icon = type === 'error' ? 'error' : 'check_circle';
-        notification.innerHTML = `<span class="material-symbols-outlined text-primary">${icon}</span><span class="text-sm font-bold">${message}</span>`;
-        document.body.appendChild(notification);
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transition = 'opacity 0.3s';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
-
-    // ==================== MOBILE MENU ====================
-    function openMobileMenu() {
-        document.getElementById('mobileMenu').classList.remove('hidden');
-        document.getElementById('mobileNav').classList.remove('-translate-x-full');
-        document.getElementById('mobileNav').classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeMobileMenu() {
-        document.getElementById('mobileMenu').classList.add('hidden');
-        document.getElementById('mobileNav').classList.add('-translate-x-full');
-        document.getElementById('mobileNav').classList.remove('open');
-        document.body.style.overflow = '';
-    }
-</script>
+<script src="js/crear_cuenta.js"></script>
 
 </body></html>
