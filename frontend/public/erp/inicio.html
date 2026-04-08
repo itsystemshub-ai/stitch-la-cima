@@ -11,7 +11,7 @@
 <link rel="manifest" href="../manifest.json">
 <link rel="icon" type="image/png" href="../../assets/images/logo.png">
 <link rel="apple-touch-icon" href="../../assets/images/logo.png">
-<title>Inicio | ERP La Cima</title>
+<title>Dashboard Principal | Mayor de Repuesto La Cima, C.A.</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -46,8 +46,8 @@
   /* Dropdown hacia la DERECHA */
   .menu-parent { position: relative; }
   .dropdown-arrow { margin-left: auto; color: #aaa; transition: transform 0.2s ease; font-size: 18px !important; }
-  .menu-parent.open .dropdown-arrow { transform: rotate(90deg); color: #1c1c1c; }
-  .menu-parent.open > .menu-item { background: #f8f9fa; color: #1c1c1c; font-weight: 600; }
+  .menu-item.open { background: #f8f9fa; color: #1c1c1c; font-weight: 600; }
+  .menu-item.open .dropdown-arrow { transform: rotate(90deg); color: #1c1c1c; }
   
   /* Submenu flotante hacia la derecha */
   .submenu {
@@ -67,7 +67,8 @@
     pointer-events: none;
     z-index: 200;
   }
-  .menu-parent.open > .submenu {
+  /* Mostrar submenu cuando el item hermano anterior tiene .open */
+  .menu-item.open + .submenu {
     opacity: 1;
     visibility: visible;
     transform: translateX(0) scale(1);
@@ -113,7 +114,6 @@
         <span class="text-[10px] font-mono text-stone-400">v2.1.0</span>
       </div>
     </div>
-    <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Sistema ERP Industrial</p>
   </div>
 
   <!-- Busqueda -->
@@ -130,14 +130,11 @@
   <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
 
     <!-- INICIO -->
-    <div class="menu-group">Principal</div>
     <a class="menu-item menu-item-active" href="inicio.html">
       <span class="material-symbols-filled text-[20px]">dashboard</span>
-      <span>Inicio</span>
     </a>
 
     <!-- INVENTARIO -->
-    <div class="menu-group">Inventario</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">inventory_2</span>
@@ -154,7 +151,6 @@
     </div>
 
     <!-- VENTAS -->
-    <div class="menu-group">Ventas</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">payments</span>
@@ -175,7 +171,6 @@
     </div>
 
     <!-- COMPRAS -->
-    <div class="menu-group">Compras</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
@@ -192,7 +187,6 @@
     </div>
 
     <!-- CONTABILIDAD -->
-    <div class="menu-group">Contabilidad</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">account_balance</span>
@@ -216,7 +210,6 @@
     </div>
 
     <!-- FINANZAS -->
-    <div class="menu-group">Finanzas</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">monetization_on</span>
@@ -231,7 +224,6 @@
     </div>
 
     <!-- RRHH -->
-    <div class="menu-group">Recursos Humanos</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">groups</span>
@@ -249,7 +241,6 @@
     </div>
 
     <!-- CONFIGURACIÓN -->
-    <div class="menu-group">Sistema</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">settings</span>
@@ -270,7 +261,6 @@
     </div>
 
     <!-- AYUDA -->
-    <div class="menu-group">Ayuda</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">help</span>
@@ -344,7 +334,7 @@
 </header>
 
 <!-- ========== CONTENIDO PRINCIPAL ========== -->
-<main class="ml-72 mt-[65px] min-h-[calc(100vh-65px)] p-6">
+<main class="ml-[280px] w-[calc(100vw-280px)] mt-[65px] min-h-[calc(100vh-65px)] p-6">
 
   <!-- Header Dashboard -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
