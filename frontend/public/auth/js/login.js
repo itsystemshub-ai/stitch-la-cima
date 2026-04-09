@@ -1,79 +1,125 @@
-tailwind.config = {
-            darkMode: "class",
-            theme: {
-              extend: {
-                "colors": {
-                            // PRIMARY
-                            "primary": "#ceff5e",
-                            "primary-dim": "#bded4f",
-                            "on-primary": "#000000",
-                            "primary-container": "#9acd32",
-                            "on-primary-container": "#3a5400",
-                            "primary-fixed": "#bef456",
-                            "primary-fixed-dim": "#a3d73c",
-                            "on-primary-fixed": "#131f00",
-                            "on-primary-fixed-variant": "#364e00",
-                            "inverse-primary": "#a3d73c",
+/**
+ * ZENITH ERP - Login Handler
+ * Conecta con el backend para autenticación real
+ */
 
-                            // SECONDARY
-                            "secondary": "#1c1c1c",
-                            "on-secondary": "#ffffff",
-                            "secondary-container": "#e2dfde",
-                            "on-secondary-container": "#636262",
-                            "secondary-fixed": "#e5e2e1",
-                            "secondary-fixed-dim": "#c8c6c5",
-                            "on-secondary-fixed": "#1c1b1b",
-                            "on-secondary-fixed-variant": "#474746",
+async function handleLogin() {
+  const email = document.getElementById('email')?.value?.trim();
+  const password = document.getElementById('password')?.value;
 
-                            // TERTIARY
-                            "tertiary": "#5e5e5e",
-                            "on-tertiary": "#ffffff",
-                            "tertiary-container": "#bebcbc",
-                            "on-tertiary-container": "#4c4c4c",
-                            "tertiary-fixed": "#e4e2e2",
-                            "tertiary-fixed-dim": "#c8c6c6",
-                            "on-tertiary-fixed": "#1b1c1c",
-                            "on-tertiary-fixed-variant": "#474747",
+  // Validaciones
+  if (!email) {
+    showNotification('Por favor ingrese su correo electrónico', 'error');
+    return;
+  }
 
-                            // ERROR
-                            "error": "#ba1a1a",
-                            "on-error": "#ffffff",
-                            "error-container": "#ffdad6",
-                            "on-error-container": "#93000a",
+  if (!password) {
+    showNotification('Por favor ingrese su contraseña', 'error');
+    return;
+  }
 
-                            // SURFACE & BACKGROUND
-                            "background": "#f6f6f9",
-                            "on-background": "#1a1c1c",
-                            "surface": "#ffffff",
-                            "on-surface": "#0c0e10",
-                            "surface-variant": "#e2e2e2",
-                            "on-surface-variant": "#5a5c5e",
-                            "surface-dim": "#dadada",
-                            "surface-bright": "#f9f9f9",
-                            "surface-container-lowest": "#ffffff",
-                            "surface-container-low": "#f3f3f3",
-                            "surface-container": "#eeeeee",
-                            "surface-container-high": "#e8e8e8",
-                            "surface-container-highest": "#e2e2e2",
-                            "inverse-surface": "#2f3131",
-                            "inverse-on-surface": "#f1f1f1",
-                            "surface-tint": "#496800",
+  try {
+    showLoading(true);
 
-                            // OUTLINE
-                            "outline": "#e2e2e5",
-                            "outline-variant": "#c3c9b1"
-                },
-                "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-                },
-                "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-                }
-              },
-            },
-          }
+    // Llamar a la API real
+    const response = await window.zenithApi.login(email, password);
+
+    if (response.status === 'success' && response.data?.token) {
+      // Guardar token y sesión
+      window.zenithApi.setToken(response.data.token);
+      localStorage.setItem('erp_session', 'true');
+      localStorage.setItem('user_role', response.data.user?.role || 'USER');
+      localStorage.setItem('user_name', response.data.user?.name || '');
+
+      showNotification('Inicio de sesión exitoso. Redirigiendo...', 'success');
+
+      // Redirigir según rol
+      setTimeout(() => {
+        const role = response.data.user?.role;
+        if (role === 'ADMIN' || role === 'MANAGER') {
+          window.location.href = '../erp/inicio.html';
+        } else {
+          window.location.href = '../ecommerce/index.html';
+        }
+      }, 1500);
+    } else {
+      showNotification(response.message || 'Error al iniciar sesión', 'error');
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    showNotification(error.message || 'Error de conexión con el servidor', 'error');
+  } finally {
+    showLoading(false);
+  }
+}
+
+function showLoading(show) {
+  const button = document.querySelector('button[type="submit"]');
+  const spinner = document.getElementById('loginSpinner');
+  
+  if (button) {
+    button.disabled = show;
+    button.style.opacity = show ? '0.7' : '1';
+  }
+  
+  if (spinner) {
+    spinner.style.display = show ? 'inline-block' : 'none';
+  }
+}
+
+function showNotification(message, type = 'success') {
+  // Remover notificación existente
+  const existing = document.querySelector('.login-notification');
+  if (existing) existing.remove();
+
+  const notification = document.createElement('div');
+  const bgColor = type === 'error' ? 'bg-red-600' : 'bg-green-600';
+  const icon = type === 'error' ? 'error' : 'check_circle';
+  
+  notification.className = `login-notification fixed top-6 right-6 ${bgColor} text-white px-6 py-4 rounded-lg shadow-2xl z-50 flex items-center gap-3 animate-slide-in`;
+  notification.innerHTML = `
+    <span class="material-symbols-outlined">${icon}</span>
+    <span class="text-sm font-bold">${message}</span>
+  `;
+  
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    notification.style.transition = 'opacity 0.3s';
+    setTimeout(() => notification.remove(), 300);
+  }, 4000);
+}
+
+// ==================== MOBILE MENU ====================
+function openMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('hidden');
+  document.getElementById('mobileNav').classList.remove('-translate-x-full');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.add('hidden');
+  document.getElementById('mobileNav').classList.add('-translate-x-full');
+  document.body.style.overflow = '';
+}
+
+// Verificar si ya está logueado al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('erp_session') === 'true') {
+    const role = localStorage.getItem('user_role');
+    if (role === 'ADMIN' || role === 'MANAGER') {
+      window.location.href = '../erp/inicio.html';
+    }
+  }
+
+  // Permitir login con Enter
+  const passwordInput = document.getElementById('password');
+  if (passwordInput) {
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleLogin();
+      }
+    });
+  }
+});

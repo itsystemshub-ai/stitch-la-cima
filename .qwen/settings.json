@@ -33,7 +33,9 @@
       "Bash(npm install *)",
       "Bash(move *)",
       "Bash(robocopy *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(grep *)",
+      "Bash(cat *)"
     ]
   },
   "$version": 3
