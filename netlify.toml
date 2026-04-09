@@ -1,44 +1,30 @@
 [build]
-  # Build command - we'll use a custom script to prepare both frontend and backend
   command = "npm run build:netlify"
-  # Publish directory - where the built frontend will be
   publish = "frontend/public"
 
 [dev]
-  # Development server command
   command = "npm run dev"
   port = 3000
 
 [[redirects]]
-  # Redirect all API routes to Netlify Functions
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
 
-# Handle SPA routing - redirect all non-file routes to index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = {Method = GET, Path = !"/*.*"}
 
 [functions]
-  # Directory where Netlify Functions are located
   directory = "netlify/functions"
-  # Node.js runtime
   node_bundler = "esbuild"
-  # Include external dependencies
   included_files = ["package.json", "package-lock.json"]
-  # Timeout for functions (in seconds)
   timeout = 10
-  # Maximum duration for background functions
   max_duration = 260
 
 [env]
-  # Set Node environment to production for builds
   NODE_ENV = "production"
-  # Default JWT expiration if not set
   JWT_EXPIRES_IN = "24h"
-  # Default rate limit settings
   RATE_LIMIT_WINDOW_MS = "900000"
   RATE_LIMIT_MAX_REQUESTS = "100"

@@ -11,12 +11,32 @@
 <link rel="manifest" href="../manifest.json">
 <link rel="icon" type="image/png" href="../../assets/images/logo.png">
 <link rel="apple-touch-icon" href="../../assets/images/logo.png">
-<title>MAYOR DE REPUESTO LA CIMA, C.A. - Registro</title>
+<title>Crear Cuenta | Mayor de Repuesto LA CIMA, C.A.</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="js/crear_cuenta.js"></script>
 <link rel="stylesheet" href="css/crear_cuenta.css">
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          primary: "#ceff5e",
+          secondary: "#1c1c1c",
+          background: "#f6f6f9",
+          surface: "#ffffff",
+          outline: "#e2e2e5"
+        },
+        fontFamily: {
+          headline: ["League Spartan", "sans-serif"],
+          body: ["Inter", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
 </head>
 <body class="bg-surface font-body text-on-surface">
 <!-- Top Navigation -->
@@ -41,7 +61,7 @@
         <div class="flex items-center gap-4">
             <a href="login.html" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
                 <span class="material-symbols-outlined text-primary text-sm">login</span>
-                Iniciar Sesión
+                Login
             </a>
         </div>
     </div>
