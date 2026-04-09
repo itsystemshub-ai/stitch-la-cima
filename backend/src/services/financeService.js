@@ -71,10 +71,7 @@ function calculateMonthlyDepreciation(asset) {
  * @returns {Promise<Object>} Updated asset
  */
 async function updateAssetBookValue(assetId, depreciationAmount, asOfDate) {
-  const id = parseInt(assetId);
-  if (isNaN(id)) {
-    throw new Error('ID de activo invalido');
-  }
+  const id = assetId;
 
   const asset = await prisma.fixedAsset.findUnique({ where: { id, active: true } });
   if (!asset) {
@@ -103,10 +100,7 @@ async function updateAssetBookValue(assetId, depreciationAmount, asOfDate) {
  * @returns {Promise<Object>} Depreciation record and journal entry
  */
 async function recordDepreciation(assetId, asOfDate) {
-  const id = parseInt(assetId);
-  if (isNaN(id)) {
-    throw new Error('ID de activo invalido');
-  }
+  const id = assetId;
 
   const asset = await prisma.fixedAsset.findUnique({ where: { id, active: true } });
   if (!asset) {

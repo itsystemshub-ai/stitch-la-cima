@@ -3,8 +3,11 @@ const router = express.Router();
 const saleController = require('../controllers/saleController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
+const validate = require('../middleware/validate');
+const { createSaleValidator } = require('../validators/saleValidator');
+
 // POST /api/sales - Create sale
-router.post('/', protect, saleController.createSale);
+router.post('/', protect, createSaleValidator, validate, saleController.createSale);
 
 // GET /api/sales - List sales with filters
 router.get('/', protect, saleController.getSales);

@@ -14,7 +14,7 @@ generator client {
 // PostgreSQL: postgresql://user:pass@host:port/db
 
 datasource db {
-  provider = env("DB_PROVIDER")
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
