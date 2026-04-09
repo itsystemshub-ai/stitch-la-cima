@@ -1,67 +1,29 @@
-tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-primary-container": "#3a5400",
-                    "primary-container": "#9acd32",
-                    "secondary-container": "#e2dfde",
-                    "on-error-container": "#93000a",
-                    "inverse-primary": "#a3d73c",
-                    "surface-container-high": "#e8e8e8",
-                    "surface-dim": "#dadada",
-                    "secondary-fixed-dim": "#c8c6c5",
-                    "surface-container-low": "#f3f3f3",
-                    "secondary-fixed": "#e5e2e1",
-                    "on-tertiary-fixed": "#1b1c1c",
-                    "on-tertiary-container": "#4c4c4c",
-                    "on-tertiary": "#ffffff",
-                    "on-secondary": "#ffffff",
-                    "on-primary-fixed": "#131f00",
-                    "background": "#f9f9f9",
-                    "surface-container-highest": "#e2e2e2",
-                    "surface-container-lowest": "#ffffff",
-                    "secondary": "#5f5e5e",
-                    "on-surface": "#1a1c1c",
-                    "tertiary": "#5e5e5e",
-                    "inverse-on-surface": "#f1f1f1",
-                    "surface-variant": "#e2e2e2",
-                    "on-secondary-container": "#636262",
-                    "primary-fixed-dim": "#a3d73c",
-                    "on-primary": "#ffffff",
-                    "surface-container": "#eeeeee",
-                    "on-tertiary-fixed-variant": "#474747",
-                    "tertiary-container": "#bebcbc",
-                    "on-secondary-fixed-variant": "#474746",
-                    "primary": "#496800",
-                    "error-container": "#ffdad6",
-                    "surface": "#f9f9f9",
-                    "inverse-surface": "#2f3131",
-                    "on-error": "#ffffff",
-                    "tertiary-fixed": "#e4e2e2",
-                    "outline": "#747a65",
-                    "error": "#ba1a1a",
-                    "on-primary-fixed-variant": "#364e00",
-                    "on-secondary-fixed": "#1c1b1b",
-                    "on-background": "#1a1c1c",
-                    "outline-variant": "#c3c9b1",
-                    "surface-tint": "#496800",
-                    "surface-bright": "#f9f9f9",
-                    "tertiary-fixed-dim": "#c8c6c6",
-                    "on-surface-variant": "#434937",
-                    "primary-fixed": "#bef456"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "headline": ["Space Grotesk"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
-            }
-          },
-        },
+const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("sidebarOverlay");
+
+      if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("open");
+          overlay.classList.toggle("hidden");
+        });
       }
+
+      function toggleDropdown(menuItem) {
+        const parent = menuItem.closest(".menu-parent");
+        const wasOpen = parent.classList.contains("open");
+        document.querySelectorAll(".menu-parent.open").forEach((el) => {
+          if (el !== parent) el.classList.remove("open");
+        });
+        if (!wasOpen) {
+          parent.classList.add("open");
+        }
+      }
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".menu-parent")) {
+          document.querySelectorAll(".menu-parent.open").forEach((el) => {
+            el.classList.remove("open");
+          });
+        }
+      });

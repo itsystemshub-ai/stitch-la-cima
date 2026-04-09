@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html class="light" lang="es">
-<head>
+<html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="description" content="Dashboard ERP - MAYOR DE REPUESTO LA CIMA, C.A. Panel de control empresarial."/>
+<meta name="description" content="Dashboard Principal | Mayor de Repuesto La Cima, C.A. - MAYOR DE REPUESTO LA CIMA, C.A."/>
 <meta name="theme-color" content="#ceff5e">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="LA CIMA ERP">
 <link rel="manifest" href="../manifest.json">
 <link rel="icon" type="image/png" href="../../assets/images/logo.png">
-<link rel="apple-touch-icon" href="../../assets/images/logo.png">
-<title>Dashboard Principal | Mayor de Repuesto La Cima, C.A.</title>
+<title>Dashboard Principal | Mayor de Repuesto La Cima, C.A. | ERP La Cima</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/inicio copy.css">
 <script>
   tailwind.config = {
     darkMode: "class",
@@ -26,8 +23,7 @@
     }
   }
 </script>
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .material-symbols-filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   body { font-family: 'Inter', sans-serif; }
@@ -98,19 +94,11 @@
   .submenu a .material-symbols-outlined { font-size: 18px !important; color: #bbb; }
   .submenu a:hover .material-symbols-outlined { color: #666; }
   .submenu-divider { height: 1px; background: #eee; margin: 6px 10px; }
-</style>
-<script>
-  (function() {
-    const isLoggedIn = localStorage.getItem('erp_session') === 'true';
-    if (!isLoggedIn) window.location.href = '/frontend/public/auth/login.html';
-  })();
-</script>
 </head>
 <body class="bg-background text-stone-900 min-h-screen flex">
 
-<!-- SideNavBar Shell -->
+<!-- ========== SIDEBAR ========== -->
 <aside id="sidebar" class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar">
-  <!-- Logo -->
   <div class="flex flex-col px-5 pt-6 pb-4">
     <div class="flex items-center gap-3 mb-2">
       <div class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg">
@@ -124,68 +112,58 @@
     <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Sistema ERP Industrial</p>
   </div>
 
-  <!-- Busqueda -->
   <div class="px-4 mb-4">
     <div class="relative">
-      <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
-        <span class="material-symbols-outlined text-lg">search</span>
-      </span>
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><span class="material-symbols-outlined text-lg">search</span></span>
       <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar..." type="text"/>
     </div>
   </div>
 
-  <!-- Menu Principal -->
-  <nav class="flex-1 px-3 space-y-0.5 pb-24">
+  <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
+    <div class="menu-group">Principal</div>
+    <a class="menu-item menu-item-inactive" href="inicio.html">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span><span>Inicio</span>
+      <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+    </a>
 
-    <!-- INICIO -->
-  <a href="inicio.html" class="menu-item menu-item-active flex items-center gap-3 px-4 py-2 transition-colors">
-    <span class="material-symbols-outlined text-[20px]" aria-hidden="true">dashboard</span>
-    <span class="flex-1">Dashboard</span>
-    <span class="material-symbols-outlined dropdown-arrow text-[18px]">chevron_right</span>
-  </a>
-
-    <!-- INVENTARIO -->
+    <div class="menu-group">Inventario</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">inventory_2</span>
-        <span>Inventario</span>
+        <span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <a href="inventario.html"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="productos.html"><span class="material-symbols-outlined">category</span> Productos</a>
         <a href="kardex.html"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
-        <a href="auditoria-inventario.html"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
+        <a href="auditoria-inventario.html"><span class="material-symbols-outlined">assignment</span> Auditor�a F�sica</a>
         <a href="ajustes-inventario.html"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
         <a href="reportes-inventario.html"><span class="material-symbols-outlined">analytics</span> Reportes</a>
       </div>
     </div>
 
-    <!-- VENTAS -->
+    <div class="menu-group">Ventas</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">payments</span>
-        <span>Ventas</span>
+        <span class="material-symbols-outlined text-[20px]">payments</span><span>Ventas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
         <a href="pos.html"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
         <a href="registro-ventas.html"><span class="material-symbols-outlined">list_alt</span> Registro</a>
-        <a href="factura-electronica.html"><span class="material-symbols-outlined">receipt</span> Factura Electrónica</a>
+        <a href="factura-electronica.html"><span class="material-symbols-outlined">receipt</span> Factura Electr�nica</a>
         <a href="facturas-emitidas.html"><span class="material-symbols-outlined">description</span> Facturas Emitidas</a>
         <div class="submenu-divider"></div>
-        <a href="notas-credito.html"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
+        <a href="notas-credito.html"><span class="material-symbols-outlined">redo</span> Notas de Cr�dito</a>
         <a href="clientes.html"><span class="material-symbols-outlined">people</span> Clientes</a>
         <a href="vendedores.html"><span class="material-symbols-outlined">badge</span> Vendedores</a>
         <a href="reportes-ventas.html"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
       </div>
     </div>
 
-    <!-- COMPRAS -->
+    <div class="menu-group">Compras</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-        <span>Compras</span>
+        <span class="material-symbols-outlined text-[20px]">shopping_cart</span><span>Compras</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
@@ -197,11 +175,10 @@
       </div>
     </div>
 
-    <!-- CONTABILIDAD -->
+    <div class="menu-group">Contabilidad</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">account_balance</span>
-        <span>Contabilidad</span>
+        <span class="material-symbols-outlined text-[20px]">account_balance</span><span>Contabilidad</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
@@ -213,18 +190,17 @@
         <a href="balance-general.html"><span class="material-symbols-outlined">balance</span> Balance General</a>
         <a href="balance-comprobacion.html"><span class="material-symbols-outlined">scale</span> Balance Comprob.</a>
         <a href="estado-resultados.html"><span class="material-symbols-outlined">monitoring</span> Estado Resultados</a>
-        <a href="declaracion-iva.html"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
+        <a href="declaracion-iva.html"><span class="material-symbols-outlined">gavel</span> Declaraci�n IVA</a>
         <a href="cierre-contable.html"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
         <a href="libros-legales.html"><span class="material-symbols-outlined">law</span> Libros Legales</a>
         <a href="reportes-contables.html"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
       </div>
     </div>
 
-    <!-- FINANZAS -->
+    <div class="menu-group">Finanzas</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">monetization_on</span>
-        <span>Finanzas</span>
+        <span class="material-symbols-outlined text-[20px]">monetization_on</span><span>Finanzas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
@@ -234,16 +210,15 @@
       </div>
     </div>
 
-    <!-- RRHH -->
+    <div class="menu-group">Recursos Humanos</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">groups</span>
-        <span>RRHH</span>
+        <span class="material-symbols-outlined text-[20px]">groups</span><span>RRHH</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
         <a href="empleados.html"><span class="material-symbols-outlined">person</span> Empleados</a>
-        <a href="nomina.html"><span class="material-symbols-outlined">payments</span> Nómina</a>
+        <a href="nomina.html"><span class="material-symbols-outlined">payments</span> N�mina</a>
         <a href="prestaciones.html"><span class="material-symbols-outlined">savings</span> Prestaciones</a>
         <a href="portal-empleado.html"><span class="material-symbols-outlined">person_outline</span> Portal Empleado</a>
         <a href="rendimiento-anual.html"><span class="material-symbols-outlined">emoji_events</span> Rendimiento</a>
@@ -251,15 +226,14 @@
       </div>
     </div>
 
-    <!-- CONFIGURACIÓN -->
+    <div class="menu-group">Sistema</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">settings</span>
-        <span>Configuración</span>
+        <span class="material-symbols-outlined text-[20px]">settings</span><span>Configuraci�n</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <a href="parametros.html"><span class="material-symbols-outlined">tune</span> Parámetros</a>
+        <a href="parametros.html"><span class="material-symbols-outlined">tune</span> Par�metros</a>
         <a href="config-fiscal.html"><span class="material-symbols-outlined">policy</span> Config Fiscal</a>
         <a href="usuarios-roles.html"><span class="material-symbols-outlined">admin_panel_settings</span> Usuarios</a>
         <a href="base-datos.html"><span class="material-symbols-outlined">storage</span> Base Datos</a>
@@ -267,15 +241,14 @@
         <a href="backups.html"><span class="material-symbols-outlined">backup</span> Backups</a>
         <a href="estado-sistema.html"><span class="material-symbols-outlined">health_and_safety</span> Estado Sistema</a>
         <a href="tareas-programadas.html"><span class="material-symbols-outlined">schedule</span> Tareas</a>
-        <a href="auditoria-seguridad.html"><span class="material-symbols-outlined">security</span> Auditoría</a>
+        <a href="auditoria-seguridad.html"><span class="material-symbols-outlined">security</span> Auditor�a</a>
       </div>
     </div>
 
-    <!-- AYUDA -->
+    <div class="menu-group">Ayuda</div>
     <div class="menu-parent">
       <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">help</span>
-        <span>Ayuda</span>
+        <span class="material-symbols-outlined text-[20px]">help</span><span>Ayuda</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
@@ -290,11 +263,10 @@
     </div>
   </nav>
 
-  <!-- Boton Cerrar Sesion -->
   <div class="mt-auto border-t border-stone-200 p-4">
-    <button onclick="localStorage.removeItem('erp_session'); window.location.href='/frontend/public/auth/login.html';" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
+    <button onclick="logout()" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
       <span class="material-symbols-outlined text-[18px]">logout</span>
-      Cerrar Sesión
+      Cerrar Sesi�n
     </button>
   </div>
 </aside>
@@ -302,43 +274,31 @@
 <!-- ========== TOP BAR ========== -->
 <header class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200">
   <div class="flex justify-between items-center px-6 py-3">
-    <!-- Breadcrumb -->
     <div class="flex items-center gap-4">
       <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
         <span class="material-symbols-outlined">menu</span>
       </button>
       <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
-        <a href="inicio.html" class="hover:text-stone-900">ERP</a>
+        <a href="inicio.html" class="hover:text-stone-900">Inicio</a>
         <span class="material-symbols-outlined text-sm">chevron_right</span>
-        <span class="text-stone-900 font-medium">Inicio</span>
+        <span class="text-stone-900 font-medium" id="breadcrumbPage">P�gina</span>
       </div>
     </div>
-
-    <!-- Acciones -->
     <div class="flex items-center gap-3">
-      <!-- Busqueda Global -->
       <div class="hidden lg:block relative">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
-          <span class="material-symbols-outlined text-lg">search</span>
-        </span>
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><span class="material-symbols-outlined text-lg">search</span></span>
         <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar repuestos, ventas, clientes..." type="text"/>
       </div>
-
-      <!-- Notificaciones -->
       <button class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative">
         <span class="material-symbols-outlined">notifications</span>
         <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
       </button>
-
-      <!-- Perfil -->
       <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
         <div class="text-right hidden md:block">
           <p class="text-sm font-bold text-stone-900 leading-none">Administrador</p>
           <p class="text-[10px] text-stone-500">Rol: Admin</p>
         </div>
-        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
-          A
-        </div>
+        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">A</div>
       </div>
     </div>
   </div>
@@ -694,73 +654,11 @@
   </div>
 </main>
 
-<!-- Overlay para mobile sidebar -->
+<!-- Overlay mobile -->
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
 
-<script>
-  // Toggle sidebar en mobile
-  const menuToggle = document.getElementById('menuToggle');
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('sidebarOverlay');
-
-  if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('hidden');
-    });
-  }
-
-  // Toggle Dropdown Menu (hacia la derecha)
-  function toggleDropdown(menuItem) {
-    const parent = menuItem.closest('.menu-parent');
-    const wasOpen = parent.classList.contains('open');
-    
-    // Cerrar todos los demás dropdowns
-    document.querySelectorAll('.menu-parent.open').forEach(el => {
-      if (el !== parent) el.classList.remove('open');
-    });
-    
-    // Toggle el actual
-    if (!wasOpen) {
-      parent.classList.add('open');
-    }
-  }
-
-  // Cerrar dropdowns al hacer clic fuera
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.menu-parent')) {
-      document.querySelectorAll('.menu-parent.open').forEach(el => {
-        el.classList.remove('open');
-      });
-    }
-  });
-
-  // Resaltar página actual en sidebar
-  const currentPage = window.location.pathname.split('/').pop();
-  if (currentPage) {
-    document.querySelectorAll('.submenu a').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href === currentPage) {
-        link.style.background = 'rgba(206, 255, 94, 0.15)';
-        link.style.color = '#1c1c1c';
-        link.style.fontWeight = '600';
-        
-        // Abrir el dropdown padre automáticamente
-        const parent = link.closest('.menu-parent');
-        if (parent) {
-          parent.classList.add('open');
-          
-          // Highlight en el item principal
-          const mainItem = parent.querySelector('.menu-item');
-          if (mainItem) {
-            mainItem.style.background = '#f8f9fa';
-            mainItem.style.color = '#1c1c1c';
-            mainItem.style.fontWeight = '600';
-          }
-        }
-      }
-    });
-  }
-</script>
+<!-- Common Scripts -->
+<script src="js/common.js"></script>
+<script src="js/inicio copy.js"></script>
 </body>
 </html>

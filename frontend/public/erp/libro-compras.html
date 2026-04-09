@@ -1,83 +1,240 @@
 <!DOCTYPE html>
-
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>METALLIC_CORE_ERP - Libro de Compras Fiscal</title>
+<meta name="description" content="METALLIC_CORE_ERP - Libro de Compras Fiscal - MAYOR DE REPUESTO LA CIMA, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/png" href="../../assets/images/logo.png">
+<title>METALLIC_CORE_ERP - Libro de Compras Fiscal | ERP La Cima</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="js/libro-compras.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/libro-compras.css">
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f6f6f9", surface: "#ffffff", outline: "#e2e2e5" },
+        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
+      }
+    }
+  }
+</script>
+
 </head>
-<body class="antialiased overflow-x-hidden">
-<!-- TopAppBar -->
-<header class="bg-stone-950/80 backdrop-blur-xl docked full-width top-0 z-50 fixed flex justify-between items-center w-full px-6 py-4 border-b border-stone-800">
-<div class="text-2xl font-bold tracking-tighter text-lime-400 font-headline">METALLIC_CORE_ERP</div>
-<nav class="hidden md:flex items-center gap-8 font-space-grotesk uppercase tracking-tighter">
-<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Dashboard</a>
-<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Inventario</a>
-<a class="text-stone-400 hover:text-lime-200 transition-colors" href="#">Reportes</a>
-</nav>
-<div class="flex items-center gap-4">
-<div class="relative hidden sm:block">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 text-sm">search</span>
-<input class="bg-stone-900 border-none text-xs font-headline tracking-widest pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-lime-400 text-stone-300" placeholder="BUSCAR..." type="text"/>
-</div>
-<button class="material-symbols-outlined text-stone-400 hover:text-lime-400 transition-colors">notifications</button>
-<button class="material-symbols-outlined text-stone-400 hover:text-lime-400 transition-colors">settings</button>
-<div class="h-8 w-8 bg-lime-400 flex items-center justify-center rounded-sm overflow-hidden border border-lime-500/50">
-<img alt="User profile" class="w-full h-full object-cover" data-alt="Abstract geometric industrial shape icon with sharp angles and high contrast lime and black colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcskIIxv-Eg5iirmseLJuCxaC1POuHZuj3aC_xzF3mXj_EWgvUpiLau3OCrjYqwBQ6Gn7BmUvUP-zvpStUH5uCdz88MCzAmUD04ahZqLJH9MSB6QKLTMFS6w2m6keGf9s-yOdoC_9bapu4bm7KGeaTKNi3PRdXopEDvm5iq41HhAeeg8bTYAfk_IxUgpnzM6bMYiss43qPXOGMU3nMGOLkmJ0XM0uwBXVs-zufIvNV0KKuqNbm1mW0r2OLE6bNLoIIOhnVqrt1jkA"/>
-</div>
-</div>
-</header>
-<!-- SideNavBar -->
-<aside class="hidden lg:flex flex-col h-screen w-64 left-0 top-0 fixed bg-stone-900 shadow-2xl py-8 gap-4 z-40 border-r border-stone-800 pt-24">
-<div class="px-6 mb-6">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-stone-800 flex items-center justify-center border border-lime-400/20">
-<span class="material-symbols-outlined text-lime-400" data-icon="factory">factory</span>
-</div>
-<div>
-<div class="text-lime-400 font-black font-headline text-sm tracking-tighter">COMPRAS_MOD</div>
-<div class="text-stone-500 text-[10px] font-mono">V1.0.2_ACTIVE</div>
-</div>
-</div>
-</div>
-<nav class="flex-1 flex flex-col gap-1 px-4">
-<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span>Indicadores</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
-<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
-<span>FacturaciÃ³n</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 bg-stone-950 text-lime-400 border-l-4 border-lime-400 transition-all duration-200 font-space-grotesk font-medium" href="#">
-<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
-<span>Libro SENIAT</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
-<span class="material-symbols-outlined" data-icon="factory">factory</span>
-<span>Proveedores</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:bg-stone-800 hover:text-stone-200 transition-all duration-200 font-space-grotesk font-medium" href="#">
-<span class="material-symbols-outlined" data-icon="payments">payments</span>
-<span>Cuentas por Pagar</span>
-</a>
-</nav>
-<div class="mt-auto px-4 flex flex-col gap-2">
-<button class="w-full py-3 border border-lime-400/30 text-lime-400 font-headline uppercase text-xs tracking-widest hover:bg-lime-400/10 transition-colors">
-                Soporte TÃ©cnico
-            </button>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-500 hover:text-error transition-colors font-space-grotesk font-medium" href="#">
-<span class="material-symbols-outlined" data-icon="logout">logout</span>
-<span>Cerrar SesiÃ³n</span>
-</a>
-</div>
+<body class="bg-background text-stone-900 min-h-screen flex">
+
+<!-- ========== SIDEBAR ========== -->
+<aside id="sidebar" class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar">
+  <div class="flex flex-col px-5 pt-6 pb-4">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg">
+        <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+      </div>
+      <div>
+        <h2 class="font-headline font-bold text-lg text-stone-900 leading-none">Mayor de Repuesto La Cima, C.A.</h2>
+        <span class="text-[10px] font-mono text-stone-400">v2.1.0</span>
+      </div>
+    </div>
+    <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Sistema ERP Industrial</p>
+  </div>
+
+  <div class="px-4 mb-4">
+    <div class="relative">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><span class="material-symbols-outlined text-lg">search</span></span>
+      <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar..." type="text"/>
+    </div>
+  </div>
+
+  <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
+    <div class="menu-group">Principal</div>
+    <a class="menu-item menu-item-inactive" href="inicio.html">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span><span>Inicio</span>
+      <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+    </a>
+
+    <div class="menu-group">Inventario</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="productos.html"><span class="material-symbols-outlined">category</span> Productos</a>
+        <a href="kardex.html"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
+        <a href="auditoria-inventario.html"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
+        <a href="ajustes-inventario.html"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
+        <a href="reportes-inventario.html"><span class="material-symbols-outlined">analytics</span> Reportes</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Ventas</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">payments</span><span>Ventas</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="pos.html"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
+        <a href="registro-ventas.html"><span class="material-symbols-outlined">list_alt</span> Registro</a>
+        <a href="factura-electronica.html"><span class="material-symbols-outlined">receipt</span> Factura Electrónica</a>
+        <a href="facturas-emitidas.html"><span class="material-symbols-outlined">description</span> Facturas Emitidas</a>
+        <div class="submenu-divider"></div>
+        <a href="notas-credito.html"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
+        <a href="clientes.html"><span class="material-symbols-outlined">people</span> Clientes</a>
+        <a href="vendedores.html"><span class="material-symbols-outlined">badge</span> Vendedores</a>
+        <a href="reportes-ventas.html"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Compras</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">shopping_cart</span><span>Compras</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="proveedores.html"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
+        <a href="historial-compras.html"><span class="material-symbols-outlined">history</span> Historial</a>
+        <a href="factura-compra.html"><span class="material-symbols-outlined">request_quote</span> Factura Compra</a>
+        <a href="libro-compras.html"><span class="material-symbols-outlined">book</span> Libro Compras</a>
+        <a href="reportes-compras.html"><span class="material-symbols-outlined">stacked_bar_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Contabilidad</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">account_balance</span><span>Contabilidad</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="plan-cuentas.html"><span class="material-symbols-outlined">format_list_numbered</span> Plan Cuentas</a>
+        <a href="libro-diario.html"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
+        <a href="libro-ventas.html"><span class="material-symbols-outlined">chrome_reader_mode</span> Libro Ventas</a>
+        <a href="libro-caja.html"><span class="material-symbols-outlined">savings</span> Libro Caja</a>
+        <div class="submenu-divider"></div>
+        <a href="balance-general.html"><span class="material-symbols-outlined">balance</span> Balance General</a>
+        <a href="balance-comprobacion.html"><span class="material-symbols-outlined">scale</span> Balance Comprob.</a>
+        <a href="estado-resultados.html"><span class="material-symbols-outlined">monitoring</span> Estado Resultados</a>
+        <a href="declaracion-iva.html"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
+        <a href="cierre-contable.html"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
+        <a href="libros-legales.html"><span class="material-symbols-outlined">law</span> Libros Legales</a>
+        <a href="reportes-contables.html"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Finanzas</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">monetization_on</span><span>Finanzas</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="activos-fijos.html"><span class="material-symbols-outlined">corporate_fare</span> Activos Fijos</a>
+        <a href="cuentas-cobrar.html"><span class="material-symbols-outlined">account_balance_wallet</span> Cuentas Cobrar</a>
+        <a href="reportes-financieros.html"><span class="material-symbols-outlined">show_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Recursos Humanos</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">groups</span><span>RRHH</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="empleados.html"><span class="material-symbols-outlined">person</span> Empleados</a>
+        <a href="nomina.html"><span class="material-symbols-outlined">payments</span> Nómina</a>
+        <a href="prestaciones.html"><span class="material-symbols-outlined">savings</span> Prestaciones</a>
+        <a href="portal-empleado.html"><span class="material-symbols-outlined">person_outline</span> Portal Empleado</a>
+        <a href="rendimiento-anual.html"><span class="material-symbols-outlined">emoji_events</span> Rendimiento</a>
+        <a href="reportes-rrhh.html"><span class="material-symbols-outlined">group_work</span> Reportes</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Sistema</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="parametros.html"><span class="material-symbols-outlined">tune</span> Parámetros</a>
+        <a href="config-fiscal.html"><span class="material-symbols-outlined">policy</span> Config Fiscal</a>
+        <a href="usuarios-roles.html"><span class="material-symbols-outlined">admin_panel_settings</span> Usuarios</a>
+        <a href="base-datos.html"><span class="material-symbols-outlined">storage</span> Base Datos</a>
+        <div class="submenu-divider"></div>
+        <a href="backups.html"><span class="material-symbols-outlined">backup</span> Backups</a>
+        <a href="estado-sistema.html"><span class="material-symbols-outlined">health_and_safety</span> Estado Sistema</a>
+        <a href="tareas-programadas.html"><span class="material-symbols-outlined">schedule</span> Tareas</a>
+        <a href="auditoria-seguridad.html"><span class="material-symbols-outlined">security</span> Auditoría</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Ayuda</div>
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">help</span><span>Ayuda</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="ayuda.html"><span class="material-symbols-outlined">help</span> Centro Ayuda</a>
+        <a href="tickets-soporte.html"><span class="material-symbols-outlined">confirmation_number</span> Tickets</a>
+        <a href="crear-ticket.html"><span class="material-symbols-outlined">add_circle</span> Crear Ticket</a>
+        <div class="submenu-divider"></div>
+        <a href="chat-asistencia.html"><span class="material-symbols-outlined">chat</span> Chat</a>
+        <a href="base-conocimiento.html"><span class="material-symbols-outlined">school</span> Conocimiento</a>
+        <a href="manual-tecnico.html"><span class="material-symbols-outlined">description</span> Manual</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mt-auto border-t border-stone-200 p-4">
+    <button onclick="logout()" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
+      <span class="material-symbols-outlined text-[18px]">logout</span>
+      Cerrar Sesión
+    </button>
+  </div>
 </aside>
-<!-- Main Content -->
+
+<!-- ========== TOP BAR ========== -->
+<header class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200">
+  <div class="flex justify-between items-center px-6 py-3">
+    <div class="flex items-center gap-4">
+      <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
+        <a href="inicio.html" class="hover:text-stone-900">Inicio</a>
+        <span class="material-symbols-outlined text-sm">chevron_right</span>
+        <span class="text-stone-900 font-medium" id="breadcrumbPage">Página</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="hidden lg:block relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><span class="material-symbols-outlined text-lg">search</span></span>
+        <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar repuestos, ventas, clientes..." type="text"/>
+      </div>
+      <button class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+      </button>
+      <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
+        <div class="text-right hidden md:block">
+          <p class="text-sm font-bold text-stone-900 leading-none">Administrador</p>
+          <p class="text-[10px] text-stone-500">Rol: Admin</p>
+        </div>
+        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">A</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== CONTENIDO PRINCIPAL ========== -->
 <main class="lg:ml-64 pt-24 pb-12 px-6 min-h-screen">
 <!-- Dashboard Header -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
@@ -232,9 +389,12 @@
 </div>
 </div>
 </main>
-<!-- FAB for New Entry (Only on relevant pages) -->
-<button class="fixed bottom-8 right-8 w-14 h-14 bg-lime-400 hover:bg-lime-300 text-stone-950 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 group z-50">
-<span class="material-symbols-outlined text-3xl font-bold" style="font-variation-settings: 'FILL' 1;">add</span>
-<span class="absolute right-16 bg-stone-900 text-white text-[10px] font-headline uppercase tracking-widest px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-stone-800">Cargar Factura</span>
-</button>
-</body></html>
+
+<!-- Overlay mobile -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
+
+<!-- Common Scripts -->
+<script src="js/common.js"></script>
+<script src="js/libro-compras.js"></script>
+</body>
+</html>
