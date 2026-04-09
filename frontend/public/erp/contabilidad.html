@@ -1,309 +1,1117 @@
-<!DOCTYPE html>
+<!doctype html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta
+      name="description"
+      content="Dashboard de Contabilidad - MAYOR DE REPUESTO LA CIMA, C.A."
+    />
+    <meta name="theme-color" content="#ceff5e" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png" />
+    <title>Contabilidad | ERP La Cima</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ceff5e",
+              secondary: "#1c1c1c",
+              background: "#f6f6f9",
+              surface: "#ffffff",
+              outline: "#e2e2e5",
+            },
+            fontFamily: {
+              headline: ["League Spartan", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .material-symbols-filled {
+        font-variation-settings:
+          "FILL" 1,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      @media (min-width: 1024px) {
+        .sidebar {
+          transform: translateX(0);
+        }
+      }
 
-<html class="light" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>TITAN ERP | ACCOUNTING - MAYOR DE REPUESTO LA CIMA, C.A.</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script src="js/contabilidad.js"></script>
-<link rel="stylesheet" href="css/contabilidad.css">
-</head>
-<body class="bg-stone-950 text-stone-100 min-h-screen overflow-x-hidden">
-<!-- TopNavBar -->
-<nav class="bg-stone-950/80 backdrop-blur-xl flex justify-between items-center w-full px-6 py-3 fixed top-0 z-50 border-b-0">
-<div class="flex items-center gap-8">
-<div class="text-xl font-bold tracking-tighter text-stone-100 font-['Space_Grotesk'] uppercase tracking-tight">
-                TITAN ERP: ACCOUNTING
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.15s ease;
+        cursor: pointer;
+        user-select: none;
+        color: #555;
+      }
+      .menu-item:hover {
+        background: #f5f5f5;
+      }
+      .menu-item-active {
+        background: rgba(206, 255, 94, 0.2);
+        color: #1c1c1c;
+        font-weight: 700;
+        border-left: 3px solid #ceff5e;
+      }
+      .menu-item-inactive {
+        color: #555;
+      }
+      .menu-group {
+        font-size: 10px;
+        font-weight: 700;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 16px 12px 6px;
+      }
+      .menu-group:first-child {
+        margin-top: 0;
+      }
+
+      .menu-parent {
+        position: relative;
+      }
+      .dropdown-arrow {
+        margin-left: auto;
+        color: #aaa;
+        transition: transform 0.2s ease;
+        font-size: 18px !important;
+      }
+      .menu-item.open {
+        background: #f8f9fa;
+        color: #1c1c1c;
+        font-weight: 600;
+      }
+      .menu-item.open .dropdown-arrow {
+        transform: rotate(90deg);
+        color: #1c1c1c;
+      }
+
+      .submenu {
+        position: absolute;
+        left: calc(100% + 6px);
+        top: 2px;
+        min-width: 210px;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.12),
+          0 4px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-12px) scale(0.96);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+        z-index: 200;
+      }
+      .menu-parent.open .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .submenu a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #666;
+        border-radius: 10px;
+        transition: all 0.15s ease;
+        text-decoration: none;
+      }
+      .submenu a:hover {
+        background: #f8f9fa;
+        color: #1c1c1c;
+      }
+      .submenu a .material-symbols-outlined {
+        font-size: 18px !important;
+        color: #bbb;
+      }
+      .submenu a:hover .material-symbols-outlined {
+        color: #666;
+      }
+      .submenu-divider {
+        height: 1px;
+        background: #eee;
+        margin: 6px 10px;
+      }
+
+      .kpi-card {
+        @apply bg-white rounded-xl border border-stone-200 p-6 hover:shadow-lg transition-all hover:border-primary/30;
+      }
+      .action-btn {
+        @apply flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98];
+      }
+      .badge {
+        @apply px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider;
+      }
+      .badge-green {
+        @apply bg-green-100 text-green-700;
+      }
+      .badge-yellow {
+        @apply bg-yellow-100 text-yellow-700;
+      }
+      .badge-red {
+        @apply bg-red-100 text-red-700;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-stone-900 min-h-screen flex">
+    <!-- ========== SIDEBAR ========== -->
+    <aside
+      id="sidebar"
+      class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar"
+    >
+      <div class="flex flex-col px-5 pt-6 pb-4">
+        <div class="flex items-center gap-3 mb-2">
+          <div
+            class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg"
+          >
+            <span class="material-symbols-outlined text-primary"
+              >precision_manufacturing</span
+            >
+          </div>
+          <div>
+            <h2
+              class="font-headline font-bold text-lg text-stone-900 leading-none"
+            >
+              Mayor de Repuesto La Cima, C.A.
+            </h2>
+            <span class="text-[10px] font-mono text-stone-400">v2.1.0</span>
+          </div>
+        </div>
+        <p
+          class="text-[10px] font-bold text-stone-400 tracking-wider uppercase"
+        >
+          Sistema ERP Industrial
+        </p>
+      </div>
+
+      <div class="px-4 mb-4">
+        <div class="relative">
+          <span
+            class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"
+            ><span class="material-symbols-outlined text-lg">search</span></span
+          >
+          <input
+            class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all"
+            placeholder="Buscar..."
+            type="text"
+          />
+        </div>
+      </div>
+
+      <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
+        <div class="menu-group">Principal</div>
+        <a class="menu-item menu-item-inactive" href="inicio.html">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span
+          ><span>Inicio</span>
+          <span class="material-symbols-outlined dropdown-arrow"
+            >chevron_right</span
+          >
+        </a>
+
+        <div class="menu-group">Inventario</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >inventory_2</span
+            ><span>Inventario</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="productos.html"
+              ><span class="material-symbols-outlined">category</span>
+              Productos</a
+            >
+            <a href="kardex.html"
+              ><span class="material-symbols-outlined">receipt_long</span>
+              Kardex</a
+            >
+            <a href="auditoria-inventario.html"
+              ><span class="material-symbols-outlined">assignment</span>
+              Auditoría Física</a
+            >
+            <a href="ajustes-inventario.html"
+              ><span class="material-symbols-outlined">edit_note</span>
+              Ajustes</a
+            >
+            <a href="reportes-inventario.html"
+              ><span class="material-symbols-outlined">analytics</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Ventas</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">payments</span
+            ><span>Ventas</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="pos.html"
+              ><span class="material-symbols-outlined">point_of_sale</span>
+              Punto de Venta</a
+            >
+            <a href="registro-ventas.html"
+              ><span class="material-symbols-outlined">list_alt</span>
+              Registro</a
+            >
+            <a href="factura-electronica.html"
+              ><span class="material-symbols-outlined">receipt</span> Factura
+              Electrónica</a
+            >
+            <a href="facturas-emitidas.html"
+              ><span class="material-symbols-outlined">description</span>
+              Facturas Emitidas</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="notas-credito.html"
+              ><span class="material-symbols-outlined">redo</span> Notas de
+              Crédito</a
+            >
+            <a href="clientes.html"
+              ><span class="material-symbols-outlined">people</span> Clientes</a
+            >
+            <a href="vendedores.html"
+              ><span class="material-symbols-outlined">badge</span>
+              Vendedores</a
+            >
+            <a href="reportes-ventas.html"
+              ><span class="material-symbols-outlined">bar_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Compras</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >shopping_cart</span
+            ><span>Compras</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="proveedores.html"
+              ><span class="material-symbols-outlined">local_shipping</span>
+              Proveedores</a
+            >
+            <a href="historial-compras.html"
+              ><span class="material-symbols-outlined">history</span>
+              Historial</a
+            >
+            <a href="factura-compra.html"
+              ><span class="material-symbols-outlined">request_quote</span>
+              Factura Compra</a
+            >
+            <a href="libro-compras.html"
+              ><span class="material-symbols-outlined">book</span> Libro
+              Compras</a
+            >
+            <a href="reportes-compras.html"
+              ><span class="material-symbols-outlined">stacked_bar_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Contabilidad</div>
+        <div class="menu-parent open">
+          <div
+            class="menu-item menu-item-active"
+            onclick="toggleDropdown(this)"
+          >
+            <span
+              class="material-symbols-outlined text-[20px]"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >account_balance</span
+            ><span>Contabilidad</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="plan-cuentas.html"
+              ><span class="material-symbols-outlined"
+                >format_list_numbered</span
+              >
+              Plan Cuentas</a
+            >
+            <a href="libro-diario.html"
+              ><span class="material-symbols-outlined">menu_book</span> Libro
+              Diario</a
+            >
+            <a href="libro-ventas.html"
+              ><span class="material-symbols-outlined">chrome_reader_mode</span>
+              Libro Ventas</a
+            >
+            <a href="libro-caja.html"
+              ><span class="material-symbols-outlined">savings</span> Libro
+              Caja</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="balance-general.html"
+              ><span class="material-symbols-outlined">balance</span> Balance
+              General</a
+            >
+            <a href="balance-comprobacion.html"
+              ><span class="material-symbols-outlined">scale</span> Balance
+              Comprob.</a
+            >
+            <a href="estado-resultados.html"
+              ><span class="material-symbols-outlined">monitoring</span> Estado
+              Resultados</a
+            >
+            <a href="declaracion-iva.html"
+              ><span class="material-symbols-outlined">gavel</span> Declaración
+              IVA</a
+            >
+            <a href="cierre-contable.html"
+              ><span class="material-symbols-outlined">lock_clock</span> Cierre
+              Contable</a
+            >
+            <a href="libros-legales.html"
+              ><span class="material-symbols-outlined">law</span> Libros
+              Legales</a
+            >
+            <a href="reportes-contables.html"
+              ><span class="material-symbols-outlined">pie_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Finanzas</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >monetization_on</span
+            ><span>Finanzas</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="activos-fijos.html"
+              ><span class="material-symbols-outlined">corporate_fare</span>
+              Activos Fijos</a
+            >
+            <a href="cuentas-cobrar.html"
+              ><span class="material-symbols-outlined"
+                >account_balance_wallet</span
+              >
+              Cuentas Cobrar</a
+            >
+            <a href="reportes-financieros.html"
+              ><span class="material-symbols-outlined">show_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Recursos Humanos</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">groups</span
+            ><span>RRHH</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="empleados.html"
+              ><span class="material-symbols-outlined">person</span>
+              Empleados</a
+            >
+            <a href="nomina.html"
+              ><span class="material-symbols-outlined">payments</span> Nómina</a
+            >
+            <a href="prestaciones.html"
+              ><span class="material-symbols-outlined">savings</span>
+              Prestaciones</a
+            >
+            <a href="portal-empleado.html"
+              ><span class="material-symbols-outlined">person_outline</span>
+              Portal Empleado</a
+            >
+            <a href="rendimiento-anual.html"
+              ><span class="material-symbols-outlined">emoji_events</span>
+              Rendimiento</a
+            >
+            <a href="reportes-rrhh.html"
+              ><span class="material-symbols-outlined">group_work</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Sistema</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">settings</span
+            ><span>Configuración</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="parametros.html"
+              ><span class="material-symbols-outlined">tune</span> Parámetros</a
+            >
+            <a href="config-fiscal.html"
+              ><span class="material-symbols-outlined">policy</span> Config
+              Fiscal</a
+            >
+            <a href="usuarios-roles.html"
+              ><span class="material-symbols-outlined"
+                >admin_panel_settings</span
+              >
+              Usuarios</a
+            >
+            <a href="base-datos.html"
+              ><span class="material-symbols-outlined">storage</span> Base
+              Datos</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="backups.html"
+              ><span class="material-symbols-outlined">backup</span> Backups</a
+            >
+            <a href="estado-sistema.html"
+              ><span class="material-symbols-outlined">health_and_safety</span>
+              Estado Sistema</a
+            >
+            <a href="tareas-programadas.html"
+              ><span class="material-symbols-outlined">schedule</span> Tareas</a
+            >
+            <a href="auditoria-seguridad.html"
+              ><span class="material-symbols-outlined">security</span>
+              Auditoría</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Ayuda</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">help</span
+            ><span>Ayuda</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="ayuda.html"
+              ><span class="material-symbols-outlined">help</span> Centro
+              Ayuda</a
+            >
+            <a href="tickets-soporte.html"
+              ><span class="material-symbols-outlined"
+                >confirmation_number</span
+              >
+              Tickets</a
+            >
+            <a href="crear-ticket.html"
+              ><span class="material-symbols-outlined">add_circle</span> Crear
+              Ticket</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="chat-asistencia.html"
+              ><span class="material-symbols-outlined">chat</span> Chat</a
+            >
+            <a href="base-conocimiento.html"
+              ><span class="material-symbols-outlined">school</span>
+              Conocimiento</a
+            >
+            <a href="manual-tecnico.html"
+              ><span class="material-symbols-outlined">description</span>
+              Manual</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <div class="mt-auto border-t border-stone-200 p-4">
+        <button
+          onclick="
+            localStorage.removeItem('erp_session');
+            window.location.href = '/frontend/public/auth/login.html';
+          "
+          class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm"
+        >
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+          Cerrar Sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========== TOP BAR ========== -->
+    <header
+      class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200"
+    >
+      <div class="flex justify-between items-center px-6 py-3">
+        <div class="flex items-center gap-4">
+          <button
+            id="menuToggle"
+            class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
+            <a href="inicio.html" class="hover:text-stone-900">Inicio</a>
+            <span class="material-symbols-outlined text-sm">chevron_right</span>
+            <span class="text-stone-900 font-medium">Contabilidad</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="hidden lg:block relative">
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"
+              ><span class="material-symbols-outlined text-lg"
+                >search</span
+              ></span
+            >
+            <input
+              class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all"
+              placeholder="Buscar repuestos, ventas, clientes..."
+              type="text"
+            />
+          </div>
+          <button
+            class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"
+            ></span>
+          </button>
+          <div
+            class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200"
+          >
+            <div class="text-right hidden md:block">
+              <p class="text-sm font-bold text-stone-900 leading-none">
+                Administrador
+              </p>
+              <p class="text-[10px] text-stone-500">Rol: Admin</p>
             </div>
-<div class="hidden md:flex items-center bg-stone-900 px-4 py-1.5 rounded-lg border border-stone-800">
-<span class="material-symbols-outlined text-stone-500 text-sm mr-2">search</span>
-<input class="bg-transparent border-none focus:ring-0 text-xs font-['Inter'] tracking-widest text-stone-300 w-64 uppercase" placeholder="SEARCH LEDGER..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="text-stone-400 hover:text-orange-400 transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="text-stone-400 hover:text-orange-400 transition-colors">
-<span class="material-symbols-outlined">settings</span>
-</button>
-<div class="h-8 w-8 rounded-sm bg-orange-500 flex items-center justify-center overflow-hidden">
-<img class="object-cover h-full w-full" data-alt="close up headshot of a professional accountant in a modern office with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClf1fha07q6lWYz-a5dCUfZuBSx1ovgfiwuOhMrYq10_myDX7iL9kf1wcNWF8U6QiDyjifboM9BkSpfyznMTsLOVXcfIw-rGa-DEPgVXwjnVCZejsc5GrbdFPqmWagAEAaEhPaGymexxCTkH-BEwSr9AJ2V4fM03XK0KBgRz___pxqvdFFXrRO3VYfHa17_neqmhNJkz-0SFepR8dJnFOiwsrubVAR_zk_fDCFewodjDNWH_JECc4qwpKiWYlc-YAqqu9DaJ3qsZA"/>
-</div>
-</div>
-</nav>
-<div class="flex">
-<!-- SideNavBar -->
-<aside class="bg-stone-900 flex flex-col h-screen fixed left-0 top-0 pt-16 w-64 border-r-0 hidden md:flex">
-<div class="p-6">
-<div class="text-orange-500 font-black font-['Inter'] text-sm font-semibold tracking-wide">FINANCE</div>
-<div class="text-stone-500 text-[10px] uppercase tracking-tighter">Precision Ledger v4.2</div>
-</div>
-<nav class="flex-1 px-2">
-<a class="bg-stone-800 text-orange-400 border-l-4 border-orange-500 py-3 px-4 flex items-center gap-3 transition-all active:translate-x-1 duration-150 mb-1" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="font-['Inter'] text-sm font-semibold tracking-wide">Dashboard</span>
-</a>
-<a class="text-stone-500 hover:text-stone-200 py-3 px-4 flex items-center gap-3 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150 mb-1" href="#">
-<span class="material-symbols-outlined">account_tree</span>
-<span class="font-['Inter'] text-sm font-semibold tracking-wide">Chart of Accounts</span>
-</a>
-<a class="text-stone-500 hover:text-stone-200 py-3 px-4 flex items-center gap-3 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150 mb-1" href="#">
-<span class="material-symbols-outlined">receipt_long</span>
-<span class="font-['Inter'] text-sm font-semibold tracking-wide">Journal Entries</span>
-</a>
-<a class="text-stone-500 hover:text-stone-200 py-3 px-4 flex items-center gap-3 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150 mb-1" href="#">
-<span class="material-symbols-outlined">menu_book</span>
-<span class="font-['Inter'] text-sm font-semibold tracking-wide">Ledger</span>
-</a>
-<a class="text-stone-500 hover:text-stone-200 py-3 px-4 flex items-center gap-3 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150 mb-1" href="#">
-<span class="material-symbols-outlined">balance</span>
-<span class="font-['Inter'] text-sm font-semibold tracking-wide">Trial Balance</span>
-</a>
-<a class="text-stone-500 hover:text-stone-200 py-3 px-4 flex items-center gap-3 hover:bg-stone-800/80 transition-all active:translate-x-1 duration-150 mb-1" href="#">
-<span class="material-symbols-outlined">analytics</span>
-<span class="font-['Inter'] text-sm font-semibold tracking-wide">Financial Statements</span>
-</a>
-</nav>
-<div class="p-4 border-t border-stone-800">
-<button class="w-full bg-orange-500 hover:bg-orange-400 text-stone-950 font-bold py-3 text-xs tracking-tighter uppercase transition-all active:scale-95">
-                    NEW ENTRY
-                </button>
-</div>
-<div class="p-2">
-<a class="text-stone-500 hover:text-stone-200 py-2 px-4 flex items-center gap-3 text-xs" href="#">
-<span class="material-symbols-outlined text-sm">help</span>
-                    Support
-                </a>
-<a class="text-stone-500 hover:text-stone-200 py-2 px-4 flex items-center gap-3 text-xs" href="#">
-<span class="material-symbols-outlined text-sm">history</span>
-                    Logs
-                </a>
-</div>
-</aside>
-<!-- Main Content -->
-<main class="flex-1 md:ml-64 pt-16 min-h-screen bg-stone-950">
-<header class="p-8 pb-4">
-<div class="flex justify-between items-end">
-<div>
-<h1 class="text-4xl font-bold tracking-tighter text-stone-100 uppercase">MAYOR DE REPUESTO LA CIMA, C.A.</h1>
-<p class="text-orange-500 font-mono text-sm tracking-widest mt-1">RIF: J-40308741-5 • FISCAL PERIOD: OCT 2023</p>
-</div>
-<div class="text-right">
-<div class="text-[10px] text-stone-500 uppercase tracking-[0.2em]">Current Exchange Rate</div>
-<div class="text-xl font-bold text-stone-200">BCV: 34.82 VES/USD</div>
-</div>
-</div>
-</header>
-<div class="p-8 grid grid-cols-12 gap-6">
-<!-- Financial Stats Grid -->
-<div class="col-span-12 lg:col-span-8 grid grid-cols-3 gap-6">
-<!-- Total Assets -->
-<div class="bg-stone-900 p-6 relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-6xl">account_balance_wallet</span>
-</div>
-<div class="text-[10px] text-stone-500 uppercase tracking-widest mb-2">Total Assets</div>
-<div class="text-2xl font-bold text-stone-100">842,391.00 <span class="text-xs text-stone-500 ml-1">VES</span></div>
-<div class="mt-4 flex items-center text-[10px] text-primary-container">
-<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
-                            +4.2% vs LAST MONTH
-                        </div>
-</div>
-<!-- Total Liabilities -->
-<div class="bg-stone-900 p-6 relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-6xl">payments</span>
-</div>
-<div class="text-[10px] text-stone-500 uppercase tracking-widest mb-2">Total Liabilities</div>
-<div class="text-2xl font-bold text-stone-100">312,105.50 <span class="text-xs text-stone-500 ml-1">VES</span></div>
-<div class="mt-4 flex items-center text-[10px] text-error">
-<span class="material-symbols-outlined text-sm mr-1">trending_down</span>
-                            -1.8% REDUCTION
-                        </div>
-</div>
-<!-- Equity -->
-<div class="bg-stone-900 p-6 relative overflow-hidden group border-b-2 border-orange-500">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-6xl">pie_chart</span>
-</div>
-<div class="text-[10px] text-stone-500 uppercase tracking-widest mb-2">Net Equity</div>
-<div class="text-2xl font-bold text-orange-400">530,285.50 <span class="text-xs text-stone-500 ml-1">VES</span></div>
-<div class="mt-4 flex items-center text-[10px] text-stone-400">
-                            RATIO: 1.69 ASSET/LIAB
-                        </div>
-</div>
-<!-- Recent Journal Entries Table -->
-<div class="col-span-3 bg-stone-900/50">
-<div class="px-6 py-4 flex justify-between items-center border-b border-stone-800">
-<h3 class="text-xs font-bold uppercase tracking-widest">Recent Journal Entries (Automatic)</h3>
-<button class="text-[10px] text-orange-500 hover:underline uppercase">View All</button>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left">
-<thead>
-<tr class="bg-stone-900 text-stone-500 text-[10px] uppercase tracking-tighter">
-<th class="px-6 py-3 font-medium">Ref #</th>
-<th class="px-6 py-3 font-medium">Origin</th>
-<th class="px-6 py-3 font-medium">Description</th>
-<th class="px-6 py-3 font-medium">Debit</th>
-<th class="px-6 py-3 font-medium">Credit</th>
-<th class="px-6 py-3 font-medium">Status</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-stone-800/50">
-<tr class="hover:bg-stone-800/30 transition-colors">
-<td class="px-6 py-4 text-xs font-mono">AS-2023-0941</td>
-<td class="px-6 py-4 text-xs"><span class="bg-primary/20 text-primary-container px-2 py-0.5 rounded-sm uppercase text-[9px] font-bold">SALES</span></td>
-<td class="px-6 py-4 text-xs text-stone-300">Daily Sales Batch: Retail POS 04</td>
-<td class="px-6 py-4 text-xs font-semibold">12,450.00</td>
-<td class="px-6 py-4 text-xs font-semibold">0.00</td>
-<td class="px-6 py-4"><span class="material-symbols-outlined text-primary-container text-sm">verified</span></td>
-</tr>
-<tr class="hover:bg-stone-800/30 transition-colors">
-<td class="px-6 py-4 text-xs font-mono">AS-2023-0940</td>
-<td class="px-6 py-4 text-xs"><span class="bg-stone-800 text-stone-400 px-2 py-0.5 rounded-sm uppercase text-[9px] font-bold">PURCHASE</span></td>
-<td class="px-6 py-4 text-xs text-stone-300">Inv: #X992 - Global Parts Inc.</td>
-<td class="px-6 py-4 text-xs font-semibold">0.00</td>
-<td class="px-6 py-4 text-xs font-semibold">8,200.00</td>
-<td class="px-6 py-4"><span class="material-symbols-outlined text-primary-container text-sm">verified</span></td>
-</tr>
-<tr class="hover:bg-stone-800/30 transition-colors">
-<td class="px-6 py-4 text-xs font-mono">AS-2023-0939</td>
-<td class="px-6 py-4 text-xs"><span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-sm uppercase text-[9px] font-bold">INVENTORY</span></td>
-<td class="px-6 py-4 text-xs text-stone-300">Stock Adjustment: Core Engine Block #4</td>
-<td class="px-6 py-4 text-xs font-semibold">1,200.00</td>
-<td class="px-6 py-4 text-xs font-semibold">1,200.00</td>
-<td class="px-6 py-4"><span class="material-symbols-outlined text-stone-500 text-sm">pending</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<!-- Sidebar Info Cards -->
-<div class="col-span-12 lg:col-span-4 space-y-6">
-<!-- Fiscal Compliance SENIAT -->
-<div class="bg-stone-900 p-6 border-l-4 border-primary-container">
-<div class="flex justify-between items-start mb-4">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest text-stone-100">Fiscal Compliance</h3>
-<p class="text-[10px] text-stone-500 uppercase mt-1">Agency: SENIAT</p>
-</div>
-<div class="bg-primary/20 text-primary-container px-2 py-1 text-[10px] font-bold rounded">VALID</div>
-</div>
-<div class="space-y-3">
-<div class="flex justify-between text-xs">
-<span class="text-stone-400">IVA Retention (LXV)</span>
-<span class="text-stone-200">Submitted</span>
-</div>
-<div class="flex justify-between text-xs">
-<span class="text-stone-400">ISLR Advance</span>
-<span class="text-stone-200">Paid 15/10</span>
-</div>
-<div class="flex justify-between text-xs">
-<span class="text-stone-400">Municipal Taxes</span>
-<span class="text-stone-200">Up to date</span>
-</div>
-</div>
-<div class="mt-6 pt-4 border-t border-stone-800">
-<div class="flex items-center gap-2 text-[10px] text-stone-500">
-<span class="material-symbols-outlined text-sm">schedule</span>
-                                NEXT FILING: NOV 05, 2023
-                            </div>
-</div>
-</div>
-<!-- Period Progress -->
-<div class="bg-stone-900 p-6">
-<h3 class="text-xs font-bold uppercase tracking-widest text-stone-100 mb-4">OCTOBER Period Closure</h3>
-<div class="relative pt-1">
-<div class="flex mb-2 items-center justify-between">
-<div>
-<span class="text-[10px] font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-400 bg-orange-900/30">
-                                        In Progress
-                                    </span>
-</div>
-<div class="text-right">
-<span class="text-xs font-semibold inline-block text-stone-200">
-                                        78%
-                                    </span>
-</div>
-</div>
-<div class="overflow-hidden h-1 mb-4 text-xs flex rounded bg-stone-800">
-<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500" style="width:78%"></div>
-</div>
-</div>
-<div class="space-y-4">
-<div class="flex items-center gap-3">
-<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
-<span class="text-xs text-stone-300">Bank Reconciliation</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
-<span class="text-xs text-stone-300">Payroll Finalization</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-1.5 h-1.5 rounded-full bg-stone-600"></div>
-<span class="text-xs text-stone-500">Inventory Valuation Batch</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-1.5 h-1.5 rounded-full bg-stone-600"></div>
-<span class="text-xs text-stone-500">Depreciation Run</span>
-</div>
-</div>
-<button class="w-full mt-6 py-2 border border-stone-700 text-[10px] uppercase tracking-widest font-bold text-stone-300 hover:bg-stone-800 transition-colors">
-                            INITIATE PRE-CLOSE
-                        </button>
-</div>
-<!-- Industrial Texture Section (Purely Visual) -->
-<div class="h-32 bg-stone-900 relative overflow-hidden">
-<img class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-700" data-alt="extreme close up of industrial engine gears with golden metallic sheen and mechanical precision" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSQGMby3WFR2id5M4z11jVdQd5elD2cCWTsYArCKdYSD8WaeDZsLjSolAARjdFes6IX1uDvQCyir_Izw53J-7UhqtAkn_PnVXsTn325BAXt_CrnD79QdJJFggQBPUOEwfdiF3Lc7fc7jxYf6siOkaFBj3Q8oKj80yWrJGGhboWTvrs9QZO32d-VBV2b-SOsbzPSpxvcS4sB_IXWZ6RTclD7kaFIcx5L-IJ_qH1UdN_z-ocz5STXlBSyDriTeAtFbiXkABwbjJKBZ4"/>
-<div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent"></div>
-<div class="absolute bottom-4 left-4">
-<div class="text-[10px] text-stone-500 uppercase tracking-widest">System Engine</div>
-<div class="text-xs font-bold text-stone-200">CORE ANALYTICS V4</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer -->
-<footer class="mt-12 p-8 border-t border-stone-900 bg-stone-950">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div>
-<div class="text-orange-500 font-bold text-sm tracking-tighter mb-4">MAYOR DE REPUESTO LA CIMA, C.A.</div>
-<div class="text-stone-500 text-xs leading-relaxed max-w-xs">
-                            Leading industrial spare parts supplier in Venezuela. High-precision distribution and accounting standards.
-                        </div>
-</div>
-<div class="space-y-4">
-<h4 class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Contact Information</h4>
-<div class="flex items-center gap-3 text-xs text-stone-300">
-<span class="material-symbols-outlined text-sm text-orange-500">location_on</span>
-                            Av. Principal de Los Ruices, Edif. La Cima, Piso 4. Caracas, Venezuela.
-                        </div>
-<div class="flex items-center gap-3 text-xs text-stone-300">
-<span class="material-symbols-outlined text-sm text-orange-500">phone</span>
-                            +58 (212) 555-0192 / +58 (212) 555-0193
-                        </div>
-<div class="flex items-center gap-3 text-xs text-stone-300">
-<span class="material-symbols-outlined text-sm text-orange-500">mail</span>
-                            contabilidad@lacima.com.ve / admin@lacima.com.ve
-                        </div>
-</div>
-<div class="flex flex-col items-end justify-between">
-<div class="text-right">
-<div class="text-[10px] text-stone-600 uppercase mb-2">Platform provided by</div>
-<div class="text-xl font-black text-stone-800 tracking-tighter">TITAN ERP SYSTEM</div>
-</div>
-<div class="text-[10px] text-stone-600">
-                            © 2023 MAYOR DE REPUESTO LA CIMA, C.A. ALL RIGHTS RESERVED.
-                        </div>
-</div>
-</div>
-</footer>
-</main>
-</div>
-</body></html>
+            <div
+              class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm"
+            >
+              A
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <main class="ml-[288px] w-[calc(100vw-288px)] mt-[65px] p-6 pb-4">
+      <!-- Header -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8"
+      >
+        <div>
+          <p
+            class="text-xs font-bold text-stone-400 tracking-[0.2em] uppercase mb-1"
+          >
+            Módulo de Contabilidad
+          </p>
+          <h2
+            class="text-3xl font-headline font-black text-stone-900 tracking-tight"
+          >
+            Control Contable
+          </h2>
+          <p class="text-stone-500 text-sm mt-1">
+            MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <a
+            href="libro-diario.html"
+            class="flex items-center gap-2 bg-primary text-stone-900 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:brightness-110 transition-all"
+          >
+            <span class="material-symbols-outlined text-sm">menu_book</span>
+            Libro Diario
+          </a>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div class="kpi-card">
+          <div class="flex items-center justify-between mb-3">
+            <div
+              class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-green-600"
+                >trending_up</span
+              >
+            </div>
+            <span class="badge badge-green">+12%</span>
+          </div>
+          <p
+            class="text-[10px] font-bold text-stone-400 uppercase tracking-wider"
+          >
+            Ingresos del Mes
+          </p>
+          <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
+            $128,450
+          </p>
+          <p class="text-xs text-stone-500 mt-1">Ventas brutas</p>
+        </div>
+
+        <div class="kpi-card">
+          <div class="flex items-center justify-between mb-3">
+            <div
+              class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-red-600"
+                >trending_down</span
+              >
+            </div>
+            <span class="badge badge-red">-5%</span>
+          </div>
+          <p
+            class="text-[10px] font-bold text-stone-400 uppercase tracking-wider"
+          >
+            Gastos del Mes
+          </p>
+          <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
+            $85,200
+          </p>
+          <p class="text-xs text-stone-500 mt-1">Costos operativos</p>
+        </div>
+
+        <div class="kpi-card">
+          <div class="flex items-center justify-between mb-3">
+            <div
+              class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-blue-600"
+                >savings</span
+              >
+            </div>
+            <span class="badge badge-green">+8%</span>
+          </div>
+          <p
+            class="text-[10px] font-bold text-stone-400 uppercase tracking-wider"
+          >
+            Utilidad Neta
+          </p>
+          <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
+            $43,250
+          </p>
+          <p class="text-xs text-stone-500 mt-1">Margen 33.7%</p>
+        </div>
+
+        <div class="kpi-card">
+          <div class="flex items-center justify-between mb-3">
+            <div
+              class="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-amber-600"
+                >gavel</span
+              >
+            </div>
+            <span class="badge badge-yellow">16%</span>
+          </div>
+          <p
+            class="text-[10px] font-bold text-stone-400 uppercase tracking-wider"
+          >
+            IVA por Pagar
+          </p>
+          <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
+            $18,500
+          </p>
+          <p class="text-xs text-stone-500 mt-1">Próximo vencimiento</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <a
+          href="plan-cuentas.html"
+          class="action-btn bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20"
+        >
+          <span class="material-symbols-outlined text-2xl"
+            >format_list_numbered</span
+          >
+          <span class="text-center leading-tight">Plan Cuentas</span>
+        </a>
+        <a
+          href="libro-diario.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl">menu_book</span>
+          <span class="text-center leading-tight">Libro Diario</span>
+        </a>
+        <a
+          href="balance-general.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl">balance</span>
+          <span class="text-center leading-tight">Balance General</span>
+        </a>
+        <a
+          href="reportes-contables.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl">pie_chart</span>
+          <span class="text-center leading-tight">Reportes</span>
+        </a>
+      </div>
+
+      <!-- Accounting Summary -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Income Statement Summary -->
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-green-600"
+                >monitoring</span
+              >
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">
+                Estado de Resultados
+              </h3>
+              <p class="text-xs text-stone-500">Resumen del mes actual</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex justify-between items-center p-3 bg-green-50 rounded-lg"
+            >
+              <span class="text-sm font-medium text-stone-700"
+                >Ingresos por Ventas</span
+              >
+              <span class="text-sm font-bold text-green-700">$128,450</span>
+            </div>
+            <div
+              class="flex justify-between items-center p-3 bg-red-50 rounded-lg"
+            >
+              <span class="text-sm font-medium text-stone-700"
+                >Costo de Ventas</span
+              >
+              <span class="text-sm font-bold text-red-700">($65,200)</span>
+            </div>
+            <div
+              class="flex justify-between items-center p-3 bg-stone-50 rounded-lg"
+            >
+              <span class="text-sm font-medium text-stone-700"
+                >Gastos Operativos</span
+              >
+              <span class="text-sm font-bold text-stone-700">($20,000)</span>
+            </div>
+            <div
+              class="border-t border-stone-200 pt-4 flex justify-between items-center"
+            >
+              <span class="text-sm font-bold text-stone-900"
+                >Utilidad Neta</span
+              >
+              <span class="text-lg font-headline font-bold text-green-700"
+                >$43,250</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Balance Sheet Summary -->
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-blue-600"
+                >balance</span
+              >
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">Balance General</h3>
+              <p class="text-xs text-stone-500">Al cierre del mes</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex justify-between items-center p-3 bg-blue-50 rounded-lg"
+            >
+              <span class="text-sm font-medium text-stone-700"
+                >Activos Totales</span
+              >
+              <span class="text-sm font-bold text-blue-700">$450,000</span>
+            </div>
+            <div
+              class="flex justify-between items-center p-3 bg-amber-50 rounded-lg"
+            >
+              <span class="text-sm font-medium text-stone-700"
+                >Pasivos Totales</span
+              >
+              <span class="text-sm font-bold text-amber-700">$180,000</span>
+            </div>
+            <div
+              class="flex justify-between items-center p-3 bg-green-50 rounded-lg"
+            >
+              <span class="text-sm font-medium text-stone-700">Patrimonio</span>
+              <span class="text-sm font-bold text-green-700">$270,000</span>
+            </div>
+            <div
+              class="border-t border-stone-200 pt-4 flex justify-between items-center"
+            >
+              <span class="text-sm font-bold text-stone-900">A = P + Pt</span>
+              <span class="text-lg font-headline font-bold text-green-700"
+                >✓ Balanceado</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Journal Entries -->
+      <div class="bg-white rounded-xl border border-stone-200 p-6 mb-8">
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-blue-600"
+                >receipt_long</span
+              >
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">
+                Asientos Recientes
+              </h3>
+              <p class="text-xs text-stone-500">
+                Últimos movimientos contables
+              </p>
+            </div>
+          </div>
+          <a
+            href="libro-diario.html"
+            class="text-xs font-bold text-primary hover:brightness-75 flex items-center gap-1"
+          >
+            Ver todo
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="border-b border-stone-200">
+              <tr>
+                <th
+                  class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-left"
+                >
+                  Asiento
+                </th>
+                <th
+                  class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-left"
+                >
+                  Fecha
+                </th>
+                <th
+                  class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-left"
+                >
+                  Descripción
+                </th>
+                <th
+                  class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-right"
+                >
+                  Débito
+                </th>
+                <th
+                  class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-right"
+                >
+                  Crédito
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-100">
+              <tr class="hover:bg-stone-50 transition-colors">
+                <td class="py-3 text-stone-500 font-mono text-xs">AE-001</td>
+                <td class="py-3 text-stone-600 text-sm">01/04/2026</td>
+                <td class="py-3 font-medium text-stone-900">
+                  Registro de ventas del día
+                </td>
+                <td class="py-3 text-right font-bold text-stone-900">
+                  $15,000
+                </td>
+                <td class="py-3 text-right font-bold text-stone-900">
+                  $15,000
+                </td>
+              </tr>
+              <tr class="hover:bg-stone-50 transition-colors">
+                <td class="py-3 text-stone-500 font-mono text-xs">AE-002</td>
+                <td class="py-3 text-stone-600 text-sm">02/04/2026</td>
+                <td class="py-3 font-medium text-stone-900">
+                  Pago a proveedores
+                </td>
+                <td class="py-3 text-right font-bold text-stone-900">$8,500</td>
+                <td class="py-3 text-right font-bold text-stone-900">$8,500</td>
+              </tr>
+              <tr class="hover:bg-stone-50 transition-colors">
+                <td class="py-3 text-stone-500 font-mono text-xs">AE-003</td>
+                <td class="py-3 text-stone-600 text-sm">03/04/2026</td>
+                <td class="py-3 font-medium text-stone-900">
+                  Depreciación mensual
+                </td>
+                <td class="py-3 text-right font-bold text-stone-900">$2,500</td>
+                <td class="py-3 text-right font-bold text-stone-900">$2,500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div
+        class="pt-4 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <span class="text-[10px] font-bold text-stone-400"
+          >RIF: J-40308741-5 • Todos los derechos reservados © 2026</span
+        >
+        <div class="flex items-center gap-4">
+          <a
+            href="ayuda.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Centro de Ayuda</a
+          >
+          <a
+            href="manual-tecnico.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Manual Técnico</a
+          >
+          <a
+            href="estado-sistema.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Estado del Sistema</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- Overlay mobile -->
+    <div
+      id="sidebarOverlay"
+      class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"
+      onclick="
+        document.getElementById('sidebar').classList.remove('open');
+        this.classList.add('hidden');
+      "
+    ></div>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("sidebarOverlay");
+
+      if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("open");
+          overlay.classList.toggle("hidden");
+        });
+      }
+
+      function toggleDropdown(menuItem) {
+        const parent = menuItem.closest(".menu-parent");
+        const wasOpen = parent.classList.contains("open");
+        document.querySelectorAll(".menu-parent.open").forEach((el) => {
+          if (el !== parent) el.classList.remove("open");
+        });
+        if (!wasOpen) {
+          parent.classList.add("open");
+        }
+      }
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".menu-parent")) {
+          document.querySelectorAll(".menu-parent.open").forEach((el) => {
+            el.classList.remove("open");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

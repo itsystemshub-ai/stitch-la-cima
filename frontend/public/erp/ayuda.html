@@ -1,237 +1,997 @@
-<!DOCTYPE html>
+<!doctype html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta
+      name="description"
+      content="Centro de Ayuda - MAYOR DE REPUESTO LA CIMA, C.A."
+    />
+    <meta name="theme-color" content="#ceff5e" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png" />
+    <title>Ayuda | ERP La Cima</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ceff5e",
+              secondary: "#1c1c1c",
+              background: "#f6f6f9",
+              surface: "#ffffff",
+              outline: "#e2e2e5",
+            },
+            fontFamily: {
+              headline: ["League Spartan", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .material-symbols-filled {
+        font-variation-settings:
+          "FILL" 1,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      @media (min-width: 1024px) {
+        .sidebar {
+          transform: translateX(0);
+        }
+      }
 
-<html class="light" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Soporte Técnico | INDUSTRIAL FORGE ERP</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="js/ayuda.js"></script>
-<link rel="stylesheet" href="css/ayuda.css">
-</head>
-<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl flex justify-between items-center px-6 py-3 w-full">
-<div class="flex items-center gap-8">
-<span class="text-xl font-black text-stone-900 dark:text-white tracking-tighter uppercase font-['Space_Grotesk']">INDUSTRIAL FORGE ERP</span>
-<div class="hidden md:flex gap-6">
-<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Dashboard</a>
-<a class="text-stone-500 dark:text-stone-400 font-medium font-['Space_Grotesk'] uppercase tracking-tight hover:text-lime-500 transition-colors" href="#">Analytics</a>
-<a class="text-lime-600 dark:text-lime-400 font-bold border-b-2 border-lime-600 font-['Space_Grotesk'] uppercase tracking-tight" href="#">Support</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="relative hidden sm:block">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">search</span>
-<input class="pl-10 pr-4 py-2 bg-surface-container-highest border-none rounded-none text-xs font-label tracking-widest focus:ring-2 focus:ring-primary w-64" placeholder="BUSCAR MANUALES..." type="text"/>
-</div>
-<div class="flex gap-2">
-<button class="p-2 hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-on-surface">notifications</span></button>
-<button class="p-2 hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-on-surface">settings</span></button>
-<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
-<img alt="User Profile Avatar" data-alt="close up professional headshot of a technical system administrator with a focused expression in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlalmvnTTm_DBu0vqaCqTSP6ISH_kdXoshdKf6H-TiEdbbOlyqxnbxsOJC0UykFuycGx3q-SSh4y6PwZw4mPR-dqoZ_Z0KR2LHc8ojeB05VbMy5gm1TXz-jFh9_B14EZr5_EJLRyaKxeuemLNWfdsEhaO4OlLWR7yZUfskOKgvWRA_TStN6jBdHVbe6wUWBg_U14wbVHgjN3q8OdqcDX4k4ncHg-wHnHzSGEd9RbOqyhBX2MM7I3fweOSaCAn6mWrf29-Cg2WlNgw"/>
-</div>
-</div>
-</div>
-</nav>
-<!-- SideNavBar (Suppressed for Support Focus Canvas) -->
-<main class="pt-24 pb-12 px-6 max-w-7xl mx-auto">
-<!-- Hero Editorial Section -->
-<header class="relative mb-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
-<div class="md:col-span-8">
-<div class="inline-block px-3 py-1 bg-primary text-on-primary text-[10px] font-bold tracking-[0.2em] mb-4 uppercase">Knowledge Base v4.2</div>
-<h1 class="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-[0.9] text-on-surface">CENTRO DE<br/><span class="text-primary">SOPORTE</span> TÉCNICO</h1>
-<p class="mt-6 text-lg text-secondary max-w-xl font-body">Portal de capacitación y asistencia para el personal de <span class="font-bold text-on-background">MAYOR DE REPUESTO LA CIMA, C.A.</span> Optimiza tu flujo de trabajo con nuestra documentación técnica.</p>
-</div>
-<div class="md:col-span-4 flex flex-col gap-4">
-<div class="bg-surface-container-low p-6 rounded-none relative overflow-hidden">
-<div class="relative z-10">
-<span class="text-[10px] font-bold uppercase tracking-widest text-secondary block mb-1">Estado del Sistema</span>
-<div class="flex items-center gap-2">
-<span class="h-2 w-2 rounded-full bg-lime-500 animate-pulse"></span>
-<span class="text-sm font-bold uppercase tracking-tight">OPERATIVO AL 100%</span>
-</div>
-</div>
-<div class="absolute -right-4 -bottom-4 opacity-10">
-<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-</div>
-</div>
-</header>
-<!-- Bento Grid: Modules Documentation -->
-<section class="mb-20">
-<div class="flex justify-between items-end mb-8">
-<div>
-<h2 class="text-2xl font-bold uppercase tracking-tight">Manuales por Módulo</h2>
-<p class="text-secondary text-sm uppercase tracking-widest">Documentación Técnica Detallada</p>
-</div>
-<button class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2 group">
-                    Ver todos los módulos <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
-<!-- Module Card 1 -->
-<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
-<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">inventory_2</span>
-<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">Inventario</h3>
-<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Gestión de stock, almacenes y repuestos pesados.</p>
-<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Descargar PDF</a>
-</div>
-<!-- Module Card 2 -->
-<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
-<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">point_of_sale</span>
-<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">Ventas</h3>
-<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Facturación, preventa y notas de entrega industriales.</p>
-<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Leer manual</a>
-</div>
-<!-- Module Card 3 (Video Feature) -->
-<div class="md:col-span-4 lg:col-span-2 row-span-2 relative bg-stone-900 overflow-hidden min-h-[300px]">
-<img alt="Video Tutorials" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="modern industrial factory workshop with engineers working on high tech engine components with cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5MGrguqHGUFiN9CKr-ZIaeATnnLbjWrerKKF4Jb43SyPX0bpOrh54OVuADX_bawcdHqBuex86aZ_WZNobEjrcCYkveBOr7GpFKlHth2CTmHDk2OegxEqJmqJmXzHHssWscyvaW1LIq0LhFqawrvixC66dfTVE5psaB6C2YYCSuijWKwOV2TZGwZFIkgDzC_ys8eIgJspsb5VCWdgAEr_AeRg5z0-VtRkGrWG07Cj1w77SJ126gSYu9gdtHRRNTdY_w_szBhLHlbU"/>
-<div class="absolute inset-0 bg-gradient-to-t from-stone-950 to-transparent p-8 flex flex-col justify-end">
-<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-</div>
-<h3 class="text-2xl font-bold uppercase tracking-tight text-white mb-2">Video Tutoriales</h3>
-<p class="text-sm text-stone-300">Guías visuales paso a paso del sistema ERP Forge.</p>
-</div>
-</div>
-<!-- Module Card 4 -->
-<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
-<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">payments</span>
-<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">Finanzas</h3>
-<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Cuentas por cobrar y conciliación bancaria.</p>
-<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Consultar</a>
-</div>
-<!-- Module Card 5 -->
-<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-8 group hover:bg-primary transition-colors duration-300">
-<span class="material-symbols-outlined text-4xl mb-6 text-primary group-hover:text-on-primary">groups</span>
-<h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-on-primary mb-2">RRHH</h3>
-<p class="text-sm text-secondary group-hover:text-on-primary/80 mb-6">Gestión de nómina y asistencia del personal.</p>
-<a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:text-on-primary border-b border-primary group-hover:border-on-primary pb-1" href="#">Ver guía</a>
-</div>
-</div>
-</section>
-<!-- FAQ Section: Editorial Layout -->
-<section class="mb-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
-<div class="lg:col-span-4">
-<h2 class="text-4xl font-bold uppercase tracking-tighter leading-none mb-6">Preguntas<br/>Frecuentes</h2>
-<p class="text-secondary text-sm font-body mb-8">Respuestas rápidas a las dudas operativas más comunes detectadas en planta.</p>
-<div class="p-6 border-l-4 border-primary bg-surface-container-low">
-<p class="text-sm italic text-on-surface-variant">"La precisión en el registro de datos es la base de nuestra eficiencia logística."</p>
-<span class="text-[10px] font-bold uppercase tracking-widest block mt-2 text-primary">— Control de Sistemas</span>
-</div>
-</div>
-<div class="lg:col-span-8 space-y-4">
-<div class="bg-surface-container p-6 flex justify-between items-center cursor-pointer hover:bg-surface-container-high transition-colors">
-<span class="font-bold uppercase tracking-tight text-sm">¿Cómo anular una factura emitida por error?</span>
-<span class="material-symbols-outlined text-primary">add</span>
-</div>
-<div class="bg-surface-container-highest p-6">
-<div class="flex justify-between items-center mb-4">
-<span class="font-bold uppercase tracking-tight text-sm text-primary">¿Cómo reponer stock de un almacén secundario?</span>
-<span class="material-symbols-outlined text-primary">remove</span>
-</div>
-<p class="text-sm text-secondary leading-relaxed font-body">
-                        Debe dirigirse al módulo de <span class="font-bold text-on-background">Inventario &gt; Transferencias</span>. Seleccione el almacén de origen "Principal" y el destino correspondiente. Ingrese los códigos de las piezas y valide la firma digital del responsable de almacén.
-                    </p>
-</div>
-<div class="bg-surface-container p-6 flex justify-between items-center cursor-pointer hover:bg-surface-container-high transition-colors">
-<span class="font-bold uppercase tracking-tight text-sm">¿Mi clave ha expirado, cómo la recupero?</span>
-<span class="material-symbols-outlined text-primary">add</span>
-</div>
-<div class="bg-surface-container p-6 flex justify-between items-center cursor-pointer hover:bg-surface-container-high transition-colors">
-<span class="font-bold uppercase tracking-tight text-sm">¿Cómo generar el reporte de ventas del mes anterior?</span>
-<span class="material-symbols-outlined text-primary">add</span>
-</div>
-</div>
-</section>
-<!-- Ticket Reporting Form -->
-<section class="bg-stone-900 text-white p-8 md:p-12 relative overflow-hidden">
-<!-- Decorative Element -->
-<div class="absolute top-0 right-0 w-1/3 h-full bg-primary/10 -skew-x-12 translate-x-1/2"></div>
-<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
-<div>
-<h2 class="text-4xl font-bold uppercase tracking-tighter mb-4">Reportar Incidencia</h2>
-<p class="text-stone-400 max-w-md mb-8">Si el problema persiste después de consultar los manuales, abra un ticket de soporte técnico. Nuestro equipo le responderá en un plazo máximo de 2 horas.</p>
-<div class="space-y-6">
-<div class="flex gap-4 items-start">
-<span class="material-symbols-outlined text-primary">mail</span>
-<div>
-<span class="block text-[10px] font-bold uppercase tracking-widest text-stone-500">Email Directo</span>
-<span class="text-lg font-headline">sistemas@lacima.com.ve</span>
-</div>
-</div>
-<div class="flex gap-4 items-start">
-<span class="material-symbols-outlined text-primary">phone_in_talk</span>
-<div>
-<span class="block text-[10px] font-bold uppercase tracking-widest text-stone-500">Emergencias (Ext.)</span>
-<span class="text-lg font-headline">405 / 406</span>
-</div>
-</div>
-</div>
-</div>
-<form class="space-y-4">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div>
-<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Nombre del Usuario</label>
-<input class="w-full bg-stone-800 border-none text-white p-3 focus:ring-2 focus:ring-primary rounded-none" placeholder="EJ. CARLOS PÉREZ" type="text"/>
-</div>
-<div>
-<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Módulo Afectado</label>
-<select class="w-full bg-stone-800 border-none text-white p-3 focus:ring-2 focus:ring-primary rounded-none">
-<option>SELECCIONAR MÓDULO</option>
-<option>INVENTARIO</option>
-<option>VENTAS</option>
-<option>COMPRAS</option>
-<option>ERROR GENERAL</option>
-</select>
-</div>
-</div>
-<div>
-<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Nivel de Prioridad</label>
-<div class="flex gap-4 mt-2">
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="text-primary focus:ring-primary bg-stone-800 border-none" name="prio" type="radio"/>
-<span class="text-xs uppercase font-bold tracking-tight">Baja</span>
-</label>
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="text-primary focus:ring-primary bg-stone-800 border-none" name="prio" type="radio"/>
-<span class="text-xs uppercase font-bold tracking-tight">Media</span>
-</label>
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="text-primary focus:ring-primary bg-stone-800 border-none" name="prio" type="radio"/>
-<span class="text-xs uppercase font-bold tracking-tight text-primary">Crítica</span>
-</label>
-</div>
-</div>
-<div>
-<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-1">Descripción de la Falla</label>
-<textarea class="w-full bg-stone-800 border-none text-white p-3 focus:ring-2 focus:ring-primary rounded-none" placeholder="DESCRIBA EL ERROR O LA DUDA TÉCNICA DETALLADAMENTE..." rows="4"></textarea>
-</div>
-<button class="w-full py-4 bg-primary text-on-primary font-bold uppercase tracking-widest hover:bg-primary-container transition-colors active:scale-[0.98]" type="submit">Enviar Ticket de Soporte</button>
-</form>
-</div>
-</section>
-</main>
-<!-- Footer Technical Info -->
-<footer class="bg-surface-container-low px-6 py-8 border-t border-outline-variant/20">
-<div class="max-w-7xl mx-auto flex flex-col md:row justify-between items-center gap-6">
-<div class="flex items-center gap-4">
-<span class="text-lg font-black tracking-tighter uppercase font-['Space_Grotesk'] opacity-50">FORGE SYSTEMS</span>
-<span class="h-4 w-px bg-stone-300"></span>
-<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">La Cima ERP Documentation Portal © 2024</span>
-</div>
-<div class="flex gap-8">
-<a class="text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-primary" href="#">Políticas de Seguridad</a>
-<a class="text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-primary" href="#">Registro de Cambios</a>
-<a class="text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-primary" href="#">Versión 4.2.1-STABLE</a>
-</div>
-</div>
-</footer>
-<!-- Floating Action Button: Contextual Quick Help -->
-<button class="fixed bottom-8 right-8 h-14 w-14 bg-primary text-on-primary rounded-none flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all z-50">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
-</button>
-</body></html>
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.15s ease;
+        cursor: pointer;
+        user-select: none;
+        color: #555;
+      }
+      .menu-item:hover {
+        background: #f5f5f5;
+      }
+      .menu-item-active {
+        background: rgba(206, 255, 94, 0.2);
+        color: #1c1c1c;
+        font-weight: 700;
+        border-left: 3px solid #ceff5e;
+      }
+      .menu-item-inactive {
+        color: #555;
+      }
+      .menu-group {
+        font-size: 10px;
+        font-weight: 700;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 16px 12px 6px;
+      }
+      .menu-group:first-child {
+        margin-top: 0;
+      }
+
+      .menu-parent {
+        position: relative;
+      }
+      .dropdown-arrow {
+        margin-left: auto;
+        color: #aaa;
+        transition: transform 0.2s ease;
+        font-size: 18px !important;
+      }
+      .menu-item.open {
+        background: #f8f9fa;
+        color: #1c1c1c;
+        font-weight: 600;
+      }
+      .menu-item.open .dropdown-arrow {
+        transform: rotate(90deg);
+        color: #1c1c1c;
+      }
+
+      .submenu {
+        position: absolute;
+        left: calc(100% + 6px);
+        top: 2px;
+        min-width: 210px;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.12),
+          0 4px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-12px) scale(0.96);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+        z-index: 200;
+      }
+      .menu-parent.open .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .submenu a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #666;
+        border-radius: 10px;
+        transition: all 0.15s ease;
+        text-decoration: none;
+      }
+      .submenu a:hover {
+        background: #f8f9fa;
+        color: #1c1c1c;
+      }
+      .submenu a .material-symbols-outlined {
+        font-size: 18px !important;
+        color: #bbb;
+      }
+      .submenu a:hover .material-symbols-outlined {
+        color: #666;
+      }
+      .submenu-divider {
+        height: 1px;
+        background: #eee;
+        margin: 6px 10px;
+      }
+
+      .kpi-card {
+        @apply bg-white rounded-xl border border-stone-200 p-6 hover:shadow-lg transition-all hover:border-primary/30;
+      }
+      .action-btn {
+        @apply flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98];
+      }
+      .badge {
+        @apply px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider;
+      }
+      .badge-green {
+        @apply bg-green-100 text-green-700;
+      }
+      .badge-yellow {
+        @apply bg-yellow-100 text-yellow-700;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-stone-900 min-h-screen flex">
+    <!-- ========== SIDEBAR ========== -->
+    <aside
+      id="sidebar"
+      class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar"
+    >
+      <div class="flex flex-col px-5 pt-6 pb-4">
+        <div class="flex items-center gap-3 mb-2">
+          <div
+            class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg"
+          >
+            <span class="material-symbols-outlined text-primary"
+              >precision_manufacturing</span
+            >
+          </div>
+          <div>
+            <h2
+              class="font-headline font-bold text-lg text-stone-900 leading-none"
+            >
+              Mayor de Repuesto La Cima, C.A.
+            </h2>
+            <span class="text-[10px] font-mono text-stone-400">v2.1.0</span>
+          </div>
+        </div>
+        <p
+          class="text-[10px] font-bold text-stone-400 tracking-wider uppercase"
+        >
+          Sistema ERP Industrial
+        </p>
+      </div>
+
+      <div class="px-4 mb-4">
+        <div class="relative">
+          <span
+            class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"
+            ><span class="material-symbols-outlined text-lg">search</span></span
+          >
+          <input
+            class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all"
+            placeholder="Buscar..."
+            type="text"
+          />
+        </div>
+      </div>
+
+      <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
+        <div class="menu-group">Principal</div>
+        <a class="menu-item menu-item-inactive" href="inicio.html">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span
+          ><span>Inicio</span>
+          <span class="material-symbols-outlined dropdown-arrow"
+            >chevron_right</span
+          >
+        </a>
+
+        <div class="menu-group">Inventario</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >inventory_2</span
+            ><span>Inventario</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="productos.html"
+              ><span class="material-symbols-outlined">category</span>
+              Productos</a
+            >
+            <a href="kardex.html"
+              ><span class="material-symbols-outlined">receipt_long</span>
+              Kardex</a
+            >
+            <a href="auditoria-inventario.html"
+              ><span class="material-symbols-outlined">assignment</span>
+              Auditoría Física</a
+            >
+            <a href="ajustes-inventario.html"
+              ><span class="material-symbols-outlined">edit_note</span>
+              Ajustes</a
+            >
+            <a href="reportes-inventario.html"
+              ><span class="material-symbols-outlined">analytics</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Ventas</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">payments</span
+            ><span>Ventas</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="pos.html"
+              ><span class="material-symbols-outlined">point_of_sale</span>
+              Punto de Venta</a
+            >
+            <a href="registro-ventas.html"
+              ><span class="material-symbols-outlined">list_alt</span>
+              Registro</a
+            >
+            <a href="factura-electronica.html"
+              ><span class="material-symbols-outlined">receipt</span> Factura
+              Electrónica</a
+            >
+            <a href="facturas-emitidas.html"
+              ><span class="material-symbols-outlined">description</span>
+              Facturas Emitidas</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="notas-credito.html"
+              ><span class="material-symbols-outlined">redo</span> Notas de
+              Crédito</a
+            >
+            <a href="clientes.html"
+              ><span class="material-symbols-outlined">people</span> Clientes</a
+            >
+            <a href="vendedores.html"
+              ><span class="material-symbols-outlined">badge</span>
+              Vendedores</a
+            >
+            <a href="reportes-ventas.html"
+              ><span class="material-symbols-outlined">bar_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Compras</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >shopping_cart</span
+            ><span>Compras</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="proveedores.html"
+              ><span class="material-symbols-outlined">local_shipping</span>
+              Proveedores</a
+            >
+            <a href="historial-compras.html"
+              ><span class="material-symbols-outlined">history</span>
+              Historial</a
+            >
+            <a href="factura-compra.html"
+              ><span class="material-symbols-outlined">request_quote</span>
+              Factura Compra</a
+            >
+            <a href="libro-compras.html"
+              ><span class="material-symbols-outlined">book</span> Libro
+              Compras</a
+            >
+            <a href="reportes-compras.html"
+              ><span class="material-symbols-outlined">stacked_bar_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Contabilidad</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >account_balance</span
+            ><span>Contabilidad</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="plan-cuentas.html"
+              ><span class="material-symbols-outlined"
+                >format_list_numbered</span
+              >
+              Plan Cuentas</a
+            >
+            <a href="libro-diario.html"
+              ><span class="material-symbols-outlined">menu_book</span> Libro
+              Diario</a
+            >
+            <a href="libro-ventas.html"
+              ><span class="material-symbols-outlined">chrome_reader_mode</span>
+              Libro Ventas</a
+            >
+            <a href="libro-caja.html"
+              ><span class="material-symbols-outlined">savings</span> Libro
+              Caja</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="balance-general.html"
+              ><span class="material-symbols-outlined">balance</span> Balance
+              General</a
+            >
+            <a href="balance-comprobacion.html"
+              ><span class="material-symbols-outlined">scale</span> Balance
+              Comprob.</a
+            >
+            <a href="estado-resultados.html"
+              ><span class="material-symbols-outlined">monitoring</span> Estado
+              Resultados</a
+            >
+            <a href="declaracion-iva.html"
+              ><span class="material-symbols-outlined">gavel</span> Declaración
+              IVA</a
+            >
+            <a href="cierre-contable.html"
+              ><span class="material-symbols-outlined">lock_clock</span> Cierre
+              Contable</a
+            >
+            <a href="libros-legales.html"
+              ><span class="material-symbols-outlined">law</span> Libros
+              Legales</a
+            >
+            <a href="reportes-contables.html"
+              ><span class="material-symbols-outlined">pie_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Finanzas</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >monetization_on</span
+            ><span>Finanzas</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="activos-fijos.html"
+              ><span class="material-symbols-outlined">corporate_fare</span>
+              Activos Fijos</a
+            >
+            <a href="cuentas-cobrar.html"
+              ><span class="material-symbols-outlined"
+                >account_balance_wallet</span
+              >
+              Cuentas Cobrar</a
+            >
+            <a href="reportes-financieros.html"
+              ><span class="material-symbols-outlined">show_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Recursos Humanos</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">groups</span
+            ><span>RRHH</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="empleados.html"
+              ><span class="material-symbols-outlined">person</span>
+              Empleados</a
+            >
+            <a href="nomina.html"
+              ><span class="material-symbols-outlined">payments</span> Nómina</a
+            >
+            <a href="prestaciones.html"
+              ><span class="material-symbols-outlined">savings</span>
+              Prestaciones</a
+            >
+            <a href="portal-empleado.html"
+              ><span class="material-symbols-outlined">person_outline</span>
+              Portal Empleado</a
+            >
+            <a href="rendimiento-anual.html"
+              ><span class="material-symbols-outlined">emoji_events</span>
+              Rendimiento</a
+            >
+            <a href="reportes-rrhh.html"
+              ><span class="material-symbols-outlined">group_work</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Sistema</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">settings</span
+            ><span>Configuración</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="parametros.html"
+              ><span class="material-symbols-outlined">tune</span> Parámetros</a
+            >
+            <a href="config-fiscal.html"
+              ><span class="material-symbols-outlined">policy</span> Config
+              Fiscal</a
+            >
+            <a href="usuarios-roles.html"
+              ><span class="material-symbols-outlined"
+                >admin_panel_settings</span
+              >
+              Usuarios</a
+            >
+            <a href="base-datos.html"
+              ><span class="material-symbols-outlined">storage</span> Base
+              Datos</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="backups.html"
+              ><span class="material-symbols-outlined">backup</span> Backups</a
+            >
+            <a href="estado-sistema.html"
+              ><span class="material-symbols-outlined">health_and_safety</span>
+              Estado Sistema</a
+            >
+            <a href="tareas-programadas.html"
+              ><span class="material-symbols-outlined">schedule</span> Tareas</a
+            >
+            <a href="auditoria-seguridad.html"
+              ><span class="material-symbols-outlined">security</span>
+              Auditoría</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Ayuda</div>
+        <div class="menu-parent open">
+          <div
+            class="menu-item menu-item-active"
+            onclick="toggleDropdown(this)"
+          >
+            <span
+              class="material-symbols-outlined text-[20px]"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >help</span
+            ><span>Ayuda</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="ayuda.html"
+              ><span class="material-symbols-outlined">help</span> Centro
+              Ayuda</a
+            >
+            <a href="tickets-soporte.html"
+              ><span class="material-symbols-outlined"
+                >confirmation_number</span
+              >
+              Tickets</a
+            >
+            <a href="crear-ticket.html"
+              ><span class="material-symbols-outlined">add_circle</span> Crear
+              Ticket</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="chat-asistencia.html"
+              ><span class="material-symbols-outlined">chat</span> Chat</a
+            >
+            <a href="base-conocimiento.html"
+              ><span class="material-symbols-outlined">school</span>
+              Conocimiento</a
+            >
+            <a href="manual-tecnico.html"
+              ><span class="material-symbols-outlined">description</span>
+              Manual</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <div class="mt-auto border-t border-stone-200 p-4">
+        <button
+          onclick="
+            localStorage.removeItem('erp_session');
+            window.location.href = '/frontend/public/auth/login.html';
+          "
+          class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm"
+        >
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+          Cerrar Sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========== TOP BAR ========== -->
+    <header
+      class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200"
+    >
+      <div class="flex justify-between items-center px-6 py-3">
+        <div class="flex items-center gap-4">
+          <button
+            id="menuToggle"
+            class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
+            <a href="inicio.html" class="hover:text-stone-900">Inicio</a>
+            <span class="material-symbols-outlined text-sm">chevron_right</span>
+            <span class="text-stone-900 font-medium">Ayuda</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="hidden lg:block relative">
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"
+              ><span class="material-symbols-outlined text-lg"
+                >search</span
+              ></span
+            >
+            <input
+              class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all"
+              placeholder="Buscar repuestos, ventas, clientes..."
+              type="text"
+            />
+          </div>
+          <button
+            class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"
+            ></span>
+          </button>
+          <div
+            class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200"
+          >
+            <div class="text-right hidden md:block">
+              <p class="text-sm font-bold text-stone-900 leading-none">
+                Administrador
+              </p>
+              <p class="text-[10px] text-stone-500">Rol: Admin</p>
+            </div>
+            <div
+              class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm"
+            >
+              A
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <main class="ml-[288px] w-[calc(100vw-288px)] mt-[65px] p-6 pb-4">
+      <!-- Header -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8"
+      >
+        <div>
+          <p
+            class="text-xs font-bold text-stone-400 tracking-[0.2em] uppercase mb-1"
+          >
+            Centro de Soporte
+          </p>
+          <h2
+            class="text-3xl font-headline font-black text-stone-900 tracking-tight"
+          >
+            Ayuda y Soporte
+          </h2>
+          <p class="text-stone-500 text-sm mt-1">
+            MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <a
+            href="crear-ticket.html"
+            class="flex items-center gap-2 bg-primary text-stone-900 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:brightness-110 transition-all"
+          >
+            <span class="material-symbols-outlined text-sm">add_circle</span>
+            Crear Ticket
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <a
+          href="tickets-soporte.html"
+          class="action-btn bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20"
+        >
+          <span class="material-symbols-outlined text-2xl"
+            >confirmation_number</span
+          >
+          <span class="text-center leading-tight">Mis Tickets</span>
+        </a>
+        <a
+          href="chat-asistencia.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl">chat</span>
+          <span class="text-center leading-tight">Chat Asistencia</span>
+        </a>
+        <a
+          href="base-conocimiento.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl">school</span>
+          <span class="text-center leading-tight">Conocimiento</span>
+        </a>
+        <a
+          href="manual-tecnico.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl">description</span>
+          <span class="text-center leading-tight">Manual Técnico</span>
+        </a>
+      </div>
+
+      <!-- Help Categories -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- FAQs -->
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-blue-600">help</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">
+                Preguntas Frecuentes
+              </h3>
+              <p class="text-xs text-stone-500">
+                Respuestas a consultas comunes
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <details class="group">
+              <summary
+                class="flex items-center justify-between p-3 bg-stone-50 rounded-lg cursor-pointer hover:bg-stone-100 transition-colors"
+              >
+                <span class="text-sm font-medium text-stone-900"
+                  >¿Cómo crear una nueva venta?</span
+                >
+                <span
+                  class="material-symbols-outlined text-stone-400 group-open:rotate-180 transition-transform"
+                  >expand_more</span
+                >
+              </summary>
+              <div class="p-3 text-sm text-stone-600">
+                Ve a Ventas > Punto de Venta, selecciona los productos y
+                finaliza la venta.
+              </div>
+            </details>
+            <details class="group">
+              <summary
+                class="flex items-center justify-between p-3 bg-stone-50 rounded-lg cursor-pointer hover:bg-stone-100 transition-colors"
+              >
+                <span class="text-sm font-medium text-stone-900"
+                  >¿Cómo ajustar el inventario?</span
+                >
+                <span
+                  class="material-symbols-outlined text-stone-400 group-open:rotate-180 transition-transform"
+                  >expand_more</span
+                >
+              </summary>
+              <div class="p-3 text-sm text-stone-600">
+                Ve a Inventario > Ajustes y registra las diferencias
+                encontradas.
+              </div>
+            </details>
+            <details class="group">
+              <summary
+                class="flex items-center justify-between p-3 bg-stone-50 rounded-lg cursor-pointer hover:bg-stone-100 transition-colors"
+              >
+                <span class="text-sm font-medium text-stone-900"
+                  >¿Cómo generar reportes?</span
+                >
+                <span
+                  class="material-symbols-outlined text-stone-400 group-open:rotate-180 transition-transform"
+                  >expand_more</span
+                >
+              </summary>
+              <div class="p-3 text-sm text-stone-600">
+                Cada módulo tiene una sección de Reportes. Selecciona el período
+                y exporta.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-green-600"
+                >headset_mic</span
+              >
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">
+                Contactar Soporte
+              </h3>
+              <p class="text-xs text-stone-500">Estamos para ayudarte</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-4 p-3 bg-stone-50 rounded-lg">
+              <span class="material-symbols-outlined text-stone-500"
+                >email</span
+              >
+              <div>
+                <p class="text-sm font-bold text-stone-900">
+                  Correo Electrónico
+                </p>
+                <p class="text-xs text-stone-500">soporte@lacima.com</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 p-3 bg-stone-50 rounded-lg">
+              <span class="material-symbols-outlined text-stone-500"
+                >phone</span
+              >
+              <div>
+                <p class="text-sm font-bold text-stone-900">Teléfono</p>
+                <p class="text-xs text-stone-500">+58 241-123-4567</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 p-3 bg-stone-50 rounded-lg">
+              <span class="material-symbols-outlined text-stone-500"
+                >schedule</span
+              >
+              <div>
+                <p class="text-sm font-bold text-stone-900">
+                  Horario de Atención
+                </p>
+                <p class="text-xs text-stone-500">
+                  Lun - Vie: 8:00 AM - 5:00 PM
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Status -->
+      <div class="bg-white rounded-xl border border-stone-200 p-6 mb-8">
+        <div class="flex items-center gap-3 mb-6">
+          <div
+            class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-green-600"
+              >health_and_safety</span
+            >
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-stone-900">Estado del Sistema</h3>
+            <p class="text-xs text-stone-500">Monitoreo en tiempo real</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="p-4 bg-green-50 rounded-lg text-center">
+            <span class="material-symbols-outlined text-green-600 text-3xl mb-2"
+              >check_circle</span
+            >
+            <p class="text-sm font-bold text-stone-900">API</p>
+            <p class="text-xs text-green-600">Operativo</p>
+          </div>
+          <div class="p-4 bg-green-50 rounded-lg text-center">
+            <span class="material-symbols-outlined text-green-600 text-3xl mb-2"
+              >check_circle</span
+            >
+            <p class="text-sm font-bold text-stone-900">Base de Datos</p>
+            <p class="text-xs text-green-600">Conectado</p>
+          </div>
+          <div class="p-4 bg-green-50 rounded-lg text-center">
+            <span class="material-symbols-outlined text-green-600 text-3xl mb-2"
+              >check_circle</span
+            >
+            <p class="text-sm font-bold text-stone-900">Backups</p>
+            <p class="text-xs text-green-600">Al día</p>
+          </div>
+          <div class="p-4 bg-amber-50 rounded-lg text-center">
+            <span class="material-symbols-outlined text-amber-600 text-3xl mb-2"
+              >warning</span
+            >
+            <p class="text-sm font-bold text-stone-900">Actualización</p>
+            <p class="text-xs text-amber-600">Pendiente</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div
+        class="pt-4 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <span class="text-[10px] font-bold text-stone-400"
+          >RIF: J-40308741-5 • Todos los derechos reservados © 2026</span
+        >
+        <div class="flex items-center gap-4">
+          <a
+            href="ayuda.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Centro de Ayuda</a
+          >
+          <a
+            href="manual-tecnico.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Manual Técnico</a
+          >
+          <a
+            href="estado-sistema.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Estado del Sistema</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- Overlay mobile -->
+    <div
+      id="sidebarOverlay"
+      class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"
+      onclick="
+        document.getElementById('sidebar').classList.remove('open');
+        this.classList.add('hidden');
+      "
+    ></div>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("sidebarOverlay");
+
+      if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("open");
+          overlay.classList.toggle("hidden");
+        });
+      }
+
+      function toggleDropdown(menuItem) {
+        const parent = menuItem.closest(".menu-parent");
+        const wasOpen = parent.classList.contains("open");
+        document.querySelectorAll(".menu-parent.open").forEach((el) => {
+          if (el !== parent) el.classList.remove("open");
+        });
+        if (!wasOpen) {
+          parent.classList.add("open");
+        }
+      }
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".menu-parent")) {
+          document.querySelectorAll(".menu-parent.open").forEach((el) => {
+            el.classList.remove("open");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

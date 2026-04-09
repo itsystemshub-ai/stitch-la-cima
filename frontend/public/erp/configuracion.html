@@ -1,306 +1,1014 @@
-<!DOCTYPE html>
+<!doctype html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta
+      name="description"
+      content="Configuración del Sistema - MAYOR DE REPUESTO LA CIMA, C.A."
+    />
+    <meta name="theme-color" content="#ceff5e" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="icon" type="image/png" href="../../assets/images/logo.png" />
+    <title>Configuración | ERP La Cima</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ceff5e",
+              secondary: "#1c1c1c",
+              background: "#f6f6f9",
+              surface: "#ffffff",
+              outline: "#e2e2e5",
+            },
+            fontFamily: {
+              headline: ["League Spartan", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .material-symbols-filled {
+        font-variation-settings:
+          "FILL" 1,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      @media (min-width: 1024px) {
+        .sidebar {
+          transform: translateX(0);
+        }
+      }
 
-<html class="light" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LA CIMA - ADMIN FORGE v2.4</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="js/configuracion.js"></script>
-<link rel="stylesheet" href="css/configuracion.css">
-</head>
-<body class="bg-background text-on-background min-h-screen">
-<!-- SideNavBar -->
-<aside class="fixed left-0 top-0 h-full z-50 h-screen w-64 flex flex-col border-r-0 bg-stone-950 dark:bg-black font-['Space_Grotesk'] uppercase tracking-tight">
-<div class="p-6">
-<div class="text-xl font-bold tracking-tighter text-lime-400 dark:text-lime-300">LA CIMA</div>
-<div class="text-[10px] text-stone-500 mt-1">ADMIN FORGE v2.4</div>
-</div>
-<nav class="flex-1 mt-4">
-<!-- Active Tab: Dashboard -->
-<a class="flex items-center gap-3 px-4 py-3 bg-stone-900 text-lime-400 border-l-4 border-lime-500" href="#">
-<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
-<span class="text-sm font-bold">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
-<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
-<span class="text-sm">Module Health</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
-<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
-<span class="text-sm">User Access</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
-<span class="material-symbols-outlined" data-icon="database">database</span>
-<span class="text-sm">DB Management</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
-<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
-<span class="text-sm">Audit Logs</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-stone-400 hover:text-stone-100 transition-colors hover:bg-stone-800/50" href="#">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span class="text-sm">Settings</span>
-</a>
-</nav>
-<div class="mt-auto p-4 border-t border-stone-800/50">
-<button class="w-full py-3 bg-stone-900 text-stone-300 text-xs font-bold border border-stone-700 hover:bg-red-900/20 hover:text-red-400 transition-all uppercase tracking-widest mb-4">
-                System Lock
-            </button>
-<div class="space-y-1">
-<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-300 text-xs transition-colors" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="support_agent">support_agent</span>
-<span>Support</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-2 text-stone-500 hover:text-stone-300 text-xs transition-colors" href="#">
-<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
-<span>Logout</span>
-</a>
-</div>
-</div>
-</aside>
-<!-- TopAppBar -->
-<header class="fixed top-0 right-0 left-0 h-16 z-40 bg-stone-950/80 backdrop-blur-md flex justify-between items-center pl-64 pr-8">
-<div class="flex items-center gap-8">
-<h2 class="text-lg font-black tracking-widest text-white font-headline">MAYOR DE REPUESTO LA CIMA, C.A.</h2>
-<nav class="hidden md:flex gap-6 font-['Space_Grotesk'] uppercase text-sm">
-<a class="text-lime-400 font-bold border-b-2 border-lime-500 pb-1" href="#">Global View</a>
-<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">System Health</a>
-<a class="text-stone-500 hover:text-stone-200 transition-colors" href="#">Security Ops</a>
-</nav>
-</div>
-<div class="flex items-center gap-6">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 text-sm">search</span>
-<input class="bg-stone-900 border-none text-stone-300 text-xs py-2 pl-10 pr-4 w-48 focus:ring-1 focus:ring-lime-500/50" placeholder="CMD_SEARCH..." type="text"/>
-</div>
-<div class="flex items-center gap-4 text-lime-500">
-<button class="material-symbols-outlined hover:text-amber-500 transition-colors" data-icon="notifications_active">notifications_active</button>
-<button class="material-symbols-outlined hover:text-amber-500 transition-colors" data-icon="terminal">terminal</button>
-<div class="h-8 w-8 bg-stone-800 rounded-sm overflow-hidden border border-stone-700">
-<img alt="Admin Avatar" data-alt="professional corporate headshot of a system administrator in a dark studio setting with moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNxb8fQct9sHnPDbIkzyS8X-P7ZeoX2LNR5IknxIosezUCS3tr1MAvDvtY7BxB1j0OI7NlnxcHT8EUN5U0nfOVczW3P61zO-vX5cyic_irCoRI26K_KlqLb-SpSJN4jQbbT7nhHsn-4RbvOY20FwGMrK5MnqpDwe6Ut2ivdQIerQokK1j8H-KmEtZM6i5ZX4tdIiXAZ18vLm6ZVCGThp0D6-iQEtmK2dXLfcAI2EYu28G5HlqtZ26PoI8abw3Xq8D7LPugCe-XFBQ"/>
-</div>
-<button class="bg-red-950 text-red-500 text-[10px] font-bold px-3 py-1 border border-red-900/50 hover:bg-red-600 hover:text-white transition-all uppercase">
-                    Emergency Shutdown
-                </button>
-</div>
-</div>
-</header>
-<!-- Main Content Canvas -->
-<main class="pt-24 pl-72 pr-8 pb-12">
-<!-- Dashboard Header / Status Area -->
-<div class="flex justify-between items-end mb-8">
-<div>
-<h1 class="text-4xl font-black uppercase tracking-tighter text-on-surface">System Overview</h1>
-<p class="text-secondary text-sm mt-1 uppercase font-medium tracking-widest">Administrative Forge / Engine Room</p>
-</div>
-<div class="flex gap-4">
-<div class="bg-primary-container/10 border-l-4 border-primary px-6 py-3 flex items-center gap-4">
-<div class="h-3 w-3 bg-primary rounded-full animate-pulse"></div>
-<div>
-<div class="text-[10px] text-primary font-bold uppercase tracking-widest">Status Engine</div>
-<div class="text-on-surface font-bold">System Integrity: OPTIMAL</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-12 gap-6">
-<!-- System Health Visualization -->
-<div class="col-span-8 bg-surface-container-lowest p-8 relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-4">
-<span class="material-symbols-outlined text-surface-container-highest text-8xl opacity-10 rotate-12 select-none" data-icon="settings_input_component">settings_input_component</span>
-</div>
-<div class="relative z-10">
-<div class="flex justify-between items-start mb-12">
-<h3 class="text-xl font-bold uppercase tracking-tight text-on-surface">Core Infrastructure Health</h3>
-<div class="flex gap-2">
-<span class="bg-surface-container-high px-2 py-1 text-[10px] font-bold">Uptime: 99.99%</span>
-<span class="bg-surface-container-high px-2 py-1 text-[10px] font-bold">Latency: 14ms</span>
-</div>
-</div>
-<div class="grid grid-cols-4 gap-4">
-<div class="bg-surface-container-low p-4">
-<div class="text-xs text-secondary uppercase font-bold mb-2">CPU Cluster</div>
-<div class="text-3xl font-headline font-bold text-on-surface">24%</div>
-<div class="w-full bg-surface-container-high h-1 mt-4">
-<div class="bg-primary h-full w-[24%]"></div>
-</div>
-</div>
-<div class="bg-surface-container-low p-4">
-<div class="text-xs text-secondary uppercase font-bold mb-2">Memory Load</div>
-<div class="text-3xl font-headline font-bold text-on-surface">61%</div>
-<div class="w-full bg-surface-container-high h-1 mt-4">
-<div class="bg-amber-500 h-full w-[61%]"></div>
-</div>
-</div>
-<div class="bg-surface-container-low p-4">
-<div class="text-xs text-secondary uppercase font-bold mb-2">Active Users</div>
-<div class="text-3xl font-headline font-bold text-on-surface">842</div>
-<div class="text-[10px] text-primary mt-2 flex items-center gap-1 font-bold">
-<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> +12%
-                            </div>
-</div>
-<div class="bg-surface-container-low p-4">
-<div class="text-xs text-secondary uppercase font-bold mb-2">IO Ops</div>
-<div class="text-3xl font-headline font-bold text-on-surface">1.2k</div>
-<div class="text-[10px] text-secondary mt-2 flex items-center gap-1 font-bold">
-<span class="material-symbols-outlined text-xs" data-icon="sync">sync</span> SYNC_STABLE
-                            </div>
-</div>
-</div>
-</div>
-</div>
-<!-- Storage Usage (LocalStorage Simulation) -->
-<div class="col-span-4 bg-surface-container-lowest p-8 border-r-8 border-amber-500/20">
-<h3 class="text-xl font-bold uppercase tracking-tight text-on-surface mb-6">Storage Matrix</h3>
-<div class="space-y-6">
-<div>
-<div class="flex justify-between text-[10px] font-bold uppercase text-secondary mb-2">
-<span>Main Warehouse DB</span>
-<span>4.2 / 5.0 GB</span>
-</div>
-<div class="w-full bg-surface-container-high h-2">
-<div class="bg-amber-500 h-full w-[84%]"></div>
-</div>
-</div>
-<div>
-<div class="flex justify-between text-[10px] font-bold uppercase text-secondary mb-2">
-<span>Attachment Repository</span>
-<span>12.8 / 50 GB</span>
-</div>
-<div class="w-full bg-surface-container-high h-2">
-<div class="bg-primary h-full w-[25%]"></div>
-</div>
-</div>
-<div>
-<div class="flex justify-between text-[10px] font-bold uppercase text-secondary mb-2">
-<span>Local Cache Index</span>
-<span>256 / 512 MB</span>
-</div>
-<div class="w-full bg-surface-container-high h-2">
-<div class="bg-primary h-full w-[50%]"></div>
-</div>
-</div>
-</div>
-<div class="mt-12 bg-surface-container p-4 rounded-sm">
-<div class="text-[10px] text-secondary uppercase font-bold mb-1">Last Maintenance Scan</div>
-<div class="text-sm font-bold text-on-surface">TODAY, 04:20 AM</div>
-<button class="mt-3 w-full text-[10px] font-bold uppercase py-2 border border-outline-variant hover:bg-surface-container-high transition-colors">Clear Expired Cache</button>
-</div>
-</div>
-<!-- Quick Access / Actions -->
-<div class="col-span-12 grid grid-cols-4 gap-6">
-<button class="group bg-surface-container-highest hover:bg-primary transition-all p-6 text-left relative overflow-hidden">
-<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="cloud_upload">cloud_upload</span>
-<div class="mt-4">
-<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Initiate Backup</div>
-<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Full System Snapshot</div>
-</div>
-</button>
-<button class="group bg-surface-container-highest hover:bg-primary transition-all p-6 text-left">
-<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="settings_backup_restore">settings_backup_restore</span>
-<div class="mt-4">
-<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Restore Point</div>
-<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Revert to Stable Version</div>
-</div>
-</button>
-<button class="group bg-surface-container-highest hover:bg-amber-600 transition-all p-6 text-left">
-<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="construction">construction</span>
-<div class="mt-4">
-<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Maintenance Mode</div>
-<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Toggle Public Access</div>
-</div>
-</button>
-<button class="group bg-surface-container-highest hover:bg-stone-900 transition-all p-6 text-left">
-<span class="material-symbols-outlined text-4xl text-on-surface group-hover:text-white transition-colors" data-icon="description">description</span>
-<div class="mt-4">
-<div class="text-sm font-bold uppercase group-hover:text-white transition-colors">Generate Report</div>
-<div class="text-[10px] text-secondary group-hover:text-white/70 uppercase">Export PDF Audit</div>
-</div>
-</button>
-</div>
-<!-- Real-Time Activity Logs -->
-<div class="col-span-12 bg-surface-container-lowest overflow-hidden">
-<div class="bg-stone-900 px-6 py-3 flex justify-between items-center">
-<h3 class="text-xs font-bold text-lime-400 uppercase tracking-widest flex items-center gap-2">
-<span class="material-symbols-outlined text-sm" data-icon="developer_board">developer_board</span> Real-time Audit Terminal
-                    </h3>
-<div class="flex items-center gap-4">
-<div class="h-2 w-2 bg-lime-500 rounded-full animate-ping"></div>
-<span class="text-[10px] text-stone-500 font-bold">STREAM_ACTIVE</span>
-</div>
-</div>
-<div class="p-0">
-<table class="w-full text-left">
-<thead class="bg-surface-container text-[10px] font-black uppercase text-secondary">
-<tr>
-<th class="px-6 py-3">Timestamp</th>
-<th class="px-6 py-3">Event Type</th>
-<th class="px-6 py-3">Subject</th>
-<th class="px-6 py-3">Source Node</th>
-<th class="px-6 py-3 text-right">Severity</th>
-</tr>
-</thead>
-<tbody class="text-xs font-medium">
-<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
-<td class="px-6 py-4 font-mono text-secondary">14:22:01:002</td>
-<td class="px-6 py-4 text-on-surface font-bold">USER_AUTH_SUCCESS</td>
-<td class="px-6 py-4">admin_root_jvalencia</td>
-<td class="px-6 py-4 font-mono">192.168.1.45</td>
-<td class="px-6 py-4 text-right"><span class="text-primary font-bold">INFO</span></td>
-</tr>
-<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
-<td class="px-6 py-4 font-mono text-secondary">14:21:44:910</td>
-<td class="px-6 py-4 text-on-surface font-bold">INVENTORY_SYNC_START</td>
-<td class="px-6 py-4">Warehouse_A_Core</td>
-<td class="px-6 py-4 font-mono">Node_Cluster_7</td>
-<td class="px-6 py-4 text-right"><span class="text-primary font-bold">INFO</span></td>
-</tr>
-<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
-<td class="px-6 py-4 font-mono text-secondary">14:21:12:005</td>
-<td class="px-6 py-4 text-on-surface font-bold">DB_QUERY_WARNING</td>
-<td class="px-6 py-4">SQL_LONG_RUNNING_PROC</td>
-<td class="px-6 py-4 font-mono">DB_SRV_02</td>
-<td class="px-6 py-4 text-right"><span class="text-amber-600 font-bold">WARN</span></td>
-</tr>
-<tr class="border-b border-surface-container-low hover:bg-surface-container-low transition-colors">
-<td class="px-6 py-4 font-mono text-secondary">14:19:55:221</td>
-<td class="px-6 py-4 text-on-surface font-bold">API_TOKEN_EXPIRED</td>
-<td class="px-6 py-4">external_client_v3</td>
-<td class="px-6 py-4 font-mono">Gateway_01</td>
-<td class="px-6 py-4 text-right"><span class="text-error font-bold">ERR</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="bg-surface-container-low px-6 py-3 flex justify-center">
-<button class="text-[10px] font-bold text-secondary uppercase hover:text-on-surface transition-colors flex items-center gap-2">
-                        Load History Buffer <span class="material-symbols-outlined text-xs" data-icon="keyboard_double_arrow_down">keyboard_double_arrow_down</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Footer Cluster -->
-<footer class="mt-16 pt-12 border-t border-surface-container-highest flex flex-col md:flex-row justify-between items-start gap-8">
-<div class="max-w-md">
-<div class="brand-font text-2xl font-black text-on-surface mb-2">LA CIMA</div>
-<p class="text-secondary text-xs leading-relaxed">
-                    MAYOR DE REPUESTO LA CIMA, C.A.<br/>
-                    R.I.F: J-00000000-0<br/>
-                    Av. Intercomunal, Zona Industrial II, Galpón 4-B<br/>
-                    Barquisimeto, Edo. Lara, Venezuela.
-                </p>
-</div>
-<div class="flex flex-col items-end gap-2 text-right">
-<div class="text-[10px] font-black uppercase text-secondary tracking-widest">Digital Infrastructure Management</div>
-<div class="text-[10px] font-medium text-stone-400">© 2024 MAYOR DE REPUESTO LA CIMA. ALL RIGHTS RESERVED.</div>
-<div class="flex gap-4 mt-4">
-<img alt="Industrial Tech" class="h-12 w-32 object-cover grayscale opacity-20" data-alt="close-up of futuristic computer circuitry with glowing green lights and complex technical architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwE1Cy5-OPd6h6OyRvbzUecQdmvyoB8c-ogDJBPmTAtlBJUViAVv9vd_ECP0cn4hBXOeIi2-gUSpScg71FKlc1FIL1XfBiKbv4VcT_UTVSz7L5Ied-ccVx7dsYB37JbWJP9oBMNHbCyUFGtHfLTfCGnYKq07cDb3bj1OQSAhKMiKi0nwnRbQ8fXffVgvwWUS40vzIQeSgDMofhnR-zxaaKTTzCbSXchiZVhagxduGq2f9VzSEqvHNu2qFYHR7vzVwJ_ESF0hvRP2A"/>
-</div>
-</div>
-</footer>
-</main>
-</body></html>
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.15s ease;
+        cursor: pointer;
+        user-select: none;
+        color: #555;
+      }
+      .menu-item:hover {
+        background: #f5f5f5;
+      }
+      .menu-item-active {
+        background: rgba(206, 255, 94, 0.2);
+        color: #1c1c1c;
+        font-weight: 700;
+        border-left: 3px solid #ceff5e;
+      }
+      .menu-item-inactive {
+        color: #555;
+      }
+      .menu-group {
+        font-size: 10px;
+        font-weight: 700;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 16px 12px 6px;
+      }
+      .menu-group:first-child {
+        margin-top: 0;
+      }
+
+      .menu-parent {
+        position: relative;
+      }
+      .dropdown-arrow {
+        margin-left: auto;
+        color: #aaa;
+        transition: transform 0.2s ease;
+        font-size: 18px !important;
+      }
+      .menu-item.open {
+        background: #f8f9fa;
+        color: #1c1c1c;
+        font-weight: 600;
+      }
+      .menu-item.open .dropdown-arrow {
+        transform: rotate(90deg);
+        color: #1c1c1c;
+      }
+
+      .submenu {
+        position: absolute;
+        left: calc(100% + 6px);
+        top: 2px;
+        min-width: 210px;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.12),
+          0 4px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-12px) scale(0.96);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+        z-index: 200;
+      }
+      .menu-parent.open .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .submenu a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #666;
+        border-radius: 10px;
+        transition: all 0.15s ease;
+        text-decoration: none;
+      }
+      .submenu a:hover {
+        background: #f8f9fa;
+        color: #1c1c1c;
+      }
+      .submenu a .material-symbols-outlined {
+        font-size: 18px !important;
+        color: #bbb;
+      }
+      .submenu a:hover .material-symbols-outlined {
+        color: #666;
+      }
+      .submenu-divider {
+        height: 1px;
+        background: #eee;
+        margin: 6px 10px;
+      }
+
+      .kpi-card {
+        @apply bg-white rounded-xl border border-stone-200 p-6 hover:shadow-lg transition-all hover:border-primary/30;
+      }
+      .action-btn {
+        @apply flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98];
+      }
+      .badge {
+        @apply px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider;
+      }
+      .badge-green {
+        @apply bg-green-100 text-green-700;
+      }
+      .badge-yellow {
+        @apply bg-yellow-100 text-yellow-700;
+      }
+      .badge-red {
+        @apply bg-red-100 text-red-700;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-stone-900 min-h-screen flex">
+    <!-- ========== SIDEBAR ========== -->
+    <aside
+      id="sidebar"
+      class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar"
+    >
+      <div class="flex flex-col px-5 pt-6 pb-4">
+        <div class="flex items-center gap-3 mb-2">
+          <div
+            class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg"
+          >
+            <span class="material-symbols-outlined text-primary"
+              >precision_manufacturing</span
+            >
+          </div>
+          <div>
+            <h2
+              class="font-headline font-bold text-lg text-stone-900 leading-none"
+            >
+              Mayor de Repuesto La Cima, C.A.
+            </h2>
+            <span class="text-[10px] font-mono text-stone-400">v2.1.0</span>
+          </div>
+        </div>
+        <p
+          class="text-[10px] font-bold text-stone-400 tracking-wider uppercase"
+        >
+          Sistema ERP Industrial
+        </p>
+      </div>
+
+      <div class="px-4 mb-4">
+        <div class="relative">
+          <span
+            class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"
+            ><span class="material-symbols-outlined text-lg">search</span></span
+          >
+          <input
+            class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all"
+            placeholder="Buscar..."
+            type="text"
+          />
+        </div>
+      </div>
+
+      <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
+        <div class="menu-group">Principal</div>
+        <a class="menu-item menu-item-inactive" href="inicio.html">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span
+          ><span>Inicio</span>
+          <span class="material-symbols-outlined dropdown-arrow"
+            >chevron_right</span
+          >
+        </a>
+
+        <div class="menu-group">Inventario</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >inventory_2</span
+            ><span>Inventario</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="productos.html"
+              ><span class="material-symbols-outlined">category</span>
+              Productos</a
+            >
+            <a href="kardex.html"
+              ><span class="material-symbols-outlined">receipt_long</span>
+              Kardex</a
+            >
+            <a href="auditoria-inventario.html"
+              ><span class="material-symbols-outlined">assignment</span>
+              Auditoría Física</a
+            >
+            <a href="ajustes-inventario.html"
+              ><span class="material-symbols-outlined">edit_note</span>
+              Ajustes</a
+            >
+            <a href="reportes-inventario.html"
+              ><span class="material-symbols-outlined">analytics</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Ventas</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">payments</span
+            ><span>Ventas</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="pos.html"
+              ><span class="material-symbols-outlined">point_of_sale</span>
+              Punto de Venta</a
+            >
+            <a href="registro-ventas.html"
+              ><span class="material-symbols-outlined">list_alt</span>
+              Registro</a
+            >
+            <a href="factura-electronica.html"
+              ><span class="material-symbols-outlined">receipt</span> Factura
+              Electrónica</a
+            >
+            <a href="facturas-emitidas.html"
+              ><span class="material-symbols-outlined">description</span>
+              Facturas Emitidas</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="notas-credito.html"
+              ><span class="material-symbols-outlined">redo</span> Notas de
+              Crédito</a
+            >
+            <a href="clientes.html"
+              ><span class="material-symbols-outlined">people</span> Clientes</a
+            >
+            <a href="vendedores.html"
+              ><span class="material-symbols-outlined">badge</span>
+              Vendedores</a
+            >
+            <a href="reportes-ventas.html"
+              ><span class="material-symbols-outlined">bar_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Compras</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >shopping_cart</span
+            ><span>Compras</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="proveedores.html"
+              ><span class="material-symbols-outlined">local_shipping</span>
+              Proveedores</a
+            >
+            <a href="historial-compras.html"
+              ><span class="material-symbols-outlined">history</span>
+              Historial</a
+            >
+            <a href="factura-compra.html"
+              ><span class="material-symbols-outlined">request_quote</span>
+              Factura Compra</a
+            >
+            <a href="libro-compras.html"
+              ><span class="material-symbols-outlined">book</span> Libro
+              Compras</a
+            >
+            <a href="reportes-compras.html"
+              ><span class="material-symbols-outlined">stacked_bar_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Contabilidad</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >account_balance</span
+            ><span>Contabilidad</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="plan-cuentas.html"
+              ><span class="material-symbols-outlined"
+                >format_list_numbered</span
+              >
+              Plan Cuentas</a
+            >
+            <a href="libro-diario.html"
+              ><span class="material-symbols-outlined">menu_book</span> Libro
+              Diario</a
+            >
+            <a href="libro-ventas.html"
+              ><span class="material-symbols-outlined">chrome_reader_mode</span>
+              Libro Ventas</a
+            >
+            <a href="libro-caja.html"
+              ><span class="material-symbols-outlined">savings</span> Libro
+              Caja</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="balance-general.html"
+              ><span class="material-symbols-outlined">balance</span> Balance
+              General</a
+            >
+            <a href="balance-comprobacion.html"
+              ><span class="material-symbols-outlined">scale</span> Balance
+              Comprob.</a
+            >
+            <a href="estado-resultados.html"
+              ><span class="material-symbols-outlined">monitoring</span> Estado
+              Resultados</a
+            >
+            <a href="declaracion-iva.html"
+              ><span class="material-symbols-outlined">gavel</span> Declaración
+              IVA</a
+            >
+            <a href="cierre-contable.html"
+              ><span class="material-symbols-outlined">lock_clock</span> Cierre
+              Contable</a
+            >
+            <a href="libros-legales.html"
+              ><span class="material-symbols-outlined">law</span> Libros
+              Legales</a
+            >
+            <a href="reportes-contables.html"
+              ><span class="material-symbols-outlined">pie_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Finanzas</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >monetization_on</span
+            ><span>Finanzas</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="activos-fijos.html"
+              ><span class="material-symbols-outlined">corporate_fare</span>
+              Activos Fijos</a
+            >
+            <a href="cuentas-cobrar.html"
+              ><span class="material-symbols-outlined"
+                >account_balance_wallet</span
+              >
+              Cuentas Cobrar</a
+            >
+            <a href="reportes-financieros.html"
+              ><span class="material-symbols-outlined">show_chart</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Recursos Humanos</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">groups</span
+            ><span>RRHH</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="empleados.html"
+              ><span class="material-symbols-outlined">person</span>
+              Empleados</a
+            >
+            <a href="nomina.html"
+              ><span class="material-symbols-outlined">payments</span> Nómina</a
+            >
+            <a href="prestaciones.html"
+              ><span class="material-symbols-outlined">savings</span>
+              Prestaciones</a
+            >
+            <a href="portal-empleado.html"
+              ><span class="material-symbols-outlined">person_outline</span>
+              Portal Empleado</a
+            >
+            <a href="rendimiento-anual.html"
+              ><span class="material-symbols-outlined">emoji_events</span>
+              Rendimiento</a
+            >
+            <a href="reportes-rrhh.html"
+              ><span class="material-symbols-outlined">group_work</span>
+              Reportes</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Sistema</div>
+        <div class="menu-parent open">
+          <div
+            class="menu-item menu-item-active"
+            onclick="toggleDropdown(this)"
+          >
+            <span
+              class="material-symbols-outlined text-[20px]"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >settings</span
+            ><span>Configuración</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="parametros.html"
+              ><span class="material-symbols-outlined">tune</span> Parámetros</a
+            >
+            <a href="config-fiscal.html"
+              ><span class="material-symbols-outlined">policy</span> Config
+              Fiscal</a
+            >
+            <a href="usuarios-roles.html"
+              ><span class="material-symbols-outlined"
+                >admin_panel_settings</span
+              >
+              Usuarios</a
+            >
+            <a href="base-datos.html"
+              ><span class="material-symbols-outlined">storage</span> Base
+              Datos</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="backups.html"
+              ><span class="material-symbols-outlined">backup</span> Backups</a
+            >
+            <a href="estado-sistema.html"
+              ><span class="material-symbols-outlined">health_and_safety</span>
+              Estado Sistema</a
+            >
+            <a href="tareas-programadas.html"
+              ><span class="material-symbols-outlined">schedule</span> Tareas</a
+            >
+            <a href="auditoria-seguridad.html"
+              ><span class="material-symbols-outlined">security</span>
+              Auditoría</a
+            >
+          </div>
+        </div>
+
+        <div class="menu-group">Ayuda</div>
+        <div class="menu-parent">
+          <div
+            class="menu-item menu-item-inactive"
+            onclick="toggleDropdown(this)"
+          >
+            <span class="material-symbols-outlined text-[20px]">help</span
+            ><span>Ayuda</span>
+            <span class="material-symbols-outlined dropdown-arrow"
+              >chevron_right</span
+            >
+          </div>
+          <div class="submenu">
+            <a href="ayuda.html"
+              ><span class="material-symbols-outlined">help</span> Centro
+              Ayuda</a
+            >
+            <a href="tickets-soporte.html"
+              ><span class="material-symbols-outlined"
+                >confirmation_number</span
+              >
+              Tickets</a
+            >
+            <a href="crear-ticket.html"
+              ><span class="material-symbols-outlined">add_circle</span> Crear
+              Ticket</a
+            >
+            <div class="submenu-divider"></div>
+            <a href="chat-asistencia.html"
+              ><span class="material-symbols-outlined">chat</span> Chat</a
+            >
+            <a href="base-conocimiento.html"
+              ><span class="material-symbols-outlined">school</span>
+              Conocimiento</a
+            >
+            <a href="manual-tecnico.html"
+              ><span class="material-symbols-outlined">description</span>
+              Manual</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <div class="mt-auto border-t border-stone-200 p-4">
+        <button
+          onclick="
+            localStorage.removeItem('erp_session');
+            window.location.href = '/frontend/public/auth/login.html';
+          "
+          class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm"
+        >
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+          Cerrar Sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========== TOP BAR ========== -->
+    <header
+      class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200"
+    >
+      <div class="flex justify-between items-center px-6 py-3">
+        <div class="flex items-center gap-4">
+          <button
+            id="menuToggle"
+            class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
+            <a href="inicio.html" class="hover:text-stone-900">Inicio</a>
+            <span class="material-symbols-outlined text-sm">chevron_right</span>
+            <span class="text-stone-900 font-medium">Configuración</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="hidden lg:block relative">
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"
+              ><span class="material-symbols-outlined text-lg"
+                >search</span
+              ></span
+            >
+            <input
+              class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all"
+              placeholder="Buscar repuestos, ventas, clientes..."
+              type="text"
+            />
+          </div>
+          <button
+            class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"
+            ></span>
+          </button>
+          <div
+            class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200"
+          >
+            <div class="text-right hidden md:block">
+              <p class="text-sm font-bold text-stone-900 leading-none">
+                Administrador
+              </p>
+              <p class="text-[10px] text-stone-500">Rol: Admin</p>
+            </div>
+            <div
+              class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm"
+            >
+              A
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
+    <main class="ml-[288px] w-[calc(100vw-288px)] mt-[65px] p-6 pb-4">
+      <!-- Header -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8"
+      >
+        <div>
+          <p
+            class="text-xs font-bold text-stone-400 tracking-[0.2em] uppercase mb-1"
+          >
+            Módulo de Configuración
+          </p>
+          <h2
+            class="text-3xl font-headline font-black text-stone-900 tracking-tight"
+          >
+            Configuración del Sistema
+          </h2>
+          <p class="text-stone-500 text-sm mt-1">
+            MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <a
+            href="backups.html"
+            class="flex items-center gap-2 bg-primary text-stone-900 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:brightness-110 transition-all"
+          >
+            <span class="material-symbols-outlined text-sm">backup</span>
+            Backup Ahora
+          </a>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <a
+          href="parametros.html"
+          class="action-btn bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20"
+        >
+          <span class="material-symbols-outlined text-2xl">tune</span>
+          <span class="text-center leading-tight">Parámetros</span>
+        </a>
+        <a
+          href="config-fiscal.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl">policy</span>
+          <span class="text-center leading-tight">Config Fiscal</span>
+        </a>
+        <a
+          href="usuarios-roles.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl"
+            >admin_panel_settings</span
+          >
+          <span class="text-center leading-tight">Usuarios</span>
+        </a>
+        <a
+          href="estado-sistema.html"
+          class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
+        >
+          <span class="material-symbols-outlined text-2xl"
+            >health_and_safety</span
+          >
+          <span class="text-center leading-tight">Estado Sistema</span>
+        </a>
+      </div>
+
+      <!-- System Status -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- System Health -->
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-green-600"
+                >health_and_safety</span
+              >
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">
+                Estado del Sistema
+              </h3>
+              <p class="text-xs text-stone-500">Monitoreo en tiempo real</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-600">API Central</span>
+              <span
+                class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full"
+                >OPERATIVO</span
+              >
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-600">Base de Datos</span>
+              <span
+                class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full"
+                >CONECTADO</span
+              >
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-600">Usuarios Activos</span>
+              <span class="text-sm font-bold text-stone-900"
+                >12 administradores</span
+              >
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-600">Último Backup</span>
+              <span class="text-xs text-stone-500">Hace 45 minutos</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-600">Espacio en Disco</span>
+              <div class="flex items-center gap-2">
+                <div class="w-24 h-2 bg-stone-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-green-500 w-[45%]"></div>
+                </div>
+                <span class="text-xs font-bold text-stone-900">45%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backup Management -->
+        <div class="bg-white rounded-xl border border-stone-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-blue-600"
+                >backup</span
+              >
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">
+                Gestión de Backups
+              </h3>
+              <p class="text-xs text-stone-500">Respaldo y restauración</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div
+              class="flex items-center justify-between p-3 bg-stone-50 rounded-lg"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-green-600"
+                  >check_circle</span
+                >
+                <div>
+                  <p class="text-sm font-bold text-stone-900">
+                    Backup Automático
+                  </p>
+                  <p class="text-[10px] text-stone-500">Diario a las 23:00</p>
+                </div>
+              </div>
+              <span class="badge badge-green">Activo</span>
+            </div>
+            <div
+              class="flex items-center justify-between p-3 bg-stone-50 rounded-lg"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-blue-600"
+                  >cloud</span
+                >
+                <div>
+                  <p class="text-sm font-bold text-stone-900">
+                    Backup en la Nube
+                  </p>
+                  <p class="text-[10px] text-stone-500">
+                    Railway Cloud Storage
+                  </p>
+                </div>
+              </div>
+              <span class="badge badge-green">Activo</span>
+            </div>
+            <div
+              class="flex items-center justify-between p-3 bg-stone-50 rounded-lg"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-stone-500"
+                  >history</span
+                >
+                <div>
+                  <p class="text-sm font-bold text-stone-900">Retención</p>
+                  <p class="text-[10px] text-stone-500">30 días</p>
+                </div>
+              </div>
+              <span class="badge badge-blue">30 días</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Configuration Summary -->
+      <div class="bg-white rounded-xl border border-stone-200 p-6 mb-8">
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-purple-600"
+                >tune</span
+              >
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-900">
+                Configuraciones Principales
+              </h3>
+              <p class="text-xs text-stone-500">Parámetros del sistema</p>
+            </div>
+          </div>
+          <a
+            href="parametros.html"
+            class="text-xs font-bold text-primary hover:brightness-75 flex items-center gap-1"
+          >
+            Ver todos
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="p-4 bg-stone-50 rounded-lg">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-stone-500 text-sm"
+                >business</span
+              >
+              <span class="text-sm font-bold text-stone-900">Empresa</span>
+            </div>
+            <p class="text-xs text-stone-600">
+              Mayor de Repuesto La Cima, C.A.
+            </p>
+            <p class="text-xs text-stone-500">RIF: J-40308741-5</p>
+          </div>
+          <div class="p-4 bg-stone-50 rounded-lg">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-stone-500 text-sm"
+                >policy</span
+              >
+              <span class="text-sm font-bold text-stone-900">IVA</span>
+            </div>
+            <p class="text-xs text-stone-600">Tasa: 16%</p>
+            <p class="text-xs text-stone-500">Contribuyente especial</p>
+          </div>
+          <div class="p-4 bg-stone-50 rounded-lg">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-stone-500 text-sm"
+                >inventory_2</span
+              >
+              <span class="text-sm font-bold text-stone-900">Inventario</span>
+            </div>
+            <p class="text-xs text-stone-600">Método: Promedio Ponderado</p>
+            <p class="text-xs text-stone-500">Stock mínimo: 10 unidades</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div
+        class="pt-4 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <span class="text-[10px] font-bold text-stone-400"
+          >RIF: J-40308741-5 • Todos los derechos reservados © 2026</span
+        >
+        <div class="flex items-center gap-4">
+          <a
+            href="ayuda.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Centro de Ayuda</a
+          >
+          <a
+            href="manual-tecnico.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Manual Técnico</a
+          >
+          <a
+            href="estado-sistema.html"
+            class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
+            >Estado del Sistema</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- Overlay mobile -->
+    <div
+      id="sidebarOverlay"
+      class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"
+      onclick="
+        document.getElementById('sidebar').classList.remove('open');
+        this.classList.add('hidden');
+      "
+    ></div>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("sidebarOverlay");
+
+      if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("open");
+          overlay.classList.toggle("hidden");
+        });
+      }
+
+      function toggleDropdown(menuItem) {
+        const parent = menuItem.closest(".menu-parent");
+        const wasOpen = parent.classList.contains("open");
+        document.querySelectorAll(".menu-parent.open").forEach((el) => {
+          if (el !== parent) el.classList.remove("open");
+        });
+        if (!wasOpen) {
+          parent.classList.add("open");
+        }
+      }
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".menu-parent")) {
+          document.querySelectorAll(".menu-parent.open").forEach((el) => {
+            el.classList.remove("open");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

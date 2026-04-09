@@ -268,27 +268,28 @@
       </div>
 
       <!-- Menu Principal -->
-      <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5">
+      <nav class="flex-1 px-3 space-y-0.5 pb-24">
         <!-- INICIO -->
-        <div class="menu-group">Principal</div>
-        <a class="menu-item menu-item-inactive" href="inicio.html">
-          <span class="material-symbols-outlined text-[20px]">dashboard</span>
-          <span>Inicio</span>
-          <span class="material-symbols-outlined dropdown-arrow"
+        <a
+          href="inicio.html"
+          class="menu-item menu-item-active flex items-center gap-3 px-4 py-2 transition-colors"
+        >
+          <span class="material-symbols-outlined text-[20px]" aria-hidden="true"
+            >dashboard</span
+          >
+          <span class="flex-1">Dashboard</span>
+          <span class="material-symbols-outlined dropdown-arrow text-[18px]"
             >chevron_right</span
           >
         </a>
 
         <!-- INVENTARIO -->
-        <div class="menu-group">Inventario</div>
-        <div class="menu-parent open">
+        <div class="menu-parent">
           <div
-            class="menu-item menu-item-active"
+            class="menu-item menu-item-inactive"
             onclick="toggleDropdown(this)"
           >
-            <span
-              class="material-symbols-outlined text-[20px]"
-              style="font-variation-settings: &quot;FILL&quot; 1"
+            <span class="material-symbols-outlined text-[20px]"
               >inventory_2</span
             >
             <span>Inventario</span>
@@ -297,6 +298,10 @@
             >
           </div>
           <div class="submenu">
+            <a href="inventario.html"
+              ><span class="material-symbols-outlined">dashboard</span>
+              Dashboard</a
+            >
             <a href="productos.html"
               ><span class="material-symbols-outlined">category</span>
               Productos</a
@@ -321,7 +326,6 @@
         </div>
 
         <!-- VENTAS -->
-        <div class="menu-group">Ventas</div>
         <div class="menu-parent">
           <div
             class="menu-item menu-item-inactive"
@@ -334,6 +338,10 @@
             >
           </div>
           <div class="submenu">
+            <a href="ventas.html"
+              ><span class="material-symbols-outlined">dashboard</span>
+              Dashboard</a
+            >
             <a href="pos.html"
               ><span class="material-symbols-outlined">point_of_sale</span>
               Punto de Venta</a
@@ -370,7 +378,6 @@
         </div>
 
         <!-- COMPRAS -->
-        <div class="menu-group">Compras</div>
         <div class="menu-parent">
           <div
             class="menu-item menu-item-inactive"
@@ -385,6 +392,10 @@
             >
           </div>
           <div class="submenu">
+            <a href="compras.html"
+              ><span class="material-symbols-outlined">dashboard</span>
+              Dashboard</a
+            >
             <a href="proveedores.html"
               ><span class="material-symbols-outlined">local_shipping</span>
               Proveedores</a
@@ -409,7 +420,6 @@
         </div>
 
         <!-- CONTABILIDAD -->
-        <div class="menu-group">Contabilidad</div>
         <div class="menu-parent">
           <div
             class="menu-item menu-item-inactive"
@@ -424,6 +434,10 @@
             >
           </div>
           <div class="submenu">
+            <a href="contabilidad.html"
+              ><span class="material-symbols-outlined">dashboard</span>
+              Dashboard</a
+            >
             <a href="plan-cuentas.html"
               ><span class="material-symbols-outlined"
                 >format_list_numbered</span
@@ -475,7 +489,6 @@
         </div>
 
         <!-- FINANZAS -->
-        <div class="menu-group">Finanzas</div>
         <div class="menu-parent">
           <div
             class="menu-item menu-item-inactive"
@@ -490,6 +503,10 @@
             >
           </div>
           <div class="submenu">
+            <a href="finanzas.html"
+              ><span class="material-symbols-outlined">dashboard</span>
+              Dashboard</a
+            >
             <a href="activos-fijos.html"
               ><span class="material-symbols-outlined">corporate_fare</span>
               Activos Fijos</a
@@ -508,7 +525,6 @@
         </div>
 
         <!-- RRHH -->
-        <div class="menu-group">Recursos Humanos</div>
         <div class="menu-parent">
           <div
             class="menu-item menu-item-inactive"
@@ -521,6 +537,10 @@
             >
           </div>
           <div class="submenu">
+            <a href="rrhh.html"
+              ><span class="material-symbols-outlined">dashboard</span>
+              Dashboard</a
+            >
             <a href="empleados.html"
               ><span class="material-symbols-outlined">person</span>
               Empleados</a
@@ -548,7 +568,6 @@
         </div>
 
         <!-- CONFIGURACIÓN -->
-        <div class="menu-group">Sistema</div>
         <div class="menu-parent">
           <div
             class="menu-item menu-item-inactive"
@@ -561,6 +580,10 @@
             >
           </div>
           <div class="submenu">
+            <a href="configuracion.html"
+              ><span class="material-symbols-outlined">business</span>
+              Empresa</a
+            >
             <a href="parametros.html"
               ><span class="material-symbols-outlined">tune</span> Parámetros</a
             >
@@ -597,7 +620,6 @@
         </div>
 
         <!-- AYUDA -->
-        <div class="menu-group">Ayuda</div>
         <div class="menu-parent">
           <div
             class="menu-item menu-item-inactive"
@@ -738,9 +760,6 @@
           >
             Control de Inventario
           </h2>
-          <p class="text-stone-500 text-sm mt-1">
-            MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5
-          </p>
         </div>
         <div class="flex gap-3">
           <div
