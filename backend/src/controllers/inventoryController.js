@@ -3,6 +3,9 @@ const {
   calculateWeightedAverageCost,
   validateStockMovement,
   createInventoryLog,
+  addStock,
+  removeStock,
+  adjustStock,
   generateInventoryReport
 } = require('../services/inventoryService');
 
@@ -80,10 +83,7 @@ exports.getProducts = async (req, res) => {
  */
 exports.getProductById = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ status: 'error', message: 'ID de producto inválido' });
-    }
+    const { id } = req.params;
 
     const product = await prisma.product.findUnique({
       where: { id, active: true },
@@ -161,10 +161,7 @@ exports.createProduct = async (req, res) => {
  */
 exports.updateProduct = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ status: 'error', message: 'ID de producto inválido' });
-    }
+    const { id } = req.params;
 
     const existing = await prisma.product.findUnique({ where: { id } });
     if (!existing) {
@@ -208,9 +205,9 @@ exports.updateProduct = async (req, res) => {
  */
 exports.deleteProduct = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ status: 'error', message: 'ID de producto inválido' });
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ status: 'error', message: 'ID de producto requerido' });
     }
 
     const product = await prisma.product.findUnique({ where: { id } });
@@ -242,9 +239,9 @@ exports.deleteProduct = async (req, res) => {
  */
 exports.getKardex = async (req, res) => {
   try {
-    const productId = parseInt(req.params.productId);
-    if (isNaN(productId)) {
-      return res.status(400).json({ status: 'error', message: 'ID de producto inválido' });
+    const { productId } = req.params;
+    if (!productId) {
+      return res.status(400).json({ status: 'error', message: 'ID de producto requerido' });
     }
 
     const product = await prisma.product.findUnique({
@@ -323,59 +320,21 @@ exports.addStock = async (req, res) => {
       return res.status(400).json({ status: 'error', message: validation.message });
     }
 
-    const product = await prisma.product.findUnique({
-      where: { id: productId },
-      include: {
-        inventoryLogs: {
-          where: { type: 'IN' },
-          orderBy: { createdAt: 'desc' },
-          take: 1
-        }
-      }
-    });
-
-    if (!product) {
-      return res.status(404).json({ status: 'error', message: 'Producto no encontrado' });
-    }
-
-    const newWeightedCost = calculateWeightedAverageCost(
-      product.stock,
-      product.inventoryLogs[0]?.cost || product.price,
-      quantity,
-      cost
-    );
-
-    const result = await prisma.$transaction(async (tx) => {
-      const updatedProduct = await tx.product.update({
-        where: { id: productId },
-        data: {
-          stock: product.stock + quantity,
-          price: newWeightedCost
-        }
-      });
-
-      const log = await createInventoryLog(tx, {
-        productId,
-        type: 'IN',
-        quantity,
-        cost,
-        reason: reason || 'Entrada de stock',
-        userId: req.user?.id
-      });
-
-      return { updatedProduct, log };
-    });
+    const result = await addStock(productId, quantity, cost, reason, req.user?.id);
 
     res.status(201).json({
       status: 'success',
       data: {
-        previousStock: product.stock,
-        currentStock: result.updatedProduct.stock,
-        newAverageCost: parseFloat(newWeightedCost.toFixed(2)),
+        previousStock: result.product.stock - quantity,
+        currentStock: result.product.stock,
+        newAverageCost: parseFloat(result.product.price.toFixed(2)),
         logId: result.log.id
       }
     });
   } catch (error) {
+    if (error.message === 'Producto no encontrado') {
+      return res.status(404).json({ status: 'error', message: error.message });
+    }
     res.status(400).json({ status: 'error', message: error.message });
   }
 };
@@ -393,49 +352,20 @@ exports.removeStock = async (req, res) => {
       return res.status(400).json({ status: 'error', message: validation.message });
     }
 
-    const product = await prisma.product.findUnique({
-      where: { id: productId },
-      select: { id: true, stock: true, price: true, name: true }
-    });
-
-    if (!product) {
-      return res.status(404).json({ status: 'error', message: 'Producto no encontrado' });
-    }
-
-    if (product.stock < quantity) {
-      return res.status(400).json({
-        status: 'error',
-        message: `Stock insuficiente. Stock actual: ${product.stock}, solicitado: ${quantity}`
-      });
-    }
-
-    const result = await prisma.$transaction(async (tx) => {
-      const updatedProduct = await tx.product.update({
-        where: { id: productId },
-        data: { stock: product.stock - quantity }
-      });
-
-      const log = await createInventoryLog(tx, {
-        productId,
-        type: 'OUT',
-        quantity,
-        cost: product.price,
-        reason: reason || 'Salida de stock',
-        userId: req.user?.id
-      });
-
-      return { updatedProduct, log };
-    });
+    const result = await removeStock(productId, quantity, reason, req.user?.id);
 
     res.status(201).json({
       status: 'success',
       data: {
-        previousStock: product.stock,
-        currentStock: result.updatedProduct.stock,
+        previousStock: result.product.stock + quantity,
+        currentStock: result.product.stock,
         logId: result.log.id
       }
     });
   } catch (error) {
+    if (error.message === 'Producto no encontrado') {
+      return res.status(404).json({ status: 'error', message: error.message });
+    }
     res.status(400).json({ status: 'error', message: error.message });
   }
 };
@@ -455,65 +385,37 @@ exports.adjustStock = async (req, res) => {
       });
     }
 
-    const parsedProductId = parseInt(productId);
     const parsedNewQuantity = parseInt(newQuantity);
-
-    if (isNaN(parsedProductId) || isNaN(parsedNewQuantity) || parsedNewQuantity < 0) {
+    if (isNaN(parsedNewQuantity) || parsedNewQuantity < 0) {
       return res.status(400).json({
         status: 'error',
-        message: 'productId y newQuantity deben ser números enteros no negativos'
+        message: 'newQuantity debe ser un número no negativo'
       });
     }
 
-    const product = await prisma.product.findUnique({
-      where: { id: parsedProductId },
-      select: { id: true, stock: true, price: true, name: true }
-    });
+    const result = await adjustStock(productId, parsedNewQuantity, reason, req.user?.id);
 
-    if (!product) {
-      return res.status(404).json({ status: 'error', message: 'Producto no encontrado' });
-    }
-
-    const difference = parsedNewQuantity - product.stock;
-    if (difference === 0) {
+    if (!result.log) {
       return res.json({
         status: 'success',
         message: 'El stock ya tiene el valor solicitado, no se realizó ningún cambio',
-        data: { currentStock: product.stock }
+        data: { currentStock: result.product.stock }
       });
     }
-
-    const type = difference > 0 ? 'IN' : 'OUT';
-    const absDifference = Math.abs(difference);
-
-    const result = await prisma.$transaction(async (tx) => {
-      const updatedProduct = await tx.product.update({
-        where: { id: parsedProductId },
-        data: { stock: parsedNewQuantity }
-      });
-
-      const log = await createInventoryLog(tx, {
-        productId: parsedProductId,
-        type: 'ADJUST',
-        quantity: parsedNewQuantity,
-        cost: product.price,
-        reason: reason || `Ajuste de inventario (${difference > 0 ? '+' : ''}${difference} unidades)`,
-        userId: req.user?.id
-      });
-
-      return { updatedProduct, log };
-    });
 
     res.status(201).json({
       status: 'success',
       data: {
-        previousStock: product.stock,
-        currentStock: result.updatedProduct.stock,
-        difference,
+        previousStock: result.product.stock - (parsedNewQuantity - result.product.stock),
+        currentStock: result.product.stock,
+        difference: parsedNewQuantity - (result.product.stock - (parsedNewQuantity - result.product.stock)),
         logId: result.log.id
       }
     });
   } catch (error) {
+    if (error.message === 'Producto no encontrado') {
+      return res.status(404).json({ status: 'error', message: error.message });
+    }
     res.status(400).json({ status: 'error', message: error.message });
   }
 };

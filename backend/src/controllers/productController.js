@@ -15,7 +15,7 @@ exports.getProducts = async (req, res) => {
 exports.getProduct = async (req, res) => {
   try {
     const product = await prisma.product.findUnique({
-      where: { id: parseInt(req.params.id) },
+      where: { id: req.params.id },
       include: { inventoryLogs: true },
     });
     if (!product) return res.status(404).json({ status: 'error', message: 'Product not found' });
@@ -39,7 +39,7 @@ exports.createProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const product = await prisma.product.update({
-      where: { id: parseInt(req.params.id) },
+      where: { id: req.params.id },
       data: req.body,
     });
     res.json({ status: 'success', data: product });
@@ -51,7 +51,7 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
   try {
     await prisma.product.update({
-      where: { id: parseInt(req.params.id) },
+      where: { id: req.params.id },
       data: { active: false },
     });
     res.json({ status: 'success', message: 'Product deactivated' });

@@ -22,14 +22,17 @@ const getUsers = async (req, res) => {
       ];
     }
 
-    const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+    const pageNum = parseInt(page, 10);
+    const limitNum = parseInt(limit, 10);
+    const skip = (pageNum - 1) * limitNum;
 
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where,
         orderBy: { createdAt: 'desc' },
         skip,
-        take: parseInt(limit, 10),
+        skip,
+        take: limitNum,
         select: {
           id: true,
           email: true,
@@ -53,9 +56,9 @@ const getUsers = async (req, res) => {
         users,
         pagination: {
           total,
-          page: parseInt(page, 10),
-          limit: parseInt(limit, 10),
-          totalPages: Math.ceil(total / parseInt(limit, 10)),
+          page: pageNum,
+          limit: limitNum,
+          totalPages: Math.ceil(total / limitNum),
         },
       },
     });
@@ -67,23 +70,12 @@ const getUsers = async (req, res) => {
   }
 };
 
-/**
- * Get user by ID
- */
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    const userId = parseInt(id, 10);
-
-    if (isNaN(userId)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'ID de usuario invalido',
-      });
-    }
 
     const user = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { id },
       select: {
         id: true,
         email: true,
@@ -160,93 +152,7 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const userId = parseInt(id, 10);
-
-    if (isNaN(userId)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'ID de usuario invalido',
-      });
-    }
-
-    const { email, name, role } = req.body;
-
-    // Check if user exists
-    const existingUser = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (!existingUser) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Usuario no encontrado',
-      });
-    }
-
-    // Build update data
-    const updateData = {};
-    if (email !== undefined) {
-      // Validate email format
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return res.status(400).json({
-          status: 'error',
-          message: 'El formato del correo electronico es invalido',
-        });
-      }
-      updateData.email = email.toLowerCase();
-    }
-    if (name !== undefined) {
-      updateData.name = name || null;
-    }
-    if (role !== undefined) {
-      if (!userManagementService.VALID_ROLES.includes(role)) {
-        return res.status(400).json({
-          status: 'error',
-          message: `El rol debe ser uno de: ${userManagementService.VALID_ROLES.join(', ')}`,
-        });
-      }
-      updateData.role = role;
-    }
-
-    // Track changes for audit
-    const changes = {};
-    for (const [key, value] of Object.entries(updateData)) {
-      if (existingUser[key] !== value) {
-        changes[key] = { old: existingUser[key], new: value };
-      }
-    }
-
-    if (Object.keys(updateData).length === 0) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'No se proporcionaron datos para actualizar',
-      });
-    }
-
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: updateData,
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
-
-    // Log audit
-    await configService.logAudit({
-      userId: req.user?.id,
-      action: 'UPDATE',
-      entity: 'User',
-      entityId: String(userId),
-      details: JSON.stringify({
-        userEmail: existingUser.email,
-        changes,
-      }),
-    });
+    const updatedUser = await userManagementService.updateUser(id, req.body, req.user?.id);
 
     res.json({
       status: 'success',
@@ -254,7 +160,7 @@ const updateUser = async (req, res) => {
       message: 'Usuario actualizado correctamente',
     });
   } catch (error) {
-    if (error.code === 'P2002') {
+    if (error.code === 'P2002' || error.message.includes('en uso')) {
       return res.status(400).json({
         status: 'error',
         message: 'El correo electronico ya esta en uso por otro usuario',
@@ -274,15 +180,6 @@ const updateUser = async (req, res) => {
 const updateUserRole = async (req, res) => {
   try {
     const { id } = req.params;
-    const userId = parseInt(id, 10);
-
-    if (isNaN(userId)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'ID de usuario invalido',
-      });
-    }
-
     const { role } = req.body;
 
     if (!role) {
@@ -293,7 +190,7 @@ const updateUserRole = async (req, res) => {
     }
 
     const updatedUser = await userManagementService.updateUserRole(
-      userId,
+      id,
       role,
       req.user?.id
     );
@@ -327,19 +224,10 @@ const updateUserRole = async (req, res) => {
 const resetUserPassword = async (req, res) => {
   try {
     const { id } = req.params;
-    const userId = parseInt(id, 10);
-
-    if (isNaN(userId)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'ID de usuario invalido',
-      });
-    }
-
     const { password } = req.body;
 
     const result = await userManagementService.resetPassword(
-      userId,
+      id,
       password || null,
       req.user?.id
     );
@@ -376,17 +264,9 @@ const resetUserPassword = async (req, res) => {
 const deactivateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const userId = parseInt(id, 10);
-
-    if (isNaN(userId)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'ID de usuario invalido',
-      });
-    }
 
     // Cannot deactivate own account
-    if (req.user?.id === userId) {
+    if (req.user?.id === id) {
       return res.status(400).json({
         status: 'error',
         message: 'No puedes desactivar tu propia cuenta',
@@ -394,7 +274,7 @@ const deactivateUser = async (req, res) => {
     }
 
     const user = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { id },
     });
 
     if (!user) {
@@ -411,7 +291,7 @@ const deactivateUser = async (req, res) => {
       : `${user.role}_DEACTIVATED`;
 
     await prisma.user.update({
-      where: { id: userId },
+      where: { id },
       data: { role: deactivatedRole },
     });
 
@@ -420,7 +300,7 @@ const deactivateUser = async (req, res) => {
       userId: req.user?.id,
       action: 'UPDATE',
       entity: 'User',
-      entityId: String(userId),
+      entityId: id,
       details: JSON.stringify({
         action: 'deactivate',
         userEmail: user.email,
@@ -502,17 +382,9 @@ const getActiveSessions = async (req, res) => {
 const forceLogoutUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const userId = parseInt(id, 10);
-
-    if (isNaN(userId)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'ID de usuario invalido',
-      });
-    }
 
     // Cannot force logout own session
-    if (req.user?.id === userId) {
+    if (req.user?.id === id) {
       return res.status(400).json({
         status: 'error',
         message: 'No puedes cerrar tu propia sesion activa',
@@ -520,7 +392,7 @@ const forceLogoutUser = async (req, res) => {
     }
 
     const user = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { id },
     });
 
     if (!user) {
@@ -540,7 +412,7 @@ const forceLogoutUser = async (req, res) => {
       userId: req.user?.id,
       action: 'UPDATE',
       entity: 'User',
-      entityId: String(userId),
+      entityId: id,
       details: JSON.stringify({
         action: 'force_logout',
         userEmail: user.email,

@@ -496,7 +496,7 @@ exports.processPayroll = async (req, res) => {
     }
 
     const updated = await prisma.payroll.update({
-      where: { id: parseInt(payrollId) },
+      where: { id: payrollId },
       data: { processed: true }
     });
 
@@ -680,7 +680,7 @@ exports.recordAttendance = async (req, res) => {
     }
 
     const employee = await prisma.employee.findUnique({
-      where: { id: parseInt(employeeId) }
+      where: { id: employeeId }
     });
 
     if (!employee) {
@@ -695,7 +695,7 @@ exports.recordAttendance = async (req, res) => {
 
     let record = await prisma.attendance.findFirst({
       where: {
-        employeeId: parseInt(employeeId),
+        employeeId: employeeId,
         date: {
           gte: today,
           lt: endDate
@@ -713,7 +713,7 @@ exports.recordAttendance = async (req, res) => {
 
       record = await prisma.attendance.create({
         data: {
-          employeeId: parseInt(employeeId),
+          employeeId: employeeId,
           date: today,
           checkIn: new Date(),
           notes: notes || null

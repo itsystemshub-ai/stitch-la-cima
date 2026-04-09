@@ -47,7 +47,7 @@ exports.getSales = async (req, res) => {
     }
 
     if (userId) {
-      where.userId = parseInt(userId);
+      where.userId = userId;
     }
 
     if (startDate || endDate) {
@@ -61,10 +61,11 @@ exports.getSales = async (req, res) => {
     }
 
     if (search) {
-      const searchNum = parseInt(search);
+      // Búsqueda simplificada: si parece un UUID completo, buscamos por ID, si no, por factura o referencia
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(search);
       where.OR = [
         { invoiceNumber: { contains: search, mode: 'insensitive' } },
-        ...(searchNum ? [{ id: searchNum }] : []),
+        ...(isUuid ? [{ id: search }] : []),
         { paymentReference: { contains: search, mode: 'insensitive' } }
       ];
     }
@@ -115,7 +116,7 @@ exports.getSaleById = async (req, res) => {
     const { id } = req.params;
 
     const sale = await prisma.sale.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: {
         items: {
           include: { product: { select: { id: true, name: true, sku: true, price: true } } }
@@ -144,40 +145,7 @@ exports.cancelSale = async (req, res) => {
     const { id } = req.params;
     const { reason } = req.body;
 
-    const sale = await prisma.sale.findUnique({
-      where: { id: parseInt(id) },
-      include: { items: true }
-    });
-
-    if (!sale) {
-      return res.status(404).json({ status: 'error', message: 'Venta no encontrada' });
-    }
-
-    if (sale.status === 'CANCELLED') {
-      return res.status(400).json({ status: 'error', message: 'La venta ya esta cancelada' });
-    }
-
-    const updatedSale = await prisma.$transaction(async (tx) => {
-      const cancelled = await tx.sale.update({
-        where: { id: parseInt(id) },
-        data: { status: 'CANCELLED' }
-      });
-
-      await saleService.restoreInventory(sale.id, tx);
-
-      // Log the cancellation
-      await tx.inventoryLog.create({
-        data: {
-          productId: sale.items[0]?.productId || 0,
-          type: 'ADJUST',
-          quantity: 0,
-          cost: 0,
-          reason: `Venta #${sale.id} cancelada. Motivo: ${reason || 'Sin motivo especificado'}`
-        }
-      });
-
-      return cancelled;
-    });
+    const updatedSale = await saleService.cancelSale(id, reason, req.user?.id);
 
     res.json({ status: 'success', data: updatedSale, message: 'Venta cancelada exitosamente' });
   } catch (error) {
@@ -482,7 +450,7 @@ exports.getCreditNotes = async (req, res) => {
       where.status = status;
     }
     if (saleId) {
-      where.saleId = parseInt(saleId);
+      where.saleId = saleId;
     }
 
     const pageNum = Math.max(1, parseInt(page));

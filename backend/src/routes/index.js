@@ -24,6 +24,9 @@ router.use('/hr', require('./hrRoutes'));
 router.use('/accounting', require('./accountingRoutes'));
 router.use('/finance', require('./financeRoutes'));
 
+// Hybrid Sync (Híbrido)
+router.use('/sync', require('./syncRoutes'));
+
 // System Configuration & Administration (ERP)
 router.use('/admin/config', require('./configRoutes'));
 router.use('/admin/users', require('./userManagementRoutes'));

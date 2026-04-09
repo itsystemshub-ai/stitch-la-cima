@@ -48,20 +48,27 @@ async function seed() {
     // 3. PRODUCTS
     // ==========================================
     console.log('📦 Creating products...');
-    await prisma.product.createMany({
-      data: [
-        { sku: 'DIS-4421-VTL', name: 'Kit Discos Freno Ventilados', description: 'Discos de alto rendimiento', price: 85.00, stock: 50, category: 'Frenos', brand: 'Toyota', origin: 'Japón' },
-        { sku: 'INJ-CAT-882', name: 'Inyector Combustible HD', description: 'Inyector Caterpillar C7/C9', price: 320.00, stock: 15, category: 'Motor', brand: 'Caterpillar', origin: 'USA' },
-        { sku: 'SUS-101-DEL', name: 'Amortiguador Reforzado Delantero', description: 'Uso pesado', price: 145.00, stock: 12, category: 'Suspensión', brand: 'Toyota', origin: 'Japón' },
-        { sku: 'TRS-55-FIL', name: 'Filtro Transmisión Automática', description: 'Filtro original', price: 42.50, stock: 100, category: 'Transmisión', brand: 'Toyota', origin: 'Japón' },
-        { sku: 'TRB-VGT-84521', name: 'Turbo VGT Geometría Variable', description: 'Turbo diesel', price: 845.00, stock: 8, category: 'Motor', brand: 'Toyota', origin: 'Japón' },
-        { sku: 'BRK-9004-HD', name: 'Pastillas Freno HD', description: 'Alto rendimiento', price: 129.50, stock: 45, category: 'Frenos', brand: 'Toyota', origin: 'Japón' },
-        { sku: 'FLT-AIR-001', name: 'Filtro de Aire', description: 'Filtro de aire estándar', price: 15.00, stock: 200, category: 'Filtros', brand: 'Universal', origin: 'Venezuela' },
-        { sku: 'ELT-ALT-001', name: 'Alternador 12V', description: 'Alternador universal', price: 185.00, stock: 20, category: 'Electrónica', brand: 'Bosch', origin: 'Alemania' },
-      ],
-      skipDuplicates: true,
-    });
-    console.log('   ✅ 8 products created\n');
+    const productsData = [
+      { sku: 'DIS-4421-VTL', name: 'Kit Discos Freno Ventilados', description: 'Discos de alto rendimiento', price: 85.00, stock: 50, category: 'Frenos', brand: 'Toyota', origin: 'Japón' },
+      { sku: 'INJ-CAT-882', name: 'Inyector Combustible HD', description: 'Inyector Caterpillar C7/C9', price: 320.00, stock: 15, category: 'Motor', brand: 'Caterpillar', origin: 'USA' },
+      { sku: 'SUS-101-DEL', name: 'Amortiguador Reforzado Delantero', description: 'Uso pesado', price: 145.00, stock: 12, category: 'Suspensión', brand: 'Toyota', origin: 'Japón' },
+      { sku: 'TRS-55-FIL', name: 'Filtro Transmisión Automática', description: 'Filtro original', price: 42.50, stock: 100, category: 'Transmisión', brand: 'Toyota', origin: 'Japón' },
+      { sku: 'TRB-VGT-84521', name: 'Turbo VGT Geometría Variable', description: 'Turbo diesel', price: 845.00, stock: 8, category: 'Motor', brand: 'Toyota', origin: 'Japón' },
+      { sku: 'BRK-9004-HD', name: 'Pastillas Freno HD', description: 'Alto rendimiento', price: 129.50, stock: 45, category: 'Frenos', brand: 'Toyota', origin: 'Japón' },
+      { sku: 'FLT-AIR-001', name: 'Filtro de Aire', description: 'Filtro de aire estándar', price: 15.00, stock: 200, category: 'Filtros', brand: 'Universal', origin: 'Venezuela' },
+      { sku: 'ELT-ALT-001', name: 'Alternador 12V', description: 'Alternador universal', price: 185.00, stock: 20, category: 'Electrónica', brand: 'Bosch', origin: 'Alemania' },
+    ];
+
+    const createdProducts = [];
+    for (const p of productsData) {
+      const product = await prisma.product.upsert({
+        where: { sku: p.sku },
+        update: p,
+        create: p,
+      });
+      createdProducts.push(product);
+    }
+    console.log(`   ✅ ${createdProducts.length} products created/updated\n`);
 
     // ==========================================
     // 4. SUPPLIERS
@@ -194,7 +201,14 @@ async function seed() {
     const adminUser = await prisma.user.findUnique({ where: { email: 'admin@lacima.com' } });
     const employeeUser = await prisma.user.findUnique({ where: { email: 'ventas@lacima.com' } });
     
-    if (adminUser) {
+    // Buscar productos por SKU para obtener sus nuevos UUIDs
+    const prodDisco = createdProducts.find(p => p.sku === 'DIS-4421-VTL');
+    const prodTurbo = createdProducts.find(p => p.sku === 'TRB-VGT-84521');
+    const prodFiltro = createdProducts.find(p => p.sku === 'TRS-55-FIL');
+    const prodAmortiguador = createdProducts.find(p => p.sku === 'SUS-101-DEL');
+    const prodPastillas = createdProducts.find(p => p.sku === 'BRK-9004-HD');
+
+    if (adminUser && prodDisco) {
       await prisma.sale.create({
         data: {
           userId: adminUser.id,
@@ -207,50 +221,54 @@ async function seed() {
           paymentMethod: 'PAGO_MOVIL',
           items: {
             create: [
-              { productId: 1, quantity: 2, price: 85.00 }, // Discos de freno
+              { productId: prodDisco.id, quantity: 2, price: 85.00 },
             ]
           }
         }
       });
 
-      await prisma.sale.create({
-        data: {
-          userId: employeeUser?.id || adminUser.id,
-          invoiceNumber: 'FAC-20260402-0002',
-          subtotal: 965.00,
-          tax: 154.40,
-          discount: 50.00,
-          total: 1069.40,
-          status: 'COMPLETED',
-          paymentMethod: 'CARD',
-          items: {
-            create: [
-              { productId: 5, quantity: 1, price: 845.00 }, // Turbo
-              { productId: 4, quantity: 2, price: 42.50 },  // Filtro transmisión
-              { productId: 1, quantity: 1, price: 85.00 },   // Disco freno
-            ]
+      if (prodTurbo && prodFiltro) {
+        await prisma.sale.create({
+          data: {
+            userId: employeeUser?.id || adminUser.id,
+            invoiceNumber: 'FAC-20260402-0002',
+            subtotal: 965.00,
+            tax: 154.40,
+            discount: 50.00,
+            total: 1069.40,
+            status: 'COMPLETED',
+            paymentMethod: 'CARD',
+            items: {
+              create: [
+                { productId: prodTurbo.id, quantity: 1, price: 845.00 },
+                { productId: prodFiltro.id, quantity: 2, price: 42.50 },
+                { productId: prodDisco.id, quantity: 1, price: 85.00 },
+              ]
+            }
           }
-        }
-      });
+        });
+      }
 
-      await prisma.sale.create({
-        data: {
-          userId: employeeUser?.id || adminUser.id,
-          invoiceNumber: 'FAC-20260403-0003',
-          subtotal: 274.50,
-          tax: 43.92,
-          discount: 0,
-          total: 318.42,
-          status: 'COMPLETED',
-          paymentMethod: 'CASH',
-          items: {
-            create: [
-              { productId: 3, quantity: 1, price: 145.00 },  // Amortiguador
-              { productId: 6, quantity: 1, price: 129.50 },  // Pastillas freno
-            ]
+      if (prodAmortiguador && prodPastillas) {
+        await prisma.sale.create({
+          data: {
+            userId: employeeUser?.id || adminUser.id,
+            invoiceNumber: 'FAC-20260403-0003',
+            subtotal: 274.50,
+            tax: 43.92,
+            discount: 0,
+            total: 318.42,
+            status: 'COMPLETED',
+            paymentMethod: 'CASH',
+            items: {
+              create: [
+                { productId: prodAmortiguador.id, quantity: 1, price: 145.00 },
+                { productId: prodPastillas.id, quantity: 1, price: 129.50 },
+              ]
+            }
           }
-        }
-      });
+        });
+      }
     }
     console.log('   ✅ 3 sample sales created\n');
 
@@ -272,23 +290,31 @@ async function seed() {
     // 11. JOURNAL ENTRIES (Sample)
     // ==========================================
     console.log('📝 Creating sample journal entries...');
-    await prisma.journalEntry.create({
-      data: {
-        number: 'JE-2026-0001',
-        date: new Date('2026-04-01'),
-        description: 'Registro de venta del día - Facturas 0001-0003',
-        totalDebit: 1585.02,
-        totalCredit: 1585.02,
-        posted: true,
-        lines: {
-          create: [
-            { accountId: 2, debit: 1585.02, credit: 0, description: 'Cobros en banco' },
-            { accountId: 13, debit: 0, credit: 1409.50, description: 'Ingresos por ventas' },
-            { accountId: 8, debit: 0, credit: 175.52, description: 'IVA cobrado en ventas' },
-          ]
+    // Buscar cuentas por código para obtener UUIDs
+    const accCaja = await prisma.account.findUnique({ where: { code: '1.01.01' } });
+    const accBanco = await prisma.account.findUnique({ where: { code: '1.01.02' } });
+    const accVentas = await prisma.account.findUnique({ where: { code: '4.01.01' } });
+    const accIvaVentas = await prisma.account.findUnique({ where: { code: '2.01.02' } });
+
+    if (accBanco && accVentas && accIvaVentas) {
+      await prisma.journalEntry.create({
+        data: {
+          number: 'JE-2026-0001',
+          date: new Date('2026-04-01'),
+          description: 'Registro de venta del día - Facturas 0001-0003',
+          totalDebit: 1585.02,
+          totalCredit: 1585.02,
+          posted: true,
+          lines: {
+            create: [
+              { accountId: accBanco.id, debit: 1585.02, credit: 0, description: 'Cobros en banco' },
+              { accountId: accVentas.id, debit: 0, credit: 1409.50, description: 'Ingresos por ventas' },
+              { accountId: accIvaVentas.id, debit: 0, credit: 175.52, description: 'IVA cobrado en ventas' },
+            ]
+          }
         }
-      }
-    });
+      });
+    }
     console.log('   ✅ 1 journal entry created\n');
 
     // ==========================================

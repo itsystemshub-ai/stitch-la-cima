@@ -18,6 +18,11 @@ const ASSETS_TO_CACHE = [
   '/frontend/public/auth/login.html',
   '/frontend/public/auth/crear_cuenta.html',
   '/frontend/public/auth/olvido_contraseña.html',
+  '/frontend/public/erp/pos.html',
+  '/frontend/public/erp/ventas.html',
+  '/frontend/public/erp/inventario.html',
+  '/frontend/public/erp/productos.html',
+  '/frontend/public/erp/kardex.html',
   '/frontend/public/assets/images/logo.png',
   'https://cdn.tailwindcss.com?plugins=forms,container-queries',
   'https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap',
@@ -143,3 +148,19 @@ self.addEventListener('notificationclick', (event) => {
     );
   }
 });
+
+// Sincronización en segundo plano
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-sales') {
+    event.waitUntil(syncSales());
+  }
+});
+
+/**
+ * Intenta sincronizar ventas pendientes guardadas en IndexedDB
+ */
+async function syncSales() {
+  console.log('[Service Worker] Sincronizando ventas pendientes...');
+  // Aquí se implementaría la lógica para leer de IndexedDB y enviar al servidor
+  // Esta lógica será llamada automáticamente cuando el navegador recupere conexión
+}

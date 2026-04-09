@@ -252,7 +252,7 @@ const getAuditLogs = async (req, res) => {
     }
 
     if (userId) {
-      where.userId = parseInt(userId, 10);
+      where.userId = userId;
     }
 
     if (startDate || endDate) {

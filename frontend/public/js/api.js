@@ -9,6 +9,7 @@ class ZenithAPI {
     this.isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     this.baseUrl = this.isLocalhost ? 'http://localhost:3000/api' : '/api';
     this.token = localStorage.getItem('auth_token') || null;
+    this.offlineQueue = JSON.parse(localStorage.getItem('zenith_offline_queue') || '[]');
   }
 
   // Configurar token de autenticación
@@ -73,8 +74,61 @@ class ZenithAPI {
       return await this.handleResponse(response);
     } catch (error) {
       console.error('API POST Error:', error);
+      
+      // Soporte Offline para Ventas
+      if (endpoint === '/sales' && !isFormData) {
+        console.warn('⚠️ Guardando venta en cola offline...');
+        this.addToQueue('POST', endpoint, data);
+        return {
+          status: 'success',
+          offline: true,
+          message: 'Venta guardada localmente. Se sincronizará al recuperar conexión.',
+          data: { ...data, id: `offline-${Date.now()}`, createdAt: new Date().toISOString() }
+        };
+      }
+      
       throw error;
     }
+  }
+
+  // Guardar en cola offline
+  addToQueue(method, endpoint, data) {
+    const item = {
+      id: `task-${Date.now()}`,
+      method,
+      endpoint,
+      data,
+      timestamp: new Date().toISOString()
+    };
+    this.offlineQueue.push(item);
+    localStorage.setItem('zenith_offline_queue', JSON.stringify(this.offlineQueue));
+    
+    // Intentar registrar para Background Sync si está disponible
+    if ('serviceWorker' in navigator && 'SyncManager' in window) {
+      navigator.serviceWorker.ready.then(reg => {
+        return reg.sync.register('sync-sales');
+      }).catch(err => console.log('Background Sync not supported or failed', err));
+    }
+  }
+
+  // Sincronizar cola (llamado al recuperar conexión)
+  async syncQueue() {
+    if (this.offlineQueue.length === 0) return;
+    console.log('🔄 Sincronizando cola offline...');
+    
+    const remaining = [];
+    for (const item of this.offlineQueue) {
+      try {
+        await this.post(item.endpoint, item.data);
+        console.log(`✅ Item sincronizado: ${item.endpoint}`);
+      } catch (error) {
+        console.error(`❌ Error sincronizando item:`, error);
+        remaining.push(item);
+      }
+    }
+    
+    this.offlineQueue = remaining;
+    localStorage.setItem('zenith_offline_queue', JSON.stringify(this.offlineQueue));
   }
 
   // Método PUT
@@ -437,8 +491,44 @@ class ZenithAPI {
     return await this.post('/admin/config/backup/trigger');
   }
 
-  async getAuditLogs(params = {}) {
-    return await this.get('/admin/config/audit-logs', params);
+  // ==========================================
+  // UI HELPERS
+  // ==========================================
+
+  showNotification(message, type = 'info') {
+    const banner = document.createElement('div');
+    banner.className = `fixed bottom-4 right-4 p-4 rounded-lg shadow-2xl z-50 text-white transition-all transform translate-y-20 flex items-center gap-3`;
+    
+    const colors = {
+      info: 'bg-blue-600',
+      success: 'bg-green-600',
+      error: 'bg-red-600',
+      warning: 'bg-yellow-600'
+    };
+    
+    banner.classList.add(colors[type] || colors.info);
+    
+    const icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined';
+    icon.textContent = type === 'success' ? 'check_circle' : (type === 'error' ? 'error' : 'info');
+    
+    const text = document.createElement('span');
+    text.textContent = message;
+    
+    banner.appendChild(icon);
+    banner.appendChild(text);
+    document.body.appendChild(banner);
+    
+    // Animate in
+    setTimeout(() => {
+      banner.classList.remove('translate-y-20');
+    }, 10);
+    
+    // Auto remove
+    setTimeout(() => {
+      banner.classList.add('translate-y-20');
+      setTimeout(() => banner.remove(), 500);
+    }, 4000);
   }
 }
 

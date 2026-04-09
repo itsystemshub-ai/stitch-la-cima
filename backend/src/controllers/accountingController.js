@@ -149,9 +149,9 @@ exports.createAccount = async (req, res) => {
  */
 exports.updateAccount = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ status: 'error', message: 'ID de cuenta invalido' });
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ status: 'error', message: 'ID de cuenta requerido' });
     }
 
     const existing = await prisma.account.findUnique({ where: { id } });
@@ -311,7 +311,7 @@ exports.createJournalEntry = async (req, res) => {
       date,
       description,
       lines: lines.map(l => ({
-        accountId: parseInt(l.accountId),
+        accountId: l.accountId,
         debit: typeof l.debit === 'number' ? l.debit : 0,
         credit: typeof l.credit === 'number' ? l.credit : 0,
         description: l.description
@@ -330,9 +330,9 @@ exports.createJournalEntry = async (req, res) => {
  */
 exports.postJournalEntry = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ status: 'error', message: 'ID de asiento invalido' });
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ status: 'error', message: 'ID de asiento requerido' });
     }
 
     const entry = await postEntry(id);
@@ -385,7 +385,7 @@ exports.getGeneralLedger = async (req, res) => {
     }
 
     const account = await prisma.account.findUnique({
-      where: { id: parseInt(accountId) }
+      where: { id: accountId }
     });
 
     if (!account) {
@@ -393,7 +393,7 @@ exports.getGeneralLedger = async (req, res) => {
     }
 
     const where = {
-      accountId: parseInt(accountId),
+      accountId: accountId,
       entry: { posted: true }
     };
 
@@ -427,7 +427,7 @@ exports.getGeneralLedger = async (req, res) => {
     // Calculate starting balance from entries before the date range
     const priorLines = await prisma.journalEntryLine.findMany({
       where: {
-        accountId: parseInt(accountId),
+        accountId: accountId,
         entry: {
           posted: true,
           date: startDate ? { lt: new Date(startDate) } : undefined

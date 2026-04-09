@@ -15,7 +15,7 @@ const VALID_ROLES = ['ADMIN', 'MANAGER', 'EMPLOYEE', 'USER'];
  * @param {string} [userData.name] - User name
  * @param {string} [userData.password] - User password (generated if not provided)
  * @param {string} [userData.role] - User role (default: USER)
- * @param {number} [createdBy] - User ID of creator for audit
+ * @param {string} [createdBy] - User ID of creator for audit
  * @returns {Promise<object>} Created user (without password)
  */
 async function createUser(userData, createdBy = null) {
@@ -162,8 +162,84 @@ function generatePassword(length = 12) {
 }
 
 /**
+ * Update user with validation
+ * @param {string} userId - User ID to update
+ * @param {object} updateData - Data to update
+ * @param {string} [updatedBy] - User ID of updater for audit
+ * @returns {Promise<object>} Updated user (without password)
+ */
+async function updateUser(userId, updateData, updatedBy = null) {
+  try {
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!existingUser) {
+      throw new Error('Usuario no encontrado');
+    }
+
+    const data = {};
+    const changes = {};
+
+    if (updateData.email !== undefined) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(updateData.email)) {
+        throw new Error('El formato del correo electronico es invalido');
+      }
+      data.email = updateData.email.toLowerCase();
+    }
+
+    if (updateData.name !== undefined) {
+      data.name = updateData.name;
+    }
+
+    if (updateData.role !== undefined) {
+      if (!VALID_ROLES.includes(updateData.role)) {
+        throw new Error(`El rol debe ser uno de: ${VALID_ROLES.join(', ')}`);
+      }
+      data.role = updateData.role;
+    }
+
+    // Track changes for audit
+    for (const [key, value] of Object.entries(data)) {
+      if (existingUser[key] !== value) {
+        changes[key] = { old: existingUser[key], new: value };
+      }
+    }
+
+    if (Object.keys(data).length === 0) {
+      throw new Error('No se proporcionaron datos validos para actualizar');
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data,
+    });
+
+    // Log audit
+    await configService.logAudit({
+      userId: updatedBy,
+      action: 'UPDATE',
+      entity: 'User',
+      entityId: userId,
+      details: JSON.stringify({
+        userEmail: existingUser.email,
+        changes,
+      }),
+    });
+
+    const { password: _, ...userWithoutPassword } = updatedUser;
+    return userWithoutPassword;
+  } catch (error) {
+    if (error.code === 'P2002') {
+      throw new Error('El correo electronico ya esta en uso');
+    }
+    throw error;
+  }
+}
+
+/**
  * Update user role with validation
- * @param {number} userId - User ID to update
+ * @param {string} userId - User ID to update
  * @param {string} newRole - New role
  * @param {number} [updatedBy] - User ID of updater for audit
  * @returns {Promise<object>} Updated user (without password)
@@ -215,9 +291,9 @@ async function updateUserRole(userId, newRole, updatedBy = null) {
 
 /**
  * Reset user password
- * @param {number} userId - User ID
+ * @param {string} userId - User ID
  * @param {string} [newPassword] - New password (generated if not provided)
- * @param {number} [resetBy] - User ID of resetter for audit
+ * @param {string} [resetBy] - User ID of resetter for audit
  * @returns {Promise<{user: object, tempPassword: string|null}>} Updated user and temp password
  */
 async function resetPassword(userId, newPassword = null, resetBy = null) {
@@ -268,7 +344,7 @@ async function resetPassword(userId, newPassword = null, resetBy = null) {
 /**
  * Log a user management action
  * @param {object} params - Log parameters
- * @param {number} [params.userId] - User performing the action
+ * @param {string} [params.userId] - User performing the action
  * @param {string} params.action - Action type
  * @param {string} params.entity - Entity type
  * @param {string} [params.entityId] - Entity ID
@@ -292,6 +368,7 @@ async function logUserAction({ userId, action, entity, entityId, details }) {
 
 module.exports = {
   createUser,
+  updateUser,
   validateUserData,
   generatePassword,
   updateUserRole,

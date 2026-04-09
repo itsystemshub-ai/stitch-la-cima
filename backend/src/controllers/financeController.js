@@ -125,9 +125,9 @@ exports.createFixedAsset = async (req, res) => {
  */
 exports.calculateDepreciation = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ status: 'error', message: 'ID de activo invalido' });
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ status: 'error', message: 'ID de activo requerido' });
     }
 
     const result = await recordDepreciation(id);
@@ -392,7 +392,7 @@ exports.createReceivable = async (req, res) => {
       data: {
         customerId: String(customerId).trim(),
         customerName: String(customerName).trim(),
-        saleId: saleId !== undefined ? parseInt(saleId) : null,
+        saleId: saleId || null,
         invoiceNumber: String(invoiceNumber).trim(),
         amount: Number(amount),
         paidAmount: 0,
@@ -416,9 +416,9 @@ exports.createReceivable = async (req, res) => {
  */
 exports.updateReceivable = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ status: 'error', message: 'ID de cuenta por cobrar invalido' });
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ status: 'error', message: 'ID de cuenta por cobrar requerido' });
     }
 
     const existing = await prisma.accountsReceivable.findUnique({ where: { id } });

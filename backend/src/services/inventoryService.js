@@ -1,4 +1,5 @@
 const prisma = require('../models/prismaClient');
+const socketUtils = require('../utils/socket'); 
 
 /**
  * Calculate the weighted average cost (costo promedio ponderado) for a product.
@@ -36,9 +37,10 @@ function validateStockMovement(data) {
     return { valid: false, message: 'El campo productId es obligatorio' };
   }
 
-  const parsedProductId = parseInt(productId);
-  if (isNaN(parsedProductId) || parsedProductId <= 0) {
-    return { valid: false, message: 'El productId debe ser un número entero positivo' };
+  // UUID validation regex
+  const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(productId);
+  if (!isUuid) {
+    return { valid: false, message: 'El productId debe ser un UUID válido' };
   }
 
   if (quantity === undefined || quantity === null) {
@@ -80,8 +82,161 @@ async function createInventoryLog(tx, data) {
       type: data.type,
       quantity: data.quantity,
       cost: data.cost,
-      reason: data.reason || null
+      reason: data.reason || null,
+      userId: data.userId || null
     }
+  });
+}
+
+/**
+ * Add stock to a product with weighted average cost calculation
+ * @param {string} productId - Product ID
+ * @param {number} quantity - Quantity to add
+ * @param {number} cost - Unit cost
+ * @param {string} reason - Reason for entry
+ * @param {string} [userId] - User ID for audit
+ */
+async function addStock(productId, quantity, cost, reason, userId = null) {
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    include: {
+      inventoryLogs: {
+        where: { type: 'IN' },
+        orderBy: { createdAt: 'desc' },
+        take: 1
+      }
+    }
+  });
+
+  if (!product) {
+    throw new Error('Producto no encontrado');
+  }
+
+  const newWeightedCost = calculateWeightedAverageCost(
+    product.stock,
+    product.inventoryLogs[0]?.cost || product.price,
+    quantity,
+    cost
+  );
+
+  return prisma.$transaction(async (tx) => {
+    const updatedProduct = await tx.product.update({
+      where: { id: productId },
+      data: {
+        stock: product.stock + quantity,
+        price: newWeightedCost
+      }
+    });
+
+    const log = await createInventoryLog(tx, {
+      productId,
+      type: 'IN',
+      quantity,
+      cost,
+      reason: reason || 'Entrada de stock',
+      userId
+    });
+
+    return { product: updatedProduct, log };
+  });
+}
+
+/**
+ * Remove stock from a product
+ * @param {string} productId - Product ID
+ * @param {number} quantity - Quantity to remove
+ * @param {string} reason - Reason for removal
+ * @param {string} [userId] - User ID for audit
+ */
+async function removeStock(productId, quantity, reason, userId = null) {
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    select: { id: true, stock: true, price: true }
+  });
+
+  if (!product) {
+    throw new Error('Producto no encontrado');
+  }
+
+  if (product.stock < quantity) {
+    throw new Error(`Stock insuficiente. Disponible: ${product.stock}, solicitado: ${quantity}`);
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const updatedProduct = await tx.product.update({
+      where: { id: productId },
+      data: { stock: { decrement: quantity } }
+    });
+
+    const log = await createInventoryLog(tx, {
+      productId,
+      type: 'OUT',
+      quantity,
+      cost: product.price,
+      reason: reason || 'Salida de stock',
+      userId
+    });
+
+    // Check for low stock alert
+    if (updatedProduct.stock <= 10) {
+      socketUtils.emit('low_stock_alert', {
+        productId: updatedProduct.id,
+        name: updatedProduct.name,
+        stock: updatedProduct.stock,
+        sku: updatedProduct.sku
+      });
+    }
+
+    return { product: updatedProduct, log };
+  });
+}
+
+/**
+ * Adjust stock to a specific quantity
+ * @param {string} productId - Product ID
+ * @param {number} newQuantity - Target quantity
+ * @param {string} reason - Reason for adjustment
+ * @param {string} [userId] - User ID for audit
+ */
+async function adjustStock(productId, newQuantity, reason, userId = null) {
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    select: { id: true, stock: true, price: true }
+  });
+
+  if (!product) {
+    throw new Error('Producto no encontrado');
+  }
+
+  const difference = newQuantity - product.stock;
+  if (difference === 0) return { product, log: null };
+
+  return prisma.$transaction(async (tx) => {
+    const updatedProduct = await tx.product.update({
+      where: { id: productId },
+      data: { stock: newQuantity }
+    });
+
+    const log = await createInventoryLog(tx, {
+      productId,
+      type: 'ADJUST',
+      quantity: newQuantity,
+      cost: product.price,
+      reason: reason || `Ajuste de inventario (${difference > 0 ? '+' : ''}${difference} unidades)`,
+      userId
+    });
+
+    // Check for low stock alert
+    if (updatedProduct.stock <= 10) {
+      socketUtils.emit('low_stock_alert', {
+        productId: updatedProduct.id,
+        name: updatedProduct.name,
+        stock: updatedProduct.stock,
+        sku: updatedProduct.sku
+      });
+    }
+
+    return { product: updatedProduct, log };
   });
 }
 
@@ -216,5 +371,8 @@ module.exports = {
   calculateWeightedAverageCost,
   validateStockMovement,
   createInventoryLog,
+  addStock,
+  removeStock,
+  adjustStock,
   generateInventoryReport
 };

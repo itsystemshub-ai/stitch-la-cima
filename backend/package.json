@@ -5,6 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
+    "postinstall": "prisma generate",
     "dev": "dotenv -e .env.production -- nodemon src/app.js",
     "dev:local": "dotenv -e .env.local -- nodemon src/app.js",
     "db:generate": "prisma generate",
@@ -18,7 +19,7 @@
     "db:reset:local": "dotenv -e .env.local -- prisma migrate reset --force",
     "db:studio": "prisma studio",
     "db:push": "prisma db push",
-    "build": "prisma generate",
+    "build": "prisma generate && tailwindcss -i ./public/css/input.css -o ./public/css/output.css",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "eslint src/"

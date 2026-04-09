@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const rateLimit = require('express-rate-limit');
+const { apiLimiter } = require('./middleware/rateLimitMiddleware');
 const path = require('path');
 const winston = require('winston');
 const fs = require('fs');
@@ -11,6 +11,7 @@ const fs = require('fs');
 // Configuration
 const { port, nodeEnv } = require('./config');
 const routes = require('./routes');
+const syncService = require('./services/syncService');
 
 // Create logs directory if it doesn't exist
 if (!fs.existsSync('logs')) {
@@ -41,19 +42,7 @@ const app = express();
 // Trust proxy (for behind reverse proxy like nginx, Railway, Render)
 app.set('trust proxy', 1);
 
-// Rate Limiting
-const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100, // limit each IP to 100 requests per windowMs
-  message: {
-    status: 'error',
-    message: 'Demasiadas peticiones, por favor intente de nuevo más tarde.',
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-app.use(limiter);
+app.use(apiLimiter);
 
 // Security Middleware
 app.use(helmet({
@@ -61,25 +50,26 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false, // Allow CDN assets
 }));
 
-// CORS Configuration
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(',')
-  : [process.env.FRONTEND_URL || 'http://localhost:5500'];
+  : ['http://localhost:5500', 'http://localhost:3000', 'https://zenith-erp.up.railway.app'];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+    // Check if origin matches allowed list or matches local dev pattern
+    const isAllowed = allowedOrigins.some(ao => ao === '*' || ao === origin || origin.startsWith('http://localhost:'));
+    
+    if (isAllowed) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('Not allowed by CORS Zenith Engine'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -129,10 +119,37 @@ app.use((err, req, res, next) => {
   });
 });
 
+const server = require('http').createServer(app);
+const socketUtils = require('./utils/socket');
+const io = require('socket.io')(server, {
+  cors: {
+    origin: allowedOrigins,
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
+});
+
+// Initialize socket utility
+socketUtils.init(io);
+
+// Socket.io connection handling
+io.on('connection', (socket) => {
+  logger.info(`🔌 Nuevo cliente conectado: ${socket.id}`);
+  
+  socket.on('disconnect', () => {
+    logger.info(`🔌 Cliente desconectado: ${socket.id}`);
+  });
+});
+
+// Attach io to app for use in controllers
+app.set('io', io);
+
 // Graceful shutdown
 process.on('SIGTERM', () => {
   logger.info('SIGTERM signal received: closing HTTP server');
-  process.exit(0);
+  server.close(() => {
+    process.exit(0);
+  });
 });
 
 process.on('unhandledRejection', (reason, promise) => {
@@ -144,9 +161,25 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
-app.listen(port, '0.0.0.0', () => {
+server.listen(port, '0.0.0.0', () => {
   logger.info(`🚀 Zenith ERP Backend running on port ${port} [${nodeEnv}]`);
   logger.info(`📊 Health check: http://localhost:${port}/api/health`);
+  logger.info(`🔌 Real-time enabled via Socket.io`);
+
+  // Iniciar ciclo de sincronización de fondo (automático)
+  const SYNC_INTERVAL_MS = parseInt(process.env.SYNC_INTERVAL_MS) || 5 * 60 * 1000; // Default 5 mins
+  setInterval(async () => {
+    try {
+      logger.info('🔄 Iniciando sincronización de fondo...');
+      // Solo sincronizar si el nodo tiene habilitada la sincronización
+      if (process.env.SYNC_ENABLED === 'true') {
+        const result = await syncService.sync();
+        logger.info(`✅ Sincronización completada: ${result.summary}`);
+      }
+    } catch (error) {
+      logger.error(`❌ Error en sincronización de fondo: ${error.message}`);
+    }
+  }, SYNC_INTERVAL_MS);
 });
 
-module.exports = app;
+module.exports = { app, server };

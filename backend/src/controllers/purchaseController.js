@@ -72,7 +72,7 @@ exports.getSupplierById = async (req, res) => {
     const { id } = req.params;
 
     const supplier = await prisma.supplier.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: {
         purchases: {
           orderBy: { orderDate: 'desc' },
@@ -95,7 +95,7 @@ exports.getSupplierById = async (req, res) => {
 
     // Get aggregate stats
     const stats = await prisma.purchaseOrder.aggregate({
-      where: { supplierId: parseInt(id) },
+      where: { supplierId: id },
       _count: { id: true },
       _sum: { total: true },
       _avg: { total: true }
@@ -168,7 +168,7 @@ exports.updateSupplier = async (req, res) => {
     const supplierData = req.body;
 
     const existing = await prisma.supplier.findUnique({
-      where: { id: parseInt(id) }
+      where: { id }
     });
 
     if (!existing) {
@@ -186,7 +186,7 @@ exports.updateSupplier = async (req, res) => {
     }
 
     const supplier = await prisma.supplier.update({
-      where: { id: parseInt(id) },
+      where: { id },
       data: {
         ...(supplierData.name !== undefined && { name: supplierData.name.trim() }),
         ...(supplierData.rif !== undefined && { rif: supplierData.rif.trim().toUpperCase() }),
@@ -268,10 +268,10 @@ exports.getPurchaseOrders = async (req, res) => {
     }
 
     if (search) {
-      const searchNum = parseInt(search);
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(search);
       where.OR = [
         { number: { contains: search, mode: 'insensitive' } },
-        ...(searchNum ? [{ id: searchNum }] : []),
+        ...(isUuid ? [{ id: search }] : []),
         { notes: { contains: search, mode: 'insensitive' } }
       ];
     }
@@ -324,7 +324,7 @@ exports.getPurchaseOrderById = async (req, res) => {
     const { id } = req.params;
 
     const po = await prisma.purchaseOrder.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: {
         items: true,
         supplier: {
@@ -351,7 +351,7 @@ exports.approvePurchaseOrder = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const po = await purchaseService.approvePurchaseOrder(parseInt(id));
+    const po = await purchaseService.approvePurchaseOrder(id);
 
     res.json({ status: 'success', data: po, message: 'Orden de compra aprobada exitosamente' });
   } catch (error) {
@@ -369,7 +369,7 @@ exports.receivePurchaseOrder = async (req, res) => {
     const { id } = req.params;
     const receiveData = req.body || {};
 
-    const po = await purchaseService.receivePurchaseOrder(parseInt(id), receiveData);
+    const po = await purchaseService.receivePurchaseOrder(id, receiveData);
 
     const message = receiveData.partialReceive
       ? 'Recepcion parcial registrada exitosamente'
@@ -391,7 +391,7 @@ exports.cancelPurchaseOrder = async (req, res) => {
     const { id } = req.params;
     const { reason } = req.body;
 
-    const po = await purchaseService.cancelPurchaseOrder(parseInt(id), reason || 'Sin motivo especificado');
+    const po = await purchaseService.cancelPurchaseOrder(id, reason || 'Sin motivo especificado');
 
     res.json({ status: 'success', data: po, message: 'Orden de compra cancelada exitosamente' });
   } catch (error) {

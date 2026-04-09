@@ -186,7 +186,7 @@ function processPayment(method, data = {}) {
 
 /**
  * Restore inventory when a sale is cancelled
- * @param {number} saleId - The sale ID to restore
+ * @param {string} saleId - The sale ID to restore
  * @param {Object} tx - Prisma transaction client
  * @returns {Promise<void>}
  */
@@ -215,9 +215,9 @@ async function restoreInventory(saleId, tx) {
 
 /**
  * Generate a credit note for a sale
- * @param {number} saleId - The sale ID
+ * @param {string} saleId - The sale ID
  * @param {string} reason - Reason for the credit note
- * @param {number} userId - User creating the credit note
+ * @param {string} userId - User creating the credit note
  * @returns {Promise<Object>} Created credit note
  */
 async function generateCreditNote(saleId, reason, userId) {
@@ -254,9 +254,46 @@ async function generateCreditNote(saleId, reason, userId) {
 }
 
 /**
+ * Cancel a sale and restore inventory
+ * @param {string} saleId - The sale ID
+ * @param {string} reason - Reason for cancellation
+ * @param {string} userId - User performing cancelation
+ * @returns {Promise<Object>} Cancelled sale
+ */
+async function cancelSale(saleId, reason, userId) {
+  const sale = await prisma.sale.findUnique({
+    where: { id: saleId },
+    include: { items: true }
+  });
+
+  if (!sale) {
+    throw new Error('Venta no encontrada');
+  }
+
+  if (sale.status === 'CANCELLED') {
+    throw new Error('La venta ya esta cancelada');
+  }
+
+  return await prisma.$transaction(async (tx) => {
+    const cancelled = await tx.sale.update({
+      where: { id: saleId },
+      data: { status: 'CANCELLED' }
+    });
+
+    await restoreInventory(saleId, tx);
+
+    // Create record in audit or similar if needed
+    // The previous logic was creating an inventory log for a null product (0)
+    // We'll skip that and rely on restoreInventory which logs each product correctly
+
+    return cancelled;
+  });
+}
+
+/**
  * Main sale processing function with inventory check
  * @param {Object} saleData - Sale data with items, paymentMethod, etc.
- * @param {number} userId - User creating the sale
+ * @param {string} userId - User creating the sale
  * @returns {Promise<Object>} Created sale with items
  */
 async function processSale(saleData, userId) {
@@ -354,6 +391,7 @@ async function processSale(saleData, userId) {
 
 module.exports = {
   processSale,
+  cancelSale,
   calculateSaleTotal,
   applyDiscount,
   calculateTax,

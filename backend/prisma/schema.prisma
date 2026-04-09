@@ -19,7 +19,7 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   email     String   @unique @db.VarChar(255)
   name      String?  @db.VarChar(255)
   password  String   @db.VarChar(255)
@@ -28,11 +28,16 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
   sales     Sale[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@map("users")
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   sku         String   @unique @db.VarChar(50)
   name        String   @db.VarChar(255)
   description String?  @db.Text
@@ -47,6 +52,11 @@ model Product {
   inventoryLogs InventoryLog[]
   saleItems     SaleItem[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([category])
   @@index([brand])
   @@index([sku])
@@ -54,8 +64,8 @@ model Product {
 }
 
 model InventoryLog {
-  id        Int      @id @default(autoincrement())
-  productId Int      @map("product_id")
+  id        String   @id @default(uuid())
+  productId String   @map("product_id")
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   type      String   @db.VarChar(10)   // IN, OUT, ADJUST
   quantity  Int
@@ -63,14 +73,19 @@ model InventoryLog {
   reason    String?  @db.VarChar(255)
   createdAt DateTime @default(now()) @map("created_at")
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([productId])
   @@index([createdAt])
   @@map("inventory_logs")
 }
 
 model Sale {
-  id                Int        @id @default(autoincrement())
-  userId            Int?       @map("user_id")
+  id                String     @id @default(uuid())
+  userId            String?    @map("user_id")
   user              User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
   invoiceNumber     String?    @unique @map("invoice_number") @db.VarChar(50)
   subtotal          Float      @default(0)
@@ -84,6 +99,11 @@ model Sale {
   items             SaleItem[]
   creditNotes       CreditNote[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([userId])
   @@index([status])
   @@index([createdAt])
@@ -92,15 +112,20 @@ model Sale {
 }
 
 model CreditNote {
-  id                 Int      @id @default(autoincrement())
+  id                 String   @id @default(uuid())
   creditNoteNumber   String   @unique @map("credit_note_number") @db.VarChar(50)
-  saleId             Int      @map("sale_id")
+  saleId             String   @map("sale_id")
   sale               Sale     @relation(fields: [saleId], references: [id], onDelete: Restrict)
-  userId             Int      @map("user_id")
+  userId             String   @map("user_id")
   amount             Float
   reason             String?  @db.Text
   status             String   @default("ISSUED") @db.VarChar(20) // ISSUED, APPLIED, CANCELLED
   createdAt          DateTime @default(now()) @map("created_at")
+
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
 
   @@index([saleId])
   @@index([userId])
@@ -109,10 +134,10 @@ model CreditNote {
 }
 
 model SaleItem {
-  id        Int     @id @default(autoincrement())
-  saleId    Int     @map("sale_id")
+  id        String  @id @default(uuid())
+  saleId    String  @map("sale_id")
   sale      Sale    @relation(fields: [saleId], references: [id], onDelete: Cascade)
-  productId Int     @map("product_id")
+  productId String  @map("product_id")
   product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
   quantity  Int
   price     Float
@@ -123,7 +148,7 @@ model SaleItem {
 }
 
 model Employee {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   firstName   String   @map("first_name") @db.VarChar(100)
   lastName    String   @map("last_name") @db.VarChar(100)
   dni         String   @unique @map("dni") @db.VarChar(20)
@@ -135,14 +160,19 @@ model Employee {
   active      Boolean  @default(true)
   payroll     Payroll[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([department])
   @@index([dni])
   @@map("employees")
 }
 
 model Payroll {
-  id          Int      @id @default(autoincrement())
-  employeeId  Int      @map("employee_id")
+  id          String   @id @default(uuid())
+  employeeId  String   @map("employee_id")
   employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
   month       Int
   year        Int
@@ -153,20 +183,30 @@ model Payroll {
   processed   Boolean  @default(false)
   createdAt   DateTime @default(now()) @map("created_at")
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([employeeId])
   @@index([year, month])
   @@map("payrolls")
 }
 
 model Attendance {
-  id          Int      @id @default(autoincrement())
-  employeeId  Int      @map("employee_id")
+  id          String   @id @default(uuid())
+  employeeId  String   @map("employee_id")
   date        DateTime @db.Date
   checkIn     DateTime @map("check_in")
   checkOut    DateTime? @map("check_out")
   hours       Float?
   notes       String?  @db.Text
   createdAt   DateTime @default(now()) @map("created_at")
+
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
 
   @@unique([employeeId, date])
   @@index([employeeId])
@@ -175,19 +215,24 @@ model Attendance {
 }
 
 model Category {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   name        String    @db.VarChar(100)
   icon        String?   @db.VarChar(50)
   description String?   @db.Text
   active      Boolean   @default(true)
   createdAt   DateTime  @default(now()) @map("created_at")
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([name])
   @@map("categories")
 }
 
 model Supplier {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   name        String   @db.VarChar(255)
   rif         String   @unique @db.VarChar(20)  // Tax ID (Venezuela)
   email       String?  @db.VarChar(255)
@@ -199,15 +244,20 @@ model Supplier {
   updatedAt   DateTime @updatedAt @map("updated_at")
   purchases   PurchaseOrder[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([rif])
   @@index([name])
   @@map("suppliers")
 }
 
 model PurchaseOrder {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   number      String   @unique @db.VarChar(20)  // PO number
-  supplierId  Int      @map("supplier_id")
+  supplierId  String   @map("supplier_id")
   supplier    Supplier @relation(fields: [supplierId], references: [id])
   total       Float
   status      String   @default("PENDING") @db.VarChar(20) // PENDING, APPROVED, RECEIVED, CANCELLED
@@ -218,6 +268,11 @@ model PurchaseOrder {
   updatedAt   DateTime @updatedAt @map("updated_at")
   items       PurchaseItem[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([supplierId])
   @@index([status])
   @@index([orderDate])
@@ -225,10 +280,10 @@ model PurchaseOrder {
 }
 
 model PurchaseItem {
-  id              Int           @id @default(autoincrement())
-  purchaseOrderId Int           @map("purchase_order_id")
+  id              String        @id @default(uuid())
+  purchaseOrderId String        @map("purchase_order_id")
   purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
-  productId       Int?
+  productId       String?
   productName     String        @db.VarChar(255)
   sku             String?       @db.VarChar(50)
   quantity        Int
@@ -245,7 +300,7 @@ model PurchaseItem {
 // ============================================================
 
 model Account {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   code        String   @unique @db.VarChar(20)  // Account code (e.g., "1.01.01")
   name        String   @db.VarChar(255)
   type        String   @db.VarChar(20)  // ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE
@@ -256,13 +311,18 @@ model Account {
   updatedAt   DateTime @updatedAt @map("updated_at")
   journalEntries JournalEntryLine[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([type])
   @@index([code])
   @@map("accounts")
 }
 
 model JournalEntry {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   number      String   @unique @db.VarChar(20)  // Entry number
   date        DateTime @db.Date
   description String   @db.Text
@@ -272,16 +332,21 @@ model JournalEntry {
   createdAt   DateTime @default(now()) @map("created_at")
   lines       JournalEntryLine[]
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([date])
   @@index([posted])
   @@map("journal_entries")
 }
 
 model JournalEntryLine {
-  id              Int            @id @default(autoincrement())
-  entryId         Int            @map("entry_id")
+  id              String         @id @default(uuid())
+  entryId         String         @map("entry_id")
   entry           JournalEntry   @relation(fields: [entryId], references: [id], onDelete: Cascade)
-  accountId       Int            @map("account_id")
+  accountId       String         @map("account_id")
   account         Account        @relation(fields: [accountId], references: [id])
   debit           Float          @default(0)
   credit          Float          @default(0)
@@ -293,7 +358,7 @@ model JournalEntryLine {
 }
 
 model FixedAsset {
-  id              Int      @id @default(autoincrement())
+  id              String   @id @default(uuid())
   name            String   @db.VarChar(255)
   code            String   @unique @db.VarChar(20)
   category        String   @db.VarChar(100)
@@ -307,15 +372,20 @@ model FixedAsset {
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt @map("updated_at")
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([category])
   @@map("fixed_assets")
 }
 
 model AccountsReceivable {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   customerId  String   @map("customer_id") @db.VarChar(50)
   customerName String  @map("customer_name") @db.VarChar(255)
-  saleId      Int?
+  saleId      String?
   invoiceNumber String @map("invoice_number") @db.VarChar(20)
   amount      Float
   paidAmount  Float    @default(0) @map("paid_amount")
@@ -324,6 +394,11 @@ model AccountsReceivable {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
+  // Sync Metadata
+  isSynced   Boolean   @default(false) @map("is_synced")
+  lastSync   DateTime? @map("last_sync")
+  originNode String    @default("cloud") @map("origin_node")
+
   @@index([customerId])
   @@index([status])
   @@index([dueDate])
@@ -331,7 +406,7 @@ model AccountsReceivable {
 }
 
 model SystemConfig {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   key         String   @unique @db.VarChar(100)
   value       String   @db.Text
   description String?  @db.Text
@@ -343,8 +418,8 @@ model SystemConfig {
 }
 
 model AuditLog {
-  id        Int      @id @default(autoincrement())
-  userId    Int?
+  id        String   @id @default(uuid())
+  userId    String?
   action    String   @db.VarChar(100)  // LOGIN, CREATE, UPDATE, DELETE, APPROVE, CANCEL
   entity    String   @db.VarChar(50)   // Entity type (User, Product, Sale, etc.)
   entityId  String?  @map("entity_id") @db.VarChar(50)
@@ -359,7 +434,7 @@ model AuditLog {
 }
 
 model Backup {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   filename    String   @db.VarChar(255)
   size        Int
   status      String   @default("PENDING") @db.VarChar(20) // PENDING, COMPLETED, FAILED
