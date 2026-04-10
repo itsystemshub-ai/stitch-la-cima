@@ -64,53 +64,7 @@ exports.getFixedAssets = async (req, res) => {
  */
 exports.createFixedAsset = async (req, res) => {
   try {
-    const { name, code, category, acquisitionDate, acquisitionCost, usefulLife, depreciationMethod, salvageValue } = req.body;
-
-    // Required field validation
-    if (!name || !code || !category || !acquisitionDate || acquisitionCost === undefined || usefulLife === undefined) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Los campos nombre, codigo, categoria, fecha de adquisicion, costo y vida util son obligatorios'
-      });
-    }
-
-    if (typeof acquisitionCost !== 'number' || acquisitionCost <= 0) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'El costo de adquisicion debe ser un numero positivo'
-      });
-    }
-
-    if (typeof usefulLife !== 'number' || usefulLife <= 0 || !Number.isInteger(usefulLife)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'La vida util debe ser un numero entero positivo (anos)'
-      });
-    }
-
-    const validMethods = ['STRAIGHT_LINE', 'DECLINING'];
-    const method = depreciationMethod ? depreciationMethod.toUpperCase() : 'STRAIGHT_LINE';
-    if (!validMethods.includes(method)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Metodo de depreciacion invalido. Use: STRAIGHT_LINE, DECLINING'
-      });
-    }
-
-    const asset = await prisma.fixedAsset.create({
-      data: {
-        name: String(name).trim(),
-        code: String(code).trim(),
-        category: String(category).trim(),
-        acquisitionDate: new Date(acquisitionDate),
-        acquisitionCost: Number(acquisitionCost),
-        usefulLife: Number(usefulLife),
-        depreciationMethod: method,
-        salvageValue: typeof salvageValue === 'number' ? salvageValue : 0,
-        currentBookValue: Number(acquisitionCost)
-      }
-    });
-
+    const asset = await financeService.createFixedAsset(req.body);
     res.status(201).json({ status: 'success', data: asset });
   } catch (error) {
     if (error.code === 'P2002') {
@@ -354,53 +308,7 @@ exports.getAccountsReceivable = async (req, res) => {
  */
 exports.createReceivable = async (req, res) => {
   try {
-    const { customerId, customerName, saleId, invoiceNumber, amount, dueDate } = req.body;
-
-    // Required field validation
-    if (!customerId || !customerName || !invoiceNumber || amount === undefined || !dueDate) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Los campos cliente, nombre del cliente, factura, monto y fecha de vencimiento son obligatorios'
-      });
-    }
-
-    if (typeof amount !== 'number' || amount <= 0) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'El monto debe ser un numero positivo'
-      });
-    }
-
-    // Check if invoice number already exists
-    const existing = await prisma.accountsReceivable.findFirst({
-      where: { invoiceNumber: String(invoiceNumber).trim() }
-    });
-
-    if (existing) {
-      return res.status(409).json({
-        status: 'error',
-        message: `Ya existe una cuenta por cobrar con el numero de factura '${invoiceNumber}'`
-      });
-    }
-
-    // Determine initial status
-    const dueDateObj = new Date(dueDate);
-    const isOverdue = dueDateObj < new Date();
-    const initialStatus = isOverdue ? 'OVERDUE' : 'PENDING';
-
-    const receivable = await prisma.accountsReceivable.create({
-      data: {
-        customerId: String(customerId).trim(),
-        customerName: String(customerName).trim(),
-        saleId: saleId || null,
-        invoiceNumber: String(invoiceNumber).trim(),
-        amount: Number(amount),
-        paidAmount: 0,
-        dueDate: dueDateObj,
-        status: initialStatus
-      }
-    });
-
+    const receivable = await financeService.createReceivable(req.body);
     res.status(201).json({ status: 'success', data: receivable });
   } catch (error) {
     if (error.code === 'P2002') {
@@ -417,59 +325,7 @@ exports.createReceivable = async (req, res) => {
 exports.updateReceivable = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!id) {
-      return res.status(400).json({ status: 'error', message: 'ID de cuenta por cobrar requerido' });
-    }
-
-    const existing = await prisma.accountsReceivable.findUnique({ where: { id } });
-    if (!existing) {
-      return res.status(404).json({ status: 'error', message: 'Cuenta por cobrar no encontrada' });
-    }
-
-    const { paidAmount, status } = req.body;
-
-    // Calculate new paid amount
-    let newPaidAmount = existing.paidAmount;
-    if (paidAmount !== undefined) {
-      if (typeof paidAmount !== 'number' || paidAmount < 0) {
-        return res.status(400).json({
-          status: 'error',
-          message: 'El monto de pago debe ser un numero no negativo'
-        });
-      }
-      newPaidAmount = existing.paidAmount + paidAmount;
-    }
-
-    // Cannot pay more than the total amount
-    if (newPaidAmount > existing.amount) {
-      return res.status(400).json({
-        status: 'error',
-        message: `El monto acumulado (Bs ${newPaidAmount.toFixed(2)}) excede el total de la factura (Bs ${existing.amount.toFixed(2)})`
-      });
-    }
-
-    // Determine new status
-    let newStatus = status || existing.status;
-    if (paidAmount !== undefined) {
-      if (newPaidAmount >= existing.amount) {
-        newStatus = 'PAID';
-      } else if (newPaidAmount > 0) {
-        newStatus = 'PARTIAL';
-      }
-    }
-
-    // Check if overdue
-    if (newStatus !== 'PAID' && existing.dueDate < new Date()) {
-      newStatus = 'OVERDUE';
-    }
-
-    const receivable = await prisma.accountsReceivable.update({
-      where: { id },
-      data: {
-        paidAmount: newPaidAmount,
-        status: newStatus
-      }
-    });
+    const receivable = await financeService.updateReceivable(id, req.body);
 
     res.json({
       status: 'success',
@@ -479,7 +335,7 @@ exports.updateReceivable = async (req, res) => {
         paidAmount: parseFloat(receivable.paidAmount.toFixed(2)),
         outstanding: parseFloat((receivable.amount - receivable.paidAmount).toFixed(2))
       },
-      message: newStatus === 'PAID' ? 'Cuenta marcada como pagada' : 'Cuenta actualizada exitosamente'
+      message: receivable.status === 'PAID' ? 'Cuenta marcada como pagada' : 'Cuenta actualizada exitosamente'
     });
   } catch (error) {
     res.status(400).json({ status: 'error', message: error.message });

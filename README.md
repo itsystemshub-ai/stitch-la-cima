@@ -108,24 +108,14 @@ chmod +x deploy.sh
 git clone <tu-repo>
 cd "stitch la cima"
 
-# 2. Instalar dependencias del backend
-cd backend
-npm install
+# 2. Instalar dependencias
+npm install && cd backend && npm install
 
-# 3. Configurar base de datos
-# Para desarrollo con SQLite (automático)
-npx prisma db push
+# 3. Preparar Base de Datos Híbrida (RECOMENDADO)
+# Este comando detecta automáticamente si usas SQLite (local) o Postgres (nube)
+npm run db:generate
 
-# O para PostgreSQL
-# Crea archivo .env con tu DATABASE_URL
-
-# 4. Ejecutar migraciones
-npx prisma migrate dev
-
-# 5. Poblar base de datos
-npm run db:seed
-
-# 6. Iniciar servidor
+# 4. Iniciar servidor
 npm run dev
 ```
 
@@ -225,26 +215,17 @@ GET /api/health        # Health check
 ### Comandos de Base de Datos
 
 ```bash
-# Ver esquema
-npx prisma db pull
+# Generar cliente híbrido (Detecta Local/Nube)
+npm run db:generate
 
-# Generar cliente
-npx prisma generate
+# Ver panel de administración
+npm run db:studio
 
-# Crear migración
-npx prisma migrate dev --name nombre_migracion
-
-# Aplicar migraciones (producción)
-npx prisma migrate deploy
-
-# Poblar datos
+# Poblar datos iniciales
 npm run db:seed
 
-# Resetear base de datos
+# Resetear base de datos local
 npm run db:reset
-
-# Abrir panel de administración
-npx prisma studio
 ```
 
 ---

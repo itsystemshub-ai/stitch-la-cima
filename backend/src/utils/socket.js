@@ -28,8 +28,36 @@ function emit(event, data) {
   }
 }
 
+/**
+ * Emit a low stock alert
+ * @param {Object} product - Product details
+ */
+function emitStockAlert(product) {
+  emit('LOW_STOCK_ALERT', {
+    productId: product.id,
+    name: product.name,
+    stock: product.stock,
+    threshold: 10,
+    timestamp: new Date()
+  });
+}
+
+/**
+ * Emit a security/audit notification to connected admins
+ * @param {Object} log - Audit log entry
+ */
+function emitSecurityAlert(log) {
+  emit('SECURITY_AUDIT', {
+    action: log.action,
+    userId: log.userId,
+    timestamp: new Date()
+  });
+}
+
 module.exports = {
   init,
   getIO,
-  emit
+  emit,
+  emitStockAlert,
+  emitSecurityAlert
 };

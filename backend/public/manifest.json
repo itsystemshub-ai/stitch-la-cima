@@ -1,0 +1,19 @@
+{
+  "name": "Zenith ERP - La Cima",
+  "short_name": "ZenithERP",
+  "description": "Sistema de Gestión Empresarial Híbrido - Mayor de Repuesto La Cima",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2991/2991148.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "orientation": "any",
+  "scope": "/"
+}

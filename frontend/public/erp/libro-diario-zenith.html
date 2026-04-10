@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Libro Diario | Mayor de Repuesto La Cima, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<title>Libro Diario | ERP La Cima</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/premium-erp.css">
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f8fafc", surface: "#ffffff", outline: "#e2e8f0" },
+        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
+      }
+    }
+  }
+</script>
+</head>
+<body class="bg-background text-stone-900 min-h-screen">
+<script src="js/zenith-identity.js"></script>
+<script src="js/zenith-layout.js"></script>
+
+<main class="ml-72 w-[calc(100vw-288px)] mt-[65px] p-6">
+    <!-- Header Módulo -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+        <div>
+            <nav class="flex gap-2 text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">
+                <a href="inicio.html" class="hover:text-primary">Dashboard</a>
+                <span>/</span>
+                <a href="contabilidad.html" class="hover:text-primary">Contabilidad</a>
+                <span>/</span>
+                <span class="text-stone-900">Libro Diario Zenith</span>
+            </nav>
+            <h2 class="text-3xl font-headline font-black text-stone-900 tracking-tight">LIBRO DIARIO</h2>
+            <p class="text-stone-500 text-sm">Registro cronológico de todas las operaciones contables.</p>
+        </div>
+        <div class="flex gap-3">
+            <button class="bg-stone-900 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-black transition-all">
+                <span class="material-symbols-outlined text-sm text-primary">add</span>
+                Nuevo Asiento
+            </button>
+        </div>
+    </div>
+
+    <!-- Tabla Contable -->
+    <div class="data-table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Asiento</th>
+                    <th>Cuenta Contable</th>
+                    <th class="text-right">Debe</th>
+                    <th class="text-right">Haber</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Contenido Dinámico -->
+                <tr class="bg-stone-50/50">
+                    <td class="font-bold">01/04/2026</td>
+                    <td class="text-stone-400 font-mono">#000124</td>
+                    <td colspan="3" class="italic text-stone-500 font-medium">Venta de mercancía s/ factura FAC-5402</td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td>1.1.01.01.001 - Caja Principal</td>
+                    <td class="text-right font-bold text-blue-600">$ 1,250.00</td>
+                    <td class="text-right text-stone-300">0.00</td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td>4.1.01.01.001 - Ventas Detal</td>
+                    <td class="text-right text-stone-300">0.00</td>
+                    <td class="text-right font-bold text-red-600">$ 1,250.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<script src="js/common.js"></script>
+</body></html>

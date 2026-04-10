@@ -446,3 +446,16 @@ model Backup {
   @@index([createdAt])
   @@map("backups")
 }
+model AuditLog {
+  id         String   @id @default(uuid())
+  action     String   @db.VarChar(255)
+  userId     String?  @db.VarChar(255)
+  ipAddress  String?  @db.VarChar(255)
+  resourceId String?  @db.VarChar(255)
+  details    String?  @db.Text
+  timestamp  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([timestamp])
+}

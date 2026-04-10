@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Control de Inventario | Mayor de Repuesto La Cima, C.A."/>
+    <title>Inventario | Mayor de Repuesto La Cima, C.A.</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/premium-erp.css">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f6f6f9", surface: "#ffffff" },
+                    fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] },
+                    boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)', 'premium': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-stone-900 min-h-screen">
+
+    <script src="js/zenith-identity.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/zenith-layout.js"></script>
+
+    <main class="ml-[288px] w-[calc(100vw-288px)] mt-[65px] p-6 pb-4">
+        
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <p class="text-[10px] font-bold text-stone-400 tracking-[0.2em] uppercase mb-1">Logística & Almacén</p>
+                <h2 class="text-3xl font-headline font-black text-stone-900 tracking-tight text-uppercase">CONTROL DE INVENTARIO</h2>
+                <div class="flex items-center gap-2 mt-1">
+                    <span class="flex items-center gap-1 text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
+                        <span class="material-symbols-outlined text-[12px]">sync</span>
+                        SINCRONIZADO
+                    </span>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button class="bg-stone-900 text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase shadow-premium hover:brightness-110 transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">add_box</span>
+                    Nueva Entrada
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8">
+            <div class="premium-card">
+                <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-2">Artículos en Stock</p>
+                <h4 class="text-3xl font-headline font-black text-stone-900">4,285</h4>
+            </div>
+            <div class="premium-card border-l-4 border-l-blue-500">
+                <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-2">Valoración</p>
+                <h4 class="text-3xl font-headline font-black text-stone-900">$842,500</h4>
+            </div>
+            <div class="premium-card">
+                <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest mb-2">Rotación</p>
+                <h4 class="text-3xl font-headline font-black text-stone-900">14.2%</h4>
+            </div>
+            <div class="premium-card border-l-4 border-l-red-500 bg-red-50/20">
+                <p class="text-red-400 text-[10px] font-bold uppercase tracking-widest mb-2">Stock Bajo</p>
+                <h4 class="text-3xl font-headline font-black text-red-600">32</h4>
+            </div>
+        </div>
+
+        <div class="premium-card p-0 overflow-hidden">
+            <div class="px-6 py-4 border-b border-stone-100 flex justify-between items-center bg-stone-50/30">
+                <h3 class="text-sm font-bold text-stone-900 uppercase tracking-widest">Catálogo de Repuestos</h3>
+                <div class="flex gap-4">
+                    <input type="text" placeholder="Buscar por OEM o Nombre..." class="text-xs border border-stone-200 rounded-lg px-3 py-1.5 w-64 focus:ring-2 focus:ring-primary/50 outline-none">
+                </div>
+            </div>
+            <div class="data-table-container border-none rounded-none">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th class="pl-6">Repuesto / Código</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Precio Mayor</th>
+                            <th class="pr-6">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pl-6 py-4">
+                                <p class="font-bold text-stone-900 text-sm">Empacadura de Cámara V6 (Metal)</p>
+                                <p class="text-[10px] text-stone-400 font-mono">CODE: CIMA-EMP-001</p>
+                            </td>
+                            <td><span class="text-xs font-bold text-stone-500">MOTOR / JUNTE</span></td>
+                            <td class="font-bold">142</td>
+                            <td class="font-bold text-stone-900">$45.00</td>
+                            <td class="pr-6">
+                                <button class="p-1.5 hover:bg-stone-100 rounded-lg transition-colors">
+                                    <span class="material-symbols-outlined text-stone-400 text-[18px]">visibility</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pl-6 py-4">
+                                <p class="font-bold text-stone-900 text-sm">Bomba de Agua Isuzu 4HK1</p>
+                                <p class="text-[10px] text-stone-400 font-mono">CODE: CIMA-PMP-982</p>
+                            </td>
+                            <td><span class="text-xs font-bold text-stone-500">ENFRIAMIENTO</span></td>
+                            <td class="font-bold text-red-600">08</td>
+                            <td class="font-bold text-stone-900">$182.00</td>
+                            <td class="pr-6">
+                                <button class="p-1.5 hover:bg-stone-100 rounded-lg transition-colors">
+                                    <span class="material-symbols-outlined text-red-400 text-[18px]">warning</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-stone-100 flex justify-between items-center text-[10px] font-bold text-stone-400">
+            <span class="entity-rif">RIF: J-40308741-5</span>
+            <span class="uppercase tracking-[0.2em]">Mayor de Repuesto La Cima, C.A.</span>
+        </div>
+
+    </main>
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+</body>
+</html>

@@ -5,9 +5,10 @@ const { protect, authorize } = require('../middleware/authMiddleware');
 
 const validate = require('../middleware/validate');
 const { createSaleValidator } = require('../validators/saleValidator');
+const auditLog = require('../middleware/auditMiddleware');
 
 // POST /api/sales - Create sale
-router.post('/', protect, createSaleValidator, validate, saleController.createSale);
+router.post('/', protect, auditLog('CREATE_SALE'), createSaleValidator, validate, saleController.createSale);
 
 // GET /api/sales - List sales with filters
 router.get('/', protect, saleController.getSales);
@@ -25,7 +26,7 @@ router.get('/top-products', protect, saleController.getTopProducts);
 router.get('/by-salesperson', protect, saleController.getSalesBySalesperson);
 
 // POST /api/sales/credit-notes - Create credit note (ADMIN only)
-router.post('/credit-notes', protect, authorize('ADMIN'), saleController.createCreditNote);
+router.post('/credit-notes', protect, authorize('ADMIN'), auditLog('CREATE_CREDIT_NOTE'), saleController.createCreditNote);
 
 // GET /api/sales/credit-notes - List credit notes
 router.get('/credit-notes', protect, saleController.getCreditNotes);
@@ -40,6 +41,6 @@ router.get('/tax-report', protect, authorize('ADMIN', 'MANAGER'), saleController
 router.get('/:id', protect, saleController.getSaleById);
 
 // POST /api/sales/:id/cancel - Cancel sale (ADMIN, MANAGER only)
-router.post('/:id/cancel', protect, authorize('ADMIN', 'MANAGER'), saleController.cancelSale);
+router.post('/:id/cancel', protect, authorize('ADMIN', 'MANAGER'), auditLog('CANCEL_SALE'), saleController.cancelSale);
 
 module.exports = router;

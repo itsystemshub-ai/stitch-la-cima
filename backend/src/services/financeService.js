@@ -286,6 +286,102 @@ function calculateFinancialRatios(balanceSheet, incomeStatement) {
   return ratios;
 }
 
+/**
+ * Create a new fixed asset
+ * @param {Object} data - Asset data
+ * @returns {Promise<Object>} Created asset
+ */
+async function createFixedAsset(data) {
+  const { name, code, category, acquisitionDate, acquisitionCost, usefulLife, depreciationMethod, salvageValue } = data;
+
+  const method = depreciationMethod ? depreciationMethod.toUpperCase() : 'STRAIGHT_LINE';
+  
+  return await prisma.fixedAsset.create({
+    data: {
+      name: String(name).trim(),
+      code: String(code).trim(),
+      category: String(category).trim(),
+      acquisitionDate: new Date(acquisitionDate),
+      acquisitionCost: Number(acquisitionCost),
+      usefulLife: Number(usefulLife),
+      depreciationMethod: method,
+      salvageValue: typeof salvageValue === 'number' ? salvageValue : 0,
+      currentBookValue: Number(acquisitionCost)
+    }
+  });
+}
+
+/**
+ * Create a new accounts receivable entry
+ * @param {Object} data - Receivable data
+ * @returns {Promise<Object>} Created receivable
+ */
+async function createReceivable(data) {
+  const { customerId, customerName, saleId, invoiceNumber, amount, dueDate } = data;
+
+  // Determine initial status
+  const dueDateObj = new Date(dueDate);
+  const isOverdue = dueDateObj < new Date();
+  const initialStatus = isOverdue ? 'OVERDUE' : 'PENDING';
+
+  return await prisma.accountsReceivable.create({
+    data: {
+      customerId: String(customerId).trim(),
+      customerName: String(customerName).trim(),
+      saleId: saleId || null,
+      invoiceNumber: String(invoiceNumber).trim(),
+      amount: Number(amount),
+      paidAmount: 0,
+      dueDate: dueDateObj,
+      status: initialStatus
+    }
+  });
+}
+
+/**
+ * Update a receivable and adjust status
+ * @param {string} id - Receivable ID
+ * @param {Object} updates - Update data { paidAmount, status }
+ * @returns {Promise<Object>} Updated receivable
+ */
+async function updateReceivable(id, updates) {
+  const { paidAmount, status } = updates;
+  
+  const existing = await prisma.accountsReceivable.findUnique({ where: { id } });
+  if (!existing) {
+    throw new Error('Cuenta por cobrar no encontrada');
+  }
+
+  let newPaidAmount = existing.paidAmount;
+  if (paidAmount !== undefined) {
+    newPaidAmount = existing.paidAmount + paidAmount;
+    if (newPaidAmount > existing.amount) {
+      throw new Error(`El monto acumulado excede el total de la factura`);
+    }
+  }
+
+  let newStatus = status || existing.status;
+  if (paidAmount !== undefined) {
+    if (newPaidAmount >= existing.amount) {
+      newStatus = 'PAID';
+    } else if (newPaidAmount > 0) {
+      newStatus = 'PARTIAL';
+    }
+  }
+
+  if (newStatus !== 'PAID' && existing.dueDate < new Date()) {
+    newStatus = 'OVERDUE';
+  }
+
+  return await prisma.accountsReceivable.update({
+    where: { id },
+    data: {
+      paidAmount: newPaidAmount,
+      status: newStatus
+    }
+  });
+}
+
 module.exports = {
   calculateStraightLineDepreciation,
   calculateDecliningBalanceDepreciation,
@@ -293,5 +389,8 @@ module.exports = {
   updateAssetBookValue,
   recordDepreciation,
   generateAgingReport,
-  calculateFinancialRatios
+  calculateFinancialRatios,
+  createFixedAsset,
+  createReceivable,
+  updateReceivable
 };
