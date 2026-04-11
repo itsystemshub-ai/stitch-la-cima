@@ -26,7 +26,7 @@
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && this.value.trim()) {
-                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+                window.location.href = '/tienda/catalogo_detallado?q=' + encodeURIComponent(this.value.trim());
             }
         });
     }

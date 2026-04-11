@@ -1,0 +1,264 @@
+@extends('layouts.erp')
+
+@section('title', 'TITAN INDUSTRIAL - Registro Histórico de Facturas | ERP La Cima')
+
+@push('styles')
+    <link rel="stylesheet" href="/frontend/public/erp/css/facturas-emitidas.css">
+@endpush
+
+@section('content')
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('breadcrumbPage');
+      if(b) b.innerText = 'P�gina';
+  });
+</script>
+
+<main class="ml-64 min-h-screen bg-surface">
+<!-- TopNavBar Shell -->
+<header class="bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl flex justify-between items-center w-full px-6 h-16 sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<h2 class="font-['Space_Grotesk'] tracking-tight uppercase text-xl font-bold tracking-tighter text-stone-900 dark:text-stone-50">REGISTRO HISTÓRICO</h2>
+<div class="relative hidden lg:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-highest border-none rounded-sm py-1.5 pl-9 pr-4 text-xs w-64 focus:ring-2 focus:ring-primary transition-all" placeholder="Buscar factura o cliente..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors rounded">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors rounded">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-stone-200 overflow-hidden ml-2">
+<img alt="User profile" data-alt="professional male portrait for user profile in high-end industrial software interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbXLcVMQbeupxzelt4BVAX0W-gazqyzO0uZk24E5OcEYmxmKI0jHPoJQhOyfBc0I31QcgDkLRuu2xqLeOkr1Jkqe8b_Q9MS_vniL5bA3Xrkf-2Ju0btzE736bF7b298BNtR4tZQSY5rDy1mcvi-ovGblXc0S5kW9UcC6PvlDjXYTx9YSlJ-aFAMqtAmfbVZb5-t4diQ0mr26xUAQoeOd20PtWsmsMJgGSh0K5qIdx6JlAkePjksdd4hhywBgLHYMdo2kHYlGaICP8"/>
+</div>
+</div>
+</header>
+<!-- View Content -->
+<div class="p-8">
+<!-- Filters & Actions Bar -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end gap-6 bg-surface-container-low p-6 rounded-lg relative overflow-hidden">
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-5 pointer-events-none">
+<div class="absolute inset-0 bg-gradient-to-l from-primary to-transparent"></div>
+</div>
+<div class="flex-1 space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-500">Rango de Fecha</label>
+<div class="flex gap-2">
+<input class="bg-surface-container-lowest border-none rounded px-3 py-2 text-sm w-full focus:ring-1 focus:ring-primary shadow-sm" type="date"/>
+<span class="self-center text-stone-400">/</span>
+<input class="bg-surface-container-lowest border-none rounded px-3 py-2 text-sm w-full focus:ring-1 focus:ring-primary shadow-sm" type="date"/>
+</div>
+</div>
+<div class="flex-1 space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-widest text-stone-500">Filtrar por Cliente</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-sm" data-icon="person">person</span>
+<input class="bg-surface-container-lowest border-none rounded pl-10 pr-3 py-2 text-sm w-full focus:ring-1 focus:ring-primary shadow-sm" placeholder="Nombre o RIF..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-stone-900 text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest hover:bg-black transition-colors flex items-center gap-2 h-[38px]">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                        Aplicar
+                    </button>
+<button class="bg-surface-container-high text-stone-700 px-4 py-2 rounded text-xs font-bold uppercase tracking-widest hover:bg-stone-300 transition-colors h-[38px]">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+</div>
+</div>
+<!-- Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container-lowest p-5 rounded border-l-4 border-lime-500">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Total Facturado</p>
+<p class="text-2xl font-['Space_Grotesk'] font-bold text-stone-900">$284,930.00</p>
+<p class="text-[10px] text-lime-600 font-bold mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> +12% este mes
+                    </p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded border-l-4 border-stone-300">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Facturas Emitidas</p>
+<p class="text-2xl font-['Space_Grotesk'] font-bold text-stone-900">1,248</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded border-l-4 border-red-500">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Anuladas</p>
+<p class="text-2xl font-['Space_Grotesk'] font-bold text-stone-900">12</p>
+<p class="text-[10px] text-red-600 font-bold mt-2">0.9% del total</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded border-l-4 border-primary">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Impuestos Retenidos</p>
+<p class="text-2xl font-['Space_Grotesk'] font-bold text-stone-900">$45,588.80</p>
+</div>
+</div>
+<!-- High Density Table Container -->
+<div class="bg-surface-container-lowest rounded overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-stone-100/50 border-b border-stone-200">
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500">Fecha</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500">Nro Control</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500">Cliente</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500">RIF</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500 text-right">Base Imp.</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500 text-right">IVA (16%)</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500 text-right">Total</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500 text-center">Estatus</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-stone-500 text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-100">
+<!-- Row 1 -->
+<tr class="hover:bg-stone-50 transition-colors group">
+<td class="px-6 py-4 text-xs font-medium text-stone-600">24/05/2024</td>
+<td class="px-6 py-4 text-xs font-bold text-stone-900 font-['Space_Grotesk']">F-0001824</td>
+<td class="px-6 py-4 text-xs font-semibold text-stone-800">Aceros del Orinoco C.A.</td>
+<td class="px-6 py-4 text-xs text-stone-500">J-30456214-0</td>
+<td class="px-6 py-4 text-xs text-right font-mono">$12,450.00</td>
+<td class="px-6 py-4 text-xs text-right font-mono">$1,992.00</td>
+<td class="px-6 py-4 text-xs text-right font-bold text-stone-900 font-mono">$14,442.00</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 rounded-sm bg-lime-100 text-lime-700 text-[9px] font-black uppercase tracking-tighter">Vigente</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded hover:bg-stone-200 text-stone-600 transition-colors" title="Ver PDF">
+<span class="material-symbols-outlined text-lg" data-icon="picture_as_pdf">picture_as_pdf</span>
+</button>
+<button class="p-1.5 rounded hover:bg-stone-200 text-stone-600 transition-colors" title="Imprimir">
+<span class="material-symbols-outlined text-lg" data-icon="print">print</span>
+</button>
+<button class="p-1.5 rounded hover:bg-red-50 text-red-600 transition-colors" title="Anular">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-stone-50 transition-colors group">
+<td class="px-6 py-4 text-xs font-medium text-stone-600">23/05/2024</td>
+<td class="px-6 py-4 text-xs font-bold text-stone-900 font-['Space_Grotesk']">F-0001823</td>
+<td class="px-6 py-4 text-xs font-semibold text-stone-800">Suministros Industriales 2000</td>
+<td class="px-6 py-4 text-xs text-stone-500">J-29877452-1</td>
+<td class="px-6 py-4 text-xs text-right font-mono">$4,200.00</td>
+<td class="px-6 py-4 text-xs text-right font-mono">$672.00</td>
+<td class="px-6 py-4 text-xs text-right font-bold text-stone-900 font-mono">$4,872.00</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 rounded-sm bg-lime-100 text-lime-700 text-[9px] font-black uppercase tracking-tighter">Vigente</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded hover:bg-stone-200 text-stone-600 transition-colors" title="Ver PDF">
+<span class="material-symbols-outlined text-lg" data-icon="picture_as_pdf">picture_as_pdf</span>
+</button>
+<button class="p-1.5 rounded hover:bg-stone-200 text-stone-600 transition-colors" title="Imprimir">
+<span class="material-symbols-outlined text-lg" data-icon="print">print</span>
+</button>
+<button class="p-1.5 rounded hover:bg-red-50 text-red-600 transition-colors" title="Anular">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 (Anulada) -->
+<tr class="bg-red-50/20 hover:bg-red-50 transition-colors group">
+<td class="px-6 py-4 text-xs font-medium text-stone-400">23/05/2024</td>
+<td class="px-6 py-4 text-xs font-bold text-stone-400 font-['Space_Grotesk'] line-through">F-0001822</td>
+<td class="px-6 py-4 text-xs font-semibold text-stone-400">Constructora El Faro</td>
+<td class="px-6 py-4 text-xs text-stone-400">J-41123300-8</td>
+<td class="px-6 py-4 text-xs text-right font-mono text-stone-400">$8,900.00</td>
+<td class="px-6 py-4 text-xs text-right font-mono text-stone-400">$1,424.00</td>
+<td class="px-6 py-4 text-xs text-right font-bold text-stone-400 font-mono">$10,324.00</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 rounded-sm bg-red-100 text-red-700 text-[9px] font-black uppercase tracking-tighter">Anulada</span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-1.5 rounded hover:bg-stone-200 text-stone-400 transition-colors" title="Ver Log de Anulación">
+<span class="material-symbols-outlined text-lg" data-icon="info">info</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-stone-50 transition-colors group">
+<td class="px-6 py-4 text-xs font-medium text-stone-600">22/05/2024</td>
+<td class="px-6 py-4 text-xs font-bold text-stone-900 font-['Space_Grotesk']">F-0001821</td>
+<td class="px-6 py-4 text-xs font-semibold text-stone-800">Logística Global S.A.</td>
+<td class="px-6 py-4 text-xs text-stone-500">J-00122455-9</td>
+<td class="px-6 py-4 text-xs text-right font-mono">$45,000.00</td>
+<td class="px-6 py-4 text-xs text-right font-mono">$7,200.00</td>
+<td class="px-6 py-4 text-xs text-right font-bold text-stone-900 font-mono">$52,200.00</td>
+<td class="px-6 py-4 text-center">
+<span class="px-2 py-1 rounded-sm bg-lime-100 text-lime-700 text-[9px] font-black uppercase tracking-tighter">Vigente</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded hover:bg-stone-200 text-stone-600 transition-colors" title="Ver PDF">
+<span class="material-symbols-outlined text-lg" data-icon="picture_as_pdf">picture_as_pdf</span>
+</button>
+<button class="p-1.5 rounded hover:bg-stone-200 text-stone-600 transition-colors" title="Imprimir">
+<span class="material-symbols-outlined text-lg" data-icon="print">print</span>
+</button>
+<button class="p-1.5 rounded hover:bg-red-50 text-red-600 transition-colors" title="Anular">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-stone-50 px-6 py-4 border-t border-stone-200 flex items-center justify-between">
+<p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Mostrando 1 a 25 de 1,248 facturas</p>
+<div class="flex gap-1">
+<button class="p-1 rounded bg-stone-200 text-stone-600 hover:bg-stone-300 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded bg-primary text-on-primary text-[10px] font-bold">1</button>
+<button class="px-3 py-1 rounded bg-stone-200 text-stone-600 text-[10px] font-bold hover:bg-stone-300">2</button>
+<button class="px-3 py-1 rounded bg-stone-200 text-stone-600 text-[10px] font-bold hover:bg-stone-300">3</button>
+<button class="p-1 rounded bg-stone-200 text-stone-600 hover:bg-stone-300 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Additional Context Footer -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-stone-200 pt-8">
+<div class="relative group cursor-pointer overflow-hidden rounded-lg">
+<img class="w-full h-40 object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="industrial warehouse interior with steel structures and precision machinery in a clean engineering environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCVY1zYC4PafKnqVJPrIU_t0NAo7bjoDdk-q6XQElOE7LaeoQZkgITyHOuTZ8BznLVNF6sLoyJejyNi6QojYupY6wLBXYwnVVKbJTgyRrdLbCVxrM2-7zhhCbVMDcXEPO24d9jBRnPcwnfMkNR6eCb2W0SSkjhEYjuNUjMpvjf1UVR7KFjEAH2JjtyrfIpRxpUF9xMAzc3Kmf7MQ7Soo4c73ua2xqqhAaubWTXld5objkdT2McfozhuaNC2_CEF3QqUSNQEe38r7s"/>
+<div class="absolute inset-0 bg-stone-900/60 flex flex-col justify-center px-8">
+<h4 class="text-lime-400 font-['Space_Grotesk'] font-bold text-lg tracking-tight">SOLICITAR REPORTE MENSUAL</h4>
+<p class="text-white/80 text-xs mt-1">Generación automática de libro de ventas en formato SENIAT.</p>
+</div>
+</div>
+<div class="space-y-4">
+<h5 class="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Avisos del Sistema</h5>
+<div class="flex gap-4 items-start">
+<div class="bg-lime-100 p-2 rounded">
+<span class="material-symbols-outlined text-lime-700 text-lg" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<p class="text-xs font-bold text-stone-800">Conexión SENIAT Activa</p>
+<p class="text-[10px] text-stone-500 mt-1">La sincronización con la plataforma fiscal se encuentra operativa y actualizada al día de hoy.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="bg-amber-100 p-2 rounded">
+<span class="material-symbols-outlined text-amber-700 text-lg" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="text-xs font-bold text-stone-800">Próximo Cierre de Mes</p>
+<p class="text-[10px] text-stone-500 mt-1">Faltan 7 días para el cierre fiscal de Mayo. Revise facturas pendientes por anular.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+@endsection
+
+@push('scripts')
+    <script src="/frontend/public/erp/js/facturas-emitidas.js"></script>
+@endpush

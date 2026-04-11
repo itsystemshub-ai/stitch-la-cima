@@ -1,7 +1,7 @@
 /**
- * ZENITH ERP - Common Scripts
+ * Mayor de Repuesto La Cima, C.A. - Common Scripts
  * Shared JavaScript for all ERP pages
- * Mayores de Repuesto La Cima, C.A.
+ * Mayor de Repuesto La Cima, C.A.
  */
 
 // Mobile Menu Toggle

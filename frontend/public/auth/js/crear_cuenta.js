@@ -57,7 +57,7 @@ async function handleRegister() {
 
       // Redirigir al login después de 2 segundos
       setTimeout(() => {
-        window.location.href = 'login.html';
+        window.location.href = '/auth/login';
       }, 2000);
     } else {
       showNotification(response.message || 'Error al crear la cuenta', 'error');
@@ -124,6 +124,6 @@ function closeMobileMenu() {
 // Verificar si ya está logueado al cargar
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('erp_session') === 'true') {
-    window.location.href = '../erp/inicio.html';
+    window.location.href = '/dashboard';
   }
 });

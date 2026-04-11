@@ -37,9 +37,9 @@ async function handleLogin() {
       setTimeout(() => {
         const role = response.data.user?.role;
         if (role === 'ADMIN' || role === 'MANAGER') {
-          window.location.href = '../erp/inicio.html';
+          window.location.href = '/dashboard';
         } else {
-          window.location.href = '../ecommerce/index.html';
+          window.location.href = '/tienda/index';
         }
       }, 1500);
     } else {
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('erp_session') === 'true') {
     const role = localStorage.getItem('user_role');
     if (role === 'ADMIN' || role === 'MANAGER') {
-      window.location.href = '../erp/inicio.html';
+      window.location.href = '/dashboard';
     }
   }
 

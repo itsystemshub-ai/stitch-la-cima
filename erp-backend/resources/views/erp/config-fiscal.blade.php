@@ -1,0 +1,243 @@
+@extends('layouts.erp')
+
+@section('title', 'Legal Configuration &amp; SENIAT Compliance | TRUCKPRO ERP | ERP La Cima')
+
+@push('styles')
+    <link rel="stylesheet" href="/frontend/public/erp/css/config-fiscal.css">
+@endpush
+
+@section('content')
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('breadcrumbPage');
+      if(b) b.innerText = 'Página';
+  });
+</script>
+
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-40 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<div class="bg-stone-200 dark:bg-stone-800 h-8 w-64 rounded flex items-center px-3 gap-2">
+<span class="material-symbols-outlined text-stone-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs w-full text-stone-300" placeholder="Search legal records..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-lime-600 text-white px-4 py-1.5 rounded text-xs font-bold uppercase tracking-tight flex items-center gap-2 hover:bg-lime-500 transition-colors">
+<span class="material-symbols-outlined text-sm">warning</span>
+                    Legal Alert
+                </button>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-stone-500 cursor-pointer p-2 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors rounded">settings</span>
+<span class="material-symbols-outlined text-stone-500 cursor-pointer p-2 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors rounded">notifications</span>
+<span class="material-symbols-outlined text-stone-500 cursor-pointer p-2 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors rounded">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Breadcrumbs & Title -->
+<div class="mb-10">
+<div class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-lime-500 font-bold mb-2">
+<span>Compliance</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span>Legal Configuration</span>
+</div>
+<h1 class="text-4xl font-bold uppercase tracking-tighter text-stone-50">MAYOR DE REPUESTO LA CIMA, C.A.</h1>
+<p class="text-stone-400 mt-1 font-body">Official configuration panel for SENIAT fiscal alignment and documented adjustments.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Fiscal Data Card -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container-low p-8 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-lime-600/5 -mr-16 -mt-16 rounded-full blur-3xl"></div>
+<h2 class="text-xl font-bold uppercase tracking-tight mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-lime-500">fingerprint</span>
+                        Fiscal Identification
+                    </h2>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">RIF Number</label>
+<div class="bg-surface-container-highest p-4 rounded text-xl font-mono text-stone-100 tracking-wider">
+                                J-40308741-5
+                            </div>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Contribuyente Especial</label>
+<div class="flex items-center h-[60px]">
+<div class="bg-lime-600 text-black px-4 py-2 rounded font-black text-sm uppercase tracking-tighter flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Active / YES
+                                </div>
+</div>
+</div>
+<div class="col-span-2 space-y-2">
+<label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Registro Mercantil Seal #</label>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none focus:ring-2 focus:ring-lime-500 p-4 rounded text-stone-100 font-headline uppercase tracking-tight" type="text" value="TOMO 45-A-6782-Z"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-500">verified</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] uppercase tracking-widest text-stone-500 font-bold">Default IVA Rate</label>
+<div class="flex items-end gap-3">
+<span class="text-5xl font-black tracking-tighter text-lime-400">16</span>
+<span class="text-xl font-bold text-stone-500 mb-1">%</span>
+<span class="text-[10px] text-stone-500 uppercase font-bold mb-2 ml-4">Standard Base</span>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-end">
+<button class="bg-stone-100 text-stone-900 px-6 py-3 font-bold uppercase text-xs tracking-widest hover:bg-lime-500 hover:text-white transition-all">
+                            Save Fiscal Changes
+                        </button>
+</div>
+</div>
+<!-- Industrial Status Widget -->
+<div class="col-span-12 lg:col-span-5 bg-surface-container-low p-8 rounded-lg flex flex-col justify-between border-l-4 border-lime-600">
+<div>
+<h2 class="text-xl font-bold uppercase tracking-tight mb-4">Compliance Score</h2>
+<div class="flex items-center gap-6 mb-8">
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-stone-800" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-lime-500" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="25.12" stroke-width="8"></circle>
+</svg>
+<span class="absolute text-2xl font-black text-stone-100">90%</span>
+</div>
+<div>
+<p class="text-stone-300 font-bold uppercase tracking-tighter">Verification Health</p>
+<p class="text-xs text-stone-500">Last audit: 12 days ago. <br/>All seals are valid until 2025.</p>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-stone-900 rounded-lg flex items-center justify-between">
+<span class="text-xs uppercase font-bold text-stone-400">SENIAT Web Service</span>
+<span class="flex items-center gap-2 text-xs font-bold text-lime-500">
+<span class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></span>
+                                CONNECTED
+                            </span>
+</div>
+<div class="p-4 bg-stone-900 rounded-lg flex items-center justify-between">
+<span class="text-xs uppercase font-bold text-stone-400">Mermas Reporting</span>
+<span class="text-xs font-bold text-stone-200">AUTOMATIC</span>
+</div>
+</div>
+</div>
+<!-- Documental Supports Section -->
+<div class="col-span-12 mt-4">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold uppercase tracking-tighter">Soportes Documentales</h2>
+<button class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-lime-500 hover:text-lime-400 transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+                            Upload Documentation
+                        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Doc Card 1 -->
+<div class="bg-surface-container-low group hover:bg-surface-container-high transition-all p-1 rounded-lg">
+<div class="aspect-[3/4] bg-stone-800 rounded relative overflow-hidden mb-4">
+<img class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" data-alt="Technical PDF document scan showing legal seals and watermarks for industrial compliance reporting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXydeD9qy_DVgISl9wpYxOqMKdVlFupbZVZXAWotSePAnRDJbpeyHffy92Nm0ILrMR3GJ4yZgQ6cU1vkDwoqalPxKpIn-aeyfluGEkHnIjw-l_S9AwPQ-j4Z0aWuME2-04hfP6h5m6ohEKSA8BZaIqGaHrGBnUl42fWsX8u5vY013IgpLJVOre1gwegzGTLW6qLcBcaj4s8BTDq3A95xEbH8UKbZtGVL0uyTaqLNmXkxY0ywTO9q-pYqus33NlcFZKbKMTSYDtGfY"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-white">visibility</span>
+</div>
+<div class="absolute top-3 left-3 bg-red-600 text-white text-[8px] font-black px-2 py-1 uppercase rounded-sm">PDF</div>
+</div>
+<div class="px-4 pb-4">
+<p class="text-sm font-bold text-stone-100 truncate">Mermas_Q3_Inventory.pdf</p>
+<p class="text-[10px] text-stone-500 uppercase tracking-widest mt-1">Uploaded Oct 24, 2023</p>
+</div>
+</div>
+<!-- Doc Card 2 -->
+<div class="bg-surface-container-low group hover:bg-surface-container-high transition-all p-1 rounded-lg">
+<div class="aspect-[3/4] bg-stone-800 rounded relative overflow-hidden mb-4">
+<img class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" data-alt="High resolution photo of a formal legal certificate with gold foil seal and complex typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtOdIXR8feOApGOnBuLE4kcNQfY0XDtIRVrWDxr9syLm5hs34_63g2_3r9kSnRnMNIhsT1wsYBTRnFv6IvXgNL1jDX-lLukQ02n6jJ1lIHZd1N8ZImr4_VS3LCY0onc67CdwzivGkHOu1h2dbHJR87aBAimhrQN6KP9w3f7HHLigjuN88k5XXuZ9CkIvq2UCsA1D0cbSF94d_1v4Aj0hgHZu_1Fkkq8DTrFHDniKRdogZiqEzIGr3MCiZ9QOwvWJ-9jzFgaW6ONGc"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-white">visibility</span>
+</div>
+<div class="absolute top-3 left-3 bg-blue-600 text-white text-[8px] font-black px-2 py-1 uppercase rounded-sm">IMAGE</div>
+</div>
+<div class="px-4 pb-4">
+<p class="text-sm font-bold text-stone-100 truncate">Sello_Mercantil_Ref.jpg</p>
+<p class="text-[10px] text-stone-500 uppercase tracking-widest mt-1">Uploaded Sep 12, 2023</p>
+</div>
+</div>
+<!-- Doc Card 3 -->
+<div class="bg-surface-container-low group hover:bg-surface-container-high transition-all p-1 rounded-lg">
+<div class="aspect-[3/4] bg-stone-800 rounded relative overflow-hidden mb-4">
+<img class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity" data-alt="Technical adjustment report document with data tables and highlighted values for SENIAT reporting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbX9DW78rDFaROPa7FvGswgEwNkhtjO6fMPGO2_W333UGXUj6hRf5hVP9cGofPBGqzsQgcx3Bwx91c--2mUqIwY0RA3OVVhsloYn5Ik9UuuvrRkSjbCRXwWAdCmAbVsgVFMxqU0dlxFp_vl4lKIAficVE3iXg_pgcjohe1gYWWQTLh6aBfQySCJsHkv4ayk2JOrmsrVunFdUjL3NLpXjm4YFdBQstQvwnKChIeXpnuYPkxi6otL2zI_4t-BNd0-gOC1g9wPIOEfew"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-white">visibility</span>
+</div>
+<div class="absolute top-3 left-3 bg-red-600 text-white text-[8px] font-black px-2 py-1 uppercase rounded-sm">PDF</div>
+</div>
+<div class="px-4 pb-4">
+<p class="text-sm font-bold text-stone-100 truncate">IVA_Adjustment_Log.pdf</p>
+<p class="text-[10px] text-stone-500 uppercase tracking-widest mt-1">Uploaded Aug 05, 2023</p>
+</div>
+</div>
+<!-- Upload New Placeholder -->
+<div class="border-2 border-dashed border-stone-800 rounded-lg flex flex-col items-center justify-center p-8 group hover:border-lime-600 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-stone-700 text-5xl mb-4 group-hover:text-lime-500 transition-colors">cloud_upload</span>
+<p class="text-[10px] uppercase font-bold text-stone-500 tracking-widest text-center group-hover:text-stone-300">Drop files here to attach to legal profile</p>
+</div>
+</div>
+</div>
+<!-- Footer Technical Table -->
+<div class="col-span-12 mt-8 bg-surface-container-lowest overflow-hidden">
+<div class="p-6 bg-stone-900 border-b border-stone-800">
+<h3 class="text-sm font-bold uppercase tracking-widest text-stone-400">Recent Adjustment Logs</h3>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container">
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-stone-500">Ref Code</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-stone-500">Operation</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-stone-500">Fiscal Impact</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-stone-500">Status</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-stone-500">Authorized By</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-800/50">
+<tr class="hover:bg-lime-500/5 transition-colors">
+<td class="px-6 py-4 text-xs font-mono text-stone-300">ADJ-00982</td>
+<td class="px-6 py-4 text-xs font-bold text-stone-100">Inventory Merma - Engine Gaskets</td>
+<td class="px-6 py-4 text-xs text-red-400">- 4,200.00 VED</td>
+<td class="px-6 py-4">
+<span class="text-[9px] font-black bg-lime-900/30 text-lime-400 px-2 py-1 rounded">SENIAT VERIFIED</span>
+</td>
+<td class="px-6 py-4 text-xs text-stone-400">R. Rodriguez (QA-04)</td>
+</tr>
+<tr class="bg-stone-900/30 hover:bg-lime-500/5 transition-colors">
+<td class="px-6 py-4 text-xs font-mono text-stone-300">ADJ-00975</td>
+<td class="px-6 py-4 text-xs font-bold text-stone-100">IVA Correction - Credit Note #88</td>
+<td class="px-6 py-4 text-xs text-lime-400">+ 1,120.00 VED</td>
+<td class="px-6 py-4">
+<span class="text-[9px] font-black bg-lime-900/30 text-lime-400 px-2 py-1 rounded">SENIAT VERIFIED</span>
+</td>
+<td class="px-6 py-4 text-xs text-stone-400">Admin System</td>
+</tr>
+<tr class="hover:bg-lime-500/5 transition-colors">
+<td class="px-6 py-4 text-xs font-mono text-stone-300">ADJ-00971</td>
+<td class="px-6 py-4 text-xs font-bold text-stone-100">Damage Disposal - Warehouse A</td>
+<td class="px-6 py-4 text-xs text-red-400">- 845.50 VED</td>
+<td class="px-6 py-4">
+<span class="text-[9px] font-black bg-stone-800 text-stone-500 px-2 py-1 rounded">PENDING SEAL</span>
+</td>
+<td class="px-6 py-4 text-xs text-stone-400">M. Blanco (WH-A)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+@endsection
+
+@push('scripts')
+    <script src="/frontend/public/erp/js/config-fiscal.js"></script>
+@endpush

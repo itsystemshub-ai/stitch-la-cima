@@ -33,7 +33,7 @@ function switchToGrid() {
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && this.value.trim()) {
-                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+                window.location.href = '/tienda/catalogo_detallado?q=' + encodeURIComponent(this.value.trim());
             }
         });
     }
@@ -112,7 +112,7 @@ function switchToGrid() {
                         <span class="material-symbols-outlined text-6xl text-stone-300 mb-4">search_off</span>
                         <h3 class="text-2xl font-black text-black uppercase mb-2">Sin Resultados</h3>
                         <p class="text-stone-500 mb-6">No encontramos productos para "${query}"</p>
-                        <a href="catalogo_general.html" class="inline-flex items-center gap-2 bg-black text-primary px-6 py-3 rounded-md font-black text-xs uppercase tracking-widest hover:bg-stone-800 transition-all">
+                        <a href="/tienda/catalogo_general" class="inline-flex items-center gap-2 bg-black text-primary px-6 py-3 rounded-md font-black text-xs uppercase tracking-widest hover:bg-stone-800 transition-all">
                             <span class="material-symbols-outlined text-sm">storefront</span>
                             Ver Catálogo Completo
                         </a>

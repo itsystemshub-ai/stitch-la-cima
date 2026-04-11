@@ -50,7 +50,7 @@
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && this.value.trim()) {
-                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+                window.location.href = '/tienda/catalogo_detallado?q=' + encodeURIComponent(this.value.trim());
             }
         });
     }
@@ -59,7 +59,7 @@
     if (quickSearch) {
         quickSearch.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && this.value.trim()) {
-                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+                window.location.href = '/tienda/catalogo_detallado?q=' + encodeURIComponent(this.value.trim());
             }
         });
     }
@@ -99,7 +99,7 @@
 
         if (relatedTerms.length > 0) query += ' ' + relatedTerms.join(' ');
 
-        window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(query);
+        window.location.href = '/tienda/catalogo_detallado?q=' + encodeURIComponent(query);
     }
 
     // ==================== MOBILE MENU ====================

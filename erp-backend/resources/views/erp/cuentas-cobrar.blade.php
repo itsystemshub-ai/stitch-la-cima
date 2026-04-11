@@ -1,0 +1,228 @@
+@extends('layouts.erp')
+
+@section('title', 'cuentas-cobrar | ERP La Cima')
+
+@push('styles')
+    <link rel="stylesheet" href="/frontend/public/erp/css/cuentas-cobrar.css">
+@endpush
+
+@section('content')
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('breadcrumbPage');
+      if(b) b.innerText = 'P�gina';
+  });
+</script>
+
+<main class="ml-64 mt-16 p-8">
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-black uppercase tracking-tighter text-zinc-50 mb-2">Cuentas por Cobrar</h1>
+<p class="text-zinc-500 font-body max-w-xl uppercase text-xs tracking-widest">MAYOR DE REPUESTO LA CIMA, C.A. • Gestión de Cartera y Cobranzas</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-zinc-900 p-4 border-l-4 border-primary">
+<p class="text-[10px] text-zinc-500 uppercase tracking-widest font-headline">Cartera Total</p>
+<p class="text-2xl font-black text-primary-container">$482,950.00</p>
+</div>
+<div class="bg-zinc-900 p-4 border-l-4 border-error">
+<p class="text-[10px] text-zinc-500 uppercase tracking-widest font-headline">Cartera Vencida</p>
+<p class="text-2xl font-black text-error">$124,300.00</p>
+</div>
+</div>
+</header>
+<!-- Bento Layout for Stats & Aging -->
+<div class="grid grid-cols-12 gap-6 mb-12">
+<!-- Aging Report Card -->
+<div class="col-span-8 bg-zinc-900/50 p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">analytics</span>
+</div>
+<h3 class="font-headline text-sm uppercase tracking-[0.2em] text-zinc-400 mb-8 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary"></span> Antigüedad de Saldos
+                </h3>
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-zinc-900 p-6 border-b-2 border-zinc-800">
+<span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-2">Al día</span>
+<span class="text-xl font-bold">$358,650</span>
+<div class="w-full bg-zinc-800 h-1 mt-4">
+<div class="bg-primary h-full w-[74%]"></div>
+</div>
+</div>
+<div class="bg-zinc-900 p-6 border-b-2 border-zinc-800">
+<span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-2">30 Días</span>
+<span class="text-xl font-bold">$62,100</span>
+<div class="w-full bg-zinc-800 h-1 mt-4">
+<div class="bg-amber-500 h-full w-[13%]"></div>
+</div>
+</div>
+<div class="bg-zinc-900 p-6 border-b-2 border-zinc-800">
+<span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-2">60 Días</span>
+<span class="text-xl font-bold">$41,800</span>
+<div class="w-full bg-zinc-800 h-1 mt-4">
+<div class="bg-orange-600 h-full w-[9%]"></div>
+</div>
+</div>
+<div class="bg-zinc-900 p-6 border-b-2 border-error">
+<span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-2">90+ Días</span>
+<span class="text-xl font-bold text-error">$20,400</span>
+<div class="w-full bg-zinc-800 h-1 mt-4">
+<div class="bg-error h-full w-[4%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Action Card -->
+<div class="col-span-4 bg-primary text-on-primary p-8 flex flex-col justify-between">
+<div>
+<h3 class="font-headline text-lg font-bold uppercase tracking-widest mb-2">Registrar Cobro</h3>
+<p class="text-xs opacity-80 font-body">Asiente pagos recibidos y aplique a facturas pendientes de forma inmediata.</p>
+</div>
+<button class="w-full bg-zinc-950 text-white font-headline text-xs font-bold py-4 px-4 rounded-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-zinc-900 transition-all">
+<span class="material-symbols-outlined text-sm">add_card</span> Seleccionar Factura
+                </button>
+</div>
+</div>
+<!-- Customer List Section -->
+<section class="bg-zinc-900/30 p-1">
+<div class="flex items-center justify-between p-6 bg-zinc-900">
+<h3 class="font-headline text-sm font-bold uppercase tracking-widest">Cartera de Clientes</h3>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 text-[10px] uppercase tracking-widest font-headline text-zinc-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filtrar por Estado
+                    </button>
+<button class="flex items-center gap-2 text-[10px] uppercase tracking-widest font-headline text-zinc-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">download</span> Exportar Reporte
+                    </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-zinc-900/50">
+<th class="px-6 py-4 text-[10px] font-headline uppercase tracking-widest text-zinc-500">Cliente</th>
+<th class="px-6 py-4 text-[10px] font-headline uppercase tracking-widest text-zinc-500">RIF / ID</th>
+<th class="px-6 py-4 text-[10px] font-headline uppercase tracking-widest text-zinc-500">Saldo Total</th>
+<th class="px-6 py-4 text-[10px] font-headline uppercase tracking-widest text-zinc-500">Fact. Vencidas</th>
+<th class="px-6 py-4 text-[10px] font-headline uppercase tracking-widest text-zinc-500">Antigüedad Máx.</th>
+<th class="px-6 py-4 text-[10px] font-headline uppercase tracking-widest text-zinc-500">Estado</th>
+<th class="px-6 py-4 text-[10px] font-headline uppercase tracking-widest text-zinc-500"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-800/50">
+<tr class="hover:bg-zinc-800/20 transition-colors">
+<td class="px-6 py-5">
+<div class="font-headline text-sm font-bold uppercase tracking-tight text-zinc-100">REPUESTOS EL MOTOR, C.A.</div>
+<span class="text-[10px] text-zinc-500">Ventas al por mayor • Región Central</span>
+</td>
+<td class="px-6 py-5 font-label text-xs text-zinc-400 tracking-wider">J-31245678-0</td>
+<td class="px-6 py-5 font-bold text-sm">$45,200.00</td>
+<td class="px-6 py-5">
+<span class="bg-zinc-800 text-zinc-300 text-[10px] font-bold px-2 py-1 uppercase">03 FACT</span>
+</td>
+<td class="px-6 py-5 text-zinc-400 text-xs">45 Días</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase text-amber-500">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Pendiente
+                                </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-zinc-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-zinc-800/20 transition-colors bg-error/5">
+<td class="px-6 py-5">
+<div class="font-headline text-sm font-bold uppercase tracking-tight text-zinc-100">SERVICIOS INTEGRALES TÉCNICOS</div>
+<span class="text-[10px] text-zinc-500">Taller Autorizado • Barquisimeto</span>
+</td>
+<td class="px-6 py-5 font-label text-xs text-zinc-400 tracking-wider">J-40552132-1</td>
+<td class="px-6 py-5 font-bold text-sm text-error">$12,850.00</td>
+<td class="px-6 py-5">
+<span class="bg-error/20 text-error text-[10px] font-bold px-2 py-1 uppercase border border-error/20">05 FACT</span>
+</td>
+<td class="px-6 py-5 text-error text-xs font-bold">94 Días</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Crítico
+                                </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-zinc-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-zinc-800/20 transition-colors">
+<td class="px-6 py-5">
+<div class="font-headline text-sm font-bold uppercase tracking-tight text-zinc-100">INVERSIONES LA MONTAÑA</div>
+<span class="text-[10px] text-zinc-500">Distribuidor Independiente</span>
+</td>
+<td class="px-6 py-5 font-label text-xs text-zinc-400 tracking-wider">J-29881772-5</td>
+<td class="px-6 py-5 font-bold text-sm">$102,400.00</td>
+<td class="px-6 py-5">
+<span class="bg-zinc-800 text-zinc-300 text-[10px] font-bold px-2 py-1 uppercase">00 FACT</span>
+</td>
+<td class="px-6 py-5 text-zinc-400 text-xs">12 Días</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase text-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Solvente
+                                </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-zinc-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-zinc-800/20 transition-colors">
+<td class="px-6 py-5">
+<div class="font-headline text-sm font-bold uppercase tracking-tight text-zinc-100">REPUESTOS TRUCK PARTS, S.A.</div>
+<span class="text-[10px] text-zinc-500">Carga Pesada • Puerto Cabello</span>
+</td>
+<td class="px-6 py-5 font-label text-xs text-zinc-400 tracking-wider">J-00122938-4</td>
+<td class="px-6 py-5 font-bold text-sm">$32,150.00</td>
+<td class="px-6 py-5">
+<span class="bg-zinc-800 text-zinc-300 text-[10px] font-bold px-2 py-1 uppercase">02 FACT</span>
+</td>
+<td class="px-6 py-5 text-zinc-400 text-xs">68 Días</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase text-orange-500">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span> Vencido
+                                </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-zinc-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Pagination -->
+<div class="p-6 bg-zinc-900 flex items-center justify-between">
+<span class="text-[10px] text-zinc-500 uppercase tracking-widest font-headline">Mostrando 4 de 128 clientes</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 border border-zinc-800 flex items-center justify-center hover:bg-zinc-800 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 border border-primary flex items-center justify-center bg-primary text-white">
+<span class="text-xs font-bold font-headline">01</span>
+</button>
+<button class="w-10 h-10 border border-zinc-800 flex items-center justify-center hover:bg-zinc-800 transition-colors">
+<span class="text-xs font-bold font-headline">02</span>
+</button>
+<button class="w-10 h-10 border border-zinc-800 flex items-center justify-center hover:bg-zinc-800 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+@endsection
+
+@push('scripts')
+    <script src="/frontend/public/erp/js/cuentas-cobrar.js"></script>
+@endpush

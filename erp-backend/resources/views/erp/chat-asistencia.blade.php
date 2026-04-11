@@ -1,0 +1,241 @@
+@extends('layouts.erp')
+
+@section('title', 'chat-asistencia | ERP La Cima')
+
+@push('styles')
+    <link rel="stylesheet" href="/frontend/public/erp/css/chat-asistencia.css">
+@endpush
+
+@section('content')
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('breadcrumbPage');
+      if(b) b.innerText = 'P�gina';
+  });
+</script>
+
+<main class="flex h-screen pt-16">
+<!-- Sidebar: Knowledge Base & Quick Links -->
+<aside class="hidden lg:flex flex-col w-80 bg-surface-container-low p-6 overflow-y-auto">
+<div class="mb-8">
+<h3 class="font-headline font-bold uppercase tracking-widest text-xs text-on-surface-variant mb-4">RESOURCES</h3>
+<div class="space-y-4">
+<div class="group bg-surface-container-lowest p-4 rounded-lg cursor-pointer hover:bg-primary/5 transition-all">
+<span class="text-xs font-bold text-primary font-headline tracking-tighter">TECHNICAL DOCS</span>
+<p class="text-sm font-semibold mt-1">Hydraulic System Maintenance v4.2</p>
+<p class="text-xs text-on-surface-variant mt-2">Step-by-step calibration guide for heavy-duty forged pistons.</p>
+</div>
+<div class="group bg-surface-container-lowest p-4 rounded-lg cursor-pointer hover:bg-primary/5 transition-all">
+<span class="text-xs font-bold text-primary font-headline tracking-tighter">KB ARTICLE</span>
+<p class="text-sm font-semibold mt-1">Troubleshooting Forge Lag</p>
+<p class="text-xs text-on-surface-variant mt-2">Common resolution steps for latency in industrial control units.</p>
+</div>
+<div class="group bg-surface-container-lowest p-4 rounded-lg cursor-pointer hover:bg-primary/5 transition-all">
+<span class="text-xs font-bold text-primary font-headline tracking-tighter">VIDEO GUIDE</span>
+<p class="text-sm font-semibold mt-1">Emergency Shutdown Procedures</p>
+<p class="text-xs text-on-surface-variant mt-2">Safety protocols for the X-900 Heat Press.</p>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant/30">
+<div class="bg-surface-container-high p-4">
+<p class="font-headline font-bold text-sm mb-2">URGENT ASSISTANCE?</p>
+<p class="text-xs text-on-surface-variant mb-4 italic">Direct line to site supervisors available for critical hardware failures.</p>
+<button class="w-full bg-primary text-on-primary font-headline font-bold text-xs py-3 tracking-widest uppercase hover:scale-105 transition-transform">REQUEST CALLBACK</button>
+</div>
+</div>
+</aside>
+<!-- Chat Interface Section -->
+<section class="flex-1 flex flex-col bg-surface relative">
+<!-- Chat Header -->
+<header class="h-20 flex items-center justify-between px-8 bg-surface-container-lowest shadow-sm z-10">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="h-12 w-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-black">MF</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-lime-500 rounded-full border-2 border-surface-container-lowest"></div>
+</div>
+<div>
+<h2 class="font-headline font-extrabold text-lg tracking-tight uppercase">Marcus Forge</h2>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">TECHNICAL ASSISTANT</span>
+<span class="h-1 w-1 rounded-full bg-on-surface-variant"></span>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-widest">ONLINE</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors material-symbols-outlined text-on-surface-variant">search</button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors material-symbols-outlined text-on-surface-variant">attach_file</button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors material-symbols-outlined text-on-surface-variant">more_vert</button>
+</div>
+</header>
+<!-- Chat Messages Area -->
+<div class="flex-1 p-8 overflow-y-auto chat-scroll flex flex-col gap-6">
+<!-- System Timestamp -->
+<div class="flex justify-center">
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">TODAY - 09:42 AM</span>
+</div>
+<!-- Agent Message -->
+<div class="flex gap-4 max-w-2xl">
+<div class="flex-shrink-0 mt-1">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold uppercase">MF</div>
+</div>
+<div>
+<div class="bg-surface-container-lowest p-4 rounded-tr-xl rounded-br-xl rounded-bl-xl shadow-sm">
+<p class="text-sm leading-relaxed">Hello. This is Marcus from the Forge technical team. I've received your report regarding the <span class="font-bold text-primary">Hydraulic Unit #4</span> cooling failure. How can I assist you with the diagnostic procedure today?</p>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1 inline-block uppercase font-medium">09:43 AM</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-2xl self-end flex-row-reverse text-right">
+<div class="flex-shrink-0 mt-1">
+<div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-on-primary text-[10px] font-bold uppercase">YOU</div>
+</div>
+<div>
+<div class="bg-primary text-on-primary p-4 rounded-tl-xl rounded-br-xl rounded-bl-xl shadow-md">
+<p class="text-sm leading-relaxed font-medium">The temperature sensor is reading 112°C. I've already checked the intake valve, but the flow rate seems restricted. Do I need to initiate a full pressure purge?</p>
+</div>
+<div class="flex items-center justify-end gap-1 mt-1">
+<span class="text-[10px] text-on-surface-variant uppercase font-medium">09:45 AM</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+</div>
+<!-- Agent Message -->
+<div class="flex gap-4 max-w-2xl">
+<div class="flex-shrink-0 mt-1">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold uppercase">MF</div>
+</div>
+<div>
+<div class="bg-surface-container-lowest p-4 rounded-tr-xl rounded-br-xl rounded-bl-xl shadow-sm border-l-4 border-primary">
+<p class="text-sm leading-relaxed mb-3">Wait. Do <span class="uppercase font-bold underline">not</span> initiate a purge yet. If the flow is restricted, a purge could cause a pressure spike in the secondary gasket.</p>
+<p class="text-sm leading-relaxed">Please check the **Override Bypass Lever (B-14)** first. Is it in the horizontal position?</p>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1 inline-block uppercase font-medium">09:46 AM</span>
+</div>
+</div>
+<!-- Technical Specification Insert (Editorial Design) -->
+<div class="bg-surface-container-highest/50 border-l-4 border-stone-900 p-6 my-2">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-stone-900">settings_input_component</span>
+<h4 class="font-headline font-bold text-xs uppercase tracking-widest">TECHNICAL SPECIFICATION: OVERRIDE B-14</h4>
+</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="flex justify-between border-b border-outline-variant py-1">
+<span class="text-on-surface-variant uppercase">Normal Ops:</span>
+<span class="font-bold">Vertical (90°)</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant py-1">
+<span class="text-on-surface-variant uppercase">Max Pressure:</span>
+<span class="font-bold">4500 PSI</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant py-1">
+<span class="text-on-surface-variant uppercase">Safety Lock:</span>
+<span class="font-bold">Manual Pin</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant py-1">
+<span class="text-on-surface-variant uppercase">Coolant Type:</span>
+<span class="font-bold">HE-22 Glycol</span>
+</div>
+</div>
+</div>
+<!-- Agent is typing indicator -->
+<div class="flex items-center gap-2 text-on-surface-variant">
+<div class="flex gap-1">
+<span class="w-1 h-1 bg-on-surface-variant rounded-full animate-bounce"></span>
+<span class="w-1 h-1 bg-on-surface-variant rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+<span class="w-1 h-1 bg-on-surface-variant rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Marcus is analyzing data...</span>
+</div>
+</div>
+<!-- Chat Input Area -->
+<footer class="p-6 bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto flex gap-4 items-end">
+<div class="flex-1 bg-surface-container-high rounded-xl p-3 flex flex-col gap-2 ring-1 ring-outline-variant/20 focus-within:ring-primary/40 transition-all">
+<textarea class="bg-transparent border-none focus:ring-0 text-sm resize-none w-full placeholder:text-on-surface-variant font-body py-1" placeholder="Type your message or diagnostic report..." rows="1"></textarea>
+<div class="flex justify-between items-center px-1">
+<div class="flex gap-3">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary text-xl">image</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary text-xl">insert_drive_file</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary text-xl">mic</button>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Shift + Enter for new line</span>
+</div>
+</div>
+<button class="h-12 w-12 bg-primary text-on-primary rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</footer>
+</section>
+<!-- Right Detail Panel (Bento Style) -->
+<aside class="hidden xl:flex flex-col w-96 bg-surface-container-low border-l border-outline-variant/10 overflow-y-auto">
+<div class="p-8">
+<h3 class="font-headline font-black text-2xl tracking-tighter uppercase mb-6 leading-none">ASSET PROFILE</h3>
+<!-- Asset Card -->
+<div class="bg-surface-container-lowest p-5 mb-8 shadow-sm group">
+<div class="h-40 w-full mb-4 bg-stone-200 overflow-hidden relative">
+<img alt="Industrial Hydraulic System" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Close-up of a massive industrial hydraulic piston assembly with heavy grease and high-pressure steel hoses in a factory setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARvpBUH3lY6si_-czckDndINnOKyXCDgE3QMIt_J4tQrIYdfl7vQ_JAOliOyPQT164ezx2wtsJg5bK4sn8ReB9kjGoUFanY_8mEZnMq3bCSwx3W_GKnCuXgWZ9XG4-5ch01F9ECQnfhhQ9yUPhMBC5c_z0N8QLq6OcyE8fQhEzy8kIrGFg1gxgHNSGt72SqDeDCfQteFdxoAx4yJFwfZoUblwaAzE_yA1bh830egjCLkcJJVnTc8Rb-luNpoAdMPI7Fdk0WGaZNcg"/>
+<div class="absolute top-2 right-2 bg-error text-on-error text-[10px] font-black px-2 py-1 tracking-widest uppercase">CRITICAL ALERT</div>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-primary font-headline tracking-widest uppercase">SERIAL: FX-9000-A2</span>
+<h4 class="font-headline font-bold text-lg uppercase tracking-tight">FORGE CORE HYDRAULIC #4</h4>
+<div class="flex items-center gap-2 mt-2">
+<span class="h-2 w-2 rounded-full bg-error"></span>
+<span class="text-xs font-bold text-on-surface-variant uppercase">OVERHEATING DETECTED</span>
+</div>
+</div>
+</div>
+<!-- Fast Info Grid -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-high p-4">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">UPTIME</span>
+<p class="text-xl font-headline font-black text-stone-900">99.8%</p>
+</div>
+<div class="bg-surface-container-high p-4">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">PSI AVG</span>
+<p class="text-xl font-headline font-black text-stone-900">4,210</p>
+</div>
+</div>
+<!-- Support Timeline -->
+<div class="space-y-4">
+<h5 class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface-variant">RECENT ACTIVITY</h5>
+<div class="relative pl-4 space-y-6 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-px before:bg-outline-variant">
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-surface-container-low"></div>
+<p class="text-xs font-bold uppercase tracking-tight">Today, 09:42 AM</p>
+<p class="text-[11px] text-on-surface-variant mt-1 italic">Diagnostic session initiated by Shift Supervisor.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-stone-400 border-2 border-surface-container-low"></div>
+<p class="text-xs font-bold uppercase tracking-tight">Oct 24, 14:15 PM</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Routine fluid replacement completed.</p>
+</div>
+<div class="relative opacity-50">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-stone-400 border-2 border-surface-container-low"></div>
+<p class="text-xs font-bold uppercase tracking-tight">Oct 12, 08:00 AM</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Monthly safety inspection: PASSED.</p>
+</div>
+</div>
+</div>
+<!-- Contact Info Footer -->
+<div class="mt-12 pt-8 border-t border-outline-variant/30 text-center">
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">GLOBAL SUPPORT NETWORK</p>
+<div class="flex justify-center gap-6 text-on-surface-variant">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">phone_in_talk</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">mail</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors">language</span>
+</div>
+<p class="text-[9px] mt-6 text-stone-400 font-medium uppercase tracking-tighter">FORGE SYSTEMS INDUSTRIAL ERP v8.4.1<br/>© 2024 INDUSTRIAL FORGE LTD.</p>
+</div>
+</div>
+</aside>
+</main>
+@endsection
+
+@push('scripts')
+    <script src="/frontend/public/erp/js/chat-asistencia.js"></script>
+@endpush

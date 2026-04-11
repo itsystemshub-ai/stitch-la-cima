@@ -14,7 +14,7 @@ function closeMobileMenu() {
 
 // Buscar productos y redirigir al catálogo
 function searchProducts() {
-  window.location.href = 'catalogo_detallado.html';
+  window.location.href = '/tienda/catalogo_detallado';
 }
 
 // Agregar al carrito

@@ -1,0 +1,263 @@
+@extends('layouts.erp')
+
+@section('title', 'Registro Global de Ventas | TITAN INDUSTRIAL | ERP La Cima')
+
+@push('styles')
+    <link rel="stylesheet" href="/frontend/public/erp/css/registro-ventas.css">
+@endpush
+
+@section('content')
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('breadcrumbPage');
+      if(b) b.innerText = 'P�gina';
+  });
+</script>
+
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl sticky top-0 z-40 flex justify-between items-center w-full px-8 h-16">
+<div class="flex items-center gap-8">
+<h2 class="font-['Space_Grotesk'] tracking-tight uppercase text-stone-900 dark:text-stone-50 font-bold">BITÁCORA DE OPERACIONES</h2>
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-1.5 gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 placeholder:text-secondary" placeholder="Buscar transacción..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors relative">
+<span class="material-symbols-outlined text-stone-600">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+<span class="material-symbols-outlined text-stone-600">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-stone-200">
+<img alt="User profile" data-alt="Close-up portrait of a professional male operations manager with a confident look and neutral office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk1fwnPMODlvx8XgrSKhrM7ATAY0c-CJYmmRV0PQfKDlOIlktn92IYuCkLJ7DAuWl9uWHkANHi4e3Df2qMqdHtTKsWb-3xcHLJe2swo4h20oKLc6gRVz9yDXFsWU84ZyeZnK8awNvleViZ0AuFoHgu6sBS4Q-zE2LrC_5UVKG9pNtfpvzCmZoLE1PfwwPzAYm1PhvZNSTJcFJLcSFSJW7m3HuJ-1d2X0YRbeSskDQgOFdO_VwD9tIRQOyXPBH1oeeMhlMf5-9rinQ"/>
+</div>
+</div>
+</header>
+<div class="p-8">
+<!-- Hero / Metrics Overview -->
+<section class="editorial-grid mb-12">
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between relative overflow-hidden group">
+<div class="relative z-10">
+<span class="font-headline font-bold text-primary tracking-tighter uppercase text-sm mb-2 block">Acumulado Mensual</span>
+<h3 class="font-headline font-black text-6xl tracking-tighter text-on-surface mb-4">$428,590.00</h3>
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined">trending_up</span>
+<span>+12.4% vs mes anterior</span>
+</div>
+</div>
+<!-- Decorative Chart Shape -->
+<div class="absolute bottom-0 right-0 w-1/2 h-full opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity">
+<img class="w-full h-full object-contain" data-alt="Abstract minimalist line graph showing an upward growth trend with sharp precision lines on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyOpa9eSmsoQE2FmqV2YMJwzF11uB8Nznv6OT4qN3c9NTbUBm91GX18XHRdobQyeJ_rOBCqwgbIPr_VlewSyDSWH3xNZvsZH06HUhjRqJDuNerA-28R6TbIr2fN9ILw1SFAS9DKrXqvkW1XSdAjfFSmbTgDuxUOXvx484S1mQlGN_K-vygQ8goVikr4OVBvHuMoqk8awZlc5rRFDLkzwHYun4dI1BCovfcspN5yoiBETIYJVUr-hUInmmK82OISysnNbs98vFOzXU"/>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">Ventas Hoy</p>
+<p class="font-headline font-bold text-3xl">$14,203.50</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] bg-primary-container text-on-primary-container px-2 py-0.5 rounded font-bold">POS ACTIVE</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-tertiary">
+<p class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">Pendiente Cobro</p>
+<p class="font-headline font-bold text-3xl text-secondary">$8,940.00</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-[10px] bg-surface-container-highest text-secondary px-2 py-0.5 rounded font-bold text-uppercase">CREDIT LIMIT REACHED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Methods & Daily Tendency -->
+<section class="editorial-grid mb-12">
+<div class="col-span-12 md:col-span-5 bg-surface-container p-8 rounded-xl">
+<h4 class="font-headline font-bold text-lg mb-6 uppercase tracking-tight">Resumen Medios de Pago</h4>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-lowest rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<div>
+<p class="font-bold text-sm">Efectivo</p>
+<p class="text-[10px] text-secondary">USD / Cash</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold">$2,450.00</p>
+<p class="text-[10px] text-primary font-bold">17% Total</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-lowest rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+<div>
+<p class="font-bold text-sm">Transferencia</p>
+<p class="text-[10px] text-secondary">Local Bank / Wire</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold">$8,120.00</p>
+<p class="text-[10px] text-primary font-bold">57% Total</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-lowest rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">currency_exchange</span>
+</div>
+<div>
+<p class="font-bold text-sm">Zelle / Digital</p>
+<p class="text-[10px] text-secondary">Digital Payments</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold">$3,633.50</p>
+<p class="text-[10px] text-primary font-bold">26% Total</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-7 bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-headline font-bold text-lg uppercase tracking-tight">Tendencia de Ventas (7D)</h4>
+<div class="flex gap-2">
+<button class="text-[10px] font-bold px-3 py-1 bg-surface-container rounded-full">Día</button>
+<button class="text-[10px] font-bold px-3 py-1 hover:bg-surface-container transition-colors rounded-full text-secondary">Semana</button>
+</div>
+</div>
+<div class="h-48 w-full flex items-end justify-between gap-4">
+<div class="w-full bg-surface-container-high h-[40%] rounded-t-sm relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-[10px] py-1 px-2 rounded">6k</div>
+</div>
+<div class="w-full bg-surface-container-high h-[65%] rounded-t-sm relative group"></div>
+<div class="w-full bg-surface-container-high h-[45%] rounded-t-sm relative group"></div>
+<div class="w-full bg-primary h-[85%] rounded-t-sm relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-[10px] py-1 px-2 rounded">12k</div>
+</div>
+<div class="w-full bg-surface-container-high h-[55%] rounded-t-sm relative group"></div>
+<div class="w-full bg-surface-container-high h-[75%] rounded-t-sm relative group"></div>
+<div class="w-full bg-primary-container h-[95%] rounded-t-sm relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-[10px] py-1 px-2 rounded">14.2k</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-secondary uppercase tracking-widest px-1">
+<span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Hoy</span>
+</div>
+</div>
+</section>
+<!-- Detailed Operations Log -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-8">
+<div class="px-8 py-6 flex justify-between items-center border-b border-surface-container">
+<h4 class="font-headline font-bold text-lg uppercase tracking-tight">Registro de Transacciones</h4>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 text-xs font-bold text-secondary border border-outline-variant px-4 py-2 rounded transition-colors hover:bg-surface-container">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                            Filtrar
+                        </button>
+<button class="flex items-center gap-2 text-xs font-bold text-secondary border border-outline-variant px-4 py-2 rounded transition-colors hover:bg-surface-container">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Exportar CSV
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-8 py-4 text-[10px] font-black text-secondary uppercase tracking-widest">ID Operación</th>
+<th class="px-8 py-4 text-[10px] font-black text-secondary uppercase tracking-widest">Tipo</th>
+<th class="px-8 py-4 text-[10px] font-black text-secondary uppercase tracking-widest">Cliente / Concepto</th>
+<th class="px-8 py-4 text-[10px] font-black text-secondary uppercase tracking-widest">Medio Pago</th>
+<th class="px-8 py-4 text-[10px] font-black text-secondary uppercase tracking-widest text-right">Monto (USD)</th>
+<th class="px-8 py-4 text-[10px] font-black text-secondary uppercase tracking-widest text-right">Estatus</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-4 font-label text-sm font-bold">#TN-90212</td>
+<td class="px-8 py-4">
+<span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded uppercase">Mostrador</span>
+</td>
+<td class="px-8 py-4">
+<p class="text-sm font-medium">Suministros Industriales S.A.</p>
+<p class="text-[10px] text-secondary">Venta de repuestos motor CAT3406</p>
+</td>
+<td class="px-8 py-4 font-label text-xs">Transferencia</td>
+<td class="px-8 py-4 text-right font-headline font-bold">$1,240.00</td>
+<td class="px-8 py-4 text-right">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-4 font-label text-sm font-bold">#TN-90213</td>
+<td class="px-8 py-4">
+<span class="text-[10px] font-bold bg-primary-container text-on-primary-container px-2 py-0.5 rounded uppercase">POS</span>
+</td>
+<td class="px-8 py-4">
+<p class="text-sm font-medium">Cliente Final D. Lopez</p>
+<p class="text-[10px] text-secondary">Filtros de aire y aceite x4</p>
+</td>
+<td class="px-8 py-4 font-label text-xs">Efectivo</td>
+<td class="px-8 py-4 text-right font-headline font-bold">$125.50</td>
+<td class="px-8 py-4 text-right">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-4 font-label text-sm font-bold">#TN-90214</td>
+<td class="px-8 py-4">
+<span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded uppercase">Crédito</span>
+</td>
+<td class="px-8 py-4">
+<p class="text-sm font-medium">Logística del Norte S.R.L.</p>
+<p class="text-[10px] text-secondary">Mantenimiento preventivo flota A2</p>
+</td>
+<td class="px-8 py-4 font-label text-xs">Factura 30 Días</td>
+<td class="px-8 py-4 text-right font-headline font-bold">$4,890.00</td>
+<td class="px-8 py-4 text-right">
+<span class="material-symbols-outlined text-amber-500 text-sm">schedule</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-8 py-4 font-label text-sm font-bold">#TN-90215</td>
+<td class="px-8 py-4">
+<span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded uppercase">Mostrador</span>
+</td>
+<td class="px-8 py-4">
+<p class="text-sm font-medium">Constructora Delta</p>
+<p class="text-[10px] text-secondary">Válvulas de escape reforzadas</p>
+</td>
+<td class="px-8 py-4 font-label text-xs">Zelle</td>
+<td class="px-8 py-4 text-right font-headline font-bold">$2,100.00</td>
+<td class="px-8 py-4 text-right">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-8 py-4 bg-surface-container-low flex justify-between items-center">
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Mostrando 4 de 142 transacciones hoy</p>
+<div class="flex gap-2">
+<button class="p-1 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+@endsection
+
+@push('scripts')
+    <script src="/frontend/public/erp/js/registro-ventas.js"></script>
+@endpush

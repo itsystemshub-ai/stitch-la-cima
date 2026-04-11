@@ -1,0 +1,203 @@
+@extends('layouts.erp')
+
+@section('title', 'Bandeja de Entrada de Aprobaciones | INDUSTRIAL FORGE ERP | ERP La Cima')
+
+@push('styles')
+    <link rel="stylesheet" href="/frontend/public/erp/css/aprobaciones.css">
+@endpush
+
+@section('content')
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('breadcrumbPage');
+      if(b) b.innerText = 'P�gina';
+  });
+</script>
+
+<main class="md:ml-64 pt-24 pb-12 px-8 min-h-screen">
+<!-- Header Section -->
+<header class="mb-12 relative">
+<div class="absolute -top-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-5xl font-black uppercase tracking-tight text-on-surface mb-2">Administración Central</h1>
+<p class="text-lg text-secondary font-medium uppercase tracking-widest flex items-center gap-2">
+<span class="w-4 h-[2px] bg-primary"></span> Bandeja de Entrada de Aprobaciones
+                    </p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-high px-6 py-4 flex flex-col items-center">
+<span class="text-primary font-black text-3xl">12</span>
+<span class="text-[10px] uppercase tracking-tighter font-bold text-secondary">Pendientes</span>
+</div>
+<div class="bg-surface-container-high px-6 py-4 flex flex-col items-center border-l-4 border-error">
+<span class="text-error font-black text-3xl">04</span>
+<span class="text-[10px] uppercase tracking-tighter font-bold text-secondary">Críticos</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Search & Filter Bar -->
+<section class="bg-surface-container-low p-2 mb-8 flex flex-wrap items-center gap-4">
+<div class="flex-1 relative min-w-[280px]">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full bg-white border-none py-3 pl-12 pr-4 text-xs font-bold uppercase tracking-widest focus:ring-2 focus:ring-primary" placeholder="BUSCAR SOLICITUD O REFERENCIA..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest border-b-2 border-primary">Todas</button>
+<button class="hover:bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors">Compras</button>
+<button class="hover:bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors">Inventario</button>
+<button class="hover:bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors">Personal</button>
+</div>
+</section>
+<!-- Bento Grid Layout for Approval Cards -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+<!-- CRITICAL ITEM: Order Over $5000 -->
+<div class="xl:col-span-8 bg-surface-container-lowest p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-0.5 h-full bg-error/20"></div>
+<div class="flex justify-between items-start mb-8">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-error text-white text-[10px] px-2 py-1 font-black uppercase tracking-tighter">ALTA PRIORIDAD</span>
+<span class="text-secondary text-[10px] font-bold uppercase tracking-widest">ORDEN DE COMPRA #OC-29401</span>
+</div>
+<h3 class="text-3xl font-black uppercase tracking-tight mb-2">Importación Motores Caterpillar 3406</h3>
+<p class="text-secondary text-sm max-w-xl">Reposición de stock crítico para contratos mineros zona sur. Proveedor: HeavyEquipment Ltd (Miami).</p>
+</div>
+<div class="text-right">
+<span class="text-4xl font-black text-on-surface">$54,200.00</span>
+<p class="text-[10px] font-bold text-secondary uppercase mt-1">Total Neto (Exento IVA)</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-8 mb-10 py-6 border-y border-outline-variant/30">
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Solicitado por</p>
+<p class="font-bold text-sm">Ing. Marcos Rivas</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Almacén Destino</p>
+<p class="font-bold text-sm">Almacén Central (Puerto Ordaz)</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Fecha Límite</p>
+<p class="font-bold text-sm text-error">24h Restantes</p>
+</div>
+</div>
+<div class="flex flex-wrap justify-between items-center gap-6">
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-8 py-3 font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> Aprobar
+                        </button>
+<button class="bg-surface-container-high text-on-surface px-8 py-3 font-black text-xs uppercase tracking-widest border border-outline-variant/20 hover:bg-error hover:text-white transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">cancel</span> Rechazar
+                        </button>
+</div>
+<button class="text-[10px] font-black uppercase tracking-widest text-primary flex items-center gap-2 group">
+                        Ver Detalles Técnicos <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- SIDE ITEM: New User Access -->
+<div class="xl:col-span-4 bg-surface-container-lowest p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-1 font-black uppercase tracking-tighter">ACCESO SISTEMA</span>
+<span class="text-secondary text-[10px] font-bold uppercase tracking-widest">NUEVO USUARIO</span>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-secondary">person</span>
+</div>
+<div>
+<h3 class="text-xl font-black uppercase tracking-tight">Celia Ortega</h3>
+<p class="text-xs font-bold text-secondary uppercase">Analista de Compras Jr.</p>
+</div>
+</div>
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-2 text-xs font-bold text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">verified_user</span> Perfil: Operador Nivel 1
+                        </div>
+<div class="flex items-center gap-2 text-xs font-bold text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">lock</span> Módulos: Inventario, Compras
+                        </div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-primary-container text-on-primary-container py-3 font-black text-[10px] uppercase tracking-widest">Aprobar</button>
+<button class="bg-surface-container-high py-3 font-black text-[10px] uppercase tracking-widest">Detalle</button>
+</div>
+</div>
+<!-- FULL WIDTH ROW: Inventory Adjustment -->
+<div class="xl:col-span-12 bg-surface-container-high p-8 flex flex-col md:flex-row items-center gap-12 group">
+<div class="w-full md:w-48 h-48 bg-white p-4 shrink-0">
+<img class="w-full h-full object-cover" data-alt="Industrial machinery components laid out on a blueprint for technical inspection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7idQ8PO_25x_MgAF9Ebh6-OGGkL2vPBJ5ZFEb_hI0ZrsXWbjnd6tsbNb47yZigaOEt29RN7gH47_RuVFy7hAPXzYb_VIDu5H-l8JKy65IX4Vupj0FbHXMiGShIJztyuqdjhcKNCQS2oc0aaiazFee9rYaUPoXYnN2leGSZqVBv6AxkQv8ABxZVMl5OKGyha_RfpHbEMqh-gCGJWAMRyL3v0T7Mv0cOOiHDTmswJK4GFVkXsgPTikVZQ4pR-aeQP5GcnLr-zoBnnU"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-secondary text-white text-[10px] px-2 py-1 font-black uppercase tracking-tighter">AJUSTE CRÍTICO</span>
+<span class="text-secondary text-[10px] font-bold uppercase tracking-widest">INVENTARIO FISICO VS SISTEMA</span>
+</div>
+<h3 class="text-2xl font-black uppercase tracking-tight mb-4">Discrepancia Ejes de Transmisión (Z-40)</h3>
+<div class="flex flex-wrap gap-12">
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Teórico</p>
+<p class="text-2xl font-black">124 Unid.</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Real Hallado</p>
+<p class="text-2xl font-black text-error">98 Unid.</p>
+</div>
+<div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Diferencia Costo</p>
+<p class="text-2xl font-black">-$2,860.00</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 w-full md:w-auto">
+<button class="bg-on-surface text-white px-8 py-3 font-black text-xs uppercase tracking-widest hover:bg-primary transition-colors">Aprobar Ajuste</button>
+<button class="bg-white text-on-surface px-8 py-3 font-black text-xs uppercase tracking-widest hover:bg-surface-container-highest transition-colors">Solicitar Recuento</button>
+<button class="text-[10px] font-black uppercase tracking-widest text-secondary mt-2 text-center">Ver Reporte Auditoría</button>
+</div>
+</div>
+<!-- ROW: Payroll Approval -->
+<div class="xl:col-span-12 bg-white p-8 grid grid-cols-1 md:grid-cols-4 gap-8 items-center border-l-[12px] border-primary">
+<div class="col-span-1">
+<span class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-2 block">CÓMPUTO DE NOMINA</span>
+<h3 class="text-xl font-black uppercase tracking-tight">MES: OCTUBRE 2023</h3>
+<p class="text-xs text-secondary font-medium">152 Empleados Activos</p>
+</div>
+<div class="col-span-1 border-l border-outline-variant/30 pl-8">
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Monto a Dispersar</p>
+<p class="text-2xl font-black">$31,450.00</p>
+</div>
+<div class="col-span-1 border-l border-outline-variant/30 pl-8">
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest mb-1">Estado Revisión</p>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary rounded-full"></span>
+<span class="text-xs font-bold uppercase">Validado por RRHH</span>
+</div>
+</div>
+<div class="col-span-1 flex justify-end gap-3">
+<button class="w-full md:w-auto bg-primary text-on-primary px-6 py-4 font-black text-xs uppercase tracking-widest">Emitir Pago</button>
+<button class="bg-surface-container-high p-4 flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pagination or Load More (Editorial Style) -->
+<div class="mt-16 flex items-center justify-between border-t-4 border-on-surface pt-6">
+<span class="text-[10px] font-black uppercase tracking-[0.2em] text-secondary">MOSTRANDO 04 DE 12 SOLICITUDES</span>
+<button class="flex items-center gap-4 group">
+<span class="text-xs font-black uppercase tracking-widest">Cargar más registros</span>
+<div class="w-10 h-10 bg-on-surface text-white flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined">add</span>
+</div>
+</button>
+</div>
+</main>
+@endsection
+
+@push('scripts')
+    <script src="/frontend/public/erp/js/aprobaciones.js"></script>
+@endpush

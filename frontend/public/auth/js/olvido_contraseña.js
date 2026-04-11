@@ -51,7 +51,7 @@ async function handleRecovery() {
     showNotification('Solicitud enviada al administrador. Será revisada en 24 horas.', 'success');
     
     setTimeout(() => {
-      window.location.href = 'login.html';
+      window.location.href = '/auth/login';
     }, 3000);
   } catch (error) {
     console.error('Recovery error:', error);
