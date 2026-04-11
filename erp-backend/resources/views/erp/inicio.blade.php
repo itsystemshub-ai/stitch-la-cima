@@ -1,12 +1,276 @@
-@extends('layouts.erp')
-
-@section('title', 'Dashboard Principal')
-
-@section('styles')
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Dashboard ERP - MAYOR DE REPUESTO LA CIMA, C.A. Panel de control empresarial."/>
+<meta name="theme-color" content="#ceff5e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LA CIMA ERP">
+<link rel="manifest" href="{{ asset('manifest.json') }}">
+<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
+<title>Dashboard Principal | Mayor de Repuesto La Cima, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f6f6f9", surface: "#ffffff", outline: "#e2e2e5" },
+        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
+      }
+    }
+  }
+</script>
+<!-- Estilos personalizados -->
 <link rel="stylesheet" href="{{ asset('erp/css/inicio.css') }}">
-@endsection
+</head>
+<body class="bg-background text-stone-900 min-h-screen flex">
 
-@section('content')
+<!-- SideNavBar Shell -->
+<aside id="sidebar" class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar">
+  <!-- Logo -->
+  <div class="flex flex-col px-5 pt-6 pb-4">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg">
+        <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+      </div>
+      <div>
+        <h2 class="font-headline font-bold text-lg text-stone-900 leading-none">Mayor de Repuesto La Cima, C.A.</h2>
+        <span class="text-[10px] font-mono text-stone-400">v2.1.0</span>
+      </div>
+    </div>
+    <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Sistema ERP Industrial</p>
+  </div>
+
+  <!-- Busqueda -->
+  <div class="px-4 mb-4">
+    <div class="relative">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+        <span class="material-symbols-outlined text-lg">search</span>
+      </span>
+      <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar..." type="text"/>
+    </div>
+  </div>
+
+  <!-- Menu Principal -->
+  <nav class="flex-1 px-3 space-y-0.5 pb-24">
+
+    <!-- INICIO -->
+  <a href="{{ url('/erp/inicio') }}" class="menu-item menu-item-active flex items-center gap-3 px-4 py-2 transition-colors">
+    <span class="material-symbols-outlined text-[20px]" aria-hidden="true">dashboard</span>
+    <span class="flex-1">Dashboard Central</span>
+    <span class="material-symbols-outlined dropdown-arrow text-[18px]">chevron_right</span>
+  </a>
+
+    <!-- INVENTARIO -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+        <span>Inventario</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/inventario') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/productos') }}"><span class="material-symbols-outlined">category</span> Productos</a>
+        <a href="{{ url('/erp/kardex') }}"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
+        <a href="{{ url('/erp/auditoria-inventario') }}"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
+        <a href="{{ url('/erp/ajustes-inventario') }}"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
+        <a href="{{ url('/erp/reportes-inventario') }}"><span class="material-symbols-outlined">analytics</span> Reportes</a>
+      </div>
+    </div>
+
+    <!-- VENTAS -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">payments</span>
+        <span>Ventas</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/ventas') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/pos') }}"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
+        <a href="{{ url('/erp/registro-ventas') }}"><span class="material-symbols-outlined">list_alt</span> Registro</a>
+        <a href="{{ url('/erp/factura-electronica') }}"><span class="material-symbols-outlined">receipt</span> Factura Electrónica</a>
+        <a href="{{ url('/erp/facturas-emitidas') }}"><span class="material-symbols-outlined">description</span> Facturas Emitidas</a>
+        <div class="submenu-divider"></div>
+        <a href="{{ url('/erp/notas-credito') }}"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
+        <a href="{{ url('/erp/clientes') }}"><span class="material-symbols-outlined">people</span> Clientes</a>
+        <a href="{{ url('/erp/vendedores') }}"><span class="material-symbols-outlined">badge</span> Vendedores</a>
+        <a href="{{ url('/erp/reportes-ventas') }}"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <!-- COMPRAS -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+        <span>Compras</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/compras') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/proveedores') }}"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
+        <a href="{{ url('/erp/historial-compras') }}"><span class="material-symbols-outlined">history</span> Historial</a>
+        <a href="{{ url('/erp/factura-compra') }}"><span class="material-symbols-outlined">request_quote</span> Factura Compra</a>
+        <a href="{{ url('/erp/libro-compras') }}"><span class="material-symbols-outlined">book</span> Libro Compras</a>
+        <a href="{{ url('/erp/reportes-compras') }}"><span class="material-symbols-outlined">stacked_bar_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <!-- CONTABILIDAD -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">account_balance</span>
+        <span>Contabilidad</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/contabilidad') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/plan-cuentas') }}"><span class="material-symbols-outlined">format_list_numbered</span> Plan Cuentas</a>
+        <a href="{{ url('/erp/libro-diario') }}"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
+        <a href="{{ url('/erp/libro-ventas') }}"><span class="material-symbols-outlined">chrome_reader_mode</span> Libro Ventas</a>
+        <a href="{{ url('/erp/libro-caja') }}"><span class="material-symbols-outlined">savings</span> Libro Caja</a>
+        <div class="submenu-divider"></div>
+        <a href="{{ url('/erp/balance-general') }}"><span class="material-symbols-outlined">balance</span> Balance General</a>
+        <a href="{{ url('/erp/balance-comprobacion') }}"><span class="material-symbols-outlined">scale</span> Balance Comprob.</a>
+        <a href="{{ url('/erp/estado-resultados') }}"><span class="material-symbols-outlined">monitoring</span> Estado Resultados</a>
+        <a href="{{ url('/erp/declaracion-iva') }}"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
+        <a href="{{ url('/erp/cierre-contable') }}"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
+        <a href="{{ url('/erp/libros-legales') }}"><span class="material-symbols-outlined">law</span> Libros Legales</a>
+        <a href="{{ url('/erp/reportes-contables') }}"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <!-- FINANZAS -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">monetization_on</span>
+        <span>Finanzas</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/finanzas') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/activos-fijos') }}"><span class="material-symbols-outlined">corporate_fare</span> Activos Fijos</a>
+        <a href="{{ url('/erp/cuentas-cobrar') }}"><span class="material-symbols-outlined">account_balance_wallet</span> Cuentas Cobrar</a>
+        <a href="{{ url('/erp/reportes-financieros') }}"><span class="material-symbols-outlined">show_chart</span> Reportes</a>
+      </div>
+    </div>
+
+    <!-- RRHH -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">groups</span>
+        <span>RRHH</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/rrhh') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/empleados') }}"><span class="material-symbols-outlined">person</span> Empleados</a>
+        <a href="{{ url('/erp/nomina') }}"><span class="material-symbols-outlined">payments</span> Nómina</a>
+        <a href="{{ url('/erp/prestaciones') }}"><span class="material-symbols-outlined">savings</span> Prestaciones</a>
+        <a href="{{ url('/erp/portal-empleado') }}"><span class="material-symbols-outlined">person_outline</span> Portal Empleado</a>
+        <a href="{{ url('/erp/rendimiento-anual') }}"><span class="material-symbols-outlined">emoji_events</span> Rendimiento</a>
+        <a href="{{ url('/erp/reportes-rrhh') }}"><span class="material-symbols-outlined">group_work</span> Reportes</a>
+      </div>
+    </div>
+
+    <!-- CONFIGURACIÓN -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">settings</span>
+        <span>Configuración</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/configuracion') }}"><span class="material-symbols-outlined">business</span> Empresa</a>
+        <a href="{{ url('/erp/parametros') }}"><span class="material-symbols-outlined">tune</span> Parámetros</a>
+        <a href="{{ url('/erp/config-fiscal') }}"><span class="material-symbols-outlined">policy</span> Config Fiscal</a>
+        <a href="{{ url('/erp/usuarios-roles') }}"><span class="material-symbols-outlined">admin_panel_settings</span> Usuarios</a>
+        <a href="{{ url('/erp/base-datos') }}"><span class="material-symbols-outlined">storage</span> Base Datos</a>
+        <div class="submenu-divider"></div>
+        <a href="{{ url('/erp/backups') }}"><span class="material-symbols-outlined">backup</span> Backups</a>
+        <a href="{{ url('/erp/estado-sistema') }}"><span class="material-symbols-outlined">health_and_safety</span> Estado Sistema</a>
+        <a href="{{ url('/erp/tareas-programadas') }}"><span class="material-symbols-outlined">schedule</span> Tareas</a>
+        <a href="{{ url('/erp/auditoria-seguridad') }}"><span class="material-symbols-outlined">security</span> Auditoría</a>
+      </div>
+    </div>
+
+    <!-- AYUDA -->
+    <div class="menu-parent">
+      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">help</span>
+        <span>Ayuda</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu">
+        <a href="{{ url('/erp/ayuda') }}"><span class="material-symbols-outlined">help</span> Centro Ayuda</a>
+        <a href="{{ url('/erp/tickets-soporte') }}"><span class="material-symbols-outlined">confirmation_number</span> Tickets</a>
+        <a href="{{ url('/erp/crear-ticket') }}"><span class="material-symbols-outlined">add_circle</span> Crear Ticket</a>
+        <div class="submenu-divider"></div>
+        <a href="{{ url('/erp/chat-asistencia') }}"><span class="material-symbols-outlined">chat</span> Chat</a>
+        <a href="{{ url('/erp/base-conocimiento') }}"><span class="material-symbols-outlined">school</span> Conocimiento</a>
+        <a href="{{ url('/erp/manual-tecnico') }}"><span class="material-symbols-outlined">description</span> Manual</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Boton Cerrar Sesion -->
+  <div class="mt-auto border-t border-stone-200 p-4">
+    <button onclick="localStorage.removeItem('erp_session'); window.location.href='{{ url('/auth/login') }}';" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
+      <span class="material-symbols-outlined text-[18px]">logout</span>
+      Cerrar Sesión
+    </button>
+  </div>
+</aside>
+
+<!-- ========== TOP BAR ========== -->
+<header class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200">
+  <div class="flex justify-between items-center px-6 py-3">
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-4">
+      <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
+        <a href="{{ url('/erp/inicio') }}" class="hover:text-stone-900">Inicio</a>
+      </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="flex items-center gap-3">
+      <!-- Busqueda Global -->
+      <div class="hidden lg:block relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+          <span class="material-symbols-outlined text-lg">search</span>
+        </span>
+        <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar repuestos, ventas, clientes..." type="text"/>
+      </div>
+
+      <!-- Notificaciones -->
+      <button class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+      </button>
+
+      <!-- Perfil -->
+      <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
+        <div class="text-right hidden md:block">
+          <p class="text-sm font-bold text-stone-900 leading-none">Administrador</p>
+          <p class="text-[10px] text-stone-500">Rol: Admin</p>
+        </div>
+        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
+          A
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
 <!-- ========== CONTENIDO PRINCIPAL ========== -->
 <main class="ml-[288px] w-[calc(100vw-288px)] mt-[65px] p-6 pb-4">
 
@@ -33,7 +297,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
 
     <!-- Inventario -->
-    <a href="/erp/inventario" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="{{ url('/erp/inventario') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-blue-600">inventory_2</span>
@@ -45,7 +309,7 @@
     </a>
 
     <!-- Ventas -->
-    <a href="/erp/ventas" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="{{ url('/erp/ventas') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-green-600">payments</span>
@@ -57,7 +321,7 @@
     </a>
 
     <!-- Compras -->
-    <a href="/erp/compras" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="{{ url('/erp/compras') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-purple-600">shopping_cart</span>
@@ -69,7 +333,7 @@
     </a>
 
     <!-- Clientes -->
-    <a href="/erp/clientes" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
+    <a href="{{ url('/erp/clientes') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg hover:border-primary/50 transition-all group">
       <div class="flex items-center justify-between mb-3">
         <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center">
           <span class="material-symbols-outlined text-orange-600">people</span>
@@ -96,7 +360,7 @@
             <p class="text-xs text-stone-500">Resumen general del stock</p>
           </div>
         </div>
-        <a href="/erp/inventario" class="text-xs font-bold text-stone-500 hover:text-stone-900 flex items-center gap-1">
+        <a href="{{ url('/erp/inventario') }}" class="text-xs font-bold text-stone-500 hover:text-stone-900 flex items-center gap-1">
           Ver completo
           <span class="material-symbols-outlined text-sm">arrow_forward</span>
         </a>
@@ -184,10 +448,10 @@
         </div>
 
         <div class="flex gap-2">
-          <a href="/erp/ventas" class="flex-1 bg-primary text-stone-900 py-2.5 font-bold text-sm rounded-lg hover:brightness-110 transition-all text-center">
+          <a href="{{ url('/erp/ventas') }}" class="flex-1 bg-primary text-stone-900 py-2.5 font-bold text-sm rounded-lg hover:brightness-110 transition-all text-center">
             VER VENTAS
           </a>
-          <a href="/erp/pos" class="w-10 h-10 border border-stone-700 flex items-center justify-center hover:bg-stone-800 rounded-lg transition-colors">
+          <a href="{{ url('/erp/pos') }}" class="w-10 h-10 border border-stone-700 flex items-center justify-center hover:bg-stone-800 rounded-lg transition-colors">
             <span class="material-symbols-outlined text-sm">add</span>
           </a>
         </div>
@@ -210,7 +474,7 @@
             <p class="text-xs text-stone-500">Órdenes en tránsito</p>
           </div>
         </div>
-        <a href="/erp/compras" class="text-xs font-bold text-stone-500 hover:text-stone-900 flex items-center gap-1">
+        <a href="{{ url('/erp/compras') }}" class="text-xs font-bold text-stone-500 hover:text-stone-900 flex items-center gap-1">
           Ver todas
           <span class="material-symbols-outlined text-sm">arrow_forward</span>
         </a>
@@ -287,10 +551,10 @@
       </div>
 
       <div class="mt-5 pt-4 border-t border-stone-100 flex gap-2">
-        <a href="/erp/estado-sistema" class="flex-1 border border-stone-300 text-stone-700 py-2 text-xs font-bold rounded-lg hover:bg-stone-50 transition-all text-center">
+        <a href="{{ url('/erp/estado-sistema') }}" class="flex-1 border border-stone-300 text-stone-700 py-2 text-xs font-bold rounded-lg hover:bg-stone-50 transition-all text-center">
           DETALLES
         </a>
-        <a href="/erp/backups" class="flex-1 bg-stone-900 text-white py-2 text-xs font-bold rounded-lg hover:bg-stone-800 transition-all text-center">
+        <a href="{{ url('/erp/backups') }}" class="flex-1 bg-stone-900 text-white py-2 text-xs font-bold rounded-lg hover:bg-stone-800 transition-all text-center">
           BACKUP AHORA
         </a>
       </div>
@@ -302,43 +566,43 @@
     <h3 class="text-lg font-bold text-stone-900 mb-4">Módulos Disponibles</h3>
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
       <!-- Inventario -->
-      <a href="/erp/inventario" class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-blue-300 group">
+      <a href="{{ url('/erp/inventario') }}" class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-blue-300 group">
         <span class="material-symbols-outlined text-blue-600 text-3xl mb-2 group-hover:scale-110 transition-transform">inventory_2</span>
         <p class="text-xs font-bold text-stone-900">Inventario</p>
         <p class="text-[10px] text-stone-500">7 módulos</p>
       </a>
       <!-- Ventas -->
-      <a href="/erp/ventas" class="bg-green-50 border border-green-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-green-300 group">
+      <a href="{{ url('/erp/ventas') }}" class="bg-green-50 border border-green-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-green-300 group">
         <span class="material-symbols-outlined text-green-600 text-3xl mb-2 group-hover:scale-110 transition-transform">payments</span>
         <p class="text-xs font-bold text-stone-900">Ventas</p>
         <p class="text-[10px] text-stone-500">8 módulos</p>
       </a>
       <!-- Compras -->
-      <a href="/erp/compras" class="bg-purple-50 border border-purple-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-purple-300 group">
+      <a href="{{ url('/erp/compras') }}" class="bg-purple-50 border border-purple-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-purple-300 group">
         <span class="material-symbols-outlined text-purple-600 text-3xl mb-2 group-hover:scale-110 transition-transform">shopping_cart</span>
         <p class="text-xs font-bold text-stone-900">Compras</p>
         <p class="text-[10px] text-stone-500">6 módulos</p>
       </a>
       <!-- Contabilidad -->
-      <a href="/erp/contabilidad" class="bg-orange-50 border border-orange-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-orange-300 group">
+      <a href="{{ url('/erp/contabilidad') }}" class="bg-orange-50 border border-orange-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-orange-300 group">
         <span class="material-symbols-outlined text-orange-600 text-3xl mb-2 group-hover:scale-110 transition-transform">account_balance</span>
         <p class="text-xs font-bold text-stone-900">Contabilidad</p>
         <p class="text-[10px] text-stone-500">11 módulos</p>
       </a>
       <!-- Finanzas -->
-      <a href="/erp/finanzas" class="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-yellow-300 group">
+      <a href="{{ url('/erp/finanzas') }}" class="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-yellow-300 group">
         <span class="material-symbols-outlined text-yellow-600 text-3xl mb-2 group-hover:scale-110 transition-transform">monetization_on</span>
         <p class="text-xs font-bold text-stone-900">Finanzas</p>
         <p class="text-[10px] text-stone-500">4 módulos</p>
       </a>
       <!-- RRHH -->
-      <a href="/erp/rrhh" class="bg-pink-50 border border-pink-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-pink-300 group">
+      <a href="{{ url('/erp/rrhh') }}" class="bg-pink-50 border border-pink-100 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-pink-300 group">
         <span class="material-symbols-outlined text-pink-600 text-3xl mb-2 group-hover:scale-110 transition-transform">groups</span>
         <p class="text-xs font-bold text-stone-900">RRHH</p>
         <p class="text-[10px] text-stone-500">6 módulos</p>
       </a>
       <!-- Configuracion -->
-      <a href="/erp/configuracion" class="bg-stone-50 border border-stone-200 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-stone-300 group">
+      <a href="{{ url('/erp/configuracion') }}" class="bg-stone-50 border border-stone-200 rounded-xl p-4 text-center hover:shadow-md transition-all hover:border-stone-300 group">
         <span class="material-symbols-outlined text-stone-600 text-3xl mb-2 group-hover:scale-110 transition-transform">settings</span>
         <p class="text-xs font-bold text-stone-900">Sistema</p>
         <p class="text-[10px] text-stone-500">15 módulos</p>
@@ -350,14 +614,17 @@
   <div class="pt-4 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
     <span class="text-[10px] font-bold text-stone-400">RIF: J-40308741-5 • Todos los derechos reservados © 2026</span>
     <div class="flex items-center gap-4">
-      <a href="/erp/ayuda" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Centro de Ayuda</a>
-      <a href="/erp/manual-tecnico" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Manual Técnico</a>
-      <a href="/erp/estado-sistema" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Estado del Sistema</a>
+      <a href="{{ url('/erp/ayuda') }}" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Centro de Ayuda</a>
+      <a href="{{ url('/erp/manual-tecnico') }}" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Manual Técnico</a>
+      <a href="{{ url('/erp/estado-sistema') }}" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Estado del Sistema</a>
     </div>
   </div>
 </main>
-@endsection
 
-@section('scripts')
+<!-- Overlay para mobile sidebar -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
+
+<!-- JavaScript personalizado -->
 <script src="{{ asset('erp/js/inicio.js') }}"></script>
-@endsection
+</body>
+</html>

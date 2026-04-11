@@ -34,14 +34,13 @@
     }
   }
 </script>
-<link rel="stylesheet" href="{{ asset('auth/css/login.css') }}">
 </head>
 <body class="bg-surface font-body text-stone-900">
 
 <!-- Top Navigation -->
 <nav class="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm">
     <div class="flex justify-between items-center px-6 py-3">
-        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
+        <a href="{{ url('/tienda/index') }}" class="flex items-center gap-2 group">
             <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
             <div class="flex flex-col">
                 <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
@@ -49,7 +48,7 @@
             </div>
         </a>
         <div class="hidden md:flex items-center gap-6">
-            <a class="text-xs uppercase tracking-widest font-bold text-stone-500 hover:text-black transition-colors" href="{{ url('/') }}">Ecommerce</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-stone-500 hover:text-black transition-colors" href="{{ url('/tienda/index') }}">Ecommerce</a>
             <a class="text-xs uppercase tracking-widest font-bold text-stone-500 hover:text-black transition-colors" href="{{ url('/tienda/catalogo_general') }}">Catálogo</a>
         </div>
         <div class="flex items-center gap-4">
@@ -61,7 +60,7 @@
 <main class="min-h-screen flex items-center justify-center pt-20 pb-12 px-4 bg-background">
     <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-0 overflow-hidden bg-white shadow-2xl rounded-2xl border border-stone-200">
         <!-- Side Panel: Brand Identity -->
-        <div class="md:col-span-5 bg-stone-900 p-8 flex flex-col justify-between relative overflow-hidden rounded-l-2xl">
+        <div class="md:col-span-5 bg-stone-900 p-8 flex flex-col justify-between relative overflow-hidden">
             <div class="absolute inset-0 opacity-20 pointer-events-none">
                 <img alt="Industrial" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTkZtJSSNsIHQErzV1_9XzToxX14snaVh43pqwzxNW6Ysrohl30gc_ET3s2rbj_7xZPTRmQl6vkH5UscwLPkzzpOtsC8WKPHdFedPQRqjs9ltLOdAbPSm9OUkB0jAHwI5AVbjXmmuFCrQBtiUrmD9q5KNpxxK6zXS6ormvjXgxV_NL5LbNwo1zdKtlB8zFOOCA6tzK7QaADLxWIOQccfeV4ZjoVm0mtOIqsFO9_lx9JC9SkXIBSc515ARVcq2IuNoRbZXElNdOh48"/>
             </div>
@@ -94,12 +93,12 @@
                 <p class="text-stone-500 font-medium text-sm">Ingrese sus credenciales corporativas</p>
             </div>
 
-            <form class="space-y-6" id="loginForm" onsubmit="event.preventDefault(); handleLogin();">
+            <form class="space-y-6" onsubmit="event.preventDefault(); localStorage.setItem('erp_session', 'true'); window.location.href='/erp/inicio';">
                 <div>
                     <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400 mb-2">Usuario / Email</label>
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">person</span>
-                        <input id="email" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="nombre.apellido" type="text" required/>
+                        <input class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="nombre.apellido" type="text" required/>
                     </div>
                 </div>
 
@@ -107,7 +106,7 @@
                     <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400 mb-2">Contraseña</label>
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">lock</span>
-                        <input id="password" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="••••••••" type="password" required/>
+                        <input class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="••••••••" type="password" required/>
                     </div>
                 </div>
 
@@ -121,8 +120,7 @@
 
                 <button class="w-full bg-stone-900 py-5 px-6 text-white font-headline font-black uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 hover:bg-black hover:shadow-xl transition-all active:scale-[0.98]" type="submit">
                     ENTRAR AL SISTEMA
-                    <span id="loginSpinner" class="hidden animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
-                    <span id="loginIcon" class="material-symbols-outlined text-primary text-sm">login</span>
+                    <span class="material-symbols-outlined text-primary text-sm">login</span>
                 </button>
             </form>
 

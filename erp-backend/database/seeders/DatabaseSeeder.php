@@ -15,12 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Administrador por defecto
         User::factory()->create([
             'name' => 'Administrador Zenith',
             'email' => 'admin@zenith.com',
             'password' => bcrypt('admin123'),
         ]);
 
-        $this->call(DataGeneratorSeeder::class);
+        // Poblar datos maestros
+        $this->call([
+            ProductSeeder::class,
+            CustomerSeeder::class,
+            DataGeneratorSeeder::class, // Mantenemos el generador dinámico para mayor volumen
+        ]);
     }
 }

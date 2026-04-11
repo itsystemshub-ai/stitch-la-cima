@@ -15,8 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="{{ asset('js/api.js') }}"></script>
-<script src="{{ asset('auth/js/olvido_contraseña.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('auth/css/olvido_contraseña.css') }}">
+<script src="{{ asset('auth/js/olvido_contrasea.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('auth/css/olvido_contrasea.css') }}">
 <script>
   tailwind.config = {
     darkMode: "class",
@@ -45,7 +45,7 @@
         <button onclick="openMobileMenu()" class="md:hidden p-2 hover:bg-stone-100 rounded-full">
             <span class="material-symbols-outlined">menu</span>
         </button>
-        <a href="{{ url('/tienda/index') }}" class="flex items-center gap-2 group">
+        <a href="{{ url('/ecommerce/index') }}" class="flex items-center gap-2 group">
             <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
             <div class="flex flex-col">
                 <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
@@ -53,10 +53,10 @@
             </div>
         </a>
         <div class="hidden md:flex items-center gap-6">
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/index') }}">Inicio</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/catalogo_general') }}">Catálogo</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/Nosotros') }}">Nosotros</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/contacto') }}">Contacto</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/ecommerce/index') }}">Inicio</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/ecommerce/catalogo_general') }}">Catálogo</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/ecommerce/nosotros') }}">Nosotros</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/ecommerce/contacto') }}">Contacto</a>
         </div>
         <div class="flex items-center gap-4">
             <a href="{{ url('/auth/login') }}" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
@@ -80,14 +80,12 @@
         </button>
     </div>
     <nav class="p-6 space-y-4">
-        <a href="{{ url('/tienda/index') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
+        <a href="{{ url('/ecommerce/index') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
         <a href="{{ url('/auth/login') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Iniciar Sesión</a>
     </nav>
 </div>
-</nav>
 
 <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4">
-
 <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-0 overflow-hidden bg-white shadow-2xl shadow-black/10 rounded-lg">
 <!-- Side Panel: Brand Identity -->
 <div class="md:col-span-5 bg-stone-900 p-8 flex flex-col justify-between relative overflow-hidden">
@@ -135,7 +133,7 @@
                         </label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">alternate_email</span>
-<input id="recoveryEmail" name="recoveryEmail" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="operador@lacima.repuestos.com" type="email" required/>
+<input id="recoveryEmail" name="recoveryEmail" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="operador@lacima.repuestos.com" type="email" required/>
 </div>
 </div>
 
@@ -146,7 +144,7 @@
                         </label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">lock</span>
-<input id="newPassword" name="newPassword" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="Mínimo 6 caracteres" type="password" required minlength="6"/>
+<input id="newPassword" name="newPassword" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="Mínimo 6 caracteres" type="password" required minlength="6"/>
 </div>
 </div>
 
@@ -157,7 +155,7 @@
                         </label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">lock_reset</span>
-<input id="confirmPassword" name="confirmPassword" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="Repetir contraseña" type="password" required minlength="6"/>
+<input id="confirmPassword" name="confirmPassword" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 text-stone-900 placeholder:text-stone-400 font-body text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="Repetir contraseña" type="password" required minlength="6"/>
 </div>
 </div>
 
@@ -172,7 +170,7 @@
 </div>
 
 <!-- Submit Button -->
-<button class="w-full bg-primary py-5 px-6 text-stone-900 font-headline font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:brightness-110 shadow-lg shadow-primary/20 transition-all group" type="submit">
+<button id="recoveryBtn" class="w-full bg-primary py-5 px-6 text-stone-900 font-headline font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:brightness-110 active:scale-[0.98] transition-all group" type="submit">
                         Enviar Solicitud de Recuperación
                         <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">send</span>
 </button>
@@ -193,17 +191,11 @@
 <div class="md:col-span-1">
 <div class="flex items-center gap-3 mb-6">
     <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="h-12 w-auto">
-
     <div class="flex flex-col justify-center">
-        <span class="text-primary font-black text-sm block uppercase tracking-tighter leading-none">
-            MAYOR DE REPUESTO LA CIMA, C.A
-        </span>
-        <span class="text-primary font-black text-xs block uppercase tracking-tighter leading-none mt-1">
-            RIF.: J-40308741-5
-        </span>
+        <span class="text-primary font-black text-sm block uppercase tracking-tighter leading-none">MAYOR DE REPUESTO LA CIMA, C.A</span>
+        <span class="text-primary font-black text-xs block uppercase tracking-tighter leading-none mt-1">RIF.: J-40308741-5</span>
     </div>
 </div>
-
 <div class="flex gap-4">
 <div class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all">
 <span class="material-symbols-outlined text-sm">facebook</span>
@@ -213,45 +205,30 @@
 </div>
 </div>
 </div>
-<div>
-<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
+<div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
 <nav class="flex flex-col gap-4">
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Nuevos Ingresos</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Sistemas de Motor</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Frenado</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Transmisión</a>
-</nav>
-</div>
-<div>
-<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Transmisión</a>
+</nav></div>
+<div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
 <nav class="flex flex-col gap-4">
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/auth/login') }}">Portal ERP</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/terminos_b2b') }}">Términos B2B</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/soporte') }}">Soporte Técnico</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/contacto') }}">Contacto</a>
-</nav>
-</div>
-<div>
-<span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Sede Central</span>
-<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">
-        AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
-</p>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="#">Contacto</a>
+</nav></div>
+<div><span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Sede Central</span>
+<p class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed">AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO</p>
 <div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
 <p class="text-[10px] text-primary font-bold uppercase tracking-widest">¿Necesitas ayuda?</p>
 <p class="text-white text-xs font-bold mt-1">LACIMA.REPUESTOS@GMAIL.COM</p>
 <p class="text-white text-xs font-bold mt-1">PEDIDOSLACIMA@GMAIL.COM</p>
-</div>
-</div>
+</div></div>
 </div>
 <div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
 <p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2026 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
-<div class="flex gap-6">
-<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/soporte') }}">Soporte</a>
-<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/terminos_b2b') }}">Legal</a>
-</div>
 </div>
 </footer>
-
-<script src="{{ asset('auth/js/olvido_contraseña.js') }}"></script>
-
 </body></html>

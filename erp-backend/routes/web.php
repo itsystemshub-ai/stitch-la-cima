@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MaintenanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AccessImportController;
@@ -55,11 +56,6 @@ Route::get('/erp/productos', [ProductController::class, 'index'])->name('erp.pro
 
 // Enrutador Dinámico para todos los submódulos ERP compilados en resources/views/erp/
 Route::get('/erp/{module}', function ($module) {
-    // Prioridad a las versiones modernizadas (_new) durante la fase de migración
-    if (view()->exists('erp.' . $module . '_new')) {
-        return view('erp.' . $module . '_new');
-    }
-    
     if (view()->exists('erp.' . $module)) {
         return view('erp.' . $module);
     }
@@ -97,4 +93,7 @@ Route::get('/auth/{page?}', function ($page = 'login') {
 Route::prefix('api/erp/invoice')->group(function () {
     Route::post('/checkout', [InvoiceController::class, 'processCheckout']);
 });
+
+// Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
+Route::get('/erp/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
 

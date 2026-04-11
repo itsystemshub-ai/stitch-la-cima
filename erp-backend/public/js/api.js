@@ -172,9 +172,8 @@ class ZenithAPI {
       // Token expirado o inválido
       if (response.status === 401) {
         this.setToken(null);
-        // Redirigir al login real en Laravel
-        if (window.location.pathname.includes('/dashboard') || window.location.pathname.includes('/auth/')) {
-          window.location.href = '/auth/login';
+        if (window.location.pathname.includes('/erp/') || window.location.pathname.includes('/auth/')) {
+          window.location.href = '/frontend/public/auth/login.html';
         }
       }
       throw new Error(data.message || 'Error en la petición');
@@ -186,7 +185,6 @@ class ZenithAPI {
   // Verificar conexión con el backend
   async checkConnection() {
     try {
-      // En Laravel, esto podría apuntar a una ruta de salud o simplemente fallar si no hay sesión
       const response = await this.get('/health');
       return {
         connected: true,
@@ -221,81 +219,312 @@ class ZenithAPI {
     localStorage.removeItem('erp_session');
   }
 
-  // Otros métodos se mantienen iguales para 1:1 funcionalidad...
-  async getUsers(params = {}) { return await this.get('/admin/users', params); }
-  async getUserById(id) { return await this.get(`/admin/users/${id}`); }
-  async createUser(userData) { return await this.post('/admin/users', userData); }
-  async updateUser(id, userData) { return await this.put(`/admin/users/${id}`, userData); }
-  async updateUserRole(id, role) { return await this.put(`/admin/users/${id}/role`, { role }); }
-  async resetUserPassword(id, newPassword) { return await this.post(`/admin/users/${id}/reset-password`, { newPassword }); }
-  async deactivateUser(id) { return await this.post(`/admin/users/${id}/deactivate`); }
-  async getActiveSessions() { return await this.get('/admin/users/sessions'); }
-  async forceLogoutUser(id) { return await this.post(`/admin/users/${id}/force-logout`); }
-  async getProducts(params = {}) { return await this.get('/inventory/products', params); }
-  async getProductById(id) { return await this.get(`/inventory/products/${id}`); }
-  async createProduct(productData) { return await this.post('/inventory/products', productData); }
-  async updateProduct(id, productData) { return await this.put(`/inventory/products/${id}`, productData); }
-  async deleteProduct(id) { return await this.delete(`/inventory/products/${id}`); }
-  async getSales(params = {}) { return await this.get('/sales', params); }
-  async getSaleById(id) { return await this.get(`/sales/${id}`); }
-  async createSale(saleData) { return await this.post('/sales', saleData); }
-  async cancelSale(id) { return await this.post(`/sales/${id}/cancel`); }
-  async getSalesSummary(params = {}) { return await this.get('/sales/summary', params); }
-  async getDailyReport(params = {}) { return await this.get('/sales/daily-report', params); }
-  async getInventorySummary() { return await this.get('/inventory/products/summary'); }
-  async getLowStockProducts() { return await this.get('/inventory/products/low-stock'); }
-  async addStock(data) { return await this.post('/inventory/stock/add', data); }
-  async removeStock(data) { return await this.post('/inventory/stock/remove', data); }
-  async adjustStock(data) { return await this.post('/inventory/stock/adjust', data); }
-  async getKardex(productId) { return await this.get(`/inventory/kardex/${productId}`); }
-  async getSuppliers(params = {}) { return await this.get('/purchases/suppliers', params); }
-  async createSupplier(supplierData) { return await this.post('/purchases/suppliers', supplierData); }
-  async updateSupplier(id, supplierData) { return await this.put(`/purchases/suppliers/${id}`, supplierData); }
-  async getPurchaseOrders(params = {}) { return await this.get('/purchases/orders', params); }
-  async createPurchaseOrder(orderData) { return await this.post('/purchases/orders', orderData); }
-  async approvePurchaseOrder(id) { return await this.post(`/purchases/orders/${id}/approve`); }
-  async receivePurchaseOrder(id) { return await this.post(`/purchases/orders/${id}/receive`); }
-  async cancelPurchaseOrder(id) { return await this.post(`/purchases/orders/${id}/cancel`); }
-  async getEmployees(params = {}) { return await this.get('/hr/employees', params); }
-  async createEmployee(employeeData) { return await this.post('/hr/employees', employeeData); }
-  async updateEmployee(id, employeeData) { return await this.put(`/hr/employees/${id}`, employeeData); }
-  async deactivateEmployee(id) { return await this.post(`/hr/employees/${id}/deactivate`); }
-  async getPayrolls(params = {}) { return await this.get('/hr/payrolls', params); }
-  async calculatePayroll(data) { return await this.post('/hr/payrolls/calculate', data); }
-  async processPayroll(data) { return await this.post('/hr/payrolls/process', data); }
-  async getPayrollSummary(params = {}) { return await this.get('/hr/payrolls/summary', params); }
-  async getAttendance(params = {}) { return await this.get('/hr/attendance', params); }
-  async recordAttendance(data) { return await this.post('/hr/attendance', data); }
-  async getChartOfAccounts() { return await this.get('/accounting/accounts'); }
-  async getJournalEntries(params = {}) { return await this.get('/accounting/journal-entries', params); }
-  async createJournalEntry(entryData) { return await this.post('/accounting/journal-entries', entryData); }
-  async getTrialBalance(params = {}) { return await this.get('/accounting/trial-balance', params); }
-  async getBalanceSheet(params = {}) { return await this.get('/accounting/balance-sheet', params); }
-  async getIncomeStatement(params = {}) { return await this.get('/accounting/income-statement', params); }
-  async getTaxReport(params = {}) { return await this.get('/accounting/tax-report', params); }
-  async getFixedAssets(params = {}) { return await this.get('/finance/fixed-assets', params); }
-  async getReceivables(params = {}) { return await this.get('/finance/receivables', params); }
-  async getFinancialDashboard() { return await this.get('/finance/dashboard'); }
-  async getConfigs(params = {}) { return await this.get('/admin/config', params); }
-  async getConfigByKey(key) { return await this.get(`/admin/config/${key}`); }
-  async updateConfig(key, value) { return await this.put(`/admin/config/${key}`, { value }); }
-  async getSystemHealth() { return await this.get('/admin/config/system/health'); }
-  async triggerBackup() { return await this.post('/admin/config/backup/trigger'); }
+  // ==========================================
+  // USER MANAGEMENT API (Admin)
+  // ==========================================
+
+  async getUsers(params = {}) {
+    return await this.get('/admin/users', params);
+  }
+
+  async getUserById(id) {
+    return await this.get(`/admin/users/${id}`);
+  }
+
+  async createUser(userData) {
+    return await this.post('/admin/users', userData);
+  }
+
+  async updateUser(id, userData) {
+    return await this.put(`/admin/users/${id}`, userData);
+  }
+
+  async updateUserRole(id, role) {
+    return await this.put(`/admin/users/${id}/role`, { role });
+  }
+
+  async resetUserPassword(id, newPassword) {
+    return await this.post(`/admin/users/${id}/reset-password`, { newPassword });
+  }
+
+  async deactivateUser(id) {
+    return await this.post(`/admin/users/${id}/deactivate`);
+  }
+
+  async getActiveSessions() {
+    return await this.get('/admin/users/sessions');
+  }
+
+  async forceLogoutUser(id) {
+    return await this.post(`/admin/users/${id}/force-logout`);
+  }
+
+  // ==========================================
+  // PRODUCT API
+  // ==========================================
+
+  async getProducts(params = {}) {
+    return await this.get('/inventory/products', params);
+  }
+
+  async getProductById(id) {
+    return await this.get(`/inventory/products/${id}`);
+  }
+
+  async createProduct(productData) {
+    return await this.post('/inventory/products', productData);
+  }
+
+  async updateProduct(id, productData) {
+    return await this.put(`/inventory/products/${id}`, productData);
+  }
+
+  async deleteProduct(id) {
+    return await this.delete(`/inventory/products/${id}`);
+  }
+
+  // ==========================================
+  // SALES API
+  // ==========================================
+
+  async getSales(params = {}) {
+    return await this.get('/sales', params);
+  }
+
+  async getSaleById(id) {
+    return await this.get(`/sales/${id}`);
+  }
+
+  async createSale(saleData) {
+    return await this.post('/sales', saleData);
+  }
+
+  async cancelSale(id) {
+    return await this.post(`/sales/${id}/cancel`);
+  }
+
+  async getSalesSummary(params = {}) {
+    return await this.get('/sales/summary', params);
+  }
+
+  async getDailyReport(params = {}) {
+    return await this.get('/sales/daily-report', params);
+  }
+
+  // ==========================================
+  // INVENTORY API
+  // ==========================================
+
+  async getInventorySummary() {
+    return await this.get('/inventory/products/summary');
+  }
+
+  async getLowStockProducts() {
+    return await this.get('/inventory/products/low-stock');
+  }
+
+  async addStock(data) {
+    return await this.post('/inventory/stock/add', data);
+  }
+
+  async removeStock(data) {
+    return await this.post('/inventory/stock/remove', data);
+  }
+
+  async adjustStock(data) {
+    return await this.post('/inventory/stock/adjust', data);
+  }
+
+  async getKardex(productId) {
+    return await this.get(`/inventory/kardex/${productId}`);
+  }
+
+  // ==========================================
+  // PURCHASES API
+  // ==========================================
+
+  async getSuppliers(params = {}) {
+    return await this.get('/purchases/suppliers', params);
+  }
+
+  async createSupplier(supplierData) {
+    return await this.post('/purchases/suppliers', supplierData);
+  }
+
+  async updateSupplier(id, supplierData) {
+    return await this.put(`/purchases/suppliers/${id}`, supplierData);
+  }
+
+  async getPurchaseOrders(params = {}) {
+    return await this.get('/purchases/orders', params);
+  }
+
+  async createPurchaseOrder(orderData) {
+    return await this.post('/purchases/orders', orderData);
+  }
+
+  async approvePurchaseOrder(id) {
+    return await this.post(`/purchases/orders/${id}/approve`);
+  }
+
+  async receivePurchaseOrder(id) {
+    return await this.post(`/purchases/orders/${id}/receive`);
+  }
+
+  async cancelPurchaseOrder(id) {
+    return await this.post(`/purchases/orders/${id}/cancel`);
+  }
+
+  // ==========================================
+  // HR API
+  // ==========================================
+
+  async getEmployees(params = {}) {
+    return await this.get('/hr/employees', params);
+  }
+
+  async createEmployee(employeeData) {
+    return await this.post('/hr/employees', employeeData);
+  }
+
+  async updateEmployee(id, employeeData) {
+    return await this.put(`/hr/employees/${id}`, employeeData);
+  }
+
+  async deactivateEmployee(id) {
+    return await this.post(`/hr/employees/${id}/deactivate`);
+  }
+
+  async getPayrolls(params = {}) {
+    return await this.get('/hr/payrolls', params);
+  }
+
+  async calculatePayroll(data) {
+    return await this.post('/hr/payrolls/calculate', data);
+  }
+
+  async processPayroll(data) {
+    return await this.post('/hr/payrolls/process', data);
+  }
+
+  async getPayrollSummary(params = {}) {
+    return await this.get('/hr/payrolls/summary', params);
+  }
+
+  async getAttendance(params = {}) {
+    return await this.get('/hr/attendance', params);
+  }
+
+  async recordAttendance(data) {
+    return await this.post('/hr/attendance', data);
+  }
+
+  // ==========================================
+  // ACCOUNTING API
+  // ==========================================
+
+  async getChartOfAccounts() {
+    return await this.get('/accounting/accounts');
+  }
+
+  async getJournalEntries(params = {}) {
+    return await this.get('/accounting/journal-entries', params);
+  }
+
+  async createJournalEntry(entryData) {
+    return await this.post('/accounting/journal-entries', entryData);
+  }
+
+  async getTrialBalance(params = {}) {
+    return await this.get('/accounting/trial-balance', params);
+  }
+
+  async getBalanceSheet(params = {}) {
+    return await this.get('/accounting/balance-sheet', params);
+  }
+
+  async getIncomeStatement(params = {}) {
+    return await this.get('/accounting/income-statement', params);
+  }
+
+  async getTaxReport(params = {}) {
+    return await this.get('/accounting/tax-report', params);
+  }
+
+  // ==========================================
+  // FINANCE API
+  // ==========================================
+
+  async getFixedAssets(params = {}) {
+    return await this.get('/finance/fixed-assets', params);
+  }
+
+  async getReceivables(params = {}) {
+    return await this.get('/finance/receivables', params);
+  }
+
+  async getFinancialDashboard() {
+    return await this.get('/finance/dashboard');
+  }
+
+  // ==========================================
+  // CONFIG API
+  // ==========================================
+
+  async getConfigs(params = {}) {
+    return await this.get('/admin/config', params);
+  }
+
+  async getConfigByKey(key) {
+    return await this.get(`/admin/config/${key}`);
+  }
+
+  async updateConfig(key, value) {
+    return await this.put(`/admin/config/${key}`, { value });
+  }
+
+  async getSystemHealth() {
+    return await this.get('/admin/config/system/health');
+  }
+
+  async triggerBackup() {
+    return await this.post('/admin/config/backup/trigger');
+  }
+
+  // ==========================================
+  // UI HELPERS
+  // ==========================================
 
   showNotification(message, type = 'info') {
     const banner = document.createElement('div');
     banner.className = `fixed bottom-4 right-4 p-4 rounded-lg shadow-2xl z-50 text-white transition-all transform translate-y-20 flex items-center gap-3`;
-    const colors = { info: 'bg-blue-600', success: 'bg-green-600', error: 'bg-red-600', warning: 'bg-yellow-600' };
+    
+    const colors = {
+      info: 'bg-blue-600',
+      success: 'bg-green-600',
+      error: 'bg-red-600',
+      warning: 'bg-yellow-600'
+    };
+    
     banner.classList.add(colors[type] || colors.info);
+    
     const icon = document.createElement('span');
     icon.className = 'material-symbols-outlined';
     icon.textContent = type === 'success' ? 'check_circle' : (type === 'error' ? 'error' : 'info');
+    
     const text = document.createElement('span');
     text.textContent = message;
+    
     banner.appendChild(icon);
     banner.appendChild(text);
     document.body.appendChild(banner);
-    setTimeout(() => { banner.classList.remove('translate-y-20'); }, 10);
+    
+    // Animate in
+    setTimeout(() => {
+      banner.classList.remove('translate-y-20');
+    }, 10);
+    
+    // Auto remove
     setTimeout(() => {
       banner.classList.add('translate-y-20');
       setTimeout(() => banner.remove(), 500);
@@ -308,6 +537,10 @@ window.zenithApi = new ZenithAPI();
 
 // Verificar conexión al cargar
 document.addEventListener('DOMContentLoaded', async () => {
-    // Verificación silenciosa en esta fase
-    console.log('Zenith API Initialized');
+  const connection = await window.zenithApi.checkConnection();
+  if (connection.connected) {
+    console.log(`✅ API conectada: ${connection.environment} (${connection.version})`);
+  } else {
+    console.warn('⚠️ API no disponible:', connection.error);
+  }
 });

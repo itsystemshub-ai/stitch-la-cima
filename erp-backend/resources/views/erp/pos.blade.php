@@ -23,19 +23,19 @@
     </div>
 
     <nav class="flex-1 px-4 space-y-1">
-        <a href="/erp/inicio" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="{{ url('/erp/inicio') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">dashboard</span> Dashboard
         </a>
-        <a href="#" class="flex items-center gap-4 px-4 py-3 bg-primary text-black font-black text-xs uppercase tracking-widest">
+        <a href="{{ url('/erp/pos') }}" class="flex items-center gap-4 px-4 py-3 bg-primary text-black font-black text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">add_shopping_cart</span> New Sale
         </a>
-        <a href="/erp/facturas-emitidas" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="{{ url('/erp/registro-ventas') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">history</span> Sales History
         </a>
-        <a href="/erp/clientes" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="{{ url('/erp/clientes') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">group</span> Customers
         </a>
-        <a href="/erp/reportes-ventas" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="{{ url('/erp/reportes-ventas') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">analytics</span> Reports
         </a>
     </nav>
@@ -43,10 +43,10 @@
     <div class="p-6 border-t border-outline space-y-4">
         <button class="w-full bg-primary text-black font-black py-4 text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all shadow-lg">Initiate Sale</button>
         <div class="space-y-1">
-            <a href="/erp/ayuda" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
+            <a href="{{ url('/erp/ayuda') }}" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
                 <span class="material-symbols-outlined text-sm">help</span> Support
             </a>
-            <a href="javascript:void(0)" onclick="localStorage.removeItem('erp_session'); window.location.href='/auth/login';" class="flex items-center gap-3 px-4 py-2 text-red-500 hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
+            <a href="{{ url('/auth/login') }}" class="flex items-center gap-3 px-4 py-2 text-red-500 hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
                 <span class="material-symbols-outlined text-sm">logout</span> Logout
             </a>
         </div>

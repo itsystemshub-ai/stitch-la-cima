@@ -15,6 +15,9 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script src="{{ asset('js/api.js') }}"></script>
+    <script src="{{ asset('auth/js/crear_cuenta.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('auth/css/crear_cuenta.css') }}" />
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -35,7 +38,6 @@
         },
       };
     </script>
-    <link rel="stylesheet" href="{{ asset('auth/css/crear_cuenta.css') }}" />
   </head>
   <body class="bg-surface font-body text-on-surface">
     <!-- Top Navigation -->
@@ -44,7 +46,7 @@
         <button onclick="openMobileMenu()" class="md:hidden p-2 hover:bg-stone-100 rounded-full">
           <span class="material-symbols-outlined">menu</span>
         </button>
-        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
+        <a href="{{ url('/tienda/index') }}" class="flex items-center gap-2 group">
           <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain" />
           <div class="flex flex-col">
             <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
@@ -52,7 +54,7 @@
           </div>
         </a>
         <div class="hidden md:flex items-center gap-6">
-          <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/') }}">Inicio</a>
+          <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/index') }}">Inicio</a>
           <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/catalogo_general') }}">Catálogo</a>
           <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/Nosotros') }}">Nosotros</a>
           <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/contacto') }}">Contacto</a>
@@ -79,12 +81,11 @@
         </button>
       </div>
       <nav class="p-6 space-y-4">
-        <a href="{{ url('/') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
+        <a href="{{ url('/tienda/index') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
         <a href="{{ url('/tienda/catalogo_general') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Catálogo</a>
         <a href="{{ url('/auth/login') }}" class="block text-sm font-bold uppercase tracking-widest text-black border-l-4 border-primary pl-4 py-2">Iniciar Sesión</a>
       </nav>
     </div>
-
     <main class="min-h-screen pt-20 pb-12 bg-gradient-to-br from-stone-50 to-stone-100">
       <div class="max-w-6xl mx-auto px-4 md:px-8 py-12">
         <!-- Header -->
