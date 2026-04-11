@@ -53,14 +53,14 @@
             <div class="bg-surface border border-outline p-8">
                 <p class="text-[9px] text-on-surface-variant font-black uppercase tracking-[0.3em] mb-6">Stock Health</p>
                 <div class="flex items-center gap-4">
-                    <div class="w-3 h-3 rounded-full bg-[#FFB300] animate-pulse"></div>
-                    <span class="text-white text-2xl font-black tracking-tighter uppercase">LOW STOCK (4)</span>
+                    <div class="w-3 h-3 rounded-full {{ $stats['low_stock'] > 0 ? 'bg-[#FFB300] animate-pulse' : 'bg-primary' }}"></div>
+                    <span class="text-white text-2xl font-black tracking-tighter uppercase">{{ $stats['low_stock'] > 0 ? 'LOW STOCK (' . $stats['low_stock'] . ')' : 'HEALTHY STOCK' }}</span>
                 </div>
             </div>
             <div class="bg-black border border-primary/20 p-8 flex items-center justify-center relative overflow-hidden">
                 <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#ceff5e 1px, transparent 1px); background-size: 10px 10px;"></div>
                 <div class="text-center z-10">
-                    <p class="text-[42px] font-black text-primary leading-none tracking-tighter">1,402</p>
+                    <p class="text-[42px] font-black text-primary leading-none tracking-tighter">{{ number_format($stats['total_sku']) }}</p>
                     <p class="text-[9px] text-on-surface-variant font-black uppercase tracking-[0.3em] mt-3">Total SKU Count</p>
                 </div>
             </div>
@@ -82,177 +82,50 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-outline">
-                        <!-- Product Row 1 -->
-                        <tr class="hover:bg-black/40 transition-colors group">
-                            <td class="p-6 text-sm font-black text-primary tracking-widest">#CP-8842-12</td>
+                        @foreach($products as $product)
+                        @php
+                            $isCritical = $product->stock_actual <= $product->stock_minimo;
+                            $stockPercent = $product->stock_actual > 0 ? min(100, ($product->stock_actual / ($product->stock_minimo * 2)) * 100) : 0;
+                        @endphp
+                        <tr class="{{ $isCritical ? 'bg-red-500/5 border-l-4 border-red-500' : 'hover:bg-black/40' }} transition-colors group">
+                            <td class="p-6 text-sm font-black {{ $isCritical ? 'text-red-500' : 'text-primary' }} tracking-widest">#{{ $product->codigo_oem ?: 'N/A' }}</td>
                             <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">Cylinder Head Gasket</p>
-                                <p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest mt-1">Cummins ISX Series</p>
+                                <p class="text-sm font-black text-white uppercase tracking-tight">{{ $product->nombre }}</p>
+                                <p class="text-xs {{ $isCritical ? 'text-red-500/60' : 'text-on-surface-variant' }} font-bold uppercase tracking-widest mt-1">{{ $product->marca }}</p>
                             </td>
                             <td class="p-6">
-                                <span class="bg-white/5 border border-white/10 text-on-surface-variant text-xs font-black px-3 py-1 uppercase tracking-widest">Engine Seals</span>
+                                <span class="bg-white/5 border border-white/10 text-on-surface-variant text-xs font-black px-3 py-1 uppercase tracking-widest">{{ $product->categoria }}</span>
                             </td>
                             <td class="p-6">
                                 <div class="flex items-center gap-4">
                                     <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full">
-                                        <div class="bg-primary h-full w-[85%] shadow-[0_0_10px_#ceff5e]"></div>
+                                        <div class="h-full {{ $isCritical ? 'bg-red-500' : 'bg-primary shadow-[0_0_10px_#ceff5e]' }}" style="width: {{ $stockPercent }}%"></div>
                                     </div>
-                                    <span class="text-[11px] font-black text-white tracking-widest">42 <span class="text-on-surface-variant font-bold text-[9px]">/ 50</span></span>
+                                    <span class="text-[11px] font-black {{ $isCritical ? 'text-red-500' : 'text-white' }} tracking-widest">{{ str_pad($product->stock_actual, 2, '0', STR_PAD_LEFT) }} <span class="{{ $isCritical ? 'text-red-500/40' : 'text-on-surface-variant' }} font-bold text-[9px]">/ {{ $product->stock_minimo }}</span></span>
                                 </div>
                             </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$124.50</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$144.42</td>
+                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">${{ number_format($product->costo_compra, 2) }}</td>
+                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">${{ number_format($product->precio_mayor * 1.16, 2) }}</td>
                             <td class="p-6">
                                 <div class="flex justify-center gap-3">
                                     <button class="p-2 text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
-                                    <button class="p-2 text-on-surface-variant hover:text-white transition-all"><span class="material-symbols-outlined text-lg">archive</span></button>
+                                    @if($isCritical)
+                                        <span class="material-symbols-outlined text-red-500 text-lg animate-pulse" style="font-variation-settings: 'FILL' 1;">error</span>
+                                    @else
+                                        <button class="p-2 text-on-surface-variant hover:text-white transition-all"><span class="material-symbols-outlined text-lg">archive</span></button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
-                        <!-- Product Row 2 (Critical) -->
-                        <tr class="bg-red-500/5 hover:bg-red-500/10 transition-colors border-l-4 border-red-500">
-                            <td class="p-6 text-sm font-black text-red-500 tracking-widest">#PK-1102-X</td>
-                            <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">Main Bearing Set</p>
-                                <p class="text-[9px] text-red-500/60 font-medium uppercase tracking-widest mt-1">Perkins 1104D-44TA</p>
-                            </td>
-                            <td class="p-6">
-                                <span class="bg-red-500/10 border border-red-500/20 text-red-500 text-[9px] font-black px-3 py-1 uppercase tracking-widest">Internal Parts</span>
-                            </td>
-                            <td class="p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full">
-                                        <div class="bg-red-500 h-full w-[15%]"></div>
-                                    </div>
-                                    <span class="text-[11px] font-black text-red-500 tracking-widest">03 <span class="text-red-500/40 font-bold text-[9px]">/ 20</span></span>
-                                </div>
-                            </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$82.00</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$95.12</td>
-                            <td class="p-6 text-center">
-                                <span class="material-symbols-outlined text-red-500 text-lg animate-pulse" style="font-variation-settings: 'FILL' 1;">error</span>
-                            </td>
-                        </tr>
-                        <!-- Product Row 3 -->
-                        <tr class="hover:bg-black/40 transition-colors group">
-                            <td class="p-6 text-sm font-black text-primary tracking-widest">#FP-9931-B</td>
-                            <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">Fuel Injection Pump</p>
-                                <p class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest mt-1">Bosch Heavy Duty</p>
-                            </td>
-                            <td class="p-6"><span class="bg-white/5 border border-white/10 text-on-surface-variant text-[9px] font-black px-3 py-1 uppercase tracking-widest">Fuel Systems</span></td>
-                            <td class="p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full"><div class="bg-primary h-full w-[60%]"></div></div>
-                                    <span class="text-[11px] font-black text-white tracking-widest">08 <span class="text-on-surface-variant font-bold text-[9px]">/ 12</span></span>
-                                </div>
-                            </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$1,840.00</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$2,134.40</td>
-                            <td class="p-6 text-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">edit</span></td>
-                        </tr>
-                        <!-- Product Row 4 -->
-                        <tr class="hover:bg-black/40 transition-colors group">
-                            <td class="p-6 text-sm font-black text-primary tracking-widest">#TU-4420-W</td>
-                            <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">Turbocharger Assembly</p>
-                                <p class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest mt-1">Holset HE351CW</p>
-                            </td>
-                            <td class="p-6"><span class="bg-white/5 border border-white/10 text-on-surface-variant text-[9px] font-black px-3 py-1 uppercase tracking-widest">Air Intake</span></td>
-                            <td class="p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full"><div class="bg-primary h-full w-[40%]"></div></div>
-                                    <span class="text-[11px] font-black text-white tracking-widest">02 <span class="text-on-surface-variant font-bold text-[9px]">/ 05</span></span>
-                                </div>
-                            </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$645.00</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$748.20</td>
-                            <td class="p-6 text-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">edit</span></td>
-                        </tr>
-                        <!-- Row 5 (Warning) -->
-                        <tr class="bg-[#FFB300]/5 hover:bg-[#FFB300]/10 transition-colors border-l-4 border-[#FFB300]">
-                            <td class="p-6 text-sm font-black text-[#FFB300] tracking-widest">#VL-0012-S</td>
-                            <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">Exhaust Valve Set</p>
-                                <p class="text-[9px] text-[#FFB300]/60 font-medium uppercase tracking-widest mt-1">CAT 3406E Industrial</p>
-                            </td>
-                            <td class="p-6"><span class="bg-[#FFB300]/10 border border-[#FFB300]/20 text-[#FFB300] text-[9px] font-black px-3 py-1 uppercase tracking-widest">Valve Train</span></td>
-                            <td class="p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full"><div class="bg-[#FFB300] h-full w-[5%]"></div></div>
-                                    <span class="text-[11px] font-black text-[#FFB300] tracking-widest">01 <span class="text-[#FFB300]/40 font-bold text-[9px]">/ 24</span></span>
-                                </div>
-                            </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$18.40</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$21.34</td>
-                            <td class="p-6 text-center text-[#FFB300]"><span class="material-symbols-outlined text-lg">warning</span></td>
-                        </tr>
-                        <!-- Product Row 6 -->
-                        <tr class="hover:bg-black/40 transition-colors group">
-                            <td class="p-6 text-sm font-black text-primary tracking-widest">#OP-5521-X</td>
-                            <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">Oil Pump Assembly</p>
-                                <p class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest mt-1">Detroit Diesel Series 60</p>
-                            </td>
-                            <td class="p-6"><span class="bg-white/5 border border-white/10 text-on-surface-variant text-[9px] font-black px-3 py-1 uppercase tracking-widest">Lubrication</span></td>
-                            <td class="p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full"><div class="bg-primary h-full w-[100%]"></div></div>
-                                    <span class="text-[11px] font-black text-white tracking-widest">12 <span class="text-on-surface-variant font-bold text-[9px]">/ 12</span></span>
-                                </div>
-                            </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$312.00</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$361.92</td>
-                            <td class="p-6 text-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">edit</span></td>
-                        </tr>
-                        <!-- Product Row 7 -->
-                        <tr class="hover:bg-black/40 transition-colors group">
-                            <td class="p-6 text-sm font-black text-primary tracking-widest">#RA-2211-L</td>
-                            <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">Heavy Duty Radiator</p>
-                                <p class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest mt-1">Kenworth T800 Core</p>
-                            </td>
-                            <td class="p-6"><span class="bg-white/5 border border-white/10 text-on-surface-variant text-[9px] font-black px-3 py-1 uppercase tracking-widest">Cooling</span></td>
-                            <td class="p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full"><div class="bg-primary h-full w-[30%]"></div></div>
-                                    <span class="text-[11px] font-black text-white tracking-widest">03 <span class="text-on-surface-variant font-bold text-[9px]">/ 10</span></span>
-                                </div>
-                            </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$940.00</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$1,090.40</td>
-                            <td class="p-6 text-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">edit</span></td>
-                        </tr>
-                        <!-- Product Row 8 -->
-                        <tr class="hover:bg-black/40 transition-colors group">
-                            <td class="p-6 text-sm font-black text-primary tracking-widest">#ST-6600-A</td>
-                            <td class="p-6">
-                                <p class="text-sm font-black text-white uppercase tracking-tight">24V Heavy Starter Motor</p>
-                                <p class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest mt-1">Delco Remy 39MT</p>
-                            </td>
-                            <td class="p-6"><span class="bg-white/5 border border-white/10 text-on-surface-variant text-[9px] font-black px-3 py-1 uppercase tracking-widest">Electrical</span></td>
-                            <td class="p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="flex-1 bg-black h-1.5 max-w-[100px] border border-outline overflow-hidden rounded-full"><div class="bg-primary h-full w-[75%]"></div></div>
-                                    <span class="text-[11px] font-black text-white tracking-widest">15 <span class="text-on-surface-variant font-bold text-[9px]">/ 20</span></span>
-                                </div>
-                            </td>
-                            <td class="p-6 text-right text-sm font-black text-on-surface-variant tracking-tighter">$425.00</td>
-                            <td class="p-6 text-right text-sm font-black text-primary tracking-tighter">$493.00</td>
-                            <td class="p-6 text-center text-on-surface-variant"><span class="material-symbols-outlined text-lg">edit</span></td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             <!-- Pagination -->
             <div class="px-8 py-6 bg-black border-t border-outline flex justify-between items-center">
-                <p class="text-[9px] text-on-surface-variant font-black uppercase tracking-[0.3em]">Showing 15 of 1,402 line items</p>
+                <p class="text-[9px] text-on-surface-variant font-black uppercase tracking-[0.3em]">Showing {{ $products->count() }} of {{ $products->total() }} line items</p>
                 <div class="flex gap-2">
-                    <button class="w-10 h-10 flex items-center justify-center bg-surface border border-outline text-on-surface-variant hover:text-primary hover:border-primary transition-all text-xs font-black">1</button>
-                    <button class="w-10 h-10 flex items-center justify-center bg-primary text-black text-xs font-black">2</button>
-                    <button class="w-10 h-10 flex items-center justify-center bg-surface border border-outline text-on-surface-variant hover:text-primary hover:border-primary transition-all text-xs font-black">3</button>
-                    <span class="flex items-center px-4 text-outline">...</span>
-                    <button class="w-10 h-10 flex items-center justify-center bg-surface border border-outline text-on-surface-variant hover:text-primary hover:border-primary transition-all text-xs font-black">94</button>
+                    {{ $products->links('vendor.pagination.tailwind_zenith') }}
                 </div>
             </div>
         </div>

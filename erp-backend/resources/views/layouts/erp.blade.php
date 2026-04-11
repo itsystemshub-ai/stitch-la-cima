@@ -98,81 +98,81 @@
         </a>
 
     <!-- INVENTARIO -->
-    <div class="menu-parent">
-      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+    <div class="menu-parent {{ request()->is('erp/inventario*') || request()->is('erp/productos*') || request()->is('erp/kardex*') ? 'open' : '' }}">
+      <div class="menu-item {{ request()->is('erp/inventario*') || request()->is('erp/productos*') || request()->is('erp/kardex*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">inventory_2</span>
         <span>Inventario</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <a href="#"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
-        <a href="#"><span class="material-symbols-outlined">category</span> Productos</a>
-        <a href="#"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
-        <a href="#"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
-        <a href="#"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
-        <a href="#"><span class="material-symbols-outlined">analytics</span> Reportes</a>
+        <a href="{{ url('/erp/inventario') }}" class="{{ request()->is('erp/inventario') ? 'text-primary' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/productos') }}" class="{{ request()->is('erp/productos') ? 'text-primary' : '' }}"><span class="material-symbols-outlined">category</span> Productos</a>
+        <a href="{{ url('/erp/kardex') }}" class="{{ request()->is('erp/kardex') ? 'text-primary' : '' }}"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
+        <a href="{{ url('/erp/auditoria-inventario') }}"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
+        <a href="{{ url('/erp/ajustes-inventario') }}"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
+        <a href="{{ url('/erp/reportes-inventario') }}"><span class="material-symbols-outlined">analytics</span> Reportes</a>
       </div>
     </div>
 
     <!-- VENTAS -->
-    <div class="menu-parent">
-      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+    <div class="menu-parent {{ request()->is('erp/ventas*') || request()->is('pos*') || request()->is('erp/clientes*') ? 'open' : '' }}">
+      <div class="menu-item {{ request()->is('erp/ventas*') || request()->is('pos*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">payments</span>
         <span>Ventas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <a href="#"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/ventas') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/pos') }}"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
-        <a href="#"><span class="material-symbols-outlined">list_alt</span> Registro</a>
-        <a href="#"><span class="material-symbols-outlined">receipt</span> Factura Electrónica</a>
-        <a href="#"><span class="material-symbols-outlined">description</span> Facturas Emitidas</a>
+        <a href="{{ url('/erp/registro-ventas') }}"><span class="material-symbols-outlined">list_alt</span> Registro</a>
+        <a href="{{ url('/erp/factura-electronica') }}"><span class="material-symbols-outlined">receipt</span> Factura Electrónica</a>
+        <a href="{{ url('/erp/facturas-emitidas') }}"><span class="material-symbols-outlined">description</span> Facturas Emitidas</a>
         <div class="submenu-divider"></div>
-        <a href="#"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
-        <a href="#"><span class="material-symbols-outlined">people</span> Clientes</a>
-        <a href="#"><span class="material-symbols-outlined">badge</span> Vendedores</a>
-        <a href="#"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
+        <a href="{{ url('/erp/notas-credito') }}"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
+        <a href="{{ url('/erp/clientes') }}"><span class="material-symbols-outlined">people</span> Clientes</a>
+        <a href="{{ url('/erp/vendedores') }}"><span class="material-symbols-outlined">badge</span> Vendedores</a>
+        <a href="{{ url('/erp/reportes-ventas') }}"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
       </div>
     </div>
 
     <!-- COMPRAS -->
-    <div class="menu-parent">
-      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+    <div class="menu-parent {{ request()->is('erp/compras*') || request()->is('erp/proveeedores*') ? 'open' : '' }}">
+      <div class="menu-item {{ request()->is('erp/compras*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
         <span>Compras</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <a href="#"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
-        <a href="#"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
-        <a href="#"><span class="material-symbols-outlined">history</span> Historial</a>
-        <a href="#"><span class="material-symbols-outlined">request_quote</span> Factura Compra</a>
-        <a href="#"><span class="material-symbols-outlined">book</span> Libro Compras</a>
-        <a href="#"><span class="material-symbols-outlined">stacked_bar_chart</span> Reportes</a>
+        <a href="{{ url('/erp/compras') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/proveedores') }}"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
+        <a href="{{ url('/erp/historial-compras') }}"><span class="material-symbols-outlined">history</span> Historial</a>
+        <a href="{{ url('/erp/factura-compra') }}"><span class="material-symbols-outlined">request_quote</span> Factura Compra</a>
+        <a href="{{ url('/erp/libro-compras') }}"><span class="material-symbols-outlined">book</span> Libro Compras</a>
+        <a href="{{ url('/erp/reportes-compras') }}"><span class="material-symbols-outlined">stacked_bar_chart</span> Reportes</a>
       </div>
     </div>
 
     <!-- CONTABILIDAD -->
-    <div class="menu-parent">
-      <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
+    <div class="menu-parent {{ request()->is('erp/contabilidad*') || request()->is('erp/libro*') ? 'open' : '' }}">
+      <div class="menu-item {{ request()->is('erp/contabilidad*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">account_balance</span>
         <span>Contabilidad</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu">
-        <a href="#"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
-        <a href="#"><span class="material-symbols-outlined">format_list_numbered</span> Plan Cuentas</a>
-        <a href="#"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
-        <a href="#"><span class="material-symbols-outlined">chrome_reader_mode</span> Libro Ventas</a>
-        <a href="#"><span class="material-symbols-outlined">savings</span> Libro Caja</a>
+        <a href="{{ url('/erp/contabilidad') }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
+        <a href="{{ url('/erp/plan-cuentas') }}"><span class="material-symbols-outlined">format_list_numbered</span> Plan Cuentas</a>
+        <a href="{{ url('/erp/libro-diario') }}"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
+        <a href="{{ url('/erp/libro-ventas') }}"><span class="material-symbols-outlined">chrome_reader_mode</span> Libro Ventas</a>
+        <a href="{{ url('/erp/libro-caja') }}"><span class="material-symbols-outlined">savings</span> Libro Caja</a>
         <div class="submenu-divider"></div>
-        <a href="#"><span class="material-symbols-outlined">balance</span> Balance General</a>
-        <a href="#"><span class="material-symbols-outlined">scale</span> Balance Comprob.</a>
-        <a href="#"><span class="material-symbols-outlined">monitoring</span> Estado Resultados</a>
-        <a href="#"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
-        <a href="#"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
-        <a href="#"><span class="material-symbols-outlined">law</span> Libros Legales</a>
-        <a href="#"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
+        <a href="{{ url('/erp/balance-general') }}"><span class="material-symbols-outlined">balance</span> Balance General</a>
+        <a href="{{ url('/erp/balance-comprobacion') }}"><span class="material-symbols-outlined">scale</span> Balance Comprob.</a>
+        <a href="{{ url('/erp/estado-resultados') }}"><span class="material-symbols-outlined">monitoring</span> Estado Resultados</a>
+        <a href="{{ url('/erp/declaracion-iva') }}"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
+        <a href="{{ url('/erp/cierre-contable') }}"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
+        <a href="{{ url('/erp/libros-legales') }}"><span class="material-symbols-outlined">law</span> Libros Legales</a>
+        <a href="{{ url('/erp/reportes-contables') }}"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
       </div>
     </div>
 

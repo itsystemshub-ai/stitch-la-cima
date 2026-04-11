@@ -11,6 +11,8 @@ use App\Models\Notification;
 use App\Models\Approval;
 use Illuminate\Support\Facades\DB;
 
+class DataGeneratorSeeder extends Seeder
+{
     public function run(): void
     {
         // Limpieza previa para evitar duplicados en pruebas

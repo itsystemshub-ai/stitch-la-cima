@@ -1,13 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AccessImportController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TiendaController;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 // Punto de Entrada Principal (Storefront)
 Route::get('/', function () {
     return redirect('/tienda/index');
 });
-
-use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -16,10 +22,6 @@ Route::get('/pos', function () {
 });
 
 // Rutas Avanzadas para Módulo de Sincronización
-use App\Http\Controllers\AccessImportController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\ApprovalController;
-
 Route::prefix('erp/aprobaciones')->group(function () {
     Route::get('/', [ApprovalController::class, 'index'])->name('erp.approvals.index');
     Route::post('/{approval}/process', [ApprovalController::class, 'process'])->name('erp.approvals.process');
@@ -32,8 +34,6 @@ Route::prefix('erp/sync')->group(function () {
     Route::post('/upload-accdb', [AccessImportController::class, 'syncAccessDatabase']);
 });
 
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
 // Static Asset Bridge: Sirve los archivos de UI originales directamente
 Route::get('/frontend/{path}', function ($path) {
     $absolutePath = base_path('../frontend/' . $path);
@@ -51,6 +51,8 @@ Route::get('/frontend/{path}', function ($path) {
     return $response;
 })->where('path', '.*');
 
+Route::get('/erp/productos', [ProductController::class, 'index'])->name('erp.productos');
+
 // Enrutador Dinámico para todos los submódulos ERP compilados en resources/views/erp/
 Route::get('/erp/{module}', function ($module) {
     if (view()->exists('erp.' . $module)) {
@@ -58,8 +60,6 @@ Route::get('/erp/{module}', function ($module) {
     }
     abort(404, 'Módulo no compilado o no encontrado.');
 })->where('module', '.*');
-
-use App\Http\Controllers\TiendaController;
 
 // Rutas Específicas Dinámicas del Storefront
 Route::get('/tienda/index', [TiendaController::class, 'index']);
@@ -92,3 +92,4 @@ Route::get('/auth/{page?}', function ($page = 'login') {
 Route::prefix('api/erp/invoice')->group(function () {
     Route::post('/checkout', [InvoiceController::class, 'processCheckout']);
 });
+
