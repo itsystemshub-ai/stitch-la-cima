@@ -1,28 +1,17 @@
 // Service Worker para LA CIMA PWA
-const CACHE_NAME = 'la-cima-v1';
-const OFFLINE_URL = '/frontend/public/ecommerce/offline.html';
+const CACHE_NAME = 'la-cima-v2';
+const OFFLINE_URL = '/tienda/offline';
 
-// Archivos para cachear inicialmente
+// Archivos para cachear inicialmente (Rutas de Laravel)
 const ASSETS_TO_CACHE = [
-  '/frontend/public/ecommerce/index.html',
-  '/frontend/public/ecommerce/catalogo_general.html',
-  '/frontend/public/ecommerce/contacto.html',
-  '/frontend/public/ecommerce/Nosotros.html',
-  '/frontend/public/ecommerce/carrito.html',
-  '/frontend/public/ecommerce/catalogo_detallado.html',
-  '/frontend/public/ecommerce/product-detail-cummins-gasket.html',
-  '/frontend/public/ecommerce/your-cart-7-items.html',
-  '/frontend/public/ecommerce/e-commerce-la-cima-c-a.html',
-  '/frontend/public/ecommerce/gestión-de-productos-inventari.html',
-  '/frontend/public/ecommerce/catalog-7-items-selected.html',
-  '/frontend/public/auth/login.html',
-  '/frontend/public/auth/crear_cuenta.html',
-  '/frontend/public/auth/olvido_contraseña.html',
-  '/frontend/public/erp/pos.html',
-  '/frontend/public/erp/ventas.html',
-  '/frontend/public/erp/inventario.html',
-  '/frontend/public/erp/productos.html',
-  '/frontend/public/erp/kardex.html',
+  '/tienda/index',
+  '/tienda/catalogo_general',
+  '/tienda/contacto',
+  '/tienda/nosotros',
+  '/tienda/carrito',
+  '/tienda/catalogo_detallado',
+  '/auth/login',
+  '/auth/crear_cuenta',
   '/frontend/public/assets/images/logo.png',
   'https://cdn.tailwindcss.com?plugins=forms,container-queries',
   'https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap',
@@ -36,7 +25,6 @@ self.addEventListener('install', (event) => {
       console.log('[Service Worker] Cache abierto');
       return cache.addAll(ASSETS_TO_CACHE).catch((error) => {
         console.log('[Service Worker] Error al cachear algunos archivos:', error);
-        // No fallar la instalación si algunos archivos no se pueden cachear
       });
     })
   );
@@ -57,16 +45,17 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Estrategia de caché: Cache First, luego Network
+// Estrategia de caché: Network First, luego Cache
 self.addEventListener('fetch', (event) => {
-  // Ignorar solicitudes que no son GET
   if (event.request.method !== 'GET') return;
 
-  // Para navegación HTML, usar Network First con fallback a caché
+  // Para navegación HTML
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
-        .catch(() => caches.match(OFFLINE_URL))
+        .catch(() => caches.match(event.request).then(cachedResponse => {
+            return cachedResponse || caches.match(OFFLINE_URL);
+        }))
     );
     return;
   }
@@ -74,93 +63,36 @@ self.addEventListener('fetch', (event) => {
   // Para otros recursos: Cache First, luego Network
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
+      if (cachedResponse) return cachedResponse;
       return fetch(event.request).then((response) => {
-        // No cachear respuestas no válidas
         if (!response || response.status !== 200 || response.type !== 'basic') {
           return response;
         }
-
-        // Clonar la respuesta para guardar en caché
         const responseToCache = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, responseToCache);
         });
-
         return response;
       });
-    }).catch(() => {
-      // Si falla todo, retornar página offline para navegación
-      if (event.request.mode === 'navigate') {
-        return caches.match(OFFLINE_URL);
-      }
     })
   );
 });
 
-// Manejar mensajes desde el cliente
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-  
-  if (event.data && event.data.type === 'CLEAR_CACHE') {
-    caches.keys().then((cacheNames) => {
-      cacheNames.forEach((cacheName) => {
-        caches.delete(cacheName);
-      });
-    });
-  }
-});
-
-// Push Notifications (preparado para futuro)
-self.addEventListener('push', (event) => {
-  const options = {
-    body: event.data.text(),
-    icon: '../../assets/images/logo.png',
-    badge: '../../assets/images/logo.png',
-    vibrate: [100, 50, 100],
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: 1
-    },
-    actions: [
-      { action: 'explore', title: 'Ver Catálogo' },
-      { action: 'close', title: 'Cerrar' }
-    ]
-  };
-
-  event.waitUntil(
-    self.registration.showNotification('LA CIMA - Repuestos', options)
-  );
-});
-
-// Click en notificaciones
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/frontend/public/ecommerce/catalogo_general.html')
+      clients.openWindow('/tienda/catalogo_general')
     );
   }
 });
 
-// Sincronización en segundo plano
 self.addEventListener('sync', (event) => {
   if (event.tag === 'sync-sales') {
     event.waitUntil(syncSales());
   }
 });
 
-/**
- * Intenta sincronizar ventas pendientes guardadas en IndexedDB
- */
 async function syncSales() {
   console.log('[Service Worker] Sincronizando ventas pendientes...');
-  // Aquí se implementaría la lógica para leer de IndexedDB y enviar al servidor
-  // Esta lógica será llamada automáticamente cuando el navegador recupere conexión
 }

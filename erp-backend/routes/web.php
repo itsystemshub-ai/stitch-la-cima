@@ -7,9 +7,9 @@ Route::get('/', function () {
     return redirect('/tienda/index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+use App\Http\Controllers\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/pos', function () {
     return view('pos.index');
@@ -18,6 +18,12 @@ Route::get('/pos', function () {
 // Rutas Avanzadas para Módulo de Sincronización
 use App\Http\Controllers\AccessImportController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ApprovalController;
+
+Route::prefix('erp/aprobaciones')->group(function () {
+    Route::get('/', [ApprovalController::class, 'index'])->name('erp.approvals.index');
+    Route::post('/{approval}/process', [ApprovalController::class, 'process'])->name('erp.approvals.process');
+});
 
 Route::prefix('erp/sync')->group(function () {
     Route::get('/', function () {

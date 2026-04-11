@@ -25,13 +25,21 @@ class TiendaController extends Controller
     /**
      * Muestra el catálogo general de productos
      */
-    public function catalogoGeneral()
+        public function catalogoGeneral(Request $request)
     {
-        // Obtener todos los productos activos
-        $products = Product::where('activo', true)
-            ->where('precio_mayor', '>', 0)
-            ->orderBy('nombre')
-            ->paginate(24);
+        $query = Product::where('activo', true);
+
+        if ($request->has('q')) {
+            $searchTerm = $request->q;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('nombre', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('codigo_oem', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('marca', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('codigo_erp', 'LIKE', "%{$searchTerm}%");
+            });
+        }
+
+        $products = $query->orderBy('nombre')->paginate(24);
 
         return view('tienda.catalogo_general', compact('products'));
     }

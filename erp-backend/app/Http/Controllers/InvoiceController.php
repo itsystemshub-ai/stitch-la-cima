@@ -51,49 +51,74 @@ class InvoiceController extends Controller
                     'fecha_vencimiento' => now()->addDays(15) // Crédito standard B2B
                 ]);
 
-                // 2. Procesar Líneas y Deducir Stock
-                foreach ($items as $item) {
-                    // Lock For Update bloquea preventivamente esta fila de producto
-                    // Evitando que dos vendedores vendan el último repuesto a la vez (Race Condition).
-                    $product = Product::where('id', $item['product_id'])->lockForUpdate()->firstOrFail();
-
-                    // Regla Fuerte: No permitir venta sin inventario real
-                    if ($product->stock_actual < $item['cantidad']) {
-                        throw new Exception("Stock Insuficiente para el repuesto: {$product->codigo_oem} ({$product->nombre}). Solicitado: {$item['cantidad']}, Disponible: {$product->stock_actual}.");
-                    }
-
-                    // Calcular subtotales
-                    $subtotalItem = $item['cantidad'] * $item['precio_unitario'];
-                    $subtotalGlobal += $subtotalItem;
-
-                    // Crear Linea
-                    OrderItem::create([
-                        'order_id' => $order->id,
-                        'product_id' => $product->id,
-                        'cantidad' => $item['cantidad'],
-                        'precio_unitario' => $item['precio_unitario'],
-                        'subtotal' => $subtotalItem
+                // 2. Determinar si requiere Aprobación (Ordenes > $1000)
+                $requiresApproval = $subtotalGlobal > 1000;
+                
+                if ($requiresApproval) {
+                    $order->update([
+                        'subtotal' => $subtotalGlobal,
+                        'impuestos' => $subtotalGlobal * 0.16,
+                        'total' => $subtotalGlobal * 1.16,
+                        'status' => 'pending_approval',
+                        'estado' => 'Esperando Aprobación'
                     ]);
 
-                    // Deducir Stock Crítico
-                    $product->stock_actual -= $item['cantidad'];
-                    $product->save();
-                }
+                    \App\Models\Approval::create([
+                        'approvable_id' => $order->id,
+                        'approvable_type' => Order::class,
+                        'requester_id' => $request->user()->id ?? 1,
+                        'status' => 'pending',
+                        'reason' => 'Orden excede el límite de aprobación automática ($1,000.00).'
+                    ]);
 
-                // 3. Finalizar Matemática de Facturación
-                $impuestos = $subtotalGlobal * 0.16; // Asume IVA General
-                $order->update([
-                    'subtotal' => $subtotalGlobal,
-                    'impuestos' => $impuestos,
-                    'total' => $subtotalGlobal + $impuestos
-                ]);
+                    // No deducimos stock hasta que sea aprobada
+                    foreach ($items as $item) {
+                        OrderItem::create([
+                            'order_id' => $order->id,
+                            'product_id' => $item['product_id'],
+                            'cantidad' => $item['cantidad'],
+                            'precio_unitario' => $item['precio_unitario'],
+                            'subtotal' => $item['cantidad'] * $item['precio_unitario']
+                        ]);
+                    }
+                } else {
+                    // 3. Procesar Líneas y Deducir Stock (Flujo estándar < $1000)
+                    foreach ($items as $item) {
+                        $product = Product::where('id', $item['product_id'])->lockForUpdate()->firstOrFail();
+
+                        if ($product->stock_actual < $item['cantidad']) {
+                            throw new Exception("Stock Insuficiente para el repuesto: {$product->codigo_oem} ({$product->nombre}).");
+                        }
+
+                        OrderItem::create([
+                            'order_id' => $order->id,
+                            'product_id' => $product->id,
+                            'cantidad' => $item['cantidad'],
+                            'precio_unitario' => $item['precio_unitario'],
+                            'subtotal' => $item['cantidad'] * $item['precio_unitario']
+                        ]);
+
+                        $product->stock_actual -= $item['cantidad'];
+                        $product->save();
+                    }
+
+                    $order->update([
+                        'subtotal' => $subtotalGlobal,
+                        'impuestos' => $subtotalGlobal * 0.16,
+                        'total' => $subtotalGlobal * 1.16
+                    ]);
+                }
 
                 return $order;
             });
 
+            $msg = $result->estado === 'Esperando Aprobación' 
+                ? 'Orden registrada. Requiere aprobación gerencial por monto elevado.' 
+                : 'Facturación procesada correctamente e Inventario Deducido.';
+
             return response()->json([
                 'status' => 'success',
-                'message' => 'Facturación procesada correctamente e Inventario Deducido.',
+                'message' => $msg,
                 'data' => $result
             ]);
 
