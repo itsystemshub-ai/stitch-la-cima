@@ -1,0 +1,33 @@
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+body { font-family: 'League Spartan', sans-serif; }
+.cart-item {
+    animation: slideIn 0.3s ease-out forwards;
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.quantity-btn {
+    transition: all 0.2s ease;
+}
+.quantity-btn:hover {
+    transform: scale(1.1);
+}
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+.remove-btn {
+    transition: all 0.2s ease;
+}
+.remove-btn:hover {
+    color: #ef4444;
+}
+.cart-empty {
+    animation: fadeIn 0.5s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

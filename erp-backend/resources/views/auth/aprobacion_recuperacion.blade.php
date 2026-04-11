@@ -34,11 +34,7 @@
     </script>
     <style>
       .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
       }
       .no-scrollbar::-webkit-scrollbar {
         display: none;
@@ -47,35 +43,19 @@
         font-family: "Inter", sans-serif;
       }
       .badge {
-        font-size: 10px;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding: 4px 8px;
-        border-radius: 9999px;
+        @apply px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider;
       }
       .badge-pending {
-        background-color: #fef3c7;
-        color: #92400e;
+        @apply bg-yellow-100 text-yellow-700;
       }
       .badge-approved {
-        background-color: #d1fae5;
-        color: #065f46;
+        @apply bg-green-100 text-green-700;
       }
       .badge-rejected {
-        background-color: #fee2e2;
-        color: #991b1b;
+        @apply bg-red-100 text-red-700;
       }
       .card {
-        background-color: white;
-        border-radius: 0.75rem;
-        border: 1px solid #e5e7eb;
-        padding: 1.5rem;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        transition: box-shadow 0.2s;
-      }
-      .card:hover {
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        @apply bg-white rounded-xl border border-stone-200 p-6 shadow-sm hover:shadow-md transition-shadow;
       }
     </style>
   </head>
@@ -91,9 +71,7 @@
             <h1 class="font-headline font-bold text-lg text-stone-900">
               Aprobación de Recuperación
             </h1>
-            <p class="text-xs text-stone-500">
-              Panel de Administración - Super Usuario
-            </p>
+            <p class="text-xs text-stone-500">Panel de Administración - Super Usuario</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
@@ -131,12 +109,8 @@
       <!-- Empty State -->
       <div id="emptyState" class="hidden text-center py-16">
         <span class="material-symbols-outlined text-stone-300 text-6xl mb-4">check_circle</span>
-        <h2 class="font-headline font-bold text-xl text-stone-900 mb-2">
-          No hay solicitudes
-        </h2>
-        <p class="text-stone-500 text-sm">
-          Todas las solicitudes de recuperación han sido procesadas.
-        </p>
+        <h2 class="font-headline font-bold text-xl text-stone-900 mb-2">No hay solicitudes</h2>
+        <p class="text-stone-500 text-sm">Todas las solicitudes de recuperación han sido procesadas.</p>
       </div>
     </main>
 
@@ -149,9 +123,11 @@
     <script>
       let currentFilter = "ALL";
 
-      // Render requests on page load
       document.addEventListener("DOMContentLoaded", () => {
-        // En esta fase permitimos acceso para validación visual
+        if (!window.zenithApi.isAuthenticated() && localStorage.getItem("erp_session") !== "true") {
+          window.location.href = "{{ url('/auth/login') }}";
+          return;
+        }
         renderRequests();
       });
 
@@ -174,9 +150,20 @@
       async function renderRequests() {
         const list = document.getElementById("requestsList");
         const emptyState = document.getElementById("emptyState");
-        const pendingCountText = document.getElementById("pendingCount");
+        const pendingCount = document.getElementById("pendingCount");
 
         let requests = JSON.parse(localStorage.getItem("recoveryRequests") || "[]");
+
+        if (window.zenithApi.isAuthenticated()) {
+          try {
+            const usersResponse = await window.zenithApi.getUsers();
+            if (usersResponse.status === "success" && usersResponse.data?.users) {
+              console.log("Usuarios cargados desde API:", usersResponse.data.users.length);
+            }
+          } catch (e) {
+            console.warn("No se pudo conectar al backend, usando datos locales");
+          }
+        }
 
         if (currentFilter !== "ALL") {
           requests = requests.filter((r) => r.status === currentFilter);
@@ -185,7 +172,7 @@
         requests.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         const pending = JSON.parse(localStorage.getItem("recoveryRequests") || "[]").filter((r) => r.status === "PENDING").length;
-        pendingCountText.textContent = `${pending} solicitud${pending !== 1 ? "es" : ""} pendiente${pending !== 1 ? "s" : ""}`;
+        pendingCount.textContent = `${pending} solicitud${pending !== 1 ? "es" : ""} pendiente${pending !== 1 ? "s" : ""}`;
 
         if (requests.length === 0) {
           list.innerHTML = "";
@@ -198,47 +185,75 @@
         list.innerHTML = requests
           .map((req) => {
             const date = new Date(req.date).toLocaleDateString("es-VE", {
-              year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
             });
 
             const statusClass = req.status === "PENDING" ? "badge-pending" : req.status === "APPROVED" ? "badge-approved" : "badge-rejected";
             const statusText = req.status === "PENDING" ? "Pendiente" : req.status === "APPROVED" ? "Aprobada" : "Rechazada";
 
             return `
-      <div class="card">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <span class="badge ${statusClass}">${statusText}</span>
-              <span class="text-xs text-stone-400">${date}</span>
-            </div>
-            <p class="text-sm font-bold text-stone-900">${req.email}</p>
-            <p class="text-xs text-stone-500 mt-1">ID: ${req.id}</p>
-          </div>
-          
-          ${req.status === "PENDING" ? `
-            <div class="flex gap-2">
-              <button onclick="approveRequest(${req.id})" class="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-green-700 transition-colors">
-                <span class="material-symbols-outlined text-sm">check</span>
-                Aprobar
-              </button>
-              <button onclick="rejectRequest(${req.id})" class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors">
-                <span class="material-symbols-outlined text-sm">close</span>
-                Rechazar
-              </button>
-            </div>
-          ` : ""}
-        </div>
-      </div>`;
-          }).join("");
+              <div class="card">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                      <span class="badge ${statusClass}">${statusText}</span>
+                      <span class="text-xs text-stone-400">${date}</span>
+                    </div>
+                    <p class="text-sm font-bold text-stone-900">${req.email}</p>
+                    <p class="text-xs text-stone-500 mt-1">ID: ${req.id}</p>
+                  </div>
+                  ` + (req.status === "PENDING" ? `
+                    <div class="flex gap-2">
+                      <button onclick="approveRequest(${req.id})" class="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-green-700 transition-colors">
+                        <span class="material-symbols-outlined text-sm">check</span>
+                        Aprobar
+                      </button>
+                      <button onclick="rejectRequest(${req.id})" class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors">
+                        <span class="material-symbols-outlined text-sm">close</span>
+                        Rechazar
+                      </button>
+                    </div>
+                  ` : "") + `
+                </div>
+              </div>
+            `;
+          })
+          .join("");
       }
 
-      function approveRequest(id) {
+      async function approveRequest(id) {
         const requests = JSON.parse(localStorage.getItem("recoveryRequests") || "[]");
         const request = requests.find((r) => r.id === id);
+
         if (request) {
           request.status = "APPROVED";
           request.approvedAt = new Date().toISOString();
+
+          if (window.zenithApi.isAuthenticated()) {
+            try {
+              const usersResponse = await window.zenithApi.getUsers();
+              if (usersResponse.status === "success" && usersResponse.data?.users) {
+                const user = usersResponse.data.users.find((u) => u.email === request.email);
+                if (user) {
+                  await window.zenithApi.resetUserPassword(user.id, request.newPassword);
+                }
+              }
+            } catch (e) {
+              console.warn("No se pudo actualizar en el backend, usando localStorage");
+            }
+          }
+
+          const users = JSON.parse(localStorage.getItem("users") || "[]");
+          const userIndex = users.findIndex((u) => u.email === request.email);
+          if (userIndex !== -1) {
+            users[userIndex].password = request.newPassword;
+            localStorage.setItem("users", JSON.stringify(users));
+          }
+
           localStorage.setItem("recoveryRequests", JSON.stringify(requests));
           showToast("Solicitud aprobada. La contraseña ha sido actualizada.");
           renderRequests();
@@ -248,6 +263,7 @@
       function rejectRequest(id) {
         const requests = JSON.parse(localStorage.getItem("recoveryRequests") || "[]");
         const request = requests.find((r) => r.id === id);
+
         if (request) {
           request.status = "REJECTED";
           request.rejectedAt = new Date().toISOString();

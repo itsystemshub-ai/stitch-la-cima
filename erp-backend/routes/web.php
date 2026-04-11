@@ -55,10 +55,15 @@ Route::get('/erp/productos', [ProductController::class, 'index'])->name('erp.pro
 
 // Enrutador Dinámico para todos los submódulos ERP compilados en resources/views/erp/
 Route::get('/erp/{module}', function ($module) {
+    // Prioridad a las versiones modernizadas (_new) durante la fase de migración
+    if (view()->exists('erp.' . $module . '_new')) {
+        return view('erp.' . $module . '_new');
+    }
+    
     if (view()->exists('erp.' . $module)) {
         return view('erp.' . $module);
     }
-    abort(404, 'Módulo no compilado o no encontrado.');
+    abort(404, 'Módulo no compilado o no encontrado: ' . $module);
 })->where('module', '.*');
 
 // Rutas Específicas Dinámicas del Storefront

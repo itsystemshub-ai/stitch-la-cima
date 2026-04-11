@@ -1,0 +1,180 @@
+/**
+ * ERP La Cima - Common Styles
+ * Shared styles for all ERP pages
+ * Mayores de Repuesto La Cima, C.A.
+ */
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Body */
+body { font-family: 'Inter', sans-serif; }
+
+/* Sidebar */
+.sidebar {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar.open { transform: translateX(0); }
+@media (min-width: 1024px) {
+  .sidebar { transform: translateX(0); }
+}
+
+/* Menu Items */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+  color: #555;
+}
+.menu-item:hover { background: #f5f5f5; }
+.menu-item-active {
+  background: rgba(206, 255, 94, 0.2);
+  color: #1c1c1c;
+  font-weight: 700;
+  border-left: 3px solid #ceff5e;
+}
+.menu-item-inactive { color: #555; }
+
+.menu-group {
+  font-size: 10px;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 12px 6px;
+}
+.menu-group:first-child { margin-top: 0; }
+
+/* Dropdown */
+.menu-parent { position: relative; }
+.dropdown-arrow {
+  margin-left: auto;
+  color: #aaa;
+  transition: transform 0.2s ease;
+  font-size: 18px !important;
+}
+.menu-item.open {
+  background: #f8f9fa;
+  color: #1c1c1c;
+  font-weight: 600;
+}
+.menu-item.open .dropdown-arrow {
+  transform: rotate(90deg);
+  color: #1c1c1c;
+}
+
+/* Submenu Flyout */
+.submenu {
+  position: absolute;
+  left: calc(100% + 6px);
+  top: 2px;
+  min-width: 210px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-12px) scale(0.96);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 200;
+}
+.menu-parent.open .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+.submenu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  border-radius: 10px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+.submenu a:hover { background: #f8f9fa; color: #1c1c1c; }
+.submenu a .material-symbols-outlined { font-size: 18px !important; color: #bbb; }
+.submenu a:hover .material-symbols-outlined { color: #666; }
+.submenu-divider { height: 1px; background: #eee; margin: 6px 10px; }
+
+/* Utility Classes */
+.kpi-card {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e7e5e4;
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+.kpi-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: rgba(206, 255, 94, 0.3);
+}
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+.action-btn:active {
+  transform: scale(0.98);
+}
+.data-table th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #78716c;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 0.75rem;
+  text-align: left;
+}
+.data-table td {
+  font-size: 0.875rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.badge {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge-green { background-color: #dcfce7; color: #15803d; }
+.badge-yellow { background-color: #fef9c3; color: #a16207; }
+.badge-red { background-color: #fee2e2; color: #b91c1c; }
+.badge-blue { background-color: #dbeafe; color: #1d4ed8; }

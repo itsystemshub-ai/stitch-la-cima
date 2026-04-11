@@ -1,0 +1,45 @@
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+body { font-family: 'League Spartan', sans-serif; }
+
+/* Grid View Styles */
+.editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* List View Styles */
+.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.list-view article {
+    flex-direction: row;
+    height: auto;
+}
+
+.list-view .aspect-square {
+    width: 240px;
+    min-width: 240px;
+    aspect-ratio: 1 / 1;
+}
+
+.list-view .p-5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list-view h3 {
+    font-size: 1.25rem;
+}
+
+/* Toggle Button Styles */
+.view-btn.active {
+    background-color: black;
+    color: white;
+}

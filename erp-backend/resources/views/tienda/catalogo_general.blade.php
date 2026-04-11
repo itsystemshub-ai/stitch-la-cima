@@ -1,136 +1,1294 @@
-@extends('layouts.ecommerce')
-
-@section('title', 'Componentes de Precisión | Mayor de Repuesto LA CIMA, C.A.')
-
-@push('styles')
-    <link rel="stylesheet" href="/frontend/public/ecommerce/css/catalogo_general.css">
-@endpush
-
-@section('content')
-<main class="pt-16">
-    <!-- Hero Section: High Impact -->
-    <section class="relative min-h-[70vh] flex items-center overflow-hidden bg-black">
-        <div class="absolute inset-0 z-0">
-            <img alt="Industrial Engine Background" class="w-full h-full object-cover opacity-30 grayscale" 
-                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAXDDoopL1vJGvj43_2EcixnT0qcffP-8sugqc3PJmetlM42HxR7EiDaACitBpmwFEGPY-d0LPOMheDO8XJC_vDkZ0NGhadXT3P0f67reZI-WnouLsKv14pyDyoOT8dU2KDqwTVwiQO7apJ_kQ5mUQ43bKNXlPy0n8itI7-GxJBnEoLXqAGm4Lc218ApwlfA93ICa2tzs84XoB3YvCguieK7UMsUIQ6QITRFgZwmKhnd-3jYDRMGtcZ5G-7Alrjd3kFtkJEppsOsA"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta
+      name="description"
+      content="Catálogo completo de repuestos industriales para motores Cummins, Volvo, Detroit Diesel. MAYOR DE REPUESTO LA CIMA, C.A."
+    />
+    <meta name="theme-color" content="#ceff5e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="LA CIMA" />
+    <link rel="manifest" href="{{ asset('manifest.json') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}" />
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}" />
+    <title>Catálogo | Mayor de Repuesto LA CIMA, C.A.</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ceff5e",
+              secondary: "#1c1c1c",
+              background: "#f6f6f9",
+              surface: "#ffffff",
+              outline: "#e2e2e5",
+            },
+            fontFamily: {
+              headline: ["League Spartan", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="{{ asset('ecommerce/js/catalogo_general.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('ecommerce/css/catalogo_general.css') }}" />
+  </head>
+  <body
+    class="bg-background text-on-surface selection:bg-primary/30 min-h-screen flex flex-col"
+  >
+    <!-- Top Navigation -->
+    <nav
+      class="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm"
+    >
+      <div class="flex justify-between items-center px-6 py-3">
+        <button
+          onclick="openMobileMenu()"
+          class="md:hidden p-2 hover:bg-stone-100 rounded-full"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
+          <img
+            src="{{ asset('assets/images/logo.png') }}"
+            alt="LA CIMA"
+            class="h-8 md:h-10 w-auto object-contain"
+          />
+          <div class="flex flex-col">
+            <span
+              class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap"
+              >MAYOR DE REPUESTO LA CIMA, C.A</span
+            >
+            <span
+              class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1"
+              >RIF.: J-40308741-5</span
+            >
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a
+            class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors"
+            href="{{ url('/') }}"
+            >Inicio</a
+          >
+          <a
+            class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary"
+            href="{{ url('/tienda/catalogo_general') }}"
+            >Catálogo</a
+          >
+          <a
+            class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors"
+            href="{{ url('/tienda/Nosotros') }}"
+            >Nosotros</a
+          >
+          <a
+            class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors"
+            href="{{ url('/tienda/contacto') }}"
+            >Contacto</a
+          >
         </div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl">
-                <span class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-6">Inventario Certificado</span>
-                <h1 class="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-8">
-                    IMPULSADO POR <br />
-                    <span class="text-primary">LA PRECISIÓN.</span>
-                </h1>
-                <p class="text-stone-400 text-lg md:text-xl max-w-xl leading-relaxed mb-10 font-light italic">
-                    Suministro crítico de piezas para Cummins, Volvo y Detroit Diesel. Ingeniería de grado industrial para máxima operatividad.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#catalog" class="bg-primary hover:bg-white text-black font-black uppercase py-5 px-10 tracking-[0.2em] text-xs transition-all inline-block">Ver Inventario</a>
-                    <a href="/tienda/nosotros" class="border border-white/20 text-white font-black uppercase py-5 px-10 tracking-[0.2em] text-xs hover:bg-white/10 transition-all inline-block">Conoce la Cima</a>
-                </div>
+        <div class="flex items-center gap-4">
+          <div class="relative hidden lg:block">
+            <input
+              id="searchInput"
+              class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64"
+              placeholder="Buscar por OEM o VIN..."
+              type="text"
+            />
+            <span
+              class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg"
+              >search</span
+            >
+          </div>
+          <a
+            href="{{ url('/tienda/carrito') }}"
+            class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors"
+          >
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <span
+              id="cart-count"
+              class="cart-badge absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white"
+              >0</span
+            >
+          </a>
+          <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
+          <a
+            href="{{ url('/auth/login') }}"
+            class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all"
+          >
+            <span class="material-symbols-outlined text-primary text-sm"
+              >database</span
+            >
+            Login
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobileMenu"
+      class="fixed inset-0 bg-black/50 z-50 hidden md:hidden"
+      onclick="closeMobileMenu()"
+    ></div>
+    <div
+      id="mobileNav"
+      class="mobile-menu fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 md:hidden"
+    >
+      <div
+        class="p-6 border-b border-outline flex justify-between items-center"
+      >
+        <div class="flex items-center gap-2">
+          <img
+            src="{{ asset('assets/images/logo.png') }}"
+            alt="LA CIMA"
+            class="h-8 w-auto"
+          />
+          <span class="text-xs font-black uppercase">LA CIMA, C.A</span>
+        </div>
+        <button
+          onclick="closeMobileMenu()"
+          class="p-2 hover:bg-stone-100 rounded-full"
+        >
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <nav class="p-6 space-y-4">
+        <a
+          href="{{ url('/') }}"
+          class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors"
+          >Inicio</a
+        >
+        <a
+          href="{{ url('/tienda/catalogo_general') }}"
+          class="block text-sm font-bold uppercase tracking-widest text-black border-l-4 border-primary pl-4 py-2"
+          >Catálogo</a
+        >
+        <a
+          href="{{ url('/tienda/Nosotros') }}"
+          class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors"
+          >Nosotros</a
+        >
+        <a
+          href="{{ url('/tienda/contacto') }}"
+          class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors"
+          >Contacto</a
+        >
+      </nav>
+      <div class="p-6 border-t border-outline">
+        <a
+          href="{{ url('/auth/login') }}"
+          class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest"
+        >
+          <span class="material-symbols-outlined text-primary text-sm"
+            >database</span
+          >
+          Login ERP
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header
+      class="relative min-h-[85vh] flex items-center overflow-hidden bg-black pt-16"
+    >
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAXDDoopL1vJGvj43_2EcixnT0qcffP-8sugqc3PJmetlM42HxR7EiDaACitBpmwFEGPY-d0LPOMheDO8XJC_vDkZ0NGhadXT3P0f67reZI-WnouLsKv14pyDyoOT8dU2KDqwTVwiQO7apJ_kQ5mUQ43bKNXlPy0n8itI7-GxJBnEoLXqAGm4Lc218ApwlfA93ICa2tzs84XoB3YvCguieK7UMsUIQ6QITRFgZwmKhnd-3jYDRMGtcZ5G-7Alrjd3kFtkJEppsOsA"
+          class="w-full h-full object-cover opacity-40 grayscale mix-blend-luminosity"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"
+        ></div>
+      </div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl">
+          <span
+            class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-6"
+            >Distribuidor Autorizado</span
+          >
+          <h1
+            class="text-6xl md:text-8xl font-headline font-black text-white uppercase tracking-tighter leading-[0.9] mb-8"
+          >
+            IMPULSADO POR <br />
+            <span class="text-primary-dim">LA PRECISIÓN.</span>
+          </h1>
+          <p
+            class="text-stone-300 text-lg md:text-xl max-w-xl leading-relaxed mb-10 font-medium italic"
+          >
+            Suministro de piezas de motor industrial de carga pesada para
+            Cummins, Volvo y Detroit Diesel. Excelencia en ingeniería para la
+            base del tiempo de actividad industrial.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="{{ url('/tienda/catalogo_detallado') }}"
+              class="bg-primary hover:bg-white text-black font-black uppercase py-5 px-10 tracking-[0.2em] text-xs transition-all inline-block"
+              >Explorar Catálogo</a
+            >
+            <button
+              class="border border-white text-white font-black uppercase py-5 px-10 tracking-[0.2em] text-xs hover:bg-white/10 transition-all"
+            >
+              Especificaciones Técnicas
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute bottom-12 right-12 hidden lg:block border-l-4 border-primary pl-6 bg-black/40 backdrop-blur-md p-6"
+      >
+        <p
+          class="text-stone-400 text-[10px] font-black uppercase tracking-[0.3em] mb-2"
+        >
+          Integridad del Motor
+        </p>
+        <p
+          class="text-white text-3xl font-black italic tracking-tighter uppercase"
+        >
+          99.9% DISPONIBILIDAD
+        </p>
+      </div>
+    </header>
+
+    <!-- Product Catalog -->
+    <main class="max-w-screen-2xl mx-auto py-24 px-6 w-full" id="catalog">
+      <div
+        class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8"
+      >
+        <div class="max-w-xl">
+          <h2
+            class="text-5xl font-black uppercase tracking-tighter text-black mb-4"
+          >
+            Componentes de Precisión
+          </h2>
+          <div class="h-2 w-24 bg-primary mb-6"></div>
+          <p class="text-on-surface-variant font-medium leading-relaxed">
+            Explore nuestra selección curada de piezas de alto rendimiento. Cada
+            componente está rigurosamente probado para durabilidad industrial.
+          </p>
+        </div>
+        <div class="flex gap-4 overflow-x-auto pb-4 w-full md:w-auto">
+          <button
+            onclick="filterProducts('all')"
+            class="filter-btn whitespace-nowrap px-8 py-3 bg-black text-primary text-xs font-black uppercase tracking-[0.2em]"
+          >
+            Todos
+          </button>
+          <button
+            onclick="filterProducts('cummins')"
+            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+          >
+            Cummins
+          </button>
+          <button
+            onclick="filterProducts('volvo')"
+            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+          >
+            Volvo
+          </button>
+          <button
+            onclick="filterProducts('detroit')"
+            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+          >
+            Detroit
+          </button>
+          <button
+            onclick="filterProducts('toyota')"
+            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+          >
+            Toyota
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Grid (RESTORING ALL 12 PRODUCTS) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="productGrid">
+        <!-- Part 1 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="cummins"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=1') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7nYKSbAGk0sNgs7oPCd8fyoeR9e60wl1s7Jym9qpDXwnXaaIfkrxG35dPa2wV94j5fhKhsSHI4p3FIiX0otqPuYO07xO5dJd67_fdC5iaU0OMvzma3OMcftTxGXR_8h-CuY0MNvIpEQtgUBoHs4Y0aWQrtQp8ZPvy2FCDe0auTRAhubbCiVTCvakNmJDOKgDPwpqWLmOg_P1hwI1D4D5VdoJ80afZqds7EAFF88xS-vm6cmgnWgiSjN6obErYH81zQhDeQ0iWub4"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+              <div
+                class="absolute top-4 right-4 bg-black text-primary text-[9px] font-black uppercase tracking-[0.2em] px-2 py-1"
+              >
+                En Stock
+              </div>
             </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Cummins</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#CU-8842-X</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=1') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Junta de Culata Cummins
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $145.00
+              </p>
+              <p
+                class="text-xs font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 5,220.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  1,
+                  'Junta de Culata Cummins',
+                  145.0,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuC7nYKSbAGk0sNgs7oPCd8fyoeR9e60wl1s7Jym9qpDXwnXaaIfkrxG35dPa2wV94j5fhKhsSHI4p3FIiX0otqPuYO07xO5dJd67_fdC5iaU0OMvzma3OMcftTxGXR_8h-CuY0MNvIpEQtgUBoHs4Y0aWQrtQp8ZPvy2FCDe0auTRAhubbCiVTCvakNmJDOKgDPwpqWLmOg_P1hwI1D4D5VdoJ80afZqds7EAFF88xS-vm6cmgnWgiSjN6obErYH81zQhDeQ0iWub4',
+                  'Cummins / CU-8842-X',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-xs tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 2 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="volvo"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=2') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsHZ9MFD4WCJtxE7xbkGvYvm4qisOi2hGXwJ_Zav27WFtthL07jOmeBqA3uxqD9hGFJF6jtKRFwuIbqtxbKM9d222u0u570XUHOr-3TM5d4-836PCyasLIpwwaCSnEasQ3XtaGoL4RnLluZBXOHdCtMdslZuzY0-nXPEIgnykw7T83b5acMv9DZ3XU7hKUl2gO3uCqaHBWjdvytWxJcG0h1D0ClBrKUkC2J3AKzajE4r9QkGRjpLqjmKsImGg4iReJej_zOKXcihk"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Volvo</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#VO-1120-F</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=2') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Filtro de Aceite Volvo
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $38.50
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 1,386.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  2,
+                  'Filtro de Aceite Volvo',
+                  38.5,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuCsHZ9MFD4WCJtxE7xbkGvYvm4qisOi2hGXwJ_Zav27WFtthL07jOmeBqA3uxqD9hGFJF6jtKRFwuIbqtxbKM9d222u0u570XUHOr-3TM5d4-836PCyasLIpwwaCSnEasQ3XtaGoL4RnLluZBXOHdCtMdslZuzY0-nXPEIgnykw7T83b5acMv9DZ3XU7hKUl2gO3uCqaHBWjdvytWxJcG0h1D0ClBrKUkC2J3AKzajE4r9QkGRjpLqjmKsImGg4iReJej_zOKXcihk',
+                  'Volvo / VO-1120-F',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 3 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="holset"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=3') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfjrGRNpjkuVD0N23eX_RV6yqwpouLC8EQL7CLZ-gZNbKywWxWd3inP-MVZR2hDLVBek4gxi0S8M2a1vyaRrrNeSO7Az-A9ojG2JNDnWXZYN-Mw4OfOBiPiHfhiudzde1KJUKBh8fLQ5PpswyaEDpkuKbGyHZWkpaF_gyP-Ge3SsLuGxew2xe1VOh-NN5PAcB0Nh9eAzk_fIks3Qi2U8CXXHJWdVHClIKUm6ddotwdSGQ6bl6u40-453SAtwWAUnFar-PMvHvR3GM"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Holset</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#HO-449-TB</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=3') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Turboalimentador Holset
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $890.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 32,040.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  3,
+                  'Turboalimentador Holset',
+                  890.0,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuCfjrGRNpjkuVD0N23eX_RV6yqwpouLC8EQL7CLZ-gZNbKywWxWd3inP-MVZR2hDLVBek4gxi0S8M2a1vyaRrrNeSO7Az-A9ojG2JNDnWXZYN-Mw4OfOBiPiHfhiudzde1KJUKBh8fLQ5PpswyaEDpkuKbGyHZWkpaF_gyP-Ge3SsLuGxew2xe1VOh-NN5PAcB0Nh9eAzk_fIks3Qi2U8CXXHJWdVHClIKUm6ddotwdSGQ6bl6u40-453SAtwWAUnFar-PMvHvR3GM',
+                  'Holset / HO-449-TB',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 4 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="detroit"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=4') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKTyHrPtqEfaH6pvwCGdF7-I4OXbWwSSA0VVvCJ2Hwl55TX8_tQAXdhZ3cVuKigbGzyZ-9DKpo-bpZxXUzYTULV4RtW7N1-xcbkK4iXcnmfLmne7Wibg8iuRbPMF8W5ei2X3VBNRT7AFKcWTsc3vTfr3uB999UrusLMap6SuiZJ6PO7G2VuXBNNEofs60aSnQkzVNb_QrnSr8LjAzwifEWQL2LqQYwDD5786DMWsx1QXI-AQcTGwH6Mw2h-EXOxvVH05pqCGvL8BM"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >EGR</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#EG-221-V</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=4') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Válvula EGR Detroit
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $420.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 15,120.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  4,
+                  'Válvula EGR Detroit',
+                  420.0,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuCKTyHrPtqEfaH6pvwCGdF7-I4OXbWwSSA0VVvCJ2Hwl55TX8_tQAXdhZ3cVuKigbGzyZ-9DKpo-bpZxXUzYTULV4RtW7N1-xcbkK4iXcnmfLmne7Wibg8iuRbPMF8W5ei2X3VBNRT7AFKcWTsc3vTfr3uB999UrusLMap6SuiZJ6PO7G2VuXBNNEofs60aSnQkzVNb_QrnSr8LjAzwifEWQL2LqQYwDD5786DMWsx1QXI-AQcTGwH6Mw2h-EXOxvVH05pqCGvL8BM',
+                  'EGR / EG-221-V',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 5 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="detroit"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=5') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB08NxRqet6a7yn-HqiDUbxiUgnO6zzAUIOfOQULzuPrSc5sbGcc-NOprB3VcUd6hzLKSPRKWZJEbCO66ivfnqZb7wHn3mYKgBgrcTPxWa4NgzOoqtEwoEN6e_tiUCddWqLFtTPVRRygYBJ9w6kDBkHXFPOJcJHuhrNy5f2Ic4G3F7XqnFmO5-SJJDGBEc8wmBi2UYrKkd1a06gVhKtgBsUcd4fuwk939GqYI_OdyV4Tmjdu1GntUBwYsaVZRRuT2CbUdV_1sApZrM"
+                class="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Detroit</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#DD-15-FI</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=5') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Inyector Detroit DD15
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $275.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 9,900.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  5,
+                  'Inyector Detroit DD15',
+                  275.0,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuB08NxRqet6a7yn-HqiDUbxiUgnO6zzAUIOfOQULzuPrSc5sbGcc-NOprB3VcUd6hzLKSPRKWZJEbCO66ivfnqZb7wHn3mYKgBgrcTPxWa4NgzOoqtEwoEN6e_tiUCddWqLFtTPVRRygYBJ9w6kDBkHXFPOJcJHuhrNy5f2Ic4G3F7XqnFmO5-SJJDGBEc8wmBi2UYrKkd1a06gVhKtgBsUcd4fuwk939GqYI_OdyV4Tmjdu1GntUBwYsaVZRRuT2CbUdV_1sApZrM',
+                  'Detroit / DD-15-FI',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 6 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="international"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=6') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaNx47CBOPWkbJfyEjb6QsZgO1mH3DCa8_MtQ5U0-k4sIcXRThFWPGPzROZKu7K9qxoXzKJ5OqOIPjTMcNyMzOykfg906z7p2uXkC4-czLMsRB6Q05vYAreG6rd0YiNhscyJqRN0gAQuE77ijcNXGZOn_-SG1qaNVZkdrjZm1i09JdPK1dFHQwnmBsJCznX7v2TYKQ0oEM7mWONm7BcflU6mdbl1I91kH5XND1w3w4OvLxerEcfQm5ewo6Uy73f1SeVu0cUpu9Sx4"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >International</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#IT-990-AF</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=6') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Filtro de Aire International
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $65.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 2,340.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  6,
+                  'Filtro de Aire International',
+                  65.0,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuDaNx47CBOPWkbJfyEjb6QsZgO1mH3DCa8_MtQ5U0-k4sIcXRThFWPGPzROZKu7K9qxoXzKJ5OqOIPjTMcNyMzOykfg906z7p2uXkC4-czLMsRB6Q05vYAreG6rd0YiNhscyJqRN0gAQuE77ijcNXGZOn_-SG1qaNVZkdrjZm1i09JdPK1dFHQwnmBsJCznX7v2TYKQ0oEM7mWONm7BcflU6mdbl1I91kH5XND1w3w4OvLxerEcfQm5ewo6Uy73f1SeVu0cUpu9Sx4',
+                  'International / IT-990-AF',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 7 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="meritor"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=7') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuABkCYWjm5SnVwKp4WKcPniFG1DbN-elQgOxC9k5tpNZzJ0fow6wuHtAW5UBmdhDhQ5ka-sk-Ut5iCIuqstdEKMjg74jOH0mtQ27H4BnHdqoJPbeIF21qxhriZVOJ9u6Cqo7flM4GPe8dJif2MKYmIgVKuJ_KgrBgN7HEjlk0u_Ciw8zzx0KSVCb9Q7yF7B9-dHrMIWBhkEZr2Znha2seW05H4B3VDX4sZiKzygwu-JXeywh1QJrue0TjmWbKqYdqavXBuzzVNOPKQ"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Meritor</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#ME-QP-4515</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=7') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Zapata de Freno Meritor
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $112.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 4,032.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  7,
+                  'Zapata de Freno Meritor',
+                  112.0,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuABkCYWjm5SnVwKp4WKcPniFG1DbN-elQgOxC9k5tpNZzJ0fow6wuHtAW5UBmdhDhQ5ka-sk-Ut5iCIuqstdEKMjg74jOH0mtQ27H4BnHdqoJPbeIF21qxhriZVOJ9u6Cqo7flM4GPe8dJif2MKYmIgVKuJ_KgrBgN7HEjlk0u_Ciw8zzx0KSVCb9Q7yF7B9-dHrMIWBhkEZr2Znha2seW05H4B3VDX4sZiKzygwu-JXeywh1QJrue0TjmWbKqYdqavXBuzzVNOPKQ',
+                  'Meritor / ME-QP-4515',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 8 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="cummins"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=8') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmnavll6Z2HmryPSzVx-xW3GSKpYRMwee8ADaDsVNpoXQAo_nfR3VIL2cZjzTaG-fCkImeSjIWmIO8i9v6LBoeieLll7gVR77QeWgG0P2KQKpvdG4N_IRSQ3jAep8EU2QgzHHuWWI4mVeSZOHnrDnV4y4YF4wX0fgwdGl38cXSfvPEjWN-D69HWSgWKfs3UJ1kRj9OMGM7gp_8_XRyzBck5ngiHeUlBEWKg2KYxImzQFIhW1QIvQg3ABFB93ZOT6REKDkau2oCmds"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Cummins</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#CU-SN-12</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=8') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Sensor Presión Aceite
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $54.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 1,944.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  8,
+                  'Sensor Presión Aceite',
+                  54.0,
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuDmnavll6Z2HmryPSzVx-xW3GSKpYRMwee8ADaDsVNpoXQAo_nfR3VIL2cZjzTaG-fCkImeSjIWmIO8i9v6LBoeieLll7gVR77QeWgG0P2KQKpvdG4N_IRSQ3jAep8EU2QgzHHuWWI4mVeSZOHnrDnV4y4YF4wX0fgwdGl38cXSfvPEjWN-D69HWSgWKfs3UJ1kRj9OMGM7gp_8_XRyzBck5ngiHeUlBEWKg2KYxImzQFIhW1QIvQg3ABFB93ZOT6REKDkau2oCmds',
+                  'Cummins / CU-SN-12',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 9 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="toyota"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=9') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Toyota</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#TOY-COR-18</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=9') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Filtro de Aceite Toyota Corolla
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $18.50
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 666.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  9,
+                  'Filtro de Aceite Toyota Corolla',
+                  18.5,
+                  '',
+                  'Toyota / TOY-COR-18',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 10 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="toyota"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=10') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Toyota</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#TOY-HIL-22</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=10') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Kit Discos de Freno Toyota Hilux
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $125.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 4,500.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  10,
+                  'Kit Discos de Freno Toyota Hilux',
+                  125.0,
+                  '',
+                  'Toyota / TOY-HIL-22',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 11 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="toyota"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=11') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Toyota</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#TOY-SPK-04</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=11') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Bujías Encendido Toyota Corolla
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $32.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 1,152.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  11,
+                  'Bujías Encendido Toyota Corolla',
+                  32.0,
+                  '',
+                  'Toyota / TOY-SPK-04',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+
+        <!-- Part 12 -->
+        <article
+          class="bg-white border border-outline group overflow-hidden"
+          data-category="toyota"
+        >
+          <a href="{{ url('/tienda/detalle_productos?id=12') }}" class="block">
+            <div
+              class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIn0RkeL7SWo_eG05JQuzVMLn7doFBFF7OpIHfDkWl6wZNAvi_1ZRIdJaIVb7a4iDU4D_xMPMwP1PwALo5h5Ne8BeQ6IYJyR5Toi0SScObpCgrDYb9pJcmIDEu8LMBWvn4ErCt93id7lunEM7-qeA4b_9GAXvUPZ4R2NbJ2iwlpFpnmQqi9yDn3DX6RtOLX6S_nes72O7ZOPAzaUA_laYrmrxqNDUBi9HF74lajrW3XH8c3vNOglhQV_mA3b7yPUnw_7OzGx-fL4k"
+                class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+              />
+            </div>
+          </a>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <span
+                class="text-[10px] font-black text-primary uppercase tracking-widest"
+                >Toyota</span
+              >
+              <span class="text-[10px] font-mono font-bold text-stone-400"
+                >#TOY-AIR-19</span
+              >
+            </div>
+            <a href="{{ url('/tienda/detalle_productos?id=12') }}" class="block">
+              <h3
+                class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
+              >
+                Filtro de Aire Toyota Corolla
+              </h3>
+            </a>
+            <div class="mb-6">
+              <p class="text-3xl font-black text-black tracking-tighter">
+                $24.00
+              </p>
+              <p
+                class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+              >
+                Bs. 864.00 aprox.
+              </p>
+            </div>
+            <button
+              onclick="
+                addToCart(
+                  12,
+                  'Filtro de Aire Toyota Corolla',
+                  24.0,
+                  '',
+                  'Toyota / TOY-AIR-19',
+                )
+              "
+              class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >add_shopping_cart</span
+              >
+              Agregar al Carrito
+            </button>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="bg-black py-24 px-6 text-white border-y border-stone-800">
+      <div
+        class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"
+      >
+        <div class="flex flex-col gap-4">
+          <span class="material-symbols-outlined text-primary text-5xl"
+            >precision_manufacturing</span
+          >
+          <h4 class="text-2xl font-black uppercase tracking-tight">
+            Estándares O.E.M.
+          </h4>
+          <p class="text-stone-400 text-sm leading-relaxed font-medium">
+            Todas las piezas cumplen o superan las especificaciones del
+            fabricante de equipo original para aplicaciones industriales
+            críticas.
+          </p>
         </div>
+        <div class="flex flex-col gap-4">
+          <span class="material-symbols-outlined text-primary text-5xl"
+            >local_shipping</span
+          >
+          <h4 class="text-2xl font-black uppercase tracking-tight">
+            Logística Rápida
+          </h4>
+          <p class="text-stone-400 text-sm leading-relaxed font-medium">
+            Distribución estratégica desde Valencia garantiza cobertura nacional
+            y tiempo de inactividad mínimo para su flota.
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <span class="material-symbols-outlined text-primary text-5xl"
+            >verified</span
+          >
+          <h4 class="text-2xl font-black uppercase tracking-tight">
+            Soporte Experto
+          </h4>
+          <p class="text-stone-400 text-sm leading-relaxed font-medium">
+            Nuestro equipo técnico proporciona consulta especializada para
+            compatibilidad de motores y mantenimiento.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- Content Area -->
-    <section id="catalog" class="py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 border-b border-outline pb-10">
-                <div class="max-w-xl">
-                    <h2 class="text-4xl font-black uppercase tracking-tighter text-black mb-4">Catálogo General</h2>
-                    <p class="text-stone-500 font-medium leading-relaxed italic text-sm">
-                        {{ $products->total() }} componentes industriales verificados disponibles en despacho inmediato.
-                    </p>
-                </div>
-                <!-- Simple Filters -->
-                <div class="flex gap-4 overflow-x-auto pb-4 w-full md:w-auto invisible md:visible">
-                    <button class="filter-btn active px-8 py-3 bg-black text-primary text-[10px] font-black uppercase tracking-widest">Todos</button>
-                    <button class="filter-btn px-8 py-3 bg-stone-100 text-stone-500 text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Cummins</button>
-                    <button class="filter-btn px-8 py-3 bg-stone-100 text-stone-500 text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Volvo</button>
-                    <button class="filter-btn px-8 py-3 bg-stone-100 text-stone-500 text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Caterpillar</button>
-                </div>
-            </div>
+    <!-- Scroll to Top Button -->
+    <button
+      id="scrollTopBtn"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      class="fixed bottom-8 right-8 bg-primary text-black p-4 shadow-xl hover:bg-white transition-all z-30 border border-black/10 hidden"
+    >
+      <span class="material-symbols-outlined font-black">arrow_upward</span>
+    </button>
 
-            <!-- Modern Editorial Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
-                @foreach($products as $product)
-                @php
-                    $imgUrl = $product->imagen_url ?: 'https://via.placeholder.com/400x400?text=' . urlencode($product->nombre);
-                    $productData = json_encode([
-                        'id' => $product->id,
-                        'nombre' => $product->nombre,
-                        'precio' => $product->precio_mayor,
-                        'imagen' => $imgUrl,
-                        'sku' => $product->codigo_oem ?? $product->codigo_erp
-                    ]);
-                @endphp
-                <article class="group bg-white border border-outline rounded-xl p-4 hover:shadow-xl transition-all flex flex-col">
-                    <div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-stone-50">
-                        <a href="/tienda/detalle_productos?id={{ $product->id }}">
-                            <img alt="{{ $product->nombre }}" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                                 src="{{ $imgUrl }}"/>
-                        </a>
-                        @if($product->stock_actual > 0)
-                        <span class="absolute top-2 left-2 bg-primary text-black text-[9px] font-black px-2 py-1 uppercase italic shadow-sm">Disponible</span>
-                        @else
-                        <span class="absolute top-2 left-2 bg-red-600 text-white text-[9px] font-black px-2 py-1 uppercase shadow-sm">Agotado</span>
-                        @endif
-                    </div>
-                    
-                    <div class="flex flex-col flex-grow">
-                        <p class="text-[10px] font-bold text-stone-400 uppercase mb-1 tracking-widest">
-                            {{ $product->marca }} / {{ $product->codigo_oem ?? $product->codigo_erp }}
-                        </p>
-                        <a href="/tienda/detalle_productos?id={{ $product->id }}">
-                            <h4 class="font-black text-sm text-black mb-4 line-clamp-2 hover:text-primary transition-colors uppercase tracking-tight">
-                                {{ $product->nombre }}
-                            </h4>
-                        </a>
-                        
-                        <div class="mt-auto pt-4 border-t border-outline flex items-center justify-between mb-4">
-                            <div>
-                                <span class="text-2xl font-black text-black tracking-tighter">${{ number_format($product->precio_mayor, 2) }}</span>
-                            </div>
-                        </div>
+    <!-- PWA Install Button -->
+    <div id="pwaInstallContainer" class="fixed bottom-8 left-8 z-30 hidden">
+      <button
+        id="pwaInstallBtn"
+        class="bg-black text-primary px-6 py-4 rounded-lg shadow-xl hover:bg-stone-800 transition-all flex items-center gap-3 font-bold text-xs uppercase tracking-widest"
+      >
+        <span class="material-symbols-outlined text-primary">download</span>
+        Instalar App
+      </button>
+    </div>
 
-                        <button onclick='addToCart({!! $productData !!})' 
-                                class="w-full bg-black text-white py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-                            <span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-                            <span class="text-[10px] font-black uppercase tracking-[0.2em]">Añadir al Carrito</span>
-                        </button>
-                    </div>
-                </article>
-                @endforeach
-            </div>
+    <!-- Footer -->
+    <footer
+      class="bg-black text-white w-full py-16 px-8 border-t border-zinc-900"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto"
+      >
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-6">
+            <img
+              src="{{ asset('assets/images/logo.png') }}"
+              alt="Logo"
+              class="h-12 w-auto"
+            />
 
-            <!-- Premium Pagination -->
-            <div class="mt-20 flex justify-center">
-                {{ $products->links() }}
+            <div class="flex flex-col justify-center">
+              <span
+                class="text-primary font-black text-sm block uppercase tracking-tighter leading-none"
+              >
+                MAYOR DE REPUESTO LA CIMA, C.A
+              </span>
+              <span
+                class="text-primary font-black text-xs block uppercase tracking-tighter leading-none mt-1"
+              >
+                RIF.: J-40308741-5
+              </span>
             </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div
+              class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all"
+            >
+              <span class="material-symbols-outlined text-sm">facebook</span>
+            </div>
+            <div
+              class="h-10 w-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-primary hover:text-black cursor-pointer transition-all"
+            >
+              <span class="material-symbols-outlined text-sm"
+                >alternate_email</span
+              >
+            </div>
+          </div>
         </div>
-    </section>
-
-    <!-- Support Banner -->
-    <section class="py-16 bg-stone-50 border-t border-outline">
-        <div class="container mx-auto px-6">
-            <div class="bg-black p-12 rounded-3xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="relative z-10 max-w-xl">
-                    <h3 class="text-3xl font-black text-white uppercase tracking-tighter mb-4">¿No encuentras la pieza exacta?</h3>
-                    <p class="text-stone-400 text-sm leading-relaxed">Nuestro departamento técnico puede localizar repuestos críticos fuera de catálogo a través de nuestra red de proveedores OEM internacionales.</p>
-                </div>
-                <a href="/tienda/soporte" class="bg-primary text-black px-12 py-5 font-black uppercase text-xs tracking-widest rounded-sm hover:scale-105 transition-transform shrink-0 relative z-10">Asistencia Técnica</a>
-                <div class="absolute -right-20 -top-20 opacity-5">
-                    <span class="material-symbols-outlined text-[300px]" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
-                </div>
-            </div>
+        <div>
+          <span
+            class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block"
+            >Catálogo</span
+          >
+          <nav class="flex flex-col gap-4">
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/tienda/catalogo_general') }}"
+              >Nuevos Ingresos</a
+            >
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/tienda/catalogo_general') }}"
+              >Sistemas de Motor</a
+            >
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/tienda/catalogo_general') }}"
+              >Frenado</a
+            >
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/tienda/catalogo_general') }}"
+              >Transmisión</a
+            >
+          </nav>
         </div>
-    </section>
-</main>
-@endsection
+        <div>
+          <span
+            class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block"
+            >Empresa</span
+          >
+          <nav class="flex flex-col gap-4">
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/dashboard') }}"
+              >Portal ERP</a
+            >
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/tienda/terminos_b2b') }}"
+              >Términos B2B</a
+            >
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/tienda/soporte') }}"
+              >Soporte Técnico</a
+            >
+            <a
+              class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
+              href="{{ url('/tienda/contacto') }}"
+              >Contacto</a
+            >
+          </nav>
+        </div>
+        <div>
+          <span
+            class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block"
+            >Sede Central</span
+          >
+          <p
+            class="text-stone-500 text-xs uppercase tracking-widest leading-relaxed"
+          >
+            AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO. 2-3-C, URB.
+            EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
+          </p>
+          <div class="mt-6 p-4 bg-zinc-900 rounded-lg border border-white/5">
+            <p
+              class="text-[10px] text-primary font-bold uppercase tracking-widest"
+            >
+              ¿Necesitas ayuda?
+            </p>
+            <p class="text-white text-xs font-bold mt-1">
+              LACIMA.REPUESTOS@GMAIL.COM
+            </p>
+            <p class="text-white text-xs font-bold mt-1">
+              PEDIDOSLACIMA@GMAIL.COM
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center"
+      >
+        <p class="text-[9px] text-stone-600 uppercase tracking-widest">
+          © 2026 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.
+        </p>
+        <div class="flex gap-6">
+          <a
+            class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white"
+            href="{{ url('/tienda/soporte') }}"
+            >Soporte</a
+          >
+          <a
+            class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white"
+            href="{{ url('/tienda/terminos_b2b') }}"
+            >Legal</a
+          >
+        </div>
+      </div>
+    </footer>
 
-@push('scripts')
-    <script src="/frontend/public/ecommerce/js/catalogo_general.js"></script>
-    <script src="/frontend/public/ecommerce/js/zenith-ecommerce-sync.js"></script>
-@endpush
+    <button
+      class="fixed bottom-8 right-8 bg-primary text-black p-4 shadow-xl hover:bg-white transition-all z-40 border border-black/10"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      <span class="material-symbols-outlined font-black">arrow_upward</span>
+    </button>
+
+    <script src="{{ asset('ecommerce/js/catalogo_general.js') }}"></script>
+  </body>
+</html>
