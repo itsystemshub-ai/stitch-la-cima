@@ -1,19 +1,302 @@
-@extends('layouts.erp')
-
-@section('title', 'Inventario | ERP La Cima | ERP La Cima')
-
-@push('styles')
-    <link rel="stylesheet" href="/frontend/public/erp/css/inventario.css">
-@endpush
-
-@section('content')
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Inventario | ERP La Cima - MAYOR DE REPUESTO LA CIMA, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+<title>Inventario | Mayor de Repuesto LA CIMA, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/inventario.css">
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const b = document.getElementById('breadcrumbPage');
-      if(b) b.innerText = 'P�gina';
-  });
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f6f6f9", surface: "#ffffff", outline: "#e2e2e5" },
+        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
+      }
+    }
+  }
 </script>
+.material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .material-symbols-filled {
+        font-variation-settings:
+          "FILL" 1,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      @media (min-width: 1024px) {
+        .sidebar {
+          transform: translateX(0);
+        }
+      }
 
+      /* Menu Items */
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.15s ease;
+        cursor: pointer;
+        user-select: none;
+        color: #555;
+      }
+      .menu-item:hover {
+        background: #f5f5f5;
+      }
+      .menu-item-active {
+        background: rgba(206, 255, 94, 0.2);
+        color: #1c1c1c;
+        font-weight: 700;
+        border-left: 3px solid #ceff5e;
+      }
+      .menu-item-inactive {
+        color: #555;
+      }
+      .menu-group {
+        font-size: 10px;
+        font-weight: 700;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 16px 12px 6px;
+      }
+      .menu-group:first-child {
+        margin-top: 0;
+      }
+
+      /* Dropdown hacia la DERECHA */
+      .menu-parent {
+        position: relative;
+      }
+      .dropdown-arrow {
+        margin-left: auto;
+        color: #aaa;
+        transition: transform 0.2s ease;
+        font-size: 18px !important;
+      }
+      .menu-item.open {
+        background: #f8f9fa;
+        color: #1c1c1c;
+        font-weight: 600;
+      }
+      .menu-item.open .dropdown-arrow {
+        transform: rotate(90deg);
+        color: #1c1c1c;
+      }
+
+      /* Submenu flotante hacia la derecha */
+      .submenu {
+        position: absolute;
+        left: calc(100% + 6px);
+        top: 2px;
+        min-width: 210px;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.12),
+          0 4px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-12px) scale(0.96);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+        z-index: 200;
+      }
+      /* Mostrar submenu cuando el menu-parent tiene .open */
+      .menu-parent.open .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .submenu a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #666;
+        border-radius: 10px;
+        transition: all 0.15s ease;
+        text-decoration: none;
+      }
+      .submenu a:hover {
+        background: #f8f9fa;
+        color: #1c1c1c;
+      }
+      .submenu a .material-symbols-outlined {
+        font-size: 18px !important;
+        color: #bbb;
+      }
+      .submenu a:hover .material-symbols-outlined {
+        color: #666;
+      }
+      .submenu-divider {
+        height: 1px;
+        background: #eee;
+        margin: 6px 10px;
+      }
+
+      /* Utility */
+      .kpi-card {
+        @apply bg-white rounded-xl border border-stone-200 p-6 hover:shadow-lg transition-all hover:border-primary/30;
+      }
+      .action-btn {
+        @apply flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98];
+      }
+      .data-table th {
+        @apply text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-left;
+      }
+      .data-table td {
+        @apply text-sm py-3;
+      }
+      .badge {
+        @apply px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider;
+      }
+      .badge-green {
+        @apply bg-green-100 text-green-700;
+      }
+      .badge-yellow {
+        @apply bg-yellow-100 text-yellow-700;
+      }
+      .badge-red {
+        @apply bg-red-100 text-red-700;
+      }
+      .badge-blue {
+        @apply bg-blue-100 text-blue-700;
+      }
+</head>
+<body class="bg-background text-stone-900 min-h-screen flex">
+
+<!-- ========== SIDEBAR ========== -->
+<aside id="sidebar" class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar">
+  <div class="flex flex-col px-5 pt-6 pb-4">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg">
+        <img src="{{ asset('assets/images/logo.png') }}" class="w-7 h-7 object-contain" alt="Logo">
+      </div>
+      <div>
+        <h2 class="font-headline font-bold text-sm text-stone-900 leading-none uppercase">LA CIMA, C.A.</h2>
+        <span class="text-[10px] font-mono text-stone-400">RIF: J-40308741-5</span>
+      </div>
+    </div>
+    <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Portal ERP Corporativo</p>
+  </div>
+
+  <div class="px-4 mb-4">
+    <div class="relative">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><span class="material-symbols-outlined text-lg">search</span></span>
+      <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar..." type="text"/>
+    </div>
+  </div>
+
+  <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5 pb-20">
+    <div class="menu-group">Principal</div>
+    <a class="menu-item menu-item-inactive" href="{{ url('/') }}">
+      <span class="material-symbols-outlined text-[20px]">storefront</span><span>Tienda Virtual</span>
+    </a>
+    <a class="menu-item menu-item-inactive" href="{{ url('/erp/inicio') }}">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard Central</span>
+    </a>
+
+    <div class="menu-group">Gestión de Inventario</div>
+    <div class="menu-parent open">
+      <div class="menu-item menu-item-active" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Almacén Central</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu block static bg-transparent border-none shadow-none opacity-100 visible transform-none p-0 pl-10 pointer-events-auto">
+        <a href="{{ url('/erp/inventario') }}" class="text-stone-900 font-bold"><span class="material-symbols-filled text-primary">analytics</span> Resumen</a>
+        <a href="{{ url('/erp/productos') }}"><span class="material-symbols-outlined">category</span> Catálogo Stock</a>
+        <a href="{{ url('/erp/kardex') }}"><span class="material-symbols-outlined">receipt_long</span> Movimientos (Kardex)</a>
+        <a href="{{ url('/erp/ajustes-inventario') }}"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Operaciones</div>
+    <a class="menu-item menu-item-inactive" href="{{ url('/erp/ventas') }}">
+      <span class="material-symbols-outlined text-[20px]">payments</span><span>Ventas y POS</span>
+    </a>
+    <a class="menu-item menu-item-inactive" href="{{ url('/erp/compras') }}">
+      <span class="material-symbols-outlined text-[20px]">shopping_cart</span><span>Compras</span>
+    </a>
+    <a class="menu-item menu-item-inactive" href="{{ url('/erp/contabilidad') }}">
+      <span class="material-symbols-outlined text-[20px]">account_balance</span><span>Contabilidad</span>
+    </a>
+  </nav>
+
+  <div class="mt-auto border-t border-stone-200 p-4 bg-stone-50">
+    <a href="{{ url('/auth/login') }}" class="w-full bg-red-50 text-red-600 font-bold py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-[10px] uppercase tracking-widest">
+      <span class="material-symbols-outlined text-[16px]">logout</span>
+      Salir del ERP
+    </a>
+  </div>
+</aside>
+
+<!-- ========== TOP BAR ========== -->
+<header class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200">
+  <div class="flex justify-between items-center px-6 py-3">
+    <div class="flex items-center gap-4">
+      <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="hidden md:flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-500">
+        <a href="{{ url('/erp/inicio') }}" class="hover:text-stone-900 transition-colors">ERP</a>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <a href="{{ url('/erp/inventario') }}" class="hover:text-stone-900 transition-colors">Inventario</a>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <span class="text-stone-900" id="breadcrumbPage">Panel de Control</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+      </button>
+      <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
+        <div class="text-right hidden md:block">
+          <p class="text-sm font-bold text-stone-900 leading-none">Administrador</p>
+          <p class="text-[10px] text-stone-500">Rol: Admin</p>
+        </div>
+        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">A</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== CONTENIDO PRINCIPAL ========== -->
 <main class="ml-[288px] w-[calc(100vw-288px)] mt-[65px] p-6 pb-4">
       <!-- Header Dashboard -->
       <div
@@ -141,28 +424,28 @@
       <!-- Action Buttons -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <a
-          href="/erp/productos"
+          href="{{ url('/erp/' . 'productos') }}"
           class="action-btn bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20"
         >
           <span class="material-symbols-outlined text-2xl">category</span>
           <span class="text-center leading-tight">Productos</span>
         </a>
         <a
-          href="/erp/kardex"
+          href="{{ url('/erp/' . 'kardex') }}"
           class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
         >
           <span class="material-symbols-outlined text-2xl">receipt_long</span>
           <span class="text-center leading-tight">Kardex</span>
         </a>
         <a
-          href="/erp/auditoria-inventario"
+          href="{{ url('/erp/' . 'auditoria-inventario') }}"
           class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
         >
           <span class="material-symbols-outlined text-2xl">assignment</span>
           <span class="text-center leading-tight">Auditoría Física</span>
         </a>
         <a
-          href="/erp/ajustes-inventario"
+          href="{{ url('/erp/' . 'ajustes-inventario') }}"
           class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5"
         >
           <span class="material-symbols-outlined text-2xl">edit_note</span>
@@ -191,7 +474,7 @@
             </div>
           </div>
           <a
-            href="/erp/kardex"
+            href="{{ url('/erp/' . 'kardex') }}"
             class="text-xs font-bold text-primary hover:brightness-75 flex items-center gap-1"
           >
             Ver todo
@@ -510,7 +793,7 @@
             </div>
           </div>
           <a
-            href="/erp/productos"
+            href="{{ url('/erp/' . 'productos') }}"
             class="text-xs font-bold text-primary hover:brightness-75 flex items-center gap-1"
           >
             Ver todos
@@ -671,25 +954,29 @@
         >
         <div class="flex items-center gap-4">
           <a
-            href="/erp/ayuda"
+            href="{{ url('/erp/' . 'ayuda') }}"
             class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
             >Centro de Ayuda</a
           >
           <a
-            href="/erp/manual-tecnico"
+            href="{{ url('/erp/' . 'manual-tecnico') }}"
             class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
             >Manual Técnico</a
           >
           <a
-            href="/erp/estado-sistema"
+            href="{{ url('/erp/' . 'estado-sistema') }}"
             class="text-[10px] font-bold text-stone-500 hover:text-stone-900"
             >Estado del Sistema</a
           >
         </div>
       </div>
     </main>
-@endsection
 
-@push('scripts')
-    <script src="/frontend/public/erp/js/inventario.js"></script>
-@endpush
+<!-- Overlay mobile -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
+
+<!-- Common Scripts -->
+<script src="js/common.js"></script>
+<script src="js/inventario.js"></script>
+</body>
+</html>

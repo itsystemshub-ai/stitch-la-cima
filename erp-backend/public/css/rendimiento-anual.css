@@ -1,0 +1,5 @@
+.material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-amber-accent { background: linear-gradient(180deg, #ffb300 0%, #fb8c00 100%); }
+        .chart-lime-accent { background: linear-gradient(180deg, #9acd32 0%, #496800 100%); }

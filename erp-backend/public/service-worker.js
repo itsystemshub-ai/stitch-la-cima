@@ -12,7 +12,7 @@ const ASSETS_TO_CACHE = [
   '/tienda/catalogo_detallado',
   '/auth/login',
   '/auth/crear_cuenta',
-  '/assets/images/logo.png',
+  '/frontend/public/assets/images/logo.png',
   'https://cdn.tailwindcss.com?plugins=forms,container-queries',
   'https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap',
   'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'

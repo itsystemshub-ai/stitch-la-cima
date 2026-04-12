@@ -6,62 +6,7 @@
     <title>Sin Conexión | LA CIMA</title>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'League Spartan', sans-serif;
-            background: #f6f6f9;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .offline-container {
-            text-align: center;
-            max-width: 400px;
-        }
-        .icon {
-            font-size: 80px;
-            color: #5a5c5e;
-            margin-bottom: 24px;
-        }
-        h1 {
-            font-size: 28px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: #0c0e10;
-            margin-bottom: 12px;
-        }
-        p {
-            color: #5a5c5e;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-        .retry-btn {
-            background: #ceff5e;
-            color: #000;
-            border: none;
-            padding: 16px 32px;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 14px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .retry-btn:hover {
-            background: #bded4f;
-            transform: scale(1.02);
-        }
-        .retry-btn:active {
-            transform: scale(0.98);
-        }
-    </style>
+    <link rel="stylesheet" href="css/offline.css">
 </head>
 <body>
     <div class="offline-container">
@@ -72,7 +17,7 @@
             <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px; font-size: 20px;">refresh</span>
             Reintentar
         </button>
-        <a href="{{ url('/tienda/index') }}" style="display: inline-block; margin-top: 24px; color: #ceff5e; text-decoration: none; font-size: 14px; font-weight: 700;">
+        <a href="{{ url('/tienda/' . 'index') }}" style="display: inline-block; margin-top: 24px; color: #ceff5e; text-decoration: none; font-size: 14px; font-weight: 700;">
             ← Volver al inicio
         </a>
     </div>

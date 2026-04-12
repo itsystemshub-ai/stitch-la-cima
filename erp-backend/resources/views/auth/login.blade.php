@@ -40,7 +40,7 @@
 <!-- Top Navigation -->
 <nav class="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm">
     <div class="flex justify-between items-center px-6 py-3">
-        <a href="{{ url('/tienda/index') }}" class="flex items-center gap-2 group">
+        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
             <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
             <div class="flex flex-col">
                 <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
@@ -48,7 +48,7 @@
             </div>
         </a>
         <div class="hidden md:flex items-center gap-6">
-            <a class="text-xs uppercase tracking-widest font-bold text-stone-500 hover:text-black transition-colors" href="{{ url('/tienda/index') }}">Ecommerce</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-stone-500 hover:text-black transition-colors" href="{{ url('/') }}">Ecommerce</a>
             <a class="text-xs uppercase tracking-widest font-bold text-stone-500 hover:text-black transition-colors" href="{{ url('/tienda/catalogo_general') }}">Catálogo</a>
         </div>
         <div class="flex items-center gap-4">
@@ -93,7 +93,7 @@
                 <p class="text-stone-500 font-medium text-sm">Ingrese sus credenciales corporativas</p>
             </div>
 
-            <form class="space-y-6" onsubmit="event.preventDefault(); localStorage.setItem('erp_session', 'true'); window.location.href='/erp/inicio';">
+            <form class="space-y-6" onsubmit="event.preventDefault(); localStorage.setItem('erp_session', 'true'); window.location.href='{{ url('/erp/inicio') }}';">
                 <div>
                     <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400 mb-2">Usuario / Email</label>
                     <div class="relative">
@@ -115,7 +115,7 @@
                         <input type="checkbox" class="w-4 h-4 rounded border-stone-300 text-primary focus:ring-primary">
                         <span class="text-xs text-stone-500 group-hover:text-stone-900 transition-colors">Recordarme</span>
                     </label>
-                    <a href="{{ url('/auth/olvido_contraseña') }}" class="text-xs font-bold text-stone-400 hover:text-stone-900 transition-colors uppercase tracking-tighter">¿Olvidó su clave?</a>
+                    <a href="{{ url('/auth/' . 'olvido_contraseña') }}" class="text-xs font-bold text-stone-400 hover:text-stone-900 transition-colors uppercase tracking-tighter">¿Olvidó su clave?</a>
                 </div>
 
                 <button class="w-full bg-stone-900 py-5 px-6 text-white font-headline font-black uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 hover:bg-black hover:shadow-xl transition-all active:scale-[0.98]" type="submit">
@@ -126,7 +126,7 @@
 
             <div class="mt-12 pt-6 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-[9px] font-bold text-stone-300 uppercase tracking-widest">SISTEMA ERP v2.5.0</p>
-                <a href="{{ url('/auth/crear_cuenta') }}" class="text-[10px] font-black text-stone-400 hover:text-stone-900 transition-colors uppercase tracking-widest flex items-center gap-1">
+                <a href="{{ url('/auth/' . 'crear_cuenta') }}" class="text-[10px] font-black text-stone-400 hover:text-stone-900 transition-colors uppercase tracking-widest flex items-center gap-1">
                     Solicitar Cuenta
                     <span class="material-symbols-outlined text-xs">arrow_forward</span>
                 </a>
@@ -148,6 +148,6 @@
     </div>
 </footer>
 
-<script src="{{ asset('auth/js/login.js') }}"></script>
+<!-- <script src="{{ asset('js/login.js') }}"></script> -->
 
 </body></html>

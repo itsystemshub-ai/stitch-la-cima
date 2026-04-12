@@ -30,7 +30,7 @@ function addToCart(id, name, price, image, category) {
   
   // Mostrar notificación
   const toast = document.createElement('div');
-  toast.className = 'fixed bottom-4 right-4 bg-black text-white px-6 py-4 rounded-lg z-50 shadow-lg';
+  toast.className = 'fixed bottom-4 right-4 bg-black text-white px-6 py-3 rounded-lg z-50 shadow-lg';
   toast.textContent = `✓ ${name} agregado al carrito`;
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 2000);

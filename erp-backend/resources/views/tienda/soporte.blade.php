@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="LA CIMA">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <link rel="manifest" href="../manifest.json">
     <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
     <title>Soporte Técnico | Mayor de Repuesto LA CIMA, C.A.</title>
@@ -35,8 +35,8 @@
 </script>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="{{ asset('ecommerce/js/soporte.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('ecommerce/css/soporte.css') }}">
+    <script src="js/soporte.js"></script>
+    <link rel="stylesheet" href="css/soporte.css">
 </head>
 <body class="bg-background text-on-surface selection:bg-primary/30 min-h-screen flex flex-col">
 
@@ -46,7 +46,7 @@
         <button onclick="openMobileMenu()" class="md:hidden p-2 hover:bg-stone-100 rounded-full">
             <span class="material-symbols-outlined">menu</span>
         </button>
-        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
+        <a href="{{ url('/tienda/' . 'index') }}" class="flex items-center gap-2 group">
             <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
             <div class="flex flex-col">
                 <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
@@ -54,22 +54,22 @@
             </div>
         </a>
         <div class="hidden md:flex items-center gap-6">
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/') }}">Inicio</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/catalogo_general') }}">Catálogo</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/Nosotros') }}">Nosotros</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/contacto') }}">Contacto</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/' . 'index') }}">Inicio</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Catálogo</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/' . 'Nosotros') }}">Nosotros</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/' . 'contacto') }}">Contacto</a>
         </div>
         <div class="flex items-center gap-4">
             <div class="relative hidden lg:block">
                 <input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
                 <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
             </div>
-            <a href="{{ url('/tienda/carrito') }}" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+            <a href="{{ url('/tienda/' . 'carrito') }}" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
                 <span class="material-symbols-outlined">shopping_cart</span>
                 <span id="cart-count" class="cart-badge absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">0</span>
             </a>
             <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
-            <a href="{{ url('/auth/login') }}" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+            <a href="{{ url('/auth/' . 'login') }}" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
                 <span class="material-symbols-outlined text-primary text-sm">database</span>
                 Login
             </a>
@@ -90,13 +90,13 @@
         </button>
     </div>
     <nav class="p-6 space-y-4">
-        <a href="{{ url('/') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
-        <a href="{{ url('/tienda/catalogo_general') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Catálogo</a>
-        <a href="{{ url('/tienda/Nosotros') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Nosotros</a>
-        <a href="{{ url('/tienda/contacto') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Contacto</a>
+        <a href="{{ url('/tienda/' . 'index') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
+        <a href="{{ url('/tienda/' . 'catalogo_general') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Catálogo</a>
+        <a href="{{ url('/tienda/' . 'Nosotros') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Nosotros</a>
+        <a href="{{ url('/tienda/' . 'contacto') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Contacto</a>
     </nav>
     <div class="p-6 border-t border-outline">
-        <a href="{{ url('/auth/login') }}" class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest">
+        <a href="{{ url('/auth/' . 'login') }}" class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-primary text-sm">database</span>
             Login ERP
         </a>
@@ -228,19 +228,19 @@
 <div>
 <span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
 <nav class="flex flex-col gap-4">
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Nuevos Ingresos</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Sistemas de Motor</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Frenado</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Transmisión</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Transmisión</a>
 </nav>
 </div>
 <div>
 <span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
 <nav class="flex flex-col gap-4">
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/auth/login') }}">Portal ERP</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/terminos_b2b') }}">Términos B2B</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/soporte') }}">Soporte Técnico</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/contacto') }}">Contacto</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/auth/' . 'login') }}">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'terminos_b2b') }}">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'soporte') }}">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'contacto') }}">Contacto</a>
 </nav>
 </div>
 <div>
@@ -256,13 +256,13 @@
 <div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
 <p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2026 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
 <div class="flex gap-6">
-<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/soporte') }}">Soporte</a>
-<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/terminos_b2b') }}">Legal</a>
+<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/' . 'soporte') }}">Soporte</a>
+<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/' . 'terminos_b2b') }}">Legal</a>
 </div>
 </div>
 </footer>
 
-<script src="{{ asset('ecommerce/js/soporte.js') }}"></script>
+<script src="js/soporte.js"></script>
 
 </body>
 </html>

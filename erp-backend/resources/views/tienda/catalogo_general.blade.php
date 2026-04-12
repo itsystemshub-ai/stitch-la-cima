@@ -14,7 +14,7 @@
       content="black-translucent"
     />
     <meta name="apple-mobile-web-app-title" content="LA CIMA" />
-    <link rel="manifest" href="{{ asset('manifest.json') }}" />
+    <link rel="manifest" href="../manifest.json" />
     <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}" />
     <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}" />
     <title>Catálogo | Mayor de Repuesto LA CIMA, C.A.</title>
@@ -47,8 +47,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
-    <script src="{{ asset('ecommerce/js/catalogo_general.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('ecommerce/css/catalogo_general.css') }}" />
+    <script src="js/catalogo_general.js"></script>
+    <link rel="stylesheet" href="css/catalogo_general.css" />
   </head>
   <body
     class="bg-background text-on-surface selection:bg-primary/30 min-h-screen flex flex-col"
@@ -64,7 +64,7 @@
         >
           <span class="material-symbols-outlined">menu</span>
         </button>
-        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
+        <a href="{{ url('/tienda/' . 'index') }}" class="flex items-center gap-2 group">
           <img
             src="{{ asset('assets/images/logo.png') }}"
             alt="LA CIMA"
@@ -84,22 +84,22 @@
         <div class="hidden md:flex items-center gap-6">
           <a
             class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors"
-            href="{{ url('/') }}"
+            href="{{ url('/tienda/' . 'index') }}"
             >Inicio</a
           >
           <a
             class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary"
-            href="{{ url('/tienda/catalogo_general') }}"
+            href="{{ url('/tienda/' . 'catalogo_general') }}"
             >Catálogo</a
           >
           <a
             class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors"
-            href="{{ url('/tienda/Nosotros') }}"
+            href="{{ url('/tienda/' . 'Nosotros') }}"
             >Nosotros</a
           >
           <a
             class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors"
-            href="{{ url('/tienda/contacto') }}"
+            href="{{ url('/tienda/' . 'contacto') }}"
             >Contacto</a
           >
         </div>
@@ -117,7 +117,7 @@
             >
           </div>
           <a
-            href="{{ url('/tienda/carrito') }}"
+            href="{{ url('/tienda/' . 'carrito') }}"
             class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors"
           >
             <span class="material-symbols-outlined">shopping_cart</span>
@@ -129,7 +129,7 @@
           </a>
           <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
           <a
-            href="{{ url('/auth/login') }}"
+            href="{{ url('/auth/' . 'login') }}"
             class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all"
           >
             <span class="material-symbols-outlined text-primary text-sm"
@@ -171,29 +171,29 @@
       </div>
       <nav class="p-6 space-y-4">
         <a
-          href="{{ url('/') }}"
+          href="{{ url('/tienda/' . 'index') }}"
           class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors"
           >Inicio</a
         >
         <a
-          href="{{ url('/tienda/catalogo_general') }}"
+          href="{{ url('/tienda/' . 'catalogo_general') }}"
           class="block text-sm font-bold uppercase tracking-widest text-black border-l-4 border-primary pl-4 py-2"
           >Catálogo</a
         >
         <a
-          href="{{ url('/tienda/Nosotros') }}"
+          href="{{ url('/tienda/' . 'Nosotros') }}"
           class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors"
           >Nosotros</a
         >
         <a
-          href="{{ url('/tienda/contacto') }}"
+          href="{{ url('/tienda/' . 'contacto') }}"
           class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors"
           >Contacto</a
         >
       </nav>
       <div class="p-6 border-t border-outline">
         <a
-          href="{{ url('/auth/login') }}"
+          href="{{ url('/auth/' . 'login') }}"
           class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest"
         >
           <span class="material-symbols-outlined text-primary text-sm"
@@ -238,7 +238,7 @@
           </p>
           <div class="flex flex-wrap gap-4">
             <a
-              href="{{ url('/tienda/catalogo_detallado') }}"
+              href="{{ url('/tienda/' . 'catalogo_detallado') }}"
               class="bg-primary hover:bg-white text-black font-black uppercase py-5 px-10 tracking-[0.2em] text-xs transition-all inline-block"
               >Explorar Catálogo</a
             >
@@ -317,14 +317,14 @@
         </div>
       </div>
 
-      <!-- Product Grid (RESTORING ALL 12 PRODUCTS) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="productGrid">
+      <!-- Product Grid (RESTORING ALL 8 PRODUCTS) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Part 1 -->
         <article
           class="bg-white border border-outline group overflow-hidden"
           data-category="cummins"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=1') }}" class="block">
+          <a href="detalle_productos.html?id=1" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -349,7 +349,7 @@
                 >#CU-8842-X</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=1') }}" class="block">
+            <a href="detalle_productos.html?id=1" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -391,7 +391,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="volvo"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=2') }}" class="block">
+          <a href="detalle_productos.html?id=2" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -411,7 +411,7 @@
                 >#VO-1120-F</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=2') }}" class="block">
+            <a href="detalle_productos.html?id=2" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -453,7 +453,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="holset"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=3') }}" class="block">
+          <a href="detalle_productos.html?id=3" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -473,7 +473,7 @@
                 >#HO-449-TB</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=3') }}" class="block">
+            <a href="detalle_productos.html?id=3" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -515,7 +515,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="detroit"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=4') }}" class="block">
+          <a href="detalle_productos.html?id=4" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -535,7 +535,7 @@
                 >#EG-221-V</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=4') }}" class="block">
+            <a href="detalle_productos.html?id=4" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -577,7 +577,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="detroit"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=5') }}" class="block">
+          <a href="detalle_productos.html?id=5" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -597,7 +597,7 @@
                 >#DD-15-FI</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=5') }}" class="block">
+            <a href="detalle_productos.html?id=5" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -639,7 +639,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="international"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=6') }}" class="block">
+          <a href="detalle_productos.html?id=6" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -659,7 +659,7 @@
                 >#IT-990-AF</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=6') }}" class="block">
+            <a href="detalle_productos.html?id=6" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -701,7 +701,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="meritor"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=7') }}" class="block">
+          <a href="detalle_productos.html?id=7" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -721,7 +721,7 @@
                 >#ME-QP-4515</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=7') }}" class="block">
+            <a href="detalle_productos.html?id=7" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -763,7 +763,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="cummins"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=8') }}" class="block">
+          <a href="detalle_productos.html?id=8" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -783,7 +783,7 @@
                 >#CU-SN-12</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=8') }}" class="block">
+            <a href="detalle_productos.html?id=8" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -825,7 +825,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="toyota"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=9') }}" class="block">
+          <a href="detalle_productos.html?id=9" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -845,7 +845,7 @@
                 >#TOY-COR-18</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=9') }}" class="block">
+            <a href="detalle_productos.html?id=9" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -887,7 +887,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="toyota"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=10') }}" class="block">
+          <a href="detalle_productos.html?id=10" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -907,7 +907,7 @@
                 >#TOY-HIL-22</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=10') }}" class="block">
+            <a href="detalle_productos.html?id=10" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -949,7 +949,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="toyota"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=11') }}" class="block">
+          <a href="detalle_productos.html?id=11" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -969,7 +969,7 @@
                 >#TOY-SPK-04</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=11') }}" class="block">
+            <a href="detalle_productos.html?id=11" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -1011,7 +1011,7 @@
           class="bg-white border border-outline group overflow-hidden"
           data-category="toyota"
         >
-          <a href="{{ url('/tienda/detalle_productos?id=12') }}" class="block">
+          <a href="detalle_productos.html?id=12" class="block">
             <div
               class="relative aspect-square overflow-hidden bg-stone-50 p-8 flex items-center justify-center"
             >
@@ -1031,7 +1031,7 @@
                 >#TOY-AIR-19</span
               >
             </div>
-            <a href="{{ url('/tienda/detalle_productos?id=12') }}" class="block">
+            <a href="detalle_productos.html?id=12" class="block">
               <h3
                 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors"
               >
@@ -1187,22 +1187,22 @@
           <nav class="flex flex-col gap-4">
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/tienda/catalogo_general') }}"
+              href="{{ url('/tienda/' . 'catalogo_general') }}"
               >Nuevos Ingresos</a
             >
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/tienda/catalogo_general') }}"
+              href="{{ url('/tienda/' . 'catalogo_general') }}"
               >Sistemas de Motor</a
             >
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/tienda/catalogo_general') }}"
+              href="{{ url('/tienda/' . 'catalogo_general') }}"
               >Frenado</a
             >
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/tienda/catalogo_general') }}"
+              href="{{ url('/tienda/' . 'catalogo_general') }}"
               >Transmisión</a
             >
           </nav>
@@ -1215,22 +1215,22 @@
           <nav class="flex flex-col gap-4">
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/dashboard') }}"
+              href="{{ url('/auth/' . 'login') }}"
               >Portal ERP</a
             >
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/tienda/terminos_b2b') }}"
+              href="{{ url('/tienda/' . 'terminos_b2b') }}"
               >Términos B2B</a
             >
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/tienda/soporte') }}"
+              href="{{ url('/tienda/' . 'soporte') }}"
               >Soporte Técnico</a
             >
             <a
               class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors"
-              href="{{ url('/tienda/contacto') }}"
+              href="{{ url('/tienda/' . 'contacto') }}"
               >Contacto</a
             >
           </nav>
@@ -1270,12 +1270,12 @@
         <div class="flex gap-6">
           <a
             class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white"
-            href="{{ url('/tienda/soporte') }}"
+            href="{{ url('/tienda/' . 'soporte') }}"
             >Soporte</a
           >
           <a
             class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white"
-            href="{{ url('/tienda/terminos_b2b') }}"
+            href="{{ url('/tienda/' . 'terminos_b2b') }}"
             >Legal</a
           >
         </div>
@@ -1289,6 +1289,6 @@
       <span class="material-symbols-outlined font-black">arrow_upward</span>
     </button>
 
-    <script src="{{ asset('ecommerce/js/catalogo_general.js') }}"></script>
+    <script src="js/catalogo_general.js"></script>
   </body>
 </html>

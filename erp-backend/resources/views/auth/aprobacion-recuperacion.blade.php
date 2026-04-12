@@ -3,14 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="description" content="Aprobación de recuperación de contraseñas - Admin" />
+    <meta
+      name="description"
+      content="Aprobación de recuperación de contraseñas - Admin"
+    />
     <meta name="theme-color" content="#ceff5e" />
-    <link rel="manifest" href="{{ asset('manifest.json') }}" />
+    <link rel="manifest" href="../manifest.json" />
     <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}" />
     <title>Aprobación de Recuperación | Admin</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
     <script src="{{ asset('js/api.js') }}"></script>
     <script>
       tailwind.config = {
@@ -65,21 +74,39 @@
   </head>
   <body class="bg-background min-h-screen">
     <!-- Top Bar -->
-    <header class="bg-white border-b border-stone-200 px-6 py-4 sticky top-0 z-40">
+    <header
+      class="bg-white border-b border-stone-200 px-6 py-4 sticky top-0 z-40"
+    >
       <div class="max-w-6xl mx-auto flex justify-between items-center">
         <div class="flex items-center gap-4">
-          <a href="{{ url('/auth/login') }}" class="p-2 hover:bg-stone-100 rounded-lg transition-colors">
-            <span class="material-symbols-outlined text-stone-500">arrow_back</span>
+          <a
+            href="{{ url('/auth/' . 'login') }}"
+            class="p-2 hover:bg-stone-100 rounded-lg transition-colors"
+          >
+            <span class="material-symbols-outlined text-stone-500"
+              >arrow_back</span
+            >
           </a>
           <div>
-            <h1 class="font-headline font-bold text-lg text-stone-900">Aprobación de Recuperación</h1>
-            <p class="text-xs text-stone-500">Panel de Administración - Super Usuario</p>
+            <h1 class="font-headline font-bold text-lg text-stone-900">
+              Aprobación de Recuperación
+            </h1>
+            <p class="text-xs text-stone-500">
+              Panel de Administración - Super Usuario
+            </p>
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <span class="text-xs text-stone-500" id="pendingCount">0 solicitudes pendientes</span>
-          <button onclick="refreshRequests()" class="p-2 hover:bg-stone-100 rounded-lg transition-colors">
-            <span class="material-symbols-outlined text-stone-500">refresh</span>
+          <span class="text-xs text-stone-500" id="pendingCount"
+            >0 solicitudes pendientes</span
+          >
+          <button
+            onclick="refreshRequests()"
+            class="p-2 hover:bg-stone-100 rounded-lg transition-colors"
+          >
+            <span class="material-symbols-outlined text-stone-500"
+              >refresh</span
+            >
           </button>
         </div>
       </div>
@@ -89,10 +116,34 @@
     <main class="max-w-6xl mx-auto px-6 py-8">
       <!-- Tabs -->
       <div class="flex gap-2 mb-6 border-b border-stone-200 pb-2">
-        <button onclick="filterByStatus('ALL')" class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-900 border-b-2 border-primary" data-tab="ALL">Todas</button>
-        <button onclick="filterByStatus('PENDING')" class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-500 hover:text-stone-900" data-tab="PENDING">Pendientes</button>
-        <button onclick="filterByStatus('APPROVED')" class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-500 hover:text-stone-900" data-tab="APPROVED">Aprobadas</button>
-        <button onclick="filterByStatus('REJECTED')" class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-500 hover:text-stone-900" data-tab="REJECTED">Rechazadas</button>
+        <button
+          onclick="filterByStatus('ALL')"
+          class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-900 border-b-2 border-primary"
+          data-tab="ALL"
+        >
+          Todas
+        </button>
+        <button
+          onclick="filterByStatus('PENDING')"
+          class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-500 hover:text-stone-900"
+          data-tab="PENDING"
+        >
+          Pendientes
+        </button>
+        <button
+          onclick="filterByStatus('APPROVED')"
+          class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-500 hover:text-stone-900"
+          data-tab="APPROVED"
+        >
+          Aprobadas
+        </button>
+        <button
+          onclick="filterByStatus('REJECTED')"
+          class="tab-btn px-4 py-2 text-sm font-bold uppercase tracking-wider text-stone-500 hover:text-stone-900"
+          data-tab="REJECTED"
+        >
+          Rechazadas
+        </button>
       </div>
 
       <!-- Requests List -->
@@ -102,14 +153,23 @@
 
       <!-- Empty State -->
       <div id="emptyState" class="hidden text-center py-16">
-        <span class="material-symbols-outlined text-stone-300 text-6xl mb-4">check_circle</span>
-        <h2 class="font-headline font-bold text-xl text-stone-900 mb-2">No hay solicitudes</h2>
-        <p class="text-stone-500 text-sm">Todas las solicitudes de recuperación han sido procesadas.</p>
+        <span class="material-symbols-outlined text-stone-300 text-6xl mb-4"
+          >check_circle</span
+        >
+        <h2 class="font-headline font-bold text-xl text-stone-900 mb-2">
+          No hay solicitudes
+        </h2>
+        <p class="text-stone-500 text-sm">
+          Todas las solicitudes de recuperación han sido procesadas.
+        </p>
       </div>
     </main>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-4 right-4 bg-stone-900 text-white px-6 py-3 rounded-lg shadow-xl z-50 hidden flex items-center gap-2">
+    <div
+      id="toast"
+      class="fixed bottom-4 right-4 bg-stone-900 text-white px-6 py-3 rounded-lg shadow-xl z-50 hidden flex items-center gap-2"
+    >
       <span class="material-symbols-outlined text-primary">check</span>
       <span class="text-sm font-medium" id="toastMessage"></span>
     </div>
@@ -124,7 +184,7 @@
           !window.zenithApi.isAuthenticated() &&
           localStorage.getItem("erp_session") !== "true"
         ) {
-          window.location.href = "{{ url('/auth/login') }}";
+          window.location.href = "login.html";
           return;
         }
         renderRequests();

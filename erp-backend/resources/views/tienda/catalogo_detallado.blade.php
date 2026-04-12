@@ -1,42 +1,41 @@
 <!DOCTYPE html>
-<html class="light" lang="es">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <meta name="description" content="Catálogo detallado de repuestos industriales. MAYOR DE REPUESTO LA CIMA, C.A."/>
-    <meta name="theme-color" content="#ceff5e">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="LA CIMA">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
-    <title>Catálogo Detallado | Mayor de Repuesto LA CIMA, C.A.</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#ceff5e",
-              secondary: "#1c1c1c",
-              background: "#f6f6f9",
-              surface: "#ffffff",
-              outline: "#e2e2e5"
-            },
-            fontFamily: {
-              headline: ["League Spartan", "sans-serif"],
-              body: ["Inter", "sans-serif"]
-            }
-          }
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Catálogo detallado de repuestos industriales. MAYOR DE REPUESTO LA CIMA, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LA CIMA">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
+<title>Catálogo Detallado | Mayor de Repuesto LA CIMA, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          primary: "#ceff5e",
+          secondary: "#1c1c1c",
+          background: "#f6f6f9",
+          surface: "#ffffff",
+          outline: "#e2e2e5"
+        },
+        fontFamily: {
+          headline: ["League Spartan", "sans-serif"],
+          body: ["Inter", "sans-serif"]
         }
       }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <script src="{{ asset('ecommerce/js/catalogo_detallado.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('ecommerce/css/catalogo_detallado.css') }}">
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="{{ asset('js/catalogo_detallado.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/catalogo_detallado.css') }}">
 </head>
 <body class="bg-background text-on-surface selection:bg-primary/30">
 <!-- Top Navigation -->
@@ -45,7 +44,7 @@
         <button onclick="openMobileMenu()" class="md:hidden p-2 hover:bg-stone-100 rounded-full">
             <span class="material-symbols-outlined">menu</span>
         </button>
-        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
+        <a href="{{ url('/tienda/' . 'index') }}" class="flex items-center gap-2 group">
             <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
             <div class="flex flex-col">
                 <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
@@ -53,22 +52,22 @@
             </div>
         </a>
         <div class="hidden md:flex items-center gap-6">
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/') }}">Inicio</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="{{ url('/tienda/catalogo_general') }}">Catálogo</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/Nosotros') }}">Nosotros</a>
-            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/contacto') }}">Contacto</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/' . 'index') }}">Inicio</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-black border-b-2 border-primary" href="{{ url('/tienda/' . 'catalogo_general') }}">Catálogo</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/' . 'Nosotros') }}">Nosotros</a>
+            <a class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-black transition-colors" href="{{ url('/tienda/' . 'contacto') }}">Contacto</a>
         </div>
         <div class="flex items-center gap-4">
             <div class="relative hidden lg:block">
                 <input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
                 <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
             </div>
-            <a href="{{ url('/tienda/carrito') }}" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
+            <a href="{{ url('/tienda/' . 'carrito') }}" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
                 <span class="material-symbols-outlined">shopping_cart</span>
                 <span id="cart-count" class="cart-badge absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">0</span>
             </a>
             <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
-            <a href="{{ url('/auth/login') }}" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+            <a href="{{ url('/auth/' . 'login') }}" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
                 <span class="material-symbols-outlined text-primary text-sm">database</span>
                 Login
             </a>
@@ -89,13 +88,13 @@
         </button>
     </div>
     <nav class="p-6 space-y-4">
-        <a href="{{ url('/') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
-        <a href="{{ url('/tienda/catalogo_general') }}" class="block text-sm font-bold uppercase tracking-widest text-black border-l-4 border-primary pl-4 py-2">Catálogo</a>
-        <a href="{{ url('/tienda/Nosotros') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Nosotros</a>
-        <a href="{{ url('/tienda/contacto') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Contacto</a>
+        <a href="{{ url('/tienda/' . 'index') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Inicio</a>
+        <a href="{{ url('/tienda/' . 'catalogo_general') }}" class="block text-sm font-bold uppercase tracking-widest text-black border-l-4 border-primary pl-4 py-2">Catálogo</a>
+        <a href="{{ url('/tienda/' . 'Nosotros') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Nosotros</a>
+        <a href="{{ url('/tienda/' . 'contacto') }}" class="block text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-black pl-4 py-2 transition-colors">Contacto</a>
     </nav>
     <div class="p-6 border-t border-outline">
-        <a href="{{ url('/auth/login') }}" class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest">
+        <a href="{{ url('/auth/' . 'login') }}" class="flex items-center gap-2 bg-black text-white px-4 py-3 rounded-md font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-primary text-sm">database</span>
             Login ERP
         </a>
@@ -182,15 +181,14 @@
                 </div>
             </div>
 
-            <div id="productGrid" class="editorial-grid">
-                <!-- 1 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4                <!-- 1 -->
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[250px] sm:max-h-none">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwVKDQ8J7uUIFrNwpCuRmbejTuDOgw9_vpIwmz0wCrb4RslhmWPIoHV-t9eB4FyM3zcmveZ6mYBdAXGjvwj1FHk7cEEzeYIktIFoXowi9VI-JA1CWSp_qrVPgv7Xb9_V6w8wnpIIJnoESwkpmJqeE9LP1q4_Wz96dbs7VcbstxzQiEDaxroiRcqohgVDXieSFSCkDwngw0mknMmsdwRC3JB4obyrVRzYkfHNUbN9wshqpV_XyeF9RIy3vmSk3NTwq-ekPZ-C2wVUQ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <p class="text-xs font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CUM-9928-HJ</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Junta de culata Cummins QSB6.7</h3>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Junta de culata Cummins QSB6.7</h3>
                         <div class="mt-auto flex justify-between items-center">
                             <span class="text-xl font-black text-black tracking-tighter">$284.00</span>
                             <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
@@ -201,13 +199,13 @@
                 </article>
 
                 <!-- 2 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[250px] sm:max-h-none">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQKD29s0z6GuS4uPSiUeQyw70ldIFl3871UjP1-u9TQTaoCIMjKqWVYf7vjLiRsk-6ggNcyvjOtMnh0Mdju6jWKG76OQKCbleekn-DTwlFAGhQGfIXROTK57Phh8C0XzugExcdoE7eGfV5Li66UjyA7Sw8tByNp7MulgucBI1tD5xgkPM-viyQr1WLFdmyQNTjZOo1QzliRygUM3ddoPLKdvFd6ifJrPGWai6WB6d2pnrTotXOVPtPuWBJu1GO7m7nCGbmB_13mek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: VOL-P901-LP</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Filtro de Aceite Volvo Penta D13</h3>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Filtro de Aceite Volvo Penta D13</h3>
                         <div class="mt-auto flex justify-between items-center">
                             <span class="text-xl font-black text-black tracking-tighter">$45.50</span>
                             <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
@@ -218,13 +216,13 @@
                 </article>
 
                 <!-- 3 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[250px] sm:max-h-none">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbPP-XFkK6zkczQlnJ0syN052qGxQ9Rj-hlorwmbSZIobuLFXOel2ZMx0xu6dwLm9-7Ubl0F2lzgVQ9DmZ9aBpYK8U6OEIRoY7anE1Esb-iCtFH7QjfwnGbXQqUkSaEkdrFKthlP8ErjHnt8sdiQWx4hVhDWfz79PgQ5U5869M8Wvi6zCxv6CSXXNqnUgGKIIQF2s1hQvlIJcaEfVIfzhL9lTiMBPL-6dmN6QYh7jai-A4a8yMUvreZnN2WsiryiSjUCufA4sWu3I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CAT-T40-99</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Turbocargador Caterpillar C15</h3>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Turbocargador Caterpillar C15</h3>
                         <div class="mt-auto flex justify-between items-center">
                             <span class="text-xl font-black text-black tracking-tighter">$1,420.00</span>
                             <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
@@ -235,13 +233,13 @@
                 </article>
 
                 <!-- 4 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[250px] sm:max-h-none">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIn0RkeL7SWo_eG05JQuzVMLn7doFBFF7OpIHfDkWl6wZNAvi_1ZRIdJaIVb7a4iDU4D_xMPMwP1PwALo5h5Ne8BeQ6IYJyR5Toi0SScObpCgrDYb9pJcmIDEu8LMBWvn4ErCt93id7lunEM7-qeA4b_9GAXvUPZ4R2NbJ2iwlpFpnmQqi9yDn3DX6RtOLX6S_nes72O7ZOPAzaUA_laYrmrxqNDUBi9HF74lajrW3XH8c3vNOglhQV_mA3b7yPUnw_7OzGx-fL4k" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: DEL-24V-HD</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Alternador 24V Detroit Diesel</h3>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Alternador 24V Detroit Diesel</h3>
                         <div class="mt-auto flex justify-between items-center">
                             <span class="text-xl font-black text-black tracking-tighter">$312.00</span>
                             <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
@@ -252,13 +250,13 @@
                 </article>
 
                 <!-- 5 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[250px] sm:max-h-none">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcq0FTn4sixsza9CVtPOnPKQJov8Ui8XYA3uGRpWC4LDD1Ze8Gg-2xj-O9jKECyJsf6PWKzcAP587qr46eOqqlv0ITwFAOGg9qxHstfdMaVcO13OY1Y43qVQhaQL0N9fEioYTxTcnUjuYC2VZLrFJAgMr_d9gGNwMWkd5tTzJ94ESTCuNWfpLOavRKnF76xuxrOANZKwOUUtEEqpu5exJOvPc5wGxgjew4_6X2fRisUN82VMogfrxsFPZqweCdlMiG8PcxWexovxQ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: BOS-6701-IN</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Inyector Bosch Common Rail</h3>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Inyector Bosch Common Rail</h3>
                         <div class="mt-auto flex justify-between items-center">
                             <span class="text-xl font-black text-black tracking-tighter">$580.00</span>
                             <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
@@ -269,117 +267,15 @@
                 </article>
 
                 <!-- 6 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
+                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[250px] sm:max-h-none">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWEohmAw6eWxzZ0isaHUZlU9cOvgrjklSgykQalVfOYZjL7qpFC9-FV6LmS9RIY5UcJfa-IDSmjpStTpdObb10qNTIOJuZpo-VXSDINLYw_NacgWn7-C6XvF7I6UnQoSXSOgNfqitJ1gcjbw5DdAiBmXQX89pAwFe1_5df3bM8k3-weKsaPWlmyLHvLBLkb0ywwgbPXjfB1kWHVmNfCx5gdA5eB-GuYD_aiBMLpQb2oSH1PQdn7qfRneQGFFuTAQUR1gzSjZQ4ahs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CUM-PIS-6</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Kit de Pistones Cummins N14</h3>
+                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Kit de Pistones Cummins N14</h3>
                         <div class="mt-auto flex justify-between items-center">
                             <span class="text-xl font-black text-black tracking-tighter">$1,150.00</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 7 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvii9sNQqqDnze22RTwuNH4tSqUrMSJEXQ_FZFjPwG7dYtpNrQJAq0iwera4ziKWQKtyKYIL3Msi0Ss1lb_0rAdSz18URZSXeNKR778JJHXa9fh-w_0xuxoiVzGWVmi51yNMm5KiF0vGlydUl4uQOHa2rxq6mLGP-mxNA4hDD6OPLg6oq6Bc1XiiwKu8x-iLpFbE2WTYWPtUz4UsWUlPEbLEvWMu82shO_LQJ9o2VuAd2XKqP2YRA3aO_XtOwzJ8hZqiF8RgaCt5U" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: PER-BR-50</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Cojinetes de Bancada Perkins</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$185.00</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 8 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnCBaJGHx-KHBLQMmi3di8svfE3nGssoVmApRyiRUq5UrT_y5Pmr6_1ffSS1IY-q5a5uldF0WDPUwWSd54IKetwTlV9chBnwD3zo5BSzAt6P6ztwcNISdloAaVQmOHdN3yZEDhMG7zUUIvZIckDDA4jU0vV0JDZnPJkVr9QulcoKSKbKqwfuLrXrypbTwNii03VYK3j6peId5g5vf6YclbW5jlhIr8u00SlBVCPvoW_1L0z6FOb_TeDtNKLKbNdpjPqlAEdSaZkXA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: KOM-CAM-10</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Árbol de Levas Komatsu SAA6D</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$940.00</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 9 - Toyota Corolla -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col" data-tags="toyota corolla sedan motor filtro aceite">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: TOY-COR-18</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Filtro de Aceite Toyota Corolla 2018-2024</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$18.50</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 10 - Toyota Hilux -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col" data-tags="toyota hilux pickup camioneta freno disco">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: TOY-HIL-22</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Kit de Discos de Freno Toyota Hilux 2020-2024</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$125.00</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 11 - Toyota Corolla Bujías -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col" data-tags="toyota corolla bujia encendido motor">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: TOY-SPK-04</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Bujías de Encendido Toyota Corolla 1.8L</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$32.00</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 12 - Toyota Filtro Aire -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col" data-tags="toyota corolla filtro aire motor mantenimiento">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIn0RkeL7SWo_eG05JQuzVMLn7doFBFF7OpIHfDkWl6wZNAvi_1ZRIdJaIVb7a4iDU4D_xMPMwP1PwALo5h5Ne8BeQ6IYJyR5Toi0SScObpCgrDYb9pJcmIDEu8LMBWvn4ErCt93id7lunEM7-qeA4b_9GAXvUPZ4R2NbJ2iwlpFpnmQqi9yDn3DX6RtOLX6S_nes72O7ZOPAzaUA_laYrmrxqNDUBi9HF74lajrW3XH8c3vNOglhQV_mA3b7yPUnw_7OzGx-fL4k" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: TOY-AIR-19</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors">Filtro de Aire Toyota Corolla 2019-2024</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$24.00</span>
                             <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
                                 <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
                             </button>
@@ -480,19 +376,19 @@
 <div>
 <span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Catálogo</span>
 <nav class="flex flex-col gap-4">
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Nuevos Ingresos</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Sistemas de Motor</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Frenado</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/catalogo_general') }}">Transmisión</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Nuevos Ingresos</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Sistemas de Motor</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Frenado</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'catalogo_general') }}">Transmisión</a>
 </nav>
 </div>
 <div>
 <span class="text-white font-black text-xs uppercase tracking-[0.2em] mb-6 block">Empresa</span>
 <nav class="flex flex-col gap-4">
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/dashboard') }}">Portal ERP</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/terminos_b2b') }}">Términos B2B</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/soporte') }}">Soporte Técnico</a>
-<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/contacto') }}">Contacto</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/auth/' . 'login') }}">Portal ERP</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'terminos_b2b') }}">Términos B2B</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'soporte') }}">Soporte Técnico</a>
+<a class="text-stone-500 text-xs uppercase tracking-widest hover:text-primary transition-colors" href="{{ url('/tienda/' . 'contacto') }}">Contacto</a>
 </nav>
 </div>
 <div>
@@ -510,13 +406,77 @@
 <div class="max-w-7xl mx-auto border-t border-zinc-900 mt-16 pt-8 flex justify-between items-center">
 <p class="text-[9px] text-stone-600 uppercase tracking-widest">© 2026 MAYOR DE REPUESTO LA CIMA, C.A. TODOS LOS DERECHOS RESERVADOS.</p>
 <div class="flex gap-6">
-<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/soporte') }}">Soporte</a>
-<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/terminos_b2b') }}">Legal</a>
+<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/' . 'soporte') }}">Soporte</a>
+<a class="text-[9px] text-stone-600 uppercase tracking-widest cursor-pointer hover:text-white" href="{{ url('/tienda/' . 'terminos_b2b') }}">Legal</a>
 </div>
 </div>
 </footer>
 
-<script src="{{ asset('ecommerce/js/catalogo_detallado.js') }}"></script>
+<style>
+/* Estilos dinámicos para la vista de lista */
+#productGrid.view-list {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+}
+#productGrid.view-list article {
+    flex-direction: row;
+    height: auto;
+    min-height: 200px;
+}
+#productGrid.view-list article .aspect-square {
+    width: 250px;
+    height: 250px;
+    max-height: none;
+    flex-shrink: 0;
+}
+#productGrid.view-list article > div.p-5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+@media (max-width: 640px) {
+    #productGrid.view-list article {
+        flex-direction: column;
+        height: auto;
+    }
+    #productGrid.view-list article .aspect-square {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+}
+</style>
+<script>
+function switchToGrid() {
+    const grid = document.getElementById('productGrid');
+    const gridBtn = document.getElementById('gridViewBtn');
+    const listBtn = document.getElementById('listViewBtn');
+    
+    grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6';
+    grid.classList.remove('view-list');
+    
+    gridBtn.classList.add('bg-black', 'text-white');
+    gridBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');
+    listBtn.classList.add('text-on-surface-variant', 'hover:bg-stone-200');
+    listBtn.classList.remove('bg-black', 'text-white');
+}
 
-</body>
-</html>
+function switchToList() {
+    const grid = document.getElementById('productGrid');
+    const gridBtn = document.getElementById('gridViewBtn');
+    const listBtn = document.getElementById('listViewBtn');
+    
+    grid.className = 'grid view-list';
+    
+    listBtn.classList.add('bg-black', 'text-white');
+    listBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');
+    gridBtn.classList.add('text-on-surface-variant', 'hover:bg-stone-200');
+    gridBtn.classList.remove('bg-black', 'text-white');
+}
+</script>
+<script src="{{ asset('js/catalogo_detallado.js') }}"></script>
+
+</body></html>ript>
+
+</body></html>

@@ -1,28 +1,45 @@
-@extends('layouts.erp')
-
-@section('title', 'Libro Mayor | ERP La Cima')
-
-@push('styles')
-    <link rel="stylesheet" href="/frontend/public/erp/css/premium-erp.css">
-@endpush
-
-@section('content')
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Libro Mayor | Mayor de Repuesto La Cima, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+<title>Libro Mayor | ERP La Cima</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/premium-erp.css">
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const b = document.getElementById('breadcrumbPage');
-      if(b) b.innerText = 'Módulo';
-  });
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f8fafc", surface: "#ffffff", outline: "#e2e8f0" },
+        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
+      }
+    }
+  }
 </script>
+</head>
+<body class="bg-background text-stone-900 min-h-screen">
 
+<!-- Scripts de Integración Zenith -->
+<script src="js/zenith-identity.js"></script>
+<script src="js/zenith-layout.js"></script>
+
+<!-- ========== CONTENIDO PRINCIPAL ========== -->
 <main class="ml-72 w-[calc(100vw-288px)] mt-[65px] p-6">
 
     <!-- Header Módulo -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
         <div>
             <nav class="flex gap-2 text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">
-                <a href="/dashboard" class="hover:text-primary">Dashboard</a>
+                <a href="{{ url('/erp/' . 'inicio') }}" class="hover:text-primary">Dashboard</a>
                 <span>/</span>
-                <a href="/erp/contabilidad" class="hover:text-primary">Contabilidad</a>
+                <a href="{{ url('/erp/' . 'contabilidad') }}" class="hover:text-primary">Contabilidad</a>
                 <span>/</span>
                 <span class="text-stone-900">Libro Mayor</span>
             </nav>
@@ -115,9 +132,7 @@
     </div>
 
 </main>
-@endsection
 
-@push('scripts')
-    <script src="/frontend/public/erp/js/zenith-identity.js"></script>
-    <script src="/frontend/public/erp/js/zenith-layout.js"></script>
-@endpush
+<script src="js/common.js"></script>
+</body>
+</html>

@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="{{ asset('erp/js/pos.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('erp/css/pos.css') }}">
+    <script src="js/pos.js"></script>
+    <link rel="stylesheet" href="css/pos.css">
 </head>
 <body class="bg-background text-on-surface selection:bg-primary/30 h-screen flex overflow-hidden">
 
@@ -23,19 +23,19 @@
     </div>
 
     <nav class="flex-1 px-4 space-y-1">
-        <a href="{{ url('/erp/inicio') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="#" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">dashboard</span> Dashboard
         </a>
-        <a href="{{ url('/erp/pos') }}" class="flex items-center gap-4 px-4 py-3 bg-primary text-black font-black text-xs uppercase tracking-widest">
+        <a href="#" class="flex items-center gap-4 px-4 py-3 bg-primary text-black font-black text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">add_shopping_cart</span> New Sale
         </a>
-        <a href="{{ url('/erp/registro-ventas') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="#" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">history</span> Sales History
         </a>
-        <a href="{{ url('/erp/clientes') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="#" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">group</span> Customers
         </a>
-        <a href="{{ url('/erp/reportes-ventas') }}" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
+        <a href="#" class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all font-bold text-xs uppercase tracking-widest">
             <span class="material-symbols-outlined text-lg">analytics</span> Reports
         </a>
     </nav>
@@ -43,10 +43,10 @@
     <div class="p-6 border-t border-outline space-y-4">
         <button class="w-full bg-primary text-black font-black py-4 text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all shadow-lg">Initiate Sale</button>
         <div class="space-y-1">
-            <a href="{{ url('/erp/ayuda') }}" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
                 <span class="material-symbols-outlined text-sm">help</span> Support
             </a>
-            <a href="{{ url('/auth/login') }}" class="flex items-center gap-3 px-4 py-2 text-red-500 hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-red-500 hover:text-white transition-all text-[9px] font-black uppercase tracking-widest">
                 <span class="material-symbols-outlined text-sm">logout</span> Logout
             </a>
         </div>

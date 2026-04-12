@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 
 // Punto de Entrada Principal (Storefront)
-Route::get('/', function () {
-    return redirect('/tienda/index');
-});
+Route::get('/', [TiendaController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -56,8 +54,16 @@ Route::get('/erp/productos', [ProductController::class, 'index'])->name('erp.pro
 
 // Enrutador Dinámico para todos los submódulos ERP compilados en resources/views/erp/
 Route::get('/erp/{module}', function ($module) {
-    if (view()->exists('erp.' . $module)) {
-        return view('erp.' . $module);
+    // Intercept to bypass files corrupted by encoding issues
+    $mappedModule = match($module) {
+        'inventario' => 'inventario_fix',
+        'ventas' => 'ventas_fix',
+        'libro-caja' => 'libro-caja_fix',
+        default => $module
+    };
+
+    if (view()->exists('erp.' . $mappedModule)) {
+        return view('erp.' . $mappedModule);
     }
     abort(404, 'Módulo no compilado o no encontrado: ' . $module);
 })->where('module', '.*');
@@ -80,12 +86,18 @@ Route::get('/tienda/{page?}', function ($page = 'index') {
 
 // Enrutador Dinámico para Autenticación (Login, Registro, Recuperación)
 Route::get('/auth/{page?}', function ($page = 'login') {
+    if ($page === 'index' || $page === 'inicio') return redirect('/');
+    
     $page = str_replace(['../', '..\\'], '', $page);
-    // Verificar existencia del archivo directamente para evitar conflictos con namespace 'auth'
     $viewPath = resource_path('views/auth/' . $page . '.blade.php');
+    
     if (file_exists($viewPath)) {
         return view('auth.' . $page);
     }
+    
+    // Fallback para nombres comunes
+    if ($page === 'crear-cuenta') return redirect('/auth/crear_cuenta');
+    
     abort(404, 'Página de acceso no encontrada: ' . $page);
 })->where('page', '.*');
 

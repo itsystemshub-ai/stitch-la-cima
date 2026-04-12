@@ -1,68 +1,169 @@
-@extends('layouts.erp')
-
-@section('title', 'INDUSTRIAL FORGE ERP - Inventory Reporting Center | ERP La Cima')
-
-@push('styles')
-    <link rel="stylesheet" href="/frontend/public/erp/css/reportes-inventario.css">
-@endpush
-
-@section('content')
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Centro de Reportes de Inventario | Mayor de Repuesto LA CIMA, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<link rel="manifest" href="{{ asset('manifest.json') }}">
+<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+<title>Reportes de Almacén | Portal ERP La Cima</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/reportes-inventario.css">
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const b = document.getElementById('breadcrumbPage');
-      if(b) b.innerText = 'P�gina';
-  });
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f6f6f9", surface: "#ffffff", outline: "#e2e2e5" },
+        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
+      }
+    }
+  }
 </script>
 
-<main class="p-6 lg:p-10 space-y-8">
+</head>
+<body class="bg-background text-stone-900 min-h-screen flex">
+
+<!-- ========== SIDEBAR ========== -->
+<aside id="sidebar" class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar">
+  <div class="flex flex-col px-5 pt-6 pb-4">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg">
+        <img src="{{ asset('assets/images/logo.png') }}" class="w-7 h-7 object-contain" alt="Logo">
+      </div>
+      <div>
+        <h2 class="font-headline font-bold text-sm text-stone-900 leading-none uppercase">LA CIMA, C.A.</h2>
+        <span class="text-[10px] font-mono text-stone-400">RIF: J-40308741-5</span>
+      </div>
+    </div>
+    <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Portal ERP Corporativo</p>
+  </div>
+
+  <div class="px-4 mb-4">
+    <div class="relative">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400"><span class="material-symbols-outlined text-lg">search</span></span>
+      <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar..." type="text"/>
+    </div>
+  </div>
+
+  <nav class="flex-1 px-3 overflow-y-auto no-scrollbar space-y-0.5 pb-20">
+    <div class="menu-group">Principal</div>
+    <a class="menu-item menu-item-inactive" href="{{ url('/') }}">
+      <span class="material-symbols-outlined text-[20px]">storefront</span><span>Tienda Virtual</span>
+    </a>
+    <a class="menu-item menu-item-inactive" href="{{ url('/erp/inicio') }}">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard Central</span>
+    </a>
+
+    <div class="menu-group">Gestión de Inventario</div>
+    <div class="menu-parent open">
+      <div class="menu-item menu-item-active" onclick="toggleDropdown(this)">
+        <span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Almacén Central</span>
+        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
+      </div>
+      <div class="submenu block static bg-transparent border-none shadow-none opacity-100 visible transform-none p-0 pl-10 pointer-events-auto">
+        <a href="{{ url('/erp/inventario') }}"><span class="material-symbols-outlined">analytics</span> Resumen</a>
+        <a href="{{ url('/erp/productos') }}"><span class="material-symbols-outlined">category</span> Catálogo Stock</a>
+        <a href="{{ url('/erp/kardex') }}"><span class="material-symbols-outlined">receipt_long</span> Movimientos (Kardex)</a>
+        <a href="{{ url('/erp/auditoria-inventario') }}"><span class="material-symbols-outlined">assignment</span> Auditoría F?sica</a>
+        <a href="{{ url('/erp/ajustes-inventario') }}"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
+        <a href="{{ url('/erp/reportes-inventario') }}" class="text-stone-900 font-bold"><span class="material-symbols-filled text-primary">analytics</span> Reportes Estadísticos</a>
+      </div>
+    </div>
+
+    <div class="menu-group">Operaciones</div>
+    <a class="menu-item menu-item-inactive" href="{{ url('/erp/ventas') }}">
+      <span class="material-symbols-outlined text-[20px]">payments</span><span>Ventas y POS</span>
+    </a>
+  </nav>
+
+  <div class="mt-auto border-t border-stone-200 p-4 bg-stone-50">
+    <a href="{{ url('/auth/login') }}" class="w-full bg-red-50 text-red-600 font-bold py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-[10px] uppercase tracking-widest">
+      <span class="material-symbols-outlined text-[16px]">logout</span>
+      Salir del ERP
+    </a>
+  </div>
+</aside>
+
+<!-- ========== TOP BAR ========== -->
+<header class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200">
+  <div class="flex justify-between items-center px-6 py-3">
+    <div class="flex items-center gap-4">
+      <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="hidden md:flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-500">
+        <a href="{{ url('/erp/inicio') }}" class="hover:text-stone-900 transition-colors">ERP</a>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <a href="{{ url('/erp/inventario') }}" class="hover:text-stone-900 transition-colors">Inventario</a>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <span class="text-stone-900" id="breadcrumbPage">Reportes y Auditoría</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
+        <div class="text-right hidden md:block">
+          <p class="text-[11px] font-black text-stone-900 leading-none uppercase">Analista de Inventario</p>
+          <p class="text-[9px] font-bold text-primary uppercase tracking-tighter bg-stone-900 px-1 inline-block mt-1">Nivel: Supervisor</p>
+        </div>
+        <div class="w-9 h-9 bg-stone-900 rounded-lg flex items-center justify-center text-primary font-black text-sm">LC</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="ml-72 pt-14 min-h-screen relative overflow-hidden p-6 lg:p-10 space-y-8">
 <!-- Header & Actions -->
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
 <div>
-<h2 class="text-4xl font-black tracking-tight uppercase mb-2">Inventory Reporting Center</h2>
-<p class="text-secondary font-medium max-w-2xl">Compliance Art. 177: Detailed Valuation using Costo Promedio Ponderado (Weighted Average Cost). Real-time stock audit and kinetic turnover analysis.</p>
+<h2 class="text-4xl font-headline font-black tracking-tight uppercase mb-2">Centro de Reportes</h2>
+<p class="text-secondary font-medium max-w-2xl font-body">Cumplimiento Art. 177: Valuación detallada mediante Costo Promedio Ponderado. Auditoría de stock en tiempo real y análisis de rotación cinética.</p>
 </div>
 <div class="flex items-center gap-3">
-<button class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-high text-on-surface-variant font-bold text-[11px] tracking-widest uppercase hover:scale-105 transition-transform">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-stone-900 text-primary font-bold text-[11px] tracking-widest uppercase hover:scale-105 transition-transform">
 <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
-                        Export PDF
+                        Exportar PDF
                     </button>
-<button class="flex items-center gap-2 px-4 py-2.5 bg-primary text-on-primary font-bold text-[11px] tracking-widest uppercase hover:scale-105 transition-transform">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-primary text-stone-900 font-bold text-[11px] tracking-widest uppercase hover:scale-105 transition-transform">
 <span class="material-symbols-outlined text-sm">table_view</span>
-                        Export Excel
+                        Exportar Excel
                     </button>
 </div>
 </div>
 <!-- Bento Stats Grid -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-<div class="md:col-span-2 bg-primary-container p-8 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+<div class="md:col-span-2 bg-stone-900 text-white p-8 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
 <div class="relative z-10">
-<div class="text-[10px] font-black uppercase tracking-[0.2em] mb-1 opacity-80">Total Inventory Valuation</div>
-<div class="text-5xl font-black tracking-tighter text-on-primary-container">$4,892,450.00</div>
+<div class="text-[10px] font-black uppercase tracking-[0.2em] mb-1 text-primary opacity-80 font-body">Valuación Total de Inventario</div>
+<div class="text-5xl font-black tracking-tighter text-white font-headline">$4.892.450,00</div>
 </div>
-<div class="relative z-10 flex items-center gap-4 text-on-primary-container/70">
+<div class="relative z-10 flex items-center gap-4 text-stone-400">
 <div class="flex items-center gap-1 font-bold text-xs">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">trending_up</span>
-                            +12.4% vs Last Quarter
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                            +12.4% vs Último Cuatrimestre
                         </div>
-<div class="text-[10px] font-bold uppercase tracking-widest">Weighted Average Logic Applied</div>
+<div class="text-[10px] font-bold uppercase tracking-widest">Lógica de Promedio Ponderado Aplicada</div>
 </div>
 <div class="absolute -right-10 -bottom-10 opacity-10">
 <span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'wght' 700;">calculate</span>
 </div>
 </div>
-<div class="bg-surface-container-lowest p-6 flex flex-col justify-between">
+<div class="bg-white border border-stone-200 p-6 flex flex-col justify-between">
 <div>
-<div class="text-[10px] font-black text-secondary uppercase tracking-[0.2em] mb-4">Critical Stock Alerts</div>
-<div class="text-4xl font-black text-error">18</div>
+<div class="text-[10px] font-black text-secondary uppercase tracking-[0.2em] mb-4 font-body">Alertas Stock Crítico</div>
+<div class="text-4xl font-headline font-black text-red-600">18</div>
 </div>
-<div class="text-xs font-bold text-error bg-error-container/30 py-1 px-2 w-fit">Requires Immediate Reorder</div>
+<div class="text-[9px] font-bold text-red-600 bg-red-50 py-1 px-2 w-fit uppercase tracking-widest">Requiere Reposición</div>
 </div>
-<div class="bg-surface-container-lowest p-6 flex flex-col justify-between">
+<div class="bg-white border border-stone-200 p-6 flex flex-col justify-between">
 <div>
-<div class="text-[10px] font-black text-secondary uppercase tracking-[0.2em] mb-4">Stock Turnover Rate</div>
-<div class="text-4xl font-black">4.2x</div>
+<div class="text-[10px] font-black text-secondary uppercase tracking-[0.2em] mb-4 font-body">Índice de Rotación</div>
+<div class="text-4xl font-headline font-black text-stone-900">4.2x</div>
 </div>
-<div class="text-xs font-bold text-primary bg-primary-container/20 py-1 px-2 w-fit">Optimal Efficiency</div>
+<div class="text-[9px] font-bold text-primary bg-stone-900 py-1 px-2 w-fit uppercase tracking-widest">Eficiencia Óptima</div>
 </div>
 </div>
 <!-- Kinetic Turnover Chart & Critical Items -->
@@ -298,8 +399,12 @@
 </div>
 </div>
 </main>
-@endsection
 
-@push('scripts')
-    <script src="/frontend/public/erp/js/reportes-inventario.js"></script>
-@endpush
+<!-- Overlay mobile -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
+
+<!-- Common Scripts -->
+<script src="js/common.js"></script>
+<script src="js/reportes-inventario.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Balance de Comprobación | ERP La Cima</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/premium-erp.css">
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: { colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f8fafc", surface: "#ffffff", outline: "#e2e8f0" }, fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] } } }
+  }
+</script>
+</head>
+<body class="bg-background text-stone-900 min-h-screen">
+<script src="js/zenith-identity.js"></script>
+<script src="js/zenith-layout.js"></script>
+
+<main class="ml-72 w-[calc(100vw-288px)] mt-[65px] p-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+        <div>
+            <nav class="flex gap-2 text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">
+                <a href="{{ url('/erp/' . 'inicio') }}" class="hover:text-primary">Dashboard</a>
+                <span>/</span>
+                <a href="{{ url('/erp/' . 'contabilidad') }}" class="hover:text-primary">Contabilidad</a>
+                <span>/</span>
+                <span class="text-stone-900">Balance de Comprobación</span>
+            </nav>
+            <h2 class="text-3xl font-headline font-black text-stone-900 tracking-tight">BALANCE DE COMPROBACIÓN</h2>
+            <p class="text-stone-500 text-sm">Verificación de sumas y saldos del periodo.</p>
+        </div>
+    </div>
+
+    <div class="data-table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th rowspan="2">Cuenta Contable</th>
+                    <th colspan="2" class="text-center border-b border-stone-200">Sumas</th>
+                    <th colspan="2" class="text-center border-b border-stone-200">Saldos</th>
+                </tr>
+                <tr>
+                    <th class="text-right">Debe</th>
+                    <th class="text-right">Haber</th>
+                    <th class="text-right">Deudor</th>
+                    <th class="text-right">Acreedor</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-100">
+                <tr>
+                    <td class="font-medium text-xs">1.1.01.01.001 - Caja Principal</td>
+                    <td class="text-right">$ 5,000.00</td>
+                    <td class="text-right">$ 1,200.00</td>
+                    <td class="text-right font-bold text-blue-600">$ 3,800.00</td>
+                    <td class="text-right text-stone-300">0.00</td>
+                </tr>
+                <tr>
+                    <td class="font-medium text-xs">2.1.01.01.001 - Proveedores Nac.</td>
+                    <td class="text-right">$ 1,000.00</td>
+                    <td class="text-right">$ 4,500.00</td>
+                    <td class="text-right text-stone-300">0.00</td>
+                    <td class="text-right font-bold text-red-600">$ 3,500.00</td>
+                </tr>
+            </tbody>
+            <tfoot class="bg-stone-900 text-white">
+                <tr class="font-black text-sm">
+                    <td class="text-right py-3 uppercase text-[10px]">Totales de Verificación</td>
+                    <td class="text-right text-primary">$ 6,000.00</td>
+                    <td class="text-right text-primary">$ 6,000.00</td>
+                    <td class="text-right text-primary">$ 3,800.00</td>
+                    <td class="text-right text-primary">$ 3,800.00</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<script src="js/common.js"></script>
+</body></html>
