@@ -46,7 +46,7 @@
     <div class="p-6 border-b border-outline flex justify-between items-center">
         <div class="flex items-center gap-2">
             <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 w-auto">
-            <span class="text-xs font-black uppercase">LA CIMA, C.A</span>
+            <span class="text-xs font-black uppercase">MAYOR DE REPUESTO LA CIMA, C.A<</span>
         </div>
         <button onclick="closeMobileMenu()" class="p-2 hover:bg-stone-100 rounded-full">
             <span class="material-symbols-outlined">close</span>

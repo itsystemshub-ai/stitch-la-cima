@@ -17,6 +17,6 @@ class ProductController extends Controller
             'total_markup' => Product::sum(\DB::raw('stock_actual * precio_mayor')),
         ];
 
-        return view('erp.productos', compact('products', 'stats'));
+        return view('erp.inventario.productos', compact('products', 'stats'));
     }
 }

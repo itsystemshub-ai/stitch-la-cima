@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Zenith ERP - MAYOR DE REPUESTO LA CIMA, C.A."/>
+<meta name="theme-color" content="#ceff5e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LA CIMA ERP">
+<link rel="manifest" href="{{ asset('manifest.json') }}">
+<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
+<title>@yield('title', 'Zenith ERP') | Mayor de Repuesto La Cima, C.A.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f6f6f9", surface: "#ffffff", outline: "#e2e2e5" },
+        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="{{ asset('erp/css/inicio.css') }}">
+@stack('styles')
+</head>
+<body class="bg-background text-stone-900 min-h-screen flex">
+
+@include('erp.layouts.sidebar')
+
+@include('erp.layouts.header')
+
+<!-- ========== CONTENIDO PRINCIPAL ========== -->
+<main class="ml-[288px] w-[calc(100vw-288px)] mt-[65px] p-6 pb-4">
+    @yield('content')
+
+    <!-- Footer Compartido -->
+    <div class="pt-4 mt-8 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
+        <span class="text-[10px] font-bold text-stone-400">RIF: J-40308741-5 • Todos los derechos reservados © 2026</span>
+        <div class="flex items-center gap-4">
+            <a href="{{ url('/erp/ayuda') }}" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Centro de Ayuda</a>
+            <a href="{{ url('/erp/ayuda/manual') }}" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Manual Técnico</a>
+            <a href="{{ url('/erp/configuracion/estado-sistema') }}" class="text-[10px] font-bold text-stone-500 hover:text-stone-900">Estado del Sistema</a>
+        </div>
+    </div>
+</main>
+
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
+
+<script src="{{ asset('erp/js/inicio.js') }}"></script>
+@stack('scripts')
+</body>
+</html>

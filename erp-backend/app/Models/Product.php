@@ -13,6 +13,7 @@ class Product extends Model
         'codigo_oem',
         'codigo_interno',
         'nombre',
+        'thumbnail',
         'marca',
         'categoria',
         'stock_actual',
@@ -21,6 +22,16 @@ class Product extends Model
         'precio_mayor',
         'precio_detal',
         'activo',
+        'is_development',
+        'development_notes',
         'ubicacion_almacen',
     ];
+
+    /**
+     * Relación con los movimientos de stock (Kardex)
+     */
+    public function movements()
+    {
+        return $this->hasMany(StockMovement::class);
+    }
 }

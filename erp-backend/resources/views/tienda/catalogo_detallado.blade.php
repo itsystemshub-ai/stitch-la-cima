@@ -67,9 +67,9 @@
                 <span id="cart-count" class="cart-badge absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">0</span>
             </a>
             <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
-            <a href="{{ url('/auth/' . 'login') }}" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
+            <a href="{{ url('/auth/login') }}" class="hidden sm:flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest hover:bg-stone-800 transition-all">
                 <span class="material-symbols-outlined text-primary text-sm">database</span>
-                Login
+                Acceso ERP
             </a>
         </div>
     </div>
@@ -183,8 +183,8 @@
 
             <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4                <!-- 1 -->
                 <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[250px] sm:max-h-none">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwVKDQ8J7uUIFrNwpCuRmbejTuDOgw9_vpIwmz0wCrb4RslhmWPIoHV-t9eB4FyM3zcmveZ6mYBdAXGjvwj1FHk7cEEzeYIktIFoXowi9VI-JA1CWSp_qrVPgv7Xb9_V6w8wnpIIJnoESwkpmJqeE9LP1q4_Wz96dbs7VcbstxzQiEDaxroiRcqohgVDXieSFSCkDwngw0mknMmsdwRC3JB4obyrVRzYkfHNUbN9wshqpV_XyeF9RIy3vmSk3NTwq-ekPZ-C2wVUQ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[180px] md:max-h-[200px] lg:max-h-[220px]">
+                        <img src="{{ $item->imagen ?? 'https://lh3.googleusercontent.com/...' }}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 p-4">
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <p class="text-xs font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CUM-9928-HJ</p>
@@ -467,7 +467,7 @@ function switchToList() {
     const gridBtn = document.getElementById('gridViewBtn');
     const listBtn = document.getElementById('listViewBtn');
     
-    grid.className = 'grid view-list';
+    grid.className = 'grid gap-6 view-list';
     
     listBtn.classList.add('bg-black', 'text-white');
     listBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');

@@ -25,7 +25,7 @@ class ApprovalController extends Controller
             ->limit(10)
             ->get();
 
-        return view('erp.approvals_system', compact('pendingApprovals', 'historyApprovals'));
+        return view('erp.aprobaciones.index', compact('pendingApprovals', 'historyApprovals'));
     }
 
     /**
