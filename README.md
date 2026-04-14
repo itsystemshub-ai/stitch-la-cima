@@ -1,358 +1,59 @@
-# Zenith ERP - Mayor de Repuesto La Cima, C.A.
-
-> Sistema integral de gestión empresarial y e-commerce para distribución de repuestos industriales
-
-**RIF:** J-40308741-5 | **Ubicación:** Valencia, Venezuela
-
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/license-Private-blue)]()
-[![Database](https://img.shields.io/badge/database-PostgreSQL-blue)](https://www.postgresql.org/)
-[![ORM](https://img.shields.io/badge/orm-Prisma-blue)](https://www.prisma.io/)
-
----
-
-## 📋 Descripción
-
-Sistema ERP (Enterprise Resource Planning) y plataforma e-commerce B2B/B2C para la empresa **Mayor de Repuesto La Cima, C.A.**, especializada en la distribución de repuestos automotrices industriales.
-
-### Módulos Incluidos
-
-| Módulo | Funcionalidades |
-|--------|----------------|
-| **E-Commerce** | Catálogo, carrito, checkout, órdenes |
-| **Inventario** | Gestión de stock, kardex, importaciones CSV |
-| **Punto de Venta** | POS integrado con facturación |
-| **Facturación** | Facturación electrónica digital |
-| **Recursos Humanos** | Gestión de empleados y nómina |
-| **Contabilidad** | Finanzas y reportes contables |
-| **Reportes** | Dashboard analítico y métricas |
-
----
-
-## 🏗️ Arquitectura
-
-### Stack Tecnológico
-
-**Backend:**
-- Node.js + Express.js
-- Prisma ORM (PostgreSQL)
-- JWT Authentication
-- Socket.IO (real-time)
-- Winston (logging)
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-**Frontend:**
-- HTML5 + Tailwind CSS
-- JavaScript Vanilla
-- PWA (Progressive Web App)
-- Service Workers
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-### Estructura del Proyecto
+## About Laravel
 
-```
-stitch-la-cima/
-├── backend/                 # API REST + Servidor
-│   ├── prisma/
-│   │   ├── schema.prisma   # Esquema de base de datos
-│   │   └── migrations/     # Migraciones
-│   ├── src/
-│   │   ├── app.js          # Entry point
-│   │   ├── config/         # Configuración
-│   │   ├── controllers/    # Controladores
-│   │   ├── routes/         # Rutas API
-│   │   ├── middleware/     # Auth, validación
-│   │   └── services/       # Lógica de negocio
-│   └── database/
-│       └── seeders/        # Datos iniciales
-├── frontend/               # Interaz de usuario
-│   └── public/
-│       ├── ecommerce/      # Páginas de e-commerce
-│       ├── erp/            # Dashboard ERP
-│       └── js/
-│           └── api.js      # Cliente API
-├── docs/                   # Documentación
-│   └── GUIA_DESPLIEGUE.md  # Guía de despliegue
-├── railway.json           # Config Railway.app
-├── render.yaml            # Config Render.com
-└── fly.toml               # Config Fly.io
-```
-
----
-
-## 🚀 Inicio Rápido
-
-### Requisitos
-
-- Node.js >= 18.0.0
-- npm >= 9.0.0
-- PostgreSQL (para producción) o SQLite (para desarrollo)
-
-### Instalación Local
-
-#### Opción 1: Script Automático (Recomendado)
-
-**Windows:**
-```bash
-deploy.bat
-```
-
-**Linux/Mac:**
-```bash
-chmod +x deploy.sh
-./deploy.sh
-```
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-#### Opción 2: Manual
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-```bash
-# 1. Clonar repositorio
-git clone <tu-repo>
-cd "stitch la cima"
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-# 2. Instalar dependencias
-npm install && cd backend && npm install
+## Learning Laravel
 
-# 3. Preparar Base de Datos Híbrida (RECOMENDADO)
-# Este comando detecta automáticamente si usas SQLite (local) o Postgres (nube)
-npm run db:generate
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
-# 4. Iniciar servidor
-npm run dev
-```
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-### Acceder al Sistema
+## Laravel Sponsors
 
-- **API:** http://localhost:3000/api
-- **Health Check:** http://localhost:3000/api/health
-- **Prisma Studio:** `npx prisma studio` → http://localhost:5555
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Credenciales por Defecto
+### Premium Partners
 
-| Rol | Email | Contraseña |
-|-----|-------|------------|
-| Admin | admin@lacima.com | admin123 |
-| Manager | manager@lacima.com | manager123 |
-| Usuario | usuario@lacima.com | user123 |
+- **[Vehikl](https://vehikl.com)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Redberry](https://redberry.international/laravel-development)**
+- **[Active Logic](https://activelogic.com)**
 
-⚠️ **¡IMPORTANTE!** Cambiar todas las contraseñas después del primer login.
+## Contributing
 
----
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## 🌐 Despliegue en la Nube
+## Code of Conduct
 
-### Opciones Disponibles
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-| Plataforma | Dificultad | Costo | PostgreSQL |
-|------------|------------|-------|------------|
-| **Railway.app** | ⭐ Muy Fácil | Gratis (~$5/mes) | ✅ Incluido |
-| **Render.com** | ⭐⭐ Fácil | Gratis | ✅ Incluido |
-| **Fly.io** | ⭐⭐⭐ Media | Gratis (3 VMs) | ✅ Incluido |
+## Security Vulnerabilities
 
-### Despliegue en Railway (5 minutos)
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-1. Ve a [railway.app](https://railway.app)
-2. Click en "Deploy from GitHub repo"
-3. Selecciona tu repositorio
-4. Añade PostgreSQL desde el dashboard
-5. Configura `JWT_SECRET` (genera uno seguro)
-6. ¡Listo! Railway despliega automáticamente
+## License
 
-**Guía completa:** [docs/GUIA_DESPLIEGUE.md](docs/GUIA_DESPLIEGUE.md)
-
----
-
-## 📡 API Endpoints
-
-### Autenticación
-```
-POST /api/auth/register   # Registrar usuario
-POST /api/auth/login      # Iniciar sesión
-POST /api/auth/logout     # Cerrar sesión
-```
-
-### Productos
-```
-GET    /api/products          # Listar productos
-GET    /api/products/:id      # Obtener producto
-POST   /api/products          # Crear producto (ADMIN, MANAGER)
-PUT    /api/products/:id      # Actualizar (ADMIN, MANAGER)
-DELETE /api/products/:id      # Eliminar (ADMIN)
-```
-
-### Inventario
-```
-GET  /api/inventory/kardex/:id     # Ver kardex
-POST /api/inventory/add-stock      # Agregar stock
-```
-
-### Ventas
-```
-POST /api/sales        # Crear venta
-GET  /api/sales        # Listar ventas (ADMIN, MANAGER)
-```
-
-### Salud del Sistema
-```
-GET /api/health        # Health check
-```
-
-**Documentación completa:** Ver controladores en `backend/src/controllers/`
-
----
-
-## 🗄️ Base de Datos
-
-### Modelos
-
-- **User** - Usuarios del sistema
-- **Product** - Catálogo de productos
-- **Category** - Categorías de productos
-- **InventoryLog** - Registro de movimientos
-- **Sale** - Ventas realizadas
-- **SaleItem** - Detalle de ventas
-- **Employee** - Registro de empleados
-- **Payroll** - Nómina
-
-### Comandos de Base de Datos
-
-```bash
-# Generar cliente híbrido (Detecta Local/Nube)
-npm run db:generate
-
-# Ver panel de administración
-npm run db:studio
-
-# Poblar datos iniciales
-npm run db:seed
-
-# Resetear base de datos local
-npm run db:reset
-```
-
----
-
-## 🛠️ Scripts Disponibles
-
-```bash
-npm run dev              # Servidor desarrollo (nodemon)
-npm start                # Servidor producción
-npm run db:generate      # Generar Prisma Client
-npm run db:migrate       # Crear migración (dev)
-npm run db:migrate:deploy # Aplicar migraciones (prod)
-npm run db:seed          # Poblar base de datos
-npm run db:reset         # Resetear base de datos
-npm run db:studio        # Abrir Prisma Studio
-npm test                 # Ejecutar tests
-npm run lint             # Verificar código
-```
-
----
-
-## 🔒 Seguridad
-
-- ✅ Autenticación JWT
-- ✅ Hash de contraseñas (bcrypt)
-- ✅ Rate limiting
-- ✅ Helmet.js (headers seguros)
-- ✅ CORS configurado
-- ✅ Validación de entradas
-- ✅ Sanitización de datos
-
-### Variables de Entorno
-
-Crear archivo `backend/.env`:
-
-```env
-NODE_ENV=development
-PORT=3000
-DATABASE_URL=postgresql://usuario:password@localhost:5432/zenith_erp
-JWT_SECRET=<generar_secreto_seguro>
-JWT_EXPIRE=24h
-FRONTEND_URL=http://localhost:5500
-```
-
-**Generar JWT_SECRET:**
-```bash
-node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
-```
-
----
-
-## 📊 Monitoreo
-
-### Logs
-```
-backend/logs/
-├── error.log       # Solo errores
-└── combined.log    # Todos los eventos
-```
-
-### Health Check
-```bash
-curl http://localhost:3000/api/health
-```
-
-Respuesta:
-```json
-{
-  "status": "ok",
-  "timestamp": "2026-04-07T...",
-  "uptime": 123.456,
-  "environment": "production",
-  "version": "1.0.0"
-}
-```
-
----
-
-## 📖 Documentación Adicional
-
-- [Guía de Despliegue](docs/GUIA_DESPLIEGUE.md) - Instrucciones detalladas para nube
-- [Auditoría de Errores](docs/AUDITORIA_ERRORES.md) - Historial de fixes
-- [Auditoría de Soluciones](docs/AUDITORIA_SOLUCIONES.md) - Mejoras aplicadas
-
----
-
-## 🧪 Testing
-
-```bash
-# Ejecutar todos los tests
-npm test
-
-# Modo watch
-npm run test:watch
-
-# Con cobertura
-npm test -- --coverage
-```
-
----
-
-## 🤝 Contribuir
-
-1. Crear rama feature (`git checkout -b feature/nueva-funcionalidad`)
-2. Commit cambios (`git commit -m 'Add: nueva funcionalidad'`)
-3. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-4. Abrir Pull Request
-
----
-
-## 📄 Licencia
-
-Proyecto privado - Mayor de Repuesto La Cima, C.A.
-
-Todos los derechos reservados.
-
----
-
-## 📞 Soporte
-
-Para problemas o consultas:
-- Revisar logs en `backend/logs/`
-- Verificar health check: `/api/health`
-- Ejecutar `npx prisma studio` para inspeccionar BD
-
----
-
-**Desarrollado para Mayor de Repuesto La Cima, C.A.**  
-Valencia, Venezuela 🇻🇪  
-Última actualización: Abril 2026
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

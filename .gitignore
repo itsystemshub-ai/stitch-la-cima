@@ -1,67 +1,24 @@
-# Dependencias
-node_modules/
-.pnp
-.pnp.js
-
-# Testing
-coverage/
 *.log
-
-# Produccion
-dist/
-build/
-out/
-
-# Variables de entorno
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
 .DS_Store
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+Homestead.json
+Homestead.yaml
 Thumbs.db
-desktop.ini
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# Database (SQLite no se usa en producción)
-*.sqlite
-*.sqlite3
-dev.db
-
-# Prisma (migraciones se generan, no se commitean manualmente)
-# EXCEPTO la migración inicial que sí está en el repo
-
-# Build artifacts
-*.tsbuildinfo
-*.map
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-
-# Stitch design files (no tracked in production)
-stitch/
-
-# Old apps directory (migrated to new structure)
-apps/
-
-# Documentation
-docs/plan_de_implementacion.md

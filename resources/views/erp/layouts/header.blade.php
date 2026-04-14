@@ -1,0 +1,85 @@
+<header class="fixed top-0 left-72 right-0 bg-white/80 backdrop-blur-xl z-40 border-b border-stone-200">
+  <div class="flex justify-between items-center px-6 py-3">
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-4">
+      <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
+        <a href="{{ url('/erp/dashboard') }}" class="hover:text-stone-900">Inicio</a>
+        @yield('breadcrumb')
+      </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="flex items-center gap-3">
+      <!-- Busqueda Global -->
+      <div class="hidden lg:block relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+          <span class="material-symbols-outlined text-lg">search</span>
+        </span>
+        <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar repuestos, ventas, clientes..." type="text"/>
+      </div>
+
+      <!-- Notificaciones -->
+      <div class="relative" x-data="{ open: false }">
+        <button @click="open = !open" class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative transition-all active:scale-95">
+          <span class="material-symbols-outlined">notifications</span>
+          @if($unreadNotificationsCount > 0)
+            <span class="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white animate-pulse">
+              {{ $unreadNotificationsCount }}
+            </span>
+          @endif
+        </button>
+
+        <!-- Dropdown de Notificaciones -->
+        <div x-show="open" @click.away="open = false" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95 translate-y-[-10px]"
+             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+             class="absolute right-0 mt-2 w-80 bg-white border border-stone-200 rounded-[24px] shadow-2xl z-50 overflow-hidden" style="display: none;">
+          <div class="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
+            <span class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Notificaciones</span>
+            @if($unreadNotificationsCount > 0)
+                <span class="text-[9px] font-black bg-primary text-stone-900 px-2 py-0.5 rounded-full uppercase">Nuevas</span>
+            @endif
+          </div>
+          <div class="max-h-96 overflow-y-auto">
+            @forelse($latestNotifications as $notif)
+              <a href="{{ $notif->action_url ?? '#' }}" class="flex items-start gap-4 p-4 hover:bg-stone-50 border-b border-stone-50 transition-colors {{ !$notif->read ? 'bg-primary/5' : '' }}">
+                <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center 
+                  {{ $notif->type == 'success' ? 'bg-green-100 text-green-600' : 'bg-primary text-stone-900' }}">
+                  <span class="material-symbols-outlined text-sm">{{ $notif->icon ?? 'info' }}</span>
+                </div>
+                <div>
+                  <p class="text-[11px] font-black text-stone-900 uppercase leading-tight">{{ $notif->title }}</p>
+                  <p class="text-[10px] text-stone-500 mt-1 line-clamp-2">{{ $notif->message }}</p>
+                  <p class="text-[8px] text-stone-400 mt-2 font-bold uppercase">{{ $notif->created_at->diffForHumans() }}</p>
+                </div>
+              </a>
+            @empty
+              <div class="p-10 text-center">
+                <span class="material-symbols-outlined text-stone-200 text-4xl">notifications_off</span>
+                <p class="text-[10px] text-stone-400 mt-2 font-bold uppercase tracking-widest">Sin notificaciones</p>
+              </div>
+            @endforelse
+          </div>
+          <div class="p-3 bg-stone-50 text-center">
+            <a href="{{ route('erp.inventario.auditoria') }}" class="text-[9px] font-black text-stone-400 hover:text-stone-900 uppercase tracking-widest transition-colors">Ver todo el historial</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Perfil -->
+      <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
+        <div class="text-right hidden md:block">
+          <p class="text-sm font-bold text-stone-900 leading-none">Administrador</p>
+          <p class="text-[10px] text-stone-500">Rol: Admin</p>
+        </div>
+        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
+          A
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
