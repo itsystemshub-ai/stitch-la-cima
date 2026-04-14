@@ -32,8 +32,8 @@
     <!-- R&D Metrics -->
     <div class="grid grid-cols-12 gap-8 mb-12">
         <div class="col-span-12 lg:col-span-4 bg-white border border-stone-200 p-8 rounded-[32px] shadow-sm relative overflow-hidden group">
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Items en Análisis</p>
-            <h3 class="text-4xl font-headline font-black text-stone-900 uppercase">24 Artículos</h3>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Items en Análisis Actual</p>
+            <h3 class="text-4xl font-headline font-black text-stone-900 uppercase">{{ $products->count() }} Artículos</h3>
             <div class="mt-4 flex items-center gap-2 text-stone-400 font-bold text-[10px] uppercase">
                 <span class="material-symbols-outlined text-xs">biotech</span>
                 Fase de Verificación Técnica
@@ -83,40 +83,41 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-50 font-body text-xs">
-                    <tr class="hover:bg-stone-50 transition-colors group">
-                        <td class="p-6 font-black text-stone-900">#NEW-SUS-901</td>
-                        <td class="p-6">
-                            <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">Kit de Suspensión Reforzado</span>
-                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest underline decoration-primary decoration-2">Buscando Proveedor en Brasil</span>
-                        </td>
-                        <td class="p-6 text-stone-400 font-bold uppercase tracking-widest">Internacional (BR)</td>
-                        <td class="p-6 text-center">
-                            <span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-lg font-black text-[9px] uppercase border border-amber-100">En Análisis</span>
-                        </td>
-                        <td class="p-6 text-right font-headline font-black text-stone-900 text-base">$ 45.50</td>
-                        <td class="p-6 text-center">
-                            <button class="w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-900 hover:text-primary transition-all">
-                                <span class="material-symbols-outlined text-sm">visibility</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-stone-50 transition-colors group">
-                        <td class="p-6 font-black text-stone-900">#NEW-MT-4022</td>
-                        <td class="p-6">
-                            <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">Empacadura Culata Pro</span>
-                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest underline decoration-green-400 decoration-2">Muestra Técnica Validada</span>
-                        </td>
-                        <td class="p-6 text-stone-400 font-bold uppercase tracking-widest">Nacional (VE)</td>
-                        <td class="p-6 text-center">
-                            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg font-black text-[9px] uppercase border border-green-100">Aprobado</span>
-                        </td>
-                        <td class="p-6 text-right font-headline font-black text-stone-900 text-base">$ 12.00</td>
-                        <td class="p-6 text-center">
-                            <button class="w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-900 hover:text-primary transition-all">
-                                <span class="material-symbols-outlined text-sm">rocket_launch</span>
-                            </button>
-                        </td>
-                    </tr>
+                    @forelse($products as $product)
+                        <tr class="hover:bg-stone-50 transition-colors group">
+                            <td class="p-6 font-black text-stone-900 uppercase tracking-tighter">{{ $product->codigo_oem }}</td>
+                            <td class="p-6">
+                                <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">{{ $product->nombre }}</span>
+                                <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest underline decoration-primary decoration-2">
+                                    {{ $product->development_notes ?? 'En espera de especificaciones' }}
+                                </span>
+                            </td>
+                            <td class="p-6 text-stone-400 font-bold uppercase tracking-widest">{{ $product->marca ?? 'N/A' }}</td>
+                            <td class="p-6 text-center">
+                                <span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-lg font-black text-[9px] uppercase border border-amber-100">En Análisis</span>
+                            </td>
+                            <td class="p-6 text-right font-headline font-black text-stone-900 text-base">$ {{ number_format($product->precio_mayor, 2) }}</td>
+                            <td class="p-6 text-center">
+                                <div class="flex items-center justify-center gap-2">
+                                    <button class="w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-900 hover:text-primary transition-all" title="Ver Ficha Técnica">
+                                        <span class="material-symbols-outlined text-sm">visibility</span>
+                                    </button>
+                                    <form action="{{ route('erp.inventario.desarrollo.promote', $product->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="w-8 h-8 rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center hover:bg-stone-900 hover:text-primary transition-all text-primary" title="Promover al Maestro">
+                                            <span class="material-symbols-outlined text-sm">rocket_launch</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="p-12 text-center text-stone-400 uppercase font-black text-[10px] tracking-widest italic">
+                                No hay items en el pipeline de desarrollo actualmente
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

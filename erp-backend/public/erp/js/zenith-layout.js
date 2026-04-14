@@ -46,13 +46,13 @@ const ZENITH_LAYOUT = {
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="ventas.html"><span class="material-symbols-outlined">analytics</span> Monitor Ventas</a>
-                            <a href="pos.html"><span class="material-symbols-outlined">point_of_sale</span> Terminal POS</a>
-                            <a href="registro-ventas.html"><span class="material-symbols-outlined">list_alt</span> Diario de Ventas</a>
-                            <a href="factura-electronica.html"><span class="material-symbols-outlined">receipt</span> Fact. Electrónica</a>
-                            <a href="facturas-emitidas.html"><span class="material-symbols-outlined">history</span> Historial Facturas</a>
-                            <a href="clientes.html"><span class="material-symbols-outlined">person</span> Clientes B2B</a>
-                            <a href="vendedores.html"><span class="material-symbols-outlined">badge</span> Fuerza de Ventas</a>
+                            <a href="/erp/ventas"><span class="material-symbols-outlined">analytics</span> Monitor Ventas</a>
+                            <a href="/erp/pos"><span class="material-symbols-outlined">point_of_sale</span> Terminal POS</a>
+                            <a href="/erp/ventas/registro"><span class="material-symbols-outlined">list_alt</span> Diario de Ventas</a>
+                            <a href="/erp/ventas/facturacion"><span class="material-symbols-outlined">receipt</span> Fact. Electrónica</a>
+                            <a href="/erp/ventas/historial"><span class="material-symbols-outlined">history</span> Historial Facturas</a>
+                            <a href="/erp/ventas/clientes"><span class="material-symbols-outlined">person</span> Clientes B2B</a>
+                            <a href="/erp/ventas/vendedores"><span class="material-symbols-outlined">badge</span> Fuerza de Ventas</a>
                         </div>
                     </div>
 
@@ -64,12 +64,12 @@ const ZENITH_LAYOUT = {
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="inventario.html"><span class="material-symbols-outlined">inventory</span> Control Stock</a>
-                            <a href="productos.html"><span class="material-symbols-outlined">category</span> Catálogo Items</a>
-                            <a href="kardex.html"><span class="material-symbols-outlined">list</span> Kardex Movimientos</a>
-                            <a href="ajustes-inventario.html"><span class="material-symbols-outlined">edit_note</span> Ajustes Stock</a>
-                            <a href="auditoria-inventario.html"><span class="material-symbols-outlined">fact_check</span> Auditoría Física</a>
-                            <a href="reportes-inventario.html"><span class="material-symbols-outlined">assessment</span> Reportes Logística</a>
+                            <a href="/erp/inventario"><span class="material-symbols-outlined">inventory</span> Control Stock</a>
+                            <a href="/erp/inventario/productos"><span class="material-symbols-outlined">category</span> Catálogo Items</a>
+                            <a href="/erp/inventario/kardex"><span class="material-symbols-outlined">list</span> Kardex Movimientos</a>
+                            <a href="/erp/inventario/ajustes"><span class="material-symbols-outlined">edit_note</span> Ajustes Stock</a>
+                            <a href="/erp/inventario/auditoria"><span class="material-symbols-outlined">fact_check</span> Auditoría Física</a>
+                            <a href="/erp/inventario/reportes"><span class="material-symbols-outlined">assessment</span> Reportes Logística</a>
                         </div>
                     </div>
 
@@ -81,11 +81,11 @@ const ZENITH_LAYOUT = {
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="compras.html"><span class="material-symbols-outlined">shopping_basket</span> Monitor Compras</a>
-                            <a href="proveedores.html"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
-                            <a href="factura-compra.html"><span class="material-symbols-outlined">receipt_long</span> Facturas Compra</a>
-                            <a href="historial-compras.html"><span class="material-symbols-outlined">history_edu</span> Historial</a>
-                            <a href="reportes-compras.html"><span class="material-symbols-outlined">analytics</span> Análisis Compras</a>
+                            <a href="/erp/compras"><span class="material-symbols-outlined">shopping_basket</span> Monitor Compras</a>
+                            <a href="/erp/compras/proveedores"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
+                            <a href="/erp/compras/factura"><span class="material-symbols-outlined">receipt_long</span> Facturas Compra</a>
+                            <a href="/erp/compras/historial"><span class="material-symbols-outlined">history_edu</span> Historial</a>
+                            <a href="/erp/compras/reportes"><span class="material-symbols-outlined">analytics</span> Análisis Compras</a>
                         </div>
                     </div>
 
@@ -98,12 +98,12 @@ const ZENITH_LAYOUT = {
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="contabilidad.html"><span class="material-symbols-outlined">table_chart</span> Resumen Contable</a>
-                            <a href="plan-cuentas.html"><span class="material-symbols-outlined">account_tree</span> Plan de Cuentas</a>
-                            <a href="balance-general.html"><span class="material-symbols-outlined">balance</span> Balance General</a>
-                            <a href="estado-resultados.html"><span class="material-symbols-outlined">monitoring</span> Resultados</a>
-                            <a href="libro-diario.html"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
-                            <a href="cierre-contable.html"><span class="material-symbols-outlined">lock</span> Cierre Periodo</a>
+                            <a href="/erp/contabilidad"><span class="material-symbols-outlined">table_chart</span> Resumen Contable</a>
+                            <a href="/erp/contabilidad/plan-cuentas"><span class="material-symbols-outlined">account_tree</span> Plan de Cuentas</a>
+                            <a href="/erp/contabilidad/balance-general"><span class="material-symbols-outlined">balance</span> Balance General</a>
+                            <a href="/erp/contabilidad/estado-resultados"><span class="material-symbols-outlined">monitoring</span> Resultados</a>
+                            <a href="/erp/contabilidad/libro-diario"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
+                            <a href="/erp/contabilidad/cierre"><span class="material-symbols-outlined">lock</span> Cierre Periodo</a>
                         </div>
                     </div>
 

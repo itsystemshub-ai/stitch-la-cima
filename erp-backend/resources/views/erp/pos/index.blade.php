@@ -1,85 +1,23 @@
-<!DOCTYPE html>
-<html class="light" lang="es">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Punto de Venta | Mayor de Repuesto La Cima, C.A.</title>
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#0a0a0a", surface: "#ffffff", outline: "#e2e2e5" },
-            fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
-          }
-        }
-      }
-    </script>
-    <link rel="stylesheet" href="{{ asset('erp/css/inicio.css') }}">
+@extends('layouts.erp')
+
+@section('title', 'Terminal POS')
+
+@section('styles')
     <link rel="stylesheet" href="{{ asset('erp/css/pos.css') }}">
-</head>
-<body class="bg-background text-on-surface selection:bg-primary/30 h-screen flex overflow-hidden font-body">
+    <style>
+        /* Ajuste para que el contenido POS ocupe el resto de la pantalla al lado del sidebar */
+        main {
+            margin-left: 288px; /* w-72 */
+        }
+        @media (max-width: 1024px) {
+            main { margin-left: 0; }
+        }
+    </style>
+@endsection
 
-  <!-- Sidebar -->
-  <aside id="sidebar" class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar">
-    <!-- Logo -->
-    <div class="flex flex-col px-5 pt-6 pb-4">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg">
-          <img src="{{ asset('assets/images/logo.png') }}" class="w-7 h-7 object-contain" alt="Logo">
-        </div>
-        <div>
-          <h2 class="font-headline font-bold text-sm text-stone-700 leading-none uppercase">MAYOR DE REPUESTO LA CIMA, C.A</h2>
-          <span class="text-[12px] font-mono text-stone-400">RIF: J-40308741-5</span>
-        </div>
-      </div>
-      <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Portal ERP Corporativo</p>
-    </div>
-  
-    <!-- Menu -->
-    <nav class="flex-1 px-3 space-y-0.5 pb-24">
-      <div class="menu-group">Principal</div>
-      <a href="{{ url('/') }}" class="menu-item menu-item-inactive">
-        <span class="material-symbols-outlined text-[20px]">storefront</span><span>Tienda Virtual</span>
-      </a>
-      <a href="{{ url('/erp/inicio') }}" class="menu-item menu-item-inactive">
-        <span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard Central</span>
-      </a>
-  
-      <div class="menu-parent">
-        <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
-          <span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span>
-        </div>
-        <div class="submenu">
-           <a href="{{ url('/erp/inventario') }}">Dashboard</a>
-           <a href="{{ url('/erp/productos') }}">Productos</a>
-        </div>
-      </div>
-  
-      <div class="menu-parent">
-        <div class="menu-item menu-item-active" onclick="toggleDropdown(this)">
-          <span class="material-symbols-outlined text-[20px]">payments</span><span>Ventas</span>
-        </div>
-        <div class="submenu" style="display: block;">
-          <a href="{{ url('/erp/ventas') }}">Dashboard</a>
-          <a href="{{ url('/erp/pos') }}" class="text-primary font-bold">Punto de Venta</a>
-        </div>
-      </div>
-    </nav>
-  
-    <div class="mt-auto border-t border-stone-200 p-4">
-      <button onclick="localStorage.removeItem('erp_session'); window.location.href='{{ url('/auth/login') }}';" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
-        <span class="material-symbols-outlined text-[18px]">logout</span>
-        Cerrar Sesión
-      </button>
-    </div>
-  </aside>
-
+@section('content')
 <!-- Main Terminal Section -->
-<main class="ml-72 flex-1 flex flex-col min-w-0 bg-[#0a0a0a] relative">
+<main class="flex-1 flex flex-col min-w-0 bg-[#0a0a0a] relative min-h-screen">
     <!-- Header Controls -->
     <header class="bg-black/80 backdrop-blur-2xl border-b border-white/5 p-8 flex flex-col md:flex-row justify-between items-end gap-8 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] pointer-events-none"></div>
@@ -102,8 +40,8 @@
                     <label class="text-[9px] font-black uppercase tracking-[0.3em] text-stone-500">Asignación de Cliente</label>
                     <div class="relative">
                         <select class="appearance-none bg-white/5 border border-white/10 text-white w-full py-4 px-5 text-xs font-black uppercase tracking-widest focus:ring-1 focus:ring-primary cursor-pointer rounded-xl outline-none">
-                            <option class="bg-stone-900">Consumidor Final (General)</option>
-                            <option class="bg-stone-900">Transporte Carabobo - J-554210-3</option>
+                            <option value="1" class="bg-stone-900">Consumidor Final (General)</option>
+                            <option value="2" class="bg-stone-900">Transporte Carabobo - J-554210-3</option>
                         </select>
                         <span class="material-symbols-outlined absolute right-5 top-3.5 text-primary pointer-events-none">expand_more</span>
                     </div>
@@ -135,7 +73,8 @@
                             <th class="p-8 w-12 border-b border-white/5"></th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-white/5">
+                    <tbody class="divide-y divide-white/5" id="cart-items">
+                        <!-- Ejemplo estático de item -->
                         <tr class="hover:bg-white/[0.03] transition-colors group">
                             <td class="p-8">
                                 <div class="flex items-center gap-8">
@@ -169,7 +108,7 @@
                 <div class="space-y-8">
                     <div class="flex justify-between items-center">
                         <span class="text-[11px] font-black text-stone-400 uppercase tracking-widest">Subtotal Neto</span>
-                        <span class="text-xl font-black text-white tracking-widest">$ 1,110.00</span>
+                        <span class="text-xl font-black text-white tracking-widest" id="summary-subtotal">$ 570.00</span>
                     </div>
                 </div>
             </div>
@@ -177,12 +116,18 @@
             <div class="mt-auto space-y-12">
                 <div class="bg-primary/5 border border-primary/20 p-10 rounded-3xl relative overflow-hidden group shadow-2xl">
                     <p class="text-xs font-black text-primary uppercase tracking-[0.4em] mb-4 relative z-10">Total a Liquidar</p>
-                    <p class="text-7xl font-black text-white tracking-tighter relative z-10">$ 1,287<span class="text-primary">.60</span></p>
+                    <p class="text-7xl font-black text-white tracking-tighter relative z-10" id="summary-total">$ 661<span class="text-primary">.20</span></p>
                 </div>
                 
-                <button class="w-full h-24 bg-primary text-stone-900 font-black text-xl uppercase tracking-[0.4em] rounded-2xl shadow-xl hover:brightness-110 hover:-translate-y-1 transition-all">
-                    Procesar <span class="text-[10px] bg-black/10 px-3 py-1 rounded ml-2">ENTER</span>
-                </button>
+                <form action="{{ route('erp.ventas.facturar') }}" method="POST" id="checkout-form">
+                    @csrf
+                    <input type="hidden" name="customer_id" value="1">
+                    <input type="hidden" name="vendedor_id" value="1">
+                    <!-- Los items se inyectarían vía JS en un escenario real -->
+                    <button type="submit" class="w-full h-24 bg-primary text-stone-900 font-black text-xl uppercase tracking-[0.4em] rounded-2xl shadow-xl hover:brightness-110 hover:-translate-y-1 transition-all">
+                        Procesar <span class="text-[10px] bg-black/10 px-3 py-1 rounded ml-2">ENTER</span>
+                    </button>
+                </form>
 
                 <div class="text-center pt-8 border-t border-white/5">
                     <p class="text-[10px] text-stone-500 font-black uppercase tracking-[0.4em]">RIF: J-40308741-5</p>
@@ -191,17 +136,19 @@
         </aside>
     </div>
 </main>
+@endsection
 
-<script src="{{ asset('erp/js/inicio.js') }}"></script>
-<script>
-    function toggleDropdown(el) {
-        const submenu = el.nextElementSibling;
-        if (submenu.style.display === 'block') {
-            submenu.style.display = 'none';
-        } else {
-            submenu.style.display = 'block';
-        }
-    }
-</script>
-</body>
-</html>
+@section('scripts')
+    <script src="{{ asset('erp/js/inicio.js') }}"></script>
+    <script>
+        // Lógica de terminal POS básica
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                // Simular submit si no hay inputs enfocados
+                if (document.activeElement.tagName !== 'INPUT') {
+                    // document.getElementById('checkout-form').submit();
+                }
+            }
+        });
+    </script>
+@endsection

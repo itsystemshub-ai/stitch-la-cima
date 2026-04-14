@@ -134,24 +134,64 @@ class InventoryController extends Controller
      */
     public function massUpdate(Request $request)
     {
-        // Nota: Aquí se implementaría el parsing de CSV/Excel.
-        // Por ahora implementamos la lógica de actualización por lote si se envía un array.
-        if ($request->has('updates')) {
-            $updates = $request->updates; // Array de ['sku' => ..., 'price' => ..., 'stock' => ...]
-            
-            foreach ($updates as $update) {
-                $product = Product::where('codigo_oem', $update['sku'])->first();
-                if ($product) {
-                    $product->update([
-                        'precio_mayor' => $update['price'] ?? $product->precio_mayor,
-                        'stock_actual' => $update['stock'] ?? $product->stock_actual,
-                    ]);
+        if ($request->isMethod('post') && $request->has('bulk_data')) {
+            $data = $request->bulk_data;
+            $lines = explode("\n", str_replace(["\r", "\t"], ["", ","], $data));
+            $count = 0;
+
+            DB::transaction(function () use ($lines, &$count) {
+                foreach ($lines as $line) {
+                    $parts = array_map('trim', explode(',', $line));
+                    if (count($parts) < 2) continue;
+
+                    $sku = $parts[0];
+                    $price = $parts[1];
+                    $stock = $parts[2] ?? null;
+
+                    $product = Product::where('codigo_oem', $sku)->first();
+                    if ($product) {
+                        $oldPrice = $product->precio_mayor;
+                        $oldStock = $product->stock_actual;
+
+                        $product->update([
+                            'precio_mayor' => $price,
+                            'stock_actual' => $stock ?? $product->stock_actual,
+                        ]);
+
+                        // Log stock change if provided
+                        if ($stock !== null && $stock != $oldStock) {
+                            StockMovement::create([
+                                'product_id' => $product->id,
+                                'type' => $stock > $oldStock ? 'IN' : 'OUT',
+                                'quantity' => abs($stock - $oldStock),
+                                'reason' => 'Carga Masiva de Inventario',
+                                'user_id' => Auth::id(),
+                            ]);
+                        }
+                        $count++;
+                    }
                 }
-            }
-            return response()->json(['status' => 'success', 'message' => 'Lote procesado.']);
+            });
+
+            return back()->with('success', "Sincronización masiva completada. $count items actualizados.");
         }
 
         return view('erp.inventario.lista-precios');
+    }
+
+    /**
+     * Promover item de Desarrollo a Maestro
+     */
+    public function promoteToMaster($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->update([
+            'is_development' => false,
+            'development_notes' => null
+        ]);
+
+        return redirect()->route('erp.inventario.productos')
+            ->with('success', "Producto [{$product->codigo_oem}] promovido exitosamente al Maestro.");
     }
 
     /**

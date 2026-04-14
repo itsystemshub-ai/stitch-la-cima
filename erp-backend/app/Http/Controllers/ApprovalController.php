@@ -42,9 +42,9 @@ class ApprovalController extends Controller
             DB::transaction(function () use ($request, $approval) {
                 $status = $request->action === 'approve' ? 'approved' : 'rejected';
                 
-                $approval->update([
+            $approval->update([
                     'status' => $status,
-                    'approver_id' => 1, // Simulating Auth::id() for now if auth is not fully configured
+                    'approver_id' => Auth::id() ?? 1,
                     'reason' => $request->reason,
                 ]);
 
@@ -53,15 +53,12 @@ class ApprovalController extends Controller
                 if ($model) {
                     $newStatus = $request->action === 'approve' ? 'Aprobado' : 'Rechazado';
                     $model->update(['estado' => $newStatus]);
-                    
-                    // Logic for specific models:
-                    // If it's an Order and approved, it might trigger stock deduction or invoice generation.
                 }
             });
 
-            return redirect()->route('erp.approvals.index')->with('success', 'Solicitud procesada correctamente.');
+            return redirect()->route('erp.aprobaciones.index')->with('success', 'Solicitud procesada correctamente.');
         } catch (\Exception $e) {
-            return redirect()->route('erp.approvals.index')->with('error', 'Error al procesar la aprobación: ' . $e->getMessage());
+            return redirect()->route('erp.aprobaciones.index')->with('error', 'Error al procesar la aprobación: ' . $e->getMessage());
         }
     }
 }

@@ -31,34 +31,39 @@ class InvoiceController extends Controller
         $vendedorId = $request->input('vendedor_id');
         $items = $request->input('items');
 
-        try {
-            // Utilizamos Transacciones de Base de Datos para Rolback de Emergencia
-            // Si algo falla a la mitad (corte luz, stock agotado simultáneo), la bbdd queda intacta.
-            $result = DB::transaction(function () use ($customerId, $vendedorId, $items) {
+                // 1. Procesar Líneas y Calcular Totales
+                foreach ($items as $item) {
+                    $product = Product::where('id', $item['product_id'])->lockForUpdate()->firstOrFail();
 
-                $subtotalGlobal = 0;
+                    if ($product->stock_actual < $item['cantidad']) {
+                        throw new Exception("Stock Insuficiente para el repuesto: {$product->codigo_oem} ({$product->nombre}).");
+                    }
 
-                // 1. Crear el Encabezado de la Orden (en estado Procesando)
-                $order = Order::create([
-                    'numero_orden' => 'ORD-' . strtoupper(uniqid()),
-                    'customer_id' => $customerId,
-                    'vendedor_id' => $vendedorId,
-                    'subtotal' => 0,
-                    'impuestos' => 0,
-                    'total' => 0,
-                    'estado' => 'Pagado', // Se asume venta inmediata POS/E-comm
-                    'fecha_emision' => now(),
-                    'fecha_vencimiento' => now()->addDays(15) // Crédito standard B2B
-                ]);
+                    $lineSubtotal = $item['cantidad'] * $item['precio_unitario'];
+                    $subtotalGlobal += $lineSubtotal;
+
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_id' => $product->id,
+                        'cantidad' => $item['cantidad'],
+                        'precio_unitario' => $item['precio_unitario'],
+                        'subtotal' => $lineSubtotal
+                    ]);
+
+                    // Deducir stock solo si NO requiere aprobación (se maneja abajo)
+                }
+
+                $tax = $subtotalGlobal * 0.16;
+                $total = $subtotalGlobal + $tax;
 
                 // 2. Determinar si requiere Aprobación (Ordenes > $1000)
-                $requiresApproval = $subtotalGlobal > 1000;
+                $requiresApproval = $total > 1000;
                 
                 if ($requiresApproval) {
                     $order->update([
                         'subtotal' => $subtotalGlobal,
-                        'impuestos' => $subtotalGlobal * 0.16,
-                        'total' => $subtotalGlobal * 1.16,
+                        'impuestos' => $tax,
+                        'total' => $total,
                         'status' => 'pending_approval',
                         'estado' => 'Esperando Aprobación'
                     ]);
@@ -66,46 +71,32 @@ class InvoiceController extends Controller
                     \App\Models\Approval::create([
                         'approvable_id' => $order->id,
                         'approvable_type' => Order::class,
-                        'requester_id' => $request->user()->id ?? 1,
+                        'requester_id' => Auth::id() ?? 1,
                         'status' => 'pending',
                         'reason' => 'Orden excede el límite de aprobación automática ($1,000.00).'
                     ]);
-
-                    // No deducimos stock hasta que sea aprobada
-                    foreach ($items as $item) {
-                        OrderItem::create([
-                            'order_id' => $order->id,
-                            'product_id' => $item['product_id'],
-                            'cantidad' => $item['cantidad'],
-                            'precio_unitario' => $item['precio_unitario'],
-                            'subtotal' => $item['cantidad'] * $item['precio_unitario']
-                        ]);
-                    }
                 } else {
-                    // 3. Procesar Líneas y Deducir Stock (Flujo estándar < $1000)
+                    // Si no requiere aprobación, deducimos el stock ahora
                     foreach ($items as $item) {
-                        $product = Product::where('id', $item['product_id'])->lockForUpdate()->firstOrFail();
-
-                        if ($product->stock_actual < $item['cantidad']) {
-                            throw new Exception("Stock Insuficiente para el repuesto: {$product->codigo_oem} ({$product->nombre}).");
-                        }
-
-                        OrderItem::create([
-                            'order_id' => $order->id,
+                        $product = Product::find($item['product_id']);
+                        $product->decrement('stock_actual', $item['cantidad']);
+                        
+                        // Registrar movimiento en Kardex
+                        \App\Models\StockMovement::create([
                             'product_id' => $product->id,
-                            'cantidad' => $item['cantidad'],
-                            'precio_unitario' => $item['precio_unitario'],
-                            'subtotal' => $item['cantidad'] * $item['precio_unitario']
+                            'type' => 'OUT',
+                            'quantity' => $item['cantidad'],
+                            'reason' => "Venta POS: {$order->numero_orden}",
+                            'user_id' => Auth::id() ?? 1,
+                            'reference_id' => $order->id
                         ]);
-
-                        $product->stock_actual -= $item['cantidad'];
-                        $product->save();
                     }
 
                     $order->update([
                         'subtotal' => $subtotalGlobal,
-                        'impuestos' => $subtotalGlobal * 0.16,
-                        'total' => $subtotalGlobal * 1.16
+                        'impuestos' => $tax,
+                        'total' => $total,
+                        'estado' => 'Pagado'
                     ]);
                 }
 

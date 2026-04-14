@@ -31,31 +31,33 @@
 
     <!-- Live Sync Status -->
     <div class="grid grid-cols-12 gap-8 mb-12">
-        <div class="col-span-12 lg:col-span-8 bg-stone-900 rounded-[40px] p-10 relative overflow-hidden flex flex-col justify-between min-h-[300px] shadow-2xl">
+        <div class="col-span-12 lg:col-span-8 bg-stone-900 rounded-[40px] p-10 relative overflow-hidden flex flex-col justify-between min-h-[400px] shadow-2xl">
             <div class="absolute -right-10 -bottom-10 opacity-10">
                 <span class="material-symbols-outlined text-[200px] text-white">cloud_upload</span>
             </div>
             
-            <div class="relative z-10">
-                <p class="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Zona de Carga Inteligente</p>
-                <div class="border-2 border-dashed border-stone-700 rounded-[32px] p-12 flex flex-col items-center justify-center group hover:border-primary transition-all cursor-pointer bg-white/[0.02]">
-                    <span class="material-symbols-outlined text-6xl text-stone-600 group-hover:text-primary group-hover:scale-110 transition-all mb-6">file_upload</span>
-                    <h4 class="text-xl font-headline font-black text-white uppercase mb-2">Arrastre su Archivo (CSV / EXCEL)</h4>
-                    <p class="text-xs text-stone-500 font-bold uppercase tracking-wider">Límite de 5,000 registros por carga</p>
-                </div>
-            </div>
+            <div class="relative z-10 w-full h-full flex flex-col">
+                <p class="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Procesador de Lotes Estratégico</p>
+                
+                <form id="massUpdateForm" action="{{ route('erp.inventario.lista-precios.update') }}" method="POST" class="flex-1 flex flex-col gap-6">
+                    @csrf
+                    <div class="flex-1 relative group">
+                        <textarea name="bulk_data" id="bulk_data" class="w-full h-48 bg-white/[0.03] border-2 border-dashed border-stone-700 rounded-[32px] p-8 text-xs font-mono text-stone-300 focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-stone-600 focus:border-primary outline-none" placeholder="PEGUE AQUÍ SUS DATOS EN FORMATO: SKU, PRECIO, STOCK (Uno por línea)&#10;Ejemplo:&#10;OEM-4421, 85.50, 100&#10;CAT-882, 320.00, 15"></textarea>
+                    </div>
 
-            <div class="relative z-10 flex justify-between items-center mt-8">
-                <div class="flex items-center gap-3">
-                    <span class="flex h-3 w-3 relative">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-                    </span>
-                    <span class="text-[10px] font-black text-white uppercase tracking-widest">Sincronización con Tienda Virtual: ACTIVA</span>
-                </div>
-                <button class="bg-primary text-stone-900 px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg">
-                    Iniciar Procesamiento
-                </button>
+                    <div class="flex justify-between items-center mt-4">
+                        <div class="flex items-center gap-3">
+                            <span class="flex h-3 w-3 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                            </span>
+                            <span class="text-[10px] font-black text-white uppercase tracking-widest">Sincronización con Tienda Virtual: ACTIVA</span>
+                        </div>
+                        <button type="submit" class="bg-primary text-stone-900 px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg active:scale-95">
+                            Sincronizar Lote Digital
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TiendaController;
+use App\Http\Controllers\InventoryController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 
@@ -58,6 +59,7 @@ Route::prefix('erp')->group(function () {
         Route::get('/productos', [InventoryController::class, 'productos'])->name('erp.inventario.productos');
         Route::post('/productos', [InventoryController::class, 'store'])->name('erp.inventario.productos.store');
         Route::get('/desarrollo', [InventoryController::class, 'desarrollo'])->name('erp.inventario.desarrollo');
+        Route::post('/desarrollo/promote/{id}', [InventoryController::class, 'promoteToMaster'])->name('erp.inventario.desarrollo.promote');
         Route::get('/lista-precios', [InventoryController::class, 'massUpdate'])->name('erp.inventario.lista-precios');
         Route::post('/lista-precios', [InventoryController::class, 'massUpdate'])->name('erp.inventario.lista-precios.update');
         Route::get('/kardex', [InventoryController::class, 'kardex'])->name('erp.inventario.kardex');

@@ -48,11 +48,11 @@
             <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
                 <span class="material-symbols-outlined text-6xl">account_balance_wallet</span>
             </div>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Valorización Total</p>
-            <h3 class="text-4xl font-headline font-black text-stone-900 uppercase">$ 42,850.25</h3>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Valorización Total Actual</p>
+            <h3 class="text-4xl font-headline font-black text-stone-900 uppercase">$ {{ number_format($totalValuation ?? 0, 2) }}</h3>
             <div class="mt-4 flex items-center gap-2 text-green-600 font-bold text-[10px] uppercase">
                 <span class="material-symbols-outlined text-xs">trending_up</span>
-                +2.4% vs Mes Anterior
+                Auditado Real-Time
             </div>
         </div>
 
@@ -101,48 +101,41 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-50 font-body text-xs">
-                    <tr class="hover:bg-stone-50 transition-colors group cursor-pointer">
-                        <td class="p-6 font-bold text-stone-400 uppercase tracking-tighter">01 OCT 2023 <br> <span class="text-[9px] opacity-60 italic">08:00 AM</span></td>
-                        <td class="p-6 font-black text-stone-900">#INV-INIT-001</td>
-                        <td class="p-6">
-                            <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">Inventario Inicial</span>
-                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">Carga Inicial de Sistema</span>
-                        </td>
-                        <td class="p-6 text-center">
-                            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg font-black text-[10px] uppercase">+ 150</span>
-                        </td>
-                        <td class="p-6 text-center font-black text-stone-900 text-sm">150</td>
-                        <td class="p-6 text-right font-headline font-bold text-stone-400 text-base">$ 180.00</td>
-                        <td class="p-6 text-right font-headline font-black text-stone-900 text-lg group-hover:text-primary transition-colors">$ 27,000.00</td>
-                    </tr>
-                    <tr class="hover:bg-stone-50 transition-colors group cursor-pointer">
-                        <td class="p-6 font-bold text-stone-400 uppercase tracking-tighter">05 OCT 2023 <br> <span class="text-[9px] opacity-60 italic">02:15 PM</span></td>
-                        <td class="p-6 font-black text-stone-900">#FAC-PUR-8822</td>
-                        <td class="p-6">
-                            <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">Compra Nacional</span>
-                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">Proveedor: Repuestos El Pana</span>
-                        </td>
-                        <td class="p-6 text-center">
-                            <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg font-black text-[10px] uppercase">+ 50</span>
-                        </td>
-                        <td class="p-6 text-center font-black text-stone-900 text-sm">200</td>
-                        <td class="p-6 text-right font-headline font-bold text-stone-400 text-base">$ 195.00</td>
-                        <td class="p-6 text-right font-headline font-black text-stone-900 text-lg group-hover:text-primary transition-colors">$ 36,750.00</td>
-                    </tr>
-                    <tr class="hover:bg-stone-50 transition-colors group cursor-pointer">
-                        <td class="p-6 font-bold text-stone-400 uppercase tracking-tighter">12 OCT 2023 <br> <span class="text-[9px] opacity-60 italic">10:45 AM</span></td>
-                        <td class="p-6 font-black text-stone-900">#SAL-009121</td>
-                        <td class="p-6">
-                            <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">Venta Contado</span>
-                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">Cliente: Autopartes Valencia</span>
-                        </td>
-                        <td class="p-6 text-center">
-                            <span class="px-3 py-1 bg-red-50 text-red-700 rounded-lg font-black text-[10px] uppercase">- 30</span>
-                        </td>
-                        <td class="p-6 text-center font-black text-stone-900 text-sm">170</td>
-                        <td class="p-6 text-right font-headline font-bold text-stone-400 text-base">$ 183.75</td>
-                        <td class="p-6 text-right font-headline font-black text-stone-900 text-lg group-hover:text-primary transition-colors">$ 31,237.50</td>
-                    </tr>
+                    @forelse($movements as $movement)
+                        <tr class="hover:bg-stone-50 transition-colors group cursor-pointer">
+                            <td class="p-6 font-bold text-stone-400 uppercase tracking-tighter">
+                                {{ $movement->created_at->format('d M Y') }} <br> 
+                                <span class="text-[9px] opacity-60 italic">{{ $movement->created_at->format('h:i A') }}</span>
+                            </td>
+                            <td class="p-6 font-black text-stone-900 uppercase tracking-tighter">#{{ str_pad($movement->id, 6, '0', STR_PAD_LEFT) }}</td>
+                            <td class="p-6">
+                                <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">{{ $movement->product->nombre ?? 'N/A' }}</span>
+                                <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">{{ $movement->reason }}</span>
+                            </td>
+                            <td class="p-6 text-center">
+                                @if($movement->type == 'IN')
+                                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg font-black text-[10px] uppercase">+ {{ number_format($movement->quantity, 0) }}</span>
+                                @else
+                                    <span class="px-3 py-1 bg-red-50 text-red-700 rounded-lg font-black text-[10px] uppercase">- {{ number_format($movement->quantity, 0) }}</span>
+                                @endif
+                            </td>
+                            <td class="p-6 text-center font-black text-stone-900 text-sm">
+                                {{ number_format($movement->product->stock_actual ?? 0, 0) }}
+                            </td>
+                            <td class="p-6 text-right font-headline font-bold text-stone-400 text-base">
+                                $ {{ number_format($movement->product->precio_mayor ?? 0, 2) }}
+                            </td>
+                            <td class="p-6 text-right font-headline font-black text-stone-900 text-lg group-hover:text-primary transition-colors">
+                                $ {{ number_format(($movement->product->precio_mayor ?? 0) * ($movement->product->stock_actual ?? 0), 2) }}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="p-12 text-center text-stone-400 uppercase font-black text-[10px] tracking-widest italic">
+                                No se registran movimientos en el periodo seleccionado
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

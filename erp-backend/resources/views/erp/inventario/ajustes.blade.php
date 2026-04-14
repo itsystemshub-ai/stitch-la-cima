@@ -38,24 +38,30 @@
                 
                 <h3 class="text-sm font-black text-stone-400 uppercase tracking-[0.2em] mb-10 border-b border-stone-50 pb-4">Parámetros del Movimiento Interno</h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                <form action="{{ route('erp.inventario.ajustes.process') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                    @csrf
                     <div class="col-span-2 space-y-3">
                         <label class="block text-[10px] font-black text-stone-400 uppercase tracking-widest">Identificación del Producto (SKU / Nombre)</label>
                         <div class="relative group">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400 group-focus-within:text-primary transition-colors">
-                                <span class="material-symbols-outlined text-xl">search</span>
+                                <span class="material-symbols-outlined text-xl">inventory_2</span>
                             </span>
-                            <input class="w-full bg-stone-50 border-none rounded-xl py-4 pl-12 pr-5 text-sm font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-stone-300" placeholder="Escriba para buscar en el maestro de repuestos..." type="text"/>
+                            <select name="product_id" required class="w-full bg-stone-50 border-none rounded-xl py-4 pl-12 pr-5 text-sm font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected>Seleccione producto del maestro...</option>
+                                @foreach($products as $product)
+                                    <option value="{{ $product->id }}">{{ $product->codigo_oem }} - {{ $product->nombre }} (Stock: {{ number_format($product->stock_actual, 0) }})</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
                     <div class="space-y-3">
                         <label class="block text-[10px] font-black text-stone-400 uppercase tracking-widest">Naturaleza del Ajuste</label>
                         <div class="relative group">
-                            <select class="w-full bg-stone-50 border-none rounded-xl py-4 px-5 text-sm font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer">
-                                <option>ENTRADA POR CORRECCIÓN FISCAL</option>
-                                <option>SALIDA POR MERMA / DAÑO TÉCNICO</option>
-                                <option>CONCILIACIÓN POR AUDITORÍA FÍSICA</option>
+                            <select name="type" required class="w-full bg-stone-50 border-none rounded-xl py-4 px-5 text-sm font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer">
+                                <option value="IN">ENTRADA POR CORRECCIÓN FISCAL (+)</option>
+                                <option value="OUT">SALIDA POR MERMA / DAÑO TÉCNICO (-)</option>
+                                <option value="ADJUST">ESTABLECER EXISTENCIA REAL (=)</option>
                             </select>
                             <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none group-hover:text-primary transition-colors">expand_more</span>
                         </div>
@@ -64,24 +70,24 @@
                     <div class="space-y-3">
                         <label class="block text-[10px] font-black text-stone-400 uppercase tracking-widest">Cantidad a Afectar</label>
                         <div class="relative">
-                            <input class="w-full bg-stone-50 border-none rounded-xl py-4 px-5 text-sm font-black text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all" type="number" value="0"/>
+                            <input name="quantity" required class="w-full bg-stone-50 border-none rounded-xl py-4 px-5 text-sm font-black text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all" type="number" step="0.01" value="0"/>
                             <span class="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-black text-stone-300 uppercase tracking-tighter">Unidades (UND)</span>
                         </div>
                     </div>
 
                     <div class="col-span-2 space-y-3">
                         <label class="block text-[10px] font-black text-stone-400 uppercase tracking-widest">Justificación Técnica (Auditoria Obligatoria)</label>
-                        <textarea class="w-full bg-stone-50 border-none rounded-xl py-4 px-5 text-sm font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-stone-300 h-32" placeholder="Describa el motivo detallado de esta variación de stock para el registro histórico..."></textarea>
+                        <textarea name="reason" required class="w-full bg-stone-50 border-none rounded-xl py-4 px-5 text-sm font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-stone-300 h-32" placeholder="Describa el motivo detallado de esta variación de stock para el registro histórico..."></textarea>
                     </div>
-                </div>
 
-                <div class="mt-12 flex justify-end gap-4 pt-8 border-t border-stone-50">
-                    <button class="bg-white text-stone-400 px-8 py-4 text-[10px] font-black uppercase tracking-widest border border-stone-100 rounded-xl hover:bg-stone-50 transition-all">Limpiar</button>
-                    <button class="bg-stone-900 text-primary px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-xl hover:bg-black transition-all active:scale-95 group/btn">
-                        Proceder con el Ajuste
-                        <span class="material-symbols-outlined text-[16px] ml-2 inline-block group-hover:rotate-12 transition-transform">published_with_changes</span>
-                    </button>
-                </div>
+                    <div class="col-span-2 mt-4 flex justify-end gap-4 pt-8 border-t border-stone-50">
+                        <button type="reset" class="bg-white text-stone-400 px-8 py-4 text-[10px] font-black uppercase tracking-widest border border-stone-100 rounded-xl hover:bg-stone-50 transition-all">Limpiar</button>
+                        <button type="submit" class="bg-stone-900 text-primary px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-xl hover:bg-black transition-all active:scale-95 group/btn">
+                            Proceder con el Ajuste
+                            <span class="material-symbols-outlined text-[16px] ml-2 inline-block group-hover:rotate-12 transition-transform">published_with_changes</span>
+                        </button>
+                    </div>
+                </form>
             </section>
         </div>
 

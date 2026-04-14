@@ -80,12 +80,12 @@
         <div class="p-8 border-b border-stone-50 bg-stone-50/30 flex justify-between items-center">
             <h3 class="text-[10px] font-black text-stone-900 uppercase tracking-[0.2em]">Listado Maestro de Activos</h3>
             <div class="flex items-center gap-4">
-                 <div class="relative hidden lg:block">
+                 <form action="{{ route('erp.inventario.productos') }}" method="GET" class="relative hidden lg:block">
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400">
                       <span class="material-symbols-outlined text-[18px]">search</span>
                     </span>
-                    <input class="bg-white border border-stone-200 text-[10px] pl-10 pr-4 py-2.5 w-64 rounded-xl uppercase font-black focus:ring-4 focus:ring-primary/10 transition-all border-none shadow-sm" placeholder="Buscar por SKU o Nombre..." type="text"/>
-                  </div>
+                    <input name="search" value="{{ request('search') }}" class="bg-white border border-stone-200 text-[10px] pl-10 pr-4 py-2.5 w-64 rounded-xl uppercase font-black focus:ring-4 focus:ring-primary/10 transition-all border-none shadow-sm" placeholder="Buscar por SKU o Nombre..." type="text"/>
+                  </form>
             </div>
         </div>
 
@@ -168,7 +168,7 @@
         <div class="p-8 bg-stone-50/50 flex justify-between items-center border-t border-stone-50">
             <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] italic">Catálogo sincronizado • Base de datos distribuida • May de Repuesto La Cima</p>
             <div class="flex gap-2">
-                {{ $products->appends(request()->query())->links('vendor.pagination.tailwind_custom') }}
+                {{ $products->appends(request()->query())->links('vendor.pagination.tailwind_zenith') }}
             </div>
         </div>
     </div>
@@ -244,4 +244,72 @@
             </button>
         </div>
     </div>
+@endsection
+
+@section('modals')
+    <!-- Modal: Nuevo Item Estratégico -->
+    <div id="createProductModal" class="hidden fixed inset-0 bg-stone-900/40 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+        <div class="bg-white rounded-[32px] w-full max-w-2xl shadow-2xl border border-stone-200 overflow-hidden animate-in fade-in zoom-in duration-300">
+            <div class="p-8 border-b border-stone-100 flex justify-between items-center bg-stone-50">
+                <div>
+                    <h3 class="text-2xl font-headline font-black text-stone-900 uppercase tracking-tighter">Registrar <span class="text-primary italic">Activo</span></h3>
+                    <p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Apertura de ficha técnica estratégica</p>
+                </div>
+                <button onclick="closeModal('createProductModal')" class="material-symbols-outlined text-stone-400 hover:text-stone-900 transition-colors">close</button>
+            </div>
+            <form action="{{ route('erp.inventario.productos.store') }}" method="POST" class="p-8">
+                @csrf
+                <div class="grid grid-cols-2 gap-6 mb-8">
+                    <div class="col-span-2">
+                        <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest block mb-2">Nombre del Producto</label>
+                        <input type="text" name="nombre" required class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-xs font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest block mb-2">Código OEM (SKU)</label>
+                        <input type="text" name="codigo_oem" required class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-xs font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all font-mono">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest block mb-2">Código Interno</label>
+                        <input type="text" name="codigo_interno" class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-xs font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all font-mono">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest block mb-2">Categoría</label>
+                        <select name="categoria" class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-xs font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer">
+                            <option>Frenado</option>
+                            <option>Motor</option>
+                            <option>Suspensión</option>
+                            <option>Transmisión</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest block mb-2">Marca</label>
+                        <input type="text" name="marca" class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-xs font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest block mb-2">Precio Mayor (USD)</label>
+                        <input type="number" name="precio_mayor" step="0.01" required class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-xs font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest block mb-2">Stock Inicial</label>
+                        <input type="number" name="stock_actual" required class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-xs font-bold text-stone-900 focus:ring-4 focus:ring-primary/10 transition-all">
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <button type="button" onclick="closeModal('createProductModal')" class="flex-1 py-4 text-[10px] font-black uppercase text-stone-400 hover:text-stone-900 transition-colors">Cancelar</button>
+                    <button type="submit" class="flex-[2] py-4 bg-stone-900 text-primary text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-xl hover:bg-black transition-all">Sincronizar Maestro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 @endsection
