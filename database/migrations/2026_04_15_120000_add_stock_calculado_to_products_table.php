@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('stock_calculado')->default(0)->after('price')->comment('Stock precalculado cacheado');
+            $table->integer('stock_calculado')->default(0)->after('stock_actual')->comment('Stock precalculado cacheado');
         });
     }
 

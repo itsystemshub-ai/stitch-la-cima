@@ -26,40 +26,59 @@
     </div>
   </div>
 
-  <!-- Tarjetas de Resumen -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-    <a href="{{ url('/erp/inventario') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-blue-600 group-hover:text-primary">inventory_2</span></div>
-        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12%</span>
+  <!-- Tarjetas de Resumen Modulares (GridStack) -->
+  <div class="grid-stack mb-6" id="tour-dashboard">
+    <div class="grid-stack-item" gs-w="3" gs-h="2">
+      <div class="grid-stack-item-content">
+        <a href="{{ url('/erp/inventario') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group block h-full">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-blue-600 group-hover:text-primary">inventory_2</span></div>
+            <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12%</span>
+          </div>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="stockCount">14,204</p>
+          <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Productos en Stock</p>
+        </a>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="stockCount">14,204</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Productos en Stock</p>
-    </a>
-    <a href="{{ url('/erp/ventas') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-green-600 group-hover:text-primary">payments</span></div>
-        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+8.2%</span>
+    </div>
+    
+    <div class="grid-stack-item" gs-w="3" gs-h="2">
+      <div class="grid-stack-item-content">
+        <a href="{{ url('/erp/ventas') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group block h-full">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-green-600 group-hover:text-primary">payments</span></div>
+            <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+8.2%</span>
+          </div>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="salesAmount">$128,450</p>
+          <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Ventas del Mes</p>
+        </a>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="salesAmount">$128,450</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Ventas del Mes</p>
-    </a>
-    <a href="{{ url('/erp/compras') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-purple-600 group-hover:text-primary">shopping_cart</span></div>
-        <span class="text-[10px] font-bold text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">3 activas</span>
+    </div>
+
+    <div class="grid-stack-item" gs-w="3" gs-h="2">
+      <div class="grid-stack-item-content">
+        <a href="{{ url('/erp/compras') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group block h-full">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-purple-600 group-hover:text-primary">shopping_cart</span></div>
+            <span class="text-[10px] font-bold text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">3 activas</span>
+          </div>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="pendingPurchases">$12,400</p>
+          <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Compras Pendientes</p>
+        </a>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="pendingPurchases">$12,400</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Compras Pendientes</p>
-    </a>
-    <a href="{{ url('/erp/ventas/clientes') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-orange-600 group-hover:text-primary">people</span></div>
-        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+5</span>
+    </div>
+
+    <div class="grid-stack-item" gs-w="3" gs-h="2">
+      <div class="grid-stack-item-content">
+        <a href="{{ url('/erp/ventas/clientes') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group block h-full">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-orange-600 group-hover:text-primary">people</span></div>
+            <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+5</span>
+          </div>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="customerCount">342</p>
+          <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Clientes Activos</p>
+        </a>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="customerCount">342</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Clientes Activos</p>
-    </a>
+    </div>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">

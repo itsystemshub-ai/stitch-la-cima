@@ -1,0 +1,38 @@
+/* resources/css/pos.css */
+@import "tailwindcss";
+
+/* 
+ * Golden UI - POS VITE BUNDLE
+ * Este archivo excluye librerias pesadas del dashboard para 
+ * garantizar un flujo ultra rapido offline-first en terminales Celeron.
+ */
+
+@theme {
+  --color-primary: #FFD700;
+  --color-primary-dark: #ccac00;
+  --color-stone-900: #1c1917;
+  --color-stone-800: #292524;
+  --font-headline: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #f5f5f4;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fast CSS-only POS layouts */
+.pos-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.pos-cart {
+    background: white;
+    border-left: 1px solid #e7e5e4;
+    display: flex;
+    flex-direction: column;
+}

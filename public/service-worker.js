@@ -13,6 +13,8 @@ const ASSETS_TO_CACHE = [
   '/auth/login',
   '/auth/crear_cuenta',
   '/frontend/public/assets/images/logo.png',
+  '/erp/pos',
+  '/build/assets/pos.css',
   'https://cdn.tailwindcss.com?plugins=forms,container-queries',
   'https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap',
   'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'

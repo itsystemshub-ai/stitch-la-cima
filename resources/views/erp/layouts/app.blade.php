@@ -45,6 +45,19 @@
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
 
 <script src="{{ asset('erp/js/inicio.js') }}"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('App lista para uso Offline en Caja. Scope:', registration.scope);
+          })
+          .catch(error => {
+            console.log('Fallo integración Offline:', error);
+          });
+      });
+    }
+</script>
 @stack('scripts')
 </body>
 </html>

@@ -10,3 +10,6 @@ Artisan::command('inspire', function () {
 // Respaldos automáticos de la base de datos (y archivos configurados)
 \Illuminate\Support\Facades\Schedule::command('backup:clean')->dailyAt('01:30');
 \Illuminate\Support\Facades\Schedule::command('backup:run')->dailyAt('02:00');
+
+// Consolidación de Asientos Contables
+\Illuminate\Support\Facades\Schedule::job(new \App\Jobs\ConsolidateDailyAccounting())->dailyAt('03:00');

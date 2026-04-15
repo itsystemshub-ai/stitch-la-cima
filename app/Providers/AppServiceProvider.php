@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Notification;
+use App\Models\StockMovement;
+use App\Observers\StockMovementObserver;
 use App\Console\Commands\ServeCommand;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        StockMovement::observe(StockMovementObserver::class);
+
         View::composer('*', function ($view) {
             if (auth()->check()) {
                 $view->with('unreadNotificationsCount', Notification::where('user_id', auth()->id())->where('read', false)->count());

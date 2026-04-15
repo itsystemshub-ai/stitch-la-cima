@@ -24,7 +24,7 @@
   </div>
 
   <!-- Menu Principal -->
-  <nav class="flex-1 px-3 space-y-0.5 pb-24">
+  <nav id="tour-nav" class="flex-1 px-3 space-y-0.5 pb-24">
 
     <div class="menu-group">Principal</div>
     <a href="{{ url('/') }}" class="menu-item menu-item-inactive">
@@ -62,7 +62,7 @@
       </div>
       <div class="submenu {{ Request::is('erp/ventas*') ? 'show' : '' }}">
         <a href="{{ url('/erp/ventas') }}" class="{{ Request::is('erp/ventas') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
-        <a href="{{ url('/erp/ventas/pos') }}" class="{{ Request::is('erp/ventas/pos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
+        <a href="{{ url('/erp/ventas/pos') }}" id="tour-pos" class="{{ Request::is('erp/ventas/pos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
         <a href="{{ url('/erp/ventas/registro') }}" class="{{ Request::is('erp/ventas/registro*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">list_alt</span> Registro</a>
         <a href="{{ url('/erp/ventas/facturacion') }}" class="{{ Request::is('erp/ventas/facturacion*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">receipt</span> Facturación</a>
         <a href="{{ url('/erp/ventas/historial') }}" class="{{ Request::is('erp/ventas/historial*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">description</span> Historial Facturas</a>

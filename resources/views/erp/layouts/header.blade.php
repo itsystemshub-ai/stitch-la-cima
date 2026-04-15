@@ -9,6 +9,10 @@
         <a href="{{ url('/erp/dashboard') }}" class="hover:text-stone-900">Inicio</a>
         @yield('breadcrumb')
       </div>
+      <button onclick="startErpTour()" class="ml-4 px-3 py-1.5 bg-stone-900 text-primary text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-stone-800 transition-all flex items-center gap-2">
+        <span class="material-symbols-outlined text-xs">auto_awesome</span>
+        Quick Tour
+      </button>
     </div>
 
     <!-- Acciones -->
