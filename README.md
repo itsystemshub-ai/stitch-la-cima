@@ -7,6 +7,52 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Getting Started
+
+### Prerequisites
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+
+### Installation
+
+```bash
+# Install dependencies
+composer install
+npm install
+
+# Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# Run migrations
+php artisan migrate
+```
+
+### Development Server
+
+**Recommended:** Use the included script que inicia TODO automáticamente:
+
+```bash
+serve.bat
+```
+
+Esto inicia:
+- ✅ PHP Development Server (http://127.0.0.1:8000)
+- ✅ Vite Dev Server (hot reload para assets)
+
+**Alternative:** Si prefieres usar `php artisan serve` directamente, abre otra terminal y ejecuta:
+```bash
+npm run dev
+```
+
+### Custom Command
+
+También puedes usar el comando personalizado:
+```bash
+php artisan serve:all
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

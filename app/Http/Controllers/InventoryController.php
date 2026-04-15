@@ -44,16 +44,29 @@ class InventoryController extends Controller
             $query->where(function($q) use ($search) {
                 $q->where('nombre', 'like', "%{$search}%")
                   ->orWhere('codigo_oem', 'like', "%{$search}%")
-                  ->orWhere('codigo_interno', 'like', "%{$search}%");
+                  ->orWhere('codigo_interno', 'like', "%{$search}%")
+                  ->orWhere('marca', 'like', "%{$search}%")
+                  ->orWhere('fabricante', 'like', "%{$search}%")
+                  ->orWhere('categoria', 'like', "%{$search}%")
+                  ->orWhere('material', 'like', "%{$search}%");
             });
         }
 
-        $products = $query->orderBy('nombre')->paginate(15);
+        // Ordenamiento Dinámico Seguro
+        $allowedSorts = [
+            'id', 'codigo_oem', 'categoria', 'fabricante', 'marca', 
+            'material', 'espesor', 'nombre', 'medidas', 'precio_mayor', 'stock_actual'
+        ];
+        
+        $sortBy = in_array($request->sort_by, $allowedSorts) ? $request->sort_by : 'nombre';
+        $sortOrder = in_array($request->sort_order, ['asc', 'desc']) ? $request->sort_order : 'asc';
+
+        $products = $query->orderBy($sortBy, $sortOrder)->paginate(100);
         
         $inventory_value = Product::where('is_development', false)->sum(DB::raw('stock_actual * costo_compra'));
         $low_stock_count = Product::where('is_development', false)->whereColumn('stock_actual', '<=', 'stock_minimo')->count();
 
-        return view('erp.inventario.productos', compact('products', 'inventory_value', 'low_stock_count'));
+        return view('erp.inventario.productos', compact('products', 'inventory_value', 'low_stock_count', 'sortBy', 'sortOrder'));
     }
 
     /**
@@ -96,7 +109,7 @@ class InventoryController extends Controller
     /**
      * Ajuste Manual de Stock
      */
-    public function adjustStock(Request $request)
+    public function adjustStock(Request $request, \App\Services\InventoryService $inventoryService)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
@@ -105,27 +118,13 @@ class InventoryController extends Controller
             'reason' => 'required|string',
         ]);
 
-        DB::transaction(function () use ($request) {
-            $product = Product::find($request->product_id);
-            $qty = $request->quantity;
-
-            if ($request->type === 'IN') {
-                $product->increment('stock_actual', $qty);
-            } elseif ($request->type === 'OUT') {
-                $product->decrement('stock_actual', $qty);
-            } else {
-                // ADJUST (Establecer valor absoluto)
-                $product->update(['stock_actual' => $qty]);
-            }
-
-            StockMovement::create([
-                'product_id' => $product->id,
-                'type' => $request->type,
-                'quantity' => $qty,
-                'reason' => $request->reason,
-                'user_id' => Auth::id(),
-            ]);
-        });
+        $inventoryService->adjustStock(
+            $request->product_id,
+            $request->type,
+            $request->quantity,
+            $request->reason,
+            Auth::id()
+        );
 
         return back()->with('success', 'Ajuste de stock procesado y auditado.');
     }
@@ -133,53 +132,18 @@ class InventoryController extends Controller
     /**
      * Carga Masiva de Precios y Stock (Excel)
      */
-    public function massUpdate(Request $request)
+    public function massUpdate(Request $request, \App\Services\InventoryService $inventoryService)
     {
         if ($request->isMethod('post') && $request->has('excel_data')) {
             $data = json_decode($request->excel_data, true);
-            $count = 0;
 
             if (!$data) {
                 return back()->with('error', 'Error al procesar los datos del archivo.');
             }
 
-            DB::transaction(function () use ($data, &$count) {
-                foreach ($data as $item) {
-                    $sku = trim($item['codigo'] ?? '');
-                    if (empty($sku)) continue;
+            \App\Jobs\ProcessMassUpdate::dispatch($data, Auth::id());
 
-                    $product = Product::updateOrCreate(
-                        ['codigo_oem' => $sku],
-                        [
-                            'foto_path'      => $item['foto'] ?? '',
-                            'categoria'      => $item['categoria'] ?? '',
-                            'fabricante'     => $item['fabricante'] ?? '',
-                            'marca'          => $item['marca'] ?? '',
-                            'material'       => $item['material'] ?? '',
-                            'espesor'        => $item['espesor'] ?? '',
-                            'nombre'         => $item['descripcion'] ?? 'Nuevo Producto',
-                            'medidas'        => $item['medidas'] ?? '',
-                            'precio_mayor'   => $item['precio'] ?? 0,
-                            'stock_actual'   => $item['stock'] ?? 0,
-                            'fecha_incorporacion' => !empty($item['incorporacion']) ? date('Y-m-d', strtotime($item['incorporacion'])) : null,
-                            'is_development' => false,
-                            'activo'         => true,
-                        ]
-                    );
-                    $count++;
-                }
-
-                // Generar Notificación Estratégica
-                Notification::create([
-                    'type' => 'success',
-                    'title' => 'Sincronización Exitosa',
-                    'message' => "Se han procesado $count items desde el archivo Excel oficial.",
-                    'icon' => 'sync',
-                    'action_url' => route('erp.inventario.productos')
-                ]);
-            });
-
-            return back()->with('success', "Sincronización masiva de Excel completada. $count items procesados exitosamente.");
+            return back()->with('success', "La sincronización masiva ha comenzado en segundo plano. Recibirá una notificación al finalizar.");
         }
 
         // Estadísticas Reales para la Vista

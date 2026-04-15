@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Notification;
+use App\Console\Commands\ServeCommand;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->commands([
+            ServeCommand::class,
+        ]);
     }
 
     /**
@@ -22,8 +25,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-            $view->with('unreadNotificationsCount', Notification::where('read', false)->count());
-            $view->with('latestNotifications', Notification::latest()->take(5)->get());
+            if (auth()->check()) {
+                $view->with('unreadNotificationsCount', Notification::where('user_id', auth()->id())->where('read', false)->count());
+                $view->with('latestNotifications', Notification::where('user_id', auth()->id())->latest()->take(5)->get());
+            } else {
+                $view->with('unreadNotificationsCount', 0);
+                $view->with('latestNotifications', collect());
+            }
         });
     }
 }

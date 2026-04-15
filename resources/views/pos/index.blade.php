@@ -42,7 +42,7 @@
 <aside class="w-64 bg-text-dark border-r border-outline flex flex-col z-50">
     <div class="p-8">
         <div class="flex items-center gap-2 mb-1">
-            <img src="/frontend/assets/images/logo.png" alt="Logo" class="h-8 w-auto brightness-0 invert">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="h-8 w-auto brightness-0 invert">
             <span class="text-xl font-headline font-black text-white italic tracking-tighter uppercase leading-none mt-1">ZENITH <span class="text-primary not-italic">V1.0</span></span>
         </div>
         <p class="text-[9px] font-black text-primary/60 tracking-[0.3em] mt-1 pl-1 uppercase font-headline">Terminal Operative</p>

@@ -201,9 +201,12 @@
 
   <!-- Boton Cerrar Sesion -->
   <div class="mt-auto border-t border-stone-200 p-4">
-    <button onclick="localStorage.removeItem('erp_session'); window.location.href='{{ url('/auth/login') }}';" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
-      <span class="material-symbols-outlined text-[18px]">logout</span>
-      Cerrar Sesión
-    </button>
+    <form method="POST" action="{{ url('/auth/logout') }}">
+      @csrf
+      <button type="submit" class="w-full bg-red-50 text-red-600 font-medium py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-red-100 transition-all rounded-lg text-sm">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        Cerrar Sesión
+      </button>
+    </form>
   </div>
 </aside>

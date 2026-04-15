@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MaintenanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -9,8 +10,16 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\VentasController;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\ContabilidadController;
+use App\Http\Controllers\RrhhController;
+use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\FinanzasController;
+use App\Http\Controllers\AyudaController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 
 // Punto de Entrada Principal (Storefront)
 Route::get('/', [TiendaController::class, 'index']);
@@ -29,13 +38,24 @@ Route::prefix('erp/sync')->group(function () {
 
 // Static Asset Bridge: Sirve los archivos de UI originales directamente
 Route::get('/frontend/{path}', function ($path) {
+    // Sanitize path to prevent traversal
+    $path = str_replace(['../', '..\\'], '', $path);
+    
     $absolutePath = base_path('stitch/' . $path);
-    if (!File::exists($absolutePath)) { abort(404); }
-    $file = File::get($absolutePath);
-    $type = File::mimeType($absolutePath);
-    if (str_ends_with($absolutePath, '.css')) { $type = 'text/css'; }
-    elseif (str_ends_with($absolutePath, '.js')) { $type = 'application/javascript'; }
-    elseif (str_ends_with($absolutePath, '.svg')) { $type = 'image/svg+xml'; }
+    
+    // Extra security: ensure real path is within the stitch directory
+    $realPath = realpath($absolutePath);
+    $stitchDir = realpath(base_path('stitch'));
+    
+    if (!$realPath || !str_starts_with($realPath, $stitchDir) || !File::exists($realPath)) { 
+        abort(404); 
+    }
+    
+    $file = File::get($realPath);
+    $type = File::mimeType($realPath);
+    if (str_ends_with($realPath, '.css')) { $type = 'text/css'; }
+    elseif (str_ends_with($realPath, '.js')) { $type = 'application/javascript'; }
+    elseif (str_ends_with($realPath, '.svg')) { $type = 'image/svg+xml'; }
     
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);
@@ -46,7 +66,7 @@ Route::get('/frontend/{path}', function ($path) {
 
 // ========== GRUPOS DE RUTAS ERP (MODULAR) ==========
 
-Route::prefix('erp')->group(function () {
+Route::prefix('erp')->middleware('auth.erp')->group(function () {
     
     // Dashboard Principal
     // Dashboard Principal (ERP Inicio)
@@ -76,73 +96,73 @@ Route::prefix('erp')->group(function () {
 
     // Módulo Ventas
     Route::prefix('ventas')->group(function () {
-        Route::get('/', function () { return view('erp.ventas.index'); })->name('erp.ventas.index');
-        Route::get('/pos', function () { return view('erp.pos.index'); })->name('erp.ventas.pos');
-        Route::get('/clientes', function () { return view('erp.ventas.clientes'); })->name('erp.ventas.clientes');
-        Route::get('/registro', function () { return view('erp.ventas.registro'); })->name('erp.ventas.registro');
-        Route::get('/facturacion', function () { return view('erp.ventas.facturacion'); })->name('erp.ventas.facturacion');
-        Route::get('/historial', function () { return view('erp.ventas.historial'); })->name('erp.ventas.historial');
-        Route::get('/notas-credito', function () { return view('erp.ventas.notas-credito'); })->name('erp.ventas.notas-credito');
-        Route::get('/vendedores', function () { return view('erp.ventas.vendedores'); })->name('erp.ventas.vendedores');
-        Route::get('/reportes', function () { return view('erp.ventas.reportes'); })->name('erp.ventas.reportes');
+        Route::get('/', [VentasController::class, 'index'])->name('erp.ventas.index');
+        Route::get('/pos', [VentasController::class, 'pos'])->name('erp.ventas.pos');
+        Route::get('/clientes', [VentasController::class, 'clientes'])->name('erp.ventas.clientes');
+        Route::get('/registro', [VentasController::class, 'registro'])->name('erp.ventas.registro');
+        Route::get('/facturacion', [VentasController::class, 'facturacion'])->name('erp.ventas.facturacion');
+        Route::get('/historial', [VentasController::class, 'historial'])->name('erp.ventas.historial');
+        Route::get('/notas-credito', [VentasController::class, 'notasCredito'])->name('erp.ventas.notas-credito');
+        Route::get('/vendedores', [VentasController::class, 'vendedores'])->name('erp.ventas.vendedores');
+        Route::get('/reportes', [VentasController::class, 'reportes'])->name('erp.ventas.reportes');
     });
 
     // Módulo Compras
     Route::prefix('compras')->group(function () {
-        Route::get('/', function () { return view('erp.compras.index'); })->name('erp.compras.index');
-        Route::get('/proveedores', function () { return view('erp.compras.proveedores'); })->name('erp.compras.proveedores');
-        Route::get('/historial', function () { return view('erp.compras.historial'); })->name('erp.compras.historial');
-        Route::get('/factura', function () { return view('erp.compras.factura'); })->name('erp.compras.factura');
-        Route::get('/libro', function () { return view('erp.compras.libro'); })->name('erp.compras.libro');
-        Route::get('/reportes', function () { return view('erp.compras.reportes'); })->name('erp.compras.reportes');
+        Route::get('/', [ComprasController::class, 'index'])->name('erp.compras.index');
+        Route::get('/proveedores', [ComprasController::class, 'proveedores'])->name('erp.compras.proveedores');
+        Route::get('/historial', [ComprasController::class, 'historial'])->name('erp.compras.historial');
+        Route::get('/factura', [ComprasController::class, 'factura'])->name('erp.compras.factura');
+        Route::get('/libro', [ComprasController::class, 'libro'])->name('erp.compras.libro');
+        Route::get('/reportes', [ComprasController::class, 'reportes'])->name('erp.compras.reportes');
     });
 
     // Módulo Contabilidad
     Route::prefix('contabilidad')->group(function () {
-        Route::get('/', function () { return view('erp.contabilidad.index'); })->name('erp.contabilidad.index');
-        Route::get('/plan-cuentas', function () { return view('erp.contabilidad.plan-cuentas'); })->name('erp.contabilidad.plan-cuentas');
-        Route::get('/libro-diario', function () { return view('erp.contabilidad.libro-diario'); })->name('erp.contabilidad.libro-diario');
-        Route::get('/libro-ventas', function () { return view('erp.contabilidad.libro-ventas'); })->name('erp.contabilidad.libro-ventas');
-        Route::get('/libro-caja', function () { return view('erp.contabilidad.libro-caja'); })->name('erp.contabilidad.libro-caja');
-        Route::get('/balance-general', function () { return view('erp.contabilidad.balance-general'); })->name('erp.contabilidad.balance-general');
-        Route::get('/balance-comprobacion', function () { return view('erp.contabilidad.balance-comprobacion'); })->name('erp.contabilidad.balance-comprobacion');
-        Route::get('/estado-resultados', function () { return view('erp.contabilidad.estado-resultados'); })->name('erp.contabilidad.estado-resultados');
-        Route::get('/declaracion-iva', function () { return view('erp.contabilidad.declaracion-iva'); })->name('erp.contabilidad.declaracion-iva');
-        Route::get('/cierre', function () { return view('erp.contabilidad.cierre-contable'); })->name('erp.contabilidad.cierre');
-        Route::get('/libros-legales', function () { return view('erp.contabilidad.libros-legales'); })->name('erp.contabilidad.libros-legales');
-        Route::get('/reportes', function () { return view('erp.contabilidad.reportes-contables'); })->name('erp.contabilidad.reportes');
+        Route::get('/', [ContabilidadController::class, 'index'])->name('erp.contabilidad.index');
+        Route::get('/plan-cuentas', [ContabilidadController::class, 'planCuentas'])->name('erp.contabilidad.plan-cuentas');
+        Route::get('/libro-diario', [ContabilidadController::class, 'libroDiario'])->name('erp.contabilidad.libro-diario');
+        Route::get('/libro-ventas', [ContabilidadController::class, 'libroVentas'])->name('erp.contabilidad.libro-ventas');
+        Route::get('/libro-caja', [ContabilidadController::class, 'libroCaja'])->name('erp.contabilidad.libro-caja');
+        Route::get('/balance-general', [ContabilidadController::class, 'balanceGeneral'])->name('erp.contabilidad.balance-general');
+        Route::get('/balance-comprobacion', [ContabilidadController::class, 'balanceComprobacion'])->name('erp.contabilidad.balance-comprobacion');
+        Route::get('/estado-resultados', [ContabilidadController::class, 'estadoResultados'])->name('erp.contabilidad.estado-resultados');
+        Route::get('/declaracion-iva', [ContabilidadController::class, 'declaracionIva'])->name('erp.contabilidad.declaracion-iva');
+        Route::get('/cierre', [ContabilidadController::class, 'cierreContable'])->name('erp.contabilidad.cierre');
+        Route::get('/libros-legales', [ContabilidadController::class, 'librosLegales'])->name('erp.contabilidad.libros-legales');
+        Route::get('/reportes', [ContabilidadController::class, 'reportesContables'])->name('erp.contabilidad.reportes');
     });
     
     // Módulo Recursos Humanos (RRHH)
     Route::prefix('rrhh')->group(function () {
-        Route::get('/', function () { return view('erp.rrhh.index'); })->name('erp.rrhh.index');
-        Route::get('/empleados', function () { return view('erp.rrhh.empleados'); })->name('erp.rrhh.empleados');
-        Route::get('/nomina', function () { return view('erp.rrhh.nomina'); })->name('erp.rrhh.nomina');
-        Route::get('/prestaciones', function () { return view('erp.rrhh.prestaciones'); })->name('erp.rrhh.prestaciones');
-        Route::get('/portal-empleado', function () { return view('erp.rrhh.portal-empleado'); })->name('erp.rrhh.portal-empleado');
-        Route::get('/rendimiento', function () { return view('erp.rrhh.rendimiento'); })->name('erp.rrhh.rendimiento');
-        Route::get('/reportes', function () { return view('erp.rrhh.reportes'); })->name('erp.rrhh.reportes');
+        Route::get('/', [RrhhController::class, 'index'])->name('erp.rrhh.index');
+        Route::get('/empleados', [RrhhController::class, 'empleados'])->name('erp.rrhh.empleados');
+        Route::get('/nomina', [RrhhController::class, 'nomina'])->name('erp.rrhh.nomina');
+        Route::get('/prestaciones', [RrhhController::class, 'prestaciones'])->name('erp.rrhh.prestaciones');
+        Route::get('/portal-empleado', [RrhhController::class, 'portalEmpleado'])->name('erp.rrhh.portal-empleado');
+        Route::get('/rendimiento', [RrhhController::class, 'rendimiento'])->name('erp.rrhh.rendimiento');
+        Route::get('/reportes', [RrhhController::class, 'reportes'])->name('erp.rrhh.reportes');
     });
 
     // Módulo Configuracion
     Route::prefix('configuracion')->group(function () {
-        Route::get('/', function () { return view('erp.configuracion.index'); })->name('erp.configuracion.index');
-        Route::get('/parametros', function () { return view('erp.configuracion.parametros'); })->name('erp.configuracion.parametros');
-        Route::get('/fiscal', function () { return view('erp.configuracion.fiscal'); })->name('erp.configuracion.fiscal');
-        Route::get('/usuarios', function () { return view('erp.configuracion.usuarios'); })->name('erp.configuracion.usuarios');
-        Route::get('/base-datos', function () { return view('erp.configuracion.base-datos'); })->name('erp.configuracion.base-datos');
-        Route::get('/backups', function () { return view('erp.configuracion.backups'); })->name('erp.configuracion.backups');
-        Route::get('/estado-sistema', function () { return view('erp.configuracion.estado-sistema'); })->name('erp.configuracion.estado-sistema');
-        Route::get('/tareas', function () { return view('erp.configuracion.tareas'); })->name('erp.configuracion.tareas');
-        Route::get('/auditoria', function () { return view('erp.configuracion.auditoria'); })->name('erp.configuracion.auditoria');
+        Route::get('/', [ConfiguracionController::class, 'index'])->name('erp.configuracion.index');
+        Route::get('/parametros', [ConfiguracionController::class, 'parametros'])->name('erp.configuracion.parametros');
+        Route::get('/fiscal', [ConfiguracionController::class, 'fiscal'])->name('erp.configuracion.fiscal');
+        Route::get('/usuarios', [ConfiguracionController::class, 'usuarios'])->name('erp.configuracion.usuarios');
+        Route::get('/base-datos', [ConfiguracionController::class, 'baseDatos'])->name('erp.configuracion.base-datos');
+        Route::get('/backups', [ConfiguracionController::class, 'backups'])->name('erp.configuracion.backups');
+        Route::get('/estado-sistema', [ConfiguracionController::class, 'estadoSistema'])->name('erp.configuracion.estado-sistema');
+        Route::get('/tareas', [ConfiguracionController::class, 'tareas'])->name('erp.configuracion.tareas');
+        Route::get('/auditoria', [ConfiguracionController::class, 'auditoria'])->name('erp.configuracion.auditoria');
     });
 
     // Módulo Finanzas
     Route::prefix('finanzas')->group(function () {
-        Route::get('/', function () { return view('erp.finanzas.index'); })->name('erp.finanzas.index');
-        Route::get('/activos-fijos', function () { return view('erp.finanzas.activos-fijos'); })->name('erp.finanzas.activos-fijos');
-        Route::get('/cuentas-cobrar', function () { return view('erp.finanzas.cuentas-cobrar'); })->name('erp.finanzas.cuentas-cobrar');
-        Route::get('/reportes', function () { return view('erp.finanzas.reportes'); })->name('erp.finanzas.reportes');
+        Route::get('/', [FinanzasController::class, 'index'])->name('erp.finanzas.index');
+        Route::get('/activos-fijos', [FinanzasController::class, 'activosFijos'])->name('erp.finanzas.activos-fijos');
+        Route::get('/cuentas-cobrar', [FinanzasController::class, 'cuentasCobrar'])->name('erp.finanzas.cuentas-cobrar');
+        Route::get('/reportes', [FinanzasController::class, 'reportes'])->name('erp.finanzas.reportes');
     });
 
     // Módulo Aprobaciones
@@ -153,12 +173,12 @@ Route::prefix('erp')->group(function () {
 
     // Módulo Ayuda
     Route::prefix('ayuda')->group(function () {
-        Route::get('/', function () { return view('erp.ayuda.index'); })->name('erp.ayuda.index');
-        Route::get('/tickets', function () { return view('erp.ayuda.tickets'); })->name('erp.ayuda.tickets');
-        Route::get('/crear-ticket', function () { return view('erp.ayuda.crear-ticket'); })->name('erp.ayuda.crear-ticket');
-        Route::get('/chat', function () { return view('erp.ayuda.chat'); })->name('erp.ayuda.chat');
-        Route::get('/conocimiento', function () { return view('erp.ayuda.conocimiento'); })->name('erp.ayuda.conocimiento');
-        Route::get('/manual', function () { return view('erp.ayuda.manuales'); })->name('erp.ayuda.manual');
+        Route::get('/', [AyudaController::class, 'index'])->name('erp.ayuda.index');
+        Route::get('/tickets', [AyudaController::class, 'tickets'])->name('erp.ayuda.tickets');
+        Route::get('/crear-ticket', [AyudaController::class, 'crearTicket'])->name('erp.ayuda.crear-ticket');
+        Route::get('/chat', [AyudaController::class, 'chat'])->name('erp.ayuda.chat');
+        Route::get('/conocimiento', [AyudaController::class, 'conocimiento'])->name('erp.ayuda.conocimiento');
+        Route::get('/manual', [AyudaController::class, 'manuales'])->name('erp.ayuda.manual');
     });
 
 });
@@ -179,20 +199,28 @@ Route::get('/tienda/{page?}', function ($page = 'index') {
     abort(404, 'Página de tienda no encontrada.');
 })->where('page', '.*');
 
-// Enrutador Dinámico para Autenticación (Login, Registro, Recuperación)
+// Auth Routes
+Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/auth/login', [LoginController::class, 'login'])->middleware('throttle:5,1');
+Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Enrutador Dinámico para Autenticación (Registro, Recuperación)
 Route::get('/auth/{page?}', function ($page = 'login') {
-    if ($page === 'index' || $page === 'inicio') return redirect('/');
-    
+    // Redirect to proper login if already authenticated
+    if (Auth::check() && $page === 'login') {
+        return redirect('/erp/inicio');
+    }
+
     $page = str_replace(['../', '..\\'], '', $page);
     $viewPath = resource_path('views/auth/' . $page . '.blade.php');
-    
+
     if (file_exists($viewPath)) {
         return view('auth.' . $page);
     }
-    
+
     // Fallback para nombres comunes
     if ($page === 'crear-cuenta') return redirect('/auth/crear_cuenta');
-    
+
     abort(404, 'Página de acceso no encontrada: ' . $page);
 })->where('page', '.*');
 
@@ -203,4 +231,3 @@ Route::prefix('api/erp/invoice')->group(function () {
 
 // Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
 Route::get('/erp/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
-

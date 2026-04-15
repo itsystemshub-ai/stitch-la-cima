@@ -93,26 +93,30 @@
                 <p class="text-stone-500 font-medium text-sm">Ingrese sus credenciales corporativas</p>
             </div>
 
-            <form class="space-y-6" onsubmit="event.preventDefault(); localStorage.setItem('erp_session', 'true'); window.location.href='{{ url('/erp/inicio') }}';">
+            <form class="space-y-6" method="POST" action="{{ url('/auth/login') }}">
+                @csrf
                 <div>
                     <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400 mb-2">Usuario / Email</label>
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">person</span>
-                        <input class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="nombre.apellido" type="text" required/>
+                        <input name="email" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none @error('email') border-red-500 @enderror" placeholder="nombre.apellido" type="text" value="{{ old('email') }}" required/>
                     </div>
+                    @error('email')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400 mb-2">Contraseña</label>
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg">lock</span>
-                        <input class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="••••••••" type="password" required/>
+                        <input name="password" class="w-full pl-12 pr-4 py-4 bg-stone-50 border border-stone-100 rounded-xl text-stone-900 placeholder:text-stone-300 text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all outline-none" placeholder="••••••••" type="password" required/>
                     </div>
                 </div>
 
                 <div class="flex items-center justify-between">
                     <label class="flex items-center gap-2 cursor-pointer group">
-                        <input type="checkbox" class="w-4 h-4 rounded border-stone-300 text-primary focus:ring-primary">
+                        <input name="remember" type="checkbox" class="w-4 h-4 rounded border-stone-300 text-primary focus:ring-primary">
                         <span class="text-xs text-stone-500 group-hover:text-stone-900 transition-colors">Recordarme</span>
                     </label>
                     <a href="{{ url('/auth/' . 'olvido_contraseña') }}" class="text-xs font-bold text-stone-400 hover:text-stone-900 transition-colors uppercase tracking-tighter">¿Olvidó su clave?</a>

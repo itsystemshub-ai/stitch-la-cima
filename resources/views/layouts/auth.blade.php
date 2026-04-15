@@ -7,9 +7,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LA CIMA">
-<link rel="manifest" href="/frontend/manifest.json">
-<link rel="icon" type="image/png" href="/frontend/assets/images/logo.png">
-<link rel="apple-touch-icon" href="/frontend/assets/images/logo.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
 <title>@yield('title', 'Acceso | Mayor de Repuesto LA CIMA, C.A.')</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -42,7 +42,7 @@
 <nav class="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm">
     <div class="flex justify-between items-center px-6 py-3">
         <a href="/tienda/index" class="flex items-center gap-2 group">
-            <img src="/frontend/assets/images/logo.png" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
             <div class="flex flex-col">
                 <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
                 <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>
@@ -63,7 +63,7 @@
 <footer class="bg-black text-white w-full py-12 px-8 mt-auto">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div class="flex items-center gap-3">
-            <img src="/frontend/assets/images/logo.png" alt="Logo" class="h-10 w-auto opacity-80">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="h-10 w-auto opacity-80">
             <div class="flex flex-col">
                 <span class="text-primary font-black text-xs uppercase tracking-tighter leading-none">MAYOR DE REPUESTO LA CIMA, C.A</span>
                 <span class="text-[9px] text-stone-500 uppercase tracking-widest leading-none mt-1">RIF.: J-40308741-5</span>

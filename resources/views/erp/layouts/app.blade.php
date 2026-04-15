@@ -12,22 +12,14 @@
 <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
 <title>@yield('title', 'Zenith ERP') | Mayor de Repuesto La Cima, C.A.</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script>
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: { primary: "#ceff5e", secondary: "#1c1c1c", background: "#f6f6f9", surface: "#ffffff", outline: "#e2e2e5" },
-        fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] }
-      }
-    }
-  }
-</script>
 <link rel="stylesheet" href="{{ asset('erp/css/inicio.css') }}">
 @stack('styles')
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-background text-stone-900 min-h-screen flex">
 

@@ -21,6 +21,7 @@ class Product extends Model
         'espesor',
         'medidas',
         'stock_actual',
+        'stock_calculado',
         'stock_minimo',
         'costo_compra',
         'precio_mayor',

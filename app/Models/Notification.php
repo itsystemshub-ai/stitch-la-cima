@@ -10,6 +10,7 @@ class Notification extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'type',
         'title',
         'message',
@@ -17,4 +18,9 @@ class Notification extends Model
         'icon',
         'action_url',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

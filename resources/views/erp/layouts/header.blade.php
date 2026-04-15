@@ -70,14 +70,65 @@
         </div>
       </div>
 
-      <!-- Perfil -->
-      <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
-        <div class="text-right hidden md:block">
-          <p class="text-sm font-bold text-stone-900 leading-none">Administrador</p>
-          <p class="text-[10px] text-stone-500">Rol: Admin</p>
-        </div>
-        <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
-          A
+      <!-- Perfil con Dropdown -->
+      <div class="relative" x-data="{ open: false }">
+        <button @click="open = !open" class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200 hover:bg-stone-50 rounded-lg px-3 py-2 transition-all">
+          <div class="text-right hidden md:block">
+            <p class="text-sm font-bold text-stone-900 leading-none">{{ Auth::user()->name }}</p>
+            <p class="text-[10px] text-stone-500">{{ Auth::user()->email }}</p>
+          </div>
+          <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
+            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+          </div>
+          <span class="material-symbols-outlined text-stone-400 text-lg" :class="{ 'rotate-180': open }">expand_more</span>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div x-show="open" @click.away="open = false"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+             class="absolute right-0 top-full mt-2 w-64 bg-white border border-stone-200 rounded-xl shadow-2xl z-50 overflow-hidden" style="display: none;">
+          
+          <!-- User Info -->
+          <div class="p-4 border-b border-stone-100 bg-stone-50/50">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
+                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+              </div>
+              <div>
+                <p class="text-xs font-black text-stone-900 uppercase leading-tight">{{ Auth::user()->name }}</p>
+                <p class="text-[10px] text-stone-500">{{ Auth::user()->email }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Menu Items -->
+          <div class="py-2">
+            <a href="{{ url('/erp/dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-colors uppercase">
+              <span class="material-symbols-outlined text-lg">dashboard</span>
+              Dashboard
+            </a>
+            <a href="{{ url('/erp/perfil') }}" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-colors uppercase">
+              <span class="material-symbols-outlined text-lg">person</span>
+              Mi Perfil
+            </a>
+            <a href="{{ url('/erp/configuracion') }}" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-colors uppercase">
+              <span class="material-symbols-outlined text-lg">settings</span>
+              Configuración
+            </a>
+          </div>
+
+          <!-- Divider & Logout -->
+          <div class="border-t border-stone-100 py-2">
+            <form method="POST" action="{{ url('/auth/logout') }}">
+              @csrf
+              <button type="submit" class="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold text-red-600 hover:bg-red-50 transition-colors uppercase">
+                <span class="material-symbols-outlined text-lg">logout</span>
+                Cerrar Sesión
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
