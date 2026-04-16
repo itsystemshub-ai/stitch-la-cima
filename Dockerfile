@@ -2,12 +2,10 @@
 FROM composer:latest as vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install \
+RUN composer update \
     --no-dev \
     --ignore-platform-reqs \
     --no-interaction \
-    --no-plugins \
-    --no-scripts \
     --prefer-dist
 
 # --- Etapa 2: Dependencias de JS y Compilación (Vite) ---
