@@ -1,8 +1,8 @@
 # --- Etapa 1: Dependencias de PHP (Composer) ---
 FROM composer:latest as vendor
 WORKDIR /app
-COPY composer.json composer.lock ./
-RUN composer install \
+COPY composer.json ./
+RUN composer update \
     --no-dev \
     --ignore-platform-reqs \
     --no-interaction \
