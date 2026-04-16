@@ -18,6 +18,7 @@ use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\VentasController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
@@ -204,37 +205,28 @@ Route::get('/tienda/detalle_productos', [TiendaController::class, 'detalleProduc
 Route::get('/tienda/carrito', [TiendaController::class, 'verCarrito']);
 Route::get('/tienda/checkout', [TiendaController::class, 'checkout']);
 Route::get('/tienda/confirmacion/{orderId}', [TiendaController::class, 'confirmacion']);
+Route::get('/tienda/contacto', fn () => view('tienda.contacto'));
+Route::post('/tienda/contacto/enviar', [TiendaController::class, 'enviarContacto']);
 
 // Rutas de Autenticación de la Tienda
 Route::prefix('tienda/auth')->group(function () {
     Route::get('/register', [TiendaAuthController::class, 'showRegisterForm']);
     Route::post('/register', [TiendaAuthController::class, 'register']);
-
-    Route::get('/login', function () {
-        return redirect('/auth/login');
-    });
-
-    Route::middleware('auth')->group(function () {
-        Route::get('/mi-cuenta', [TiendaAuthController::class, 'miCuenta']);
-    });
+    Route::get('/login', fn () => redirect('/auth/login'));
 });
 
-// Enrutador Dinámico para el Storefront Público (Otras páginas estáticas)
-Route::get('/tienda/{page?}', function ($page = 'index') {
-    if ($page === 'index') {
-        return redirect('/tienda/index');
-    }
-    $page = str_replace(['../', '..\\'], '', $page); // Sanitize path traversal
-    if (view()->exists('tienda.'.$page)) {
-        return view('tienda.'.$page);
-    }
-    abort(404, 'Página de tienda no encontrada.');
-})->where('page', '.*');
+// Área de cliente autenticado
+Route::middleware('auth')->group(function () {
+    Route::get('/tienda/mi-cuenta', [TiendaAuthController::class, 'miCuenta']);
+});
 
-// Auth Routes
+// Auth Routes (ERP + Tienda — Login Único)
 Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/auth/login', [LoginController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Rutas CMS Dinámicas (SIEMPRE al final para no superponer rutas específicas)
+Route::get('/tienda/{slug}', [TiendaController::class, 'getPage'])->where('slug', '[a-zA-Z0-9_-]+');
 
 // Enrutador Dinámico para Autenticación (Registro, Recuperación)
 Route::get('/auth/{page?}', function ($page = 'login') {
@@ -271,6 +263,8 @@ Route::prefix('api/tienda')->group(function () {
     Route::get('/productos', [TiendaController::class, 'catalogoGeneral']);
     Route::get('/productos/{id}', [TiendaController::class, 'detalleProducto']);
     Route::post('/carrito', [TiendaController::class, 'agregarCarrito']);
+    Route::put('/carrito/{id}', [TiendaController::class, 'updateCarrito']);
+    Route::delete('/carrito/{id}', [TiendaController::class, 'eliminarDeCarrito']);
     Route::post('/checkout', [TiendaController::class, 'procesarCheckout']);
 });
 

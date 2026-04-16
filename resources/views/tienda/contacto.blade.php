@@ -1,123 +1,112 @@
 @extends('layouts.ecommerce')
 
-@section('title', 'Contacto | Mayor de Repuesto LA CIMA, C.A.')
-
-@push('styles')
-    <link rel="stylesheet" href="css/contacto.css" />
-@endpush
+@section('title', 'Contacto Industrial | Mayor de Repuesto LA CIMA, C.A.')
 
 @section('content')
-<main class="flex-grow pt-16">
-    <!-- Hero Section -->
-    <section class="h-[400px] flex items-center overflow-hidden bg-black relative">
-        <div class="absolute inset-0 z-0">
-            <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAXDDoopL1vJGvj43_2EcixnT0qcffP-8sugqc3PJmetlM42HxR7EiDaACitBpmwFEGPY-d0LPOMheDO8XJC_vDkZ0NGhadXT3P0f67reZI-WnouLsKv14pyDyoOT8dU2KDqwTVwiQO7apJ_kQ5mUQ43bKNXlPy0n8itI7-GxJBnEoLXqAGm4Lc218ApwlfA93ICa2tzs84XoB3YvCguieK7UMsUIQ6QITRFgZwmKhnd-3jYDRMGtcZ5G-7Alrjd3kFtkJEppsOsA"
-                alt="Fondo Industrial"
-                class="w-full h-full object-cover opacity-50 grayscale mix-blend-luminosity"
-                loading="eager"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-black/60 to-transparent"></div>
-        </div>
-        <div class="container mx-auto px-6 relative z-10">
-            <span class="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Centro de Soporte Industrial</span>
-            <h1 class="text-5xl md:text-7xl font-headline font-black text-white tracking-tighter uppercase leading-[0.9]">
-                CONTACTO <br />
-                <span class="text-primary-dim">DIRECTO</span>
-            </h1>
-        </div>
-    </section>
+<main class="flex-grow pt-32 pb-12 px-6 max-w-7xl mx-auto w-full">
+    
+    <div class="text-center mb-16">
+        <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-2">Comunicaciones Corporativas</span>
+        <h1 class="font-headline text-5xl font-black uppercase tracking-tighter">Conecte con Ingeniería</h1>
+    </div>
 
-    <!-- Bento About -->
-    <section class="py-24 container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-24">
-            <div class="md:col-span-2 bg-stone-100 p-8 rounded-lg group">
-                <h3 class="font-headline text-2xl font-bold uppercase mb-4 group-hover:text-primary transition-colors">
-                    Nuestra Historia
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+        
+        <!-- Información Fija -->
+        <div class="space-y-12">
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-6 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+                    Centro de Operaciones
                 </h3>
-                <p class="text-on-surface-variant leading-relaxed">
-                    Nacimos en Valencia con la visión de centralizar el suministro de
-                    repuestos de alta precisión para la flota industrial más exigente
-                    del país.
+                <p class="text-stone-600 font-medium leading-relaxed max-w-md">
+                    Zona Industrial Los Ruices, Calle Milán, Edificio Comercial La Cima.<br>
+                    Caracas, Miranda. Zona Postal 1071.<br>
+                    Venezuela.
                 </p>
-                <div class="mt-8 text-4xl font-black text-black">
-                    VENEZUELA <span class="text-primary">2024</span>
+            </div>
+
+            <div class="h-px w-full bg-stone-200"></div>
+
+            <div class="grid grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-bold uppercase text-xs tracking-widest text-stone-500 mb-2">Ventas B2B</h4>
+                    <a href="tel:+582121234567" class="text-xl font-black text-black hover:text-primary transition">+58 (212) 123-4567</a>
+                </div>
+                <div>
+                    <h4 class="font-bold uppercase text-xs tracking-widest text-stone-500 mb-2">Soporte Técnico</h4>
+                    <a href="tel:+582129876543" class="text-xl font-black text-black hover:text-primary transition">+58 (212) 987-6543</a>
                 </div>
             </div>
-            <div class="md:col-span-1 bg-black text-white p-8 rounded-lg flex flex-col justify-between">
-                <div>
-                    <h3 class="font-headline text-xl font-bold uppercase mb-2 text-primary">
-                        Evolución Industrial
-                    </h3>
-                    <p class="text-stone-400 text-xs">
-                        Adaptándonos a las nuevas tecnologías de motorización Cummins y Volvo.
+
+            <div class="bg-black text-white p-8 rounded-2xl relative overflow-hidden">
+                <span class="material-symbols-outlined absolute right-4 bottom-4 text-8xl opacity-10">verified_user</span>
+                <h4 class="text-primary font-black uppercase mb-2 relative z-10">Línea Mayorista</h4>
+                <p class="text-sm text-stone-300 relative z-10">Si representa a una flotilla pesada o concesionario marítimo, nuestro equipo KAM está disponible 24/7 de forma exclusiva para corporaciones autorizadas.</p>
+            </div>
+        </div>
+
+        <!-- Formulario Dinámico Backend -->
+        <div class="bg-white p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-outline relative">
+            
+            @if(session('success'))
+                <div class="bg-primary/20 border-l-4 border-primary p-4 mb-8 rounded">
+                    <p class="font-bold text-black uppercase text-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        {{ session('success') }}
                     </p>
                 </div>
-                <span class="material-symbols-outlined text-4xl text-primary mt-4">query_stats</span>
-            </div>
-            <div class="md:col-span-1 bg-white border border-outline p-8 rounded-lg">
-                <h3 class="font-headline text-xl font-bold uppercase mb-2">Misión</h3>
-                <p class="text-on-surface-variant text-xs leading-relaxed italic">
-                    "Garantizar que ninguna máquina se detenga por falta de una pieza crítica."
-                </p>
-            </div>
-        </div>
+            @endif
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div class="space-y-12">
-                <div>
-                    <h2 class="text-4xl font-headline font-black uppercase tracking-tight mb-8">Oficinas Centrales</h2>
-                    <div class="space-y-8">
-                        <div class="flex items-start gap-4 p-6 bg-white border border-outline rounded-lg">
-                            <span class="material-symbols-outlined text-black bg-primary p-3 rounded-full">location_on</span>
-                            <div>
-                                <h4 class="font-headline font-black uppercase text-sm tracking-[0.2em] text-[#5a5c5e] mb-2">Dirección Física</h4>
-                                <p class="text-on-surface font-medium leading-relaxed">
-                                    AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA NO.
-                                    2-3-C, URB. EL PARRAL, 2001, VALENCIA, EDO. CARABOBO
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-6 bg-white border border-outline rounded-lg">
-                            <span class="material-symbols-outlined text-black bg-primary p-3 rounded-full">phone_in_talk</span>
-                            <div>
-                                <h4 class="font-headline font-black uppercase text-sm tracking-[0.2em] text-[#5a5c5e] mb-2">Línea de Atención</h4>
-                                <p class="text-on-surface font-black text-lg">+58 (241) 555-0101</p>
-                                <p class="text-on-surface-variant text-sm">atencion@lacima.com.ve</p>
-                            </div>
-                        </div>
+            <h3 class="text-xl font-black uppercase mb-8">Formulario de Requerimiento</h3>
+            
+            <form action="{{ url('/tienda/contacto/enviar') }}" method="POST" class="space-y-6">
+                @csrf
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-stone-500 mb-2">Empresa / Nombre *</label>
+                        <input type="text" name="nombre" value="{{ old('nombre') }}" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition" required>
+                        @error('nombre') <span class="text-red-500 text-xs font-bold">{{ $message }}</span> @enderror
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-stone-500 mb-2">Email Corporativo *</label>
+                        <input type="email" name="email" value="{{ old('email') }}" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition" required>
+                        @error('email') <span class="text-red-500 text-xs font-bold">{{ $message }}</span> @enderror
                     </div>
                 </div>
-            </div>
 
-            <div class="bg-black p-12 rounded-xl text-white shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
-                <h3 class="text-2xl font-headline font-black uppercase tracking-tight mb-8 text-primary">Consulta Técnica</h3>
-                <form class="space-y-6 relative z-10">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-xs uppercase tracking-[0.2em] font-black text-stone-500">Nombre Completo</label>
-                            <input class="w-full bg-stone-900 border-stone-800 focus:ring-2 focus:ring-primary p-4 rounded text-sm text-white placeholder:text-stone-700" placeholder="Ej. Juan Pérez" type="text" />
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs uppercase tracking-[0.2em] font-black text-stone-500">Correo Electrónico</label>
-                            <input class="w-full bg-stone-900 border-stone-800 focus:ring-2 focus:ring-primary p-4 rounded text-sm text-white placeholder:text-stone-700" placeholder="juan@empresa.com" type="email" />
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-stone-500 mb-2">Teléfono</label>
+                        <input type="text" name="telefono" value="{{ old('telefono') }}" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition">
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase tracking-[0.2em] font-black text-stone-500">Mensaje / Requerimiento Técnica</label>
-                        <textarea class="w-full bg-stone-900 border-stone-800 focus:ring-2 focus:ring-primary p-4 rounded text-sm text-white placeholder:text-stone-700 resize-none" placeholder="Indique número de parte o VIN..." rows="4"></textarea>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-stone-500 mb-2">Asunto *</label>
+                        <select name="asunto" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition" required>
+                            <option value="">Seleccione Departamento</option>
+                            <option value="Ventas" @if(old('asunto') == 'Ventas') selected @endif>Cotización Mayorista</option>
+                            <option value="Soporte" @if(old('asunto') == 'Soporte') selected @endif>Soporte Técnico Especializado</option>
+                            <option value="RMA/Facturación" @if(old('asunto') == 'RMA/Facturación') selected @endif>RMA y Devoluciones</option>
+                            <option value="Directorio" @if(old('asunto') == 'Directorio') selected @endif>Contacto Directorio Ejecutivo</option>
+                        </select>
+                        @error('asunto') <span class="text-red-500 text-xs font-bold">{{ $message }}</span> @enderror
                     </div>
-                    <button class="w-full bg-primary text-black font-headline font-black uppercase tracking-[0.2em] py-5 px-8 hover:bg-white transition-all transform active:scale-95" type="submit">
-                        Enviar Solicitud
-                    </button>
-                </form>
-            </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-widest text-stone-500 mb-2">Especificaciones Técnicas del Requerimiento *</label>
+                    <textarea name="mensaje" rows="4" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition resiz-none" required>{{ old('mensaje') }}</textarea>
+                    @error('mensaje') <span class="text-red-500 text-xs font-bold">{{ $message }}</span> @enderror
+                </div>
+
+                <button type="submit" class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3">
+                    Transmtir Petición Segura
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+                <p class="text-[10px] text-center text-stone-400 font-bold uppercase tracking-widest mt-4">Información Protegida por cifrado AES-256</p>
+            </form>
         </div>
-    </section>
+    </div>
 </main>
 @endsection
-
-@push('scripts')
-    <script src="js/contacto.js"></script>
-@endpush

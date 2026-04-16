@@ -1,6 +1,6 @@
 @extends('layouts.ecommerce')
 
-@section('title', 'Mi Cuenta | LA CIMA')
+@section('title', 'Mi Cuenta | MAYOR DE REPUESTO LA CIMA, C.A.')
 
 @section('content')
 <div class="min-h-screen bg-background mt-16 py-12 px-4 sm:px-6 lg:px-8">

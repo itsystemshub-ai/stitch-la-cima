@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="LA CIMA">
+<meta name="apple-mobile-web-app-title" content="MAYOR DE REPUESTO LA CIMA, C.A.">
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
@@ -59,8 +59,8 @@
 <div id="mobileNav" class="fixed top-0 left-0 h-full w-80 bg-white z-50 shadow-2xl transform -translate-x-full transition-transform duration-300">
     <div class="p-6 border-b border-outline flex justify-between items-center">
         <div class="flex items-center gap-2">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 w-auto">
-            <span class="text-xs font-black uppercase">LA CIMA, C.A</span>
+            <img src="{{ asset('assets/images/logo.png') }}" alt="MAYOR DE REPUESTO LA CIMA, C.A." class="h-8 w-auto">
+            <span class="text-xs font-black uppercase">MAYOR DE REPUESTO LA CIMA, C.A.</span>
         </div>
         <button onclick="closeMobileMenu()" class="p-2 hover:bg-stone-100 rounded-full">
             <span class="material-symbols-outlined">close</span>
@@ -185,45 +185,130 @@
 @yield('content')
 
 <!-- Global Store Footer -->
-<footer class="bg-black text-white pt-20 pb-10 border-t border-white/10">
+<footer class="bg-gradient-to-b from-stone-950 to-black text-white pt-20 pb-8">
     <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div class="col-span-1 md:col-span-2">
-                <div class="flex items-center gap-3 mb-6">
-                    <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-12 w-auto grayscale mix-blend-screen opacity-70">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+            <!-- Brand & Contact -->
+            <div class="lg:col-span-2">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined text-3xl text-primary">precision_manufacturing</span>
+                    </div>
                     <div>
-                        <h4 class="font-black text-xl uppercase tracking-tighter text-white">LA CIMA</h4>
-                        <p class="text-[9px] text-primary uppercase tracking-[0.2em] font-bold">Industrial Parts Distrib.</p>
+                        <h4 class="font-black text-2xl uppercase tracking-tighter text-white">MAYOR DE REPUESTO LA CIMA, C.A.</h4>
+                        <p class="text-primary text-xs font-bold uppercase tracking-[0.3em]">RIF: J-40308741-5</p>
                     </div>
                 </div>
-                <p class="text-stone-400 text-sm leading-relaxed max-w-md font-light">
-                    Más de dos décadas garantizando el suministro ininterrumpido de componentes críticos de motor para los flujos industriales más exigentes del país. 
+                
+                <p class="text-stone-400 text-sm leading-relaxed mb-6 max-w-lg">
+MAYOR DE REPUESTO LA CIMA, C.A.<br>
+                        <span class="text-stone-500">Distribuidor autorizado de repuestos para motores Cummins, Volvo, Detroit Diesel y más.</span><br>
+                        <span class="text-primary text-xs font-bold">RIF: J-40308741-5</span>
                 </p>
+
+                <!-- Contact Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a href="tel:+584244582766" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-4 transition-all group">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition">phone</span>
+                            <div>
+                                <p class="text-[10px] text-stone-500 uppercase font-bold">Teléfono</p>
+                                <p class="text-white font-semibold">+58 424-4582766</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="mailto:lacima.repuestos@gmail.com" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-4 transition-all group">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition">email</span>
+                            <div>
+                                <p class="text-[10px] text-stone-500 uppercase font-bold">General</p>
+                                <p class="text-white font-semibold">lacima.repuestos@gmail.com</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="mailto:pedidoslacima@gmail.com" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-4 transition-all group">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition">shopping_cart</span>
+                            <div>
+                                <p class="text-[10px] text-stone-500 uppercase font-bold">Pedidos</p>
+                                <p class="text-white font-semibold">pedidoslacima@gmail.com</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Location -->
+                <div class="mt-6 bg-stone-900/50 rounded-xl p-4 border border-white/5">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary mt-1">location_on</span>
+                        <div>
+                            <p class="text-xs font-bold text-white uppercase mb-1">Dirección</p>
+                            <p class="text-stone-400 text-sm">AV. 119, EDIF. MULTICENTRO PASEO EL PARRAL, OFICINA 2-3-C, URB. EL PARRAL, VALENCIA, EDO. CARABOBO</p>
+                            <p class="text-primary text-xs font-bold mt-2">RIF: J-40308741-5</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+
+            <!-- Quick Links -->
             <div>
-                <h5 class="text-white font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/20 pb-2">Catálogo & Redes</h5>
-                <ul class="space-y-4">
-                    <li><a href="/tienda/catalogo_general" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2">- Motores Diesel</a></li>
-                    <li><a href="#" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2">- Filtros & Lubricantes</a></li>
-                    <li><a href="#" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2">- Turbos & Inyección</a></li>
+                <h5 class="text-white font-black uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-primary rounded-full"></span>
+                    Catálogo
+                </h5>
+                <ul class="space-y-3">
+                    <li><a href="/tienda/catalogo_general" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">chevron_right</span> Motores Diesel</a></li>
+                    <li><a href="/tienda/catalogo_general?q=filtro" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">chevron_right</span> Filtros & Lubricantes</a></li>
+                    <li><a href="/tienda/catalogo_general?q=turbo" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">chevron_right</span> Turbos & Compresores</a></li>
+                    <li><a href="/tienda/catalogo_general?q=inyector" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">chevron_right</span> Inyección Combustible</a></li>
+                    <li><a href="/tienda/catalogo_general?q=freno" class="text-stone-400 hover:text-primary transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">chevron_right</span> Frenos & Suspensión</a></li>
                 </ul>
             </div>
 
+            <!-- Support -->
             <div>
-                <h5 class="text-white font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/20 pb-2">Centro de Ayuda</h5>
-                <ul class="space-y-4">
-                    <li><a href="/tienda/soporte" class="text-stone-400 hover:text-white transition-colors text-sm font-light">Políticas de Garantía</a></li>
-                    <li><a href="/tienda/terminos_b2b" class="text-stone-400 hover:text-white transition-colors text-sm font-light">Despachos & Logística</a></li>
-                    <li><a href="/tienda/contacto" class="text-stone-400 hover:text-white transition-colors text-sm font-light">Ventas B2B</a></li>
+                <h5 class="text-white font-black uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-primary rounded-full"></span>
+                    Soporte
+                </h5>
+                <ul class="space-y-3">
+                    <li><a href="/tienda/contacto" class="text-stone-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">support_agent</span> Contacto Ventas</a></li>
+                    <li><a href="/tienda/terminos_b2b" class="text-stone-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">description</span> Términos B2B</a></li>
+                    <li><a href="/tienda/soporte" class="text-stone-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">verified_user</span> Políticas Garantía</a></li>
+                    <li><a href="/tienda/nosotros" class="text-stone-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2"><span class="material-symbols-outlined text-sm">business</span> Nosotros</a></li>
                 </ul>
+
+                <!-- Social Links -->
+                <div class="mt-8">
+                    <p class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-4">Síguenos</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-primary rounded-lg flex items-center justify-center transition-all group">
+                            <span class="material-symbols-outlined text-stone-400 group-hover:text-black">chat</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-primary rounded-lg flex items-center justify-center transition-all group">
+                            <span class="material-symbols-outlined text-stone-400 group-hover:text-black">campaign</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 hover:bg-primary rounded-lg flex items-center justify-center transition-all group">
+                            <span class="material-symbols-outlined text-stone-400 group-hover:text-black">video_library</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-stone-500 text-[10px] uppercase tracking-widest">© 2026 ZENITH V1.0 TODOS LOS DERECHOS RESERVADOS.</p>
-            <div class="flex gap-6">
-                <span class="text-stone-600 text-[9px] font-mono tracking-tighter">MAYOR DE REPUESTO LA CIMA, C.A. RIF J-40308741-5</span>
+        <!-- Bottom Bar -->
+        <div class="border-t border-white/10 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <span class="text-stone-500 text-xs uppercase tracking-widest">© 2026 MAYOR DE REPUESTO LA CIMA, C.A. - RIF: J-40308741-5</span>
+                    <span class="text-stone-600">|</span>
+                    <span class="text-stone-600 text-xs">Todos los derechos reservados</span>
+                </div>
+                <div class="flex items-center gap-2 text-stone-500 text-xs">
+                    <span class="material-symbols-outlined text-sm text-primary">verified</span>
+                    <span>Zenith ERP v6.0</span>
+                </div>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#ceff5e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="LA CIMA">
+<meta name="apple-mobile-web-app-title" content="MAYOR DE REPUESTO LA CIMA, C.A.">
 <link rel="manifest" href="{{ asset('manifest.json') }}">
 <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
@@ -41,7 +41,7 @@
 <nav class="fixed top-0 w-full z-40 bg-white/90 backdrop-blur-md border-b border-outline shadow-sm">
     <div class="flex justify-between items-center px-6 py-3">
         <a href="{{ url('/') }}" class="flex items-center gap-2 group">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="LA CIMA" class="h-8 md:h-10 w-auto object-contain">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="MAYOR DE REPUESTO LA CIMA, C.A." class="h-8 md:h-10 w-auto object-contain">
             <div class="flex flex-col">
                 <span class="text-xs md:text-sm font-black text-black leading-tight tracking-tighter uppercase whitespace-nowrap">MAYOR DE REPUESTO LA CIMA, C.A</span>
                 <span class="text-[8px] md:text-[9px] font-medium text-stone-500 tracking-[0.15em] uppercase leading-none mt-1">RIF.: J-40308741-5</span>

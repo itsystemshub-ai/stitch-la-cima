@@ -19,7 +19,7 @@
 <div class="text-center mb-10">
 <span class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-4">E-commerce Público &amp; Mayorista</span>
 <h1 class="text-5xl md:text-5xl font-black text-white leading-tight tracking-tighter mb-4 uppercase">
-                       MAYOR DE REPUESTOS <span class="text-primary">LA CIMA</span>
+                       MAYOR DE REPUESTO <span class="text-primary">LA CIMA, C.A.</span>
 </h1>
 <p class="text-stone-300 text-lg max-w-2xl mx-auto font-light leading-relaxed">
                         Localice piezas críticas con precisión absoluta por VIN, OEM o catálogo técnico.

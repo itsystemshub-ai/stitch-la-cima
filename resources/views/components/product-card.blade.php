@@ -23,7 +23,7 @@
     <div class="p-6">
         <div class="flex justify-between items-start mb-2">
             <span class="text-[10px] font-black text-primary uppercase tracking-widest">{{ $product->categoria ?? 'Repuesto' }}</span>
-            <span class="text-[10px] font-mono font-bold text-stone-400">#{{ $product->sku ?? 'N/A' }}</span>
+            <span class="text-[10px] font-mono font-bold text-stone-400">#{{ $product->codigo_oem ?? 'N/A' }}</span>
         </div>
         <a href="{{ url('/tienda/producto/' . $product->id) }}" class="block">
             <h3 class="text-xl font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2" title="{{ $product->nombre }}">
@@ -32,15 +32,15 @@
         </a>
         <div class="mb-6">
             <p class="text-3xl font-black text-black tracking-tighter">
-                ${{ number_format($product->precio_usd, 2) }}
+                ${{ number_format($product->precio_mayor ?? 0, 2) }}
             </p>
             <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
-                Bs. {{ number_format($product->precio_usd * ($tasa_bcv ?? 36.0), 2) }} aprox.
+                Bs. {{ number_format(($product->precio_mayor ?? 0) * 36.0, 2) }} aprox.
             </p>
         </div>
         <button
             @if($product->stock_actual > 0)
-                onclick="addToCart({{ $product->id }}, '{{ addslashes($product->nombre) }}', {{ $product->precio_usd }}, '{{ $product->imagen_url }}', '{{ $product->categoria }} / {{ $product->sku }}')"
+                onclick="addToCart({{ $product->id }}, '{{ addslashes($product->nombre) }}', {{ $product->precio_mayor ?? 0 }}, '{{ $product->imagen_url ?? '' }}', '{{ $product->categoria ?? '' }}')"
                 class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all cursor-pointer"
             @else
                 disabled

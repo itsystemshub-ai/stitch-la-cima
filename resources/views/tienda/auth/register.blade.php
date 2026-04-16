@@ -1,6 +1,6 @@
 @extends('layouts.ecommerce')
 
-@section('title', 'Registro | LA CIMA')
+@section('title', 'Registro | MAYOR DE REPUESTO LA CIMA, C.A.')
 
 @section('content')
 <div class="min-h-screen bg-stone-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 mt-16">

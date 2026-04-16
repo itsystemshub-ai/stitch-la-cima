@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#ceff5e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Productos | LA CIMA">
+<meta name="apple-mobile-web-app-title" content="MAYOR DE REPUESTO LA CIMA, C.A.">
 <link rel="manifest" href="{{ asset('manifest.json') }}">
 <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">

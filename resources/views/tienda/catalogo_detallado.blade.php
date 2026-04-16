@@ -11,21 +11,17 @@
             gap: 1.5rem;
         }
         #productGrid.view-list article {
+            display: flex;
             flex-direction: row;
             height: auto;
             min-height: 200px;
+            align-items: stretch;
         }
-        #productGrid.view-list article .aspect-square {
+        #productGrid.view-list article > a {
             width: 250px;
-            height: 250px;
-            max-height: none;
             flex-shrink: 0;
-        }
-        #productGrid.view-list article > div.p-5 {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
+            border-right: 1px solid #e5e7eb;
         }
         @media (max-width: 640px) {
             #productGrid.view-list article {
@@ -124,41 +120,14 @@
             </div>
 
             <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- 1 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[180px] md:max-h-[200px] lg:max-h-[220px]">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQKD29s0z6GuS4uPSiUeQyw70ldIFl3871UjP1-u9TQTaoCIMjKqWVYf7vjLiRsk-6ggNcyvjOtMnh0Mdju6jWKG76OQKCbleekn-DTwlFAGhQGfIXROTK57Phh8C0XzugExcdoE7eGfV5Li66UjyA7Sw8tByNp7MulgucBI1tD5xgkPM-viyQr1WLFdmyQNTjZOo1QzliRygUM3ddoPLKdvFd6ifJrPGWai6WB6d2pnrTotXOVPtPuWBJu1GO7m7nCGbmB_13mek" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 p-4">
+                @forelse($products as $product)
+                    <x-product-card :product="$product" />
+                @empty
+                    <div class="col-span-full py-12 text-center">
+                        <span class="material-symbols-outlined text-6xl text-stone-200 mb-4 block">inventory_2</span>
+                        <p class="text-stone-500 font-bold text-sm uppercase tracking-widest">No se encontraron productos con estos parámetros.</p>
                     </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-xs font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: CUM-9928-HJ</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Junta de culata Cummins QSB6.7</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$284.00</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 2 -->
-                <article class="bg-white border border-outline rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full">
-                    <div class="aspect-square bg-stone-100 relative overflow-hidden flex-shrink-0 max-h-[180px] md:max-h-[200px] lg:max-h-[220px]">
-                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQKD29s0z6GuS4uPSiUeQyw70ldIFl3871UjP1-u9TQTaoCIMjKqWVYf7vjLiRsk-6ggNcyvjOtMnh0Mdju6jWKG76OQKCbleekn-DTwlFAGhQGfIXROTK57Phh8C0XzugExcdoE7eGfV5Li66UjyA7Sw8tByNp7MulgucBI1tD5xgkPM-viyQr1WLFdmyQNTjZOo1QzliRygUM3ddoPLKdvFd6ifJrPGWai6WB6d2pnrTotXOVPtPuWBJu1GO7m7nCGbmB_13mek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <p class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest mb-1 text-primary">SKU: VOL-P901-LP</p>
-                        <h3 class="text-lg font-bold uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-2">Filtro de Aceite Volvo Penta D13</h3>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-xl font-black text-black tracking-tighter">$45.50</span>
-                            <button class="bg-black text-white p-2 rounded-lg hover:bg-primary hover:text-black transition-colors">
-                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- More items... -->
+                @endforelse
             </div>
 
             <!-- Pagination -->
@@ -253,6 +222,34 @@
         listBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');
         gridBtn.classList.add('text-on-surface-variant', 'hover:bg-stone-200');
         gridBtn.classList.remove('bg-black', 'text-white');
+    }
+
+    // Funcionalidad global del API carrito
+    window.addToCart = function(productId, productName, price, imageUrl, category) {
+        fetch('/api/tienda/carrito', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                cantidad: 1
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(productName + ' agregado exitosamente al carrito.');
+                // Update badge if exists
+            } else {
+                alert('No se pudo agregar al carrito: ' + (data.message || 'Error'));
+            }
+        })
+        .catch(err => {
+            console.error('Error adding to cart', err);
+            alert('Error técnico al agregar al carrito.');
+        });
     }
     </script>
     <script src="{{ asset('js/catalogo_detallado.js') }}"></script>

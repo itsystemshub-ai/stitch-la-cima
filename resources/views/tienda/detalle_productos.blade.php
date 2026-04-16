@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 
 @section('title')
-    <title id="pageTitle">Detalle del Producto | LA CIMA</title>
+    <title id="pageTitle">Detalle del Producto | MAYOR DE REPUESTO LA CIMA, C.A.</title>
 @endsection
 
 @push('styles')

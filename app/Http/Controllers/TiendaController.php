@@ -98,9 +98,46 @@ class TiendaController extends Controller
      */
     public function verCarrito(Request $request)
     {
-        $cart = $request->session()->get('cart', []);
+        $cartItems = [];
 
-        return view('tienda.carrito', compact('cart'));
+        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'cliente') {
+            $customer = \Illuminate\Support\Facades\Auth::user()->customer;
+            if ($customer) {
+                // Extraer de la Base de Datos usando la relación del modelo
+                $dbItems = \App\Models\TiendaCart::with('product')->where('customer_id', $customer->id)->get();
+                foreach($dbItems as $item) {
+                    if ($item->product) {
+                        $cartItems[] = [
+                            'id' => $item->id, 
+                            'product_id' => $item->product->id,
+                            'nombre' => $item->product->nombre,
+                            'codigo_oem' => $item->product->codigo_oem,
+                            'precio' => $item->product->precio_mayor ?? 0,
+                            'imagen_url' => $item->product->imagen_url ?? asset('assets/images/default-product.png'),
+                            'cantidad' => $item->cantidad,
+                            'is_db' => true
+                        ];
+                    }
+                }
+            }
+        } else {
+            // Extraer de la Sesión
+            $sessionCart = $request->session()->get('cart', []);
+            foreach($sessionCart as $key => $item) {
+                $cartItems[] = [
+                    'id' => str_replace('product_', '', $key),
+                    'product_id' => $item['product_id'],
+                    'nombre' => $item['nombre'],
+                    'codigo_oem' => $item['codigo_oem'],
+                    'precio' => $item['precio'] ?? 0,
+                    'imagen_url' => asset('assets/images/default-product.png'),
+                    'cantidad' => $item['cantidad'],
+                    'is_db' => false
+                ];
+            }
+        }
+
+        return view('tienda.carrito', compact('cartItems'));
     }
 
     /**
@@ -258,6 +295,47 @@ class TiendaController extends Controller
     }
 
     /**
+     * API: Actualiza cantidad de un ítem
+     */
+    public function updateCarrito(Request $request, $id)
+    {
+        $request->validate(['cantidad' => 'required|integer|min:1']);
+        
+        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'cliente') {
+            $customer = \Illuminate\Support\Facades\Auth::user()->customer;
+            $cartItem = \App\Models\TiendaCart::where('customer_id', $customer->id)->findOrFail($id);
+            $cartItem->update(['cantidad' => $request->cantidad]);
+        } else {
+            $cart = $request->session()->get('cart', []);
+            $key = 'product_' . $id;
+            if (isset($cart[$key])) {
+                $cart[$key]['cantidad'] = $request->cantidad;
+                $request->session()->put('cart', $cart);
+            }
+        }
+        return response()->json(['status' => 'success']);
+    }
+
+    /**
+     * API: Elimina un ítem del carrito
+     */
+    public function eliminarDeCarrito(Request $request, $id)
+    {
+        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'cliente') {
+            $customer = \Illuminate\Support\Facades\Auth::user()->customer;
+            \App\Models\TiendaCart::where('customer_id', $customer->id)->where('id', $id)->delete();
+        } else {
+            $cart = $request->session()->get('cart', []);
+            $key = 'product_' . $id;
+            if (isset($cart[$key])) {
+                unset($cart[$key]);
+                $request->session()->put('cart', $cart);
+            }
+        }
+        return response()->json(['status' => 'success']);
+    }
+
+    /**
      * Muestra la página de confirmación de pedido
      */
     public function confirmacion(Request $request, $orderId)
@@ -265,5 +343,48 @@ class TiendaController extends Controller
         $order = Order::with('items.product', 'customer')->findOrFail($orderId);
 
         return view('tienda.confirmacion', compact('order'));
+    }
+
+    /**
+     * Storefront CMS: Carga de Páginas Genéricas (Términos, Nosotros, etc.)
+     */
+    public function getPage($slug)
+    {
+        $page = \App\Models\Page::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        return view('tienda.page', compact('page'));
+    }
+
+    /**
+     * Storefront CMS: Receptor de Bandeja de Contacto (Leads y Soporte)
+     */
+    public function enviarContacto(Request $request)
+    {
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:150',
+            'email' => 'required|email|max:150',
+            'telefono' => 'nullable|string|max:30',
+            'asunto' => 'required|string|max:200',
+            'mensaje' => 'required|string|min:10',
+        ]);
+
+        $message = \App\Models\ContactMessage::create([
+            'nombre' => $validated['nombre'],
+            'email' => $validated['email'],
+            'telefono' => $validated['telefono'],
+            'asunto' => $validated['asunto'],
+            'mensaje' => $validated['mensaje'],
+            'ip_address' => $request->ip(),
+        ]);
+
+        try {
+            // Se envía a los administradores principales
+            \Illuminate\Support\Facades\Mail::to('ventas@lacimarepuestos.com')
+                ->send(new \App\Mail\ContactMessageNotification($message));
+        } catch (\Exception $e) {
+            // Silenciar error de mail local en dev, o registrar log
+            \Illuminate\Support\Facades\Log::error('Fallo al enviar el correo de contacto: ' . $e->getMessage());
+        }
+
+        return redirect()->back()->with('success', 'Hemos recibido su solicitud de contacto. Un asesor industrial se comunicará con usted en breve.');
     }
 }
