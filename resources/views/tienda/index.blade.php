@@ -216,7 +216,7 @@
 <div class="absolute bottom-0 left-0 p-10">
 <span class="text-primary text-xs font-black uppercase tracking-[0.4em]">Industrial Forge</span>
 <h3 class="text-5xl font-black text-white uppercase tracking-tighter mt-2">Sistemas de Motor</h3>
-<button onclick="window.location.href='catalogo_general.html'" class="mt-6 bg-primary text-black px-8 py-3 rounded-md font-black text-xs uppercase tracking-widest hover:bg-white transition-all">Explorar Motor</button>
+<a href="{{ url('/tienda/catalogo_general') }}" class="mt-6 inline-block bg-primary text-black px-8 py-3 rounded-md font-black text-xs uppercase tracking-widest hover:bg-white transition-all">Explorar Motor</a>
 </div>
 </div>
 <div class="md:col-span-4 group relative overflow-hidden rounded-2xl bg-zinc-900">
@@ -225,7 +225,7 @@
 <div class="absolute inset-0 flex flex-col justify-end p-10">
 <h3 class="text-3xl font-black text-white uppercase tracking-tighter">Frenado y Seguridad</h3>
 <p class="text-stone-400 text-sm mt-2 mb-4">Pastillas, discos y componentes hidráulicos.</p>
-<button onclick="window.location.href='catalogo_general.html'" class="w-fit bg-white/10 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3 border border-white/20 hover:bg-primary hover:text-black hover:border-primary transition-all">Ver Más</button>
+<a href="{{ url('/tienda/catalogo_general') }}" class="w-fit inline-block bg-white/10 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3 border border-white/20 hover:bg-primary hover:text-black hover:border-primary transition-all">Ver Más</a>
 </div>
 </div>
 <div class="md:col-span-4 group relative overflow-hidden rounded-2xl bg-primary">

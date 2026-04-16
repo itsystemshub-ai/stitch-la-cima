@@ -61,26 +61,26 @@
 
     <!-- Live Sync Status -->
     <div class="grid grid-cols-12 gap-8 mb-12">
-        <div class="col-span-12 lg:col-span-8 bg-stone-900 rounded-[40px] p-10 relative overflow-hidden flex flex-col justify-between min-h-[400px] shadow-2xl">
-            <div class="absolute -right-10 -bottom-10 opacity-10">
-                <span class="material-symbols-outlined text-[200px] text-white">cloud_upload</span>
+        <div class="col-span-12 lg:col-span-8 bg-white border border-stone-200 rounded-[40px] p-10 relative overflow-hidden flex flex-col justify-between min-h-[400px] shadow-sm">
+            <div class="absolute -right-10 -bottom-10 opacity-[0.03]">
+                <span class="material-symbols-outlined text-[200px] text-stone-900">cloud_upload</span>
             </div>
             
             <div class="relative z-10 w-full h-full flex flex-col">
-                <p class="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Procesador de Lotes Inteligente (.xlsx / .xls)</p>
+                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4">Procesador de Lotes Inteligente (.xlsx / .xls)</p>
                 
-                <div id="dropZone" class="flex-1 border-2 border-dashed border-stone-700 rounded-[32px] flex flex-col items-center justify-center p-8 cursor-pointer drop-zone hover:border-primary group transition-all">
+                <div id="dropZone" class="flex-1 border-2 border-dashed border-stone-100 rounded-[32px] flex flex-col items-center justify-center p-8 cursor-pointer drop-zone hover:border-primary group transition-all bg-stone-50/30">
                     <input type="file" id="fileInput" class="hidden" accept=".xlsx, .xls">
                     <div id="dropZoneUI" class="text-center">
-                        <span class="material-symbols-outlined text-6xl text-stone-700 group-hover:text-primary transition-colors mb-4">upload_file</span>
-                        <h4 class="text-white font-headline font-bold text-xl uppercase tracking-tight">Arrastra tu Excel aquí</h4>
-                        <p class="text-stone-500 text-[10px] uppercase font-bold tracking-widest mt-2">O haz click para seleccionar el archivo oficial</p>
+                        <span class="material-symbols-outlined text-6xl text-stone-200 group-hover:text-primary transition-colors mb-4">upload_file</span>
+                        <h4 class="text-stone-900 font-headline font-bold text-xl uppercase tracking-tight">Arrastra tu Excel aquí</h4>
+                        <p class="text-stone-400 text-[10px] uppercase font-bold tracking-widest mt-2">O haz click para seleccionar el archivo oficial</p>
                     </div>
                     <div id="fileInfo" class="hidden text-center">
                         <span class="material-symbols-outlined text-6xl text-primary mb-4">description</span>
-                        <h4 id="fileName" class="text-white font-headline font-bold text-xl uppercase tracking-tight">nombre_archivo.xlsx</h4>
+                        <h4 id="fileName" class="text-stone-900 font-headline font-bold text-xl uppercase tracking-tight">nombre_archivo.xlsx</h4>
                         <p id="fileSize" class="text-primary text-[10px] uppercase font-bold tracking-widest mt-2">0.0 MB</p>
-                        <button id="removeFile" class="mt-4 text-[10px] font-black text-red-400 uppercase hover:text-red-300">Quitar archivo</button>
+                        <button id="removeFile" class="mt-4 text-[10px] font-black text-red-500 uppercase hover:text-red-600 transition-colors">Quitar archivo</button>
                     </div>
                 </div>
 
@@ -93,9 +93,9 @@
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
                             </span>
-                            <span class="text-[10px] font-black text-white uppercase tracking-widest">Pre-procesamiento en cliente: ACTIVO</span>
+                            <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Pre-procesamiento en cliente: <span class="text-primary">ACTIVO</span></span>
                         </div>
-                        <button type="submit" id="submitBtn" disabled class="bg-primary/20 text-stone-500 px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-not-allowed">
+                        <button type="submit" id="submitBtn" disabled class="bg-stone-100 text-stone-400 px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-not-allowed">
                             Sincronizar Lote Digital
                         </button>
                     </div>

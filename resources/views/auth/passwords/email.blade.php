@@ -4,7 +4,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="Recuperación de contraseña - MAYOR DE REPUESTO LA CIMA, C.A."/>
 <meta name="theme-color" content="#ceff5e">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LA CIMA">
 <link rel="manifest" href="{{ asset('manifest.json') }}">

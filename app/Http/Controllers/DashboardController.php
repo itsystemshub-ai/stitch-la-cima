@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Approval;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class DashboardController extends Controller
@@ -27,10 +29,13 @@ class DashboardController extends Controller
                 $stats['stock_risks'] = Product::whereColumn('stock_actual', '<=', 'stock_minimo')->count();
             }
             if (Schema::hasTable('orders')) {
-                $stats['ingresos_mes'] = Order::where('status', 'completed')
+                // Unificamos a 'Pagado' según el seeder
+                $stats['ingresos_mes'] = Order::where('estado', 'Pagado')
                     ->whereMonth('created_at', now()->month)
                     ->sum('total');
-                $stats['ordenes_pendientes'] = Order::where('status', 'pending')->count();
+                
+                // Ordenes que requieren atención inmediata
+                $stats['ordenes_pendientes'] = Order::whereIn('estado', ['Pendiente', 'Esperando Aprobación'])->count();
             }
             if (Schema::hasTable('customers')) {
                 $stats['clientes_activos'] = Customer::where('activo', true)->count();
@@ -39,7 +44,7 @@ class DashboardController extends Controller
                 $stats['aprobaciones_count'] = Approval::where('status', 'pending')->count();
             }
         } catch (\Exception $e) {
-            // Silently fail to zeros
+            // Log error if needed: \Log::error($e->getMessage());
         }
 
         // Ultimas ventas para la terminal rápida
@@ -54,6 +59,13 @@ class DashboardController extends Controller
         } catch (\Exception $e) {
             $recentOrders = collect();
         }
+
+        $stats['categoria_mix'] = OrderItem::join('products', 'order_items.product_id', '=', 'products.id')
+            ->select('products.categoria', DB::raw('count(*) as total'))
+            ->groupBy('products.categoria')
+            ->orderByDesc('total')
+            ->limit(4)
+            ->get();
 
         return view('erp.dashboard.index', compact('stats', 'recentOrders'));
     }

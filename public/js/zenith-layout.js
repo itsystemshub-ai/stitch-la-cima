@@ -31,7 +31,7 @@ const ZENITH_LAYOUT = {
                 </div>
 
                 <nav class="flex-1 px-3 space-y-0.5 pb-24 overflow-y-auto no-scrollbar">
-                    <a href="inicio.html" class="menu-item flex items-center gap-3 px-4 py-2 transition-colors nav-link" data-page="inicio">
+                    <a href="/erp/dashboard" class="menu-item flex items-center gap-3 px-4 py-2 transition-colors nav-link" data-page="erp.dashboard">
                         <span class="material-symbols-outlined text-[20px]">dashboard</span>
                         <span class="flex-1 text-sm font-medium">Dashboard Central</span>
                         <span class="material-symbols-outlined dropdown-arrow text-[18px]">chevron_right</span>
@@ -42,17 +42,17 @@ const ZENITH_LAYOUT = {
                         <p class="px-4 py-1 text-[9px] font-black text-stone-400 uppercase tracking-widest">Área Comercial</p>
                         <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
                             <span class="material-symbols-outlined text-[20px]">payments</span>
-                            <span class="text-sm">Ventas & POS</span>
+                            <span class="text-sm">Ventas &amp; POS</span>
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="ventas.html"><span class="material-symbols-outlined">analytics</span> Monitor Ventas</a>
-                            <a href="pos.html"><span class="material-symbols-outlined">point_of_sale</span> Terminal POS</a>
-                            <a href="registro-ventas.html"><span class="material-symbols-outlined">list_alt</span> Diario de Ventas</a>
-                            <a href="factura-electronica.html"><span class="material-symbols-outlined">receipt</span> Fact. Electrónica</a>
-                            <a href="facturas-emitidas.html"><span class="material-symbols-outlined">history</span> Historial Facturas</a>
-                            <a href="clientes.html"><span class="material-symbols-outlined">person</span> Clientes B2B</a>
-                            <a href="vendedores.html"><span class="material-symbols-outlined">badge</span> Fuerza de Ventas</a>
+                            <a href="/erp/ventas"><span class="material-symbols-outlined">analytics</span> Monitor Ventas</a>
+                            <a href="/erp/ventas/pos"><span class="material-symbols-outlined">point_of_sale</span> Terminal POS</a>
+                            <a href="/erp/ventas/registro"><span class="material-symbols-outlined">list_alt</span> Diario de Ventas</a>
+                            <a href="/erp/ventas/facturacion"><span class="material-symbols-outlined">receipt</span> Fact. Electrónica</a>
+                            <a href="/erp/ventas/historial"><span class="material-symbols-outlined">history</span> Historial Facturas</a>
+                            <a href="/erp/ventas/clientes"><span class="material-symbols-outlined">person</span> Clientes B2B</a>
+                            <a href="/erp/ventas/vendedores"><span class="material-symbols-outlined">badge</span> Fuerza de Ventas</a>
                         </div>
                     </div>
 
@@ -60,16 +60,16 @@ const ZENITH_LAYOUT = {
                     <div class="menu-parent">
                         <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
                             <span class="material-symbols-outlined text-[20px]">inventory_2</span>
-                            <span class="text-sm">Logística & Almacén</span>
+                            <span class="text-sm">Logística &amp; Almacén</span>
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="inventario.html"><span class="material-symbols-outlined">inventory</span> Control Stock</a>
-                            <a href="productos.html"><span class="material-symbols-outlined">category</span> Catálogo Items</a>
-                            <a href="kardex.html"><span class="material-symbols-outlined">list</span> Kardex Movimientos</a>
-                            <a href="ajustes-inventario.html"><span class="material-symbols-outlined">edit_note</span> Ajustes Stock</a>
-                            <a href="auditoria-inventario.html"><span class="material-symbols-outlined">fact_check</span> Auditoría Física</a>
-                            <a href="reportes-inventario.html"><span class="material-symbols-outlined">assessment</span> Reportes Logística</a>
+                            <a href="/erp/inventario"><span class="material-symbols-outlined">inventory</span> Control Stock</a>
+                            <a href="/erp/inventario/productos"><span class="material-symbols-outlined">category</span> Catálogo Items</a>
+                            <a href="/erp/inventario/kardex"><span class="material-symbols-outlined">list</span> Kardex Movimientos</a>
+                            <a href="/erp/inventario/ajustes"><span class="material-symbols-outlined">edit_note</span> Ajustes Stock</a>
+                            <a href="/erp/inventario/auditoria"><span class="material-symbols-outlined">fact_check</span> Auditoría Física</a>
+                            <a href="/erp/inventario/reportes"><span class="material-symbols-outlined">assessment</span> Reportes Logística</a>
                         </div>
                     </div>
 
@@ -81,29 +81,29 @@ const ZENITH_LAYOUT = {
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="compras.html"><span class="material-symbols-outlined">shopping_basket</span> Monitor Compras</a>
-                            <a href="proveedores.html"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
-                            <a href="factura-compra.html"><span class="material-symbols-outlined">receipt_long</span> Facturas Compra</a>
-                            <a href="historial-compras.html"><span class="material-symbols-outlined">history_edu</span> Historial</a>
-                            <a href="reportes-compras.html"><span class="material-symbols-outlined">analytics</span> Análisis Compras</a>
+                            <a href="/erp/compras"><span class="material-symbols-outlined">shopping_basket</span> Monitor Compras</a>
+                            <a href="/erp/compras/proveedores"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
+                            <a href="/erp/compras/factura"><span class="material-symbols-outlined">receipt_long</span> Facturas Compra</a>
+                            <a href="/erp/compras/historial"><span class="material-symbols-outlined">history_edu</span> Historial</a>
+                            <a href="/erp/compras/reportes"><span class="material-symbols-outlined">analytics</span> Análisis Compras</a>
                         </div>
                     </div>
 
                     <!-- SECCIÓN: CONTABILIDAD -->
                     <div class="menu-parent pt-2 border-t border-stone-100">
-                        <p class="px-4 py-1 text-[9px] font-black text-stone-400 uppercase tracking-widest">Finanzas & Leyes</p>
+                        <p class="px-4 py-1 text-[9px] font-black text-stone-400 uppercase tracking-widest">Finanzas &amp; Leyes</p>
                         <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
                             <span class="material-symbols-outlined text-[20px]">account_balance</span>
                             <span class="text-sm">Administración</span>
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="contabilidad.html"><span class="material-symbols-outlined">table_chart</span> Resumen Contable</a>
-                            <a href="plan-cuentas.html"><span class="material-symbols-outlined">account_tree</span> Plan de Cuentas</a>
-                            <a href="balance-general.html"><span class="material-symbols-outlined">balance</span> Balance General</a>
-                            <a href="estado-resultados.html"><span class="material-symbols-outlined">monitoring</span> Resultados</a>
-                            <a href="libro-diario.html"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
-                            <a href="cierre-contable.html"><span class="material-symbols-outlined">lock</span> Cierre Periodo</a>
+                            <a href="/erp/contabilidad"><span class="material-symbols-outlined">table_chart</span> Resumen Contable</a>
+                            <a href="/erp/contabilidad/plan-cuentas"><span class="material-symbols-outlined">account_tree</span> Plan de Cuentas</a>
+                            <a href="/erp/contabilidad/balance-general"><span class="material-symbols-outlined">balance</span> Balance General</a>
+                            <a href="/erp/contabilidad/estado-resultados"><span class="material-symbols-outlined">monitoring</span> Resultados</a>
+                            <a href="/erp/contabilidad/libro-diario"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
+                            <a href="/erp/contabilidad/cierre"><span class="material-symbols-outlined">lock</span> Cierre Periodo</a>
                         </div>
                     </div>
 
@@ -111,15 +111,15 @@ const ZENITH_LAYOUT = {
                     <div class="menu-parent">
                         <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
                             <span class="material-symbols-outlined text-[20px]">gavel</span>
-                            <span class="text-sm">Libros & Fiscal</span>
+                            <span class="text-sm">Libros &amp; Fiscal</span>
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="libros-legales.html"><span class="material-symbols-outlined">library_books</span> Libros Legales</a>
-                            <a href="libro-ventas.html"><span class="material-symbols-outlined">list</span> Libro de Ventas</a>
-                            <a href="libro-compras.html"><span class="material-symbols-outlined">list</span> Libro de Compras</a>
-                            <a href="declaracion-iva.html"><span class="material-symbols-outlined">account_balance_wallet</span> IVA / Fiscal</a>
-                            <a href="config-fiscal.html"><span class="material-symbols-outlined">settings_applications</span> Config Fiscal</a>
+                            <a href="/erp/contabilidad/libros-legales"><span class="material-symbols-outlined">library_books</span> Libros Legales</a>
+                            <a href="/erp/contabilidad/libro-ventas"><span class="material-symbols-outlined">list</span> Libro de Ventas</a>
+                            <a href="/erp/contabilidad/libro-compras"><span class="material-symbols-outlined">list</span> Libro de Compras</a>
+                            <a href="/erp/contabilidad/declaracion-iva"><span class="material-symbols-outlined">account_balance_wallet</span> IVA / Fiscal</a>
+                            <a href="/erp/configuracion/fiscal"><span class="material-symbols-outlined">settings_applications</span> Config Fiscal</a>
                         </div>
                     </div>
 
@@ -128,33 +128,33 @@ const ZENITH_LAYOUT = {
                         <p class="px-4 py-1 text-[9px] font-black text-stone-400 uppercase tracking-widest">Capital Humano</p>
                         <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
                             <span class="material-symbols-outlined text-[20px]">groups</span>
-                            <span class="text-sm">RRHH & Nómina</span>
+                            <span class="text-sm">RRHH &amp; Nómina</span>
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="rrhh.html"><span class="material-symbols-outlined">group</span> Gestión Humana</a>
-                            <a href="empleados.html"><span class="material-symbols-outlined">person_add</span> Ficha Empleado</a>
-                            <a href="nomina.html"><span class="material-symbols-outlined">payments</span> Cálculo Nómina</a>
-                            <a href="prestaciones.html"><span class="material-symbols-outlined">savings</span> Prestaciones</a>
-                            <a href="portal-empleado.html"><span class="material-symbols-outlined">account_box</span> Portal</a>
+                            <a href="/erp/rrhh"><span class="material-symbols-outlined">group</span> Gestión Humana</a>
+                            <a href="/erp/rrhh/empleados"><span class="material-symbols-outlined">person_add</span> Ficha Empleado</a>
+                            <a href="/erp/rrhh/nomina"><span class="material-symbols-outlined">payments</span> Cálculo Nómina</a>
+                            <a href="/erp/rrhh/prestaciones"><span class="material-symbols-outlined">savings</span> Prestaciones</a>
+                            <a href="/erp/rrhh/portal-empleado"><span class="material-symbols-outlined">account_box</span> Portal</a>
                         </div>
                     </div>
 
                     <!-- SECCIÓN: SISTEMA -->
                     <div class="menu-parent pt-2 border-t border-stone-100">
-                        <p class="px-4 py-1 text-[9px] font-black text-stone-400 uppercase tracking-widest">Configuración & IT</p>
+                        <p class="px-4 py-1 text-[9px] font-black text-stone-400 uppercase tracking-widest">Configuración &amp; IT</p>
                         <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
                             <span class="material-symbols-outlined text-[20px]">settings_suggest</span>
                             <span class="text-sm">Arquitectura</span>
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="configuracion.html"><span class="material-symbols-outlined">settings</span> Gral. Sistema</a>
-                            <a href="usuarios-roles.html"><span class="material-symbols-outlined">admin_panel_settings</span> Roles & Accesos</a>
-                            <a href="base-datos.html"><span class="material-symbols-outlined">database</span> Base de Datos</a>
-                            <a href="backups.html"><span class="material-symbols-outlined">backup</span> Resguardos/Backups</a>
-                            <a href="auditoria-seguridad.html"><span class="material-symbols-outlined">assignment_ind</span> Log Accesos</a>
-                            <a href="estado-sistema.html"><span class="material-symbols-outlined">cloud_circle</span> Monitor Servidor</a>
+                            <a href="/erp/configuracion"><span class="material-symbols-outlined">settings</span> Gral. Sistema</a>
+                            <a href="/erp/configuracion/usuarios"><span class="material-symbols-outlined">admin_panel_settings</span> Roles &amp; Accesos</a>
+                            <a href="/erp/configuracion/base-datos"><span class="material-symbols-outlined">database</span> Base de Datos</a>
+                            <a href="/erp/configuracion/backups"><span class="material-symbols-outlined">backup</span> Resguardos/Backups</a>
+                            <a href="/erp/configuracion/auditoria"><span class="material-symbols-outlined">assignment_ind</span> Log Accesos</a>
+                            <a href="/erp/configuracion/estado-sistema"><span class="material-symbols-outlined">cloud_circle</span> Monitor Servidor</a>
                         </div>
                     </div>
 
@@ -162,14 +162,14 @@ const ZENITH_LAYOUT = {
                     <div class="menu-parent mb-8">
                         <div class="menu-item menu-item-inactive" onclick="toggleDropdown(this)">
                             <span class="material-symbols-outlined text-[20px]">help</span>
-                            <span class="text-sm">Ayuda & Soporte</span>
+                            <span class="text-sm">Ayuda &amp; Soporte</span>
                             <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
                         </div>
                         <div class="submenu">
-                            <a href="ayuda.html"><span class="material-symbols-outlined">help_center</span> FAQ</a>
-                            <a href="base-conocimiento.html"><span class="material-symbols-outlined">library_books</span> Knowledge</a>
-                            <a href="tickets-soporte.html"><span class="material-symbols-outlined">support</span> Tickets</a>
-                            <a href="chat-asistencia.html"><span class="material-symbols-outlined">chat</span> Chat Directo</a>
+                            <a href="/erp/ayuda"><span class="material-symbols-outlined">help_center</span> FAQ</a>
+                            <a href="/erp/ayuda/conocimiento"><span class="material-symbols-outlined">library_books</span> Knowledge</a>
+                            <a href="/erp/ayuda/tickets"><span class="material-symbols-outlined">support</span> Tickets</a>
+                            <a href="/erp/ayuda/chat"><span class="material-symbols-outlined">chat</span> Chat Directo</a>
                         </div>
                     </div>
                 </nav>
@@ -194,7 +194,7 @@ const ZENITH_LAYOUT = {
                             <span class="material-symbols-outlined">menu</span>
                         </button>
                         <div class="hidden md:flex items-center gap-2 text-[10px] font-black text-stone-400 uppercase tracking-[0.1em]">
-                            <a href="inicio.html" class="hover:text-stone-900 transition-colors">ZENITH CORE</a>
+                            <a href="/erp/dashboard" class="hover:text-stone-900 transition-colors">ZENITH CORE</a>
                             <span class="material-symbols-outlined text-[14px]">chevron_right</span>
                             <span class="text-stone-900" id="breadcrumbPage">${document.title.split('|')[0] || 'Dashboard'}</span>
                         </div>
@@ -225,16 +225,14 @@ const ZENITH_LAYOUT = {
     },
 
     highlightActive: function() {
-        const path = window.location.pathname.split('/').pop() || 'inicio.html';
+        const path = window.location.pathname;
         const links = document.querySelectorAll('.nav-link, .submenu a');
-        
+
         links.forEach(link => {
             const href = link.getAttribute('href');
-            if (path === href) {
+            if (href && (path === href || path.startsWith(href + '/'))) {
                 if (link.classList.contains('nav-link')) {
                     link.classList.add('menu-item-active');
-                    const arrow = link.querySelector('.dropdown-arrow');
-                    if (arrow) arrow.style.display = 'none'; // No arrow for direct dashboard link if active
                 } else {
                     link.classList.add('bg-stone-100', 'text-stone-900', 'font-bold');
                     const parent = link.closest('.menu-parent');
@@ -259,18 +257,12 @@ const ZENITH_LAYOUT = {
 function toggleDropdown(element) {
     const parent = element.closest('.menu-parent');
     if (!parent) return;
-    
-    // Cerrar otros menús si se desea (opcional, Photo 1 sugiere que pueden estar abiertos)
-    // document.querySelectorAll('.menu-parent.open').forEach(p => {
-    //     if (p !== parent) p.classList.remove('open');
-    // });
-
     parent.classList.toggle('open');
 }
 
 function logout() {
     localStorage.removeItem('erp_session');
-    window.location.href = '../auth/login.html';
+    window.location.href = '/auth/login';
 }
 
 window.addEventListener('DOMContentLoaded', () => ZENITH_LAYOUT.init());

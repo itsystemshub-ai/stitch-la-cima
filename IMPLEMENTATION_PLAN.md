@@ -60,51 +60,8 @@
 
 ## 3. Plan de Implementación Mejorado
 
-### Fase 1: Autenticación Tienda (5 días)
-
-#### 1.1 Migración DB
-- [ ] Crear migración `add_auth_fields_to_customers`
-  - `password` (string, nullable)
-  - `tipo_cliente` (enum: 'b2b', 'b2c')
-  - `verified_at` (timestamp, nullable)
-  - `remember_token` (string, nullable)
-
-#### 1.2 Modelo Customer
-- [ ] Actualizar `app/Models/Customer.php`
-  - Agregar `MustImplementPasswordReset` trait
-  - Agregar método `setPasswordAttribute()`
-  - Agregar relaciones: orders, cart, wishlist
-
-#### 1.3 Controlador TiendaAuth
-- [ ] Crear `app/Http/Controllers/TiendaAuthController.php`
-  - `showRegisterForm()` - GET /tienda/register
-  - `register()` - POST registro con validación
-  - `showLoginForm()` - GET /tienda/login
-  - `login()` - POST login
-  - `logout()` - POST logout
-  - `showForgotPassword()` - GET /tienda/password/reset
-  - `miCuenta()` - GET dashboard cliente
-
-#### 1.4 Rutas
-- [ ] Agregar en `routes/web.php`:
-```php
-Route::prefix('tienda/auth')->group(function () {
-    Route::get('/register', [TiendaAuthController::class, 'showRegisterForm']);
-    Route::post('/register', [TiendaAuthController::class, 'register']);
-    Route::get('/login', [TiendaAuthController::class, 'showLoginForm']);
-    Route::post('/login', [TiendaAuthController::class, 'login']);
-    Route::post('/logout', [TiendaAuthController::class, 'logout']);
-    Route::get('/mi-cuenta', [TiendaAuthController::class, 'miCuenta']);
-});
-```
-
-#### 1.5 Vistas
-- [ ] Crear `resources/views/tienda/auth/register.blade.php`
-- [ ] Crear `resources/views/tienda/auth/login.blade.php`
-- [ ] Crear `resources/views/tienda/auth/mi-cuenta.blade.php` (historial pedidos)
-
-#### 1.6 Middleware
-- [ ] Crear `TiendaAuthMiddleware` para proteger rutas de cliente
+### Fase 1: Autenticación Tienda (Completado ✅)
+*Nota: Se optó por una arquitectura de vinculación donde el perfil `Customer` se asocia a un registro en la tabla `Users` con el rol `cliente`, centralizando la seguridad.*
 
 ---
 

@@ -5,10 +5,14 @@
 
 
    
-// Verificar autenticación al cargar
+// Verificar autenticación al cargar - Guardado contra bucles
 (function() {
   const isLoggedIn = localStorage.getItem('erp_session') === 'true';
-  if (!isLoggedIn) window.location.href = '/frontend/public/auth/login.html';
+  const isAuthPage = window.location.pathname.includes('/auth/');
+  
+  if (!isLoggedIn && !isAuthPage) {
+    window.location.href = '/auth/login';
+  }
 })();
 
 // Toggle sidebar en mobile

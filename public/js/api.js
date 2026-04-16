@@ -173,7 +173,7 @@ class ZenithAPI {
       if (response.status === 401) {
         this.setToken(null);
         if (window.location.pathname.includes('/erp/') || window.location.pathname.includes('/auth/')) {
-          window.location.href = '/frontend/public/auth/login.html';
+          window.location.href = '/auth/login';
         }
       }
       throw new Error(data.message || 'Error en la petición');

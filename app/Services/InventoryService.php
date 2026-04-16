@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\StockMovement;
 use App\Models\Notification;
-use App\Models\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\LazyCollection;
 
@@ -36,62 +35,82 @@ class InventoryService
                 'user_id' => $userId,
             ]);
         });
+
+        $product = Product::find($productId);
+        Notification::create([
+            'user_id' => $userId,
+            'type' => 'info',
+            'title' => 'Ajuste de Stock Realizado',
+            'message' => "Se ha procesado un ajuste ($type) para el item {$product->codigo_oem}.",
+            'icon' => 'settings_input_component',
+            'action_url' => route('erp.inventario.productos') . '?search=' . $product->codigo_oem
+        ]);
     }
 
     /**
-     * Procesamiento masivo de actualización de stock y precios desde archivo físico (Lazy Collection/Chunking)
+     * Procesamiento masivo de actualización de stock y precios (Estrategia Universal)
      */
     public function processMassUpdateFromFile(string $filePath, $userId)
     {
         $count = 0;
-        
-        // Verifica si es un .accdb (Access origin test) para mock de mdbtools
-        $isAccess = pathinfo($filePath, PATHINFO_EXTENSION) === 'accdb';
-        
-        // Asumiremos que tenemos función que retorna un Generator 
-        // yields rows (arrays). Podría usar fgetcsv temporalmente:
-        $collection = LazyCollection::make(function () use ($filePath, $isAccess) {
-            // Nota de Implementación Avanzada: Si $isAccess === true, aquí se ejecutaría:
-            // $process = Process::run("mdb-export $filePath Products");
-            // Y leeríamos el standard output iterativamente. Por ahora iteraremos si fuera CSV básico 
-            // asumiendo que un puente transformó la metadata a csv estándar.
-            
-            $handle = fopen($filePath, 'r');
-            $headers = fgetcsv($handle); // Leer cabeceras
-            
-            if ($headers) {
-                while (($line = fgetcsv($handle)) !== false) {
-                    if(count($headers) === count($line)) {
-                        yield array_combine($headers, $line);
+        $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+
+        // Estrategia de Extracción de Datos
+        $collection = LazyCollection::make(function () use ($filePath, $extension) {
+            if ($extension === 'accdb' || $extension === 'mdb') {
+                // Si estamos en Windows, intentamos usar el driver ODBC directamente
+                if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                    try {
+                        $connectionString = "odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq={$filePath};";
+                        $pdo = new \PDO($connectionString);
+                        $stmt = $pdo->query("SELECT OEM as codigo, Descripcion as descripcion, Marca as marca, Categoria as categoria, StockFinal as stock, PrecioMayorista as precio FROM Inventario");
+                        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                            yield $row;
+                        }
+                    } catch (\Exception $e) {
+                        \Log::warning("Fallo en driver ODBC local. Intentando fallback.");
                     }
                 }
             }
-            fclose($handle);
+
+            // Fallback Universal: CSV / TXT
+            if (file_exists($filePath)) {
+                $handle = fopen($filePath, 'r');
+                $headers = fgetcsv($handle, 0, ','); // Intento con coma
+                
+                // Si falla, intentamos punto y coma (común en Excel español)
+                if (!$headers || count($headers) < 2) {
+                    rewind($handle);
+                    $headers = fgetcsv($handle, 0, ';');
+                }
+
+                if ($headers) {
+                    while (($line = fgetcsv($handle, 0, str_contains(implode('', $headers), ';') ? ';' : ',')) !== false) {
+                        if (count($headers) === count($line)) {
+                            yield array_combine($headers, $line);
+                        }
+                    }
+                }
+                fclose($handle);
+            }
         });
 
-        // Parseo por chunks para DB connection limits
-        $collection->chunk(500)->each(function ($chunk) use ($userId, &$count) {
+        // Aplicación de Cambios en Chunks
+        $collection->chunk(200)->each(function ($chunk) use ($userId, &$count) {
             DB::transaction(function () use ($chunk, &$count) {
                 foreach ($chunk as $item) {
-                    $sku = trim($item['codigo'] ?? '');
+                    $sku = trim($item['codigo'] ?? $item['OEM'] ?? '');
                     if (empty($sku)) continue;
 
                     Product::updateOrCreate(
                         ['codigo_oem' => $sku],
                         [
-                            'foto_path'      => $item['foto'] ?? '',
-                            'categoria'      => $item['categoria'] ?? '',
-                            'fabricante'     => $item['fabricante'] ?? '',
-                            'marca'          => $item['marca'] ?? '',
-                            'material'       => $item['material'] ?? '',
-                            'espesor'        => $item['espesor'] ?? '',
-                            'nombre'         => $item['descripcion'] ?? 'Nuevo Producto',
-                            'medidas'        => $item['medidas'] ?? '',
-                            'precio_mayor'   => floatval($item['precio'] ?? 0),
-                            'stock_actual'   => intval($item['stock'] ?? 0),
-                            'fecha_incorporacion' => !empty($item['incorporacion']) ? date('Y-m-d', strtotime($item['incorporacion'])) : null,
-                            'is_development' => false,
-                            'activo'         => true,
+                            'nombre'       => $item['descripcion'] ?? $item['Descripcion'] ?? 'Producto Sincronizado',
+                            'marca'        => $item['marca'] ?? $item['Marca'] ?? 'N/A',
+                            'categoria'    => $item['categoria'] ?? $item['Categoria'] ?? 'General',
+                            'precio_mayor' => floatval($item['precio'] ?? $item['PrecioMayorista'] ?? 0),
+                            'stock_actual' => floatval($item['stock'] ?? $item['StockFinal'] ?? 0),
+                            'activo'       => true,
                         ]
                     );
                     $count++;
@@ -99,13 +118,18 @@ class InventoryService
             });
         });
 
+        activity()
+            ->useLogName('inventario')
+            ->withProperties(['count' => $count, 'file' => basename($filePath)])
+            ->log("Sincronización masiva de inventario completada: $count items procesados.");
+
         Notification::create([
             'user_id' => $userId,
             'type' => 'success',
             'title' => 'Sincronización Masiva Completada',
             'message' => "Se han procesado $count items a través de LazyCollection (Chunking optimizado).",
             'icon' => 'sync',
-            'action_url' => route('erp.inventario.productos')
+            'action_url' => route('erp.inventario.productos') . '?updated=' . time()
         ]);
         
         return $count;

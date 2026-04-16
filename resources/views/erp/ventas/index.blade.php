@@ -49,7 +49,7 @@
         </div>
         <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-2">Ingresos Consolidados</p>
         <div class="flex items-baseline gap-2">
-          <span class="text-4xl font-headline font-black text-stone-900">$128,450</span>
+          <span class="text-4xl font-headline font-black text-stone-900">${{ number_format($stats['ventas_mes'], 0) }}</span>
           <span class="text-xs font-bold text-stone-400">.00</span>
         </div>
         <div class="mt-4 pt-4 border-t border-stone-50">
@@ -67,17 +67,17 @@
             <span class="material-symbols-outlined">pending_actions</span>
           </div>
           <div class="flex flex-col items-end">
-            <span class="text-xs font-black text-amber-600">24 Pendientes</span>
-            <span class="text-[8px] font-bold text-stone-400 uppercase tracking-widest">Cartera Crítica</span>
+            <span class="text-xs font-black text-amber-600">{{ $stats['ordenes_pendientes'] }} Pendientes</span>
+            <span class="text-[8px] font-bold text-stone-400 uppercase tracking-widest">Atención inmediata</span>
           </div>
         </div>
         <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-2">Pendiente de Cobro</p>
         <div class="flex items-baseline gap-2">
-          <span class="text-4xl font-headline font-black text-stone-900">$32,180</span>
-          <span class="text-xs font-bold text-stone-400">.50</span>
+          <span class="text-4xl font-headline font-black text-stone-900">${{ number_format($stats['cuentas_por_cobrar'], 0) }}</span>
+          <span class="text-xs font-bold text-stone-400">.00</span>
         </div>
         <div class="mt-4 pt-4 border-t border-stone-50">
-          <p class="text-[9px] text-stone-500 leading-relaxed font-medium">12 facturas vencidas requieren gestión inmediata.</p>
+          <p class="text-[9px] text-stone-500 leading-relaxed font-medium">Cuentas por cobrar en estado pendiente.</p>
         </div>
       </div>
     </div>
@@ -97,7 +97,7 @@
         </div>
         <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-2">Ticket de Venta</p>
         <div class="flex items-baseline gap-2">
-          <span class="text-4xl font-headline font-black text-stone-900">$425</span>
+          <span class="text-4xl font-headline font-black text-stone-900">${{ number_format($stats['ticket_promedio'], 0) }}</span>
           <span class="text-xs font-bold text-stone-400">/ORD</span>
         </div>
         <div class="mt-4 pt-4 border-t border-stone-50">
@@ -114,7 +114,7 @@
           <div class="w-12 h-12 bg-primary text-black rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20">
             <span class="material-symbols-outlined">group</span>
           </div>
-          <span class="text-xs font-black text-primary uppercase">342 Activos</span>
+          <span class="text-xs font-black text-primary uppercase">{{ $stats['clientes_activos'] }} Activos</span>
         </div>
         <p class="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-2 text-white/50">Base de Clientes</p>
         <div class="flex items-baseline gap-2">
@@ -164,46 +164,32 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-stone-50">
+            @foreach($recentOrders as $order)
             <tr class="group hover:bg-stone-50/50 transition-colors">
               <td class="py-5 pl-2">
-                <span class="text-xs font-mono font-bold text-stone-400 group-hover:text-stone-900 transition-colors uppercase">#FAC-9801</span>
+                <span class="text-xs font-mono font-bold text-stone-400 group-hover:text-stone-900 transition-colors uppercase">#{{ $order->numero_orden }}</span>
               </td>
               <td class="py-5">
                 <div class="flex flex-col">
-                  <span class="text-xs font-black text-stone-900 uppercase">Transportes Carabobo</span>
-                  <span class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">RIF: J-554210-3</span>
+                  <span class="text-xs font-black text-stone-900 uppercase">{{ $order->customer->razon_social ?? 'Cliente General' }}</span>
+                  <span class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">RIF: {{ $order->customer->rif ?? '---' }}</span>
                 </div>
               </td>
               <td class="py-5">
-                <p class="text-xs text-stone-500 font-medium italic">Filtros Volvo + Turbo VGT</p>
+                <p class="text-xs text-stone-500 font-medium italic">
+                    {{ $order->items->count() }} item(s) registrado(s)
+                </p>
               </td>
               <td class="py-5 text-right">
-                <span class="text-sm font-headline font-black text-stone-900 tracking-tight">$1,245.50</span>
+                <span class="text-sm font-headline font-black text-stone-900 tracking-tight">${{ number_format($order->total, 2) }}</span>
               </td>
               <td class="py-5 text-center">
-                <span class="px-3 py-1 bg-green-50 text-green-600 rounded-full text-[9px] font-black uppercase tracking-wider border border-green-100">Liquidada</span>
+                <span class="px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider border {{ $order->estado == 'Pagado' ? 'bg-green-50 text-green-600 border-green-100' : 'bg-amber-50 text-amber-600 border-amber-100' }}">
+                  {{ $order->estado }}
+                </span>
               </td>
             </tr>
-            <tr class="group hover:bg-stone-50/50 transition-colors">
-              <td class="py-5 pl-2">
-                <span class="text-xs font-mono font-bold text-stone-400 group-hover:text-stone-900 transition-colors uppercase">#FAC-9802</span>
-              </td>
-              <td class="py-5">
-                <div class="flex flex-col">
-                  <span class="text-xs font-black text-stone-900 uppercase">Industrial Parts S.A.</span>
-                  <span class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">RIF: J-127440-1</span>
-                </div>
-              </td>
-              <td class="py-5">
-                <p class="text-xs text-stone-500 font-medium italic">Kit Rodamientos Heavy Duty</p>
-              </td>
-              <td class="py-5 text-right">
-                <span class="text-sm font-headline font-black text-stone-900 tracking-tight">$840.00</span>
-              </td>
-              <td class="py-5 text-center">
-                <span class="px-3 py-1 bg-amber-50 text-amber-600 rounded-full text-[9px] font-black uppercase tracking-wider border border-amber-100">Por Cobrar</span>
-              </td>
-            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>

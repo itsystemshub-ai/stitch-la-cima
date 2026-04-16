@@ -35,7 +35,7 @@
             <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-blue-600 group-hover:text-primary">inventory_2</span></div>
             <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12%</span>
           </div>
-          <p class="text-2xl font-headline font-bold text-stone-900" id="stockCount">14,204</p>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="stockCount">{{ number_format($stats['stock_total'], 0) }}</p>
           <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Productos en Stock</p>
         </a>
       </div>
@@ -48,7 +48,7 @@
             <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-green-600 group-hover:text-primary">payments</span></div>
             <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+8.2%</span>
           </div>
-          <p class="text-2xl font-headline font-bold text-stone-900" id="salesAmount">$128,450</p>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="salesAmount">${{ number_format($stats['ingresos_mes'], 2) }}</p>
           <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Ventas del Mes</p>
         </a>
       </div>
@@ -61,8 +61,8 @@
             <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-purple-600 group-hover:text-primary">shopping_cart</span></div>
             <span class="text-[10px] font-bold text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">3 activas</span>
           </div>
-          <p class="text-2xl font-headline font-bold text-stone-900" id="pendingPurchases">$12,400</p>
-          <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Compras Pendientes</p>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="pendingPurchases">{{ $stats['ordenes_pendientes'] }}</p>
+          <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Órdenes a Procesar</p>
         </a>
       </div>
     </div>
@@ -74,7 +74,7 @@
             <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-orange-600 group-hover:text-primary">people</span></div>
             <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+5</span>
           </div>
-          <p class="text-2xl font-headline font-bold text-stone-900" id="customerCount">342</p>
+          <p class="text-2xl font-headline font-bold text-stone-900" id="customerCount">{{ $stats['clientes_activos'] }}</p>
           <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Clientes Activos</p>
         </a>
       </div>
@@ -91,9 +91,9 @@
         <a href="{{ url('/erp/inventario') }}" class="text-[10px] font-black uppercase text-stone-400 hover:text-stone-900 flex items-center gap-2 transition-colors">Ver completo <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
       </div>
       <div class="grid grid-cols-3 gap-6 mb-6">
-        <div class="border-l-4 border-green-500 pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Stock Activo</p><p class="text-2xl font-headline font-bold text-stone-900">14,204</p></div>
-        <div class="border-l-4 border-red-500 pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Alertas Críticas</p><p class="text-2xl font-headline font-bold text-red-500">5</p></div>
-        <div class="border-l-4 border-primary pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Rotación</p><p class="text-2xl font-headline font-bold text-stone-900">12.4%</p></div>
+        <div class="border-l-4 border-green-500 pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Stock Total</p><p class="text-2xl font-headline font-bold text-stone-900">{{ number_format($stats['stock_total'], 0) }}</p></div>
+        <div class="border-l-4 border-red-500 pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Alertas de Stock</p><p class="text-2xl font-headline font-bold text-red-500">{{ $stats['stock_risks'] }}</p></div>
+        <div class="border-l-4 border-primary pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Aprobaciones</p><p class="text-2xl font-headline font-bold text-stone-900">{{ $stats['aprobaciones_count'] }}</p></div>
       </div>
       <div class="h-32 bg-stone-50 rounded-lg flex items-end gap-1 px-3 py-2 overflow-hidden shadow-inner"><div class="flex-1 bg-stone-200 h-[40%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[60%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[55%] rounded-t"></div><div class="flex-1 bg-blue-400 h-[85%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[45%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[30%] rounded-t"></div><div class="flex-1 bg-stone-900 h-[95%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[50%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[70%] rounded-t"></div><div class="flex-1 bg-primary h-[100%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[65%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[75%] rounded-t"></div></div>
     </div>
@@ -103,19 +103,34 @@
         </div>
       <div class="relative z-10">
           <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2">Ingresos del Mes</p>
-          <h3 class="text-5xl font-headline font-black text-white tracking-tighter mb-8 italic">$128,450</h3>
+          <h3 class="text-5xl font-headline font-black text-white tracking-tighter mb-8 italic">${{ number_format($stats['ingresos_mes'], 2) }}</h3>
       </div>
       <div class="space-y-4 mb-10 relative z-10">
+        @foreach($recentOrders as $order)
         <div class="flex items-center justify-between bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/5">
-            <div><p class="text-[10px] font-black text-stone-400 uppercase mb-1">FAC-001</p><p class="text-xs font-bold uppercase">Discos de Freno</p></div>
-            <span class="font-headline font-black text-primary">$170.00</span>
+            <div><p class="text-[10px] font-black text-stone-400 uppercase mb-1">{{ $order->numero_orden }}</p><p class="text-xs font-bold uppercase">{{ $order->customer->razon_social ?? 'Cliente General' }}</p></div>
+            <span class="font-headline font-black text-primary">${{ number_format($order->total, 2) }}</span>
         </div>
-        <div class="flex items-center justify-between bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/5">
-            <div><p class="text-[10px] font-black text-stone-400 uppercase mb-1">FAC-002</p><p class="text-xs font-bold uppercase">Turbo VGT</p></div>
-            <span class="font-headline font-black text-primary">$845.00</span>
+        @endforeach
+      </div>
+      <a href="{{ url('/erp/ventas') }}" class="block bg-primary text-stone-900 py-4 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:brightness-110 transition-all text-center shadow-xl shadow-primary/10 relative z-10 mb-6">VER MÁS DETALLES</a>
+
+      @if($stats['categoria_mix']->count() > 0)
+      <div class="mt-8 pt-8 border-t border-white/5 relative z-10">
+        <p class="text-[9px] font-black text-stone-500 uppercase tracking-widest mb-4">Mix de Ventas por Categoría</p>
+        <div class="space-y-3">
+          @foreach($stats['categoria_mix'] as $mix)
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-stone-400 font-bold uppercase">{{ $mix->categoria }}</span>
+            <span class="text-white font-black">{{ $mix->total }} ord.</span>
+          </div>
+          <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+            <div class="bg-primary h-full" style="width: {{ min(100, $mix->total * 10) }}%"></div>
+          </div>
+          @endforeach
         </div>
       </div>
-      <a href="{{ url('/erp/ventas') }}" class="block bg-primary text-stone-900 py-4 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:brightness-110 transition-all text-center shadow-xl shadow-primary/10 relative z-10">VER MÁS DETALLES</a>
+      @endif
     </div>
   </div>
 @endsection

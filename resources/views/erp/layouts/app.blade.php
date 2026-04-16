@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="Zenith ERP - MAYOR DE REPUESTO LA CIMA, C.A."/>
 <meta name="theme-color" content="#ceff5e">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MAYOR DE REPUESTO LA CIMA, C.A. - ERP">
 <link rel="manifest" href="{{ asset('manifest.json') }}">
@@ -14,6 +14,12 @@
 <title>@yield('title', 'Zenith ERP') | MAYOR DE REPUESTO LA CIMA, C.A. - RIF: J-40308741-5</title>
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+<script>
+    // Sincronización proactiva de sesión Servidor -> Cliente
+    // Si esta página carga, el usuario está autenticado en Laravel.
+    localStorage.setItem('erp_session', 'true');
+</script>
 
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>

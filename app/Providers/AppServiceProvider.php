@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 use App\Models\Notification;
 use App\Models\StockMovement;
 use App\Observers\StockMovementObserver;
@@ -26,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Schema::defaultStringLength(191);
+        
         StockMovement::observe(StockMovementObserver::class);
 
         View::composer('*', function ($view) {

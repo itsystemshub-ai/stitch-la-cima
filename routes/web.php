@@ -79,9 +79,7 @@ Route::get('/frontend/{path}', function ($path) {
 Route::prefix('erp')->middleware('auth.erp')->group(function () {
 
     // Dashboard Principal
-    Route::get('/dashboard', function () {
-        return view('erp.dashboard.index');
-    })->name('erp.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('erp.dashboard');
 
     // Redirección de compatibilidad
     Route::get('/inicio', function () {

@@ -83,7 +83,10 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create($product);
+            Product::updateOrCreate(
+                ['codigo_oem' => $product['codigo_oem']],
+                $product
+            );
         }
     }
 }

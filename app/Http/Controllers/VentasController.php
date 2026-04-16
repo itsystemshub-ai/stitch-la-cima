@@ -17,12 +17,20 @@ class VentasController extends Controller
     public function index()
     {
         $stats = [
-            'ventas_hoy' => Order::whereDate('created_at', today())->sum('total'),
-            'ventas_mes' => Order::whereMonth('created_at', now()->month)->sum('total'),
-            'ordenes_pendientes' => Order::where('estado', 'Pendiente')->count(),
+            'ventas_hoy' => Order::whereDate('created_at', today())->where('estado', 'Pagado')->sum('total'),
+            'ventas_mes' => Order::whereMonth('created_at', now()->month)->where('estado', 'Pagado')->sum('total'),
+            'ordenes_pendientes' => Order::whereIn('estado', ['Pendiente', 'Esperando Aprobación'])->count(),
             'clientes_activos' => Customer::where('activo', true)->count(),
+            'cuentas_por_cobrar' => Order::where('estado', 'Pendiente')->sum('total'),
+            'ticket_promedio' => Order::where('estado', 'Pagado')->avg('total') ?? 0,
         ];
-        return view('erp.ventas.index', compact('stats'));
+
+        $recentOrders = Order::with('customer')
+            ->orderByDesc('created_at')
+            ->limit(5)
+            ->get();
+
+        return view('erp.ventas.index', compact('stats', 'recentOrders'));
     }
 
     public function pos()

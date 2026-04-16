@@ -251,50 +251,21 @@
             <h3 class="text-sm font-black text-stone-900 uppercase tracking-widest">Items de Inventario Destacados</h3>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Item 1 -->
+          @foreach($stats['featured_products'] as $product)
           <div class="flex items-center p-4 bg-white border border-stone-200 rounded-xl hover:border-primary transition-all shadow-sm">
             <div class="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center border border-stone-200 flex-shrink-0">
-               <span class="material-symbols-outlined text-stone-400">album</span>
+               <span class="material-symbols-outlined text-stone-400">inventory_2</span>
             </div>
             <div class="ml-4 flex-1 min-w-0">
-              <p class="text-[10px] font-bold text-primary uppercase tracking-wider">SKU: OEM-4421</p>
-              <p class="text-sm font-bold text-stone-900 truncate uppercase">Kit Discos Freno</p>
+              <p class="text-[10px] font-bold text-primary uppercase tracking-wider">SKU: {{ $product->codigo_oem }}</p>
+              <p class="text-sm font-bold text-stone-900 truncate uppercase">{{ $product->nombre }}</p>
               <div class="flex gap-4 mt-1">
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Stock:</span> <span class="text-[9px] font-black text-stone-900">424</span></div>
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Valor:</span> <span class="text-[9px] font-black text-green-600">$60,420</span></div>
+                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Stock:</span> <span class="text-[9px] font-black {{ $product->stock_actual <= $product->stock_minimo ? 'text-red-600' : 'text-stone-900' }}">{{ number_format($product->stock_actual, 0) }}</span></div>
+                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Valor:</span> <span class="text-[9px] font-black text-green-600">${{ number_format($product->stock_actual * $product->costo_compra, 0) }}</span></div>
               </div>
             </div>
           </div>
-
-          <!-- Item 2 -->
-          <div class="flex items-center p-4 bg-white border border-stone-200 rounded-xl hover:border-primary transition-all shadow-sm">
-            <div class="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center border border-stone-200 flex-shrink-0">
-               <span class="material-symbols-outlined text-stone-400">bolt</span>
-            </div>
-            <div class="ml-4 flex-1 min-w-0">
-              <p class="text-[10px] font-bold text-primary uppercase tracking-wider">SKU: TRB-VGT-84521</p>
-              <p class="text-sm font-bold text-stone-900 truncate uppercase">Turbo VGT</p>
-              <div class="flex gap-4 mt-1">
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Stock:</span> <span class="text-[9px] font-black text-amber-600">12</span></div>
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Valor:</span> <span class="text-[9px] font-black text-green-600">$22,200</span></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div class="flex items-center p-4 bg-white border border-stone-200 rounded-xl hover:border-primary transition-all shadow-sm">
-            <div class="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center border border-stone-200 flex-shrink-0">
-               <span class="material-symbols-outlined text-stone-400">compress</span>
-            </div>
-            <div class="ml-4 flex-1 min-w-0">
-              <p class="text-[10px] font-bold text-primary uppercase tracking-wider">SKU: SUS-101-DEL</p>
-              <p class="text-sm font-bold text-stone-900 truncate uppercase">Amortiguador Ref.</p>
-              <div class="flex gap-4 mt-1">
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Stock:</span> <span class="text-[9px] font-black text-stone-900">88</span></div>
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Valor:</span> <span class="text-[9px] font-black text-green-600">$3,977</span></div>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
     </div>
 @endsection

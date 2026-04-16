@@ -15,14 +15,13 @@ class DataGeneratorSeeder extends Seeder
 {
     public function run(): void
     {
-        // Limpieza previa para evitar duplicados en pruebas
+        // Limpieza de datos transaccionales para evitar acumulación excesiva en pruebas
         \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
         Approval::truncate();
         Notification::truncate();
         OrderItem::truncate();
         Order::truncate();
-        Customer::truncate();
-        Product::truncate();
+        // Nota: NO truncamos Product ni Customer para preservar datos de seeders previos
         \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
         // 1. GENERACIÓN DE PRODUCTOS (REPUESTOS REALES)
@@ -40,57 +39,77 @@ class DataGeneratorSeeder extends Seeder
         ];
 
         foreach ($productos as $p) {
-            Product::create([
-                'codigo_oem' => $p['oem'],
-                'codigo_interno' => 'LC-' . rand(1000, 9999),
-                'nombre' => $p['nombre'],
-                'marca' => $p['marca'],
-                'categoria' => $p['categoria'],
-                'stock_actual' => rand(5, 50),
-                'stock_minimo' => 10,
-                'costo_compra' => rand(50, 500),
-                'precio_mayor' => rand(600, 800),
-                'precio_detal' => rand(850, 1100),
-                'activo' => true,
-                'ubicacion_almacen' => 'PASILLO-' . chr(rand(65, 70)) . rand(1, 10),
-            ]);
+            Product::updateOrCreate(
+                ['codigo_oem' => $p['oem']],
+                [
+                    'codigo_interno' => 'LC-' . rand(1000, 9999),
+                    'nombre' => $p['nombre'],
+                    'marca' => $p['marca'],
+                    'categoria' => $p['categoria'],
+                    'stock_actual' => rand(5, 50),
+                    'stock_minimo' => 10,
+                    'costo_compra' => rand(50, 500),
+                    'precio_mayor' => rand(600, 800),
+                    'precio_detal' => rand(850, 1100),
+                    'activo' => true,
+                    'ubicacion_almacen' => 'PASILLO-' . chr(rand(65, 70)) . rand(1, 10),
+                ]
+            );
         }
 
         // 2. CLIENTES CORPORATIVOS
         $clientes = [
-            ['razon_social' => 'Transporte Carabobo, C.A.', 'rif' => 'J-12345678-0', 'tipo' => 'Mayor'],
-            ['razon_social' => 'Industrial Parts S.A.', 'rif' => 'J-87654321-9', 'tipo' => 'Mayor'],
-            ['razon_social' => 'Constructora Master Venezuela', 'rif' => 'J-45612378-2', 'tipo' => 'Detal'],
-            ['razon_social' => 'Logística La Cima Express', 'rif' => 'J-99887766-5', 'tipo' => 'Mayor'],
+            ['razon_social' => 'Transporte Carabobo, C.A.', 'rif' => 'J-12345678-0', 'tipo' => 'Mayor', 'name' => 'Admin Transporte Carabobo', 'email' => 'admin@transcarabobo.com.ve'],
+            ['razon_social' => 'Industrial Parts S.A.', 'rif' => 'J-87654321-9', 'tipo' => 'Mayor', 'name' => 'Compras Industrial Parts', 'email' => 'compras@industrialparts.com.ve'],
+            ['razon_social' => 'Constructora Master Venezuela', 'rif' => 'J-45612378-2', 'tipo' => 'Detal', 'name' => 'Ing. Ricardo Torres', 'email' => 'rtorres@masterauto.com.ve'],
+            ['razon_social' => 'Logística La Cima Express', 'rif' => 'J-99887766-5', 'tipo' => 'Mayor', 'name' => 'Gerencia Logística', 'email' => 'gerencia@lacimaexpress.com.ve'],
         ];
 
         foreach ($clientes as $c) {
-            Customer::create([
-                'rif' => $c['rif'],
-                'razon_social' => $c['razon_social'],
-                'email' => strtolower(str_replace(' ', '.', $c['razon_social'])) . '@gmail.com',
-                'telefono' => '0414-' . rand(1000000, 9999999),
-                'direccion' => 'Zona Industrial Valencia, Edo. Carabobo',
-                'tipo_cliente' => $c['tipo'],
-                'limite_credito' => $c['tipo'] == 'Mayor' ? 5000 : 0,
-                'activo' => true
-            ]);
+            $user = \App\Models\User::updateOrCreate(
+                ['email' => $c['email']],
+                [
+                    'name' => $c['name'],
+                    'password' => \Illuminate\Support\Facades\Hash::make('cliente123'),
+                    'role' => 'cliente',
+                    'is_active' => true,
+                ]
+            );
+
+            Customer::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'rif' => $c['rif'],
+                    'razon_social' => $c['razon_social'],
+                    'telefono' => '0414-' . rand(1000000, 9999999),
+                    'direccion' => 'Zona Industrial Valencia, Edo. Carabobo',
+                    'tipo_cliente' => $c['tipo'],
+                    'limite_credito' => $c['tipo'] == 'Mayor' ? 5000 : 0,
+                    'activo' => true
+                ]
+            );
         }
 
         // 3. ÓRDENES E HISTORIAL PARA DASHBOARD
         $allProducts = Product::all();
         $allCustomers = Customer::all();
+        $adminUser = \App\Models\User::where('role', 'admin')->first();
+        $adminId = $adminUser ? $adminUser->id : 1;
 
         for ($i = 0; $i < 20; $i++) {
             $customer = $allCustomers->random();
-            $order = Order::create([
-                'numero_orden' => 'ORD-' . (1024 + $i),
-                'customer_id' => $customer->id,
-                'estado' => 'Pagado',
-                'total' => 0,
-                'fecha_emision' => now()->subDays(rand(1, 60)),
-                'created_at' => now()->subDays(rand(1, 60))
-            ]);
+            $orderNumber = 'ORD-' . (1024 + $i);
+            
+            $order = Order::updateOrCreate(
+                ['numero_orden' => $orderNumber],
+                [
+                    'customer_id' => $customer->id,
+                    'estado' => 'Pagado',
+                    'total' => 0,
+                    'fecha_emision' => now()->subDays(rand(1, 60)),
+                    'created_at' => now()->subDays(rand(1, 60))
+                ]
+            );
 
             $subtotal = 0;
             $itemsCount = rand(1, 3);
@@ -99,54 +118,48 @@ class DataGeneratorSeeder extends Seeder
                 $qty = rand(1, 5);
                 $price = $customer->tipo_cliente == 'Mayor' ? $product->precio_mayor : $product->precio_detal;
                 
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $product->id,
-                    'cantidad' => $qty,
-                    'precio_unitario' => $price,
-                    'subtotal' => $price * $qty
-                ]);
+                OrderItem::updateOrCreate(
+                    [
+                        'order_id' => $order->id,
+                        'product_id' => $product->id
+                    ],
+                    [
+                        'cantidad' => $qty,
+                        'precio_unitario' => $price,
+                        'subtotal' => $price * $qty
+                    ]
+                );
                 $subtotal += $price * $qty;
             }
             $order->update(['total' => $subtotal]);
         }
 
-        // 4. NOTIFICACIONES DE LA CAMPANA
-        Notification::create([
-            'type' => 'warning',
-            'title' => 'Stock Bajo Detectado',
-            'message' => 'El producto Filtro de Aceite Cummins LF9009 está por debajo del mínimo (8 unidades restantes).',
-            'icon' => 'inventory_2',
-            'read' => false
-        ]);
-
-        Notification::create([
-            'type' => 'success',
-            'title' => 'Venta Online Recibida',
-            'message' => 'Nueva orden #1024 recibida desde el portal E-commerce por $850.00.',
-            'icon' => 'shopping_cart',
-            'read' => false
-        ]);
-
-        Notification::create([
-            'type' => 'info',
-            'title' => 'Sincronización Exitosa',
-            'message' => 'La base de datos de Access se ha sincronizado correctamente con el ERP.',
-            'icon' => 'sync',
-            'read' => true
-        ]);
+        // 4. NOTIFICACIONES DE LA CAMPANA (Para el Admin) - Muestra de sistema
+        Notification::firstOrCreate(
+            ['title' => 'Stock Bajo Detectado', 'user_id' => $adminId],
+            [
+                'type' => 'warning',
+                'message' => 'El producto Filtro de Aceite Cummins LF9009 está por debajo del mínimo (8 unidades restantes).',
+                'icon' => 'inventory_2',
+                'read' => false
+            ]
+        );
 
         // 5. GENERACIÓN DE APROBACIONES PENDIENTES
-        $ordersToApprove = Order::where('total', '>', 1000)->take(3)->get();
+        $ordersToApprove = Order::where('total', '>', 500)->take(3)->get();
         foreach ($ordersToApprove as $order) {
             $order->update(['estado' => 'Esperando Aprobación']);
-            Approval::create([
-                'approvable_id' => $order->id,
-                'approvable_type' => Order::class,
-                'requester_id' => 1, // Admin default
-                'status' => 'pending',
-                'reason' => 'Orden de alto valor requiere validación gerencial.'
-            ]);
+            Approval::updateOrCreate(
+                [
+                    'approvable_id' => $order->id,
+                    'approvable_type' => Order::class
+                ],
+                [
+                    'requester_id' => $adminId,
+                    'status' => 'pending',
+                    'reason' => 'Orden de valor moderado requiere validación gerencial para despacho prioritario.'
+                ]
+            );
         }
     }
 }

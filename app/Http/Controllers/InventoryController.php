@@ -27,6 +27,10 @@ class InventoryController extends Controller
             'valuation' => Product::where('activo', true)->sum(DB::raw('stock_actual * costo_compra')),
             'potential_revenue' => Product::where('activo', true)->sum(DB::raw('stock_actual * precio_mayor')),
             'recent_movements' => StockMovement::with('product')->latest()->take(5)->get(),
+            'featured_products' => Product::where('activo', true)->where('stock_actual', '>', 0)
+                                    ->orderByDesc(DB::raw('stock_actual * costo_compra'))
+                                    ->take(3)
+                                    ->get(),
         ];
 
         return view('erp.inventario.index', compact('stats'));
@@ -102,6 +106,15 @@ class InventoryController extends Controller
                 'user_id' => Auth::id(),
             ]);
         }
+
+        Notification::create([
+            'user_id' => Auth::id(),
+            'type' => 'success',
+            'title' => 'Nuevo Producto Registrado',
+            'message' => "El item {$product->codigo_oem} se ha integrado satisfactoriamente al ecosistema.",
+            'icon' => 'inventory_2',
+            'action_url' => route('erp.inventario.productos') . '?search=' . $product->codigo_oem
+        ]);
 
         return back()->with('success', 'Producto registrado estratégicamente.');
     }
@@ -189,11 +202,15 @@ class InventoryController extends Controller
     }
 
     /**
-     * Auditoría
+     * Auditoría Global del Sistema
      */
     public function auditoria()
     {
-        return view('erp.inventario.auditoria');
+        $activities = \Spatie\Activitylog\Models\Activity::with('causer', 'subject')
+            ->latest()
+            ->paginate(50);
+
+        return view('erp.inventario.auditoria', compact('activities'));
     }
 
     /**

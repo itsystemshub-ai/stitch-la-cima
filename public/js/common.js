@@ -46,15 +46,15 @@ document.addEventListener('click', (e) => {
 // Logout function
 function logout() {
   localStorage.removeItem('erp_session');
-  window.location.href = '/frontend/public/auth/login.html';
+  window.location.href = '/auth/login';
 }
 
 // Check authentication on page load
 document.addEventListener('DOMContentLoaded', () => {
-  if (!localStorage.getItem('erp_session')) {
-    // Only redirect if not already on login page
-    if (!window.location.pathname.includes('login.html')) {
-      window.location.href = '/frontend/public/auth/login.html';
-    }
+  const isLoggedIn = localStorage.getItem('erp_session') === 'true';
+  const isAuthPage = window.location.pathname.includes('/auth/');
+
+  if (!isLoggedIn && !isAuthPage) {
+    window.location.href = '/auth/login';
   }
 });

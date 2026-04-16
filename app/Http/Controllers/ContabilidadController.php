@@ -6,8 +6,25 @@ use Illuminate\Http\Request;
 
 class ContabilidadController extends Controller
 {
-    public function index() { return view('erp.contabilidad.index'); }
-    public function planCuentas() { return view('erp.contabilidad.plan-cuentas'); }
+    public function index() 
+    {
+        $stats = [
+            'ingresos_mes' => \App\Models\Order::where('estado', 'Pagado')->whereMonth('created_at', now()->month)->sum('total'),
+            'gastos_mes' => \App\Models\Order::where('estado', 'Pagado')->whereMonth('created_at', now()->month)->sum('subtotal') * 0.65, // Simulación de costos
+            'cuentas_count' => \App\Models\Account::count(),
+            'asientos_recientes' => [], // Por ahora vacío hasta implementar JournalEntry
+        ];
+        
+        $stats['utilidad_neta'] = $stats['ingresos_mes'] - $stats['gastos_mes'];
+        $stats['iva_por_pagar'] = \App\Models\Order::where('estado', 'Pagado')->whereMonth('created_at', now()->month)->sum('impuestos');
+
+        return view('erp.contabilidad.index', compact('stats')); 
+    }
+    public function planCuentas() 
+    { 
+        $cuentas = \App\Models\Account::orderBy('codigo')->get();
+        return view('erp.contabilidad.plan-cuentas', compact('cuentas')); 
+    }
     public function libroDiario() { return view('erp.contabilidad.libro-diario'); }
     public function libroVentas() { return view('erp.contabilidad.libro-ventas'); }
     public function libroCaja() { return view('erp.contabilidad.libro-caja'); }

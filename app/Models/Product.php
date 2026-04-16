@@ -4,11 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['nombre', 'codigo_oem', 'stock_actual', 'precio_mayor', 'costo_compra', 'activo', 'ubicacion_almacen'])
+            ->logOnlyDirty()
+            ->useLogName('inventario')
+            ->dontSubmitEmptyLogs();
+    }
 
     protected $fillable = [
         'foto_path',

@@ -126,14 +126,16 @@
         document.getElementById('total').textContent = `USD $${total.toFixed(2)}`;
     }
 
-    // Checkout
+    // Checkout: Redirige al módulo de pago Laravel
     function checkout() {
         if (cart.length === 0) {
             showNotification('Tu carrito está vacío', 'error');
             return;
         }
         showNotification('Redirigiendo al proceso de pago...', 'success');
-        // In production: window.location.href = 'checkout.html';
+        setTimeout(() => {
+            window.location.href = '/tienda/checkout';
+        }, 800);
     }
 
     function showNotification(message, type = 'success') {
@@ -155,7 +157,7 @@
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && this.value.trim()) {
-                window.location.href = 'catalogo_detallado.html?q=' + encodeURIComponent(this.value.trim());
+                window.location.href = '/tienda/catalogo_detallado?q=' + encodeURIComponent(this.value.trim());
             }
         });
     }

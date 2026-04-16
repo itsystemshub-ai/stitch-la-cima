@@ -9,7 +9,7 @@
       content="Registro empresarial - MAYOR DE REPUESTO LA CIMA, C.A."
     />
     <meta name="theme-color" content="#ceff5e" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"

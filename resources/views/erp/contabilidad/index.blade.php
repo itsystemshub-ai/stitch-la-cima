@@ -41,7 +41,7 @@
                 Ingresos del Mes
             </p>
             <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
-                $128,450
+                ${{ number_format($stats['ingresos_mes'], 2) }}
             </p>
             <p class="text-xs text-stone-500 mt-1">Ventas brutas</p>
         </div>
@@ -57,7 +57,7 @@
                 Gastos del Mes
             </p>
             <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
-                $85,200
+                ${{ number_format($stats['gastos_mes'], 2) }}
             </p>
             <p class="text-xs text-stone-500 mt-1">Costos operativos</p>
         </div>
@@ -73,7 +73,7 @@
                 Utilidad Neta
             </p>
             <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
-                $43,250
+                ${{ number_format($stats['utilidad_neta'], 2) }}
             </p>
             <p class="text-xs text-stone-500 mt-1">Margen 33.7%</p>
         </div>
@@ -89,7 +89,7 @@
                 IVA por Pagar
             </p>
             <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
-                $18,500
+                ${{ number_format($stats['iva_por_pagar'], 2) }}
             </p>
             <p class="text-xs text-stone-500 mt-1">Próximo vencimiento</p>
         </div>
@@ -99,7 +99,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <a href="{{ url('/erp/contabilidad/plan-cuentas') }}" class="flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98] bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20">
             <span class="material-symbols-outlined text-2xl">format_list_numbered</span>
-            <span class="text-center leading-tight">Plan Cuentas</span>
+            <span class="text-center leading-tight">Plan Cuentas ({{ $stats['cuentas_count'] }})</span>
         </a>
         <a href="{{ url('/erp/contabilidad/libro-diario') }}" class="flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98] bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
             <span class="material-symbols-outlined text-2xl">menu_book</span>
@@ -132,11 +132,11 @@
             <div class="space-y-4">
                 <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
                     <span class="text-sm font-medium text-stone-700">Ingresos por Ventas</span>
-                    <span class="text-sm font-bold text-green-700">$128,450</span>
+                    <span class="text-sm font-bold text-green-700">${{ number_format($stats['ingresos_mes'], 2) }}</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
                     <span class="text-sm font-medium text-stone-700">Costo de Ventas</span>
-                    <span class="text-sm font-bold text-red-700">($65,200)</span>
+                    <span class="text-sm font-bold text-red-700">(${{ number_format($stats['gastos_mes'], 2) }})</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-stone-50 rounded-lg">
                     <span class="text-sm font-medium text-stone-700">Gastos Operativos</span>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="border-t border-stone-200 pt-4 flex justify-between items-center">
                     <span class="text-sm font-bold text-stone-900">Utilidad Neta</span>
-                    <span class="text-lg font-headline font-bold text-green-700">$43,250</span>
+                    <span class="text-lg font-headline font-bold text-green-700">${{ number_format($stats['utilidad_neta'], 2) }}</span>
                 </div>
             </div>
         </div>

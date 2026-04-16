@@ -184,7 +184,7 @@
           !window.zenithApi.isAuthenticated() &&
           localStorage.getItem("erp_session") !== "true"
         ) {
-          window.location.href = "login.html";
+          window.location.href = "{{ route('login') }}";
           return;
         }
         renderRequests();
