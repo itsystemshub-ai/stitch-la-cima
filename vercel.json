@@ -1,8 +1,8 @@
 {
     "version": 2,
     "functions": {
-        "api/*.php": {
-            "runtime": "vercel-php@0.7.2"
+        "api/index.php": {
+            "runtime": "vercel-php@0.6.0"
         }
     },
     "routes": [
@@ -22,7 +22,6 @@
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "LOG_CHANNEL": "stderr",
-        "VERCEL_DEPLOY_RETRY": "2"
+        "LOG_CHANNEL": "stderr"
     }
 }
