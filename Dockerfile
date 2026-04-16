@@ -1,40 +1,53 @@
-# FROM php:8.2-fpm-alpine
+# --- Etapa 1: Dependencias de PHP (Composer) ---
+FROM composer:latest as vendor
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install \
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist
+
+# --- Etapa 2: Dependencias de JS y Compilación (Vite) ---
+FROM node:20-alpine as assets
+WORKDIR /app
+COPY package.json package-lock.json vite.config.js ./
+COPY resources/ ./resources/
+RUN npm install && npm run build
+
+# --- Etapa 3: Imagen Final de Producción ---
 FROM php:8.2-fpm-alpine
-
-# Instalar dependencias del sistema
-RUN apk add --no-cache \
-    git \
-    curl \
-    libpng-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    oniguruma-dev \
-    libzip-dev \
-    nginx \
-    supervisor
-
-# Instalar extensiones de PHP necesarias (SOLUCIONA: pdo_mysql)
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
-
-# Configurar directorio de trabajo
 WORKDIR /var/www
 
-# Copiar archivos del proyecto
+# Instalar dependencias del sistema y extensiones necesarias
+RUN apk add --no-cache \
+    nginx \
+    supervisor \
+    libpng-dev \
+    libxml2-dev \
+    libzip-dev \
+    oniguruma-dev \
+    icu-dev \
+    bash
+
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl
+
+# Copiar el código y las dependencias de las etapas anteriores
 COPY . .
+COPY --from=vendor /app/vendor/ ./vendor/
+COPY --from=assets /app/public/build/ ./public/build/
 
-# Instalar dependencias de Composer (vía Multi-stage o asumiendo que ya están si se despliega local)
-# Para este demo, asumimos que el usuario sube los archivos. En CI se usaría:
-# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-# RUN composer install --no-dev --optimize-autoloader
+# Crear link simbólico para el storage si no existe y dar permisos
+RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions bootstrap/cache && \
+    chmod -R 775 storage bootstrap/cache && \
+    chown -R www-data:www-data /var/www
 
-# Configurar permisos
-RUN mkdir -p /var/www/cache && chown -R www-data:www-data /var/www/storage /var/www/cache
-
-# Configuración de Nginx
+# Configuración de Nginx y Supervisor
 COPY ./docker/nginx.conf /etc/nginx/http.d/default.conf
 
-# Script de inicio
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
-
+# Exponer puertos
 EXPOSE 80
+
+# Script de arranque para procesos paralelos
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
