@@ -85,6 +85,13 @@
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   z-index: 200;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.submenu-up {
+  top: auto;
+  bottom: 0px;
 }
 
 .menu-parent.open .submenu {

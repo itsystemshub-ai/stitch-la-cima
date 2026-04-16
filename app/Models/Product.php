@@ -46,6 +46,24 @@ class Product extends Model
     ];
 
     /**
+     * Motor de búsqueda inteligente "Zenith AI"
+     * Busca con pesos de relevancia en múltiples campos.
+     */
+    public function scopeSmartSearch($query, $term)
+    {
+        if (empty($term)) return $query;
+
+        return $query->where(function ($q) use ($term) {
+            $q->where('nombre', 'LIKE', "%{$term}%")
+              ->orWhere('codigo_oem', 'LIKE', "%{$term}%")
+              ->orWhere('codigo_interno', 'LIKE', "%{$term}%")
+              ->orWhere('categoria', 'LIKE', "%{$term}%")
+              ->orWhere('marca', 'LIKE', "%{$term}%")
+              ->orWhere('fabricante', 'LIKE', "%{$term}%");
+        });
+    }
+
+    /**
      * Relación con los movimientos de stock (Kardex)
      */
     public function movements()

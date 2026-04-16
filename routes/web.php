@@ -100,6 +100,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/ajustes', [InventoryController::class, 'ajustesView'])->name('erp.inventario.ajustes');
         Route::post('/ajustes', [InventoryController::class, 'adjustStock'])->name('erp.inventario.ajustes.process');
         Route::get('/reportes', [InventoryController::class, 'reportes'])->name('erp.inventario.reportes');
+        Route::get('/api/search', [InventoryController::class, 'smartSearch'])->name('erp.inventario.api.search');
     });
 
     // Módulo Ventas
@@ -115,6 +116,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/notas-credito', [VentasController::class, 'notasCredito'])->name('erp.ventas.notas-credito');
         Route::get('/vendedores', [VentasController::class, 'vendedores'])->name('erp.ventas.vendedores');
         Route::get('/reportes', [VentasController::class, 'reportes'])->name('erp.ventas.reportes');
+        Route::get('/reporte-ganancias', [VentasController::class, 'reporteGanancias'])->name('erp.ventas.reporte-ganancias');
         Route::get('/orden/{id}', [VentasController::class, 'showOrder'])->name('erp.ventas.orden.show');
         Route::post('/orden/{id}/anular', [VentasController::class, 'anularOrden'])->name('erp.ventas.orden.anular');
     });
@@ -141,6 +143,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/estado-resultados', [ContabilidadController::class, 'estadoResultados'])->name('erp.contabilidad.estado-resultados');
         Route::get('/declaracion-iva', [ContabilidadController::class, 'declaracionIva'])->name('erp.contabilidad.declaracion-iva');
         Route::get('/cierre', [ContabilidadController::class, 'cierreContable'])->name('erp.contabilidad.cierre');
+        Route::get('/libros', [ContabilidadController::class, 'librosContables'])->name('erp.contabilidad.libros');
         Route::get('/libros-legales', [ContabilidadController::class, 'librosLegales'])->name('erp.contabilidad.libros-legales');
         Route::get('/reportes', [ContabilidadController::class, 'reportesContables'])->name('erp.contabilidad.reportes');
     });

@@ -60,7 +60,7 @@
         <span>Ventas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/ventas*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/ventas*') ? 'show' : '' }}">
         <a href="{{ url('/erp/ventas') }}" class="{{ Request::is('erp/ventas') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/ventas/pos') }}" id="tour-pos" class="{{ Request::is('erp/ventas/pos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
         <a href="{{ url('/erp/ventas/registro') }}" class="{{ Request::is('erp/ventas/registro*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">list_alt</span> Registro</a>
@@ -70,7 +70,8 @@
         <a href="{{ url('/erp/ventas/notas-credito') }}" class="{{ Request::is('erp/ventas/notas-credito*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">redo</span> Notas de Crédito</a>
         <a href="{{ url('/erp/ventas/clientes') }}" class="{{ Request::is('erp/ventas/clientes*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">people</span> Clientes</a>
         <a href="{{ url('/erp/ventas/vendedores') }}" class="{{ Request::is('erp/ventas/vendedores*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">badge</span> Vendedores</a>
-        <a href="{{ url('/erp/ventas/reportes') }}" class="{{ Request::is('erp/ventas/reportes*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">bar_chart</span> Reportes</a>
+        <a href="{{ url('/erp/ventas/reportes') }}" class="{{ Request::is('erp/ventas/reportes*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">bar_chart</span> Reportes Ventas</a>
+        <a href="{{ url('/erp/ventas/reporte-ganancias') }}" class="{{ Request::is('erp/ventas/reporte-ganancias*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">analytics</span> Inteligencia de Ganancias</a>
       </div>
     </div>
 
@@ -98,19 +99,16 @@
         <span>Contabilidad</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/contabilidad*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/contabilidad*') ? 'show' : '' }}">
         <a href="{{ url('/erp/contabilidad') }}" class="{{ Request::is('erp/contabilidad') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/contabilidad/plan-cuentas') }}" class="{{ Request::is('erp/contabilidad/plan-cuentas*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">format_list_numbered</span> Plan Cuentas</a>
-        <a href="{{ url('/erp/contabilidad/libro-diario') }}" class="{{ Request::is('erp/contabilidad/libro-diario*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">menu_book</span> Libro Diario</a>
-        <a href="{{ url('/erp/contabilidad/libro-ventas') }}" class="{{ Request::is('erp/contabilidad/libro-ventas*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">chrome_reader_mode</span> Libro Ventas</a>
-        <a href="{{ url('/erp/contabilidad/libro-caja') }}" class="{{ Request::is('erp/contabilidad/libro-caja*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">savings</span> Libro Caja</a>
+        <a href="{{ url('/erp/contabilidad/libros') }}" class="{{ Request::is('erp/contabilidad/libros*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">menu_book</span> Libros Contables</a>
         <div class="submenu-divider"></div>
         <a href="{{ url('/erp/contabilidad/balance-general') }}" class="{{ Request::is('erp/contabilidad/balance-general*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">balance</span> Balance General</a>
         <a href="{{ url('/erp/contabilidad/balance-comprobacion') }}" class="{{ Request::is('erp/contabilidad/balance-comprobacion*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">scale</span> Balance Comprob.</a>
         <a href="{{ url('/erp/contabilidad/estado-resultados') }}" class="{{ Request::is('erp/contabilidad/estado-resultados*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">monitoring</span> Estado Resultados</a>
         <a href="{{ url('/erp/contabilidad/declaracion-iva') }}" class="{{ Request::is('erp/contabilidad/declaracion-iva*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">gavel</span> Declaración IVA</a>
         <a href="{{ url('/erp/contabilidad/cierre') }}" class="{{ Request::is('erp/contabilidad/cierre*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">lock_clock</span> Cierre Contable</a>
-        <a href="{{ url('/erp/contabilidad/libros-legales') }}" class="{{ Request::is('erp/contabilidad/libros-legales*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">law</span> Libros Legales</a>
         <a href="{{ url('/erp/contabilidad/reportes') }}" class="{{ Request::is('erp/contabilidad/reportes*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">pie_chart</span> Reportes</a>
       </div>
     </div>
@@ -149,7 +147,7 @@
         <span>RRHH</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/rrhh*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/rrhh*') ? 'show' : '' }}">
         <a href="{{ url('/erp/rrhh') }}" class="{{ Request::is('erp/rrhh') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/rrhh/empleados') }}" class="{{ Request::is('erp/rrhh/empleados*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">person</span> Empleados</a>
         <a href="{{ url('/erp/rrhh/nomina') }}" class="{{ Request::is('erp/rrhh/nomina*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">payments</span> Nómina</a>
@@ -166,7 +164,7 @@
         <span>Configuración</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/configuracion*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/configuracion*') ? 'show' : '' }}">
         <a href="{{ url('/erp/configuracion') }}" class="{{ Request::is('erp/configuracion') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/configuracion/parametros') }}" class="{{ Request::is('erp/configuracion/parametros*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">tune</span> Parámetros</a>
         <a href="{{ url('/erp/configuracion/fiscal') }}" class="{{ Request::is('erp/configuracion/fiscal*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">policy</span> Config Fiscal</a>
@@ -187,7 +185,7 @@
         <span>Ayuda</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/ayuda*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/ayuda*') ? 'show' : '' }}">
         <a href="{{ url('/erp/ayuda') }}" class="{{ Request::is('erp/ayuda') ? 'active-link' : '' }}"><span class="material-symbols-outlined">help</span> Centro Ayuda</a>
         <a href="{{ url('/erp/ayuda/tickets') }}" class="{{ Request::is('erp/ayuda/tickets*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">confirmation_number</span> Mis Tickets</a>
         <a href="{{ url('/erp/ayuda/crear-ticket') }}" class="{{ Request::is('erp/ayuda/crear-ticket*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">add_circle</span> Crear Ticket</a>

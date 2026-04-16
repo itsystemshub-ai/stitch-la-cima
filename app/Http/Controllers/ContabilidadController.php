@@ -33,6 +33,7 @@ class ContabilidadController extends Controller
     public function estadoResultados() { return view('erp.contabilidad.estado-resultados'); }
     public function declaracionIva() { return view('erp.contabilidad.declaracion-iva'); }
     public function cierreContable() { return view('erp.contabilidad.cierre-contable'); }
+    public function librosContables() { return view('erp.contabilidad.libros'); }
     public function librosLegales() { return view('erp.contabilidad.libros-legales'); }
     public function reportesContables() { return view('erp.contabilidad.reportes-contables'); }
 }

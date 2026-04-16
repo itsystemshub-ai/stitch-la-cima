@@ -214,6 +214,22 @@ class InventoryController extends Controller
     }
 
     /**
+     * API para Búsqueda Inteligente (Usada por Smart Navigator)
+     */
+    public function smartSearch(Request $request)
+    {
+        $term = $request->q;
+        if (empty($term)) return response()->json([]);
+
+        $products = Product::smartSearch($term)
+            ->where('activo', true)
+            ->limit(5)
+            ->get(['id', 'nombre', 'codigo_oem', 'categoria', 'marca', 'precio_mayor', 'stock_actual']);
+
+        return response()->json($products);
+    }
+
+    /**
      * Ajustes (Vista)
      */
     public function ajustesView()

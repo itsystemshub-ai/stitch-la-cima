@@ -101,9 +101,9 @@
             <span class="material-symbols-outlined text-2xl">format_list_numbered</span>
             <span class="text-center leading-tight">Plan Cuentas ({{ $stats['cuentas_count'] }})</span>
         </a>
-        <a href="{{ url('/erp/contabilidad/libro-diario') }}" class="flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98] bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
+        <a href="{{ url('/erp/contabilidad/libros') }}" class="flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98] bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
             <span class="material-symbols-outlined text-2xl">menu_book</span>
-            <span class="text-center leading-tight">Libro Diario</span>
+            <span class="text-center leading-tight">Libros Contables</span>
         </a>
         <a href="{{ url('/erp/contabilidad/balance-general') }}" class="flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98] bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
             <span class="material-symbols-outlined text-2xl">balance</span>

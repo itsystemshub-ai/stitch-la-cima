@@ -298,6 +298,43 @@ class VentasController extends Controller
         return view('erp.ventas.reportes', compact('ventas', 'total_ventas', 'total_ordenes', 'periodo'));
     }
 
+    /**
+     * Reporte de Ganancias Mensuales (Inteligencia de Negocio)
+     */
+    public function reporteGanancias()
+    {
+        $mesActual = now()->month;
+        $anioActual = now()->year;
+
+        // Cálculo de Ganancias: Sum( (Precio Venta - Costo Compra) * Cantidad )
+        $reporte = OrderItem::join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->join('products', 'order_items.product_id', '=', 'products.id')
+            ->whereMonth('orders.created_at', $mesActual)
+            ->whereYear('orders.created_at', $anioActual)
+            ->where('orders.estado', 'Pagado')
+            ->select(
+                DB::raw('SUM(order_items.subtotal) as ingresos_brutos'),
+                DB::raw('SUM(order_items.cantidad * products.costo_compra) as total_costo'),
+                DB::raw('SUM(order_items.subtotal - (order_items.cantidad * products.costo_compra)) as ganancia_neta'),
+                DB::raw('COUNT(DISTINCT orders.id) as total_ventas')
+            )
+            ->first();
+
+        // Ventas por día para el gráfico
+        $ventasGrafico = Order::whereMonth('created_at', $mesActual)
+            ->whereYear('created_at', $anioActual)
+            ->where('estado', 'Pagado')
+            ->select(
+                DB::raw('DATE(created_at) as fecha'),
+                DB::raw('SUM(total) as total')
+            )
+            ->groupBy('fecha')
+            ->orderBy('fecha')
+            ->get();
+
+        return view('erp.ventas.reporte-ganancias', compact('reporte', 'ventasGrafico'));
+    }
+
     public function showOrder($id)
     {
         $order = Order::with('customer', 'items.product', 'vendedor')->findOrFail($id);

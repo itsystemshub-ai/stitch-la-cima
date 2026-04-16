@@ -3,12 +3,10 @@ import { GridStack } from 'gridstack';
 import 'gridstack/dist/gridstack.min.css';
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
-import ApexCharts from 'apexcharts';
 
 window.Alpine = Alpine;
 window.GridStack = GridStack;
 window.driver = driver;
-window.ApexCharts = ApexCharts;
 
 Alpine.start();
 
