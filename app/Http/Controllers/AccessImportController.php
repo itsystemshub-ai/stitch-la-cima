@@ -27,8 +27,21 @@ class AccessImportController extends Controller
     public function syncAccessDatabase(Request $request)
     {
         $request->validate([
-            'accdb_file' => 'required|file', // Podría validarse extensión mediante rule custom
+            'accdb_file' => 'required|file',
         ]);
+
+        // VERIFICACIÓN DE CAPACIDAD DEL SERVIDOR (Portabilidad Cloud)
+        $drivers = PDO::getAvailableDrivers();
+        $hasOdbc = in_array('odbc', $drivers);
+
+        if (!$hasOdbc) {
+            return response()->json([
+                'status' => 'unsupported',
+                'message' => 'El entorno de servidor actual no soporta la lectura directa de archivos .accdb.',
+                'recommendation' => 'Para despliegues en la nube (Linux/Docker), exporte sus datos de Access a Excel o CSV y utilice nuestro "Cargador Universal" de inventario.',
+                'cloud_ready' => true
+            ], 422);
+        }
 
         try {
             // Guardar temporalmente el archivo
@@ -36,22 +49,29 @@ class AccessImportController extends Controller
             $path = $file->storeAs('temp_imports', 'CIMA_SYNC_' . time() . '.accdb');
             $fullPath = storage_path('app/private/' . $path);
 
-            // Conexión avanzada por ODBC (Requiere MS Access Driver en el servidor)
+            // Conexión avanzada por ODBC (Solo funcionará en Windows con Driver instalado)
             $connectionString = "odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq={$fullPath};";
-            $pdo = new PDO($connectionString);
+            
+            try {
+                $pdo = new PDO($connectionString);
+            } catch (Exception $e) {
+                return response()->json([
+                    'status' => 'driver_error',
+                    'message' => 'Driver de Microsoft Access no encontrado o mal configurado en el sistema.',
+                    'hint' => 'Este comando requiere el "Microsoft Access Database Engine" instalado en el Sistema Operativo.',
+                    'alternative' => 'Recomendamos usar el Cargador Universal para máxima compatibilidad.'
+                ], 500);
+            }
+
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // EJEMPLO: Sincronizar Tabla de Productos (la tabla real se llamaría 'Articulos' o 'Inventario' en Access)
-            // Esto es parametrizable dependiendo de cómo se llamen exactamente las tablas en CIMA2026.accdb
             $query = "SELECT OEM, SKU, Descripcion, Marca, Categoria, StockFinal, CostoPromedio, PrecioMayorista, PrecioDetal FROM Inventario";
             $stmt = $pdo->query($query);
 
             $importedCount = 0;
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                
-                // Función avanzada: Upsert (Actualiza si existe, crea si no)
                 Product::updateOrCreate(
-                    ['codigo_oem' => $row['OEM']], // Llave primaria real de busqueda
+                    ['codigo_oem' => $row['OEM']],
                     [
                         'codigo_interno' => $row['SKU'] ?? null,
                         'nombre' => $row['Descripcion'],
@@ -64,23 +84,20 @@ class AccessImportController extends Controller
                         'activo' => true
                     ]
                 );
-                
                 $importedCount++;
             }
 
-            // Eliminar archivo temporal por seguridad
-            unlink($fullPath);
+            if (file_exists($fullPath)) unlink($fullPath);
 
             return response()->json([
                 'status' => 'success',
-                'message' => "Sincronización Avanzada completada. {$importedCount} productos actualizados/importados desde Access con éxito."
+                'message' => "Sincronización Avanzada completada. {$importedCount} productos actualizados con éxito."
             ]);
 
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Error crítico al procesar la base de datos Access: ' . $e->getMessage(),
-                'hint' => 'Verifica que el Microsoft Access ODBC Driver esté instalado en el servidor PHP.'
             ], 500);
         }
     }
