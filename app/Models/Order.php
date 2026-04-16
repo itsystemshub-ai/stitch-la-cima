@@ -19,6 +19,7 @@ class Order extends Model
         'impuestos',
         'total',
         'estado',
+        'status',
         'fecha_emision',
         'fecha_vencimiento',
     ];

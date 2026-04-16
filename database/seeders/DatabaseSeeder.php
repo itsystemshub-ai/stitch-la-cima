@@ -10,17 +10,14 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Poblar datos maestros
         $this->call([
             UserSeeder::class,
+            AccountSeeder::class,
             ProductSeeder::class,
             CustomerSeeder::class,
-            DataGeneratorSeeder::class, // Mantenemos el generador dinámico para mayor volumen
+            DataGeneratorSeeder::class,
         ]);
     }
 }

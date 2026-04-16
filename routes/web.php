@@ -98,13 +98,17 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     Route::prefix('ventas')->group(function () {
         Route::get('/', [VentasController::class, 'index'])->name('erp.ventas.index');
         Route::get('/pos', [VentasController::class, 'pos'])->name('erp.ventas.pos');
+        Route::post('/pos/procesar', [VentasController::class, 'procesarVenta'])->name('erp.ventas.pos.procesar');
         Route::get('/clientes', [VentasController::class, 'clientes'])->name('erp.ventas.clientes');
+        Route::post('/clientes', [VentasController::class, 'storeCliente'])->name('erp.ventas.clientes.store');
         Route::get('/registro', [VentasController::class, 'registro'])->name('erp.ventas.registro');
         Route::get('/facturacion', [VentasController::class, 'facturacion'])->name('erp.ventas.facturacion');
         Route::get('/historial', [VentasController::class, 'historial'])->name('erp.ventas.historial');
         Route::get('/notas-credito', [VentasController::class, 'notasCredito'])->name('erp.ventas.notas-credito');
         Route::get('/vendedores', [VentasController::class, 'vendedores'])->name('erp.ventas.vendedores');
         Route::get('/reportes', [VentasController::class, 'reportes'])->name('erp.ventas.reportes');
+        Route::get('/orden/{id}', [VentasController::class, 'showOrder'])->name('erp.ventas.orden.show');
+        Route::post('/orden/{id}/anular', [VentasController::class, 'anularOrden'])->name('erp.ventas.orden.anular');
     });
 
     // Módulo Compras
@@ -188,6 +192,9 @@ Route::get('/tienda/index', [TiendaController::class, 'index']);
 Route::get('/tienda/catalogo_general', [TiendaController::class, 'catalogoGeneral']);
 Route::get('/tienda/catalogo_detallado', [TiendaController::class, 'catalogoDetallado']);
 Route::get('/tienda/detalle_productos', [TiendaController::class, 'detalleProducto']);
+Route::get('/tienda/carrito', [TiendaController::class, 'verCarrito']);
+Route::get('/tienda/checkout', [TiendaController::class, 'checkout']);
+Route::get('/tienda/confirmacion/{orderId}', [TiendaController::class, 'confirmacion']);
 
 // Enrutador Dinámico para el Storefront Público (Otras páginas estáticas)
 Route::get('/tienda/{page?}', function ($page = 'index') {
@@ -229,5 +236,25 @@ Route::prefix('api/erp/invoice')->group(function () {
     Route::post('/checkout', [InvoiceController::class, 'processCheckout']);
 });
 
+// Rutas API Tienda (Público)
+Route::prefix('api/tienda')->group(function () {
+    Route::get('/productos', [TiendaController::class, 'catalogoGeneral']);
+    Route::get('/productos/{id}', [TiendaController::class, 'detalleProducto']);
+    Route::post('/carrito', [TiendaController::class, 'agregarCarrito']);
+    Route::post('/checkout', [TiendaController::class, 'procesarCheckout']);
+});
+
 // Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
 Route::get('/erp/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
+
+// Debug route to test login manually
+Route::get('/debug/login-test', function () {
+    $credentials = ['email' => 'admin@lacima.com', 'password' => 'admin123'];
+    
+    if (\Illuminate\Support\Facades\Auth::attempt($credentials)) {
+        request()->session()->regenerate();
+        return response()->json(['status' => 'success', 'user' => \Illuminate\Support\Facades\Auth::user()->name]);
+    }
+    
+    return response()->json(['status' => 'failed', 'message' => 'Auth failed']);
+});
