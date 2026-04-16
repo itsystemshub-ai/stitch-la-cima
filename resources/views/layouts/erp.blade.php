@@ -12,7 +12,7 @@
     <title>@yield('title', 'ERP') | Mayor de Repuesto La Cima, C.A.</title>
     
     <!-- Core Assets -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
@@ -37,8 +37,7 @@
       }
     </script>
     
-    <link rel="stylesheet" href="{{ asset('erp/css/common.css') }}">
-    <link rel="stylesheet" href="{{ asset('erp/css/premium-erp.css') }}">
+    {{-- Vite ya maneja el CSS principal --}}
     @yield('styles')
 </head>
 <body class="bg-background text-stone-900 min-h-screen flex">

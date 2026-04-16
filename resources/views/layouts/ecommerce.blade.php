@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
 <title>@yield('title', 'E-commerce Profesional | Mayor de Repuesto La Cima, C.A.')</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script>

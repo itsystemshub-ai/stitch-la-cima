@@ -2,7 +2,8 @@
 FROM composer:latest as vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install \
+RUN composer update \
+    --no-dev \
     --ignore-platform-reqs \
     --no-interaction \
     --no-plugins \
@@ -46,8 +47,13 @@ RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/s
 # Configuración de Nginx y Supervisor
 COPY ./docker/nginx.conf /etc/nginx/http.d/default.conf
 
+# Copiar y preparar el script de entrada
+COPY ./docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Exponer puertos
 EXPOSE 80
 
-# Script de arranque para procesos paralelos
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Usar el script de entrada
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
