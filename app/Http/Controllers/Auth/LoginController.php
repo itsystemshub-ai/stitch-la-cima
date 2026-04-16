@@ -13,15 +13,10 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        // Redirección inteligente si ya está logueado
         if (Auth::check()) {
-            $user = Auth::user();
-            if ($user->isCliente()) {
-                return redirect('/tienda/mi-cuenta');
-            }
-
-            return redirect('/erp/inicio');
+            return $this->redirectBasedOnRole(Auth::user());
         }
-
         return view('auth.login');
     }
 
@@ -36,25 +31,11 @@ class LoginController extends Controller
         ]);
 
         $loginField = filter_var($credentials['email'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-
-        if (Auth::attempt([$loginField => $credentials['email'], 'password' => $credentials['password']], $request->filled('remember'))) {
+        
+        if (Auth::attempt([$loginField => $credentials['email'], 'password' => $credentials['password']], $request->boolean('remember'))) {
             $request->session()->regenerate();
-
-            $user = Auth::user();
-
-            if ($user->is_active === false) {
-                Auth::logout();
-
-                return back()->withErrors([
-                    'email' => 'Tu cuenta ha sido desactivada. Contacta al administrador.',
-                ])->onlyInput('email');
-            }
-
-            if ($user->isCliente()) {
-                return redirect()->intended('/tienda/mi-cuenta');
-            }
-
-            return redirect()->intended('/erp/inicio');
+            
+            return $this->redirectBasedOnRole(Auth::user());
         }
 
         return back()->withErrors([
@@ -72,5 +53,18 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/auth/login');
+    }
+
+    /**
+     * Redirect users based on their assigned role
+     */
+    protected function redirectBasedOnRole($user)
+    {
+        if ($user->role === 'cliente') {
+            return redirect()->intended('/tienda/mi-cuenta')->with('success', 'Bienvenido a La Cima B2B.');
+        } 
+        
+        // Si es admin, trabajador o vendedor
+        return redirect()->intended('/erp/inicio')->with('success', 'Sesión iniciada. Bienvenido al ERP.');
     }
 }

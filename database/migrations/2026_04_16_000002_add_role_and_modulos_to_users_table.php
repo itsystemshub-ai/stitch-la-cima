@@ -9,9 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('trabajador')->nullable()->after('password');
-            $table->boolean('is_active')->default(true)->nullable()->after('role');
-            $table->json('modulos')->nullable()->after('is_active');
+            if (! Schema::hasColumn('users', 'role')) {
+                $table->string('role')->default('trabajador')->nullable()->after('password');
+            }
+            if (! Schema::hasColumn('users', 'is_active')) {
+                $table->tinyInteger('is_active')->default(1)->after('role');
+            }
+            if (! Schema::hasColumn('users', 'modulos')) {
+                $table->json('modulos')->nullable()->after('is_active');
+            }
         });
     }
 

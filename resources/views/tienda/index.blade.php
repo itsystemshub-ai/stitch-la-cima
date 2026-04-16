@@ -324,7 +324,7 @@
 
 @push('scripts')
     <!-- Zenith Integration Bridge -->
-    <script src="../erp/js/zenith-data.js"></script>
-    <script src="js/zenith-ecommerce-sync.js"></script>
-    <script src="js/index.js"></script>
+    <script src="{{ asset('js/zenith-data.js') }}"></script>
+    <script src="{{ asset('js/zenith-ecommerce-sync.js') }}"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
 @endpush

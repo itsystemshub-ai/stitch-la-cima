@@ -17,7 +17,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="{{ asset('erp/css/inicio.css') }}">
+<link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
 @stack('styles')
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
@@ -44,7 +44,7 @@
 
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
 
-<script src="{{ asset('erp/js/inicio.js') }}"></script>
+<script src="{{ asset('js/inicio.js') }}"></script>
 <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

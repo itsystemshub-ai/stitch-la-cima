@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\StockMovement;
+use App\Models\TiendaCart;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TiendaController extends Controller
@@ -30,17 +32,17 @@ class TiendaController extends Controller
     /**
      * Muestra el catálogo general de productos
      */
-        public function catalogoGeneral(Request $request)
+    public function catalogoGeneral(Request $request)
     {
         $query = Product::where('activo', true);
 
         if ($request->has('q')) {
             $searchTerm = $request->q;
-            $query->where(function($q) use ($searchTerm) {
+            $query->where(function ($q) use ($searchTerm) {
                 $q->where('nombre', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('codigo_oem', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('marca', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('codigo_erp', 'LIKE', "%{$searchTerm}%");
+                    ->orWhere('codigo_oem', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('marca', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('codigo_erp', 'LIKE', "%{$searchTerm}%");
             });
         }
 
@@ -59,10 +61,10 @@ class TiendaController extends Controller
         // Búsqueda simple par las redirecciones del JS
         if ($request->has('q')) {
             $searchTerm = $request->q;
-            $query->where(function($q) use ($searchTerm) {
+            $query->where(function ($q) use ($searchTerm) {
                 $q->where('nombre', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('codigo_oem', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('marca', 'LIKE', "%{$searchTerm}%");
+                    ->orWhere('codigo_oem', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('marca', 'LIKE', "%{$searchTerm}%");
             });
         }
 
@@ -79,7 +81,7 @@ class TiendaController extends Controller
         $id = $request->id;
         $product = Product::find($id);
 
-        if (!$product) {
+        if (! $product) {
             return redirect('/tienda/catalogo_general')->with('error', 'Producto no encontrado');
         }
 
@@ -97,6 +99,7 @@ class TiendaController extends Controller
     public function verCarrito(Request $request)
     {
         $cart = $request->session()->get('cart', []);
+
         return view('tienda.carrito', compact('cart'));
     }
 
@@ -112,10 +115,10 @@ class TiendaController extends Controller
 
         $product = Product::findOrFail($request->product_id);
 
-        if (\Illuminate\Support\Facades\Auth::guard('tienda')->check()) {
-            $customer = \Illuminate\Support\Facades\Auth::guard('tienda')->user();
-            
-            $cartItem = \App\Models\TiendaCart::firstOrNew([
+        if (Auth::check() && Auth::user()->isCliente()) {
+            $customer = Auth::user()->customer;
+
+            $cartItem = TiendaCart::firstOrNew([
                 'customer_id' => $customer->id,
                 'product_id' => $product->id,
             ]);
@@ -123,11 +126,11 @@ class TiendaController extends Controller
             $cartItem->cantidad = $cartItem->exists ? $cartItem->cantidad + $request->cantidad : $request->cantidad;
             $cartItem->save();
 
-            $cartCount = \App\Models\TiendaCart::where('customer_id', $customer->id)->sum('cantidad');
+            $cartCount = TiendaCart::where('customer_id', $customer->id)->sum('cantidad');
         } else {
             $cart = $request->session()->get('cart', []);
-            $key = 'product_' . $product->id;
-            
+            $key = 'product_'.$product->id;
+
             if (isset($cart[$key])) {
                 $cart[$key]['cantidad'] += $request->cantidad;
             } else {
@@ -156,14 +159,14 @@ class TiendaController extends Controller
     public function checkout(Request $request)
     {
         $cart = $request->session()->get('cart', []);
-        
+
         if (empty($cart)) {
             return redirect('/tienda/carrito')->with('error', 'El carrito está vacío');
         }
 
         $customers = Customer::where('activo', true)->get();
-        
-        $subtotal = array_sum(array_map(function($item) {
+
+        $subtotal = array_sum(array_map(function ($item) {
             return $item['precio'] * $item['cantidad'];
         }, $cart));
 
@@ -184,11 +187,11 @@ class TiendaController extends Controller
         ]);
 
         $items = $request->items;
-        
+
         try {
             $result = DB::transaction(function () use ($request, $items) {
                 $subtotal = 0;
-                
+
                 foreach ($items as $item) {
                     $product = Product::find($item['product_id']);
                     if ($product->stock_actual < $item['cantidad']) {
@@ -201,7 +204,7 @@ class TiendaController extends Controller
                 $total = $subtotal + $impuesto;
 
                 $order = Order::create([
-                    'numero_orden' => 'WEB-' . date('Ymd') . '-' . str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT),
+                    'numero_orden' => 'WEB-'.date('Ymd').'-'.str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT),
                     'customer_id' => $request->customer_id,
                     'subtotal' => $subtotal,
                     'impuestos' => $impuesto,
@@ -249,7 +252,7 @@ class TiendaController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 422);
         }
     }
@@ -260,6 +263,7 @@ class TiendaController extends Controller
     public function confirmacion(Request $request, $orderId)
     {
         $order = Order::with('items.product', 'customer')->findOrFail($orderId);
+
         return view('tienda.confirmacion', compact('order'));
     }
 }

@@ -17,11 +17,11 @@ class AuthMiddleware
 
         $user = Auth::user();
 
-        if ($user->isCliente()) {
+        if ($user->role === 'cliente') {
             return redirect('/tienda/mi-cuenta')->with('error', 'No tienes acceso al sistema ERP.');
         }
 
-        if (! $user->is_active) {
+        if ($user->is_active === false) {
             Auth::logout();
 
             return redirect('/auth/login')->with('error', 'Tu cuenta ha sido desactivada.');

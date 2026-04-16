@@ -201,7 +201,7 @@
     </footer>
 </main>
 
-<script src="{{ asset('erp/js/inicio.js') }}"></script>
+<script src="{{ asset('js/inicio.js') }}"></script>
 <script>
     function toggleDropdown(el) {
         const submenu = el.nextElementSibling;

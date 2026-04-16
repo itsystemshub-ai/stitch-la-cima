@@ -24,7 +24,12 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 // Punto de Entrada Principal (Storefront)
-Route::get('/', [TiendaController::class, 'index']);
+Route::get('/', [TiendaController::class, 'index'])->name('home');
+
+// Ruta ERP simple SIN middleware para debug
+Route::get('/erp', function () {
+    return response()->json(['message' => 'ERP funciona!', 'status' => 'ok']);
+});
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -204,12 +209,14 @@ Route::get('/tienda/confirmacion/{orderId}', [TiendaController::class, 'confirma
 Route::prefix('tienda/auth')->group(function () {
     Route::get('/register', [TiendaAuthController::class, 'showRegisterForm']);
     Route::post('/register', [TiendaAuthController::class, 'register']);
+
     Route::get('/login', function () {
         return redirect('/auth/login');
     });
-    Route::post('/login', [LoginController::class, 'login']);
-    Route::post('/logout', [LoginController::class, 'logout']);
-    Route::get('/mi-cuenta', [TiendaAuthController::class, 'miCuenta'])->middleware('auth');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/mi-cuenta', [TiendaAuthController::class, 'miCuenta']);
+    });
 });
 
 // Enrutador Dinámico para el Storefront Público (Otras páginas estáticas)
@@ -278,7 +285,7 @@ Route::get('/debug/seed-admin', function () {
             'name' => 'Administrador',
             'password' => Hash::make('admin123'),
             'role' => 'admin',
-            'is_active' => true,
+            'is_active' => 1,
         ]
     );
 
@@ -286,20 +293,79 @@ Route::get('/debug/seed-admin', function () {
         'status' => 'success',
         'user' => $user->email,
         'role' => $user->role,
-        'is_active' => $user->is_active,
+        'is_active' => (bool) $user->is_active,
         'message' => 'Usuario admin creado/actualizado',
     ]);
 });
 
-// Debug route to test login manually
+// Diagnostico completo
+Route::get('/debug/diagnostico', function () {
+    $result = [
+        'php_version' => PHP_VERSION,
+        'laravel_version' => app()->version(),
+        'env_db_connection' => env('DB_CONNECTION'),
+        'tablas' => [],
+        'columnas_users' => [],
+        'usuarios' => [],
+        'middleware_auth_erp' => [],
+    ];
+
+    // Verificar tablas
+    try {
+        $tables = DB::select('SHOW TABLES');
+        foreach ($tables as $t) {
+            $result['tablas'][] = array_values((array) $t)[0];
+        }
+    } catch (Exception $e) {
+        $result['error_db'] = $e->getMessage();
+    }
+
+    // Verificar columnas de users
+    try {
+        $result['columnas_users'] = DB::getSchemaBuilder()->getColumnListing('users');
+    } catch (Exception $e) {
+        $result['error_columns'] = $e->getMessage();
+    }
+
+    // Verificar usuarios
+    try {
+        $result['usuarios'] = User::select('id', 'name', 'email', 'role', 'is_active')->get()->toArray();
+    } catch (Exception $e) {
+        $result['error_users'] = $e->getMessage();
+    }
+
+    return response()->json($result, JSON_PRETTY_PRINT);
+});
+
+// Debug route to list all users
+Route::get('/debug/users', function () {
+    $users = User::select('id', 'name', 'email', 'role', 'is_active')->get();
+
+    return response()->json($users);
+});
+
+// Debug route to test login
 Route::get('/debug/login-test', function () {
     $credentials = ['email' => 'admin@lacima.com', 'password' => 'admin123'];
 
     if (Auth::attempt($credentials)) {
         request()->session()->regenerate();
 
-        return response()->json(['status' => 'success', 'user' => Auth::user()->name]);
+        return response()->json(['status' => 'success', 'user' => Auth::user()->name, 'role' => Auth::user()->role]);
     }
 
     return response()->json(['status' => 'failed', 'message' => 'Auth failed']);
+});
+
+// Debug: Lista de rutas ERP
+Route::get('/debug/rutas', function () {
+    $rutas = Route::getRoutes();
+    $erpRoutes = [];
+    foreach ($rutas as $route) {
+        if (str_contains($route->uri(), 'erp')) {
+            $erpRoutes[] = $route->uri().' ['.implode(',', $route->methods()).']';
+        }
+    }
+
+    return response()->json($erpRoutes);
 });

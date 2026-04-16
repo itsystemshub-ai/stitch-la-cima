@@ -139,7 +139,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('erp/js/inicio.js') }}"></script>
+    <script src="{{ asset('js/inicio.js') }}"></script>
     <script>
         // Lógica de terminal POS básica
         document.addEventListener('keydown', (e) => {
