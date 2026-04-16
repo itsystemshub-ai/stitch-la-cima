@@ -29,7 +29,7 @@ COPY . .
 # RUN composer install --no-dev --optimize-autoloader
 
 # Configurar permisos
-RUN chown -R www-data:www-data /var/www/storage /var/www/cache
+RUN mkdir -p /var/www/cache && chown -R www-data:www-data /var/www/storage /var/www/cache
 
 # Configuración de Nginx
 COPY ./docker/nginx.conf /etc/nginx/http.d/default.conf
