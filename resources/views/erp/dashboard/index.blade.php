@@ -95,7 +95,7 @@
         <div class="border-l-4 border-red-500 pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Alertas de Stock</p><p class="text-2xl font-headline font-bold text-red-500">{{ $stats['stock_risks'] }}</p></div>
         <div class="border-l-4 border-primary pl-4"><p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Aprobaciones</p><p class="text-2xl font-headline font-bold text-stone-900">{{ $stats['aprobaciones_count'] }}</p></div>
       </div>
-      <div class="h-32 bg-stone-50 rounded-lg flex items-end gap-1 px-3 py-2 overflow-hidden shadow-inner"><div class="flex-1 bg-stone-200 h-[40%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[60%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[55%] rounded-t"></div><div class="flex-1 bg-blue-400 h-[85%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[45%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[30%] rounded-t"></div><div class="flex-1 bg-stone-900 h-[95%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[50%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[70%] rounded-t"></div><div class="flex-1 bg-primary h-[100%] rounded-t"></div><div class="flex-1 bg-stone-200 h-[65%] rounded-t"></div><div class="flex-1 bg-stone-300 h-[75%] rounded-t"></div></div>
+      <div id="salesTrendChart" class="w-full -ml-3"></div>
     </div>
     <div class="bg-stone-950 text-white rounded-xl p-8 relative overflow-hidden shadow-2xl">
         <div class="absolute right-0 top-0 opacity-[0.05] translate-x-1/4 -translate-y-1/4">
@@ -133,4 +133,19 @@
       @endif
     </div>
   </div>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            window.notify('Sistema Zenith v6.0 Online', 'success');
+        }, 1000);
+        
+        // Simular alerta de stock bajo
+        setTimeout(() => {
+            window.notify('Alerta: Stock Crítico en Repuestos de Motor', 'warning');
+        }, 3000);
+    });
+</script>
 @endsection

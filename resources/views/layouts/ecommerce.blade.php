@@ -21,33 +21,7 @@
 <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
 <title>@yield('title', 'E-commerce Profesional | Mayor de Repuesto La Cima, C.A.')</title>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script>
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        colors: {
-          primary: "#ceff5e",
-          secondary: "#1c1c1c",
-          background: "#f6f6f9",
-          surface: "#ffffff",
-          outline: "#e2e2e5"
-        },
-        fontFamily: {
-          headline: ["League Spartan", "sans-serif"],
-          body: ["Inter", "sans-serif"]
-        }
-      }
-    }
-  }
-</script>
-<style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'League Spartan', sans-serif; }
-</style>
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Sora:wght@100..800&family=League+Spartan:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 @stack('styles')
 </head>

@@ -16,31 +16,10 @@
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: { 
-                primary: "#ceff5e", 
-                secondary: "#1c1c1c", 
-                background: "#f8fafc", 
-                surface: "#ffffff", 
-                outline: "#e2e8f0" 
-            },
-            fontFamily: { headline: ["League Spartan", "sans-serif"], body: ["Inter", "sans-serif"] },
-            boxShadow: {
-                'premium': '0 10px 40px -10px rgba(0,0,0,0.05)',
-            }
-          }
-        }
-      }
-    </script>
-    
-    {{-- Vite ya maneja el CSS principal --}}
     @yield('styles')
 </head>
-<body class="bg-background text-stone-900 min-h-screen flex">
+<body class="bg-erp text-stone-900 min-h-screen flex">
+    <x-smart-navigator />
 
     <!-- Assets de Lógica y UI -->
     <script src="{{ asset('erp/js/zenith-identity.js') }}"></script>
@@ -54,6 +33,9 @@
 
     <!-- Overlay para mobile sidebar -->
     <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[200] flex flex-col gap-3 w-80"></div>
 
     @yield('scripts')
 </body>

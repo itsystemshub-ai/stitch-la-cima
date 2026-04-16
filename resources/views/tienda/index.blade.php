@@ -1,6 +1,6 @@
 @extends('layouts.ecommerce')
 
-@section('title', 'E-commerce Profesional | Mayor de Repuesto La Cima, C.A.')
+@section('title', 'Tienda Virtual | Mayor de Repuesto La Cima, C.A.')
 
 @push('styles')
     <link rel="stylesheet" href="css/index.css">

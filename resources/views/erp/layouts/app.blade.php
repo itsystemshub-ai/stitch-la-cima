@@ -17,16 +17,16 @@
 
 <script>
     // Sincronización proactiva de sesión Servidor -> Cliente
-    // Si esta página carga, el usuario está autenticado en Laravel.
     localStorage.setItem('erp_session', 'true');
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300..700&amp;family=Inter:wght@300..700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
 @stack('styles')
 </head>
-<body class="bg-background text-stone-900 min-h-screen flex">
+<body class="bg-erp text-stone-900 min-h-screen flex">
+
+<x-smart-navigator />
 
 @include('erp.layouts.sidebar')
 
@@ -49,7 +49,6 @@
 
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="document.getElementById('sidebar').classList.remove('open'); this.classList.add('hidden');"></div>
 
-<script src="{{ asset('js/inicio.js') }}"></script>
 <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -63,6 +62,8 @@
       });
     }
 </script>
-@stack('scripts')
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[200] flex flex-col gap-3 w-80"></div>
+    @stack('scripts')
 </body>
 </html>
