@@ -2,7 +2,7 @@
 FROM composer:latest as vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer update \
+RUN composer install \
     --no-dev \
     --ignore-platform-reqs \
     --no-interaction \
