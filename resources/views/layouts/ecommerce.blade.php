@@ -2,8 +2,16 @@
 <html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<!-- PWA Meta Tags -->
-<meta name="description" content="Mayor de Repuesto La Cima, C.A. - Distribuidor autorizado de repuestos industriales para motores Cummins, Volvo, Detroit Diesel.">
+<!-- PWA & SEO Meta Tags -->
+<meta name="description" content="@yield('meta_description', 'Mayor de Repuesto La Cima, C.A. - Distribuidor autorizado de repuestos industriales para motores Cummins, Volvo, Detroit Diesel.')">
+<meta name="keywords" content="@yield('meta_keywords', 'repuestos, motores, cummins, volvo, detroit diesel, industriales, venezuela')">
+<meta name="author" content="Mayor de Repuesto La Cima, C.A.">
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="@yield('title', 'E-commerce Profesional | Mayor de Repuesto La Cima, C.A.')">
+<meta property="og:description" content="@yield('meta_description', 'Mayor de Repuesto La Cima, C.A. - Distribuidor autorizado de repuestos industriales.')">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request()->url() }}">
+<meta property="og:image" content="{{ asset('assets/images/logo.png') }}">
 <meta name="theme-color" content="#ceff5e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">

@@ -111,27 +111,42 @@ class TiendaController extends Controller
         ]);
 
         $product = Product::findOrFail($request->product_id);
-        $cart = $request->session()->get('cart', []);
 
-        $key = 'product_' . $product->id;
-        if (isset($cart[$key])) {
-            $cart[$key]['cantidad'] += $request->cantidad;
-        } else {
-            $cart[$key] = [
+        if (\Illuminate\Support\Facades\Auth::guard('tienda')->check()) {
+            $customer = \Illuminate\Support\Facades\Auth::guard('tienda')->user();
+            
+            $cartItem = \App\Models\TiendaCart::firstOrNew([
+                'customer_id' => $customer->id,
                 'product_id' => $product->id,
-                'nombre' => $product->nombre,
-                'codigo_oem' => $product->codigo_oem,
-                'precio' => $product->precio_mayor,
-                'cantidad' => $request->cantidad,
-            ];
-        }
+            ]);
 
-        $request->session()->put('cart', $cart);
+            $cartItem->cantidad = $cartItem->exists ? $cartItem->cantidad + $request->cantidad : $request->cantidad;
+            $cartItem->save();
+
+            $cartCount = \App\Models\TiendaCart::where('customer_id', $customer->id)->sum('cantidad');
+        } else {
+            $cart = $request->session()->get('cart', []);
+            $key = 'product_' . $product->id;
+            
+            if (isset($cart[$key])) {
+                $cart[$key]['cantidad'] += $request->cantidad;
+            } else {
+                $cart[$key] = [
+                    'product_id' => $product->id,
+                    'nombre' => $product->nombre,
+                    'codigo_oem' => $product->codigo_oem,
+                    'precio' => $product->precio_mayor,
+                    'cantidad' => $request->cantidad,
+                ];
+            }
+            $request->session()->put('cart', $cart);
+            $cartCount = array_sum(array_column($cart, 'cantidad'));
+        }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Producto agregado al carrito',
-            'cart_count' => array_sum(array_column($cart, 'cantidad')),
+            'message' => 'Producto agregado al carrito exitosamente.',
+            'cart_count' => $cartCount,
         ]);
     }
 

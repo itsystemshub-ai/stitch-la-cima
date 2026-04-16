@@ -1,33 +1,32 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\MaintenanceController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AccessImportController;
-use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ApprovalController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\TiendaController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\VentasController;
-use App\Http\Controllers\ComprasController;
-use App\Http\Controllers\ContabilidadController;
-use App\Http\Controllers\RrhhController;
-use App\Http\Controllers\ConfiguracionController;
-use App\Http\Controllers\FinanzasController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AyudaController;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\ContabilidadController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FinanzasController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\RrhhController;
+use App\Http\Controllers\TiendaAuthController;
+use App\Http\Controllers\TiendaController;
+use App\Http\Controllers\VentasController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
 
 // Punto de Entrada Principal (Storefront)
 Route::get('/', [TiendaController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
-
 
 Route::prefix('erp/sync')->group(function () {
     Route::get('/', function () {
@@ -40,46 +39,51 @@ Route::prefix('erp/sync')->group(function () {
 Route::get('/frontend/{path}', function ($path) {
     // Sanitize path to prevent traversal
     $path = str_replace(['../', '..\\'], '', $path);
-    
-    $absolutePath = base_path('stitch/' . $path);
-    
+
+    $absolutePath = base_path('stitch/'.$path);
+
     // Extra security: ensure real path is within the stitch directory
     $realPath = realpath($absolutePath);
     $stitchDir = realpath(base_path('stitch'));
-    
-    if (!$realPath || !str_starts_with($realPath, $stitchDir) || !File::exists($realPath)) { 
-        abort(404); 
+
+    if (! $realPath || ! str_starts_with($realPath, $stitchDir) || ! File::exists($realPath)) {
+        abort(404);
     }
-    
+
     $file = File::get($realPath);
     $type = File::mimeType($realPath);
-    if (str_ends_with($realPath, '.css')) { $type = 'text/css'; }
-    elseif (str_ends_with($realPath, '.js')) { $type = 'application/javascript'; }
-    elseif (str_ends_with($realPath, '.svg')) { $type = 'image/svg+xml'; }
-    
+    if (str_ends_with($realPath, '.css')) {
+        $type = 'text/css';
+    } elseif (str_ends_with($realPath, '.js')) {
+        $type = 'application/javascript';
+    } elseif (str_ends_with($realPath, '.svg')) {
+        $type = 'image/svg+xml';
+    }
+
     $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
+    $response->header('Content-Type', $type);
     // Agregamos cache control para no penalizar el rendimiento
-    $response->header("Cache-Control", "max-age=86400, public");
+    $response->header('Cache-Control', 'max-age=86400, public');
+
     return $response;
 })->where('path', '.*');
 
 // ========== GRUPOS DE RUTAS ERP (MODULAR) ==========
 
 Route::prefix('erp')->middleware('auth.erp')->group(function () {
-    
+
     // Dashboard Principal
-    // Dashboard Principal (ERP Inicio)
-    Route::get('/dashboard', function () { 
-        return view('erp.dashboard.index'); 
+    Route::get('/dashboard', function () {
+        return view('erp.dashboard.index');
     })->name('erp.dashboard');
 
     // Redirección de compatibilidad
-    Route::get('/inicio', function () { return redirect()->route('erp.dashboard'); });
-
+    Route::get('/inicio', function () {
+        return redirect()->route('erp.dashboard');
+    });
 
     // Módulo Inventario
-    Route::prefix('inventario')->group(function () {
+    Route::prefix('inventario')->middleware('permiso.modulo:inventario')->group(function () {
         Route::get('/', [InventoryController::class, 'index'])->name('erp.inventario.index');
         Route::get('/productos', [InventoryController::class, 'productos'])->name('erp.inventario.productos');
         Route::post('/productos', [InventoryController::class, 'store'])->name('erp.inventario.productos.store');
@@ -95,7 +99,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     });
 
     // Módulo Ventas
-    Route::prefix('ventas')->group(function () {
+    Route::prefix('ventas')->middleware('permiso.modulo:ventas')->group(function () {
         Route::get('/', [VentasController::class, 'index'])->name('erp.ventas.index');
         Route::get('/pos', [VentasController::class, 'pos'])->name('erp.ventas.pos');
         Route::post('/pos/procesar', [VentasController::class, 'procesarVenta'])->name('erp.ventas.pos.procesar');
@@ -112,7 +116,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     });
 
     // Módulo Compras
-    Route::prefix('compras')->group(function () {
+    Route::prefix('compras')->middleware('permiso.modulo:compras')->group(function () {
         Route::get('/', [ComprasController::class, 'index'])->name('erp.compras.index');
         Route::get('/proveedores', [ComprasController::class, 'proveedores'])->name('erp.compras.proveedores');
         Route::get('/historial', [ComprasController::class, 'historial'])->name('erp.compras.historial');
@@ -122,7 +126,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     });
 
     // Módulo Contabilidad
-    Route::prefix('contabilidad')->group(function () {
+    Route::prefix('contabilidad')->middleware('permiso.modulo:contabilidad')->group(function () {
         Route::get('/', [ContabilidadController::class, 'index'])->name('erp.contabilidad.index');
         Route::get('/plan-cuentas', [ContabilidadController::class, 'planCuentas'])->name('erp.contabilidad.plan-cuentas');
         Route::get('/libro-diario', [ContabilidadController::class, 'libroDiario'])->name('erp.contabilidad.libro-diario');
@@ -136,9 +140,9 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/libros-legales', [ContabilidadController::class, 'librosLegales'])->name('erp.contabilidad.libros-legales');
         Route::get('/reportes', [ContabilidadController::class, 'reportesContables'])->name('erp.contabilidad.reportes');
     });
-    
+
     // Módulo Recursos Humanos (RRHH)
-    Route::prefix('rrhh')->group(function () {
+    Route::prefix('rrhh')->middleware('permiso.modulo:rrhh')->group(function () {
         Route::get('/', [RrhhController::class, 'index'])->name('erp.rrhh.index');
         Route::get('/empleados', [RrhhController::class, 'empleados'])->name('erp.rrhh.empleados');
         Route::get('/nomina', [RrhhController::class, 'nomina'])->name('erp.rrhh.nomina');
@@ -149,7 +153,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     });
 
     // Módulo Configuracion
-    Route::prefix('configuracion')->group(function () {
+    Route::prefix('configuracion')->middleware('permiso.modulo:configuracion')->group(function () {
         Route::get('/', [ConfiguracionController::class, 'index'])->name('erp.configuracion.index');
         Route::get('/parametros', [ConfiguracionController::class, 'parametros'])->name('erp.configuracion.parametros');
         Route::get('/fiscal', [ConfiguracionController::class, 'fiscal'])->name('erp.configuracion.fiscal');
@@ -162,7 +166,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     });
 
     // Módulo Finanzas
-    Route::prefix('finanzas')->group(function () {
+    Route::prefix('finanzas')->middleware('permiso.modulo:finanzas')->group(function () {
         Route::get('/', [FinanzasController::class, 'index'])->name('erp.finanzas.index');
         Route::get('/activos-fijos', [FinanzasController::class, 'activosFijos'])->name('erp.finanzas.activos-fijos');
         Route::get('/cuentas-cobrar', [FinanzasController::class, 'cuentasCobrar'])->name('erp.finanzas.cuentas-cobrar');
@@ -170,13 +174,13 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     });
 
     // Módulo Aprobaciones
-    Route::prefix('aprobaciones')->group(function () {
+    Route::prefix('aprobaciones')->middleware('permiso.modulo:aprobaciones')->group(function () {
         Route::get('/', [ApprovalController::class, 'index'])->name('erp.aprobaciones.index');
         Route::post('/{approval}/process', [ApprovalController::class, 'process'])->name('erp.aprobaciones.process');
     });
 
     // Módulo Ayuda
-    Route::prefix('ayuda')->group(function () {
+    Route::prefix('ayuda')->middleware('permiso.modulo:ayuda')->group(function () {
         Route::get('/', [AyudaController::class, 'index'])->name('erp.ayuda.index');
         Route::get('/tickets', [AyudaController::class, 'tickets'])->name('erp.ayuda.tickets');
         Route::get('/crear-ticket', [AyudaController::class, 'crearTicket'])->name('erp.ayuda.crear-ticket');
@@ -196,12 +200,26 @@ Route::get('/tienda/carrito', [TiendaController::class, 'verCarrito']);
 Route::get('/tienda/checkout', [TiendaController::class, 'checkout']);
 Route::get('/tienda/confirmacion/{orderId}', [TiendaController::class, 'confirmacion']);
 
+// Rutas de Autenticación de la Tienda
+Route::prefix('tienda/auth')->group(function () {
+    Route::get('/register', [TiendaAuthController::class, 'showRegisterForm']);
+    Route::post('/register', [TiendaAuthController::class, 'register']);
+    Route::get('/login', function () {
+        return redirect('/auth/login');
+    });
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::get('/mi-cuenta', [TiendaAuthController::class, 'miCuenta'])->middleware('auth');
+});
+
 // Enrutador Dinámico para el Storefront Público (Otras páginas estáticas)
 Route::get('/tienda/{page?}', function ($page = 'index') {
-    if ($page === 'index') return redirect('/tienda/index');
+    if ($page === 'index') {
+        return redirect('/tienda/index');
+    }
     $page = str_replace(['../', '..\\'], '', $page); // Sanitize path traversal
-    if (view()->exists('tienda.' . $page)) {
-        return view('tienda.' . $page);
+    if (view()->exists('tienda.'.$page)) {
+        return view('tienda.'.$page);
     }
     abort(404, 'Página de tienda no encontrada.');
 })->where('page', '.*');
@@ -213,22 +231,27 @@ Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Enrutador Dinámico para Autenticación (Registro, Recuperación)
 Route::get('/auth/{page?}', function ($page = 'login') {
-    // Redirect to proper login if already authenticated
     if (Auth::check() && $page === 'login') {
+        $user = Auth::user();
+        if ($user->isCliente()) {
+            return redirect('/tienda/mi-cuenta');
+        }
+
         return redirect('/erp/inicio');
     }
 
     $page = str_replace(['../', '..\\'], '', $page);
-    $viewPath = resource_path('views/auth/' . $page . '.blade.php');
+    $viewPath = resource_path('views/auth/'.$page.'.blade.php');
 
     if (file_exists($viewPath)) {
-        return view('auth.' . $page);
+        return view('auth.'.$page);
     }
 
-    // Fallback para nombres comunes
-    if ($page === 'crear-cuenta') return redirect('/auth/crear_cuenta');
+    if ($page === 'crear-cuenta') {
+        return redirect('/auth/crear_cuenta');
+    }
 
-    abort(404, 'Página de acceso no encontrada: ' . $page);
+    abort(404, 'Página de acceso no encontrada: '.$page);
 })->where('page', '.*');
 
 // Rutas Estrictas de Facturación y Transacciones
@@ -247,14 +270,36 @@ Route::prefix('api/tienda')->group(function () {
 // Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
 Route::get('/erp/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
 
+// Debug route to seed admin user
+Route::get('/debug/seed-admin', function () {
+    $user = User::updateOrCreate(
+        ['email' => 'admin@lacima.com'],
+        [
+            'name' => 'Administrador',
+            'password' => Hash::make('admin123'),
+            'role' => 'admin',
+            'is_active' => true,
+        ]
+    );
+
+    return response()->json([
+        'status' => 'success',
+        'user' => $user->email,
+        'role' => $user->role,
+        'is_active' => $user->is_active,
+        'message' => 'Usuario admin creado/actualizado',
+    ]);
+});
+
 // Debug route to test login manually
 Route::get('/debug/login-test', function () {
     $credentials = ['email' => 'admin@lacima.com', 'password' => 'admin123'];
-    
-    if (\Illuminate\Support\Facades\Auth::attempt($credentials)) {
+
+    if (Auth::attempt($credentials)) {
         request()->session()->regenerate();
-        return response()->json(['status' => 'success', 'user' => \Illuminate\Support\Facades\Auth::user()->name]);
+
+        return response()->json(['status' => 'success', 'user' => Auth::user()->name]);
     }
-    
+
     return response()->json(['status' => 'failed', 'message' => 'Auth failed']);
 });

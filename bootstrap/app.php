@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\VerificarPermisoModulo;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'auth.erp' => \App\Http\Middleware\AuthMiddleware::class,
+            'auth.erp' => AuthMiddleware::class,
+            'permiso.modulo' => VerificarPermisoModulo::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

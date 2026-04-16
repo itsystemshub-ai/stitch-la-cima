@@ -9,13 +9,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthMiddleware
 {
-    /**
-     * Handle an incoming request.
-     */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect('/auth/login')->with('error', 'Debes iniciar sesión para acceder al ERP.');
+        }
+
+        $user = Auth::user();
+
+        if ($user->isCliente()) {
+            return redirect('/tienda/mi-cuenta')->with('error', 'No tienes acceso al sistema ERP.');
+        }
+
+        if (! $user->is_active) {
+            Auth::logout();
+
+            return redirect('/auth/login')->with('error', 'Tu cuenta ha sido desactivada.');
         }
 
         return $next($request);

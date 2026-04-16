@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'is_active',
+        'modulos',
     ];
 
     /**
@@ -44,11 +47,67 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'modulos' => 'array',
         ];
     }
 
     public function notifications()
     {
         return $this->hasMany(Notification::class);
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
+
+    public function isCliente(): bool
+    {
+        return $this->role === 'cliente';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isTrabajador(): bool
+    {
+        return $this->role === 'trabajador';
+    }
+
+    public function isVendedor(): bool
+    {
+        return $this->role === 'vendedor';
+    }
+
+    public function puedeAccederModulo(string $modulo): bool
+    {
+        if ($this->isAdmin()) {
+            return true;
+        }
+
+        if ($this->role === 'cliente') {
+            return false;
+        }
+
+        $modulos = $this->modulos ?? [];
+
+        return in_array($modulo, $modulos);
+    }
+
+    public function getModulos(): array
+    {
+        if ($this->isAdmin()) {
+            return ['inventario', 'ventas', 'compras', 'contabilidad', 'rrhh', 'configuracion', 'finanzas', 'aprobaciones', 'ayuda', 'pos'];
+        }
+
+        return $this->modulos ?? [];
+    }
+
+    public function tieneAccesoCompleto(): bool
+    {
+        return $this->isAdmin();
     }
 }

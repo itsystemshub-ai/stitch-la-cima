@@ -13,10 +13,15 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        // If already logged in, redirect to ERP
         if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isCliente()) {
+                return redirect('/tienda/mi-cuenta');
+            }
+
             return redirect('/erp/inicio');
         }
+
         return view('auth.login');
     }
 
@@ -30,11 +35,25 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Try to login with email or username
         $loginField = filter_var($credentials['email'], FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-        
+
         if (Auth::attempt([$loginField => $credentials['email'], 'password' => $credentials['password']], $request->filled('remember'))) {
             $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if ($user->is_active === false) {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => 'Tu cuenta ha sido desactivada. Contacta al administrador.',
+                ])->onlyInput('email');
+            }
+
+            if ($user->isCliente()) {
+                return redirect()->intended('/tienda/mi-cuenta');
+            }
+
             return redirect()->intended('/erp/inicio');
         }
 
