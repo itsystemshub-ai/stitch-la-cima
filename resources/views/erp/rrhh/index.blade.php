@@ -25,7 +25,7 @@
 </div>
 
 <!-- KPI Cards -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+<div id="tour-hr-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
   <div class="kpi-card">
     <div class="flex items-center justify-between mb-3">
       <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
@@ -88,7 +88,7 @@
 </div>
 
 <!-- Action Buttons -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+<div id="tour-hr-actions" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
   <a href="{{ url('/erp/rrhh/empleados') }}" class="action-btn bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20">
     <span class="material-symbols-outlined text-2xl">person</span>
     <span class="text-center leading-tight">Empleados</span>

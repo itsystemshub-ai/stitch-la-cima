@@ -18,7 +18,7 @@
             <h2 class="text-4xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none">Módulo de <span class="text-stone-400">Compras</span></h2>
             <p class="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
         </div>
-        <div class="flex gap-3">
+        <div id="tour-purchase-actions" class="flex gap-3">
             <a href="{{ url('/erp/compras/factura') }}" class="bg-stone-900 text-primary px-6 py-3 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 hover:bg-stone-800 transition-all rounded-xl shadow-xl group active:scale-95">
                 <span class="material-symbols-outlined text-sm group-hover:rotate-45 transition-transform">add_circle</span>
                 Registrar Recepción
@@ -30,7 +30,7 @@
     </div>
 
     <!-- Buy Metrics Bento Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+    <div id="tour-purchase-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <!-- Monthly Spend -->
         <div class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm relative overflow-hidden group hover:border-primary/50 transition-all">
             <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Gasto Mensual (Neto)</p>

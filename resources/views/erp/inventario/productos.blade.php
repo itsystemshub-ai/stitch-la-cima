@@ -37,7 +37,7 @@
     </div>
 
     <!-- Premium Monitoring Context -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+    <div id="tour-product-filters" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
         <div class="bg-white border border-stone-200 p-6 rounded-[24px] shadow-sm hover:border-primary/50 transition-all group/card">
             <div class="flex justify-between items-start mb-6">
                 <div class="w-10 h-10 bg-stone-50 rounded-xl flex items-center justify-center text-stone-400 group-hover/card:bg-stone-950 group-hover/card:text-primary transition-all">
@@ -128,7 +128,7 @@
                 </h3>
                 <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest mt-1 italic">Reflejando registros auditados en tiempo real</p>
             </div>
-            <div class="flex items-center gap-4 w-full lg:w-auto">
+            <div id="tour-product-search" class="flex items-center gap-4 w-full lg:w-auto">
                  <form action="{{ route('erp.inventario.productos') }}" method="GET" class="relative w-full lg:w-96 group">
                     <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-stone-400 group-focus-within:text-primary transition-colors">
                       <span class="material-symbols-outlined text-[18px]">hub</span>
@@ -143,7 +143,7 @@
             </div>
         </div>
 
-        <div class="overflow-x-auto custom-scrollbar border-b border-stone-200">
+        <div id="tour-product-table" class="overflow-x-auto custom-scrollbar border-b border-stone-200">
             <table class="w-full text-left border-collapse min-w-[1900px]">
                 <thead>
                     <tr class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] bg-stone-50/50 border-b border-stone-100">

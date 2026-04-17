@@ -9,7 +9,7 @@
         <a href="{{ url('/erp/dashboard') }}" class="hover:text-stone-900">Inicio</a>
         @yield('breadcrumb')
       </div>
-      <button onclick="startErpTour()" class="ml-4 px-3 py-1.5 bg-stone-900 text-primary text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-stone-800 transition-all flex items-center gap-2">
+      <button id="tour-quick-tour" onclick="startErpTour()" class="ml-4 px-3 py-1.5 bg-stone-900 text-primary text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-stone-800 transition-all flex items-center gap-2">
         <span class="material-symbols-outlined text-xs">auto_awesome</span>
         Quick Tour
       </button>
@@ -18,7 +18,7 @@
     <!-- Acciones -->
     <div class="flex items-center gap-3">
       <!-- Busqueda Global -->
-      <div class="hidden lg:block relative">
+      <div id="tour-header-search" class="hidden lg:block relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
           <span class="material-symbols-outlined text-lg">search</span>
         </span>
@@ -26,7 +26,7 @@
       </div>
 
       <!-- Notificaciones -->
-      <div class="relative" x-data="{ open: false }">
+      <div id="tour-notifications" class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="p-2 text-stone-500 hover:bg-stone-100 rounded-lg relative transition-all active:scale-95">
           <span class="material-symbols-outlined">notifications</span>
           @if($unreadNotificationsCount > 0)
@@ -75,7 +75,7 @@
       </div>
 
       <!-- Perfil con Dropdown -->
-      <div class="relative" x-data="{ open: false }">
+      <div id="tour-profile" class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200 hover:bg-stone-50 rounded-lg px-3 py-2 transition-all">
           <div class="text-right hidden md:block">
             <p class="text-sm font-bold text-stone-900 leading-none">{{ Auth::user()->name }}</p>

@@ -42,7 +42,7 @@
     </div>
 
     <!-- Metric Bento Grid: Precision Analytics -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+    <div id="tour-inventory-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <!-- Value Card -->
         <div class="bg-white border border-stone-200 p-6 rounded-2xl hover:border-primary/50 transition-all group shadow-sm relative overflow-hidden">
             <div class="absolute -right-4 -top-4 opacity-[0.03] group-hover:scale-110 transition-transform duration-700">
@@ -109,7 +109,7 @@
     </div>
 
     <!-- System Interaction Panel: Quick Access -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+    <div id="tour-inventory-actions" class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
         <a href="{{ url('/erp/inventario/productos') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
             <div class="w-14 h-14 bg-stone-900 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                 <span class="material-symbols-outlined text-3xl">category</span>

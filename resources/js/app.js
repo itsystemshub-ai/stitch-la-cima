@@ -127,4 +127,142 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100);
         }
     });
+
+    // 6. Quick Tour Logic (Driver.js)
+    window.startErpTour = function() {
+        const d = window.driver({
+            showProgress: true,
+            allowClose: true,
+            overlayColor: '#000',
+            overlayOpacity: 0.85,
+            stagePadding: 4,
+            nextBtnText: 'Siguiente',
+            prevBtnText: 'Anterior',
+            doneBtnText: 'Finalizar',
+            steps: [
+                { 
+                    element: '#tour-brand', 
+                    popover: { 
+                        title: 'Portal La Cima', 
+                        description: 'Bienvenido a tu centro de mando corporativo. Aquí gestionamos inventario, ventas y finanzas.', 
+                        position: 'right' 
+                    } 
+                },
+                { 
+                    element: '#tour-sidebar-search', 
+                    popover: { 
+                        title: 'Búsqueda de Módulos', 
+                        description: 'Encuentra rápidamente cualquier herramienta o página del ERP.', 
+                        position: 'right' 
+                    } 
+                },
+                { 
+                    element: '#tour-nav', 
+                    popover: { 
+                        title: 'Navegación Modular', 
+                        description: 'Accede a los departamentos de Ventas, Inventario, Contabilidad y más.', 
+                        position: 'right' 
+                    } 
+                },
+                { 
+                    element: '#tour-header-search', 
+                    popover: { 
+                        title: 'Búsqueda Global', 
+                        description: 'Busca productos, facturas o clientes sin importar en qué página estés.', 
+                        position: 'bottom' 
+                    } 
+                },
+                { 
+                    element: '#tour-notifications', 
+                    popover: { 
+                        title: 'Notificaciones', 
+                        description: 'Mantente al tanto de alertas de stock, pedidos nuevos y aprobaciones pendientes.', 
+                        position: 'bottom' 
+                    } 
+                },
+                { 
+                    element: '#tour-profile', 
+                    popover: { 
+                        title: 'Tu Cuenta', 
+                        description: 'Gestiona tu perfil, configuración del sistema y cierra sesión de forma segura.', 
+                        position: 'bottom' 
+                    } 
+                }
+            ]
+        });
+
+        // Pasos dinámicos adicionales por módulo
+        const contextSteps = [
+            { 
+                id: '#tour-dashboard', 
+                title: 'Tablero de Control', 
+                description: 'Un vistazo rápido al estado de tu empresa en tiempo real.' 
+            },
+            { 
+                id: '#tour-inventory-stats', 
+                title: 'Métricas de Inventario', 
+                description: 'Controla la valoración, rotación y niveles críticos de stock.' 
+            },
+            { 
+                id: '#tour-inventory-actions', 
+                title: 'Gestión de Productos', 
+                description: 'Acceso rápido al maestro de artículos, ajustes y auditoría.' 
+            },
+            { 
+                id: '#tour-sales-stats', 
+                title: 'Rendimiento Comercial', 
+                description: 'Monitorea ingresos, ticket promedio y facturación del mes.' 
+            },
+            { 
+                id: '#tour-sales-actions', 
+                title: 'Terminal de Ventas', 
+                description: 'Inicia nuevas ventas rápidamente o genera reportes de forecast.' 
+            },
+            { 
+                id: '#tour-purchase-stats', 
+                title: 'Métricas de Compra', 
+                description: 'Verifica el gasto mensual y las cuentas por pagar pendientes.' 
+            },
+            { 
+                id: '#tour-purchase-actions', 
+                title: 'Gestión de Suministros', 
+                description: 'Registra recepciones y gestiona tu cartera de proveedores.' 
+            },
+            { 
+                id: '#tour-accounting-stats', 
+                title: 'Indicadores Financieros', 
+                description: 'KPIs de utilidad, ingresos y gastos según el plan contable.' 
+            },
+            { 
+                id: '#tour-accounting-actions', 
+                title: 'Cierre y Libros', 
+                description: 'Gestiona el Plan de Cuentas, Libros Legales y Balances.' 
+            },
+            { 
+                id: '#tour-hr-stats', 
+                title: 'Capital Humano', 
+                description: 'Indicadores de asistencia, vacaciones y nómina consolidada.' 
+            },
+            { 
+                id: '#tour-hr-actions', 
+                title: 'Gestión de Personal', 
+                description: 'Control de expedientes de empleados y procesamiento de nómina.' 
+            }
+        ];
+
+        contextSteps.forEach(step => {
+            if (document.querySelector(step.id)) {
+                d.getConfig().steps.push({
+                    element: step.id,
+                    popover: {
+                        title: step.title,
+                        description: step.description,
+                        position: 'top'
+                    }
+                });
+            }
+        });
+
+        d.drive();
+    };
 });

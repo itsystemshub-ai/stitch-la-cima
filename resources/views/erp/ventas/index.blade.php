@@ -20,7 +20,7 @@
       <p class="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
     </div>
     
-    <div class="flex items-center gap-3">
+    <div id="tour-sales-actions" class="flex items-center gap-3">
       <button class="bg-stone-900 text-white px-5 py-3 rounded-xl flex items-center gap-3 hover:bg-stone-800 transition-all group active:scale-95 shadow-xl shadow-stone-200 border border-stone-800">
         <span class="material-symbols-outlined text-lg text-primary">analytics</span>
         <span class="text-[10px] font-bold uppercase tracking-widest">Generar Forecast</span>
@@ -33,7 +33,7 @@
   </div>
 
   <!-- Bento Grid: Key Metrics -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+  <div id="tour-sales-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
     <!-- Ventas del Mes -->
     <div class="bg-white rounded-3xl p-8 border border-stone-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden">
       <div class="absolute -right-6 -top-6 w-24 h-24 bg-green-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>

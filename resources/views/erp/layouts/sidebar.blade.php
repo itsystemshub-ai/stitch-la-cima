@@ -1,6 +1,6 @@
 <aside id="sidebar" class="h-screen w-72 fixed left-0 top-0 z-50 flex flex-col bg-white border-r border-stone-200 sidebar">
   <!-- Logo -->
-  <div class="flex flex-col px-5 pt-6 pb-4">
+  <div id="tour-brand" class="flex flex-col px-5 pt-6 pb-4">
     <div class="flex items-center gap-3 mb-2">
       <div class="w-10 h-10 bg-stone-900 flex items-center justify-center rounded-lg">
         <img src="{{ asset('assets/images/logo.png') }}" class="w-7 h-7 object-contain" alt="Logo">
@@ -14,7 +14,7 @@
   </div>
 
   <!-- Busqueda -->
-  <div class="px-4 mb-4">
+  <div id="tour-sidebar-search" class="px-4 mb-4">
     <div class="relative">
       <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
         <span class="material-symbols-outlined text-lg">search</span>

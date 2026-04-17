@@ -29,7 +29,7 @@
     </div>
 
     <!-- KPI Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+    <div id="tour-accounting-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
         <div class="bg-white rounded-xl border border-stone-200 p-6 hover:shadow-lg transition-all hover:border-primary/30">
             <div class="flex items-center justify-between mb-3">
                 <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
@@ -96,7 +96,7 @@
     </div>
 
     <!-- Action Buttons -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div id="tour-accounting-actions" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <a href="{{ url('/erp/contabilidad/plan-cuentas') }}" class="flex items-center justify-center gap-3 p-5 rounded-xl font-headline font-bold text-sm uppercase tracking-wider transition-all active:scale-[0.98] bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20">
             <span class="material-symbols-outlined text-2xl">format_list_numbered</span>
             <span class="text-center leading-tight">Plan Cuentas ({{ $stats['cuentas_count'] }})</span>
