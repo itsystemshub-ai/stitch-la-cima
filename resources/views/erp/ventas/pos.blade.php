@@ -35,7 +35,7 @@
         <h2 class="text-5xl font-black text-white uppercase tracking-tighter mb-8 leading-none">Nueva <span class="text-primary">Transacción</span></h2>
         
         <div class="grid grid-cols-2 gap-8">
-            <div class="space-y-3">
+            <div id="tour-pos-scanner" class="space-y-3">
                 <label class="text-[9px] font-black uppercase tracking-[0.3em] text-stone-500">Búsqueda de Repuestos</label>
                 <div class="flex items-center bg-white/5 border border-white/10 px-5 py-4 focus-within:border-primary/50 transition-all rounded-xl">
                     <span class="material-symbols-outlined text-primary text-xl mr-4">barcode_scanner</span>
@@ -58,6 +58,9 @@
     </div>
 
     <div class="flex gap-4 mb-1 relative z-10">
+        <button id="tour-quick-tour" onclick="startErpTour()" class="h-14 px-8 flex items-center justify-center gap-3 bg-primary/10 border border-primary/20 text-primary font-black uppercase text-[10px] tracking-widest hover:bg-primary hover:text-stone-900 transition-all rounded-xl">
+            <span class="material-symbols-outlined text-lg">auto_awesome</span> Quick Tour
+        </button>
         <button class="h-14 px-8 flex items-center justify-center gap-3 bg-white/5 border border-white/10 text-stone-400 font-black uppercase text-[10px] tracking-widest hover:text-white hover:bg-white/10 transition-all rounded-xl">
             <span class="material-symbols-outlined text-lg">print</span> Pausar <span class="text-[8px] opacity-30 ml-2">F4</span>
         </button>
@@ -70,7 +73,7 @@
 <div class="flex-1 flex overflow-hidden">
     <!-- Transaction Table Container -->
     <div class="flex-1 p-10 overflow-y-auto custom-scrollbar bg-[radial-gradient(circle_at_top_right,_#1a1a1a_0%,_#0a0a0a_100%)] relative">
-        <div class="bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl shadow-2xl overflow-hidden relative z-10">
+        <div id="tour-pos-cart" class="bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl shadow-2xl overflow-hidden relative z-10">
             <table class="w-full text-left">
                 <thead>
                     <tr class="bg-white/[0.02]">
@@ -192,7 +195,7 @@
                 <p class="text-7xl font-black text-white tracking-tighter relative z-10">$ 1,287<span class="text-primary">.60</span></p>
             </div>
             
-            <div class="space-y-6">
+            <div id="tour-pos-total" class="space-y-6">
                 <div class="grid grid-cols-2 gap-4">
                     <button class="h-20 flex flex-col items-center justify-center gap-2 bg-white/5 border border-white/5 hover:border-primary/50 hover:bg-primary/5 transition-all group rounded-2xl">
                         <span class="material-symbols-outlined text-stone-500 group-hover:text-primary transition-colors">payments</span>
@@ -203,7 +206,7 @@
                         <span class="text-[10px] font-black uppercase text-stone-500 tracking-widest group-hover:text-white transition-colors">Tarjeta</span>
                     </button>
                 </div>
-                <button class="w-full h-24 bg-primary text-stone-900 font-black text-xl uppercase tracking-[0.4em] rounded-2xl shadow-[0_20px_60px_rgba(206,255,94,0.15)] hover:brightness-110 hover:-translate-y-1 transition-all active:scale-95">
+                <button id="tour-pos-checkout" class="w-full h-24 bg-primary text-stone-900 font-black text-xl uppercase tracking-[0.4em] rounded-2xl shadow-[0_20px_60px_rgba(206,255,94,0.15)] hover:brightness-110 hover:-translate-y-1 transition-all active:scale-95">
                     Procesar <span class="text-[10px] bg-black/10 px-3 py-1 rounded ml-2">ENTER</span>
                 </button>
             </div>
