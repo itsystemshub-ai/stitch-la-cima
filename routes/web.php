@@ -34,12 +34,7 @@ Route::get('/erp', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::prefix('erp/sync')->group(function () {
-    Route::get('/', function () {
-        return view('configuracion.sync');
-    });
-    Route::post('/upload-accdb', [AccessImportController::class, 'syncAccessDatabase']);
-});
+// Nota: Las rutas de sincronización se han movido dentro del grupo erp para mayor seguridad.
 
 // Static Asset Bridge: Sirve los archivos de UI originales directamente
 Route::get('/frontend/{path}', function ($path) {
@@ -269,98 +264,106 @@ Route::prefix('api/tienda')->group(function () {
     Route::post('/checkout', [TiendaController::class, 'procesarCheckout']);
 });
 
-// Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
-Route::get('/erp/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
+    // Herramientas de Sincronización (Protegidas)
+    Route::prefix('sync')->group(function () {
+        Route::get('/', function () {
+            return view('configuracion.sync');
+        });
+        Route::post('/upload-accdb', [AccessImportController::class, 'syncAccessDatabase']);
+    });
 
-// Debug route to seed admin user
-Route::get('/debug/seed-admin', function () {
-    $user = User::updateOrCreate(
-        ['email' => 'admin@lacima.com'],
-        [
-            'name' => 'Administrador',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
-            'is_active' => 1,
-        ]
-    );
+    // Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
+    Route::get('/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
 
-    return response()->json([
-        'status' => 'success',
-        'user' => $user->email,
-        'role' => $user->role,
-        'is_active' => (bool) $user->is_active,
-        'message' => 'Usuario admin creado/actualizado',
-    ]);
-});
+// Rutas de Herramientas y Diagnóstico (Protegidas solo para administradores en producción)
+Route::middleware(['auth', 'permiso.modulo:configuracion'])->prefix('debug')->group(function () {
+    // Debug route to seed admin user
+    Route::get('/seed-admin', function () {
+        $user = User::updateOrCreate(
+            ['email' => 'admin@lacima.com'],
+            [
+                'name' => 'Administrador',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+                'is_active' => 1,
+            ]
+        );
 
-// Diagnostico completo
-Route::get('/debug/diagnostico', function () {
-    $result = [
-        'php_version' => PHP_VERSION,
-        'laravel_version' => app()->version(),
-        'env_db_connection' => env('DB_CONNECTION'),
-        'tablas' => [],
-        'columnas_users' => [],
-        'usuarios' => [],
-        'middleware_auth_erp' => [],
-    ];
+        return response()->json([
+            'status' => 'success',
+            'user' => $user->email,
+            'role' => $user->role,
+            'is_active' => (bool) $user->is_active,
+            'message' => 'Usuario admin creado/actualizado',
+        ]);
+    });
 
-    // Verificar tablas
-    try {
-        $tables = DB::select('SHOW TABLES');
-        foreach ($tables as $t) {
-            $result['tablas'][] = array_values((array) $t)[0];
+    // Diagnostico completo
+    Route::get('/diagnostico', function () {
+        $result = [
+            'php_version' => PHP_VERSION,
+            'laravel_version' => app()->version(),
+            'env_db_connection' => env('DB_CONNECTION'),
+            'tablas' => [],
+            'columnas_users' => [],
+            'usuarios' => [],
+            'middleware_auth_erp' => [],
+        ];
+
+        // Verificar tablas
+        try {
+            $tables = DB::select('SHOW TABLES');
+            foreach ($tables as $t) {
+                $result['tablas'][] = array_values((array) $t)[0];
+            }
+        } catch (Exception $e) {
+            $result['error_db'] = $e->getMessage();
         }
-    } catch (Exception $e) {
-        $result['error_db'] = $e->getMessage();
-    }
 
-    // Verificar columnas de users
-    try {
-        $result['columnas_users'] = DB::getSchemaBuilder()->getColumnListing('users');
-    } catch (Exception $e) {
-        $result['error_columns'] = $e->getMessage();
-    }
-
-    // Verificar usuarios
-    try {
-        $result['usuarios'] = User::select('id', 'name', 'email', 'role', 'is_active')->get()->toArray();
-    } catch (Exception $e) {
-        $result['error_users'] = $e->getMessage();
-    }
-
-    return response()->json($result, JSON_PRETTY_PRINT);
-});
-
-// Debug route to list all users
-Route::get('/debug/users', function () {
-    $users = User::select('id', 'name', 'email', 'role', 'is_active')->get();
-
-    return response()->json($users);
-});
-
-// Debug route to test login
-Route::get('/debug/login-test', function () {
-    $credentials = ['email' => 'admin@lacima.com', 'password' => 'admin123'];
-
-    if (Auth::attempt($credentials)) {
-        request()->session()->regenerate();
-
-        return response()->json(['status' => 'success', 'user' => Auth::user()->name, 'role' => Auth::user()->role]);
-    }
-
-    return response()->json(['status' => 'failed', 'message' => 'Auth failed']);
-});
-
-// Debug: Lista de rutas ERP
-Route::get('/debug/rutas', function () {
-    $rutas = Route::getRoutes();
-    $erpRoutes = [];
-    foreach ($rutas as $route) {
-        if (str_contains($route->uri(), 'erp')) {
-            $erpRoutes[] = $route->uri().' ['.implode(',', $route->methods()).']';
+        // Verificar columnas de users
+        try {
+            $result['columnas_users'] = DB::getSchemaBuilder()->getColumnListing('users');
+        } catch (Exception $e) {
+            $result['error_columns'] = $e->getMessage();
         }
-    }
 
-    return response()->json($erpRoutes);
+        // Verificar usuarios
+        try {
+            $result['usuarios'] = User::select('id', 'name', 'email', 'role', 'is_active')->get()->toArray();
+        } catch (Exception $e) {
+            $result['error_users'] = $e->getMessage();
+        }
+
+        return response()->json($result, JSON_PRETTY_PRINT);
+    });
+
+    // Debug route to list all users
+    Route::get('/users', function () {
+        $users = User::select('id', 'name', 'email', 'role', 'is_active')->get();
+        return response()->json($users);
+    });
+
+    // Debug route to test login
+    Route::get('/login-test', function () {
+        $credentials = ['email' => 'admin@lacima.com', 'password' => 'admin123'];
+
+        if (Auth::attempt($credentials)) {
+            request()->session()->regenerate();
+            return response()->json(['status' => 'success', 'user' => Auth::user()->name, 'role' => Auth::user()->role]);
+        }
+
+        return response()->json(['status' => 'failed', 'message' => 'Auth failed']);
+    });
+
+    // Debug: Lista de rutas ERP
+    Route::get('/rutas', function () {
+        $rutas = Route::getRoutes();
+        $erpRoutes = [];
+        foreach ($rutas as $route) {
+            if (str_contains($route->uri(), 'erp')) {
+                $erpRoutes[] = $route->uri().' ['.implode(',', $route->methods()).']';
+            }
+        }
+        return response()->json($erpRoutes);
+    });
 });

@@ -65,6 +65,6 @@ class LoginController extends Controller
         } 
         
         // Si es admin, trabajador o vendedor
-        return redirect()->intended('/erp/inicio')->with('success', 'Sesión iniciada. Bienvenido al ERP.');
+        return redirect()->intended('/erp/dashboard')->with('success', 'Sesión iniciada. Bienvenido al ERP.');
     }
 }
