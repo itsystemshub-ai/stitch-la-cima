@@ -41,9 +41,10 @@
         <span>Inventario</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/inventario*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/inventario*') ? 'show' : '' }}">
         <a href="{{ url('/erp/inventario') }}" class="{{ Request::is('erp/inventario') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/inventario/productos') }}" class="{{ Request::is('erp/inventario/productos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">category</span> Productos</a>
+        <a href="{{ url('/erp/inventario/busqueda-ia') }}" class="{{ Request::is('erp/inventario/busqueda-ia*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">psychology</span> Búsqueda IA</a>
         <a href="{{ url('/erp/inventario/desarrollo') }}" class="{{ Request::is('erp/inventario/desarrollo*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">biotech</span> Desarrollo</a>
         <a href="{{ url('/erp/inventario/lista-precios') }}" class="{{ Request::is('erp/inventario/lista-precios*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">payments</span> Lista de Precios</a>
         <a href="{{ url('/erp/inventario/kardex') }}" class="{{ Request::is('erp/inventario/kardex*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
@@ -82,7 +83,7 @@
         <span>Compras</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/compras*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/compras*') ? 'show' : '' }}">
         <a href="{{ url('/erp/compras') }}" class="{{ Request::is('erp/compras') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/compras/proveedores') }}" class="{{ Request::is('erp/compras/proveedores*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
         <a href="{{ url('/erp/compras/historial') }}" class="{{ Request::is('erp/compras/historial*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">history</span> Historial</a>
@@ -120,7 +121,7 @@
         <span>Finanzas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/finanzas*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/finanzas*') ? 'show' : '' }}">
         <a href="{{ url('/erp/finanzas') }}" class="{{ Request::is('erp/finanzas') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/finanzas/activos-fijos') }}" class="{{ Request::is('erp/finanzas/activos-fijos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">corporate_fare</span> Activos Fijos</a>
         <a href="{{ url('/erp/finanzas/cuentas-cobrar') }}" class="{{ Request::is('erp/finanzas/cuentas-cobrar*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">account_balance_wallet</span> Cuentas Cobrar</a>
@@ -135,7 +136,7 @@
         <span>Aprobaciones</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu {{ Request::is('erp/aprobaciones*') ? 'show' : '' }}">
+      <div class="submenu submenu-up {{ Request::is('erp/aprobaciones*') ? 'show' : '' }}">
         <a href="{{ url('/erp/aprobaciones') }}" class="{{ Request::is('erp/aprobaciones') ? 'active-link' : '' }}"><span class="material-symbols-outlined">gavel</span> Gestión de Aprobaciones</a>
       </div>
     </div>

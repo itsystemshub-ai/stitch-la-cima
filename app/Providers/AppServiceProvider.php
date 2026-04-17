@@ -36,10 +36,15 @@ class AppServiceProvider extends ServiceProvider
         StockMovement::observe(StockMovementObserver::class);
 
         View::composer('*', function ($view) {
-            if (auth()->check()) {
-                $view->with('unreadNotificationsCount', Notification::where('user_id', auth()->id())->where('read', false)->count());
-                $view->with('latestNotifications', Notification::where('user_id', auth()->id())->latest()->take(5)->get());
-            } else {
+            try {
+                if (auth()->check() && Schema::hasTable('notifications')) {
+                    $view->with('unreadNotificationsCount', Notification::where('user_id', auth()->id())->where('read', false)->count());
+                    $view->with('latestNotifications', Notification::where('user_id', auth()->id())->latest()->take(5)->get());
+                } else {
+                    $view->with('unreadNotificationsCount', 0);
+                    $view->with('latestNotifications', collect());
+                }
+            } catch (\Exception $e) {
                 $view->with('unreadNotificationsCount', 0);
                 $view->with('latestNotifications', collect());
             }

@@ -15,6 +15,7 @@ FROM node:20-alpine as assets
 WORKDIR /app
 COPY package.json package-lock.json vite.config.js ./
 COPY resources/ ./resources/
+COPY public/ ./public/
 RUN npm install && npm run build
 
 # --- Etapa 3: Imagen Final de Producción ---
@@ -32,7 +33,8 @@ RUN apk add --no-cache \
     icu-dev \
     bash
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl && \
+    echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 # Copiar el código y las dependencias de las etapas anteriores
 COPY . .
