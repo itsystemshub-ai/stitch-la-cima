@@ -41,20 +41,22 @@ COPY . .
 COPY --from=vendor /app/vendor/ ./vendor/
 COPY --from=assets /app/public/build/ ./public/build/
 
-# Crear link simbólico para el storage si no existe y dar permisos
+# Crear link simbólico para el storage si no existe y dar permisos finales
 RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions bootstrap/cache && \
-    chmod -R 775 storage bootstrap/cache && \
-    chown -R www-data:www-data /var/www
+    chown -R www-data:www-data /var/www && \
+    chmod -R 775 /var/www/storage /var/www/bootstrap/cache && \
+    mkdir -p /var/log/nginx && \
+    chown -R www-data:www-data /var/log/nginx
 
-# Configuración de Nginx y Supervisor
+# Configuración de Nginx
 COPY ./docker/nginx.conf /etc/nginx/http.d/default.conf
 
 # Copiar y preparar el script de entrada
 COPY ./docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Exponer puertos
-EXPOSE 80
+# Exponer el puerto por defecto (se cambiará dinámicamente en entrypoint)
+EXPOSE 8080
 
 # Usar el script de entrada
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
