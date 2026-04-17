@@ -75,6 +75,7 @@
       </div>
 
       <!-- Perfil con Dropdown -->
+      @auth
       <div id="tour-profile" class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200 hover:bg-stone-50 rounded-lg px-3 py-2 transition-all">
           <div class="text-right hidden md:block">
@@ -135,6 +136,14 @@
           </div>
         </div>
       </div>
+      @else
+      <div class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200">
+        <a href="{{ url('/auth/login') }}" class="px-4 py-2 bg-stone-900 text-white text-xs font-bold rounded-lg hover:bg-stone-800 transition-all uppercase">
+          Iniciar Sesión
+        </a>
+      </div>
+      @endauth
+
     </div>
   </div>
 </header>

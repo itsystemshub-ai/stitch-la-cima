@@ -12,8 +12,15 @@ class InventoryService
 {
     /**
      * Ajuste Manual o Corrección de Stock
+     *
+     * @param int|string $productId
+     * @param string $type
+     * @param float $quantity
+     * @param string $reason
+     * @param int|string $userId
+     * @return void
      */
-    public function adjustStock($productId, $type, $quantity, $reason, $userId)
+    public function adjustStock(int|string $productId, string $type, float $quantity, string $reason, int|string $userId): void
     {
         DB::transaction(function () use ($productId, $type, $quantity, $reason, $userId) {
             $product = Product::findOrFail($productId);
@@ -49,8 +56,12 @@ class InventoryService
 
     /**
      * Procesamiento masivo de actualización de stock y precios (Estrategia Universal)
+     *
+     * @param string $filePath
+     * @param int|string $userId
+     * @return int
      */
-    public function processMassUpdateFromFile(string $filePath, $userId)
+    public function processMassUpdateFromFile(string $filePath, int|string $userId): int
     {
         $count = 0;
         $extension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));

@@ -123,7 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             setTimeout(() => {
                 const searchInput = document.querySelector('[x-ref="searchInput"]');
-                if (searchInput) searchInput.focus();
+                if (searchInput) {
+                    searchInput.focus();
+                }
             }, 100);
         }
     });
@@ -247,6 +249,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: '#tour-hr-actions', 
                 title: 'Gestión de Personal', 
                 description: 'Control de expedientes de empleados y procesamiento de nómina.' 
+            },
+            // Pasos de Subpáginas Críticas
+            { 
+                id: '#tour-product-filters', 
+                title: 'Filtros Técnicos', 
+                description: 'Segmenta el inventario por categoría o marca para una localización rápida.' 
+            },
+            { 
+                id: '#tour-product-search', 
+                title: 'Buscador de Activos', 
+                description: 'Localización instantánea de repuestos por SKU, nombre o marca.' 
+            },
+            { 
+                id: '#tour-product-table', 
+                title: 'Maestro de Datos', 
+                description: 'Visualiza precios, stock y estatus de criticidad en tiempo real.' 
+            },
+            { 
+                id: '#tour-pos-scanner', 
+                title: 'Escaneo de Repuestos', 
+                description: 'Utiliza el lector de barras o busca por nombre para cargar el carrito.' 
+            },
+            { 
+                id: '#tour-pos-cart', 
+                title: 'Transacción Activa', 
+                description: 'Verifica los componentes cargados, ajusta cantidades o anula items.' 
+            },
+            { 
+                id: '#tour-pos-total', 
+                title: 'Resumen de Pago', 
+                description: 'Visualiza el total neto e impuestos antes de seleccionar el método de liquidación.' 
+            },
+            { 
+                id: '#tour-pos-checkout', 
+                title: 'Finalizar Operación', 
+                description: 'Procesa la venta y genera el comprobante fiscal de forma instantánea.' 
             }
         ];
 
