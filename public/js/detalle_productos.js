@@ -101,21 +101,41 @@
             : productsDB.filter(p => p.id !== product.id).sort(() => Math.random() - 0.5).slice(0, 4);
             
         document.getElementById('relatedProducts').innerHTML = related.map(p => `
-            <a href="/tienda/detalle_productos?id=${p.id}" class="group bg-white border border-outline rounded-2xl overflow-hidden hover:shadow-xl transition-all block">
-                <div class="relative aspect-square bg-stone-50 overflow-hidden">
-                    <img src="${p.image || (p.images ? p.images[0] : '')}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500 p-8">
-                </div>
+            <div class="group bg-white border border-outline rounded-2xl overflow-hidden hover:shadow-xl transition-all block">
+                <a href="/tienda/detalle_productos?id=${p.id}" class="block">
+                    <div class="relative aspect-square bg-stone-50 overflow-hidden flex items-center justify-center p-8">
+                        <img src="${p.image || (p.images ? p.images[0] : '')}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                </a>
                 <div class="p-6">
-                    <p class="text-[10px] font-bold text-stone-400 uppercase mb-1">${p.category || p.brand} / ${p.sku || ''}</p>
-                    <h4 class="font-bold text-sm text-black mb-3 line-clamp-1">${p.name}</h4>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xl font-black text-black">$${p.price.toFixed(2)}</span>
-                        <button class="w-10 h-10 bg-black text-white rounded-lg flex items-center justify-center hover:bg-primary hover:text-black transition-colors">
-                            <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-black text-primary uppercase tracking-widest">${p.category || p.brand}</span>
+                        <span class="text-[10px] font-mono font-bold text-stone-400">#${p.sku || 'N/A'}</span>
+                    </div>
+                    <a href="/tienda/detalle_productos?id=${p.id}" class="block">
+                        <h4 class="text-lg font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-1" title="${p.name}">${p.name}</h4>
+                    </a>
+                    <div class="mb-4">
+                        <p class="text-2xl font-black text-black tracking-tighter">$${p.price.toFixed(2)}</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center bg-stone-100 rounded-lg p-1 h-10 border border-stone-200">
+                            <button type="button" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-stone-600 active:scale-90" onclick="this.parentNode.querySelector('input').stepDown()">
+                                <span class="material-symbols-outlined text-sm font-black">remove</span>
+                            </button>
+                            <input type="number" value="1" min="1" class="w-8 text-center bg-transparent border-none focus:ring-0 font-black text-xs p-0 pointer-events-none" readonly />
+                            <button type="button" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-stone-600 active:scale-90" onclick="this.parentNode.querySelector('input').stepUp()">
+                                <span class="material-symbols-outlined text-sm font-black">add</span>
+                            </button>
+                        </div>
+                        <button onclick="Cart.add(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image || (p.images ? p.images[0] : '')}', '${p.brand} / ${p.sku}', this.previousElementSibling.querySelector('input').value)" class="flex-1 bg-black text-white hover:bg-primary hover:text-black h-10 px-3 rounded-lg font-black uppercase text-[9px] tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 shadow-sm">
+                            <span class="material-symbols-outlined text-base">shopping_cart</span>
+                            Añadir
                         </button>
                     </div>
                 </div>
-            </a>
+            </div>
         `).join('');
     }
 
@@ -156,42 +176,19 @@
         btn.classList.remove('border-transparent', 'text-on-surface-variant');
     }
 
-    function getCart() { return JSON.parse(localStorage.getItem('cart')) || []; }
-    function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); }
-    
-    function updateCartCount() {
-        const cart = getCart();
-        const count = cart.reduce((sum, item) => sum + item.qty, 0);
-        const badge = document.getElementById('cart-count');
-        if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'flex' : 'none'; }
-    }
-    
+    // Usa el módulo cart.js centralizado
     function addToCartFromDetail() {
         if (!currentProduct) return;
         const qty = parseInt(document.getElementById('qtyInput').value) || 1;
-        let cart = getCart();
-        const existing = cart.find(item => item.id === currentProduct.id);
         
-        if (existing) { existing.qty += qty; }
-        else {
-            cart.push({
-                id: currentProduct.id,
-                name: currentProduct.name,
-                price: currentProduct.price,
-                image: currentProduct.images[0],
-                ref: currentProduct.brand + ' / ' + currentProduct.sku,
-                qty: qty
-            });
-        }
-        
-        saveCart(cart);
-        updateCartCount();
-        
-        const notification = document.createElement('div');
-        notification.className = 'fixed top-24 right-6 bg-black text-white px-6 py-4 rounded-lg shadow-2xl z-50 flex items-center gap-3';
-        notification.innerHTML = '<span class="material-symbols-outlined text-primary">check_circle</span><span class="text-sm font-bold">Producto agregado al carrito</span>';
-        document.body.appendChild(notification);
-        setTimeout(() => { notification.style.opacity = '0'; notification.style.transition = 'opacity 0.3s'; setTimeout(() => notification.remove(), 300); }, 2000);
+        Cart.add(
+            currentProduct.id,
+            currentProduct.name,
+            currentProduct.price,
+            currentProduct.images[0],
+            currentProduct.brand + ' / ' + currentProduct.sku,
+            qty
+        );
     }
 
     function openMobileMenu() {
@@ -231,7 +228,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const product = getProductFromURL();
         renderProduct(product);
-        updateCartCount();
+        Cart.updateBadge();
         checkFavorite(product.id);
     });
 

@@ -1,47 +1,12 @@
-function getCart() {
-        return JSON.parse(localStorage.getItem('cart')) || [];
-    }
-    
-    function saveCart(cart) {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    
-    function updateCartCounter() {
-        const cart = getCart();
-        const count = cart.reduce((sum, item) => sum + item.qty, 0);
-        const badge = document.getElementById('cart-count');
-        if (badge) {
-            badge.textContent = count;
-            badge.style.display = count > 0 ? 'flex' : 'none';
-        }
-    }
-    
-    function addToCart(id, name, price, image, ref) {
-        let cart = getCart();
-        const existingItem = cart.find(item => item.id === id);
-        
-        if (existingItem) {
-            existingItem.qty += 1;
-        } else {
-            cart.push({ id, name, price, image, ref, qty: 1 });
-        }
-        
-        saveCart(cart);
-        updateCartCounter();
-        
-        const notification = document.createElement('div');
-        notification.className = 'fixed top-24 right-6 bg-black text-white px-6 py-4 rounded-lg shadow-2xl z-50 flex items-center gap-3';
-        notification.innerHTML = '<span class="material-symbols-outlined text-primary">check_circle</span><span class="text-sm font-bold">' + name + ' agregado</span>';
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transition = 'opacity 0.3s ease';
-            setTimeout(() => notification.remove(), 300);
-        }, 2000);
-    }
-    
-    document.addEventListener('DOMContentLoaded', updateCartCounter);
+/**
+ * CATÁLOGO GENERAL - usa el módulo cart.js centralizado
+ * Las funciones getCart, saveCart, addToCart ya están en cart.js
+ */
+
+// Actualizar badge al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    Cart.updateBadge();
+});
 
     // ==================== MOBILE MENU ====================
     function openMobileMenu() {

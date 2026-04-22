@@ -15,6 +15,10 @@
       <p class="text-stone-500 text-sm mt-1 uppercase">RIF: J-40308741-5 • Valencia, Venezuela</p>
     </div>
     <div class="flex gap-3">
+      <a href="{{ url('/sync') }}" class="bg-white border border-stone-200 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-primary transition-all group">
+        <span class="material-symbols-outlined text-stone-400 group-hover:text-primary transition-colors text-sm">sync</span>
+        <span class="text-[10px] font-bold text-stone-400 group-hover:text-stone-900 uppercase">Sincronizar Legacy</span>
+      </a>
       <div class="bg-white border border-stone-200 px-4 py-2 rounded-lg">
         <span class="text-[10px] font-bold text-stone-400 uppercase">Uptime</span>
         <p class="text-xl font-headline font-bold text-stone-900">99.9%</p>

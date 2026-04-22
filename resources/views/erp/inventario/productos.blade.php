@@ -270,11 +270,11 @@
                         </td>
                         <td class="p-6 sticky right-0 bg-stone-950/2 backdrop-blur-sm z-10 group-hover:bg-primary/5">
                             <div class="flex justify-center gap-3">
-                                <button class="w-10 h-10 bg-white border border-stone-200 text-stone-400 hover:text-stone-950 hover:border-stone-950 hover:rotate-6 rounded-xl transition-all shadow-sm flex items-center justify-center group/icon">
+                                <a href="{{ url('/tienda/detalle_productos?id=' . $product->id) }}" target="_blank" class="w-10 h-10 bg-white border border-stone-200 text-stone-400 hover:text-primary hover:border-primary hover:rotate-6 rounded-xl transition-all shadow-sm flex items-center justify-center group/icon" title="Ver en Tienda">
+                                    <span class="material-symbols-outlined text-lg">visibility</span>
+                                </a>
+                                <button class="w-10 h-10 bg-white border border-stone-200 text-stone-400 hover:text-stone-950 hover:border-stone-950 hover:-rotate-6 rounded-xl transition-all shadow-sm flex items-center justify-center group/icon" title="Editar Ficha">
                                     <span class="material-symbols-outlined text-lg">edit_square</span>
-                                </button>
-                                <button class="w-10 h-10 bg-white border border-stone-200 text-stone-400 hover:text-red-600 hover:border-red-600 hover:-rotate-6 rounded-xl transition-all shadow-sm flex items-center justify-center group/icon">
-                                    <span class="material-symbols-outlined text-lg">analytics</span>
                                 </button>
                             </div>
                         </td>

@@ -3,6 +3,7 @@
         search: '',
         modules: [
             { name: 'Dashboard Central', url: '/erp/dashboard', icon: 'dashboard', category: 'General' },
+            { name: 'Ir a Tienda en Línea', url: '/', icon: 'shopping_bag', category: 'General' },
             { name: 'Ventas y POS', url: '/erp/ventas', icon: 'payments', category: 'Comercial' },
             { name: 'Inventario de Repuestos', url: '/erp/inventario', icon: 'inventory_2', category: 'Logística' },
             { name: 'Cierre Contable', url: '/erp/contabilidad/cierre', icon: 'lock', category: 'Finanzas' },

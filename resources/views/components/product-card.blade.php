@@ -38,17 +38,30 @@
                 Bs. {{ number_format(($product->precio_mayor ?? 0) * 36.0, 2) }} aprox.
             </p>
         </div>
-        <button
-            @if($product->stock_actual > 0)
-                onclick="addToCart({{ $product->id }}, '{{ addslashes($product->nombre) }}', {{ $product->precio_mayor ?? 0 }}, '{{ $product->imagen_url ?? '' }}', '{{ $product->categoria ?? '' }}')"
-                class="w-full bg-black text-white hover:bg-primary hover:text-black py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 transition-all cursor-pointer"
-            @else
-                disabled
-                class="w-full bg-stone-300 text-stone-500 py-4 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 cursor-not-allowed"
-            @endif
-        >
-            <span class="material-symbols-outlined text-lg">{{ $product->stock_actual > 0 ? 'add_shopping_cart' : 'remove_shopping_cart' }}</span>
-            {{ $product->stock_actual > 0 ? 'Agregar al Carrito' : 'Sin Disponibilidad' }}
-        </button>
+        <div class="flex items-center gap-2">
+            <!-- Selector de Cantidad Moderno -->
+            <div class="flex items-center bg-stone-100 rounded-lg p-1 h-10 border border-stone-200">
+                <button type="button" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-stone-600 active:scale-90" onclick="this.parentNode.querySelector('input').stepDown()">
+                    <span class="material-symbols-outlined text-sm font-black">remove</span>
+                </button>
+                <input type="number" value="1" min="1" class="w-8 text-center bg-transparent border-none focus:ring-0 font-black text-xs p-0 appearance-none pointer-events-none" readonly />
+                <button type="button" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-stone-600 active:scale-90" onclick="this.parentNode.querySelector('input').stepUp()">
+                    <span class="material-symbols-outlined text-sm font-black">add</span>
+                </button>
+            </div>
+
+            <button
+                @if($product->stock_actual > 0)
+                    onclick="Cart.add({{ $product->id }}, '{{ addslashes($product->nombre) }}', {{ $product->precio_mayor ?? 0 }}, '{{ $product->imagen_url ?? '' }}', '{{ $product->categoria ?? '' }}', this.previousElementSibling.querySelector('input').value)"
+                    class="flex-1 bg-black text-white hover:bg-primary hover:text-black h-10 px-3 rounded-lg font-black uppercase text-[9px] tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-95"
+                @else
+                    disabled
+                    class="flex-1 bg-stone-300 text-stone-500 h-10 px-3 rounded-lg font-black uppercase text-[9px] tracking-widest flex items-center justify-center gap-2 cursor-not-allowed"
+                @endif
+            >
+                <span class="material-symbols-outlined text-base">{{ $product->stock_actual > 0 ? 'shopping_cart' : 'block' }}</span>
+                {{ $product->stock_actual > 0 ? 'Añadir' : 'Agotado' }}
+            </button>
+        </div>
     </div>
 </article>

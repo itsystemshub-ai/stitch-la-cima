@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessageNotification;
+use App\Models\ContactMessage;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Page;
 use App\Models\Product;
 use App\Models\StockMovement;
 use App\Models\TiendaCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class TiendaController extends Controller
 {
@@ -94,50 +99,15 @@ class TiendaController extends Controller
     }
 
     /**
-     * Muestra el carrito de compras
+     * Muestra el carrito de compras (página ahora lee de localStorage vía JS)
+     * Mantenemos este método para backwards compatibility pero la vista principal
+     * usa Cart.js (localStorage) directamente.
      */
     public function verCarrito(Request $request)
     {
-        $cartItems = [];
-
-        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'cliente') {
-            $customer = \Illuminate\Support\Facades\Auth::user()->customer;
-            if ($customer) {
-                // Extraer de la Base de Datos usando la relación del modelo
-                $dbItems = \App\Models\TiendaCart::with('product')->where('customer_id', $customer->id)->get();
-                foreach($dbItems as $item) {
-                    if ($item->product) {
-                        $cartItems[] = [
-                            'id' => $item->id, 
-                            'product_id' => $item->product->id,
-                            'nombre' => $item->product->nombre,
-                            'codigo_oem' => $item->product->codigo_oem,
-                            'precio' => $item->product->precio_mayor ?? 0,
-                            'imagen_url' => $item->product->imagen_url ?? asset('assets/images/default-product.png'),
-                            'cantidad' => $item->cantidad,
-                            'is_db' => true
-                        ];
-                    }
-                }
-            }
-        } else {
-            // Extraer de la Sesión
-            $sessionCart = $request->session()->get('cart', []);
-            foreach($sessionCart as $key => $item) {
-                $cartItems[] = [
-                    'id' => str_replace('product_', '', $key),
-                    'product_id' => $item['product_id'],
-                    'nombre' => $item['nombre'],
-                    'codigo_oem' => $item['codigo_oem'],
-                    'precio' => $item['precio'] ?? 0,
-                    'imagen_url' => asset('assets/images/default-product.png'),
-                    'cantidad' => $item['cantidad'],
-                    'is_db' => false
-                ];
-            }
-        }
-
-        return view('tienda.carrito', compact('cartItems'));
+        // El carrito ahora se lee desde localStorage via JavaScript (cart.js)
+        // Este método mantiene compatibilidad con enlaces directos y SEO
+        return view('tienda.carrito');
     }
 
     /**
@@ -300,19 +270,20 @@ class TiendaController extends Controller
     public function updateCarrito(Request $request, $id)
     {
         $request->validate(['cantidad' => 'required|integer|min:1']);
-        
-        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'cliente') {
-            $customer = \Illuminate\Support\Facades\Auth::user()->customer;
-            $cartItem = \App\Models\TiendaCart::where('customer_id', $customer->id)->findOrFail($id);
+
+        if (Auth::check() && Auth::user()->role === 'cliente') {
+            $customer = Auth::user()->customer;
+            $cartItem = TiendaCart::where('customer_id', $customer->id)->findOrFail($id);
             $cartItem->update(['cantidad' => $request->cantidad]);
         } else {
             $cart = $request->session()->get('cart', []);
-            $key = 'product_' . $id;
+            $key = 'product_'.$id;
             if (isset($cart[$key])) {
                 $cart[$key]['cantidad'] = $request->cantidad;
                 $request->session()->put('cart', $cart);
             }
         }
+
         return response()->json(['status' => 'success']);
     }
 
@@ -321,17 +292,18 @@ class TiendaController extends Controller
      */
     public function eliminarDeCarrito(Request $request, $id)
     {
-        if (\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->role === 'cliente') {
-            $customer = \Illuminate\Support\Facades\Auth::user()->customer;
-            \App\Models\TiendaCart::where('customer_id', $customer->id)->where('id', $id)->delete();
+        if (Auth::check() && Auth::user()->role === 'cliente') {
+            $customer = Auth::user()->customer;
+            TiendaCart::where('customer_id', $customer->id)->where('id', $id)->delete();
         } else {
             $cart = $request->session()->get('cart', []);
-            $key = 'product_' . $id;
+            $key = 'product_'.$id;
             if (isset($cart[$key])) {
                 unset($cart[$key]);
                 $request->session()->put('cart', $cart);
             }
         }
+
         return response()->json(['status' => 'success']);
     }
 
@@ -350,7 +322,8 @@ class TiendaController extends Controller
      */
     public function getPage($slug)
     {
-        $page = \App\Models\Page::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        $page = Page::where('slug', $slug)->where('is_active', true)->firstOrFail();
+
         return view('tienda.page', compact('page'));
     }
 
@@ -367,7 +340,7 @@ class TiendaController extends Controller
             'mensaje' => 'required|string|min:10',
         ]);
 
-        $message = \App\Models\ContactMessage::create([
+        $message = ContactMessage::create([
             'nombre' => $validated['nombre'],
             'email' => $validated['email'],
             'telefono' => $validated['telefono'],
@@ -378,11 +351,11 @@ class TiendaController extends Controller
 
         try {
             // Se envía a los administradores principales
-            \Illuminate\Support\Facades\Mail::to('ventas@lacimarepuestos.com')
-                ->send(new \App\Mail\ContactMessageNotification($message));
+            Mail::to('ventas@lacimarepuestos.com')
+                ->send(new ContactMessageNotification($message));
         } catch (\Exception $e) {
             // Silenciar error de mail local en dev, o registrar log
-            \Illuminate\Support\Facades\Log::error('Fallo al enviar el correo de contacto: ' . $e->getMessage());
+            Log::error('Fallo al enviar el correo de contacto: '.$e->getMessage());
         }
 
         return redirect()->back()->with('success', 'Hemos recibido su solicitud de contacto. Un asesor industrial se comunicará con usted en breve.');

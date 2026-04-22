@@ -78,13 +78,17 @@
                     <p id="productPriceBs" class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-6">Bs. 0.00 aprox. | IVA incluido</p>
 
                     <div class="flex gap-4 mb-8">
-                        <div class="flex items-center bg-background border border-outline rounded-xl overflow-hidden">
-                            <button onclick="updateQty(-1)" class="qty-btn w-14 h-14 flex items-center justify-center text-black font-black text-xl hover:bg-white transition-colors">−</button>
-                            <input id="qtyInput" class="w-16 bg-transparent border-none text-center font-black text-lg focus:ring-0" type="number" value="1" min="1" max="99"/>
-                            <button onclick="updateQty(1)" class="qty-btn w-14 h-14 flex items-center justify-center text-black font-black text-xl hover:bg-white transition-colors">+</button>
+                        <div class="flex items-center bg-stone-100 rounded-2xl p-1.5 border border-stone-200 shadow-inner">
+                            <button onclick="updateQty(-1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-white hover:shadow-md transition-all text-black active:scale-90">
+                                <span class="material-symbols-outlined font-black">remove</span>
+                            </button>
+                            <input id="qtyInput" class="w-16 bg-transparent border-none text-center font-black text-xl focus:ring-0 pointer-events-none" type="number" value="1" min="1" max="99" readonly/>
+                            <button onclick="updateQty(1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-white hover:shadow-md transition-all text-black active:scale-90">
+                                <span class="material-symbols-outlined font-black">add</span>
+                            </button>
                         </div>
-                        <button onclick="addToCartFromDetail()" class="flex-grow bg-black text-primary hover:bg-primary hover:text-black border border-black font-black uppercase py-4 px-8 tracking-[0.2em] text-[11px] rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-black/10">
-                            <span class="material-symbols-outlined text-xl">shopping_bag</span>
+                        <button onclick="addToCartFromDetail()" class="flex-grow bg-black text-primary hover:bg-primary hover:text-black border border-black font-black uppercase py-3 px-6 tracking-widest text-xs rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl active:scale-95">
+                            <span class="material-symbols-outlined text-2xl">shopping_cart</span>
                             Añadir al Carrito
                         </button>
                     </div>

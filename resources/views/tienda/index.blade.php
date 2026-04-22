@@ -124,82 +124,9 @@
 <a class="text-[10px] font-black uppercase tracking-widest text-black border-b-2 border-primary pb-1" href="{{ url('/tienda/' . 'catalogo_detallado') }}">Ver Catálogo Completo</a>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Product Card 1 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
-<img alt="Brake Disc" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A"/>
-<span class="absolute top-2 left-2 bg-black text-primary text-[9px] font-black px-2 py-1 uppercase">-15%</span>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Frenos / OEM-4421</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Kit de Discos de Freno Ventilados</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$85.00</span>
-<span class="text-[10px] text-stone-400 line-through ml-2">$102.00</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: +50</span>
-</div>
-<button onclick="addToCart(1, 'Kit de Discos de Freno Ventilados', 85.00, 'https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A', 'Frenos / OEM-4421')" class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
-<!-- Product Card 2 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
-<img alt="Engine Part" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ"/>
-<span class="absolute top-2 right-2 bg-primary text-black text-[9px] font-black px-2 py-1 uppercase">Top Ventas</span>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Motor / CAT-882</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Inyector de Combustible Heavy Duty</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$320.00</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Bajo Pedido</span>
-</div>
-<button onclick="addToCart(2, 'Inyector de Combustible Heavy Duty', 320.00, 'https://lh3.googleusercontent.com/aida-public/AB6AXuAiuQeey5lmq6st-vJo1TRQIs8oQtq_4Cg3QyJcj3j5bJguRJRMBb8ZSC_EXi5lrwaP7iFhysnzJ-1xPxNGrK4UF7AT2OeN8ElIvXkr9-fKhD32L0ADYy9Ey15LiRkDN8mJeDuWdAW5rDzkxw-EYW2ydO_BYYgkeF9JIGC8kwEVf-n5FRVlF_rtG7bTZ9VsR_-6AslLZLeyVYNZWjszYl7HOoO_0ZWqNEcN2WLJnxoqR8dzy5OKZhKk8pdLOhI6kvQ7oAHsQ2gQeQ', 'Motor / CAT-882')" class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
-<!-- Product Card 3 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white">
-<img alt="Suspension" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw"/>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Suspensión / SUS-101</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Amortiguador Reforzado Delantero</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$145.00</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: 12</span>
-</div>
-<button onclick="addToCart(3, 'Amortiguador Reforzado Delantero', 145.00, 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw', 'Suspensión / SUS-101')" class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
-<!-- Product Card 4 -->
-<div class="group bg-stone-50 border border-outline rounded-xl p-4 hover:shadow-xl transition-all">
-<div class="relative aspect-square mb-4 overflow-hidden rounded-lg bg-white flex items-center justify-center">
-<span class="material-symbols-outlined text-6xl text-stone-200">settings_input_component</span>
-</div>
-<p class="text-[10px] font-bold text-stone-400 uppercase mb-1">Transmisión / TRS-55</p>
-<h4 class="font-bold text-sm text-black mb-2 line-clamp-1">Filtro de Transmisión Automática</h4>
-<div class="flex items-center justify-between mb-4">
-<div>
-<span class="text-lg font-black text-black">$42.50</span>
-</div>
-<span class="text-[10px] font-bold text-primary-dim uppercase">Stock: +100</span>
-</div>
-<button onclick="addToCart(4, 'Filtro de Transmisión Automática', 42.50, '', 'Transmisión / TRS-55')" class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-colors group/btn">
-<span class="material-symbols-outlined text-sm group-hover/btn:text-primary">add_shopping_cart</span>
-<span class="text-[10px] font-black uppercase tracking-widest">Añadir al Carrito</span>
-</button>
-</div>
-</div>
+    @foreach($featuredProducts as $product)
+        <x-product-card :product="$product" />
+    @endforeach
 </div>
 </section>
 <!-- Categories Bento Grid -->

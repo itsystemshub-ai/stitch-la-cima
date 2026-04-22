@@ -12,6 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ request()->url() }}">
 <meta property="og:image" content="{{ asset('assets/images/logo.png') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="theme-color" content="#ceff5e">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -104,9 +105,9 @@
                 <input id="searchInput" class="bg-stone-100 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Buscar por OEM o VIN..." type="text"/>
                 <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-lg">search</span>
             </div>
-            <a href="/tienda/carrito" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors">
-                <span class="material-symbols-outlined">shopping_cart</span>
-                <span id="cart-count" class="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full border border-white">0</span>
+            <a href="/tienda/carrito" class="relative p-2 text-black hover:bg-stone-100 rounded-full transition-colors group/cart">
+                <span class="material-symbols-outlined transition-transform group-hover/cart:scale-110">shopping_bag</span>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-primary text-black text-[9px] font-black h-5 w-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm">0</span>
             </a>
             <div class="h-6 w-px bg-outline mx-2 hidden sm:block"></div>
             @guest
@@ -287,6 +288,7 @@ MAYOR DE REPUESTO LA CIMA, C.A.<br>
     </div>
 </footer>
 
+<script src="{{ asset('js/cart.js') }}"></script>
 <script>
 function openMobileMenu() {
     document.getElementById('mobileMenu').classList.remove('hidden');

@@ -1,84 +1,12 @@
-// La Cima - Index JS loaded
-console.log('[INDEX.JS] Carrito cargado');
+// INDEX.JS - usa el módulo cart.js centralizado
+// Las funciones getCart, saveCart, addToCart ya están en cart.js
 
-// ==================== CART FUNCTIONALITY (AVANZADO) ====================
-    const STORAGE_KEY = 'lacima_cart';
+console.log('[INDEX.JS] Módulo de inicio cargado (usa cart.js centralizado)');
 
-    function getCart() {
-        try {
-            const stored = sessionStorage.getItem(STORAGE_KEY);
-            if (stored) return JSON.parse(stored);
-        } catch (e) {
-            console.warn('SessionStorage falló, usando localStorage:', e);
-        }
-        try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-        } catch (e) {
-            console.error('Todo storage falló:', e);
-            return [];
-        }
-    }
-
-    function saveCart(cart) {
-        const json = JSON.stringify(cart);
-        try {
-            sessionStorage.setItem(STORAGE_KEY, json);
-        } catch (e) {
-            try {
-                localStorage.setItem(STORAGE_KEY, json);
-            } catch (e2) {
-                console.error('Storage falló:', e2);
-            }
-        }
-        // También guardar en cookie como backup
-        document.cookie = STORAGE_KEY + '=' + encodeURIComponent(json) + ';path=/;max-age=2592000';
-    }
-
-    function updateCartCount() {
-        const cart = getCart();
-        const count = cart.reduce((s, i) => s + (i.qty || 0), 0);
-        
-        const badge = document.getElementById('cart-count');
-        if (badge) {
-            badge.textContent = count;
-            badge.style.display = count > 0 ? 'flex' : 'none';
-        }
-        
-        // También actualizar otros badges
-        document.querySelectorAll('.cart-badge').forEach(el => {
-            el.textContent = count;
-        });
-    }
-
-    function addToCart(id, name, price, image, ref) {
-        console.log('[CART] Agregar:', id, name);
-        let cart = getCart();
-        if (!Array.isArray(cart)) cart = [];
-        
-        const existing = cart.find(item => item.id === id);
-        if (existing) {
-            existing.qty = (existing.qty || 0) + 1;
-        } else {
-            cart.push({ id, name, price, image, ref, qty: 1 });
-        }
-
-        saveCart(cart);
-        updateCartCount();
-        
-        // Mostrar notificación
-        const notif = document.createElement('div');
-        notif.className = 'fixed top-20 right-6 z-50 bg-black text-white px-6 py-3 rounded-lg shadow-2xl flex items-center gap-2';
-        notif.innerHTML = '<span class="text-primary">✓</span><span class="text-sm font-bold">' + name + ' agregado</span>';
-        document.body.appendChild(notif);
-        setTimeout(() => notif.remove(), 2500);
-        
-        console.log('[CART] Actualizado:', cart);
-    }
-
-    // Inicializar al cargar
-    document.addEventListener('DOMContentLoaded', function() {
-        updateCartCount();
-    });
+// Actualizar badge al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    Cart.updateBadge();
+});
 
     function showNotification(message) {
         const notification = document.createElement('div');

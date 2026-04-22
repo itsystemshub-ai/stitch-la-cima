@@ -80,78 +80,52 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-stone-50">
+          @forelse($orders as $order)
           <tr class="group hover:bg-stone-50/80 transition-all duration-300">
             <td class="py-7 pl-10">
-              <span class="text-xs font-mono font-bold text-stone-400 group-hover:text-primary-dim transition-colors">#TN-90212</span>
+              <span class="text-xs font-mono font-bold text-stone-400 group-hover:text-primary-dim transition-colors">#{{ $order->numero_orden }}</span>
             </td>
             <td class="py-7">
-              <span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[9px] font-black uppercase tracking-widest border border-blue-100">Mostrador</span>
+              @if(str_starts_with($order->numero_orden, 'WEB-'))
+                <span class="px-2 py-0.5 bg-purple-50 text-purple-600 rounded text-[9px] font-black uppercase tracking-widest border border-purple-100">Tienda Online</span>
+              @else
+                <span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[9px] font-black uppercase tracking-widest border border-blue-100">POS Interno</span>
+              @endif
             </td>
             <td class="py-7">
               <div>
-                <p class="text-sm font-bold text-stone-900 leading-none mb-1 uppercase tracking-tight transition-colors">Suministros Industriales S.A.</p>
-                <p class="text-[9px] text-stone-400 italic">Repuestos Motor CAT3406 (Heavy Duty)</p>
+                <p class="text-sm font-bold text-stone-900 leading-none mb-1 uppercase tracking-tight transition-colors">{{ $order->customer->razon_social ?? 'Cliente Desconocido' }}</p>
+                <p class="text-[9px] text-stone-400 italic">{{ $order->items_count ?? $order->items->count() }} ítems en pedido</p>
               </div>
             </td>
-            <td class="py-7 font-black text-[10px] text-stone-500 uppercase tracking-widest">Transferencia</td>
+            <td class="py-7 font-black text-[10px] text-stone-500 uppercase tracking-widest">
+                {{ $order->metodo_pago ?? 'Por Definir' }}
+            </td>
             <td class="py-7 text-right">
-              <span class="text-base font-headline font-black text-stone-900 tracking-tight">$ 1,240.00</span>
+              <span class="text-base font-headline font-black text-stone-900 tracking-tight">$ {{ number_format($order->total, 2) }}</span>
             </td>
             <td class="py-7 pr-10 text-right">
                 <div class="flex items-center justify-center">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
-                    <span class="text-[10px] font-black text-green-600 uppercase tracking-widest">Liquidada</span>
+                    @if($order->estado === 'Pagado')
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                        <span class="text-[10px] font-black text-green-600 uppercase tracking-widest">Liquidada</span>
+                    @elseif($order->estado === 'Anulada')
+                        <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                        <span class="text-[10px] font-black text-red-600 uppercase tracking-widest">Anulada</span>
+                    @else
+                        <span class="w-2 h-2 bg-amber-500 rounded-full mr-2 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
+                        <span class="text-[10px] font-black text-amber-600 uppercase tracking-widest">{{ $order->estado }}</span>
+                    @endif
                 </div>
             </td>
           </tr>
-          <tr class="group hover:bg-stone-50/80 transition-all duration-300">
-            <td class="py-7 pl-10">
-              <span class="text-xs font-mono font-bold text-stone-400 group-hover:text-primary-dim transition-colors">#TN-90213</span>
-            </td>
-            <td class="py-7">
-              <span class="px-2 py-0.5 bg-primary/20 text-stone-900 rounded text-[9px] font-black uppercase tracking-widest border border-primary/20">Punto Venta</span>
-            </td>
-            <td class="py-7">
-              <div>
-                <p class="text-sm font-bold text-stone-900 leading-none mb-1 uppercase tracking-tight transition-colors">Cliente Final D. Lopez</p>
-                <p class="text-[9px] text-stone-400 italic">Kit Filtros Aire/Aceite (Volvo Pack)</p>
-              </div>
-            </td>
-            <td class="py-7 font-black text-[10px] text-stone-500 uppercase tracking-widest">Efectivo (USD)</td>
-            <td class="py-7 text-right">
-              <span class="text-base font-headline font-black text-stone-900 tracking-tight">$ 125.50</span>
-            </td>
-            <td class="py-7 pr-10 text-right">
-                <div class="flex items-center justify-center">
-                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                    <span class="text-[10px] font-black text-green-600 uppercase tracking-widest">Liquidada</span>
-                </div>
+          @empty
+          <tr>
+            <td colspan="6" class="py-20 text-center">
+                <p class="text-stone-400 font-bold uppercase tracking-widest">No hay registros de ventas</p>
             </td>
           </tr>
-          <tr class="group hover:bg-stone-50/80 transition-all duration-300">
-            <td class="py-7 pl-10">
-              <span class="text-xs font-mono font-bold text-stone-400 group-hover:text-primary-dim transition-colors">#TN-90214</span>
-            </td>
-            <td class="py-7">
-              <span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded text-[9px] font-black uppercase tracking-widest border border-amber-100">Crédito</span>
-            </td>
-            <td class="py-7">
-              <div>
-                <p class="text-sm font-bold text-stone-900 leading-none mb-1 uppercase tracking-tight transition-colors">Logística del Norte S.R.L.</p>
-                <p class="text-[9px] text-stone-400 italic">Correctivo Mayor Flota Eje A2</p>
-              </div>
-            </td>
-            <td class="py-7 font-black text-[10px] text-stone-500 uppercase tracking-widest">Factura 30D</td>
-            <td class="py-7 text-right">
-              <span class="text-base font-headline font-black text-stone-900 tracking-tight">$ 4,890.00</span>
-            </td>
-            <td class="py-7 pr-10 text-right">
-                <div class="flex items-center justify-center">
-                    <span class="w-2 h-2 bg-amber-500 rounded-full mr-2 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
-                    <span class="text-[10px] font-black text-amber-600 uppercase tracking-widest">Por Cobrar</span>
-                </div>
-            </td>
-          </tr>
+          @endforelse
         </tbody>
       </table>
     </div>
@@ -159,12 +133,10 @@
     <!-- Table Footer / Pagination -->
     <div class="px-10 py-6 bg-stone-50/50 border-t border-stone-50 flex flex-col md:flex-row justify-between items-center gap-6">
         <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Reporte Consolidado • MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
-        <div class="flex items-center gap-4">
-            <span class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Pág. 1 de 14</span>
-            <div class="flex gap-2">
-                <button class="w-8 h-8 rounded-lg border border-stone-200 flex items-center justify-center hover:bg-white transition-all"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
-                <button class="w-8 h-8 rounded-lg border border-stone-200 flex items-center justify-center hover:bg-white transition-all text-primary"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
-            </div>
+        <div class="flex gap-2">
+            <template x-if="true">
+                {{ $orders->links('vendor.pagination.tailwind_zenith') }}
+            </template>
         </div>
     </div>
   </div>
