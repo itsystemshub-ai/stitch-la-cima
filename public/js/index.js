@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ==================== INICIALIZAR ====================
     console.log('[LA CIMA] JS cargado correctamente');
-    updateCartCount();
+    if (typeof Cart !== 'undefined' && Cart.updateBadge) {
+        Cart.updateBadge();
+    }
 
     function searchProducts() {
         const year = document.getElementById('searchYear')?.value || '';
@@ -97,13 +99,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ==================== SCROLL TO TOP ====================
     const scrollTopBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            scrollTopBtn.classList.remove('hidden');
-        } else {
-            scrollTopBtn.classList.add('hidden');
-        }
-    });
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.remove('hidden');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+            }
+        });
+    }
 
     // ==================== PWA SERVICE WORKER & INSTALL ====================
     if ('serviceWorker' in navigator) {
@@ -148,5 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ==================== INITIALIZE ====================
     document.addEventListener('DOMContentLoaded', function() {
-        updateCartCount();
+        if (typeof Cart !== 'undefined' && Cart.updateBadge) {
+            Cart.updateBadge();
+        }
     });

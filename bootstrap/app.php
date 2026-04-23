@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\SecurityHeadersMiddleware;
 use App\Http\Middleware\VerificarPermisoModulo;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,6 +18,16 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth.erp' => AuthMiddleware::class,
             'permiso.modulo' => VerificarPermisoModulo::class,
+            'security.headers' => SecurityHeadersMiddleware::class,
+        ]);
+
+        $middleware->api(append: [
+            'throttle:api',
+            'security.headers',
+        ]);
+
+        $middleware->web(append: [
+            'security.headers',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

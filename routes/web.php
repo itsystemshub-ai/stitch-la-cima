@@ -15,6 +15,7 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\RrhhController;
 use App\Http\Controllers\TiendaAuthController;
 use App\Http\Controllers\TiendaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VentasController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -264,16 +265,16 @@ Route::prefix('api/tienda')->group(function () {
     Route::post('/checkout', [TiendaController::class, 'procesarCheckout']);
 });
 
-    // Herramientas de Sincronización (Protegidas)
-    Route::prefix('sync')->group(function () {
-        Route::get('/', function () {
-            return view('configuracion.sync');
-        });
-        Route::post('/upload-accdb', [AccessImportController::class, 'syncAccessDatabase']);
+// Herramientas de Sincronización (Protegidas)
+Route::prefix('sync')->group(function () {
+    Route::get('/', function () {
+        return view('configuracion.sync');
     });
+    Route::post('/upload-accdb', [AccessImportController::class, 'syncAccessDatabase']);
+});
 
-    // Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
-    Route::get('/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
+// Ruta Única de Mantenimiento para Desbloqueo de Base de Datos
+Route::get('/debug/desbloquear-db', [MaintenanceController::class, 'unlockDatabase']);
 
 // Rutas de Herramientas y Diagnóstico (Protegidas solo para administradores en producción)
 Route::middleware(['auth', 'permiso.modulo:configuracion'])->prefix('debug')->group(function () {
@@ -340,6 +341,7 @@ Route::middleware(['auth', 'permiso.modulo:configuracion'])->prefix('debug')->gr
     // Debug route to list all users
     Route::get('/users', function () {
         $users = User::select('id', 'name', 'email', 'role', 'is_active')->get();
+
         return response()->json($users);
     });
 
@@ -349,6 +351,7 @@ Route::middleware(['auth', 'permiso.modulo:configuracion'])->prefix('debug')->gr
 
         if (Auth::attempt($credentials)) {
             request()->session()->regenerate();
+
             return response()->json(['status' => 'success', 'user' => Auth::user()->name, 'role' => Auth::user()->role]);
         }
 
@@ -359,11 +362,21 @@ Route::middleware(['auth', 'permiso.modulo:configuracion'])->prefix('debug')->gr
     Route::get('/rutas', function () {
         $rutas = Route::getRoutes();
         $erpRoutes = [];
-        foreach ($rutas as $route) {
-            if (str_contains($route->uri(), 'erp')) {
-                $erpRoutes[] = $route->uri().' ['.implode(',', $route->methods()).']';
+        foreach ($rutas as $ruta) {
+            if (str_contains($ruta->uri(), 'erp')) {
+                $erpRoutes[] = $ruta->uri().' ['.implode(',', $ruta->methods()).']';
             }
         }
+
         return response()->json($erpRoutes);
     });
+
+    // User management routes
+    Route::middleware(['auth.erp'])->group(function () {
+        Route::get('/users', [UserController::class, 'index']);
+        Route::post('/users', [UserController::class, 'store']);
+        Route::put('/users/{user}', [UserController::class, 'update']);
+        Route::delete('/users/{user}', [UserController::class, 'destroy']);
+    });
+
 });
