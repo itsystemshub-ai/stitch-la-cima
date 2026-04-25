@@ -2,18 +2,19 @@
 
 namespace App\Jobs;
 
+use App\Services\InventoryService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Services\InventoryService;
 
 class ProcessMassUpdate implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $filePath;
+
     protected $userId;
 
     /**
@@ -31,5 +32,10 @@ class ProcessMassUpdate implements ShouldQueue
     public function handle(InventoryService $inventoryService)
     {
         $inventoryService->processMassUpdateFromFile($this->filePath, $this->userId);
+
+        // Clean up temporary file
+        if (file_exists($this->filePath)) {
+            unlink($this->filePath);
+        }
     }
 }
