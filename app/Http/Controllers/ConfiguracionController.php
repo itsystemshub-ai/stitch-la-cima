@@ -15,4 +15,6 @@ class ConfiguracionController extends Controller
     public function estadoSistema() { return view('erp.configuracion.estado-sistema'); }
     public function tareas() { return view('erp.configuracion.tareas'); }
     public function auditoria() { return view('erp.configuracion.auditoria'); }
+
+    public function showSync() { return view('configuracion.sync'); }
 }

@@ -38,37 +38,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Nota: Las rutas de sincronización se han movido dentro del grupo erp para mayor seguridad.
 
 // Static Asset Bridge: Sirve los archivos de UI originales directamente
-Route::get('/frontend/{path}', function ($path) {
-    // Sanitize path to prevent traversal
-    $path = str_replace(['../', '..\\'], '', $path);
-
-    $absolutePath = base_path('stitch/'.$path);
-
-    // Extra security: ensure real path is within the stitch directory
-    $realPath = realpath($absolutePath);
-    $stitchDir = realpath(base_path('stitch'));
-
-    if (! $realPath || ! str_starts_with($realPath, $stitchDir) || ! File::exists($realPath)) {
-        abort(404);
-    }
-
-    $file = File::get($realPath);
-    $type = File::mimeType($realPath);
-    if (str_ends_with($realPath, '.css')) {
-        $type = 'text/css';
-    } elseif (str_ends_with($realPath, '.js')) {
-        $type = 'application/javascript';
-    } elseif (str_ends_with($realPath, '.svg')) {
-        $type = 'image/svg+xml';
-    }
-
-    $response = Response::make($file, 200);
-    $response->header('Content-Type', $type);
-    // Agregamos cache control para no penalizar el rendimiento
-    $response->header('Cache-Control', 'max-age=86400, public');
-
-    return $response;
-})->where('path', '.*');
+Route::get('/frontend/{path}', [App\Http\Controllers\StaticAssetController::class, 'serve'])->where('path', '.*');
 
 // ========== GRUPOS DE RUTAS ERP (MODULAR) ==========
 
@@ -226,29 +196,7 @@ Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/tienda/{slug}', [TiendaController::class, 'getPage'])->where('slug', '[a-zA-Z0-9_-]+');
 
 // Enrutador Dinámico para Autenticación (Registro, Recuperación)
-Route::get('/auth/{page?}', function ($page = 'login') {
-    if (Auth::check() && $page === 'login') {
-        $user = Auth::user();
-        if ($user->isCliente()) {
-            return redirect('/tienda/mi-cuenta');
-        }
-
-        return redirect('/erp/inicio');
-    }
-
-    $page = str_replace(['../', '..\\'], '', $page);
-    $viewPath = resource_path('views/auth/'.$page.'.blade.php');
-
-    if (file_exists($viewPath)) {
-        return view('auth.'.$page);
-    }
-
-    if ($page === 'crear-cuenta') {
-        return redirect('/auth/crear_cuenta');
-    }
-
-    abort(404, 'Página de acceso no encontrada: '.$page);
-})->where('page', '.*');
+Route::get('/auth/{page?}', [App\Http\Controllers\AuthPageController::class, 'show'])->where('page', '.*');
 
 // Rutas Estrictas de Facturación y Transacciones
 Route::prefix('api/erp/invoice')->group(function () {
@@ -267,9 +215,7 @@ Route::prefix('api/tienda')->group(function () {
 
 // Herramientas de Sincronización (Protegidas)
 Route::prefix('sync')->group(function () {
-    Route::get('/', function () {
-        return view('configuracion.sync');
-    });
+    Route::get('/', [ConfiguracionController::class, 'showSync']);
     Route::post('/upload-accdb', [AccessImportController::class, 'syncAccessDatabase']);
 });
 
@@ -278,98 +224,11 @@ Route::get('/debug/desbloquear-db', [MaintenanceController::class, 'unlockDataba
 
 // Rutas de Herramientas y Diagnóstico (Protegidas solo para administradores en producción)
 Route::middleware(['auth', 'permiso.modulo:configuracion'])->prefix('debug')->group(function () {
-    // Debug route to seed admin user
-    Route::get('/seed-admin', function () {
-        $user = User::updateOrCreate(
-            ['email' => 'admin@lacima.com'],
-            [
-                'name' => 'Administrador',
-                'password' => Hash::make('admin123'),
-                'role' => 'admin',
-                'is_active' => 1,
-            ]
-        );
-
-        return response()->json([
-            'status' => 'success',
-            'user' => $user->email,
-            'role' => $user->role,
-            'is_active' => (bool) $user->is_active,
-            'message' => 'Usuario admin creado/actualizado',
-        ]);
-    });
-
-    // Diagnostico completo
-    Route::get('/diagnostico', function () {
-        $result = [
-            'php_version' => PHP_VERSION,
-            'laravel_version' => app()->version(),
-            'env_db_connection' => env('DB_CONNECTION'),
-            'tablas' => [],
-            'columnas_users' => [],
-            'usuarios' => [],
-            'middleware_auth_erp' => [],
-        ];
-
-        // Verificar tablas
-        try {
-            $tables = DB::select('SHOW TABLES');
-            foreach ($tables as $t) {
-                $result['tablas'][] = array_values((array) $t)[0];
-            }
-        } catch (Exception $e) {
-            $result['error_db'] = $e->getMessage();
-        }
-
-        // Verificar columnas de users
-        try {
-            $result['columnas_users'] = DB::getSchemaBuilder()->getColumnListing('users');
-        } catch (Exception $e) {
-            $result['error_columns'] = $e->getMessage();
-        }
-
-        // Verificar usuarios
-        try {
-            $result['usuarios'] = User::select('id', 'name', 'email', 'role', 'is_active')->get()->toArray();
-        } catch (Exception $e) {
-            $result['error_users'] = $e->getMessage();
-        }
-
-        return response()->json($result, JSON_PRETTY_PRINT);
-    });
-
-    // Debug route to list all users
-    Route::get('/users', function () {
-        $users = User::select('id', 'name', 'email', 'role', 'is_active')->get();
-
-        return response()->json($users);
-    });
-
-    // Debug route to test login
-    Route::get('/login-test', function () {
-        $credentials = ['email' => 'admin@lacima.com', 'password' => 'admin123'];
-
-        if (Auth::attempt($credentials)) {
-            request()->session()->regenerate();
-
-            return response()->json(['status' => 'success', 'user' => Auth::user()->name, 'role' => Auth::user()->role]);
-        }
-
-        return response()->json(['status' => 'failed', 'message' => 'Auth failed']);
-    });
-
-    // Debug: Lista de rutas ERP
-    Route::get('/rutas', function () {
-        $rutas = Route::getRoutes();
-        $erpRoutes = [];
-        foreach ($rutas as $ruta) {
-            if (str_contains($ruta->uri(), 'erp')) {
-                $erpRoutes[] = $ruta->uri().' ['.implode(',', $ruta->methods()).']';
-            }
-        }
-
-        return response()->json($erpRoutes);
-    });
+    Route::get('/seed-admin', [App\Http\Controllers\DiagnosticController::class, 'seedAdmin']);
+    Route::get('/diagnostico', [App\Http\Controllers\DiagnosticController::class, 'diagnostico']);
+    Route::get('/users', [App\Http\Controllers\DiagnosticController::class, 'listarUsuarios']); // Se asume que listarUsuarios existe o se usará listarRutasErp
+    Route::get('/login-test', [App\Http\Controllers\DiagnosticController::class, 'loginTest']);
+    Route::get('/rutas', [App\Http\Controllers\DiagnosticController::class, 'listarRutasErp']);
 
     // User management routes
     Route::middleware(['auth.erp'])->group(function () {
