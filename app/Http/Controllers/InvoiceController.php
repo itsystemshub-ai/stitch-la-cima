@@ -35,8 +35,7 @@ class InvoiceController extends Controller
                     'customer_id' => $customerId,
                     'vendedor_id' => $vendedorId,
                     'numero_orden' => 'ORD-' . date('Ymd') . '-' . str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT),
-                    'estado' => 'Pendiente',
-                    'status' => 'pending'
+                    'estado' => 'Pendiente'
                 ]);
 
                 foreach ($items as $item) {
@@ -68,7 +67,6 @@ class InvoiceController extends Controller
                         'subtotal' => $subtotalGlobal,
                         'impuestos' => $tax,
                         'total' => $total,
-                        'status' => 'pending_approval',
                         'estado' => 'Esperando Aprobación'
                     ]);
 

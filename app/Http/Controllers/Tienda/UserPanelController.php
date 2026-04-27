@@ -20,6 +20,10 @@ class UserPanelController extends Controller
         $user = Auth::user();
         $customer = $user->customer;
 
+        if (!$customer) {
+            return redirect('/')->with('error', 'No se encontró perfil de cliente asociado.');
+        }
+
         $recentOrders = Order::where("customer_id", $customer->id)
             ->orderBy("created_at", "desc")
             ->take(5)
@@ -27,18 +31,18 @@ class UserPanelController extends Controller
 
         $totalOrders = Order::where("customer_id", $customer->id)->count();
         $pendingOrders = Order::where("customer_id", $customer->id)
-            ->where("status", "pending")
+            ->where("estado", "Pendiente")
             ->count();
         $completedOrders = Order::where("customer_id", $customer->id)
-            ->where("status", "completed")
+            ->where("estado", "Pagado")
             ->count();
         $cancelledOrders = Order::where("customer_id", $customer->id)
-            ->where("status", "cancelled")
+            ->where("estado", "Cancelado")
             ->count();
         
         $totalSpent = Order::where("customer_id", $customer->id)
-            ->where("status", "completed")
-            ->sum("total_amount");
+            ->where("estado", "Pagado")
+            ->sum("total");
 
         return view("tienda.panel.index", compact(
             "user","customer","recentOrders","totalOrders","pendingOrders","completedOrders","cancelledOrders","totalSpent"
@@ -109,7 +113,7 @@ class UserPanelController extends Controller
         $customer = $user->customer;
 
         $cancelledOrders = Order::where("customer_id", $customer->id)
-            ->where("status", "cancelled")
+            ->where("estado", "Cancelado")
             ->orderBy("created_at", "desc")
             ->paginate(10);
 
@@ -125,23 +129,24 @@ class UserPanelController extends Controller
                 ->with("error", "No tienes permiso para acceder a esta seccion");
         }
 
-        $misVentas = Order::where("seller_id", $user->id)
+        $misVentas = Order::where("vendedor_id", $user->id)
             ->orderBy("created_at", "desc")
             ->take(5)
             ->get();
 
-        $totalVentas = Order::where("seller_id", $user->id)->count();
-        $ventasDelMes = Order::where("seller_id", $user->id)
+        $totalVentas = Order::where("vendedor_id", $user->id)->count();
+        $ventasDelMes = Order::where("vendedor_id", $user->id)
             ->whereYear("created_at", now()->year)
             ->whereMonth("created_at", now()->month)
             ->count();
 
-        $comisionTotal = Order::where("seller_id", $user->id)
-            ->where("status", "completed")
-            ->sum("commission_amount");
+        $ventasCobradas = Order::where("vendedor_id", $user->id)
+            ->where("estado", "Pagado")
+            ->sum("total");
 
         return view("tienda.panel.vendedor", compact(
-            "user","misVentas","totalVentas","ventasDelMes","comisionTotal"
+            "user","misVentas","totalVentas","ventasDelMes","ventasCobradas"
         ));
     }
+
 }

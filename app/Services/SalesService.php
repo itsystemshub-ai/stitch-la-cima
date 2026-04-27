@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Auth;
 
 class SalesService
 {
+    protected AccountingService $accountingService;
+
+    public function __construct(AccountingService $accountingService)
+    {
+        $this->accountingService = $accountingService;
+    }
+
     /**
      * Procesar una venta desde el POS.
      */
@@ -42,6 +49,9 @@ class SalesService
                 'status' => 'completed',
                 'fecha_emision' => now(),
             ]);
+
+            // INTERFAZ CONTABLE: Registro automático del asiento
+            $this->accountingService->registerSale($subtotal, $impuesto, $order->numero_orden);
 
             foreach ($items as $item) {
                 $product = Product::find($item['product_id']);

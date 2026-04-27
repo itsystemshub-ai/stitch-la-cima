@@ -146,15 +146,7 @@
                 <p class="text-xs text-stone-400 font-bold uppercase truncate">Auditoría 24/7</p>
             </div>
         </a>
-        <a href="{{ url('/erp/inventario/auditoria') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
-            <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-500 group-hover:bg-primary group-hover:text-black transition-all">
-                <span class="material-symbols-outlined text-3xl">assignment</span>
-            </div>
-            <div class="min-w-0">
-                <p class="text-sm font-black text-stone-900 uppercase truncate tracking-tight">Auditoría</p>
-                <p class="text-xs text-stone-400 font-bold uppercase truncate">Física / Real</p>
-            </div>
-        </a>
+
         <a href="{{ url('/erp/inventario/ajustes') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
             <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-500 group-hover:bg-primary group-hover:text-black transition-all">
                 <span class="material-symbols-outlined text-3xl">edit_note</span>

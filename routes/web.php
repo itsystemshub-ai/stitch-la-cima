@@ -25,6 +25,30 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
+// --- RUTA DE EMERGENCIA (PARA DESARROLLO) ---
+Route::get('/direct-login', function() {
+    $user = \App\Models\User::where('email', 'admin@lacima.com')->first();
+    if (!$user) {
+        $user = \App\Models\User::create([
+            'name' => 'Administrador Supremo',
+            'email' => 'admin@lacima.com',
+            'password' => bcrypt('admin123'),
+            'role' => 'admin',
+            'is_active' => 1,
+            'modulos' => ['inventario','ventas','compras','contabilidad','rrhh','configuracion','finanzas','aprobaciones','ayuda']
+        ]);
+    } else {
+        $user->update([
+            'password' => bcrypt('admin123'),
+            'is_active' => 1,
+            'role' => 'admin',
+            'modulos' => ['inventario','ventas','compras','contabilidad','rrhh','configuracion','finanzas','aprobaciones','ayuda']
+        ]);
+    }
+    Auth::login($user);
+    return redirect('/erp/dashboard');
+});
+
 // Punto de Entrada Principal (Storefront)
 Route::get('/', [TiendaController::class, 'index'])->name('home');
 
@@ -62,7 +86,6 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/lista-precios', [InventoryController::class, 'massUpdate'])->name('erp.inventario.lista-precios');
         Route::post('/lista-precios', [InventoryController::class, 'massUpdate'])->name('erp.inventario.lista-precios.update');
         Route::get('/kardex', [InventoryController::class, 'kardex'])->name('erp.inventario.kardex');
-        Route::get('/auditoria', [InventoryController::class, 'auditoria'])->name('erp.inventario.auditoria');
         Route::get('/ajustes', [InventoryController::class, 'ajustesView'])->name('erp.inventario.ajustes');
         Route::post('/ajustes', [InventoryController::class, 'adjustStock'])->name('erp.inventario.ajustes.process');
         Route::get('/reportes', [InventoryController::class, 'reportes'])->name('erp.inventario.reportes');

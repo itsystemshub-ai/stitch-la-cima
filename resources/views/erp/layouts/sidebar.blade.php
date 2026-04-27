@@ -48,7 +48,7 @@
         <a href="{{ url('/erp/inventario/desarrollo') }}" class="{{ Request::is('erp/inventario/desarrollo*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">biotech</span> Desarrollo</a>
         <a href="{{ url('/erp/inventario/lista-precios') }}" class="{{ Request::is('erp/inventario/lista-precios*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">payments</span> Lista de Precios</a>
         <a href="{{ url('/erp/inventario/kardex') }}" class="{{ Request::is('erp/inventario/kardex*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>
-        <a href="{{ url('/erp/inventario/auditoria') }}" class="{{ Request::is('erp/inventario/auditoria*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">assignment</span> Auditoría Física</a>
+
         <a href="{{ url('/erp/inventario/ajustes') }}" class="{{ Request::is('erp/inventario/ajustes*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">edit_note</span> Ajustes</a>
         <a href="{{ url('/erp/inventario/reportes') }}" class="{{ Request::is('erp/inventario/reportes*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">analytics</span> Reportes</a>
       </div>

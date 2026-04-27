@@ -46,7 +46,7 @@
                         </div>
                         <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Valorización Total Maestro</p>
                     </div>
-                    <h3 class="text-6xl font-headline font-black text-white tracking-tighter leading-none mb-4 italic">$4.892.450,00</h3>
+                    <h3 class="text-6xl font-headline font-black text-white tracking-tighter leading-none mb-4 italic">${{ number_format($valuation, 2) }}</h3>
                     <p class="text-stone-500 font-bold text-[10px] uppercase tracking-widest">Activo Circulante Bruto en Almacén</p>
                 </div>
                 <div class="mt-12 flex items-center gap-8 border-t border-white/5 pt-8">
@@ -71,7 +71,7 @@
                     <span class="material-symbols-outlined font-black">warning_amber</span>
                 </div>
                 <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-2">Stock Crítico</p>
-                <h4 class="text-4xl font-headline font-black text-stone-900 italic">18 <span class="text-stone-300">ITEMS</span></h4>
+                <h4 class="text-4xl font-headline font-black text-stone-900 italic">{{ $critical_items }} <span class="text-stone-300">ITEMS</span></h4>
                 <div class="mt-8 h-2 w-full bg-stone-100 rounded-full overflow-hidden">
                     <div class="h-full bg-red-500 w-[65%] shadow-[0_0_10px_rgba(239,68,68,0.3)]"></div>
                 </div>
@@ -117,38 +117,31 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-50 text-xs font-body">
+                    @forelse($movements as $movement)
                     <tr class="hover:bg-stone-50/80 transition-colors group">
                         <td class="p-8">
-                            <span class="font-black text-stone-900 block mb-1">Turbo Compresor G-23</span>
-                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest font-mono italic">ID: LC-SKU-992201-AX</span>
+                            <span class="font-black text-stone-900 block mb-1">{{ $movement->product->nombre }}</span>
+                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest font-mono italic">ID: {{ $movement->product->codigo_oem }}</span>
                         </td>
                         <td class="p-8">
-                            <span class="px-3 py-1 bg-stone-900 text-primary text-[9px] font-black rounded-lg uppercase tracking-widest group-hover:bg-primary group-hover:text-stone-900 transition-colors shadow-sm">Clase A</span>
+                            @php
+                                $stock = $movement->product->stock_actual;
+                                $min = $movement->product->stock_minimo;
+                                $status = ($stock <= $min) ? 'Clase A' : (($stock < $min * 2) ? 'Clase B' : 'Clase C');
+                            @endphp
+                            <span class="px-3 py-1 @if($status == 'Clase A') bg-stone-900 text-primary @else bg-stone-100 text-stone-500 @endif text-[9px] font-black rounded-lg uppercase tracking-widest group-hover:bg-primary group-hover:text-stone-900 transition-colors shadow-sm">{{ $status }}</span>
                         </td>
                         <td class="p-8">
-                            <div class="flex items-center gap-2 text-primary font-black text-[10px] uppercase italic">
-                                <span class="material-symbols-outlined text-sm">download</span> ENTRADA
+                            <div class="flex items-center gap-2 @if($movement->type == 'IN') text-primary @else text-stone-300 @endif font-black text-[10px] uppercase italic">
+                                <span class="material-symbols-outlined text-sm">{{ $movement->type == 'IN' ? 'download' : 'upload' }}</span> {{ $movement->type == 'IN' ? 'ENTRADA' : 'SALIDA' }}
                             </div>
                         </td>
-                        <td class="p-8 text-stone-900 font-black italic">45 UND</td>
-                        <td class="p-8 text-right text-stone-900 font-black text-sm">$12.450,00</td>
+                        <td class="p-8 text-stone-900 font-black italic">{{ $movement->quantity }} UND</td>
+                        <td class="p-8 text-right text-stone-900 font-black text-sm">${{ number_format($movement->quantity * $movement->product->precio_mayor, 2) }}</td>
                     </tr>
-                    <tr class="hover:bg-stone-50/80 transition-colors group border-l-4 border-transparent hover:border-l-primary/40">
-                        <td class="p-8">
-                            <span class="font-black text-stone-900 block mb-1">Bomba Inyección Diésel</span>
-                            <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest font-mono italic">ID: LC-SKU-440122-BY</span>
-                        </td>
-                        <td class="p-8">
-                            <span class="px-3 py-1 bg-stone-100 text-stone-500 text-[9px] font-black rounded-lg uppercase tracking-widest shadow-sm">Clase B</span>
-                        </td>
-                        <td class="p-8">
-                            <div class="flex items-center gap-2 text-stone-300 font-black text-[10px] uppercase italic">
-                                <span class="material-symbols-outlined text-sm">upload</span> SALIDA
-                            </div>
-                        </td>
-                        <td class="p-8 text-stone-900 font-black italic">12 UND</td>
-                        <td class="p-8 text-right text-stone-900 font-black text-sm">$8.900,00</td>
-                    </tr>
+                    @empty
+                    <tr><td colspan="5" class="p-8 text-center text-stone-400 uppercase tracking-widest font-black">No se han registrado movimientos de stock</td></tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

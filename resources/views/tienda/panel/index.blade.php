@@ -49,9 +49,9 @@
             @forelse($recentOrders as $order)
             <tr><td class="px-6 py-4 whitespace-nowrap text-sm">#{{ $order->id }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $order->created_at->format('d/m/Y') }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">$ {{ number_format($order->total_amount, 2) }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">$ {{ number_format($order->total, 2) }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs rounded-full @if($order->status == 'completed') bg-green-100 text-green-800 @elseif($order->status == 'pending') bg-yellow-100 text-yellow-800 @elseif($order->status == 'cancelled') bg-red-100 text-red-800 @else bg-gray-100 text-gray-800 @endif">{{ ucfirst($order->status) }}</span></td>
+                    <span class="px-2 py-1 text-xs rounded-full @if($order->estado == 'Pagado') bg-green-100 text-green-800 @elseif($order->estado == 'Pendiente') bg-yellow-100 text-yellow-800 @elseif($order->estado == 'Cancelado') bg-red-100 text-red-800 @else bg-gray-100 text-gray-800 @endif">{{ $order->estado }}</span></td>
                 <td class="px-6 py-4 whitespace-nowrap"><a href="{{ route('tienda.panel.detalle-orden', $order->id) }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Ver detalles</a></td></tr>
             @empty
             <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No hay ordenes recientes</td></tr>@endforelse

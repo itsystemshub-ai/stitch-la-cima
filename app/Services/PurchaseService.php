@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class PurchaseService
 {
+    protected AccountingService $accountingService;
+
+    public function __construct(AccountingService $accountingService)
+    {
+        $this->accountingService = $accountingService;
+    }
+
     /**
      * Procesar una orden de compra y actualizar inventario.
      */
@@ -30,6 +37,9 @@ class PurchaseService
                 'estado' => 'Recibida',
                 'fecha_recepcion' => now(),
             ]);
+
+            // INTERFAZ CONTABLE: Registro automático del asiento
+            $this->accountingService->registerPurchase($subtotal, $impuesto, $orden->numero_orden);
 
             foreach ($items as $item) {
                 $product = Product::find($item['product_id']);

@@ -11,6 +11,24 @@ use Illuminate\Support\LazyCollection;
 class InventoryService
 {
     /**
+     * Obtener estadísticas clave del inventario.
+     */
+    public function getInventoryStats(): array
+    {
+        return [
+            'total_sku' => Product::where('activo', true)->count(),
+            'low_stock' => Product::where('activo', true)->whereColumn('stock_actual', '<=', 'stock_minimo')->count(),
+            'valuation' => Product::where('activo', true)->sum(DB::raw('stock_actual * costo_compra')),
+            'potential_revenue' => Product::where('activo', true)->sum(DB::raw('stock_actual * precio_mayor')),
+            'recent_movements' => StockMovement::with('product')->latest()->take(5)->get(),
+            'featured_products' => Product::where('activo', true)->where('stock_actual', '>', 0)
+                ->orderByDesc(DB::raw('stock_actual * costo_compra'))
+                ->take(3)
+                ->get(),
+        ];
+    }
+
+    /**
      * Ajuste Manual o Corrección de Stock
      *
      * @param int|string $productId

@@ -217,7 +217,6 @@ class TiendaController extends Controller
                     'impuestos' => $impuesto,
                     'total' => $total,
                     'estado' => 'Pendiente',
-                    'status' => 'pending',
                     'fecha_emision' => now(),
                 ]);
 

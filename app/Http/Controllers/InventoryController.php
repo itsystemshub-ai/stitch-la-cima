@@ -20,23 +20,19 @@ use Spatie\Activitylog\Models\Activity;
 
 class InventoryController extends Controller
 {
+    protected InventoryService $inventoryService;
+
+    public function __construct(InventoryService $inventoryService)
+    {
+        $this->inventoryService = $inventoryService;
+    }
+
     /**
      * Dashboard Principal de Inventario
      */
     public function index()
     {
-        $stats = [
-            'total_sku' => Product::where('activo', true)->count(),
-            'low_stock' => Product::where('activo', true)->whereColumn('stock_actual', '<=', 'stock_minimo')->count(),
-            'valuation' => Product::where('activo', true)->sum(DB::raw('stock_actual * costo_compra')),
-            'potential_revenue' => Product::where('activo', true)->sum(DB::raw('stock_actual * precio_mayor')),
-            'recent_movements' => StockMovement::with('product')->latest()->take(5)->get(),
-            'featured_products' => Product::where('activo', true)->where('stock_actual', '>', 0)
-                ->orderByDesc(DB::raw('stock_actual * costo_compra'))
-                ->take(3)
-                ->get(),
-        ];
-
+        $stats = $this->inventoryService->getInventoryStats();
         return view('erp.inventario.index', compact('stats'));
     }
 
@@ -221,20 +217,20 @@ class InventoryController extends Controller
      */
     public function reportes()
     {
-        return view('erp.inventario.reportes');
-    }
-
-    /**
-     * Auditoría Global del Sistema
-     */
-    public function auditoria()
-    {
-        $activities = Activity::with('causer', 'subject')
+        $valuation = Product::where('activo', true)->sum(DB::raw('stock_actual * precio_mayor'));
+        $critical_items = Product::where('activo', true)
+            ->whereColumn('stock_actual', '<=', 'stock_minimo')
+            ->count();
+        
+        $movements = StockMovement::with('product')
             ->latest()
-            ->paginate(50);
+            ->take(20)
+            ->get();
 
-        return view('erp.inventario.auditoria', compact('activities'));
+        return view('erp.inventario.reportes', compact('valuation', 'critical_items', 'movements'));
     }
+
+
 
     /**
      * API para Búsqueda Inteligente (Usada por Smart Navigator)

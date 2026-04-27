@@ -10,6 +10,13 @@ use Carbon\Carbon;
 
 class HrService
 {
+    protected AccountingService $accountingService;
+
+    public function __construct(AccountingService $accountingService)
+    {
+        $this->accountingService = $accountingService;
+    }
+
     /**
      * Registrar un nuevo empleado.
      */
@@ -28,12 +35,17 @@ class HrService
         $count = 0;
 
         return DB::transaction(function () use ($employees, $period, $userId, &$count) {
+            $periodTotalPagar = 0;
+            $periodTotalDeducciones = 0;
+
             foreach ($employees as $employee) {
-                // Lógica simplificada de nómina
                 $salarioBase = $employee->salario;
-                $bonos = 0; // Se podría extender para capturar bonos variables
-                $deducciones = $salarioBase * 0.04; // Ejemplo: 4% retención ley
+                $bonos = 0; 
+                $deducciones = $salarioBase * 0.04; 
                 $totalPagar = $salarioBase + $bonos - $deducciones;
+
+                $periodTotalPagar += $totalPagar;
+                $periodTotalDeducciones += $deducciones;
 
                 Payroll::updateOrCreate(
                     [
@@ -50,6 +62,11 @@ class HrService
                     ]
                 );
                 $count++;
+            }
+
+            // INTERFAZ CONTABLE: Registro automático de nómina
+            if ($count > 0) {
+                $this->accountingService->registerPayroll($periodTotalPagar, $periodTotalDeducciones, $period);
             }
 
             Notification::create([
