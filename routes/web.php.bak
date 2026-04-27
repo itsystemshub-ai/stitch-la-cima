@@ -187,18 +187,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/tienda/mi-cuenta', [TiendaAuthController::class, 'miCuenta']);
 });
 
-
-// Panel de Usuario (Clientes y Vendedores)
-Route::prefix("tienda/panel")->middleware("auth")->name("tienda.panel.")->group(function () {
-    Route::get("/", [App\Http\Controllers\Tienda\UserPanelController::class, "index"])->name("index");
-    Route::get("/ordenes", [App\Http\Controllers\Tienda\UserPanelController::class, "misOrdenes"])->name("ordenes");
-    Route::get("/orden/{id}", [App\Http\Controllers\Tienda\UserPanelController::class, "detalleOrden"])->name("detalle-orden");
-    Route::get("/perfil", [App\Http\Controllers\Tienda\UserPanelController::class, "miPerfil"])->name("perfil");
-    Route::put("/perfil", [App\Http\Controllers\Tienda\UserPanelController::class, "actualizarPerfil"])->name("perfil.update");
-    Route::get("/canceladas", [App\Http\Controllers\Tienda\UserPanelController::class, "comprasCanceladas"])->name("canceladas");
-    Route::get("/vendedor", [App\Http\Controllers\Tienda\UserPanelController::class, "panelVendedor"])->name("vendedor");
-});
-
 // Auth Routes (ERP + Tienda — Login Único)
 Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/auth/login', [LoginController::class, 'login'])->middleware('throttle:5,1');

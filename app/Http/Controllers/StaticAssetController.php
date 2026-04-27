@@ -30,10 +30,14 @@ class StaticAssetController extends Controller
 
         $file = File::get($realPath);
         $type = $this->getMimeType($realPath);
+        $lastModified = File::lastModified($realPath);
+        $etag = md5_file($realPath);
 
         return Response::make($file, 200)
             ->header('Content-Type', $type)
-            ->header('Cache-Control', 'max-age=86400, public');
+            ->header('Cache-Control', 'max-age=31536000, public') // 1 año para assets estáticos
+            ->header('Last-Modified', gmdate('D, d M Y H:i:s', $lastModified) . ' GMT')
+            ->header('Etag', $etag);
     }
 
     /**

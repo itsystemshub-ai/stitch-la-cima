@@ -1,0 +1,14 @@
+@extends('tienda.panel.layout')
+@section('title', 'Orden ' . $order->id)
+@section('content')
+<div class="max-w-4xl mx-auto"><a href="{{ route('tienda.panel.ordenes') }}" class="text-blue-600 hover:text-blue-800 flex items-center mb-6"><svg class="w-4 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-4 7-4"></path></svg> Volver</a>
+<div class="bg-white rounded-xl shadow-sm border border-gray-100"><div class="p-6 border-b flex justify-between items-center"><div><h2 class="text-2xl font-bold text-gray-800">Orden #{{ $order->id }}</h2><p class="text-gray-600">{{ $order->created_at->format('d/m/Y H:i') }}</p></div>
+@if($order->status == 'completed')<span class="px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800">Completada</span>@elseif($order->status == 'pending')<span class="px-4 py-2 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">Pendiente</span>@elseif($order->status == 'cancelled')<span class="px-4 py-2 rounded-full text-sm font-medium bg-red-100 text-red-800">Cancelada</span>@else<span class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-800">{{ $order->status }}</span>@endif</div>
+<div class="p-6"><h3 class="text-lg font-semibold mb-4">Productos</h3>@foreach($order->items as $item)
+<div class="flex items-center border rounded-lg p-4 mb-4"><div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400 mr-4"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
+<div class="flex-1"><h4 class="font-medium text-gray-900">{{ $item->product->name ?? 'Producto' }}</h4><p class="text-sm text-gray-500">Cantidad: {{ $item->quantity }}</p><p class="text-sm font-medium text-gray-900">$ {{ $item->price }}</p></div><div class="text-right font-medium">$ {{ $item->price * $item->quantity }}</div></div>@endforeach
+<div class="mt-8 pt-6 border-t"><div class="flex justify-between mb-2"><span>Subtotal</span><span>$ {{ $order->total_amount - $order->shipping_cost }}</span></div>
+<div class="flex justify-between mb-2"><span>Envio</span><span>$ {{ $order->shipping_cost }}</span></div>@if($order->discount > 0)
+<div class="flex justify-between mb-2 text-green-600"><span>Descuento</span><span>-$ {{ $order->discount }}</span></div>@endif
+<div class="flex justify-between text-xl font-bold pt-4 border-t"><span>Total</span><span>$ {{ $order->total_amount }}</span></div></div></div></div></div>
+@endsection

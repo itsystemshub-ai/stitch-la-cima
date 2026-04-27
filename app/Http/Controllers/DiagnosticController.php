@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Route;
 
 class DiagnosticController extends Controller
 {
+    public function __construct()
+    {
+        // Solo permitir debug en local o si está explícitamente habilitado en el .env
+        if (app()->environment('production') && !config('app.erp_debug', false)) {
+            abort(403, 'Acceso denegado: Herramientas de diagnóstico deshabilitadas en producción.');
+        }
+    }
+
     /**
      * Semilla rápida para crear un usuario administrador.
      */

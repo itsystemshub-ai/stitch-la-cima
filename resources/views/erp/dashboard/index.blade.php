@@ -140,16 +140,71 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Notificaciones Iniciales
         setTimeout(() => {
-            window.notify('Sistema Zenith v6.0 Online', 'success');
+            if (window.notify) window.notify('Sistema Zenith v6.0 Online', 'success');
         }, 1000);
         
-        // Simular alerta de stock bajo
-        setTimeout(() => {
-            window.notify('Alerta: Stock Crítico en Repuestos de Motor', 'warning');
-        }, 3000);
+        // Datos del gráfico pasados desde el backend
+        const trendData = @json($trendData);
+        
+        const categories = trendData.map(item => item.date);
+        const totals = trendData.map(item => item.total);
+
+        // Configuración de ApexCharts
+        const options = {
+            series: [{
+                name: 'Ventas Diarias',
+                data: totals.length > 0 ? totals : [30, 40, 35, 50, 49, 60, 70, 91, 125]
+            }],
+            chart: {
+                height: 300,
+                type: 'area',
+                toolbar: { show: false },
+                zoom: { enabled: false },
+                fontFamily: 'Inter, sans-serif'
+            },
+            colors: ['#ceff5e'],
+            dataLabels: { enabled: false },
+            stroke: { curve: 'smooth', width: 4 },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.4,
+                    opacityTo: 0.05,
+                    stops: [0, 90, 100]
+                }
+            },
+            xaxis: {
+                categories: categories.length > 0 ? categories : ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                axisBorder: { show: false },
+                axisTicks: { show: false },
+                labels: { style: { colors: '#a8a29e', fontWeight: 600 } }
+            },
+            yaxis: {
+                labels: { 
+                    formatter: (val) => `$${val.toLocaleString()}`,
+                    style: { colors: '#a8a29e', fontWeight: 600 } 
+                }
+            },
+            grid: {
+                borderColor: '#f5f5f4',
+                strokeDashArray: 4,
+                padding: { left: 0, right: 0 }
+            },
+            tooltip: {
+                theme: 'dark',
+                x: { show: true },
+                y: { formatter: (val) => `$${val.toFixed(2)}` }
+            }
+        };
+
+        const chart = new ApexCharts(document.querySelector("#salesTrendChart"), options);
+        chart.render();
     });
 </script>
 @endsection

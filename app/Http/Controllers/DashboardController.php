@@ -67,6 +67,24 @@ class DashboardController extends Controller
             ->limit(4)
             ->get();
 
-        return view('erp.dashboard.index', compact('stats', 'recentOrders'));
+        // Datos para el gráfico de tendencia (Últimos 14 días)
+        $trendData = [];
+        try {
+            if (Schema::hasTable('orders')) {
+                $trendData = Order::select(
+                        DB::raw('DATE(created_at) as date'),
+                        DB::raw('SUM(total) as total')
+                    )
+                    ->where('created_at', '>=', now()->subDays(14))
+                    ->groupBy('date')
+                    ->orderBy('date')
+                    ->get()
+                    ->toArray();
+            }
+        } catch (\Exception $e) {
+            $trendData = [];
+        }
+
+        return view('erp.dashboard.index', compact('stats', 'recentOrders', 'trendData'));
     }
 }
