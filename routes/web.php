@@ -161,6 +161,12 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/estado-sistema', [ConfiguracionController::class, 'estadoSistema'])->name('erp.configuracion.estado-sistema');
         Route::get('/tareas', [ConfiguracionController::class, 'tareas'])->name('erp.configuracion.tareas');
         Route::get('/auditoria', [ConfiguracionController::class, 'auditoria'])->name('erp.configuracion.auditoria');
+        
+        // Módulo Aprobaciones (Integrado en Configuración)
+        Route::prefix('aprobaciones')->group(function () {
+            Route::get('/', [ApprovalController::class, 'index'])->name('erp.aprobaciones.index');
+            Route::post('/{approval}/process', [ApprovalController::class, 'process'])->name('erp.aprobaciones.process');
+        });
     });
 
     // Módulo Finanzas
@@ -171,11 +177,7 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/reportes', [FinanzasController::class, 'reportes'])->name('erp.finanzas.reportes');
     });
 
-    // Módulo Aprobaciones
-    Route::prefix('aprobaciones')->middleware('permiso.modulo:aprobaciones')->group(function () {
-        Route::get('/', [ApprovalController::class, 'index'])->name('erp.aprobaciones.index');
-        Route::post('/{approval}/process', [ApprovalController::class, 'process'])->name('erp.aprobaciones.process');
-    });
+
 
     // Módulo Ayuda
     Route::prefix('ayuda')->middleware('permiso.modulo:ayuda')->group(function () {

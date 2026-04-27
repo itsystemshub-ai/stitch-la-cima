@@ -81,9 +81,6 @@ class SalesService
         });
     }
 
-    /**
-     * Obtener KPIs de ventas.
-     */
     public function getSalesKPIs()
     {
         return [
@@ -94,5 +91,28 @@ class SalesService
             'cuentas_por_cobrar' => Order::where('estado', 'Pendiente')->sum('total'),
             'ticket_promedio' => Order::where('estado', 'Pagado')->avg('total') ?? 0,
         ];
+    }
+
+    /**
+     * Obtener mezcla de categorías más vendidas.
+     */
+    public function getCategoryMix()
+    {
+        if (!\Illuminate\Support\Facades\Schema::hasTable('order_items')) return collect();
+
+        $totalItems = OrderItem::count();
+
+        $mix = OrderItem::join('products', 'order_items.product_id', '=', 'products.id')
+            ->select('products.categoria', DB::raw('count(*) as count'))
+            ->groupBy('products.categoria')
+            ->orderByDesc('count')
+            ->limit(4)
+            ->get();
+
+        foreach ($mix as $item) {
+            $item->percentage = $totalItems > 0 ? round(($item->count / $totalItems) * 100) : 0;
+        }
+
+        return $mix;
     }
 }

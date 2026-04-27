@@ -74,10 +74,10 @@
             <div class="absolute inset-x-0 bottom-0 h-1 bg-primary"></div>
             <p class="text-[10px] font-black text-primary uppercase tracking-widest mb-4 relative z-10">Cuentas por Pagar</p>
             <div class="flex items-baseline gap-2 relative z-10">
-                <span class="text-3xl font-headline font-black text-white">$0.00</span>
+                <span class="text-3xl font-headline font-black text-white">${{ number_format($stats['cuentas_por_pagar'] ?? 0, 2) }}</span>
                 <span class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">USD</span>
             </div>
-            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter mt-4 relative z-10">Sin deudas vencidas</p>
+            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter mt-4 relative z-10">Facturas pendientes</p>
         </div>
     </div>
 
@@ -173,26 +173,35 @@
             <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm">
                 <h3 class="text-[10px] font-black text-stone-900 uppercase tracking-widest mb-6">Alerta de Reposición</h3>
                 <div class="space-y-5">
+                    @forelse($stats['critical_stock'] ?? [] as $low_stock)
                     <div class="relative pt-1">
                         <div class="flex mb-2 items-center justify-between">
-                            <div><span class="text-[9px] font-black inline-block py-1 px-2 uppercase rounded-full text-stone-600 bg-stone-100">Frenos Ventilados</span></div>
-                            <div class="text-right"><span class="text-[10px] font-black inline-block text-red-600 uppercase">Stock Crítico</span></div>
+                            <div><span class="text-[9px] font-black inline-block py-1 px-2 uppercase rounded-full text-stone-600 bg-stone-100 max-w-[150px] truncate">{{ $low_stock->nombre }}</span></div>
+                            <div class="text-right"><span class="text-[10px] font-black inline-block {{ $low_stock->stock_actual == 0 ? 'text-red-600' : 'text-amber-600' }} uppercase">{{ $low_stock->stock_actual }} en stock</span></div>
                         </div>
                         <div class="overflow-hidden h-1.5 mb-4 text-xs flex rounded bg-stone-100">
-                            <div style="width:12%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
+                            <div style="width:{{ $low_stock->stock_minimo > 0 ? min(100, ($low_stock->stock_actual / $low_stock->stock_minimo) * 100) : 0 }}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center {{ $low_stock->stock_actual == 0 ? 'bg-red-500' : 'bg-amber-500' }}"></div>
                         </div>
                     </div>
-                    <div class="relative pt-1">
-                        <div class="flex mb-2 items-center justify-between">
-                            <div><span class="text-[9px] font-black inline-block py-1 px-2 uppercase rounded-full text-stone-600 bg-stone-100">Inyectores C15</span></div>
-                            <div class="text-right"><span class="text-[10px] font-black inline-block text-amber-600 uppercase">Orden Pendiente</span></div>
-                        </div>
-                        <div class="overflow-hidden h-1.5 mb-4 text-xs flex rounded bg-stone-100">
-                            <div style="width:45%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-amber-500"></div>
-                        </div>
-                    </div>
+                    @empty
+                    <p class="text-[10px] text-stone-500 uppercase tracking-widest text-center italic">Inventario estable</p>
+                    @endforelse
                 </div>
-                <button class="w-full mt-6 py-3 border-2 border-stone-900 text-stone-900 text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-stone-900 hover:text-white transition-all active:scale-95">
+                <button onclick="Swal.fire({
+                    title: 'Iniciando Proceso de Emergencia',
+                    text: 'Se enviará una solicitud de aprobación prioritaria a Gerente de Compras. ¿Continuar?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ceff5e',
+                    cancelButtonColor: '#1c1917',
+                    confirmButtonText: 'Sí, enviar solicitud',
+                    cancelButtonText: 'Cancelar',
+                    color: '#1c1917'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('Solicitud Enviada', 'El flujo de aprobación ha sido notificado.', 'success');
+                    }
+                })" class="w-full mt-6 py-3 border-2 border-stone-900 text-stone-900 text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-stone-900 hover:text-white transition-all active:scale-95">
                     Procesar Compra de Emergencia
                 </button>
             </div>

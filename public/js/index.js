@@ -47,15 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function searchProducts() {
-        const year = document.getElementById('searchYear')?.value || '';
         const brand = document.getElementById('searchBrand')?.value || '';
-        const model = document.getElementById('searchModel')?.value || '';
+        const category = document.getElementById('searchCategory')?.value || '';
+        const fabricante = document.getElementById('searchFabricante')?.value || '';
         const quick = document.getElementById('quickSearch')?.value?.trim() || '';
 
         let queryParts = [];
-        if (year) queryParts.push(year);
         if (brand) queryParts.push(brand);
-        if (model) queryParts.push(model);
+        if (category) queryParts.push(category);
+        if (fabricante) queryParts.push(fabricante);
         if (quick) queryParts.push(quick);
 
         if (queryParts.length === 0) {

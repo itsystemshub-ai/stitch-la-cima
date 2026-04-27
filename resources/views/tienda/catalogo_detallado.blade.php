@@ -42,65 +42,77 @@
     <div class="flex flex-col md:flex-row gap-8">
         
         <!-- Sidebar Filters -->
-        <aside class="w-full md:w-72 flex-shrink-0 space-y-8">
-            <div class="bg-white border border-outline p-6 rounded-lg shadow-sm">
-                <h2 class="font-headline text-lg font-bold uppercase tracking-tighter mb-6 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary">filter_list</span>
-                    Filtrado Técnico
-                </h2>
-                <div class="space-y-6">
-                    <div>
-                        <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest">Tipo de Motor</label>
-                        <div class="space-y-2">
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
-                                <span class="text-sm font-medium group-hover:text-primary transition-colors">Diesel V8 Heavy Duty</span>
-                            </label>
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input checked="" class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
-                                <span class="text-sm font-medium group-hover:text-primary transition-colors">Inline 6 Turbo</span>
-                            </label>
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
-                                <span class="text-sm font-medium group-hover:text-primary transition-colors">Gas Turbine Aux</span>
-                            </label>
+        <aside class="w-full md:w-72 flex-shrink-0">
+            <form action="{{ url()->current() }}" method="GET" id="filterForm" class="space-y-8">
+                @if(request('q'))
+                    <input type="hidden" name="q" value="{{ request('q') }}">
+                @endif
+                
+                <div class="bg-white border border-outline p-6 rounded-lg shadow-sm">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-headline text-lg font-bold uppercase tracking-tighter flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">filter_list</span>
+                            Filtrado Técnico
+                        </h2>
+                        @if(request('brands') || request('categories'))
+                            <a href="{{ url()->current() }}{{ request('q') ? '?q='.request('q') : '' }}" class="text-[9px] font-black text-stone-400 hover:text-primary uppercase tracking-widest">Limpiar</a>
+                        @endif
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- Categorías -->
+                        <div>
+                            <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest">Sistemas / Categorías</label>
+                            <div class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                                @forelse($categories as $category)
+                                    <label class="flex items-center gap-3 cursor-pointer group">
+                                        <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" 
+                                               type="checkbox" name="categories[]" value="{{ $category }}"
+                                               {{ is_array(request('categories')) && in_array($category, request('categories')) ? 'checked' : '' }}
+                                               onchange="this.form.submit()"/>
+                                        <span class="text-sm font-medium group-hover:text-primary transition-colors uppercase">{{ $category }}</span>
+                                    </label>
+                                @empty
+                                    <p class="text-[10px] text-stone-400 italic">No hay categorías disponibles</p>
+                                @endforelse
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest text-[#5a5c5e]">Marca / Fabricante</label>
-                        <select class="w-full bg-stone-100 border-none rounded-lg text-sm p-3 focus:ring-2 focus:ring-primary">
-                            <option>Cummins Engine Co.</option>
-                            <option>Volvo Penta</option>
-                            <option>Caterpillar Inc.</option>
-                            <option>Detroit Diesel</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest text-[#5a5c5e]">Tipo de Maquinaria</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button class="p-2 text-xs font-bold border border-outline rounded hover:bg-black hover:text-white transition-all uppercase">Excavator</button>
-                            <button class="p-2 text-xs font-bold border border-outline rounded bg-primary text-black uppercase">Truck</button>
-                            <button class="p-2 text-xs font-bold border border-outline rounded hover:bg-black hover:text-white transition-all uppercase">Marine</button>
-                            <button class="p-2 text-xs font-bold border border-outline rounded hover:bg-black hover:text-white transition-all uppercase">GenSet</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Technical Support Card -->
-            <div class="bg-black text-white p-6 rounded-lg relative overflow-hidden group">
-                <div class="relative z-10">
-                    <h3 class="font-headline text-xl font-black uppercase leading-none mb-2 text-primary">Soporte Técnico</h3>
-                    <p class="text-stone-400 text-xs mb-4">Piezas críticas y asistencia en instalación industrial.</p>
-                    <button class="text-primary text-xs font-bold uppercase flex items-center gap-1 group-hover:gap-2 transition-all">
-                        Hablar con Ingeniero
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </button>
+                        <!-- Marcas -->
+                        <div>
+                            <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest text-[#5a5c5e]">Marcas Disponibles</label>
+                            <div class="space-y-2 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+                                @forelse($brands as $brand)
+                                    <label class="flex items-center gap-3 cursor-pointer group">
+                                        <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" 
+                                               type="checkbox" name="brands[]" value="{{ $brand }}"
+                                               {{ is_array(request('brands')) && in_array($brand, request('brands')) ? 'checked' : '' }}
+                                               onchange="this.form.submit()"/>
+                                        <span class="text-sm font-medium group-hover:text-primary transition-colors uppercase">{{ $brand }}</span>
+                                    </label>
+                                @empty
+                                    <p class="text-[10px] text-stone-400 italic">No hay marcas disponibles</p>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
-                    <span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">engineering</span>
+
+                <!-- Technical Support Card -->
+                <div class="bg-black text-white p-6 rounded-lg relative overflow-hidden group">
+                    <div class="relative z-10">
+                        <h3 class="font-headline text-xl font-black uppercase leading-none mb-2 text-primary">Soporte Técnico</h3>
+                        <p class="text-stone-400 text-xs mb-4">Piezas críticas y asistencia en instalación industrial.</p>
+                        <a href="{{ url('/tienda/contacto') }}" class="text-primary text-xs font-bold uppercase flex items-center gap-1 group-hover:gap-2 transition-all">
+                            Hablar con Ingeniero
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                    <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">engineering</span>
+                    </div>
                 </div>
-            </div>
+            </form>
         </aside>
 
         <!-- Product Listing -->
@@ -111,7 +123,9 @@
                     <h1 class="font-headline text-4xl font-black uppercase tracking-tighter">Catálogo Completo</h1>
                 </div>
                 <div class="text-right w-full sm:w-auto">
-                    <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Mostrando 12 de 842 Items</p>
+                    <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">
+                        Mostrando {{ $products->firstItem() ?? 0 }} - {{ $products->lastItem() ?? 0 }} de {{ $products->total() }} Items
+                    </p>
                     <div class="flex gap-2 mt-2 justify-end">
                         <button id="gridViewBtn" class="view-btn active w-8 h-8 flex items-center justify-center bg-black text-white rounded" onclick="switchToGrid()"><span class="material-symbols-outlined text-sm">grid_view</span></button>
                         <button id="listViewBtn" class="view-btn w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-stone-200 rounded transition-colors" onclick="switchToList()"><span class="material-symbols-outlined text-sm">list</span></button>
@@ -131,20 +145,8 @@
             </div>
 
             <!-- Pagination -->
-            <div class="mt-12 flex justify-center items-center gap-4">
-                <button class="w-10 h-10 flex items-center justify-center rounded border border-outline text-on-surface-variant hover:text-primary hover:border-primary transition-all">
-                    <span class="material-symbols-outlined">chevron_left</span>
-                </button>
-                <div class="flex items-center gap-2">
-                    <button class="w-10 h-10 flex items-center justify-center rounded bg-black text-primary font-bold">1</button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded border border-outline hover:border-primary font-bold">2</button>
-                    <button class="w-10 h-10 flex items-center justify-center rounded border border-outline hover:border-primary font-bold">3</button>
-                    <span class="px-2 text-stone-400">...</span>
-                    <button class="w-10 h-10 flex items-center justify-center rounded border border-outline hover:border-primary font-bold">24</button>
-                </div>
-                <button class="w-10 h-10 flex items-center justify-center rounded border border-outline text-on-surface-variant hover:text-primary hover:border-primary transition-all">
-                    <span class="material-symbols-outlined">chevron_right</span>
-                </button>
+            <div class="mt-12 flex justify-center">
+                {{ $products->links() }}
             </div>
 
             <!-- Technical Compatibility Table -->

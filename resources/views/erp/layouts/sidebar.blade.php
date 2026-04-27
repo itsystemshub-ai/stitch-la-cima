@@ -129,17 +129,7 @@
       </div>
     </div>
 
-    <!-- APROBACIONES -->
-    <div class="menu-parent">
-      <div class="menu-item {{ Request::is('erp/aprobaciones*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
-        <span class="material-symbols-outlined text-[20px]">verified_user</span>
-        <span>Aprobaciones</span>
-        <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
-      </div>
-      <div class="submenu submenu-up {{ Request::is('erp/aprobaciones*') ? 'show' : '' }}">
-        <a href="{{ url('/erp/aprobaciones') }}" class="{{ Request::is('erp/aprobaciones') ? 'active-link' : '' }}"><span class="material-symbols-outlined">gavel</span> Gestión de Aprobaciones</a>
-      </div>
-    </div>
+
 
     <!-- RRHH -->
     <div class="menu-parent">
@@ -175,6 +165,7 @@
         <a href="{{ url('/erp/configuracion/backups') }}" class="{{ Request::is('erp/configuracion/backups*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">backup</span> Backups</a>
         <a href="{{ url('/erp/configuracion/estado-sistema') }}" class="{{ Request::is('erp/configuracion/estado-sistema*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">health_and_safety</span> Estado Sistema</a>
         <a href="{{ url('/erp/configuracion/auditoria') }}" class="{{ Request::is('erp/configuracion/auditoria*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">security</span> Auditoría</a>
+        <a href="{{ url('/erp/configuracion/aprobaciones') }}" class="{{ Request::is('erp/configuracion/aprobaciones*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">verified_user</span> Aprobaciones</a>
         <a href="{{ url('/erp/configuracion/tareas') }}" class="{{ Request::is('erp/configuracion/tareas*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">schedule</span> Tareas</a>
       </div>
     </div>

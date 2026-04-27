@@ -123,7 +123,13 @@
         <p class="text-[9px] text-stone-500 font-black uppercase tracking-[0.2em] mb-3">Último Punto de Restauración</p>
         <div class="flex justify-between items-end">
           <div class="text-stone-300 font-headline font-bold text-lg">DB_ZENITH_PROD_12042026.sql</div>
-          <button class="text-[9px] font-black text-primary uppercase tracking-widest hover:underline border border-primary/30 px-3 py-1 rounded">Restaurar</button>
+          <button onclick="Swal.fire({
+              title: 'Acceso Restringido',
+              text: 'La restauración de base de datos requiere privilegios de Seguridad Nivel 1. Contacte al administrador del sistema.',
+              icon: 'warning',
+              confirmButtonColor: '#1c1917',
+              confirmButtonText: 'Entendido'
+          })" class="text-[9px] font-black text-primary uppercase tracking-widest hover:underline border border-primary/30 px-3 py-1 rounded">Restaurar</button>
         </div>
       </div>
     </div>

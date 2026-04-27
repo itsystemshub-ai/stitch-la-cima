@@ -26,6 +26,7 @@ class VentasController extends Controller
     public function index()
     {
         $stats = $this->salesService->getSalesKPIs();
+        $stats['categoria_mix'] = $this->salesService->getCategoryMix();
 
         $recentOrders = Order::with('customer')
             ->orderByDesc('created_at')

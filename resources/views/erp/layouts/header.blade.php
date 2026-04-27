@@ -69,7 +69,7 @@
             @endforelse
           </div>
           <div class="p-3 bg-stone-50 text-center">
-            <a href="{{ route('erp.inventario.auditoria') }}" class="text-[9px] font-black text-stone-400 hover:text-stone-900 uppercase tracking-widest transition-colors">Ver todo el historial</a>
+            <a href="{{ route('erp.inventario.kardex') }}" class="text-[9px] font-black text-stone-400 hover:text-stone-900 uppercase tracking-widest transition-colors">Ver todo el historial</a>
           </div>
         </div>
       </div>

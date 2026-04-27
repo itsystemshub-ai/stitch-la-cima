@@ -21,7 +21,16 @@
     </div>
     
     <div id="tour-sales-actions" class="flex items-center gap-3">
-      <button class="bg-stone-900 text-white px-5 py-3 rounded-xl flex items-center gap-3 hover:bg-stone-800 transition-all group active:scale-95 shadow-xl shadow-stone-200 border border-stone-800">
+      <button onclick="Swal.fire({
+          title: 'Generando Pronóstico...',
+          text: 'El motor de IA está analizando las tendencias de ventas del último trimestre.',
+          icon: 'info',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          background: '#fff',
+          color: '#1c1917'
+      })" class="bg-stone-900 text-white px-5 py-3 rounded-xl flex items-center gap-3 hover:bg-stone-800 transition-all group active:scale-95 shadow-xl shadow-stone-200 border border-stone-800">
         <span class="material-symbols-outlined text-lg text-primary">analytics</span>
         <span class="text-[10px] font-bold uppercase tracking-widest">Generar Forecast</span>
       </button>
@@ -218,20 +227,20 @@
         </div>
 
         <div class="space-y-4">
+          @php
+              $colors = ['bg-primary', 'bg-stone-900', 'bg-blue-500', 'bg-green-500'];
+          @endphp
+          @forelse($stats['categoria_mix'] as $index => $mix)
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div class="w-2.5 h-2.5 bg-primary rounded-sm"></div>
-              <span class="text-[10px] font-bold text-stone-600 uppercase">Repuestos Cummins</span>
+              <div class="w-2.5 h-2.5 {{ $colors[$index % count($colors)] }} rounded-sm"></div>
+              <span class="text-[10px] font-bold text-stone-600 uppercase">{{ $mix->categoria ?? 'General' }}</span>
             </div>
-            <span class="text-[10px] font-black text-stone-900">45%</span>
+            <span class="text-[10px] font-black text-stone-900">{{ $mix->percentage }}%</span>
           </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-2.5 h-2.5 bg-stone-900 rounded-sm"></div>
-              <span class="text-[10px] font-bold text-stone-600 uppercase">Filtros Volvo</span>
-            </div>
-            <span class="text-[10px] font-black text-stone-900">25%</span>
-          </div>
+          @empty
+          <p class="text-xs text-stone-400 italic">No hay datos de categorias aún.</p>
+          @endforelse
         </div>
       </div>
 
@@ -242,9 +251,30 @@
           <h4 class="text-xs font-black text-primary uppercase tracking-widest mb-2">Soporte Comercial</h4>
           <p class="text-[10px] text-stone-400 font-medium leading-relaxed uppercase">Accede a las herramientas de asistencia técnica avanzada.</p>
         </div>
-        <div class="flex gap-3 mt-6 relative z-10">
-          <button class="flex-1 bg-white/5 border border-white/10 p-3 rounded-xl transition-all text-[9px] font-black uppercase tracking-widest text-white hover:bg-white/10">FAQ</button>
-          <button class="flex-1 bg-primary text-stone-900 p-3 rounded-xl hover:brightness-110 transition-all text-[9px] font-black uppercase tracking-widest">Catálogo</button>
+        <div class="space-y-4 mt-6 relative z-10">
+            <button onclick="Swal.fire({
+                title: 'Generando Pronóstico...',
+                text: 'El motor de IA está analizando las tendencias de ventas del último trimestre.',
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#fff',
+                color: '#1c1917'
+            })" class="w-full bg-stone-900 text-primary py-4 rounded-xl font-headline font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-all flex items-center justify-center gap-3 active:scale-95 shadow-xl shadow-stone-900/10 group">
+                <span class="material-symbols-outlined text-lg group-hover:animate-pulse">insights</span>
+                Generar Forecast
+            </button>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="{{ url('/erp/ayuda') }}" class="flex flex-col items-center justify-center p-4 bg-white border border-stone-200 rounded-xl hover:border-primary transition-all group">
+                    <span class="material-symbols-outlined text-stone-400 group-hover:text-primary transition-colors">help</span>
+                    <span class="text-[9px] font-black text-stone-500 uppercase mt-2">FAQ</span>
+                </a>
+                <a href="{{ url('/erp/ayuda/manual') }}" class="flex flex-col items-center justify-center p-4 bg-white border border-stone-200 rounded-xl hover:border-primary transition-all group">
+                    <span class="material-symbols-outlined text-stone-400 group-hover:text-primary transition-colors">menu_book</span>
+                    <span class="text-[9px] font-black text-stone-500 uppercase mt-2">Catálogo</span>
+                </a>
+            </div>
         </div>
       </div>
     </div>

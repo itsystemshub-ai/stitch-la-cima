@@ -23,7 +23,25 @@ class RrhhController extends Controller
             'empleados_activos' => Employee::where('estatus', 'ACTIVO')->count(),
             'nomina_por_pagar' => Payroll::where('estatus', 'PENDIENTE')->sum('total_pagar'),
         ];
-        return view('erp.rrhh.index', compact('stats'));
+        
+        $recentEmployees = Employee::orderBy('created_at', 'desc')->take(5)->get();
+
+        // Calcular distribución de empleados por departamento
+        $deptMix = Employee::select('departamento', \DB::raw('count(*) as total'))
+            ->groupBy('departamento')
+            ->orderBy('total', 'desc')
+            ->get();
+            
+        // Resumen de Nómina Pendiente
+        $payrollSummary = [
+            'salarios_base' => Payroll::where('estatus', 'PENDIENTE')->sum('salario_base'),
+            'horas_extra' => Payroll::where('estatus', 'PENDIENTE')->sum('horas_extra'),
+            'bonos' => Payroll::where('estatus', 'PENDIENTE')->sum('bonos'),
+            'deducciones' => Payroll::where('estatus', 'PENDIENTE')->sum('deducciones'),
+            'total_neto' => Payroll::where('estatus', 'PENDIENTE')->sum('total_pagar'),
+        ];
+
+        return view('erp.rrhh.index', compact('stats', 'recentEmployees', 'deptMix', 'payrollSummary'));
     }
 
     public function empleados()

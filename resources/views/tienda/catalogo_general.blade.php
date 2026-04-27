@@ -47,6 +47,7 @@
               >Explorar Catálogo</a
             >
             <button
+              onclick="showNotification('Especificaciones técnicas en preparación')"
               class="border border-white text-white font-black uppercase py-5 px-10 tracking-[0.2em] text-xs hover:bg-white/10 transition-all"
             >
               Especificaciones Técnicas
@@ -88,36 +89,28 @@
           </p>
         </div>
         <div class="flex gap-4 overflow-x-auto pb-4 w-full md:w-auto">
-          <button
-            onclick="filterProducts('all')"
-            class="filter-btn whitespace-nowrap px-8 py-3 bg-black text-primary text-xs font-black uppercase tracking-[0.2em]"
+          <a
+            href="{{ url('/tienda/catalogo_general') }}"
+            class="whitespace-nowrap px-8 py-3 {{ !request('marca') && !request('categoria') ? 'bg-black text-primary' : 'bg-white border border-outline text-black' }} text-xs font-black uppercase tracking-[0.2em]"
           >
             Todos
-          </button>
-          <button
-            onclick="filterProducts('cummins')"
-            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
-          >
-            Cummins
-          </button>
-          <button
-            onclick="filterProducts('volvo')"
-            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
-          >
-            Volvo
-          </button>
-          <button
-            onclick="filterProducts('detroit')"
-            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
-          >
-            Detroit
-          </button>
-          <button
-            onclick="filterProducts('toyota')"
-            class="filter-btn whitespace-nowrap px-8 py-3 bg-white border border-outline text-black text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
-          >
-            Toyota
-          </button>
+          </a>
+          @foreach($brands as $brand)
+            <a
+              href="{{ url('/tienda/catalogo_general') }}?marca={{ urlencode($brand) }}"
+              class="whitespace-nowrap px-8 py-3 {{ request('marca') == $brand ? 'bg-black text-primary' : 'bg-white border border-outline text-black' }} text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+            >
+              {{ $brand }}
+            </a>
+          @endforeach
+          @foreach($categories as $category)
+            <a
+              href="{{ url('/tienda/catalogo_general') }}?categoria={{ urlencode($category) }}"
+              class="whitespace-nowrap px-8 py-3 {{ request('categoria') == $category ? 'bg-black text-primary' : 'bg-white border border-outline text-black' }} text-xs font-black uppercase tracking-[0.2em] hover:bg-primary transition-colors"
+            >
+              {{ $category }}
+            </a>
+          @endforeach
         </div>
       </div>
 

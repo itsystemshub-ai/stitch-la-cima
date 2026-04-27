@@ -31,7 +31,10 @@ class TiendaController extends Controller
             ->take(8)
             ->get();
 
-        return view('tienda.index', compact('featuredProducts'));
+        $brands = Product::where('activo', true)->whereNotNull('marca')->distinct()->pluck('marca')->sort();
+        $categories = Product::where('activo', true)->whereNotNull('categoria')->distinct()->pluck('categoria')->sort();
+
+        return view('tienda.index', compact('featuredProducts', 'brands', 'categories'));
     }
 
     /**
@@ -51,9 +54,23 @@ class TiendaController extends Controller
             });
         }
 
-        $products = $query->orderBy('nombre')->paginate(24);
+        // Filtro por Marcas
+        if ($request->has('marca')) {
+            $query->where('marca', $request->marca);
+        }
 
-        return view('tienda.catalogo_general', compact('products'));
+        // Filtro por Categorías (pueden venir de los botones de la landing)
+        if ($request->has('categoria')) {
+            $query->where('categoria', $request->categoria);
+        }
+
+        $products = $query->orderBy('nombre')->paginate(24)->withQueryString();
+
+        // Obtener marcas y categorías para los botones de filtrado rápido
+        $brands = Product::where('activo', true)->whereNotNull('marca')->distinct()->pluck('marca')->take(6);
+        $categories = Product::where('activo', true)->whereNotNull('categoria')->distinct()->pluck('categoria')->take(6);
+
+        return view('tienda.catalogo_general', compact('products', 'brands', 'categories'));
     }
 
     /**
@@ -63,7 +80,7 @@ class TiendaController extends Controller
     {
         $query = Product::where('activo', true);
 
-        // Búsqueda simple par las redirecciones del JS
+        // Búsqueda simple
         if ($request->has('q')) {
             $searchTerm = $request->q;
             $query->where(function ($q) use ($searchTerm) {
@@ -73,9 +90,23 @@ class TiendaController extends Controller
             });
         }
 
-        $products = $query->paginate(20);
+        // Filtro por Marcas (pueden ser múltiples)
+        if ($request->has('brands') && is_array($request->brands)) {
+            $query->whereIn('marca', $request->brands);
+        }
 
-        return view('tienda.catalogo_detallado', compact('products'));
+        // Filtro por Categorías (pueden ser múltiples)
+        if ($request->has('categories') && is_array($request->categories)) {
+            $query->whereIn('categoria', $request->categories);
+        }
+
+        $products = $query->paginate(20)->withQueryString();
+
+        // Obtener marcas y categorías únicas para los filtros laterales
+        $brands = Product::where('activo', true)->whereNotNull('marca')->distinct()->pluck('marca')->sort();
+        $categories = Product::where('activo', true)->whereNotNull('categoria')->distinct()->pluck('categoria')->sort();
+
+        return view('tienda.catalogo_detallado', compact('products', 'brands', 'categories'));
     }
 
     /**

@@ -67,10 +67,12 @@ class PurchaseService
     public function getPurchaseKPIs()
     {
         return [
-            'compras_mes' => PurchaseOrder::whereMonth('created_at', now()->month)->sum('total'),
-            'compras_anio' => PurchaseOrder::whereYear('created_at', now()->year)->sum('total'),
+            'compras_mes' => PurchaseOrder::whereMonth('created_at', now()->month)->where('estado', '!=', 'Anulada')->sum('total'),
+            'compras_anio' => PurchaseOrder::whereYear('created_at', now()->year)->where('estado', '!=', 'Anulada')->sum('total'),
             'proveedores_activos' => \App\Models\Supplier::count(),
             'ordenes_pendientes' => PurchaseOrder::where('estado', 'Pendiente')->count(),
+            'cuentas_por_pagar' => PurchaseOrder::where('estado', 'Pendiente')->orWhere('estado', 'Recibida_No_Pagada')->sum('total'), // Simplified logic
+            'critical_stock' => Product::whereColumn('stock_actual', '<=', 'stock_minimo')->where('activo', true)->orderBy('stock_actual')->limit(3)->get()
         ];
     }
 }

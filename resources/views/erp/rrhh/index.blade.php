@@ -119,107 +119,35 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-stone-100">
+        @forelse($recentEmployees as $empleado)
         <tr class="hover:bg-stone-50 transition-colors">
           <td class="py-3">
             <div class="flex items-center gap-3">
-              <div class="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-xs font-bold">
-                JP
+              <div class="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-xs font-bold font-headline">
+                {{ strtoupper(substr($empleado->nombre, 0, 1) . substr($empleado->apellido, 0, 1)) }}
               </div>
               <div>
-                <p class="text-sm font-bold text-stone-900">Juan Pérez</p>
-                <p class="text-[10px] text-stone-500">V-12345678</p>
+                <p class="text-sm font-bold text-stone-900">{{ $empleado->nombre }} {{ $empleado->apellido }}</p>
+                <p class="text-[10px] text-stone-500">{{ $empleado->cedula }}</p>
               </div>
             </div>
           </td>
-          <td class="py-3 text-stone-600 text-sm">Ventas</td>
-          <td class="py-3 text-stone-600 text-sm">Vendedor Senior</td>
-          <td class="py-3 text-right font-bold text-stone-900">$1,500</td>
+          <td class="py-3 text-stone-600 text-sm italic">{{ $empleado->departamento ?? 'General' }}</td>
+          <td class="py-3 text-stone-600 text-sm font-medium">{{ $empleado->cargo ?? 'Técnico' }}</td>
+          <td class="py-3 text-right font-black text-stone-900">${{ number_format($empleado->salario, 2) }}</td>
           <td class="py-3 text-center">
-            <span class="badge badge-green">Activo</span>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest {{ $empleado->estatus == 'ACTIVO' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                {{ $empleado->estatus }}
+            </span>
           </td>
         </tr>
-        <tr class="hover:bg-stone-50 transition-colors">
-          <td class="py-3">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-xs font-bold">
-                MG
-              </div>
-              <div>
-                <p class="text-sm font-bold text-stone-900">
-                  María González
-                </p>
-                <p class="text-[10px] text-stone-500">V-87654321</p>
-              </div>
-            </div>
-          </td>
-          <td class="py-3 text-stone-600 text-sm">Almacén</td>
-          <td class="py-3 text-stone-600 text-sm">Almacenista</td>
-          <td class="py-3 text-right font-bold text-stone-900">$1,200</td>
-          <td class="py-3 text-center">
-            <span class="badge badge-green">Activo</span>
-          </td>
+        @empty
+        <tr>
+            <td colspan="5" class="py-12 text-center text-stone-400 italic text-sm">
+                No hay personal registrado recientemente.
+            </td>
         </tr>
-        <tr class="hover:bg-stone-50 transition-colors">
-          <td class="py-3">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-xs font-bold">
-                PR
-              </div>
-              <div>
-                <p class="text-sm font-bold text-stone-900">
-                  Pedro Ramírez
-                </p>
-                <p class="text-[10px] text-stone-500">V-11223344</p>
-              </div>
-            </div>
-          </td>
-          <td class="py-3 text-stone-600 text-sm">Contabilidad</td>
-          <td class="py-3 text-stone-600 text-sm">Contador</td>
-          <td class="py-3 text-right font-bold text-stone-900">$2,000</td>
-          <td class="py-3 text-center">
-            <span class="badge badge-green">Activo</span>
-          </td>
-        </tr>
-        <tr class="hover:bg-stone-50 transition-colors">
-          <td class="py-3">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-xs font-bold">
-                AL
-              </div>
-              <div>
-                <p class="text-sm font-bold text-stone-900">Ana López</p>
-                <p class="text-[10px] text-stone-500">V-55667788</p>
-              </div>
-            </div>
-          </td>
-          <td class="py-3 text-stone-600 text-sm">RRHH</td>
-          <td class="py-3 text-stone-600 text-sm">Gerente RRHH</td>
-          <td class="py-3 text-right font-bold text-stone-900">$2,500</td>
-          <td class="py-3 text-center">
-            <span class="badge badge-green">Activo</span>
-          </td>
-        </tr>
-        <tr class="hover:bg-stone-50 transition-colors">
-          <td class="py-3">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 bg-stone-200 rounded-full flex items-center justify-center text-xs font-bold">
-                CD
-              </div>
-              <div>
-                <p class="text-sm font-bold text-stone-900">
-                  Carlos Díaz
-                </p>
-                <p class="text-[10px] text-stone-500">V-99887766</p>
-              </div>
-            </div>
-          </td>
-          <td class="py-3 text-stone-600 text-sm">Servicio Técnico</td>
-          <td class="py-3 text-stone-600 text-sm">Técnico</td>
-          <td class="py-3 text-right font-bold text-stone-900">$1,300</td>
-          <td class="py-3 text-center">
-            <span class="badge badge-yellow">Vacaciones</span>
-          </td>
-        </tr>
+        @endforelse
       </tbody>
     </table>
   </div>
@@ -242,42 +170,22 @@
     </div>
 
     <div class="space-y-4">
+      @php
+          $colors = ['bg-blue-500', 'bg-green-500', 'bg-amber-500', 'bg-purple-500', 'bg-red-500', 'bg-teal-500'];
+      @endphp
+      @forelse($deptMix as $index => $dept)
       <div>
         <div class="flex justify-between items-center mb-2">
-          <span class="text-sm font-medium text-stone-700">Ventas</span>
-          <span class="text-sm font-bold text-stone-900">8 empleados</span>
+          <span class="text-sm font-medium text-stone-700">{{ $dept->departamento ?? 'General' }}</span>
+          <span class="text-sm font-bold text-stone-900">{{ $dept->total }} empleados</span>
         </div>
         <div class="w-full bg-stone-100 rounded-full h-3">
-          <div class="bg-blue-500 h-3 rounded-full" style="width: 33%"></div>
+          <div class="{{ $colors[$index % count($colors)] }} h-3 rounded-full" style="width: {{ $stats['total_empleados'] > 0 ? ($dept->total / $stats['total_empleados']) * 100 : 0 }}%"></div>
         </div>
       </div>
-      <div>
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-sm font-medium text-stone-700">Almacén</span>
-          <span class="text-sm font-bold text-stone-900">6 empleados</span>
-        </div>
-        <div class="w-full bg-stone-100 rounded-full h-3">
-          <div class="bg-green-500 h-3 rounded-full" style="width: 25%"></div>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-sm font-medium text-stone-700">Contabilidad</span>
-          <span class="text-sm font-bold text-stone-900">4 empleados</span>
-        </div>
-        <div class="w-full bg-stone-100 rounded-full h-3">
-          <div class="bg-amber-500 h-3 rounded-full" style="width: 17%"></div>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-sm font-medium text-stone-700">RRHH</span>
-          <span class="text-sm font-bold text-stone-900">3 empleados</span>
-        </div>
-        <div class="w-full bg-stone-100 rounded-full h-3">
-          <div class="bg-purple-500 h-3 rounded-full" style="width: 12%"></div>
-        </div>
-      </div>
+      @empty
+      <p class="text-sm text-stone-500 italic">No hay departamentos registrados.</p>
+      @endforelse
     </div>
   </div>
 
@@ -298,23 +206,23 @@
     <div class="space-y-3">
       <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
         <span class="text-sm font-medium text-stone-700">Salarios Base</span>
-        <span class="text-sm font-bold text-stone-900">$30,000</span>
+        <span class="text-sm font-bold text-stone-900">${{ number_format($payrollSummary['salarios_base'], 2) }}</span>
       </div>
       <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
         <span class="text-sm font-medium text-stone-700">Horas Extra</span>
-        <span class="text-sm font-bold text-stone-900">$2,500</span>
+        <span class="text-sm font-bold text-stone-900">${{ number_format($payrollSummary['horas_extra'], 2) }}</span>
       </div>
       <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
-        <span class="text-sm font-medium text-stone-700">Cesta Ticket</span>
-        <span class="text-sm font-bold text-stone-900">$3,500</span>
+        <span class="text-sm font-medium text-stone-700">Bonos / Cesta Ticket</span>
+        <span class="text-sm font-bold text-stone-900">${{ number_format($payrollSummary['bonos'], 2) }}</span>
       </div>
       <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
         <span class="text-sm font-medium text-stone-700">Deducciones (IVSS, FAOV)</span>
-        <span class="text-sm font-bold text-red-700">-$4,200</span>
+        <span class="text-sm font-bold text-red-700">-${{ number_format($payrollSummary['deducciones'], 2) }}</span>
       </div>
       <div class="border-t border-stone-200 pt-4 flex justify-between items-center">
-        <span class="text-sm font-bold text-stone-900">Total Nómina</span>
-        <span class="text-lg font-headline font-bold text-green-700">$36,000</span>
+        <span class="text-sm font-bold text-stone-900">Total Nómina P.</span>
+        <span class="text-lg font-headline font-bold text-green-700">${{ number_format($payrollSummary['total_neto'], 2) }}</span>
       </div>
     </div>
   </div>

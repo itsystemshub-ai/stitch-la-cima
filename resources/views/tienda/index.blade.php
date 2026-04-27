@@ -29,37 +29,29 @@
 <div class="bg-white p-1 rounded-xl shadow-2xl">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-outline rounded-lg overflow-hidden">
 <div class="bg-white p-4">
-<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Año</label>
-<select id="searchYear" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
-<option value="">Seleccionar Año</option>
-<option value="2024">2024</option>
-<option value="2023">2023</option>
-<option value="2022">2022</option>
-<option value="2021">2021</option>
-</select>
-</div>
-<div class="bg-white p-4">
-<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Marca / Fabricante</label>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Marca</label>
 <select id="searchBrand" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
 <option value="">Seleccionar Marca</option>
-<option value="Toyota">Toyota</option>
-<option value="Caterpillar">Caterpillar</option>
-<option value="Cummins">Cummins</option>
-<option value="Volvo">Volvo</option>
-<option value="Detroit Diesel">Detroit Diesel</option>
-<option value="Ford">Ford</option>
+@foreach($brands as $brand)
+<option value="{{ $brand }}">{{ $brand }}</option>
+@endforeach
 </select>
 </div>
 <div class="bg-white p-4">
-<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Modelo</label>
-<select id="searchModel" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
-<option value="">Seleccionar Modelo</option>
-<option value="Hilux">Hilux</option>
-<option value="Corolla">Corolla</option>
-<option value="F-150">F-150</option>
-<option value="C15">C15</option>
-<option value="D13">D13</option>
-<option value="DD15">DD15</option>
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Categoría</label>
+<select id="searchCategory" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
+<option value="">Seleccionar Categoría</option>
+@foreach($categories as $category)
+<option value="{{ $category }}">{{ $category }}</option>
+@endforeach
+</select>
+</div>
+<div class="bg-white p-4">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Fabricante</label>
+<select id="searchFabricante" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
+<option value="">Seleccionar Fabricante</option>
+<option value="OEM">OEM</option>
+<option value="Aftermarket">Aftermarket</option>
 </select>
 </div>
 <div onclick="searchProducts()" class="bg-primary p-4 flex items-center justify-center cursor-pointer hover:bg-primary-dim transition-colors group">
@@ -75,11 +67,11 @@
 </div>
 </div>
 <div class="flex items-center gap-6">
-<button class="flex items-center gap-2 text-[10px] font-bold text-stone-500 uppercase hover:text-black">
+<button onclick="showNotification('Catálogo PDF en preparación')" class="flex items-center gap-2 text-[10px] font-bold text-stone-500 uppercase hover:text-black">
 <span class="material-symbols-outlined text-sm">description</span>
                                 Catálogo PDF
                             </button>
-<button class="flex items-center gap-2 text-[10px] font-bold text-stone-500 uppercase hover:text-black">
+<button onclick="window.location.href='{{ url('/tienda/catalogo_detallado') }}'" class="flex items-center gap-2 text-[10px] font-bold text-stone-500 uppercase hover:text-black">
 <span class="material-symbols-outlined text-sm">settings_suggest</span>
                                 Filtro Avanzado
                             </button>
