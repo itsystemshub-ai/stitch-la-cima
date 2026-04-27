@@ -31,13 +31,12 @@
       <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
         <span class="material-symbols-outlined text-blue-600">groups</span>
       </div>
-      <span class="badge badge-green">+2</span>
     </div>
     <p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">
       Empleados Activos
     </p>
-    <p class="text-2xl font-headline font-bold text-stone-900 mt-1">24</p>
-    <p class="text-xs text-stone-500 mt-1">Personal registrado</p>
+    <p class="text-2xl font-headline font-bold text-stone-900 mt-1">{{ $stats['empleados_activos'] }}</p>
+    <p class="text-xs text-stone-500 mt-1">Personal operativo</p>
   </div>
 
   <div class="kpi-card">
@@ -45,63 +44,32 @@
       <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
         <span class="material-symbols-outlined text-green-600">payments</span>
       </div>
-      <span class="badge badge-green">+5%</span>
     </div>
     <p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">
-      Nómina Mensual
+      Pendiente por Pagar
     </p>
     <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
-      $36,000
+      ${{ number_format($stats['nomina_por_pagar'], 2) }}
     </p>
-    <p class="text-xs text-stone-500 mt-1">Total salarios</p>
-  </div>
-
-  <div class="kpi-card">
-    <div class="flex items-center justify-between mb-3">
-      <div class="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center">
-        <span class="material-symbols-outlined text-amber-600">calendar_month</span>
-      </div>
-      <span class="badge badge-yellow">3</span>
-    </div>
-    <p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">
-      Vacaciones Pendientes
-    </p>
-    <p class="text-2xl font-headline font-bold text-stone-900 mt-1">3</p>
-    <p class="text-xs text-stone-500 mt-1">Por aprobar</p>
-  </div>
-
-  <div class="kpi-card">
-    <div class="flex items-center justify-between mb-3">
-      <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
-        <span class="material-symbols-outlined text-purple-600">emoji_events</span>
-      </div>
-      <span class="badge badge-green">95%</span>
-    </div>
-    <p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">
-      Asistencia Promedio
-    </p>
-    <p class="text-2xl font-headline font-bold text-stone-900 mt-1">
-      95%
-    </p>
-    <p class="text-xs text-stone-500 mt-1">Este mes</p>
+    <p class="text-xs text-stone-500 mt-1">Nómina generada</p>
   </div>
 </div>
 
 <!-- Action Buttons -->
-<div id="tour-hr-actions" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-  <a href="{{ url('/erp/rrhh/empleados') }}" class="action-btn bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20">
+<div id="tour-hr-actions" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+  <a href="{{ route('erp.rrhh.empleados') }}" class="action-btn bg-primary text-stone-900 hover:brightness-110 shadow-lg shadow-primary/20">
     <span class="material-symbols-outlined text-2xl">person</span>
     <span class="text-center leading-tight">Empleados</span>
   </a>
-  <a href="{{ url('/erp/rrhh/nomina') }}" class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
+  <a href="{{ route('erp.rrhh.nomina') }}" class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
     <span class="material-symbols-outlined text-2xl">payments</span>
     <span class="text-center leading-tight">Nómina</span>
   </a>
-  <a href="{{ url('/erp/rrhh/prestaciones') }}" class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
+  <a href="{{ route('erp.rrhh.prestaciones') }}" class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
     <span class="material-symbols-outlined text-2xl">savings</span>
     <span class="text-center leading-tight">Prestaciones</span>
   </a>
-  <a href="{{ url('/erp/rrhh/reportes') }}" class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
+  <a href="{{ route('erp.rrhh.reportes') }}" class="action-btn bg-white border border-stone-200 text-stone-700 hover:border-primary hover:bg-primary/5">
     <span class="material-symbols-outlined text-2xl">group_work</span>
     <span class="text-center leading-tight">Reportes</span>
   </a>

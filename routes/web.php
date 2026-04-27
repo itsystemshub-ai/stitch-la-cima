@@ -118,7 +118,9 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     Route::prefix('rrhh')->middleware('permiso.modulo:rrhh')->group(function () {
         Route::get('/', [RrhhController::class, 'index'])->name('erp.rrhh.index');
         Route::get('/empleados', [RrhhController::class, 'empleados'])->name('erp.rrhh.empleados');
+        Route::post('/empleados', [RrhhController::class, 'storeEmpleado'])->name('erp.rrhh.empleados.store');
         Route::get('/nomina', [RrhhController::class, 'nomina'])->name('erp.rrhh.nomina');
+        Route::post('/nomina/generate', [RrhhController::class, 'generateNomina'])->name('erp.rrhh.nomina.generate');
         Route::get('/prestaciones', [RrhhController::class, 'prestaciones'])->name('erp.rrhh.prestaciones');
         Route::get('/portal-empleado', [RrhhController::class, 'portalEmpleado'])->name('erp.rrhh.portal-empleado');
         Route::get('/rendimiento', [RrhhController::class, 'rendimiento'])->name('erp.rrhh.rendimiento');

@@ -131,20 +131,16 @@
 
             <div class="space-y-4">
                 <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-                    <span class="text-sm font-medium text-stone-700">Ingresos por Ventas</span>
-                    <span class="text-sm font-bold text-green-700">${{ number_format($stats['ingresos_mes'], 2) }}</span>
+                    <span class="text-sm font-medium text-stone-700">Ingresos Totales</span>
+                    <span class="text-sm font-bold text-green-700">${{ number_format($balances['ingresos'], 2) }}</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
-                    <span class="text-sm font-medium text-stone-700">Costo de Ventas</span>
-                    <span class="text-sm font-bold text-red-700">(${{ number_format($stats['gastos_mes'], 2) }})</span>
-                </div>
-                <div class="flex justify-between items-center p-3 bg-stone-50 rounded-lg">
-                    <span class="text-sm font-medium text-stone-700">Gastos Operativos</span>
-                    <span class="text-sm font-bold text-stone-700">($20,000)</span>
+                    <span class="text-sm font-medium text-stone-700">Gastos Totales</span>
+                    <span class="text-sm font-bold text-red-700">(${{ number_format($balances['egresos'], 2) }})</span>
                 </div>
                 <div class="border-t border-stone-200 pt-4 flex justify-between items-center">
                     <span class="text-sm font-bold text-stone-900">Utilidad Neta</span>
-                    <span class="text-lg font-headline font-bold text-green-700">${{ number_format($stats['utilidad_neta'], 2) }}</span>
+                    <span class="text-lg font-headline font-bold text-green-700">${{ number_format($balances['ingresos'] - $balances['egresos'], 2) }}</span>
                 </div>
             </div>
         </div>
@@ -157,26 +153,28 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-bold text-stone-900">Balance General</h3>
-                    <p class="text-xs text-stone-500">Al cierre del mes</p>
+                    <p class="text-xs text-stone-500">Saldo acumulado</p>
                 </div>
             </div>
 
             <div class="space-y-4">
                 <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
                     <span class="text-sm font-medium text-stone-700">Activos Totales</span>
-                    <span class="text-sm font-bold text-blue-700">$450,000</span>
+                    <span class="text-sm font-bold text-blue-700">${{ number_format($balances['activo'], 2) }}</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-amber-50 rounded-lg">
                     <span class="text-sm font-medium text-stone-700">Pasivos Totales</span>
-                    <span class="text-sm font-bold text-amber-700">$180,000</span>
+                    <span class="text-sm font-bold text-amber-700">${{ number_format($balances['pasivo'], 2) }}</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
                     <span class="text-sm font-medium text-stone-700">Patrimonio</span>
-                    <span class="text-sm font-bold text-green-700">$270,000</span>
+                    <span class="text-sm font-bold text-green-700">${{ number_format($balances['patrimonio'], 2) }}</span>
                 </div>
                 <div class="border-t border-stone-200 pt-4 flex justify-between items-center">
-                    <span class="text-sm font-bold text-stone-900">A = P + Pt</span>
-                    <span class="text-lg font-headline font-bold text-green-700">✓ Balanceado</span>
+                    <span class="text-sm font-bold text-stone-900">Ecuación Patrimonial</span>
+                    <span class="text-lg font-headline font-bold {{ abs($balances['activo'] - ($balances['pasivo'] + $balances['patrimonio'])) < 0.01 ? 'text-green-700' : 'text-red-600' }}">
+                        {{ abs($balances['activo'] - ($balances['pasivo'] + $balances['patrimonio'])) < 0.01 ? '✓ Balanceado' : '✗ Desbalanceado' }}
+                    </span>
                 </div>
             </div>
         </div>
@@ -207,32 +205,28 @@
                         <th class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-left">Asiento</th>
                         <th class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-left">Fecha</th>
                         <th class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-left">Descripción</th>
-                        <th class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-right">Débito</th>
-                        <th class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-right">Crédito</th>
+                        <th class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-right">Monto</th>
+                        <th class="text-xs font-bold text-stone-500 uppercase tracking-wider pb-3 text-center">Estado</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-100">
+                    @forelse($stats['asientos_recientes'] as $asiento)
                     <tr class="hover:bg-stone-50 transition-colors">
-                        <td class="py-3 text-stone-500 font-mono text-xs">AE-001</td>
-                        <td class="py-3 text-stone-600 text-sm">01/04/2026</td>
-                        <td class="py-3 font-medium text-stone-900">Registro de ventas del día</td>
-                        <td class="py-3 text-right font-bold text-stone-900">$15,000</td>
-                        <td class="py-3 text-right font-bold text-stone-900">$15,000</td>
+                        <td class="py-3 text-stone-500 font-mono text-xs">AE-{{ str_pad($asiento->id, 5, '0', STR_PAD_LEFT) }}</td>
+                        <td class="py-3 text-stone-600 text-sm">{{ $asiento->fecha }}</td>
+                        <td class="py-3 font-medium text-stone-900">{{ $asiento->concepto }}</td>
+                        <td class="py-3 text-right font-bold text-stone-900">${{ number_format($asiento->total_debe, 2) }}</td>
+                        <td class="py-3 text-center">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase {{ $asiento->estado === 'CONTABILIZADO' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                {{ $asiento->estado }}
+                            </span>
+                        </td>
                     </tr>
-                    <tr class="hover:bg-stone-50 transition-colors">
-                        <td class="py-3 text-stone-500 font-mono text-xs">AE-002</td>
-                        <td class="py-3 text-stone-600 text-sm">02/04/2026</td>
-                        <td class="py-3 font-medium text-stone-900">Pago a proveedores</td>
-                        <td class="py-3 text-right font-bold text-stone-900">$8,500</td>
-                        <td class="py-3 text-right font-bold text-stone-900">$8,500</td>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="py-10 text-center text-stone-500">No hay asientos recientes.</td>
                     </tr>
-                    <tr class="hover:bg-stone-50 transition-colors">
-                        <td class="py-3 text-stone-500 font-mono text-xs">AE-003</td>
-                        <td class="py-3 text-stone-600 text-sm">03/04/2026</td>
-                        <td class="py-3 font-medium text-stone-900">Depreciación mensual</td>
-                        <td class="py-3 text-right font-bold text-stone-900">$2,500</td>
-                        <td class="py-3 text-right font-bold text-stone-900">$2,500</td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

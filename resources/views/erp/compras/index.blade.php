@@ -35,25 +35,24 @@
         <div class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm relative overflow-hidden group hover:border-primary/50 transition-all">
             <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Gasto Mensual (Neto)</p>
             <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">$45,200</span>
-                <span class="text-[10px] font-bold text-stone-400 uppercase">USD</span>
+                <span class="text-3xl font-headline font-black text-stone-900">${{ number_format($stats['compras_mes'], 2) }}</span>
+                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">USD</span>
             </div>
             <div class="mt-4 flex items-center gap-2">
-                <span class="flex items-center text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12.4%</span>
-                <span class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">vs periodo anterior</span>
+                <span class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">Periodo Actual</span>
             </div>
         </div>
 
         <!-- Orders in Progress -->
         <div class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm relative overflow-hidden group hover:border-primary/50 transition-all">
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Órdenes Activas</p>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Órdenes Pendientes</p>
             <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">03</span>
-                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">En Tránsito</span>
+                <span class="text-3xl font-headline font-black text-stone-900">{{ str_pad($stats['ordenes_pendientes'], 2, '0', STR_PAD_LEFT) }}</span>
+                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Activas</span>
             </div>
             <div class="mt-4">
                 <div class="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-primary h-full w-[65%]"></div>
+                    <div class="bg-primary h-full w-[25%]"></div>
                 </div>
             </div>
         </div>
@@ -62,11 +61,11 @@
         <div class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm relative overflow-hidden group hover:border-primary/50 transition-all">
             <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Cartera de Aliados</p>
             <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">12</span>
+                <span class="text-3xl font-headline font-black text-stone-900">{{ $stats['proveedores_activos'] }}</span>
                 <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Proveedores</span>
             </div>
             <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter mt-4 flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> 92% Nivel de Cumplimiento
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Gestión Centralizada
             </p>
         </div>
 
@@ -75,35 +74,35 @@
             <div class="absolute inset-x-0 bottom-0 h-1 bg-primary"></div>
             <p class="text-[10px] font-black text-primary uppercase tracking-widest mb-4 relative z-10">Cuentas por Pagar</p>
             <div class="flex items-baseline gap-2 relative z-10">
-                <span class="text-3xl font-headline font-black text-white">$12,840</span>
-                <span class="text-[10px] font-bold text-stone-500 uppercase">USD</span>
+                <span class="text-3xl font-headline font-black text-white">$0.00</span>
+                <span class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">USD</span>
             </div>
-            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter mt-4 relative z-10">Próximo Vencimiento: 15 ABR</p>
+            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter mt-4 relative z-10">Sin deudas vencidas</p>
         </div>
     </div>
 
     <!-- Purchases Quick Actions Overlay -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
         <a href="{{ url('/erp/compras/proveedores') }}" class="group bg-white border border-stone-200 p-5 rounded-2xl flex flex-col items-center gap-3 hover:border-primary transition-all shadow-sm">
-            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all">
+            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all text-sm">
                 <span class="material-symbols-outlined text-2xl">local_shipping</span>
             </div>
             <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Proveedores</span>
         </a>
         <a href="{{ url('/erp/compras/historial') }}" class="group bg-white border border-stone-200 p-5 rounded-2xl flex flex-col items-center gap-3 hover:border-primary transition-all shadow-sm">
-            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all">
+            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all text-sm">
                 <span class="material-symbols-outlined text-2xl">history</span>
             </div>
             <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Historial</span>
         </a>
-        <a href="{{ url('/erp/compras/libro') }}" class="group bg-white border border-stone-200 p-5 rounded-2xl flex flex-col items-center gap-3 hover:border-primary transition-all shadow-sm">
-            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all">
+        <a href="{{ url('/erp/compras/libro') }}" class="group bg-white border border-stone-200 p-5 rounded-2xl flex flex-col items-center gap-3 hover:border-primary transition-all shadow-sm text-sm">
+            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all text-sm">
                 <span class="material-symbols-outlined text-2xl">menu_book</span>
             </div>
             <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Libro Legal</span>
         </a>
-        <a href="{{ url('/erp/compras/reportes') }}" class="group bg-white border border-stone-200 p-5 rounded-2xl flex flex-col items-center gap-3 hover:border-primary transition-all shadow-sm">
-            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all">
+        <a href="{{ url('/erp/compras/reportes') }}" class="group bg-white border border-stone-200 p-5 rounded-2xl flex flex-col items-center gap-3 hover:border-primary transition-all shadow-sm text-sm">
+            <div class="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:bg-primary group-hover:text-black transition-all text-sm">
                 <span class="material-symbols-outlined text-2xl">insights</span>
             </div>
             <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Costos</span>
@@ -131,69 +130,35 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-stone-100">
+                        @forelse($recentOrders as $order)
                         <tr class="hover:bg-stone-50/50 transition-colors group">
                             <td class="px-6 py-4">
-                                <p class="text-xs font-black text-stone-900 uppercase">OC-2024-042</p>
-                                <p class="text-[9px] font-bold text-stone-400 font-mono tracking-widest">REF: PRO-T-45</p>
+                                <p class="text-xs font-black text-stone-900 uppercase">{{ $order->numero_orden }}</p>
+                                <p class="text-[9px] font-bold text-stone-400 font-mono tracking-widest">FECHA: {{ $order->created_at->format('d/m/Y') }}</p>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-[10px] font-black">TR</div>
+                                    <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-[10px] font-black">
+                                        {{ substr($order->supplier->nombre, 0, 2) }}
+                                    </div>
                                     <div>
-                                        <p class="text-xs font-black text-stone-900 uppercase">Toyota Repuestos C.A.</p>
-                                        <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">Suministro de Frenado</p>
+                                        <p class="text-xs font-black text-stone-900 uppercase">{{ $order->supplier->nombre }}</p>
+                                        <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">{{ $order->supplier->rif }}</p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <span class="text-sm font-headline font-black text-stone-900">$4,250.00</span>
+                                <span class="text-sm font-headline font-black text-stone-900">${{ number_format($order->total, 2) }}</span>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <span class="px-3 py-1 bg-green-50 text-green-600 text-[9px] font-black uppercase rounded-full border border-green-100">Recibido</span>
+                                <span class="px-3 py-1 bg-green-50 text-green-600 text-[9px] font-black uppercase rounded-full border border-green-100">{{ $order->estado }}</span>
                             </td>
                         </tr>
-                        <tr class="hover:bg-stone-50/50 transition-colors group">
-                            <td class="px-6 py-4">
-                                <p class="text-xs font-black text-stone-900 uppercase">OC-2024-041</p>
-                                <p class="text-[9px] font-bold text-stone-400 font-mono tracking-widest">REF: CAT-ENG-02</p>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-stone-900 text-primary flex items-center justify-center text-[10px] font-black">CV</div>
-                                    <div>
-                                        <p class="text-xs font-black text-stone-900 uppercase">Caterpillar Venezuela</p>
-                                        <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">Sistemas de Inyección</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <span class="text-sm font-headline font-black text-stone-900">$12,840.40</span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <span class="px-3 py-1 bg-amber-50 text-amber-600 text-[9px] font-black uppercase rounded-full border border-amber-100">En Tránsito</span>
-                            </td>
+                        @empty
+                        <tr>
+                            <td colspan="4" class="px-6 py-10 text-center text-stone-500 font-bold text-xs uppercase tracking-widest">No hay órdenes registradas.</td>
                         </tr>
-                        <tr class="hover:bg-stone-50/50 transition-colors group">
-                            <td class="px-6 py-4">
-                                <p class="text-xs font-black text-stone-900 uppercase">OC-2024-040</p>
-                                <p class="text-[9px] font-bold text-stone-400 font-mono tracking-widest">REF: BSH-FL-10</p>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-[10px] font-black">BA</div>
-                                    <div>
-                                        <p class="text-xs font-black text-stone-900 uppercase">Bosch Auto Parts</p>
-                                        <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">Filtros & Sensores</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <span class="text-sm font-headline font-black text-stone-900">$3,150.00</span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <span class="px-3 py-1 bg-green-50 text-green-600 text-[9px] font-black uppercase rounded-full border border-green-100">Recibido</span>
-                            </td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

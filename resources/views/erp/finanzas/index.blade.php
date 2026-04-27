@@ -29,12 +29,12 @@
         <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-primary transition-all">
             <div class="flex justify-between items-start mb-4">
                 <div class="w-10 h-10 bg-stone-900 rounded-lg flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary">savings</span>
+                    <span class="material-symbols-outlined text-primary">payments</span>
                 </div>
-                <span class="px-2 py-1 bg-lime-100 text-lime-700 text-[9px] font-black uppercase rounded-md">+8.2%</span>
+                <span class="px-2 py-1 bg-lime-100 text-lime-700 text-[9px] font-black uppercase rounded-md">Cash</span>
             </div>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Activos Totales</p>
-            <p class="text-2xl font-headline font-black text-stone-900">$450,000.00</p>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Efectivo Disponible</p>
+            <p class="text-2xl font-headline font-black text-stone-900">${{ number_format($cashFlow['disponible'], 2) }}</p>
         </div>
 
         <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-red-500/30 transition-all text-stone-900">
@@ -42,10 +42,10 @@
                 <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center">
                     <span class="material-symbols-outlined text-red-500">account_balance_wallet</span>
                 </div>
-                <span class="px-2 py-1 bg-red-100 text-red-700 text-[9px] font-black uppercase rounded-md">$180K</span>
+                <span class="px-2 py-1 bg-red-100 text-red-700 text-[9px] font-black uppercase rounded-md">AP</span>
             </div>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Pasivos Totales</p>
-            <p class="text-2xl font-headline font-black text-stone-900">$180,000.00</p>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Cuentas por Pagar</p>
+            <p class="text-2xl font-headline font-black text-stone-900">${{ number_format($cashFlow['por_pagar'], 2) }}</p>
         </div>
 
         <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-blue-500/30 transition-all">
@@ -53,10 +53,10 @@
                 <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
                     <span class="material-symbols-outlined text-blue-600">trending_up</span>
                 </div>
-                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-[9px] font-black uppercase rounded-md">+12%</span>
+                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-[9px] font-black uppercase rounded-md">AR</span>
             </div>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Patrimonio Neto</p>
-            <p class="text-2xl font-headline font-black text-stone-900">$270,000.00</p>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Cuentas por Cobrar</p>
+            <p class="text-2xl font-headline font-black text-stone-900">${{ number_format($cashFlow['por_cobrar'], 2) }}</p>
         </div>
 
         <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-amber-500/30 transition-all">
@@ -64,10 +64,10 @@
                 <div class="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center">
                     <span class="material-symbols-outlined text-amber-600">corporate_fare</span>
                 </div>
-                <span class="px-2 py-1 bg-amber-100 text-amber-700 text-[9px] font-black uppercase rounded-md">$85K</span>
+                <span class="px-2 py-1 bg-amber-100 text-amber-700 text-[9px] font-black uppercase rounded-md">Dep</span>
             </div>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Activos Fijos</p>
-            <p class="text-2xl font-headline font-black text-stone-900">$85,000.00</p>
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Depreciación Mensual</p>
+            <p class="text-2xl font-headline font-black text-stone-900">${{ number_format($depreciacion, 2) }}</p>
         </div>
     </div>
 
@@ -109,26 +109,26 @@
         <!-- Balance Analyzer -->
         <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
             <div class="px-6 py-4 border-b border-stone-100 bg-stone-50/50 flex justify-between items-center">
-                <h3 class="font-headline text-lg font-black uppercase tracking-tight text-stone-900">Activos vs Pasivos</h3>
+                <h3 class="font-headline text-lg font-black uppercase tracking-tight text-stone-900">Pasivos vs Disponible</h3>
                 <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Snapshot Mensual</span>
             </div>
             <div class="p-8 space-y-8">
                 <div>
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-[10px] font-black text-stone-700 uppercase tracking-widest">Activos Totales</span>
-                        <span class="font-headline text-lg font-bold text-lime-600">$450,000</span>
+                        <span class="text-[10px] font-black text-stone-700 uppercase tracking-widest">Efectivo Disponible</span>
+                        <span class="font-headline text-lg font-bold text-lime-600">${{ number_format($cashFlow['disponible'], 2) }}</span>
                     </div>
                     <div class="h-3 bg-stone-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-lime-500 w-[75%]"></div>
+                        <div class="h-full bg-lime-500" style="width: {{ $cashFlow['disponible'] > 0 ? min(100, ($cashFlow['disponible'] / ($cashFlow['disponible'] + $cashFlow['por_pagar'])) * 100) : 0 }}%"></div>
                     </div>
                 </div>
                 <div>
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-[10px] font-black text-stone-700 uppercase tracking-widest">Pasivos Totales</span>
-                        <span class="font-headline text-lg font-bold text-red-500">$180,000</span>
+                        <span class="text-[10px] font-black text-stone-700 uppercase tracking-widest">Compromisos por Pagar</span>
+                        <span class="font-headline text-lg font-bold text-red-500">${{ number_format($cashFlow['por_pagar'], 2) }}</span>
                     </div>
                     <div class="h-3 bg-stone-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-red-500 w-[40%]"></div>
+                        <div class="h-full bg-red-500" style="width: {{ $cashFlow['por_pagar'] > 0 ? min(100, ($cashFlow['por_pagar'] / ($cashFlow['disponible'] + $cashFlow['por_pagar'])) * 100) : 0 }}%"></div>
                     </div>
                 </div>
                 <div class="pt-4 border-t border-stone-100">

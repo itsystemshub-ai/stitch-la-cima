@@ -12,18 +12,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use App\Services\SalesService;
+
 class VentasController extends Controller
 {
+    protected SalesService $salesService;
+
+    public function __construct(SalesService $salesService)
+    {
+        $this->salesService = $salesService;
+    }
+
     public function index()
     {
-        $stats = [
-            'ventas_hoy' => Order::whereDate('created_at', today())->where('estado', 'Pagado')->sum('total'),
-            'ventas_mes' => Order::whereMonth('created_at', now()->month)->where('estado', 'Pagado')->sum('total'),
-            'ordenes_pendientes' => Order::whereIn('estado', ['Pendiente', 'Esperando Aprobación'])->count(),
-            'clientes_activos' => Customer::where('activo', true)->count(),
-            'cuentas_por_cobrar' => Order::where('estado', 'Pendiente')->sum('total'),
-            'ticket_promedio' => Order::where('estado', 'Pagado')->avg('total') ?? 0,
-        ];
+        $stats = $this->salesService->getSalesKPIs();
 
         $recentOrders = Order::with('customer')
             ->orderByDesc('created_at')
@@ -111,62 +113,8 @@ class VentasController extends Controller
             'items.*.precio_unitario' => 'required|numeric|min:0',
         ]);
 
-        $customer = Customer::findOrFail($request->customer_id);
-        $items = $request->items;
-        
         try {
-            $result = DB::transaction(function () use ($customer, $items) {
-                $subtotal = 0;
-                
-                foreach ($items as $item) {
-                    $product = Product::find($item['product_id']);
-                    if ($product->stock_actual < $item['cantidad']) {
-                        throw new \Exception("Stock insuficiente para: {$product->nombre}");
-                    }
-                    $subtotal += $item['cantidad'] * $item['precio_unitario'];
-                }
-
-                $impuesto = $subtotal * 0.16;
-                $total = $subtotal + $impuesto;
-
-                $order = Order::create([
-                    'numero_orden' => 'ORD-' . date('Ymd') . '-' . str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT),
-                    'customer_id' => $customer->id,
-                    'vendedor_id' => Auth::id(),
-                    'subtotal' => $subtotal,
-                    'impuestos' => $impuesto,
-                    'total' => $total,
-                    'estado' => 'Pagado',
-                    'status' => 'completed',
-                    'fecha_emision' => now(),
-                ]);
-
-                foreach ($items as $item) {
-                    $product = Product::find($item['product_id']);
-                    $lineSubtotal = $item['cantidad'] * $item['precio_unitario'];
-
-                    OrderItem::create([
-                        'order_id' => $order->id,
-                        'product_id' => $product->id,
-                        'cantidad' => $item['cantidad'],
-                        'precio_unitario' => $item['precio_unitario'],
-                        'subtotal' => $lineSubtotal,
-                    ]);
-
-                    $product->decrement('stock_actual', $item['cantidad']);
-
-                    StockMovement::create([
-                        'product_id' => $product->id,
-                        'type' => 'OUT',
-                        'quantity' => $item['cantidad'],
-                        'reason' => "Venta POS: {$order->numero_orden}",
-                        'user_id' => Auth::id(),
-                        'reference_id' => $order->id,
-                    ]);
-                }
-
-                return $order;
-            });
+            $result = $this->salesService->processSale($request->customer_id, $request->items);
 
             return response()->json([
                 'status' => 'success',

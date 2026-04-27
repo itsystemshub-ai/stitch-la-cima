@@ -4,20 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\StockMovement;
+use App\Models\Supplier;
+use App\Models\PurchaseOrder;
+use App\Services\PurchaseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ComprasController extends Controller
 {
+    protected PurchaseService $purchaseService;
+
+    public function __construct(PurchaseService $purchaseService)
+    {
+        $this->purchaseService = $purchaseService;
+    }
+
     public function index()
     {
-        return view('erp.compras.index');
+        $stats = $this->purchaseService->getPurchaseKPIs();
+        $recentOrders = PurchaseOrder::with('supplier')->latest()->take(5)->get();
+        return view('erp.compras.index', compact('stats', 'recentOrders'));
     }
 
     public function proveedores(Request $request)
     {
-        $query = \App\Models\Supplier::query();
+        $query = Supplier::query();
 
         if ($request->has('search')) {
             $search = $request->search;
@@ -43,13 +55,13 @@ class ComprasController extends Controller
             'condiciones_pago' => 'nullable|string',
         ]);
 
-        \App\Models\Supplier::create($validated);
+        Supplier::create($validated);
         return back()->with('success', 'Proveedor registrado exitosamente.');
     }
 
     public function historial(Request $request)
     {
-        $query = \App\Models\PurchaseOrder::with('supplier');
+        $query = PurchaseOrder::with('supplier');
 
         if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
             $query->whereBetween('created_at', [
@@ -85,8 +97,8 @@ class ComprasController extends Controller
                 $impuesto = $subtotal * 0.16;
                 $total = $subtotal + $impuesto;
 
-                $orden = \App\Models\PurchaseOrder::create([
-                    'numero_orden' => 'OC-' . date('Ymd') . '-' . str_pad(\App\Models\PurchaseOrder::count() + 1, 4, '0', STR_PAD_LEFT),
+                $orden = PurchaseOrder::create([
+                    'numero_orden' => 'OC-' . date('Ymd') . '-' . str_pad(PurchaseOrder::count() + 1, 4, '0', STR_PAD_LEFT),
                     'supplier_id' => $request->supplier_id,
                     'user_id' => Auth::id(),
                     'subtotal' => $subtotal,
@@ -136,7 +148,7 @@ class ComprasController extends Controller
 
     public function libro(Request $request)
     {
-        $query = \App\Models\PurchaseOrder::with('supplier')
+        $query = PurchaseOrder::with('supplier')
             ->where('estado', 'Recibida');
 
         if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
@@ -156,8 +168,8 @@ class ComprasController extends Controller
 
     public function reportes()
     {
-        $compras_mes = \App\Models\PurchaseOrder::whereMonth('created_at', now()->month)->sum('total');
-        $compras_anio = \App\Models\PurchaseOrder::whereYear('created_at', now()->year)->sum('total');
+        $compras_mes = PurchaseOrder::whereMonth('created_at', now()->month)->sum('total');
+        $compras_anio = PurchaseOrder::whereYear('created_at', now()->year)->sum('total');
         
         return view('erp.compras.reportes', compact('compras_mes', 'compras_anio'));
     }
