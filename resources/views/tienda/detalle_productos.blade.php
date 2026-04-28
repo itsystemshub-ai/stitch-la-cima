@@ -10,8 +10,8 @@
 
 @section('content')
 <!-- Premium Product Detail Main -->
-<main class="pt-32 pb-24">
-    <section class="max-w-screen-2xl mx-auto px-6 md:px-12 py-12">
+<main class="pt-20 pb-16">
+    <section class="max-w-screen-2xl mx-auto px-6 md:px-12 py-8">
         <!-- Breadcrumb -->
         <nav class="mb-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">
             <a href="{{ url('/tienda/' . 'index') }}" class="hover:text-primary transition-colors flex items-center gap-1">
@@ -78,8 +78,8 @@
                         <span id="productPrice" class="text-6xl font-headline font-black text-stone-950 tracking-tighter italic leading-none">$0.00</span>
                         <span id="productOldPrice" class="text-stone-300 line-through text-2xl font-bold mb-1 hidden">$0.00</span>
                     </div>
-                    <p id="productPriceBs" class="text-[10.5px] font-black text-stone-400 uppercase tracking-[0.2em] mb-8 bg-stone-50 px-4 py-2 rounded-full inline-block border border-stone-100 italic font-mono">
-                        Ref. Bs. 0.00 aprox. <span class="mx-2 opacity-30">|</span> <span class="text-stone-300 font-bold">Protocolo IVA incluido</span>
+                    <p id="productPriceBs" class="text-[10px] font-black text-stone-300 uppercase tracking-[0.2em] mb-8 bg-stone-50 px-4 py-2 rounded-full inline-block border border-stone-100 italic">
+                        Protocolo IVA incluido
                     </p>
 
                     <div class="flex gap-4 mb-10">
@@ -87,7 +87,7 @@
                             <button onclick="updateQty(-1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-stone-800 text-stone-400 transition-all active:scale-90">
                                 <span class="material-symbols-outlined font-black">remove</span>
                             </button>
-                            <input id="qtyInput" class="w-16 bg-transparent border-none text-center font-black text-xl focus:ring-0 pointer-events-none text-white font-mono" type="number" value="1" min="1" max="99" readonly/>
+                            <input id="qtyInput" class="w-16 bg-transparent border-none text-center font-black text-xl focus:ring-0 text-white font-mono [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" value="1" min="1" max="99" />
                             <button onclick="updateQty(1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-stone-800 text-stone-400 transition-all active:scale-90">
                                 <span class="material-symbols-outlined font-black">add</span>
                             </button>
@@ -178,7 +178,7 @@
     </section>
 
     <!-- Related Products -->
-    <section class="max-w-screen-2xl mx-auto px-6 md:px-12 mt-32">
+    <section class="max-w-screen-2xl mx-auto px-6 md:px-12 mt-20">
         <div class="flex items-center justify-between mb-12">
             <div>
                 <span class="text-primary text-[10px] font-black uppercase tracking-[0.4em]">Compra Inteligente</span>

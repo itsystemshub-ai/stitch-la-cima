@@ -1,32 +1,40 @@
 function switchToGrid() {
-        const grid = document.getElementById('productGrid');
-        const gridBtn = document.getElementById('gridViewBtn');
-        const listBtn = document.getElementById('listViewBtn');
-        
-        grid.classList.remove('list-view');
-        grid.classList.add('editorial-grid');
-        
-        gridBtn.classList.add('active', 'bg-black', 'text-white');
-        gridBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');
-        
-        listBtn.classList.remove('active', 'bg-black', 'text-white');
-        listBtn.classList.add('text-on-surface-variant', 'hover:bg-stone-200');
+    const gridContainer = document.getElementById('gridViewContainer');
+    const listContainer = document.getElementById('listViewContainer');
+    const gridBtn = document.getElementById('gridViewBtn');
+    const listBtn = document.getElementById('listViewBtn');
+    
+    if (gridContainer && listContainer) {
+        gridContainer.classList.remove('hidden');
+        listContainer.classList.add('hidden');
     }
     
-    function switchToList() {
-        const grid = document.getElementById('productGrid');
-        const gridBtn = document.getElementById('gridViewBtn');
-        const listBtn = document.getElementById('listViewBtn');
-
-        grid.classList.remove('editorial-grid');
-        grid.classList.add('list-view');
-
-        listBtn.classList.add('active', 'bg-black', 'text-white');
-        listBtn.classList.remove('text-on-surface-variant', 'hover:bg-stone-200');
-
-        gridBtn.classList.remove('active', 'bg-black', 'text-white');
-        gridBtn.classList.add('text-on-surface-variant', 'hover:bg-stone-200');
+    if (gridBtn && listBtn) {
+        gridBtn.classList.add('bg-stone-900', 'text-primary');
+        gridBtn.classList.remove('text-stone-400', 'hover:bg-stone-100');
+        listBtn.classList.add('text-stone-400', 'hover:bg-stone-100');
+        listBtn.classList.remove('bg-stone-900', 'text-primary');
     }
+}
+
+function switchToList() {
+    const gridContainer = document.getElementById('gridViewContainer');
+    const listContainer = document.getElementById('listViewContainer');
+    const gridBtn = document.getElementById('gridViewBtn');
+    const listBtn = document.getElementById('listViewBtn');
+    
+    if (gridContainer && listContainer) {
+        gridContainer.classList.add('hidden');
+        listContainer.classList.remove('hidden');
+    }
+    
+    if (gridBtn && listBtn) {
+        listBtn.classList.add('bg-stone-900', 'text-primary');
+        listBtn.classList.remove('text-stone-400', 'hover:bg-stone-100');
+        gridBtn.classList.add('text-stone-400', 'hover:bg-stone-100');
+        gridBtn.classList.remove('bg-stone-900', 'text-primary');
+    }
+}
 
     // Search functionality - redirect with query
     const searchInput = document.getElementById('searchInput');
@@ -65,29 +73,46 @@ function switchToGrid() {
 
             const searchTerms = query.split(' ').map(normalizeText).filter(t => t.length > 1);
             
-            // Filter products based on query - search in title, SKU, and data-tags
-            const products = document.querySelectorAll('#productGrid article');
+            // Filter products based on query - search in title, SKU, etc.
+            const gridItems = document.querySelectorAll('#productGrid article');
+            const tableRows = document.querySelectorAll('#listViewContainer tbody tr');
             let visibleCount = 0;
 
-            products.forEach(product => {
-                const title = normalizeText(product.querySelector('h3')?.textContent || '');
-                const sku = normalizeText(product.querySelector('.text-primary')?.textContent || '');
-                const tags = normalizeText(product.getAttribute('data-tags') || '');
-                const price = normalizeText(product.querySelector('.text-xl')?.textContent || '');
+            const filterItem = (item, isRow = false) => {
+                const title = normalizeText(item.querySelector(isRow ? 'a' : 'h3')?.textContent || '');
+                const sku = normalizeText(item.querySelector(isRow ? '.font-mono' : '.text-mono')?.textContent || '');
+                const searchableText = title + ' ' + sku;
                 
-                // Combine all searchable text
-                const searchableText = title + ' ' + sku + ' ' + tags + ' ' + price;
-                
-                // Check if ANY search term matches
                 const matches = searchTerms.some(term => searchableText.includes(term));
                 
                 if (matches) {
-                    product.style.display = '';
+                    item.style.display = isRow ? 'table-row' : '';
                     visibleCount++;
                 } else {
-                    product.style.display = 'none';
+                    item.style.display = 'none';
+                }
+            };
+
+            gridItems.forEach(item => filterItem(item, false));
+            // Only count once if showing both? No, they are mirrors. 
+            // Reset visibleCount for rows if we want total unique products, 
+            // but for simplicity we just filter both.
+            let tableVisibleCount = 0;
+            tableRows.forEach(row => {
+                const title = normalizeText(row.querySelector('td:nth-child(3) a')?.textContent || '');
+                const sku = normalizeText(row.querySelector('td:nth-child(2) span')?.textContent || '');
+                const searchableText = title + ' ' + sku;
+                const matches = searchTerms.some(term => searchableText.includes(term));
+                if (matches) {
+                    row.style.display = 'table-row';
+                    tableVisibleCount++;
+                } else {
+                    row.style.display = 'none';
                 }
             });
+            
+            // Sync visible count (assuming both represent the same set)
+            visibleCount = Math.max(visibleCount, tableVisibleCount);
 
             // Update item count display
             const countDisplay = document.querySelector('.text-xs.font-bold');

@@ -10,7 +10,7 @@
   <!-- Header Dashboard -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
     <div>
-      <p class="text-[12px] font-black text-stone-400 tracking-[0.3em] uppercase mb-1 italic">Resumen Operativo Central</p>
+      <p class="text-[13px] font-black text-stone-400 tracking-[0.3em] uppercase mb-1 italic">Resumen Operativo Central</p>
       <h2 class="text-4xl font-headline font-black text-stone-900 tracking-tighter leading-none italic uppercase">MAYOR DE REPUESTO <span class="text-stone-400 italic">LA CIMA, C.A.</span></h2>
       <p class="text-stone-500 text-[12px] mt-1 uppercase font-black tracking-tight italic">RIF: J-40308741-5 • VALENCIA, VENEZUELA • PROTOCOLO ACTIVADO</p>
     </div>

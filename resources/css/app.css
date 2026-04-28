@@ -26,6 +26,22 @@
   h1, h2, h3, h4 {
     @apply font-heading font-bold tracking-tight;
   }
+  
+  /* Force light mode for ERP pages */
+  html.light {
+    color-scheme: light;
+  }
+  html.light, html.light body {
+    background: var(--color-background-tienda) !important;
+    color: var(--color-stone-900) !important;
+  }
+  /* Prevent dark mode from overriding in ERP context */
+  html.light .bg-erp {
+    background-color: var(--color-background-erp) !important;
+  }
+  html.light .bg-surface {
+    background-color: var(--color-surface) !important;
+  }
 
 /* ========== CUSTOM MODULAR STYLES (FROM INICIO.CSS) ========== */
 
@@ -130,27 +146,36 @@
 }
 
 @layer components {
+  /* Force light mode override */
+  .force-light {
+    color-scheme: light !important;
+  }
+  .force-light, .force-light * {
+    background-color: var(--color-background-tienda) !important;
+    color: #1f2937 !important;
+  }
+  
   /* Zenith Industrial Table System */
   .zenith-table-header {
     @apply text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] bg-stone-50/30 border-b border-stone-100 px-4 py-5;
   }
-  
+    
   .zenith-table-sku {
     @apply font-mono text-[10.5px] font-black px-2.5 py-1.5 bg-stone-100 text-stone-900 rounded-lg border border-stone-200 group-hover:bg-stone-950 group-hover:text-primary transition-all inline-block;
   }
-  
+    
   .zenith-table-main {
     @apply text-[12px] font-black text-stone-900 uppercase leading-tight transition-colors;
   }
-  
+    
   .zenith-table-secondary {
     @apply text-[10px] font-bold text-stone-500 uppercase tracking-tight;
   }
-  
+    
   .zenith-table-price {
     @apply text-[12px] font-black text-stone-950 font-mono;
   }
-
+ 
   .zenith-table-row {
     @apply hover:bg-primary/5 transition-all cursor-default;
   }

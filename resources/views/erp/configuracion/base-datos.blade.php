@@ -1,354 +1,269 @@
 @extends('erp.layouts.app')
 
-@section('title', 'Infraestructura de Datos | Zenith Industrial')
+@section('title', 'NÚCLEO_INFRAESTRUCTURA_DATOS')
 
 @section('breadcrumb')
-    <a href="{{ url('/erp/inicio') }}" class="text-stone-400 hover:text-stone-900 transition-colors font-bold text-[12px] uppercase tracking-wider">NÚCLEO_ERP</a>
+    <a href="{{ url('/erp/inicio') }}" class="text-stone-400 hover:text-stone-900 transition-colors font-bold text-[10px] uppercase tracking-[0.2em]">NÚCLEO_OPERATIVO</a>
     <span class="material-symbols-outlined text-[14px] text-stone-300">chevron_right</span>
-    <a href="{{ url('/erp/configuracion') }}" class="text-stone-400 hover:text-stone-900 transition-colors font-bold text-[12px] uppercase tracking-wider">CONTROL_SISTEMA</a>
-    <span class="material-symbols-outlined text-[14px] text-stone-300">chevron_right</span>
-    <span class="text-stone-900 font-bold text-[12px] uppercase tracking-wider">INFRAESTRUCTURA_DB</span>
+    <span class="text-stone-900 font-black text-[10px] uppercase tracking-[0.2em]">DATA_ARCHITECTURE</span>
 @endsection
 
 @section('content')
-<div class="flex flex-col lg:flex-row gap-6 min-h-screen bg-[#f3f3f3] -m-6 p-6 font-sans">
+<div class="space-y-6 font-sans pb-10">
     
-    <!-- Sidebar: Database Navigator (phpMyAdmin style) -->
-    <div class="lg:w-[250px] flex-shrink-0 bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
-        <div class="p-4 bg-stone-50 border-b border-stone-200 flex items-center justify-between">
-            <h2 class="text-[12px] font-black text-stone-900 uppercase tracking-tighter">Navegador_DB</h2>
-            <div class="flex gap-1">
-                <span class="material-symbols-outlined text-[16px] text-stone-400 cursor-pointer hover:text-stone-900">refresh</span>
-                <span class="material-symbols-outlined text-[16px] text-stone-400 cursor-pointer hover:text-stone-900">settings</span>
+    <!-- Hero Header: Database Pulse & Real-time Metrics -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div class="lg:col-span-3 bg-stone-950 rounded-2xl p-8 relative overflow-hidden flex flex-col justify-between min-h-[220px] shadow-2xl">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[120px] -mr-32 -mt-32"></div>
+            <div class="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full blur-[60px] -ml-16 -mb-16"></div>
+            
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-2 h-8 bg-primary rounded-full animate-pulse"></div>
+                    <div>
+                        <h1 class="text-white text-3xl font-black lowercase tracking-tighter leading-none italic">data_architecture</h1>
+                        <p class="text-stone-500 text-[11px] font-bold uppercase tracking-[0.3em] mt-1 italic">Gestión de sustrato binario & telemetría de motor</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-12 mt-4">
+                    <div class="space-y-1">
+                        <p class="text-stone-500 text-[9px] font-black uppercase tracking-widest">Estado_Motor</p>
+                        <div class="flex items-center gap-2">
+                             <div class="w-2 h-2 rounded-full bg-primary animate-ping"></div>
+                             <span class="text-white text-xl font-black italic uppercase tracking-tighter">{{ $dbStats['server_info']['type'] }} <span class="text-stone-600 text-sm font-bold">V_{{ $dbStats['version'] }}</span></span>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-stone-500 text-[9px] font-black uppercase tracking-widest">Latencia_SQL</p>
+                        <span class="text-white text-xl font-black italic uppercase tracking-tighter">{{ $dbStats['latency'] }} <span class="text-stone-600 text-sm font-bold">MS</span></span>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-stone-500 text-[9px] font-black uppercase tracking-widest">Uptime_Servidor</p>
+                        <span class="text-white text-xl font-black italic uppercase tracking-tighter">{{ $dbStats['uptime'] }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex gap-4 mt-8">
+                 <button class="bg-primary text-stone-950 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-[0_0_20px_rgba(206,255,94,0.3)] flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[20px]">bolt</span> Optimizar_Indices
+                 </button>
+                 <button class="bg-white/5 border border-white/10 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[20px]">backup</span> Dump_Estructural
+                 </button>
             </div>
         </div>
-        <div class="p-2 space-y-1 overflow-y-auto max-h-[calc(100vh-200px)]">
-            <div class="flex items-center gap-2 p-2 hover:bg-stone-50 rounded-md group cursor-pointer">
-                <span class="material-symbols-outlined text-[18px] text-stone-400">add_box</span>
-                <span class="text-[12px] font-bold text-stone-600 group-hover:text-stone-900 transition-colors uppercase italic">Nueva</span>
-            </div>
-            @foreach(['information_schema', 'mysql', 'performance_schema', 'phpmyadmin', $dbStats['database_name'], 'test'] as $db)
-            <div class="flex flex-col">
-                <div class="flex items-center gap-2 p-2 hover:bg-stone-50 rounded-md group cursor-pointer {{ $db == $dbStats['database_name'] ? 'bg-stone-100' : '' }}">
-                    <span class="material-symbols-outlined text-[18px] text-stone-400">expand_more</span>
-                    <span class="material-symbols-outlined text-[18px] text-stone-400">database</span>
-                    <span class="text-[12px] font-bold text-stone-600 group-hover:text-stone-900 transition-colors uppercase italic tracking-tight">{{ $db }}</span>
+
+        <div class="bg-primary rounded-2xl p-8 flex flex-col justify-between shadow-xl">
+             <div class="space-y-1">
+                <p class="text-stone-950/40 text-[9px] font-black uppercase tracking-widest">Carga_Total_Data</p>
+                <div class="flex items-end gap-1">
+                    <h2 class="text-stone-950 text-5xl font-black tracking-tighter leading-none italic">{{ $dbStats['size_mb'] }}</h2>
+                    <span class="text-stone-950 font-black text-xs uppercase mb-1">MB</span>
                 </div>
-                @if($db == $dbStats['database_name'])
-                <div class="ml-8 mt-1 space-y-0.5 border-l-2 border-stone-100 pl-4">
-                    @foreach(array_slice($dbStats['tables'], 0, 10) as $table)
-                    <div class="flex items-center gap-2 p-1.5 hover:bg-stone-50 rounded-md group cursor-pointer">
-                         <span class="material-symbols-outlined text-[16px] text-stone-300">table_rows</span>
-                         <span class="text-[11px] font-medium text-stone-500 group-hover:text-stone-900 uppercase italic transition-colors truncate">{{ $table['name'] }}</span>
-                    </div>
-                    @endforeach
-                    <div class="p-1 px-2 text-[10px] text-stone-400 font-bold uppercase italic cursor-pointer hover:text-primary">... Ver más ({{ $dbStats['tables_count'] }})</div>
-                </div>
-                @endif
-            </div>
-            @endforeach
+             </div>
+             <div class="pt-6 border-t border-stone-950/10">
+                 <div class="flex justify-between items-center mb-2">
+                    <span class="text-stone-950 text-[10px] font-black uppercase italic">Distribución_Saturación</span>
+                    <span class="text-stone-950 text-[10px] font-black uppercase">8%</span>
+                 </div>
+                 <div class="w-full h-3 bg-stone-950/20 rounded-full overflow-hidden">
+                    <div class="h-full bg-stone-950 w-[8%] rounded-full"></div>
+                 </div>
+                 <p class="text-stone-950/60 text-[9px] font-bold uppercase mt-3 italic tracking-tight">Capacidad crítica nominal detectada</p>
+             </div>
         </div>
     </div>
 
-    <!-- Main Workspace -->
-    <div class="flex-1 flex flex-col gap-6">
+    <!-- Main Data Hub: Tables & Performance Matrix -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
         
-        <!-- Top Tab Navigation -->
-        <div class="bg-white border border-stone-200 rounded-lg shadow-sm flex overflow-x-auto no-scrollbar">
-            @foreach(['Bases de datos', 'SQL', 'Estado actual', 'Cuentas de usuarios', 'Exportar', 'Importar', 'Configuración', 'Replicación', 'Más'] as $tab)
-            <div class="px-6 py-4 border-r border-stone-100 flex items-center gap-2 cursor-pointer hover:bg-stone-50 transition-colors whitespace-nowrap {{ $loop->first ? 'bg-[#e5e5e5] border-b-2 border-b-stone-900' : '' }}">
-                <span class="material-symbols-outlined text-[20px] text-stone-500 {{ $loop->first ? 'text-stone-900' : '' }}">
-                    @switch($tab)
-                        @case('Bases de datos') database @break
-                        @case('SQL') terminal @break
-                        @case('Estado actual') monitoring @break
-                        @case('Cuentas de usuarios') group @break
-                        @case('Exportar') upload @break
-                        @case('Importar') download @break
-                        @case('Configuración') settings @break
-                        @case('Replicación') dns @break
-                        @default more_horiz
-                    @endswitch
-                </span>
-                <span class="text-[12px] font-black uppercase italic tracking-tight text-stone-600 {{ $loop->first ? 'text-stone-900' : '' }}">{{ $tab }}</span>
-            </div>
-            @endforeach
-        </div>
+        <!-- Center Table Grid: Advanced Layout -->
+        <div class="xl:col-span-2 space-y-6">
+            <div class="bg-white border border-stone-200 rounded-2xl shadow-sm overflow-hidden min-h-[600px]">
+                <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-stone-900 rounded-xl flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">database</span>
+                        </div>
+                        <div>
+                            <h3 class="text-[14px] font-black uppercase text-stone-900 italic tracking-tighter">Inventario_Estructural_Tablas</h3>
+                            <p class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">{{ $dbStats['tables_count'] }} Entidades registradas en el motor</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400">
+                                <span class="material-symbols-outlined text-[18px]">search</span>
+                            </span>
+                            <input type="text" placeholder="REF_TABLA..." class="bg-stone-100 border-none rounded-xl pl-10 pr-4 py-2 text-[11px] font-black uppercase focus:ring-2 focus:ring-primary/50 transition-all w-[200px]">
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Database Structure (Integrated phpMyAdmin View) -->
-        <div class="bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden mb-6">
-            <div class="bg-[#c2c2c2] px-6 py-3 border-b border-stone-300 flex justify-between items-center">
-                <h3 class="text-[14px] font-black uppercase text-stone-800 tracking-tight italic">Estructura de la base de datos: <span class="text-stone-500">{{ $dbStats['database_name'] }}</span></h3>
-                <div class="flex gap-2">
-                    <button class="bg-white border border-stone-300 px-3 py-1 rounded text-[10px] font-black uppercase hover:bg-stone-50">Seleccionar todos</button>
-                    <button class="bg-white border border-stone-300 px-3 py-1 rounded text-[10px] font-black uppercase hover:bg-stone-50">Con los seleccionados:</button>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-stone-50/50 border-b border-stone-100">
+                                <th class="p-4 text-[9px] font-black text-stone-400 uppercase tracking-widest">Identificador</th>
+                                <th class="p-4 text-[9px] font-black text-stone-400 uppercase tracking-widest">Densidad_Filas</th>
+                                <th class="p-4 text-[9px] font-black text-stone-400 uppercase tracking-widest">Motor</th>
+                                <th class="p-4 text-[9px] font-black text-stone-400 uppercase tracking-widest">Peso_Físico</th>
+                                <th class="p-4 text-[9px] font-black text-stone-400 uppercase tracking-widest text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-50">
+                            @foreach($dbStats['tables'] as $table)
+                            <tr class="group hover:bg-stone-50/80 transition-all border-l-4 border-l-transparent hover:border-l-primary">
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-2 h-2 rounded-full bg-stone-300 group-hover:bg-primary transition-colors"></div>
+                                        <div>
+                                            <a href="{{ route('erp.configuracion.ver-tabla', ['tabla' => $table['name']]) }}" class="text-[12px] font-black text-stone-900 uppercase italic transition-colors hover:text-stone-600 tracking-tight">{{ $table['name'] }}</a>
+                                            <p class="text-[9px] text-stone-400 font-bold uppercase italic mt-0.5">{{ $table['collation'] }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="flex flex-col gap-1">
+                                        <span class="text-[11px] font-black font-mono text-stone-600">{{ number_format($table['rows']) }} <span class="text-[9px] text-stone-300">REG</span></span>
+                                        <div class="w-24 h-1 bg-stone-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-stone-400 w-[65%]"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <span class="px-2.5 py-1 bg-stone-100 text-stone-500 rounded-lg text-[9px] font-black uppercase tracking-widest border border-stone-200">
+                                        {{ $table['engine'] }}
+                                    </span>
+                                </td>
+                                <td class="p-4">
+                                    <span class="text-[11px] font-black text-stone-950 font-mono">{{ $table['size_mb'] }} <span class="text-stone-400">MB</span></span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <div class="flex justify-end gap-2">
+                                        <a href="{{ route('erp.configuracion.ver-tabla', ['tabla' => $table['name']]) }}" class="p-2 bg-stone-100 text-stone-400 hover:bg-stone-950 hover:text-primary rounded-xl transition-all flex items-center justify-center shadow-sm">
+                                            <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                        </a>
+                                        <button class="p-2 bg-stone-100 text-stone-400 hover:bg-stone-950 hover:text-primary rounded-xl transition-all flex items-center justify-center shadow-sm">
+                                            <span class="material-symbols-outlined text-[18px]">build</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-stone-50/80 border-b border-stone-200 text-stone-400 font-black text-[10px] uppercase tracking-widest">
-                            <th class="p-4 w-10"></th>
-                            <th class="p-4 border-r border-stone-100">Tabla</th>
-                            <th class="p-4 border-r border-stone-100">Acción</th>
-                            <th class="p-4 border-r border-stone-100 text-right">Registros</th>
-                            <th class="p-4 border-r border-stone-100 text-center">Tipo</th>
-                            <th class="p-4 border-r border-stone-100">Cotejamiento</th>
-                            <th class="p-4 text-right">Tamaño</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-stone-100">
-                        @foreach($dbStats['tables'] as $table)
-                        <tr class="hover:bg-stone-50 transition-colors group">
-                            <td class="p-4 text-center">
-                                <input type="checkbox" class="rounded border-stone-300 text-stone-900 focus:ring-stone-900">
-                            </td>
-                            <td class="p-4 border-r border-stone-50">
-                                <a href="{{ route('erp.configuracion.ver-tabla', ['tabla' => $table['name']]) }}" class="text-[12px] font-black text-primary hover:underline uppercase tracking-tight italic">{{ $table['name'] }}</a>
-                            </td>
-                            <td class="p-4 border-r border-stone-50">
-                                <div class="flex gap-3 items-center">
-                                    <a href="{{ route('erp.configuracion.ver-tabla', ['tabla' => $table['name']]) }}" class="flex items-center gap-1 text-[10px] font-black text-stone-400 hover:text-stone-900 uppercase">
-                                        <span class="material-symbols-outlined text-[16px]">visibility</span> Examinar
-                                    </a>
-                                    <a href="#" class="flex items-center gap-1 text-[10px] font-black text-stone-400 hover:text-stone-900 uppercase">
-                                        <span class="material-symbols-outlined text-[16px]">list</span> Estructura
-                                    </a>
-                                </div>
-                            </td>
-                            <td class="p-4 border-r border-stone-50 text-right font-black text-[11px] text-stone-600">
-                                {{ number_format($table['rows']) }}
-                            </td>
-                            <td class="p-4 border-r border-stone-50 text-center text-[10px] font-bold text-stone-400 uppercase tracking-widest">
-                                {{ $table['engine'] }}
-                            </td>
-                            <td class="p-4 border-r border-stone-50 text-[10px] font-medium text-stone-400 uppercase italic">
-                                {{ $table['collation'] }}
-                            </td>
-                            <td class="p-4 text-right font-black text-[11px] text-stone-600">
-                                {{ $table['size_mb'] }} <span class="text-stone-300">MB</span>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr class="bg-stone-100/50 border-t-2 border-stone-300 text-[11px] font-black text-stone-900 uppercase italic">
-                            <td class="p-4 text-center">{{ $dbStats['tables_count'] }}</td>
-                            <td class="p-4">Tablas</td>
-                            <td class="p-4">Sumatoria de totales</td>
-                            <td class="p-4 text-right">{{ number_format($dbStats['total_records']) }}</td>
-                            <td class="p-4"></td>
-                            <td class="p-4"></td>
-                            <td class="p-4 text-right">{{ number_format($dbStats['size_mb'], 2) }} MB</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
         </div>
 
-        <!-- Dashboard Grid (phpMyAdmin style) -->
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <!-- Right Side: Advanced Diagnostic Panels -->
+        <div class="space-y-6">
             
-            <!-- Column Left: Settings -->
-            <div class="space-y-6">
-                <!-- Configuraciones generales -->
-                <div class="bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden">
-                    <div class="bg-[#c2c2c2] px-6 py-3 border-b border-stone-300">
-                        <h3 class="text-[14px] font-black uppercase text-stone-800 tracking-tight italic">Configuraciones generales</h3>
+            <!-- Connection Detail Card -->
+            <div class="bg-white border border-stone-200 rounded-2xl p-8 shadow-sm relative overflow-hidden">
+                <h4 class="text-[13px] font-black uppercase text-stone-900 mb-6 italic tracking-tight">Detalles_Conexión_Activos</h4>
+                <div class="space-y-5">
+                    <div class="flex justify-between items-center group cursor-pointer hover:bg-stone-50 p-2 -m-2 rounded-xl transition-all">
+                        <div class="flex items-center gap-3">
+                             <span class="material-symbols-outlined text-stone-300">alternate_email</span>
+                             <span class="text-[11px] font-bold text-stone-500 uppercase tracking-tight">Usuario_Root:</span>
+                        </div>
+                        <span class="text-[11px] font-black text-stone-900 italic lowercase tracking-tighter">{{ $dbStats['server_info']['user'] }}</span>
                     </div>
-                    <div class="p-8 space-y-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-stone-400">subject</span>
-                                <span class="text-[13px] font-bold text-stone-700 uppercase italic">Cotejamiento de la conexión al servidor</span>
-                                <span class="material-symbols-outlined text-[16px] text-primary cursor-help">help</span>
-                            </div>
-                            <select class="bg-stone-50 border border-stone-200 px-4 py-2 rounded-md text-[13px] font-black text-stone-900 focus:outline-none focus:border-stone-900 transition-all uppercase w-[250px]">
-                                <option>{{ $dbStats['server_info']['collation'] }}</option>
-                                <option>utf8mb4_general_ci</option>
-                                <option>utf8mb4_bin</option>
-                            </select>
+                    <div class="flex justify-between items-center group cursor-pointer hover:bg-stone-50 p-2 -m-2 rounded-xl transition-all">
+                        <div class="flex items-center gap-3">
+                             <span class="material-symbols-outlined text-stone-300">dns</span>
+                             <span class="text-[11px] font-bold text-stone-500 uppercase tracking-tight">Hostname:</span>
                         </div>
-                        <div class="flex items-center gap-3 cursor-pointer group">
-                            <span class="material-symbols-outlined text-stone-400 group-hover:text-primary transition-colors">key</span>
-                            <span class="text-[13px] font-black text-stone-400 group-hover:text-stone-900 transition-colors uppercase italic underline">Más configuraciones</span>
-                        </div>
+                        <span class="text-[11px] font-black text-stone-900 uppercase italic tracking-tighter">{{ $dbStats['server_info']['ip'] }}</span>
                     </div>
-                </div>
-
-                <!-- Configuraciones de apariencia -->
-                <div class="bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden">
-                    <div class="bg-[#c2c2c2] px-6 py-3 border-b border-stone-300">
-                        <h3 class="text-[14px] font-black uppercase text-stone-800 tracking-tight italic">Configuraciones de apariencia</h3>
-                    </div>
-                    <div class="p-8 space-y-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3 text-stone-700">
-                                <span class="material-symbols-outlined text-[20px]">language</span>
-                                <span class="text-[13px] font-bold uppercase italic">Idioma <span class="text-stone-400">(Language)</span></span>
-                                <span class="material-symbols-outlined text-[16px] text-primary cursor-help">help</span>
-                            </div>
-                            <select class="bg-stone-50 border border-stone-200 px-4 py-2 rounded-md text-[13px] font-black text-stone-900 uppercase w-[250px]">
-                                <option>Español - Spanish</option>
-                                <option>Inglés - English</option>
-                            </select>
+                    <div class="flex justify-between items-center group cursor-pointer hover:bg-stone-50 p-2 -m-2 rounded-xl transition-all">
+                        <div class="flex items-center gap-3">
+                             <span class="material-symbols-outlined text-stone-300">security_update_good</span>
+                             <span class="text-[11px] font-bold text-stone-500 uppercase tracking-tight">Protocolo:</span>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3 text-stone-700">
-                                <span class="material-symbols-outlined text-[20px]">palette</span>
-                                <span class="text-[13px] font-bold uppercase italic">Tema</span>
-                            </div>
-                            <div class="flex gap-2">
-                                <select class="bg-stone-50 border border-stone-200 px-4 py-2 rounded-md text-[13px] font-black text-stone-900 uppercase w-[150px]">
-                                    <option>pmahomme</option>
-                                    <option>zenith</option>
-                                </select>
-                                <button class="bg-stone-100 border border-stone-200 px-4 py-2 rounded-md text-[11px] font-black uppercase text-stone-700 hover:bg-stone-200 transition-all">Ver todo</button>
-                            </div>
-                        </div>
+                        <span class="text-[11px] font-black text-primary bg-stone-900 px-2 py-0.5 rounded-lg uppercase tracking-widest italic">VERSION_{{ $dbStats['server_info']['protocol'] }}</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Column Right: Technical Specs -->
-            <div class="space-y-6">
-                <!-- Servidor de base de datos -->
-                <div class="bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden">
-                    <div class="bg-[#c2c2c2] px-6 py-3 border-b border-stone-300">
-                        <h3 class="text-[14px] font-black uppercase text-stone-800 tracking-tight italic">Servidor de base de datos</h3>
+            <!-- Health Distribution Isometric Visual (Simulated with CSS) -->
+            <div class="bg-stone-950 rounded-2xl p-8 shadow-2xl relative">
+                <div class="flex items-center justify-between mb-8">
+                     <h4 class="text-white text-[13px] font-black uppercase italic">Salud_Entorno</h4>
+                     <span class="bg-emerald-500/20 text-emerald-500 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border border-emerald-500/30">Stable_Grid</span>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] font-black text-stone-500 uppercase tracking-widest italic">Consumo_I/O</span>
+                            <span class="text-[11px] font-black text-white italic">12%</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary w-[12%] rounded-full shadow-[0_0_10px_#ceff5e]"></div>
+                        </div>
                     </div>
-                    <div class="p-8">
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Servidor:</span> <span class="text-stone-900">{{ $dbStats['server_info']['ip'] }}</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Tipo de servidor:</span> <span class="text-stone-900">{{ $dbStats['server_info']['type'] }}</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Conexión del servidor:</span> <span class="text-stone-900 italic">No se está utilizando SSL</span> <span class="material-symbols-outlined text-[14px] text-primary cursor-help">help</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Versión del servidor:</span> <span class="text-stone-900">{{ $dbStats['server_info']['version'] }} - {{ $dbStats['server_info']['os'] }} binary distribution</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Versión del protocolo:</span> <span class="text-stone-900 font-black">{{ $dbStats['server_info']['protocol'] }}</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Usuario:</span> <span class="text-stone-900 font-black tracking-tight">{{ $dbStats['server_info']['user'] }}</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Conjunto de caracteres del servidor:</span> <span class="text-stone-900 uppercase font-black tracking-tighter italic">UTF-8 Unicode ({{ $dbStats['server_info']['charset'] }})</span></div>
-                            </li>
-                        </ul>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] font-black text-stone-500 uppercase tracking-widest italic">Conexiones_Simultáneas</span>
+                            <span class="text-[11px] font-black text-white italic">{{ $dbStats['connections'] }}</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-blue-500 w-[18%] rounded-full shadow-[0_0_10px_#3b82f6]"></div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Servidor web -->
-                <div class="bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden">
-                    <div class="bg-[#c2c2c2] px-6 py-3 border-b border-stone-300">
-                        <h3 class="text-[14px] font-black uppercase text-stone-800 tracking-tight italic">Servidor web</h3>
-                    </div>
-                    <div class="p-8">
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-900">{{ $dbStats['web_server']['software'] }}</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Versión del cliente de base de datos:</span> <span class="text-stone-900">libmysql - mysqlnd {{ PHP_MAJOR_VERSION }}.{{ PHP_MINOR_VERSION }}.{{ PHP_RELEASE_VERSION }}</span> <span class="material-symbols-outlined text-[14px] text-primary cursor-help">help</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-stone-400 uppercase italic">extensión PHP:</span> 
-                                    @foreach($dbStats['web_server']['extensions'] as $ext)
-                                        <span class="text-stone-900 font-black italic">{{ $ext }}</span>
-                                        <span class="material-symbols-outlined text-[14px] text-primary cursor-help">help</span>
-                                    @endforeach
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div><span class="text-stone-400 uppercase italic mr-1">Versión de PHP:</span> <span class="text-primary font-black">{{ $dbStats['web_server']['php_version'] }}</span></div>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="mt-10 p-4 border border-white/5 rounded-xl bg-white/5 flex items-center gap-4">
+                     <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary border border-primary/20">
+                        <span class="material-symbols-outlined text-[24px]">verified</span>
+                     </div>
+                     <div>
+                        <p class="text-white text-[11px] font-black uppercase italic">Integridad_Check</p>
+                        <p class="text-stone-500 text-[9px] font-bold uppercase tracking-tight mt-0.5">Sustrato de datos verificado y saludable</p>
+                     </div>
                 </div>
+            </div>
 
-                <!-- phpMyAdmin -->
-                <div class="bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden">
-                    <div class="bg-[#c2c2c2] px-6 py-3 border-b border-stone-300">
-                        <h3 class="text-[14px] font-black uppercase text-stone-800 tracking-tight italic text-primary">Zenith_Admin <span class="text-stone-500">(phpMyAdmin Standard)</span></h3>
+            <!-- Web Server Spec Glass Card -->
+            <div class="bg-stone-50 border border-stone-200 rounded-2xl p-8 shadow-sm">
+                 <h4 class="text-[13px] font-black uppercase text-stone-900 mb-6 italic tracking-tight">Software_Stack</h4>
+                 <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-white border border-stone-100 rounded-xl">
+                        <p class="text-[9px] font-black text-stone-400 uppercase mb-1">Entorno_Web</p>
+                        <p class="text-[11px] font-black text-stone-900 uppercase italic truncate">{{ explode('/', $dbStats['web_server']['software'])[0] }}</p>
                     </div>
-                    <div class="p-8">
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div class="text-stone-500 italic">Acerca de esta versión: <span class="text-stone-900 font-black">{{ $dbStats['phpmyadmin']['version'] }}</span>, versión estable más reciente: <span class="text-primary font-black animate-pulse">{{ $dbStats['phpmyadmin']['latest'] }}</span></div>
-                            </li>
-                            <li class="flex items-start gap-2 text-[12px] font-bold text-stone-600 underline cursor-pointer hover:text-stone-900 transition-colors italic">
-                                <span class="w-1.5 h-1.5 bg-stone-900 rounded-full mt-1.5 flex-shrink-0"></span>
-                                <div>Documentación</div>
-                            </li>
-                        </ul>
+                    <div class="p-4 bg-white border border-stone-100 rounded-xl border-l-4 border-l-primary">
+                        <p class="text-[9px] font-black text-stone-400 uppercase mb-1">Versión_PHP</p>
+                        <p class="text-[11px] font-black text-stone-900 italic tracking-widest">{{ $dbStats['web_server']['php_version'] }}</p>
                     </div>
-                </div>
+                 </div>
+                 <div class="mt-4 flex flex-wrap gap-2 text-stone-400">
+                    @foreach($dbStats['web_server']['extensions'] as $ext)
+                        <span class="text-[9px] font-black uppercase px-2 py-0.5 bg-stone-100 border border-stone-200 rounded text-stone-500">{{ $ext }}</span>
+                    @endforeach
+                 </div>
             </div>
         </div>
-
-        <!-- System Actions Footer (Stitch Style) -->
-        <div class="flex justify-between items-center bg-white border border-stone-200 p-6 rounded-lg shadow-sm">
-            <div class="flex gap-4">
-                <a href="{{ route('erp.configuracion.gestor-tablas') }}" class="bg-stone-900 text-primary px-8 py-3 rounded-lg text-[11px] font-black uppercase italic tracking-widest hover:brightness-110 transition-all flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[20px]">table_chart</span>
-                    IR_AL_GESTOR_DE_TABLAS_COMPLETO
-                </a>
-                <button class="bg-white border border-stone-200 text-stone-900 px-8 py-3 rounded-lg text-[11px] font-black uppercase italic tracking-widest hover:bg-stone-50 transition-all flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[20px]">bolt</span>
-                    OPTIMIZAR_NÚCLEO
-                </button>
-            </div>
-            <div class="flex items-center gap-4 text-stone-400 text-[11px] font-bold uppercase italic border-l border-stone-100 pl-6">
-                <span>CONEXIÓN: {{ $dbStats['latency'] }} MS</span>
-                <span class="text-primary">PULSO: ACTIVO</span>
-            </div>
-        </div>
-
     </div>
 </div>
 
 <style>
-/* Clean Scrollbar for Sidebar */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
+/* Smooth Industrial Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 20px; }
+::-webkit-scrollbar-thumb:hover { background: #d4d4d4; }
 
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+@keyframes pulse-slow {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.3; }
 }
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background: #e5e5e5;
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #d4d4d4;
-}
+.animate-pulse-slow { animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 </style>
 @endsection

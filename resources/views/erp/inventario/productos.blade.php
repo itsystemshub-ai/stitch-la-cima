@@ -12,7 +12,7 @@
 
 @section('content')
     <!-- Header: Master Catalog Identity Trace -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-16 pb-12 border-b border-primary/20 relative z-10">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-10 pb-8 border-b border-primary/20 relative z-10">
         <div>
             <div class="flex items-center gap-4 mb-6">
                 <span class="w-12 h-1 bg-primary shadow-[0_0_15px_#ceff5e]"></span>
@@ -37,7 +37,7 @@
     </div>
     
     <!-- Operational Monitoring: Global Integrity -->
-    <div id="tour-product-filters" class="flex flex-wrap gap-8 mb-16 relative z-10">
+    <div id="tour-product-filters" class="flex flex-wrap gap-6 mb-10 relative z-10">
         <!-- Status Node: Criticality -->
         <div class="bg-stone-900 border border-white/5 px-10 py-6 rounded-[40px] shadow-3xl flex items-center gap-8 hover:border-red-500/30 transition-all group/alert min-w-[320px] {{ $low_stock_count > 0 ? 'border-l-[12px] border-l-red-500' : 'border-l-[12px] border-l-primary' }}">
             <div class="w-2 h-12 rounded-full {{ $low_stock_count > 0 ? 'bg-red-500 animate-pulse' : 'bg-primary shadow-[0_0_15px_#ceff5e]' }}"></div>
@@ -73,8 +73,8 @@
     </div>
 
     <!-- Main Data Matrix: High-Precision Catalog -->
-    <div class="bg-stone-900 border border-white/5 rounded-[48px] shadow-33xl overflow-hidden mb-20 relative z-10">
-        <div class="p-12 border-b border-white/5 bg-stone-950/50 backdrop-blur-3xl flex flex-col xl:flex-row justify-between items-start xl:items-center gap-10">
+    <div class="bg-stone-900 border border-white/5 rounded-[48px] shadow-33xl overflow-hidden mb-12 relative z-10">
+        <div class="p-8 border-b border-white/5 bg-stone-950/50 backdrop-blur-3xl flex flex-col xl:flex-row justify-between items-start xl:items-center gap-8">
             <div class="flex items-center gap-8">
                 <div class="w-20 h-20 bg-stone-950 border border-white/5 rounded-3xl flex items-center justify-center text-primary shadow-inner group">
                     <span class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform">inventory_2</span>
@@ -109,12 +109,18 @@
                 <thead>
                     <tr class="bg-stone-950 text-stone-700">
                         <th class="py-8 px-10 w-16"><input type="checkbox" class="w-5 h-5 rounded-lg border-white/10 bg-stone-900 text-primary focus:ring-primary shadow-inner"></th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">N°</th>
+                        <th class="py-8 px-6 text text-center text-[11px] font-black tracking-[0.3em] uppercase">FOTO</th>
                         <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">IDENTIFIER_SKU</th>
-                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">TECHNICAL_NOMINAL_XMIT</th>
-                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">CAT_SYSTEM_NODE</th>
-                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">OP_BRAND / FAB_CMD</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">CATEGORY</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">FAB_ORIGIN</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">BRAND_TAG</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">MATERIAL</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">THICKNESS</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">TECHNICAL_NOMINAL</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">MEASURES</th>
                         <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase text-right">VALUATION</th>
-                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">DISPONIBILITY_MAG</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase text-center">STOCK_MAG</th>
                         <th class="py-8 px-10 text-[11px] font-black tracking-[0.3em] uppercase text-center">CMD_HUB</th>
                     </tr>
                 </thead>
@@ -122,26 +128,46 @@
                     @forelse($products as $index => $product)
                     <tr class="hover:bg-primary/5 transition-all group/row">
                         <td class="py-8 px-10"><input type="checkbox" class="w-5 h-5 rounded-lg border-white/10 bg-stone-900 text-primary focus:ring-primary shadow-inner"></td>
+                        <td class="py-8 px-6 text-[13px] font-black text-stone-700 italic">
+                            {{ str_pad($index + 1, 3, '0', STR_PAD_LEFT) }}
+                        </td>
+                        <td class="py-8 px-6">
+                            <div class="w-16 h-16 bg-stone-950 border border-white/10 rounded-2xl flex items-center justify-center overflow-hidden shadow-inner group-hover/row:border-primary/40 transition-all">
+                                @if($product->foto_path)
+                                    <img src="{{ asset($product->foto_path) }}" class="w-full h-full object-cover opacity-80 group-hover/row:opacity-100 transition-opacity">
+                                @else
+                                    <span class="material-symbols-outlined text-stone-800 text-2xl group-hover/row:text-primary transition-colors">image</span>
+                                @endif
+                            </div>
+                        </td>
                         <td class="py-8 px-6">
                             <span class="text-[14px] font-black text-white tracking-tighter drop-shadow-sm uppercase">
                                 {{ $product->codigo_oem }}
                             </span>
                         </td>
                         <td class="py-8 px-6">
-                            <a href="{{ url('/tienda/detalle_productos?id=' . $product->id) }}" target="_blank" class="text-[14px] font-black text-stone-300 group-hover/row:text-primary transition-colors block uppercase leading-tight tracking-tight max-w-xs">
+                            <span class="text-[11px] font-black text-stone-500 uppercase tracking-widest bg-stone-950 px-4 py-2 rounded-xl group-hover/row:text-white transition-all shadow-inner border border-white/5">{{ $product->categoria ?? 'MASTER_NODE' }}</span>
+                        </td>
+                        <td class="py-8 px-6">
+                            <span class="text-[11px] font-black text-stone-600 uppercase tracking-widest">{{ $product->fabricante ?? '---' }}</span>
+                        </td>
+                        <td class="py-8 px-6">
+                            <span class="text-[11px] font-black text-stone-300 uppercase tracking-widest italic">{{ $product->marca ?? '---' }}</span>
+                        </td>
+                        <td class="py-8 px-6">
+                            <span class="text-[11px] font-black text-stone-600 uppercase tracking-widest">{{ $product->material ?? '---' }}</span>
+                        </td>
+                        <td class="py-8 px-6">
+                            <span class="text-[11px] font-black text-stone-600 uppercase tracking-widest">{{ $product->espesor ?? '---' }}</span>
+                        </td>
+                        <td class="py-8 px-6">
+                            <a href="{{ url('/tienda/detalle_productos?id=' . $product->id) }}" target="_blank" class="text-[14px] font-black text-stone-300 group-hover/row:text-primary transition-colors block uppercase leading-tight tracking-tight max-w-xs italic">
                                 {{ $product->nombre }}
                             </a>
-                            <p class="text-[11px] text-stone-700 font-black mt-2 uppercase tracking-widest italic group-hover/row:text-stone-500 transition-colors">ID_TRANS: #{{ str_pad($product->id, 5, '0', STR_PAD_LEFT) }}</p>
+                            <p class="text-[10px] text-stone-700 font-black mt-2 uppercase tracking-[0.2em] italic group-hover/row:text-stone-500 transition-colors opacity-50">TRANS_ID: #{{ str_pad($product->id, 5, '0', STR_PAD_LEFT) }}</p>
                         </td>
                         <td class="py-8 px-6">
-                            <span class="text-[11px] font-black text-stone-500 uppercase tracking-widest bg-stone-950 px-4 py-2 rounded-xl group-hover/row:text-white transition-all shadow-inner border border-white/5">{{ $product->categoria ?? 'GENERAL_BLOCK' }}</span>
-                        </td>
-                        <td class="py-8 px-6">
-                            <div class="flex items-center gap-4 text-[11px] font-black tracking-widest uppercase">
-                                <span class="text-stone-400 group-hover/row:text-white transition-colors">{{ $product->marca ?? '---' }}</span>
-                                <span class="text-stone-800">//</span>
-                                <span class="text-stone-600 group-hover/row:text-stone-400 transition-colors italic">{{ $product->fabricante ?? '---' }}</span>
-                            </div>
+                            <span class="text-[11px] font-black text-stone-600 uppercase tracking-widest">{{ $product->medidas ?? '---' }}</span>
                         </td>
                         <td class="py-8 px-6 text-right">
                             <span class="text-[18px] font-black text-primary italic tracking-tighter shadow-primary/10 drop-shadow-md">${{ number_format($product->precio_mayor, 2) }}</span>
@@ -149,18 +175,18 @@
                         <td class="py-8 px-6">
                             @php $safeMinimo = max(1, (float)$product->stock_minimo); @endphp
                             @php $stockPercent = min(100, ($product->stock_actual / ($safeMinimo * 3)) * 100); @endphp
-                            <div class="flex items-center gap-6">
-                                <span class="text-[16px] font-black {{ $product->stock_actual <= $safeMinimo ? 'text-red-500 animate-pulse' : 'text-white' }} min-w-[50px] leading-none shadow-inner italic">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[16px] font-black {{ $product->stock_actual <= $safeMinimo ? 'text-red-500 animate-pulse' : 'text-white' }} leading-none shadow-inner italic mb-2 tracking-tighter">
                                     {{ number_format($product->stock_actual, 0) }}_QTY
                                 </span>
-                                <div class="w-full max-w-[100px] bg-stone-950 h-3 rounded-full overflow-hidden border border-white/5 relative shadow-inner">
-                                    <div class="{{ $product->stock_actual <= $safeMinimo ? 'bg-red-500 shadow-[0_0_15px_#ef4444]' : 'bg-primary shadow-[0_0_15px_#ceff5e]' }} h-full transition-all duration-1000" style="width: {{ $stockPercent }}%"></div>
+                                <div class="w-20 bg-stone-950 h-1.5 rounded-full overflow-hidden border border-white/5 relative shadow-inner">
+                                    <div class="{{ $product->stock_actual <= $safeMinimo ? 'bg-red-500' : 'bg-primary shadow-[0_0_10px_#ceff5e]' }} h-full transition-all duration-1000" style="width: {{ $stockPercent }}%"></div>
                                 </div>
                             </div>
                         </td>
                         <td class="py-8 px-10 text-center">
-                            <button class="w-12 h-12 bg-stone-950 border border-white/5 text-stone-700 hover:bg-white hover:text-stone-950 transition-all rounded-2xl shadow-inner flex items-center justify-center mx-auto group">
-                                <span class="material-symbols-outlined text-xl group-hover:rotate-90 transition-transform">more_vert</span>
+                            <button class="w-12 h-12 bg-stone-950 border border-white/5 text-stone-700 hover:bg-white hover:text-stone-950 transition-all rounded-2xl shadow-inner flex items-center justify-center mx-auto group/btn">
+                                <span class="material-symbols-outlined text-xl group-hover/btn:rotate-90 transition-transform">more_vert</span>
                             </button>
                         </td>
                     </tr>
@@ -252,6 +278,18 @@
                         <div class="col-span-12 md:col-span-4 space-y-3">
                             <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">SYS_CATEGORY_NODE</label>
                             <input type="text" name="categoria" class="w-full bg-stone-950 border border-white/5 rounded-[20px] px-8 py-5 text-[12px] font-black text-stone-300 focus:border-primary transition-all uppercase tracking-widest italic font-mono shadow-inner">
+                        </div>
+                        <div class="col-span-12 md:col-span-4 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">MATERIAL_SPEC</label>
+                            <input type="text" name="material" class="w-full bg-stone-950 border border-white/5 rounded-[20px] px-8 py-5 text-[12px] font-black text-white focus:border-primary transition-all uppercase tracking-widest italic font-mono shadow-inner">
+                        </div>
+                        <div class="col-span-12 md:col-span-4 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">THICKNESS_SPEC</label>
+                            <input type="text" name="espesor" class="w-full bg-stone-950 border border-white/5 rounded-[20px] px-8 py-5 text-[12px] font-black text-white focus:border-primary transition-all uppercase tracking-widest italic font-mono shadow-inner">
+                        </div>
+                        <div class="col-span-12 md:col-span-4 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">MEASURES_SPEC</label>
+                            <input type="text" name="medidas" class="w-full bg-stone-950 border border-white/5 rounded-[20px] px-8 py-5 text-[12px] font-black text-white focus:border-primary transition-all uppercase tracking-widest italic font-mono shadow-inner">
                         </div>
                     </div>
 

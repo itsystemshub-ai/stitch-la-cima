@@ -104,9 +104,7 @@
                                     <div>
                                         <p class="text-sm font-black text-stone-900 uppercase leading-none mb-1" x-text="p.nombre"></p>
                                         <p class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
-                                            OEM: <span class="text-stone-600" x-text="p.codigo_oem"></span> • 
-                                            Stock: <template x-if="p.stock_actual > 0"><span class="text-green-600 font-black" x-text="p.stock_actual"></span></template>
-                                            <template x-if="p.stock_actual <= 0"><span class="text-red-500 font-black">AGOTADO</span></template>
+                                            SKU: <span class="text-stone-600" x-text="p.codigo_oem"></span>
                                         </p>
                                     </div>
                                 </div>

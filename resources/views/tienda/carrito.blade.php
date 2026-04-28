@@ -3,16 +3,16 @@
 @section('title', 'Carrito de Compras | Mayor de Repuesto LA CIMA, C.A.')
 
 @section('content')
-<main class="flex-grow w-full max-w-screen-2xl mx-auto px-6 md:px-12 pt-32 pb-24 relative z-10">
+<main class="flex-grow w-full max-w-screen-2xl mx-auto px-6 md:px-12 pt-20 pb-20 relative z-10">
     
     <!-- Título y Breadcrumb -->
-    <div class="mb-12">
-        <h1 class="text-6xl font-black text-black uppercase tracking-tighter leading-none mb-3">Tu <span class="text-primary">Carrito</span></h1>
-        <p class="text-[11px] font-bold text-stone-500 uppercase tracking-[0.3em]">Revisa tus productos antes de proceder al pago</p>
+    <div class="mb-8">
+        <h1 class="text-5xl font-black text-black uppercase tracking-tighter leading-none mb-2">Tu <span class="text-primary">Carrito</span></h1>
+        <p class="text-[10px] font-bold text-stone-500 uppercase tracking-[0.3em]">Revisa tus productos antes de realizar tu pedido</p>
     </div>
 
     <!-- Estado vacío (se muestra por defecto, JS lo oculta si hay items) -->
-    <div id="emptyCartState" class="bg-white rounded-[40px] p-24 text-center border border-stone-200 shadow-2xl relative overflow-hidden">
+    <div id="emptyCartState" class="bg-white rounded-[32px] p-16 text-center border border-stone-200 shadow-xl relative overflow-hidden">
         <div class="absolute inset-x-0 -top-40 h-80 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
         <span class="material-symbols-outlined text-[100px] text-stone-200 mb-8 block grayscale opacity-40">inventory</span>
         <h2 class="text-4xl font-headline font-black text-black uppercase tracking-tighter italic mb-4">Módulo de Adquisición Despejado</h2>

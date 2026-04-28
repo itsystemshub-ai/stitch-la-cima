@@ -80,13 +80,14 @@ class TiendaController extends Controller
     {
         $query = Product::where('activo', true);
 
-        // Búsqueda simple
-        if ($request->has('q')) {
-            $searchTerm = $request->q;
+        // Búsqueda Inteligente (SKU, Nombre, Marca, Categoría)
+        if ($request->filled('search') || $request->filled('q')) {
+            $searchTerm = $request->input('search') ?? $request->input('q');
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('nombre', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('codigo_oem', 'LIKE', "%{$searchTerm}%")
-                    ->orWhere('marca', 'LIKE', "%{$searchTerm}%");
+                    ->orWhere('marca', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('categoria', 'LIKE', "%{$searchTerm}%");
             });
         }
 

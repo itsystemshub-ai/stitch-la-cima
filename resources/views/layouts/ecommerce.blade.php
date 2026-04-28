@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="es"><head>
+<html class="light" lang="es" style="color-scheme: light;"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <!-- PWA & SEO Meta Tags -->
@@ -26,7 +26,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 @stack('styles')
 </head>
-<body class="bg-background text-on-surface selection:bg-primary/30">
+<body class="bg-background text-on-surface selection:bg-primary/30" style="color-scheme: light;">
 
 <!-- Mobile Menu -->
 <div id="mobileMenu" class="fixed inset-0 bg-black/50 z-50 hidden" onclick="closeMobileMenu()"></div>

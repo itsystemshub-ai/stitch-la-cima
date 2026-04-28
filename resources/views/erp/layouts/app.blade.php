@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="es">
+<html class="light" lang="es" style="color-scheme: light;">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -26,7 +26,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stack('styles')
 </head>
-<body class="bg-erp text-stone-900 min-h-screen flex">
+<body class="bg-erp text-stone-900 min-h-screen flex" style="color-scheme: light;">
 
 <x-smart-navigator />
 

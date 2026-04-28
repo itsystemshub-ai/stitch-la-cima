@@ -30,8 +30,9 @@
         // Update SKU
         document.getElementById('productSKU').textContent = 'SKU: #' + product.sku;
         
-        // Update stock
-        document.getElementById('stockStatus').textContent = product.stockText;
+        // Update stock visibility logic
+        const stockEl = document.getElementById('stockStatus');
+        if (stockEl) stockEl.closest('span').classList.add('hidden');
         
         // Update price
         document.getElementById('productPrice').textContent = '$' + product.price.toFixed(2);
@@ -53,8 +54,8 @@
             discountBadge.classList.add('hidden');
         }
         
-        // Update Bs price
-        document.getElementById('productPriceBs').textContent = 'Bs. ' + (product.price * 36).toFixed(2) + ' aprox. | IVA incluido';
+        // Update Bs price - REMOVED per user request
+        // document.getElementById('productPriceBs').textContent = 'Bs. ' + (product.price * 36).toFixed(2) + ' aprox. | IVA incluido';
         
         // Update main image
         document.getElementById('mainImage').src = product.images[0];
@@ -111,7 +112,6 @@
                 <a href="/tienda/detalle_productos?id=${p.id}" class="block">
                     <div class="relative aspect-square bg-stone-50 overflow-hidden flex items-center justify-center p-8">
                         <img src="${p.image || (p.images ? p.images[0] : '')}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute top-4 right-4 bg-stone-900 text-primary text-[9px] font-black uppercase tracking-[0.2em] px-2 py-1 shadow-lg">EN STOCK</div>
                     </div>
                 </a>
                 <div class="p-6">
@@ -134,7 +134,7 @@
                             <button type="button" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-stone-800 text-stone-400 transition-all" onclick="this.parentNode.querySelector('input').stepDown()">
                                 <span class="material-symbols-outlined text-xs font-black">remove</span>
                             </button>
-                            <input type="number" value="1" min="1" class="w-6 text-center bg-transparent border-none focus:ring-0 font-black text-[12px] p-0 pointer-events-none text-white" readonly />
+                            <input type="number" value="1" min="1" class="w-full flex-1 bg-transparent border-none focus:ring-0 font-black text-[12px] p-0 text-center text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" placeholder="1" />
                             <button type="button" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-stone-800 text-stone-400 transition-all" onclick="this.parentNode.querySelector('input').stepUp()">
                                 <span class="material-symbols-outlined text-xs font-black">add</span>
                             </button>

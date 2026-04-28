@@ -22,7 +22,7 @@
                        MAYOR DE REPUESTO <span class="text-primary">LA CIMA, C.A.</span>
 </h1>
 <p class="text-stone-300 text-lg max-w-2xl mx-auto font-light leading-relaxed">
-                        Localice piezas críticas con precisión absoluta por VIN, OEM o catálogo técnico.
+                        Localice piezas críticas con precisión absoluta por VIN, SKU o catálogo técnico.
                     </p>
 </div>
 <!-- Central Search Console -->
@@ -62,7 +62,7 @@
 <div class="p-4 flex flex-wrap gap-4 items-center justify-between bg-stone-50 border-t border-outline">
 <div class="flex-1">
 <div class="relative">
-<input id="quickSearch" class="w-full bg-white border-outline text-[12px] py-3 px-10 rounded-md focus:ring-primary focus:border-primary font-bold uppercase tracking-tight" placeholder="Búsqueda rápida por número de parte OEM o serie VIN..." type="text"/>
+<input id="quickSearch" class="w-full bg-white border-outline text-[12px] py-3 px-10 rounded-md focus:ring-primary focus:border-primary font-bold uppercase tracking-tight" placeholder="Búsqueda rápida por número de parte SKU o serie VIN..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-2.5 text-stone-400 text-lg">qr_code_scanner</span>
 </div>
 </div>
@@ -87,7 +87,7 @@
 </div>
 <div>
 <p class="text-white text-[10.5px] font-black uppercase tracking-[0.2em] italic">¿Eres Taller o Flota?</p>
-<p class="text-stone-400 text-[10px] font-bold uppercase tracking-tight">Acceso a precios de mayorista y stock ERP en tiempo real.</p>
+<p class="text-stone-400 text-[10px] font-bold uppercase tracking-tight">Acceso a precios de mayorista y catálogo técnico integrado.</p>
 </div>
 </div>
 <a href="{{ url('/auth/' . 'login') }}" class="bg-white text-black px-6 py-2 rounded-md font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-all">
