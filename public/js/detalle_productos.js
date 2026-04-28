@@ -71,67 +71,77 @@
         // Update technical note
         document.getElementById('technicalNoteText').textContent = product.technicalNote;
         
-        // Update specs table
-        document.getElementById('specsTable').innerHTML = '<table class="w-full"><tbody class="text-xs font-black uppercase tracking-widest">' +
-            product.specs.map((s, i) => `<tr class="bg-white border-b border-outline hover:bg-background transition-colors"><td class="px-8 py-5 text-on-surface-variant bg-background w-1/3">${s.label}</td><td class="px-8 py-5 text-black">${s.value}</td></tr>`).join('') +
+        // Update specs table - Zenith Industrial Standard: 12px labels / 10.5px values
+        document.getElementById('specsTable').innerHTML = '<table class="w-full border-separate border-spacing-0"><tbody class="text-[12px] font-black uppercase tracking-tight">' +
+            product.specs.map((s, i) => `
+                <tr class="bg-white border-b border-stone-100 hover:bg-stone-50 transition-colors group">
+                    <td class="px-8 py-5 text-stone-500 bg-stone-50/50 w-1/3 border-r border-stone-100 italic transition-all group-hover:pl-10">${s.label}</td>
+                    <td class="px-8 py-5 text-stone-900 font-mono text-[10.5px] tracking-widest">${s.value}</td>
+                </tr>`).join('') +
             '</tbody></table>';
         
-        // Update compatibility
+        // Update compatibility - Industrial Clarity: 12px
         document.getElementById('compatibilityGrid').innerHTML = product.compatibility.map(c => `
-            <div class="p-6 border-l-4 border-primary bg-white rounded-r-xl shadow-sm hover:shadow-md transition-shadow">
-                <p class="text-on-surface-variant mb-2 text-[10px] font-bold uppercase tracking-widest">${c.title}</p>
-                <p class="text-black text-sm font-bold">${c.desc}</p>
+            <div class="p-6 border-l-4 border-primary bg-white rounded-r-3xl shadow-sm hover:shadow-xl transition-all group active:scale-[0.98]">
+                <p class="text-stone-400 mb-2 text-[9px] font-black uppercase tracking-[0.3em] italic">${c.title}</p>
+                <p class="text-stone-900 text-[12px] font-black uppercase tracking-tight">${c.desc}</p>
             </div>
         `).join('');
         
         // Update installation
         document.getElementById('installationSteps').innerHTML = product.installation.map(s => `
-            <div class="flex gap-4">
-                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0 text-black font-black">${s.step}</div>
+            <div class="flex gap-6 items-start group">
+                <div class="w-12 h-12 bg-stone-900 rounded-2xl flex items-center justify-center flex-shrink-0 text-primary font-black shadow-lg shadow-black/20 group-hover:bg-primary group-hover:text-black transition-all">
+                    <span class="text-[14px]">${s.step}</span>
+                </div>
                 <div>
-                    <h4 class="font-black uppercase text-sm mb-1">${s.title}</h4>
-                    <p class="text-xs text-on-surface-variant font-medium leading-relaxed">${s.desc}</p>
+                    <h4 class="font-black uppercase text-[12px] tracking-widest mb-1 text-stone-900 italic">${s.title}</h4>
+                    <p class="text-[11px] text-stone-500 font-bold uppercase tracking-tight leading-relaxed">${s.desc}</p>
                 </div>
             </div>
         `).join('');
         
-        // Update related products (show products injected from server)
+        // Update related products - Zenith Industrial Product Cards: 12px
         const related = (window.relatedProductsData && window.relatedProductsData.length > 0) 
             ? window.relatedProductsData 
             : productsDB.filter(p => p.id !== product.id).sort(() => Math.random() - 0.5).slice(0, 4);
             
         document.getElementById('relatedProducts').innerHTML = related.map(p => `
-            <div class="group bg-white border border-outline rounded-2xl overflow-hidden hover:shadow-xl transition-all block">
+            <div class="group bg-white border border-stone-200 rounded-[30px] overflow-hidden hover:shadow-2xl transition-all duration-500 block relative">
                 <a href="/tienda/detalle_productos?id=${p.id}" class="block">
                     <div class="relative aspect-square bg-stone-50 overflow-hidden flex items-center justify-center p-8">
-                        <img src="${p.image || (p.images ? p.images[0] : '')}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500">
+                        <img src="${p.image || (p.images ? p.images[0] : '')}" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-stone-900 text-primary text-[9px] font-black uppercase tracking-[0.2em] px-2 py-1 shadow-lg">EN STOCK</div>
                     </div>
                 </a>
                 <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] font-black text-primary uppercase tracking-widest">${p.category || p.brand}</span>
-                        <span class="text-[10px] font-mono font-bold text-stone-400">#${p.sku || 'N/A'}</span>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-[9px] font-black text-primary uppercase tracking-[0.2em] bg-stone-900 px-2 py-0.5">${p.category || 'GENUINE_PART'}</span>
+                        <span class="text-[10.5px] font-mono font-bold text-stone-400 bg-stone-50 px-2 py-0.5 rounded border border-stone-100">#${p.sku || 'REF'}</span>
                     </div>
                     <a href="/tienda/detalle_productos?id=${p.id}" class="block">
-                        <h4 class="text-lg font-black uppercase tracking-tight mb-4 group-hover:text-primary transition-colors line-clamp-1" title="${p.name}">${p.name}</h4>
+                        <h4 class="text-[16px] font-headline font-black uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors line-clamp-1 italic" title="${p.name}">${p.name}</h4>
                     </a>
-                    <div class="mb-4">
-                        <p class="text-2xl font-black text-black tracking-tighter">$${p.price.toFixed(2)}</p>
+                    <div class="mb-6 bg-stone-50 p-4 rounded-2xl border border-stone-100">
+                        <p class="text-2xl font-headline font-black text-stone-900 tracking-tighter flex items-start gap-1">
+                            <span class="text-xs mt-1">$</span>
+                            <span class="font-mono tracking-tight">${p.price.toFixed(2)}</span>
+                        </p>
                     </div>
                     
                     <div class="flex items-center gap-2">
-                        <div class="flex items-center bg-stone-100 rounded-lg p-1 h-10 border border-stone-200">
-                            <button type="button" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-stone-600 active:scale-90" onclick="this.parentNode.querySelector('input').stepDown()">
-                                <span class="material-symbols-outlined text-sm font-black">remove</span>
+                        <div class="flex items-center bg-stone-900 rounded-xl p-1 h-11 border border-stone-800">
+                            <button type="button" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-stone-800 text-stone-400 transition-all" onclick="this.parentNode.querySelector('input').stepDown()">
+                                <span class="material-symbols-outlined text-xs font-black">remove</span>
                             </button>
-                            <input type="number" value="1" min="1" class="w-8 text-center bg-transparent border-none focus:ring-0 font-black text-xs p-0 pointer-events-none" readonly />
-                            <button type="button" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-stone-600 active:scale-90" onclick="this.parentNode.querySelector('input').stepUp()">
-                                <span class="material-symbols-outlined text-sm font-black">add</span>
+                            <input type="number" value="1" min="1" class="w-6 text-center bg-transparent border-none focus:ring-0 font-black text-[12px] p-0 pointer-events-none text-white" readonly />
+                            <button type="button" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-stone-800 text-stone-400 transition-all" onclick="this.parentNode.querySelector('input').stepUp()">
+                                <span class="material-symbols-outlined text-xs font-black">add</span>
                             </button>
                         </div>
-                        <button onclick="Cart.add(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image || (p.images ? p.images[0] : '')}', '${p.brand} / ${p.sku}', this.previousElementSibling.querySelector('input').value)" class="flex-1 bg-black text-white hover:bg-primary hover:text-black h-10 px-3 rounded-lg font-black uppercase text-[9px] tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 shadow-sm">
-                            <span class="material-symbols-outlined text-base">shopping_cart</span>
-                            Añadir
+                        <button onclick="Cart.add(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image || (p.images ? p.images[0] : '')}', '${p.brand} / ${p.sku}', this.previousElementSibling.querySelector('input').value)" class="flex-1 bg-primary text-stone-900 hover:bg-white hover:text-stone-900 h-11 px-3 rounded-xl font-black uppercase text-[10px] tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/10">
+                            <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            Adquirir
                         </button>
                     </div>
                 </div>

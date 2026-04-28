@@ -58,42 +58,50 @@
   <div class="overflow-x-auto">
     <table class="w-full text-left border-collapse">
       <thead>
-        <tr class="bg-stone-50 text-stone-500 font-bold uppercase text-[10px] tracking-widest border-b border-stone-100">
-          <th class="px-6 py-4">Empleado</th>
-          <th class="px-6 py-4">Salario Base</th>
-          <th class="px-6 py-4">Deducciones</th>
-          <th class="px-6 py-4">Periodo</th>
-          <th class="px-6 py-4">Total Neto</th>
-          <th class="px-6 py-4 text-right">Estado</th>
+        <tr class="zenith-table-header">
+          <th class="px-6 py-4">Beneficiario / Cargo</th>
+          <th class="px-6 py-4 text-right">Devengado Bruto</th>
+          <th class="px-6 py-4 text-right">Deducciones Ley</th>
+          <th class="px-6 py-4 text-center">Periodo Fiscal</th>
+          <th class="px-6 py-4 text-right">Total Neto</th>
+          <th class="px-6 py-4 text-right">Estado Pago</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-stone-100 text-sm">
+      <tbody class="divide-y divide-stone-50">
         @forelse($payrolls as $payroll)
-        <tr class="hover:bg-stone-50/80 transition-colors">
-          <td class="px-6 py-4">
+        <tr class="zenith-table-row group">
+          <td class="px-6 py-5">
             <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded bg-stone-900 flex items-center justify-center font-bold text-primary text-xs">
+              <div class="w-8 h-8 rounded-lg bg-stone-900 flex items-center justify-center font-black text-primary text-[10px] shadow-lg">
                 {{ substr($payroll->employee->nombre, 0, 1) }}{{ substr($payroll->employee->apellido, 0, 1) }}
               </div>
               <div>
-                <p class="text-sm font-bold text-stone-900">{{ $payroll->employee->nombre_completo }}</p>
-                <p class="text-[10px] text-stone-500 uppercase font-medium">Cargo: {{ $payroll->employee->cargo }}</p>
+                <p class="zenith-table-main">{{ $payroll->employee->nombre_completo }}</p>
+                <p class="zenith-table-secondary mt-1">{{ $payroll->employee->cargo }}</p>
               </div>
             </div>
           </td>
-          <td class="px-6 py-4 font-medium text-stone-600">${{ number_format($payroll->salario_base, 2) }}</td>
-          <td class="px-6 py-4 text-sm font-medium text-red-600">-${{ number_format($payroll->deducciones, 2) }}</td>
-          <td class="px-6 py-4">{{ $payroll->periodo }}</td>
-          <td class="px-6 py-4 font-headline font-bold text-stone-900">${{ number_format($payroll->total_pagar, 2) }}</td>
-          <td class="px-6 py-4 text-right">
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase {{ $payroll->estatus === 'PAGADO' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+          <td class="px-6 py-5 text-right">
+            <span class="zenith-table-secondary font-bold text-stone-600">${{ number_format($payroll->salario_base, 2) }}</span>
+          </td>
+          <td class="px-6 py-5 text-right">
+            <span class="zenith-table-secondary font-bold text-red-600">-${{ number_format($payroll->deducciones, 2) }}</span>
+          </td>
+          <td class="px-6 py-5 text-center">
+            <span class="zenith-table-secondary font-mono">{{ $payroll->periodo }}</span>
+          </td>
+          <td class="px-6 py-5 text-right">
+            <span class="zenith-table-price">${{ number_format($payroll->total_pagar, 2) }}</span>
+          </td>
+          <td class="px-6 py-5 text-right">
+            <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest {{ $payroll->estatus === 'PAGADO' ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-amber-50 text-amber-600 border border-amber-100' }}">
                 {{ $payroll->estatus }}
             </span>
           </td>
         </tr>
         @empty
         <tr>
-            <td colspan="6" class="px-6 py-10 text-center text-stone-500">No hay registros de nómina.</td>
+            <td colspan="6" class="px-6 py-12 text-center zenith-table-main text-stone-400">No hay registros de nómina procesados.</td>
         </tr>
         @endforelse
       </tbody>

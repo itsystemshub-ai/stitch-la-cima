@@ -26,43 +26,43 @@
                     </p>
 </div>
 <!-- Central Search Console -->
-<div class="bg-white p-1 rounded-xl shadow-2xl">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-outline rounded-lg overflow-hidden">
-<div class="bg-white p-4">
-<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Marca</label>
-<select id="searchBrand" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
-<option value="">Seleccionar Marca</option>
+<div class="bg-white p-2 rounded-xl shadow-2xl border border-stone-200">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-stone-100 rounded-lg overflow-hidden">
+<div class="bg-white p-5 group hover:bg-stone-50 transition-colors">
+<label class="block text-[10px] font-black text-stone-400 uppercase mb-2 tracking-[0.2em] group-hover:text-primary transition-colors">Selección de Marca</label>
+<select id="searchBrand" class="w-full border-none bg-transparent font-black text-[12px] p-0 focus:ring-0 text-stone-900 uppercase">
+<option value="">TODAS LAS MARCAS</option>
 @foreach($brands as $brand)
 <option value="{{ $brand }}">{{ $brand }}</option>
 @endforeach
 </select>
 </div>
-<div class="bg-white p-4">
-<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Categoría</label>
-<select id="searchCategory" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
-<option value="">Seleccionar Categoría</option>
+<div class="bg-white p-5 group hover:bg-stone-50 transition-colors border-l border-stone-100">
+<label class="block text-[10px] font-black text-stone-400 uppercase mb-2 tracking-[0.2em] group-hover:text-primary transition-colors">Categoría Técnica</label>
+<select id="searchCategory" class="w-full border-none bg-transparent font-black text-[12px] p-0 focus:ring-0 text-stone-900 uppercase">
+<option value="">TODOS LOS SISTEMAS</option>
 @foreach($categories as $category)
 <option value="{{ $category }}">{{ $category }}</option>
 @endforeach
 </select>
 </div>
-<div class="bg-white p-4">
-<label class="block text-[10px] font-bold text-on-surface-variant uppercase mb-2 tracking-widest">Fabricante</label>
-<select id="searchFabricante" class="w-full border-none bg-transparent font-bold text-sm p-0 focus:ring-0">
-<option value="">Seleccionar Fabricante</option>
-<option value="OEM">OEM</option>
-<option value="Aftermarket">Aftermarket</option>
+<div class="bg-white p-5 group hover:bg-stone-50 transition-colors border-l border-stone-100">
+<label class="block text-[10px] font-black text-stone-400 uppercase mb-2 tracking-[0.2em] group-hover:text-primary transition-colors">Fabricante / Tipo</label>
+<select id="searchFabricante" class="w-full border-none bg-transparent font-black text-[12px] p-0 focus:ring-0 text-stone-900 uppercase">
+<option value="">VALOR DE FABRICANTE</option>
+<option value="OEM">ORIGINAL (OEM)</option>
+<option value="Aftermarket">REPRO (AFTERMARKET)</option>
 </select>
 </div>
-<div onclick="searchProducts()" class="bg-primary p-4 flex items-center justify-center cursor-pointer hover:bg-primary-dim transition-colors group">
-<span class="material-symbols-outlined text-black mr-2">search</span>
-<span class="font-black uppercase tracking-widest text-black text-sm">Buscar Repuesto</span>
-</div>
+<button onclick="searchProducts()" class="bg-stone-900 p-5 flex items-center justify-center cursor-pointer hover:bg-primary transition-all group shadow-inner">
+<span class="material-symbols-outlined text-primary group-hover:text-stone-900 mr-2 font-black transition-colors">search</span>
+<span class="font-black uppercase tracking-[0.2em] text-white group-hover:text-stone-900 text-[11px] transition-colors">Localizar Repuesto</span>
+</button>
 </div>
 <div class="p-4 flex flex-wrap gap-4 items-center justify-between bg-stone-50 border-t border-outline">
 <div class="flex-1">
 <div class="relative">
-<input id="quickSearch" class="w-full bg-white border-outline text-xs py-3 px-10 rounded-md focus:ring-primary focus:border-primary" placeholder="Búsqueda rápida por número de parte OEM o serie VIN..." type="text"/>
+<input id="quickSearch" class="w-full bg-white border-outline text-[12px] py-3 px-10 rounded-md focus:ring-primary focus:border-primary font-bold uppercase tracking-tight" placeholder="Búsqueda rápida por número de parte OEM o serie VIN..." type="text"/>
 <span class="material-symbols-outlined absolute left-3 top-2.5 text-stone-400 text-lg">qr_code_scanner</span>
 </div>
 </div>
@@ -86,8 +86,8 @@
 <span class="material-symbols-outlined text-primary">corporate_fare</span>
 </div>
 <div>
-<p class="text-white text-xs font-bold uppercase tracking-widest">¿Eres Taller o Flota?</p>
-<p class="text-stone-400 text-[10px]">Acceso a precios de mayorista y stock ERP en tiempo real.</p>
+<p class="text-white text-[10.5px] font-black uppercase tracking-[0.2em] italic">¿Eres Taller o Flota?</p>
+<p class="text-stone-400 text-[10px] font-bold uppercase tracking-tight">Acceso a precios de mayorista y stock ERP en tiempo real.</p>
 </div>
 </div>
 <a href="{{ url('/auth/' . 'login') }}" class="bg-white text-black px-6 py-2 rounded-md font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-all">
@@ -142,17 +142,17 @@
 <img alt="Brake Systems" class="w-full h-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNjAH9S_Dx8VtU7mF1yl1gIoO1HHxRUQR20jPWmEZ_fWPK0Lf-aqaHg5SbId7ALpHlPm1IBVe6hQPm83-NLF_KRSd1NILUJYVRLn7UO6bSjWbJHrwIEjbFqo-DEe4gv3JFYAtDUXn6VNxmvX1mo4hAlQY5e3qx9t69T02-YM-fgbgyu5g29n1SbpBH5IfDiboMUFBwLW5HUBLf0gL-uFhYCkYCmLrNxaXuJfXidw71gc1TWNKpa50EjrPRsAU9-GWS_sIc880L1A"/>
 <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all"></div>
 <div class="absolute inset-0 flex flex-col justify-end p-10">
-<h3 class="text-3xl font-black text-white uppercase tracking-tighter">Frenado y Seguridad</h3>
-<p class="text-stone-400 text-sm mt-2 mb-4">Pastillas, discos y componentes hidráulicos.</p>
-<a href="{{ url('/tienda/catalogo_general') }}" class="w-fit inline-block bg-white/10 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3 border border-white/20 hover:bg-primary hover:text-black hover:border-primary transition-all">Ver Más</a>
+<h3 class="text-3xl font-black text-white uppercase tracking-tighter italic">Frenado y Seguridad</h3>
+<p class="text-stone-400 text-[12px] font-bold uppercase tracking-tight mt-2 mb-4 leading-relaxed line-clamp-2">Pastillas, discos y componentes hidráulicos certificados de alta fricción.</p>
+<a href="{{ url('/tienda/catalogo_general') }}" class="w-fit inline-block bg-white/10 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-[0.3em] px-8 py-3 border border-white/20 hover:bg-primary hover:text-black hover:border-primary transition-all italic">Ver Más</a>
 </div>
 </div>
 <div class="md:col-span-4 group relative overflow-hidden rounded-2xl bg-primary">
 <div class="p-10 h-full flex flex-col justify-between">
 <span class="material-symbols-outlined text-6xl text-black">settings_input_component</span>
 <div>
-<h3 class="text-3xl font-black text-black uppercase tracking-tighter">Transmisión</h3>
-<p class="text-black/70 text-sm mt-2">Cajas, embragues y diferenciales industriales certificados.</p>
+<h3 class="text-3xl font-black text-black uppercase tracking-tighter italic">Transmisión</h3>
+<p class="text-black/70 text-[12px] font-bold uppercase tracking-tight mt-2 leading-relaxed">Cajas, embragues y diferenciales industriales certificados bajo normas OEM.</p>
 </div>
 </div>
 </div>
@@ -171,25 +171,25 @@
 <div class="container mx-auto px-6 relative z-10">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 <div>
-<span class="text-primary font-black text-xs uppercase tracking-[0.4em] mb-4 block">Portal Corporativo</span>
-<h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none mb-8">
+<span class="text-primary font-black text-[10.5px] uppercase tracking-[0.4em] mb-4 block italic">Portal Corporativo</span>
+<h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-8 italic">
                         SOLUCIONES <br/> <span class="text-primary">ERP B2B</span>
 </h2>
-<p class="text-stone-400 mb-10 text-lg font-light leading-relaxed">
-                        Sistema exclusivo para Talleres y Flotas. Gestione sus pedidos directamente desde nuestro inventario centralizado con condiciones de crédito preferenciales.
+<p class="text-stone-400 mb-10 text-[12px] font-bold uppercase tracking-tight leading-[1.8]">
+                        Sistema exclusivo para Talleres y Flotas. Gestione sus pedidos directamente desde nuestro inventario centralizado con condiciones de crédito preferenciales y despacho prioritario.
                     </p>
 <ul class="space-y-6 mb-12">
-<li class="flex items-center text-white font-bold text-xs uppercase tracking-widest">
+<li class="flex items-center text-white font-black text-[10px] uppercase tracking-[0.2em] italic">
 <span class="material-symbols-outlined text-primary mr-4" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            Precios Mayoristas Netos
+                            Precios Mayoristas Netos (Tier 1)
                         </li>
-<li class="flex items-center text-white font-bold text-xs uppercase tracking-widest">
+<li class="flex items-center text-white font-black text-[10px] uppercase tracking-[0.2em] italic">
 <span class="material-symbols-outlined text-primary mr-4" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            Línea de Crédito Industrial
+                            Línea de Crédito Industrial Automática
                         </li>
-<li class="flex items-center text-white font-bold text-xs uppercase tracking-widest">
+<li class="flex items-center text-white font-black text-[10px] uppercase tracking-[0.2em] italic">
 <span class="material-symbols-outlined text-primary mr-4" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            Integración API para Inventarios
+                            Integración API para Sincronización
                         </li>
 </ul>
 <div class="flex flex-wrap gap-4">

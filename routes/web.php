@@ -189,6 +189,12 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/manual', [AyudaController::class, 'manuales'])->name('erp.ayuda.manual');
     });
 
+    // Rutas de Exportación
+    Route::prefix('export')->group(function () {
+        Route::get('/ventas', [App\Http\Controllers\ExportController::class, 'ventasExcel'])->name('erp.export.ventas');
+        Route::get('/inventario', [App\Http\Controllers\ExportController::class, 'inventarioExcel'])->name('erp.export.inventario');
+    });
+
 });
 
 // Rutas Específicas Dinámicas del Storefront

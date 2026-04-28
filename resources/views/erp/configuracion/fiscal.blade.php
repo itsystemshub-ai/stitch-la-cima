@@ -69,36 +69,63 @@
     <!-- Section: Retenciones ISLR -->
     <div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
       <div class="px-8 py-6 border-b border-stone-100 bg-stone-50/50">
-        <h3 class="font-headline font-bold text-lg text-stone-900 uppercase">Tabla de Retenciones ISLR</h3>
+        <h3 class="font-headline font-black text-xs text-stone-900 uppercase tracking-widest">Matriz de Retenciones ISLR (Providencia Administrativa)</h3>
       </div>
       <div class="p-0">
         <table class="w-full text-left">
           <thead>
-            <tr class="bg-stone-50 text-[10px] font-black text-stone-400 uppercase tracking-widest border-b border-stone-100">
-              <th class="p-6">Concepto de Pago</th>
-              <th class="p-6 text-center">Persona Nat.</th>
-              <th class="p-6 text-center">Persona Jur.</th>
-              <th class="p-6 text-right">Base Imp.</th>
+            <tr class="zenith-table-header bg-stone-50">
+              <th class="p-6">Hecho Imponible / Concepto de Pago</th>
+              <th class="p-6 text-center">Persona Natural (%)</th>
+              <th class="p-6 text-center">Persona Jurídica (%)</th>
+              <th class="p-6 text-right">Base Imponible</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-stone-100 text-sm">
-            <tr class="hover:bg-primary/5 transition-colors">
-              <td class="p-6 font-bold text-stone-700">Honorarios Profesionales</td>
-              <td class="p-6 text-center font-mono font-bold text-stone-900">3%</td>
-              <td class="p-6 text-center font-mono font-bold text-stone-900">5%</td>
-              <td class="p-6 text-right text-stone-500 font-mono">100%</td>
+          <tbody class="divide-y divide-stone-100 font-body">
+            <tr class="zenith-table-row hover:bg-primary/5 transition-colors group">
+              <td class="p-6">
+                <span class="zenith-table-main text-[12px] font-black">Honorarios Profesionales</span>
+                <p class="text-[9px] text-stone-400 font-bold uppercase mt-0.5">RESIDENTES / DOMICILIADOS</p>
+              </td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-sku bg-stone-100 text-stone-900 border-stone-200 font-black">3.00%</span>
+              </td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800 font-black">5.00%</span>
+              </td>
+              <td class="p-6 text-right">
+                <span class="zenith-table-secondary font-mono font-bold">100.00%</span>
+              </td>
             </tr>
-            <tr class="hover:bg-primary/5 transition-colors">
-              <td class="p-6 font-bold text-stone-700">Arrendamiento Inmuebles</td>
-              <td class="p-6 text-center font-mono font-bold text-stone-900">3%</td>
-              <td class="p-6 text-center font-mono font-bold text-stone-900">5%</td>
-              <td class="p-6 text-right text-stone-500 font-mono">100%</td>
+            <tr class="zenith-table-row bg-stone-50/20 hover:bg-primary/5 transition-colors group">
+              <td class="p-6">
+                <span class="zenith-table-main text-[12px] font-black">Arrendamiento Inmuebles</span>
+                <p class="text-[9px] text-stone-400 font-bold uppercase mt-0.5">ESTRUCTURAS INDUSTRIALES</p>
+              </td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-sku bg-stone-100 text-stone-900 border-stone-200 font-black">3.00%</span>
+              </td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800 font-black">5.00%</span>
+              </td>
+              <td class="p-6 text-right">
+                <span class="zenith-table-secondary font-mono font-bold">100.00%</span>
+              </td>
             </tr>
-            <tr class="hover:bg-primary/5 transition-colors">
-              <td class="p-6 font-bold text-stone-700">Fletes y Transporte</td>
-              <td class="p-6 text-center font-mono font-bold text-stone-900">1%</td>
-              <td class="p-6 text-center font-mono font-bold text-stone-900">3%</td>
-              <td class="p-6 text-right text-stone-500 font-mono">100%</td>
+            <tr class="zenith-table-row hover:bg-primary/5 transition-colors group">
+              <td class="p-6">
+                <span class="zenith-table-main text-[12px] font-black">Fletes y Transporte Global</span>
+                <p class="text-[9px] text-stone-400 font-bold uppercase mt-0.5">LOGÍSTICA NACIONAL</p>
+              </td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-sku bg-stone-100 text-stone-900 border-stone-200 font-black">1.00%</span>
+              </td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800 font-black">3.00%</span>
+              </td>
+              <td class="p-6 text-right">
+                <span class="zenith-table-secondary font-mono font-bold">100.00%</span>
+              </td>
             </tr>
           </tbody>
         </table>

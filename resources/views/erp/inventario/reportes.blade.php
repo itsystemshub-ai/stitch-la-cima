@@ -26,10 +26,10 @@
                 <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
                 Descargar Historial PDF
             </button>
-            <button class="bg-stone-900 text-primary px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-xl hover:bg-black transition-all active:scale-95 group/btn">
+            <a href="{{ route('erp.export.inventario') }}" class="bg-stone-900 text-primary px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-xl hover:bg-black transition-all active:scale-95 group/btn flex items-center gap-2">
                 Exportar Data Maestra
-                <span class="material-symbols-outlined text-[16px] ml-2 inline-block group-hover:rotate-12 transition-transform">table_view</span>
-            </button>
+                <span class="material-symbols-outlined text-[16px] group-hover:rotate-12 transition-transform">table_view</span>
+            </a>
         </div>
     </div>
 

@@ -83,7 +83,7 @@
             Componentes de Precisión
           </h2>
           <div class="h-2 w-24 bg-primary mb-6"></div>
-          <p class="text-on-surface-variant font-medium leading-relaxed">
+          <p class="text-stone-500 font-bold leading-relaxed text-[12px] uppercase tracking-wide">
             Explore nuestra selección curada de piezas de alto rendimiento. Cada
             componente está rigurosamente probado para durabilidad industrial.
           </p>
@@ -144,7 +144,7 @@
           <h4 class="text-2xl font-black uppercase tracking-tight">
             Estándares O.E.M.
           </h4>
-          <p class="text-stone-400 text-sm leading-relaxed font-medium">
+          <p class="text-stone-400 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
             Todas las piezas cumplen o superan las especificaciones del
             fabricante de equipo original para aplicaciones industriales
             críticas.
@@ -157,7 +157,7 @@
           <h4 class="text-2xl font-black uppercase tracking-tight">
             Logística Rápida
           </h4>
-          <p class="text-stone-400 text-sm leading-relaxed font-medium">
+          <p class="text-stone-400 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
             Distribución estratégica desde Valencia garantiza cobertura nacional
             y tiempo de inactividad mínimo para su flota.
           </p>
@@ -169,7 +169,7 @@
           <h4 class="text-2xl font-black uppercase tracking-tight">
             Soporte Experto
           </h4>
-          <p class="text-stone-400 text-sm leading-relaxed font-medium">
+          <p class="text-stone-400 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
             Nuestro equipo técnico proporciona consulta especializada para
             compatibilidad de motores y mantenimiento.
           </p>

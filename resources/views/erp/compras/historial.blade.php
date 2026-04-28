@@ -75,68 +75,68 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr class="bg-stone-50/80">
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em]">Referencia / Control</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em]">Aliado Estratégico</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em]">Estatus Logístico</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] text-right">Monto Neto</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] text-center">Protocolo</th>
+                    <tr class="zenith-table-header">
+                        <th class="px-8 py-5">Referencia de Orden / Control</th>
+                        <th class="px-8 py-5">Aliado Estratégico (Proveedor)</th>
+                        <th class="px-8 py-5">Estatus Logístico</th>
+                        <th class="px-8 py-5 text-right">Monto Consolidado</th>
+                        <th class="px-8 py-5 text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-stone-100 italic md:not-italic">
-                    <tr class="hover:bg-stone-50/80 transition-colors group">
+                <tbody class="divide-y divide-stone-100 italic md:not-italic font-body">
+                    <tr class="zenith-table-row group">
                         <td class="px-8 py-5">
-                            <p class="text-xs font-black text-stone-900 uppercase tracking-tight">ORD-2026-0089</p>
-                            <p class="text-[9px] font-bold text-stone-400 font-mono mt-1">12 OCT 2026 • 14:20</p>
+                            <span class="zenith-table-sku bg-stone-100 text-stone-600 border-stone-200 uppercase tracking-tight">ORD-2026-0089</span>
+                            <p class="text-[9px] font-bold text-stone-400 font-mono mt-1 opacity-60">12 OCT 2026 • 14:20</p>
                         </td>
                         <td class="px-8 py-5">
-                            <div class="flex items-center gap-2">
-                                <div class="w-6 h-6 rounded bg-stone-900 flex items-center justify-center text-[10px] text-primary font-black">AC</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-stone-900 flex items-center justify-center text-[10px] text-primary font-black shadow-lg">AC</div>
                                 <div>
-                                    <p class="text-[10px] font-black text-stone-900 uppercase">Aceros Continental S.A.</p>
-                                    <p class="text-[9px] text-stone-400 font-mono italic">J-29384812-0</p>
+                                    <p class="zenith-table-main">Aceros Continental S.A.</p>
+                                    <p class="zenith-table-secondary mt-0.5">RIF: J-29384812-0</p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-8 py-5">
-                            <span class="px-3 py-1 bg-primary text-stone-900 text-[9px] font-black uppercase rounded-full shadow-sm">Recibido Total</span>
+                            <span class="px-4 py-1 bg-stone-900 text-primary text-[9px] font-black uppercase rounded-full shadow-md border border-stone-800">Recibido Total</span>
                         </td>
                         <td class="px-8 py-5 text-right">
-                            <p class="text-[11px] font-black text-stone-900 font-headline">$12,450.00</p>
-                            <p class="text-[9px] text-stone-400 font-bold uppercase mt-1">BS. 448,200.00</p>
+                            <p class="zenith-table-price">$12,450.00</p>
+                            <p class="zenith-table-secondary mt-1 font-mono uppercase opacity-50">Bs. 448,200.00</p>
                         </td>
                         <td class="px-8 py-5">
                             <div class="flex justify-center">
-                                <button class="bg-stone-900 text-white px-4 py-2 text-[9px] font-black uppercase tracking-widest rounded-lg hover:bg-stone-800 transition-all active:scale-95 shadow-lg group">
+                                <button class="bg-stone-900 text-white px-5 py-2.5 text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-black transition-all active:scale-95 shadow-xl group">
                                     Explorar Registro
                                 </button>
                             </div>
                         </td>
                     </tr>
-                    <tr class="hover:bg-stone-50/80 transition-colors group">
+                    <tr class="zenith-table-row bg-stone-50/20 group">
                         <td class="px-8 py-5">
-                            <p class="text-xs font-black text-stone-900 uppercase tracking-tight">ORD-2026-0092</p>
-                            <p class="text-[9px] font-bold text-stone-400 font-mono mt-1">14 OCT 2026 • 09:45</p>
+                            <span class="zenith-table-sku bg-stone-100 text-stone-600 border-stone-200 uppercase tracking-tight">ORD-2026-0092</span>
+                            <p class="text-[9px] font-bold text-stone-400 font-mono mt-1 opacity-60">14 OCT 2026 • 09:45</p>
                         </td>
                         <td class="px-8 py-5">
-                            <div class="flex items-center gap-2">
-                                <div class="w-6 h-6 rounded bg-stone-100 flex items-center justify-center text-[10px] text-stone-400 font-black border border-stone-200">LG</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-stone-100 border border-stone-200 flex items-center justify-center text-[10px] text-stone-400 font-black shadow-sm italic">LG</div>
                                 <div>
-                                    <p class="text-[10px] font-black text-stone-900 uppercase">Logística Global C.A.</p>
-                                    <p class="text-[9px] text-stone-400 font-mono italic">J-30491823-1</p>
+                                    <p class="zenith-table-main">Logística Global C.A.</p>
+                                    <p class="zenith-table-secondary mt-0.5">RIF: J-30491823-1</p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-8 py-5">
-                            <span class="px-3 py-1 bg-stone-100 text-stone-400 text-[9px] font-black uppercase rounded-full border border-stone-200">En Tránsito</span>
+                            <span class="px-4 py-1 bg-stone-100 text-stone-400 text-[9px] font-black uppercase rounded-full border border-stone-200 italic shadow-sm">En Tránsito</span>
                         </td>
                         <td class="px-8 py-5 text-right">
-                            <p class="text-[11px] font-black text-stone-900 font-headline">$4,820.50</p>
-                            <p class="text-[9px] text-stone-400 font-bold uppercase mt-1">BS. 173,538.00</p>
+                            <p class="zenith-table-price">$4,820.50</p>
+                            <p class="zenith-table-secondary mt-1 font-mono uppercase opacity-50">Bs. 173,538.00</p>
                         </td>
                         <td class="px-8 py-5">
                             <div class="flex justify-center">
-                                <button class="bg-white border border-stone-200 text-stone-500 px-4 py-2 text-[9px] font-black uppercase tracking-widest rounded-lg hover:bg-stone-50 transition-all shadow-sm">
+                                <button class="bg-white border border-stone-200 text-stone-500 px-5 py-2.5 text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-stone-50 transition-all shadow-sm">
                                     Detalles
                                 </button>
                             </div>

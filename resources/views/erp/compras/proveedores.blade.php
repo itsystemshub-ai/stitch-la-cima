@@ -121,64 +121,76 @@
         </div>
         
         <div class="overflow-x-auto">
-            <table class="w-full text-left">
+            <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-stone-50/80">
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em]">Aliado Estratégico</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em]">Canal de Contacto</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em]">Perfil Fiscal</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] text-right">Saldo en Cuenta</th>
-                        <th class="px-8 py-5 text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] text-center">Acciones</th>
+                    <tr class="zenith-table-header">
+                        <th class="px-8 py-5">Aliado Estratégico / Segmento</th>
+                        <th class="px-8 py-5">Canal de Operación</th>
+                        <th class="px-8 py-5">Perfil Fiscal</th>
+                        <th class="px-8 py-5 text-right">Saldo Consolidado</th>
+                        <th class="px-8 py-5 text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-stone-100">
-                    <tr class="hover:bg-stone-50/80 transition-colors group">
+                <tbody class="divide-y divide-stone-50">
+                    <tr class="zenith-table-row group">
                         <td class="px-8 py-5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-stone-900 flex items-center justify-center text-primary text-xs font-black shadow-lg">AV</div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-stone-900 flex items-center justify-center text-primary text-[10px] font-black shadow-lg">AV</div>
                                 <div>
-                                    <p class="text-xs font-black text-stone-900 uppercase tracking-tight">Aceros de Venezuela S.A.</p>
-                                    <p class="text-[9px] font-bold text-stone-400 font-mono">J-30594832-1</p>
+                                    <p class="zenith-table-main">Aceros de Venezuela S.A.</p>
+                                    <p class="zenith-table-sku mt-1 border-stone-100 text-stone-400">J-30594832-1</p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-8 py-5">
-                            <p class="text-[10px] font-bold text-stone-900">compras@acerosv.com</p>
-                            <p class="text-[9px] text-stone-400 font-bold uppercase mt-1">Soporte Corporativo</p>
+                            <p class="zenith-table-main font-medium lowercase">compras@acerosv.com</p>
+                            <p class="zenith-table-secondary mt-1">Soporte Corporativo</p>
                         </td>
                         <td class="px-8 py-5">
-                            <span class="px-3 py-1 bg-stone-100 text-stone-900 text-[9px] font-black uppercase rounded-full border border-stone-200">Agente Contribuyente</span>
+                            <span class="px-3 py-1 bg-stone-50 text-stone-900 text-[9px] font-black uppercase rounded-lg border border-stone-100">Agente Contribuyente</span>
                         </td>
-                        <td class="px-8 py-5 text-right font-headline font-black text-stone-900 text-sm">$42,900.00</td>
+                        <td class="px-8 py-5 text-right">
+                            <span class="zenith-table-price">$42,900.00</span>
+                        </td>
                         <td class="px-8 py-5">
-                            <div class="flex justify-center gap-2">
-                                <button class="w-8 h-8 rounded-lg bg-stone-50 text-stone-400 hover:bg-primary hover:text-stone-900 transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
-                                <button class="w-8 h-8 rounded-lg bg-stone-50 text-stone-400 hover:bg-stone-900 hover:text-white transition-all"><span class="material-symbols-outlined text-sm">history</span></button>
+                            <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                                <button class="p-2 hover:bg-stone-100 rounded-lg text-stone-400 hover:text-stone-900 transition-all">
+                                    <span class="material-symbols-outlined text-lg">edit_square</span>
+                                </button>
+                                <button class="p-2 hover:bg-stone-900 rounded-lg text-stone-400 hover:text-white transition-all">
+                                    <span class="material-symbols-outlined text-lg">manage_search</span>
+                                </button>
                             </div>
                         </td>
                     </tr>
-                    <tr class="hover:bg-stone-50/80 transition-colors group">
+                    <tr class="zenith-table-row group">
                         <td class="px-8 py-5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-stone-400 text-xs font-black border border-stone-200">QI</div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-stone-100 border border-stone-200 flex items-center justify-center text-stone-400 text-[10px] font-black">QI</div>
                                 <div>
-                                    <p class="text-xs font-black text-stone-900 uppercase tracking-tight">Químicos Industriales Maracaibo</p>
-                                    <p class="text-[9px] font-bold text-stone-400 font-mono">J-40112345-0</p>
+                                    <p class="zenith-table-main">Químicos Industriales Maracaibo</p>
+                                    <p class="zenith-table-sku mt-1 border-stone-100 text-stone-400">J-40112345-0</p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-8 py-5">
-                            <p class="text-[10px] font-bold text-stone-900">logistica@qimca.com.ve</p>
-                            <p class="text-[9px] text-stone-400 font-bold uppercase mt-1">Despacho Principal</p>
+                            <p class="zenith-table-main font-medium lowercase">logistica@qimca.com.ve</p>
+                            <p class="zenith-table-secondary mt-1">Despacho Principal</p>
                         </td>
                         <td class="px-8 py-5">
-                            <span class="px-3 py-1 bg-stone-100 text-stone-900 text-[9px] font-black uppercase rounded-full border border-stone-200">Ordinario</span>
+                            <span class="px-3 py-1 bg-stone-50 text-stone-900 text-[9px] font-black uppercase rounded-lg border border-stone-100">Ordinario</span>
                         </td>
-                        <td class="px-8 py-5 text-right font-headline font-black text-stone-900 text-sm">$12,450.50</td>
+                        <td class="px-8 py-5 text-right">
+                            <span class="zenith-table-price">$12,450.50</span>
+                        </td>
                         <td class="px-8 py-5">
-                            <div class="flex justify-center gap-2">
-                                <button class="w-8 h-8 rounded-lg bg-stone-50 text-stone-400 hover:bg-primary hover:text-stone-900 transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
-                                <button class="w-8 h-8 rounded-lg bg-stone-50 text-stone-400 hover:bg-stone-900 hover:text-white transition-all"><span class="material-symbols-outlined text-sm">history</span></button>
+                            <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                                <button class="p-2 hover:bg-stone-100 rounded-lg text-stone-400 hover:text-stone-900 transition-all">
+                                    <span class="material-symbols-outlined text-lg">edit_square</span>
+                                </button>
+                                <button class="p-2 hover:bg-stone-900 rounded-lg text-stone-400 hover:text-white transition-all">
+                                    <span class="material-symbols-outlined text-lg">manage_search</span>
+                                </button>
                             </div>
                         </td>
                     </tr>

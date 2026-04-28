@@ -1,27 +1,98 @@
 @extends('tienda.panel.layout')
 @section('title', 'Panel Vendedor')
 @section('content')
-<div class="max-w-7xl mx-auto"><div class="mb-8"><h2 class="text-3xl font-bold text-gray-800">Panel de Vendedor</h2></div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"><div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-<div class="flex items-center"><div class="p-3 bg-green-100 rounded-lg"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></div>
-<div class="ml-4"><p class="text-sm font-medium text-gray-600">Total Ventas</p><p class="text-2xl font-bold text-gray-900">{{ $totalVentas }}</p></div></div></div>
-<div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100"><div class="flex items-center"><div class="p-3 bg-blue-100 rounded-lg"><svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
-<div class="ml-4"><p class="text-sm font-medium text-gray-600">Ventas Mes</p><p class="text-2xl font-bold text-gray-900">{{ $ventasDelMes }}</p></div></div></div>
-<div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100"><div class="flex items-center"><div class="p-3 bg-yellow-100 rounded-lg"><svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
-<div class="ml-4"><p class="text-sm font-medium text-gray-600">Comision Total</p><p class="text-2xl font-bold text-gray-900">$ {{ number_format($comisionTotal, 2) }}</p></div></div></div></div>
-<div class="bg-white rounded-xl shadow-sm border border-gray-100"><div class="p-6 border-b"><h3 class="text-lg font-semibold text-gray-800">Mis Ventas Recientes</h3></div><table class="w-full"><thead class="bg-gray-50"><tr>
-<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
-<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Cliente</th>
-<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
-<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
-<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Comision</th>
-<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th></tr></thead><tbody class="divide-y divide-gray-200">
-@forelse($misVentas as $venta)
-<tr><td class="px-6 py-4 text-sm">#{{ $venta->id }}</td><td class="px-6 py-4 text-sm">{{ $venta->customer->name ?? 'N/A' }}</td>
-<td class="px-6 py-4 text-sm">{{ $venta->created_at->format('d/m/Y') }}</td>
-<td class="px-6 py-4 text-sm">$ {{ number_format($venta->total_amount, 2) }}</td>
-<td class="px-6 py-4 text-sm text-green-600">$ {{ number_format($venta->commission_amount, 2) }}</td>
-<td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded-full @if($venta->status == 'completed') bg-green-100 text-green-800 @elseif($venta->status == 'pending') bg-yellow-100 text-yellow-800 @elseif($venta->status == 'cancelled') bg-red-100 text-red-800 @else bg-gray-100 text-gray-800 @endif">{{ ucfirst($venta->status) }}</span></td></tr>@empty
-<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500">No hay ventas registradas</td></tr>@endforelse
-</tbody></table></div></div>
+<div class="max-w-[1920px] mx-auto px-6 py-12">
+    <div class="mb-12">
+        <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block italic">División de Inteligencia Comercial</span>
+        <h2 class="text-5xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Panel de <span class="text-stone-300">Vendedor</span></h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <!-- KPI: Total Ventas -->
+        <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group">
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Volumen Acumulado</p>
+            <div class="flex items-end justify-between">
+                <p class="text-4xl font-headline font-black text-stone-950 tracking-tighter leading-none">{{ $totalVentas }} <span class="text-[12px] text-stone-300">TRANSACCIONES</span></p>
+                <span class="material-symbols-outlined text-green-500 text-3xl">analytics</span>
+            </div>
+        </div>
+
+        <!-- KPI: Ventas Mes -->
+        <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group">
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Cierre Mensual Actual</p>
+            <div class="flex items-end justify-between">
+                <p class="text-4xl font-headline font-black text-stone-950 tracking-tighter leading-none">{{ $ventasDelMes }} <span class="text-[12px] text-stone-300">OPERACIONES</span></p>
+                <span class="material-symbols-outlined text-primary text-3xl">calendar_month</span>
+            </div>
+        </div>
+
+        <!-- KPI: Comision -->
+        <div class="bg-stone-900 rounded-[32px] shadow-xl p-8 border border-white/5 relative overflow-hidden group">
+            <p class="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-4 italic">Liquidación de Comisiones</p>
+            <div class="flex items-end justify-between">
+                <p class="text-4xl font-headline font-black text-white tracking-tighter leading-none">$ {{ number_format($comisionTotal, 2) }}</p>
+                <span class="material-symbols-outlined text-primary text-3xl italic">payments</span>
+            </div>
+            <div class="absolute -right-4 -bottom-4 opacity-[0.05]">
+                <span class="material-symbols-outlined text-8xl text-white">paid</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Table -->
+    <div class="bg-white rounded-[40px] shadow-2xl border border-stone-200 overflow-hidden relative">
+        <div class="p-10 border-b border-stone-50 flex justify-between items-center bg-stone-50/30">
+            <h3 class="text-[14px] font-black text-stone-900 uppercase tracking-[0.2em] italic flex items-center gap-3">
+                <span class="w-2 h-8 bg-primary rounded-full"></span>
+                Registro de Gestión Comercial
+            </h3>
+        </div>
+
+        <table class="w-full text-left zenith-table-main">
+            <thead class="zenith-table-header uppercase italic">
+                <tr>
+                    <th class="py-5 px-10">Referencia</th>
+                    <th class="py-5 px-10">Identidad Cliente</th>
+                    <th class="py-5 px-10">Fecha Registro</th>
+                    <th class="py-5 px-10 text-right">Inversión</th>
+                    <th class="py-5 px-10 text-center">Incentivo</th>
+                    <th class="py-5 px-10 text-center">Estado Gestión</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-50">
+                @forelse($misVentas as $venta)
+                <tr class="bg-white hover:bg-stone-50/50 transition-colors group">
+                    <td class="py-6 px-10 font-mono text-[10.5px] font-bold text-stone-400 group-hover:text-primary tracking-tighter">ZEN-S-{{ str_pad($venta->id, 6, '0', STR_PAD_LEFT) }}</td>
+                    <td class="py-6 px-10 font-black uppercase text-stone-900 tracking-tight leading-none group-hover:translate-x-1 transition-transform">
+                        {{ $venta->customer->name ?? 'INSTITUCIONAL N/A' }}
+                    </td>
+                    <td class="py-6 px-10 text-stone-400 font-bold uppercase text-[10px] tracking-widest italic">
+                        {{ $venta->created_at->format('d/M/Y') }}
+                    </td>
+                    <td class="py-6 px-10 text-right font-mono text-[11px] font-bold text-stone-950 tracking-tighter">
+                        $ {{ number_format($venta->total_amount, 2) }}
+                    </td>
+                    <td class="py-6 px-10 text-center">
+                        <span class="text-green-600 font-mono text-[10.5px] font-black tracking-widest">+ $ {{ number_format($venta->commission_amount, 2) }}</span>
+                    </td>
+                    <td class="py-6 px-10 text-center">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border bg-stone-900 leading-none
+                            @if($venta->status == 'completed') text-green-500 border-green-500/20 
+                            @elseif($venta->status == 'pending') text-amber-500 border-amber-500/20 
+                            @elseif($venta->status == 'cancelled') text-red-500 border-red-500/20 
+                            @else text-stone-400 border-stone-800 @endif">
+                            <span class="w-1.5 h-1.5 rounded-full @if($venta->status == 'completed') bg-green-500 animate-pulse @elseif($venta->status == 'pending') bg-amber-500 @else bg-red-500 @endif"></span>
+                            {{ $venta->status }}
+                        </span>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="py-32 text-center text-stone-400 font-black uppercase tracking-[0.2em] italic text-[11px]">No se detectaron operaciones comerciales asignadas.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
 @endsection

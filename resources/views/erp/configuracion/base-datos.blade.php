@@ -54,55 +54,67 @@
       <div class="overflow-x-auto">
         <table class="w-full text-left">
           <thead>
-            <tr class="bg-stone-50 text-[10px] font-black text-stone-400 uppercase tracking-widest border-b border-stone-100">
-              <th class="p-6">Nombre de Tabla</th>
-              <th class="p-6">Filas Estimadas</th>
-              <th class="p-6">Espacio en Disco</th>
-              <th class="p-6">Tipo</th>
-              <th class="p-6 text-right">Mantenimiento</th>
+            <tr class="zenith-table-header">
+              <th class="p-6">Nombre del Repositorio (SQL)</th>
+              <th class="p-6">Dataset / Filas</th>
+              <th class="p-6">Carga en Disco</th>
+              <th class="p-6">Arquitectura</th>
+              <th class="p-6 text-right">Acción Técnica</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-stone-100 text-sm font-body">
-            <tr class="hover:bg-primary/5 transition-colors">
+          <tbody class="divide-y divide-stone-100">
+            <tr class="zenith-table-row group">
               <td class="p-6">
-                <p class="font-black text-stone-900">products_kardex</p>
-                <p class="text-[9px] text-stone-500 font-bold uppercase tracking-widest">Movimientos de Inventario</p>
+                <p class="zenith-table-main">products_kardex</p>
+                <p class="zenith-table-secondary mt-0.5">HISTORIAL DE MOVIMIENTOS DE STOCK</p>
               </td>
-              <td class="p-6 font-mono font-bold text-stone-700">142,500</td>
-              <td class="p-6 font-mono font-bold text-stone-700">256.4 MB</td>
               <td class="p-6">
-                <span class="text-[10px] font-black text-stone-400 uppercase">Datos</span>
+                <span class="zenith-table-sku bg-stone-100 text-stone-700 border-stone-200">142,500 ROWS</span>
+              </td>
+              <td class="p-6">
+                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800">256.4 MB</span>
+              </td>
+              <td class="p-6">
+                <span class="text-[10px] font-black text-stone-400 uppercase tracking-widest italic">Inno-DB Ledger</span>
               </td>
               <td class="p-6 text-right">
-                <button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors">rotate_left</button>
+                <button class="material-symbols-outlined text-stone-300 hover:text-primary transition-all">rotate_left</button>
               </td>
             </tr>
-            <tr class="hover:bg-primary/5 transition-colors">
+            <tr class="zenith-table-row bg-stone-50/20 group">
               <td class="p-6">
-                <p class="font-black text-stone-900">sales_ledger</p>
-                <p class="text-[9px] text-stone-500 font-bold uppercase tracking-widest">Historial de Ventas</p>
+                <p class="zenith-table-main">sales_ledger</p>
+                <p class="zenith-table-secondary mt-0.5">REGISTRO DE TRANSACCIONES FISCALES</p>
               </td>
-              <td class="p-6 font-mono font-bold text-stone-700">89,200</td>
-              <td class="p-6 font-mono font-bold text-stone-700">188.1 MB</td>
               <td class="p-6">
-                <span class="text-[10px] font-black text-stone-400 uppercase">Finanzas</span>
+                <span class="zenith-table-sku bg-stone-100 text-stone-700 border-stone-200">89,200 ROWS</span>
+              </td>
+              <td class="p-6">
+                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800">188.1 MB</span>
+              </td>
+              <td class="p-6">
+                <span class="text-[10px] font-black text-stone-400 uppercase tracking-widest italic">Financial Core</span>
               </td>
               <td class="p-6 text-right">
-                <button class="material-symbols-outlined text-stone-400 hover:text-primary transition-colors">rotate_left</button>
+                <button class="material-symbols-outlined text-stone-300 hover:text-primary transition-all">rotate_left</button>
               </td>
             </tr>
-            <tr class="hover:bg-primary/5 transition-colors">
+            <tr class="zenith-table-row group">
               <td class="p-6">
-                <p class="font-black text-stone-900">audit_logs</p>
-                <p class="text-[9px] text-stone-500 font-bold uppercase tracking-widest">Registros de Seguridad</p>
+                <p class="zenith-table-main">audit_logs</p>
+                <p class="zenith-table-secondary mt-0.5">BITÁCORA DE SEGURIDAD SISTÉMICA</p>
               </td>
-              <td class="p-6 font-mono font-bold text-stone-700">12,400</td>
-              <td class="p-6 font-mono font-bold text-stone-700">64.5 MB</td>
               <td class="p-6">
-                <span class="text-[10px] font-black text-stone-400 uppercase">Sistema</span>
+                <span class="zenith-table-sku bg-stone-100 text-stone-700 border-stone-200">12,400 ROWS</span>
               </td>
-              <td class="p-6 text-right text-red-500">
-                <button class="material-symbols-outlined hover:scale-110 transition-transform">delete_sweep</button>
+              <td class="p-6">
+                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800">64.5 MB</span>
+              </td>
+              <td class="p-6">
+                <span class="text-[10px] font-black text-stone-400 uppercase tracking-widest italic">Security Audit</span>
+              </td>
+              <td class="p-6 text-right">
+                <button class="material-symbols-outlined text-red-400 hover:text-red-600 transition-all">delete_sweep</button>
               </td>
             </tr>
           </tbody>

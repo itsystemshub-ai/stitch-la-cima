@@ -50,42 +50,46 @@
   <div class="overflow-x-auto">
     <table class="w-full text-left border-collapse">
       <thead>
-        <tr class="bg-stone-50 text-stone-500 font-bold uppercase text-[10px] tracking-widest border-b border-stone-200">
-          <th class="px-6 py-4">Empleado</th>
-          <th class="px-4 py-4">Cédula</th>
-          <th class="px-4 py-4">Cargo</th>
-          <th class="px-4 py-4 text-right">Salario Base</th>
-          <th class="px-4 py-4">Fecha Ingreso</th>
-          <th class="px-4 py-4">Estado</th>
-          <th class="px-6 py-4 text-right">Acciones</th>
+        <tr class="zenith-table-header">
+          <th class="px-6 py-4">Empleado / Cargo</th>
+          <th class="px-4 py-4">Cédula Identidad</th>
+          <th class="px-4 py-4 text-right">Devengado Mensual</th>
+          <th class="px-4 py-4 text-center">Ingreso Fiscal</th>
+          <th class="px-4 py-4 text-center">Estado Civil</th>
+          <th class="px-6 py-4 text-right">Gestión</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-stone-100 text-sm">
+      <tbody class="divide-y divide-stone-50">
         @forelse($empleados as $empleado)
-        <tr class="hover:bg-stone-50/80 transition-colors">
-          <td class="px-6 py-4">
+        <tr class="zenith-table-row group">
+          <td class="px-6 py-5">
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full bg-stone-100 flex items-center justify-center font-bold text-stone-600">
+              <div class="w-9 h-9 rounded-xl bg-stone-900 flex items-center justify-center font-black text-primary text-[11px] shadow-lg">
                 {{ substr($empleado->nombre, 0, 1) }}{{ substr($empleado->apellido, 0, 1) }}
               </div>
               <div>
-                <p class="font-bold text-stone-900">{{ $empleado->nombre_completo }}</p>
-                <p class="text-[10px] text-stone-500">{{ $empleado->email }}</p>
+                <p class="zenith-table-main">{{ $empleado->nombre_completo }}</p>
+                <p class="zenith-table-secondary mt-1">{{ $empleado->cargo }}</p>
               </div>
             </div>
           </td>
-          <td class="px-4 py-4 font-mono text-xs text-stone-500">{{ $empleado->cedula }}</td>
-          <td class="px-4 py-4 text-stone-700 font-medium">{{ $empleado->cargo }}</td>
-          <td class="px-4 py-4 text-right font-bold text-stone-900">${{ number_format($empleado->salario, 2) }}</td>
-          <td class="px-4 py-4 text-stone-500 text-xs">{{ $empleado->fecha_ingreso->format('d M Y') }}</td>
-          <td class="px-4 py-4">
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase {{ $empleado->estatus === 'ACTIVO' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+          <td class="px-4 py-5">
+            <span class="zenith-table-sku">{{ $empleado->cedula }}</span>
+          </td>
+          <td class="px-4 py-5 text-right">
+            <span class="zenith-table-price">${{ number_format($empleado->salario, 2) }}</span>
+          </td>
+          <td class="px-4 py-5 text-center font-mono">
+            <span class="zenith-table-secondary">{{ $empleado->fecha_ingreso->format('d/m/Y') }}</span>
+          </td>
+          <td class="px-4 py-5 text-center">
+            <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest {{ $empleado->estatus === 'ACTIVO' ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600' }}">
                 {{ $empleado->estatus }}
             </span>
           </td>
-          <td class="px-6 py-4 text-right">
-            <div class="flex justify-end gap-2">
-              <button class="p-1.5 text-stone-400 hover:text-primary transition-all">
+          <td class="px-6 py-5 text-right">
+            <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
+              <button class="p-2 hover:bg-stone-100 rounded-lg text-stone-400 hover:text-stone-900 transition-all">
                 <span class="material-symbols-outlined text-lg">folder_shared</span>
               </button>
             </div>
@@ -93,7 +97,7 @@
         </tr>
         @empty
         <tr>
-            <td colspan="7" class="px-6 py-10 text-center text-stone-500">No hay empleados registrados.</td>
+            <td colspan="6" class="px-6 py-12 text-center zenith-table-main text-stone-400">Sin personal registrado en el nodo actual.</td>
         </tr>
         @endforelse
       </tbody>

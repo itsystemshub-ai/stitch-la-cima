@@ -35,63 +35,73 @@
       <div class="overflow-x-auto">
         <table class="w-full text-left">
           <thead>
-            <tr class="bg-stone-50 text-[10px] font-black text-stone-400 uppercase tracking-widest border-b border-stone-100">
-              <th class="p-6">Usuario / Alias</th>
-              <th class="p-6">Rol de Sistema</th>
-              <th class="p-6">Última Conexión</th>
-              <th class="p-6">Estatus</th>
-              <th class="p-6 text-right">Acciones</th>
+            <tr class="zenith-table-header">
+              <th class="p-6">Identidad / Nodo de Acceso</th>
+              <th class="p-6">Rol Jerárquico</th>
+              <th class="p-6 text-center">Último Log-In</th>
+              <th class="p-6">Estatus Seguridad</th>
+              <th class="p-6 text-right">Auditoría</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-stone-100 text-sm font-body">
-            <tr class="hover:bg-primary/5 transition-colors">
+          <tbody class="divide-y divide-stone-50">
+            <tr class="zenith-table-row group">
               <td class="p-6">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-stone-900 rounded-full flex items-center justify-center text-primary font-black text-xs">AD</div>
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 bg-stone-900 rounded-xl flex items-center justify-center text-primary font-black text-xs shadow-lg transform group-hover:scale-110 transition-all">AD</div>
                   <div>
-                    <p class="font-black text-stone-900">Admin_Cima</p>
-                    <p class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">admin@lacima.com</p>
+                    <p class="zenith-table-main">Admin_Cima</p>
+                    <p class="zenith-table-secondary mt-1">admin@lacima.com</p>
                   </div>
                 </div>
               </td>
               <td class="p-6">
-                <span class="px-2 py-1 bg-stone-900 text-primary text-[9px] font-black rounded uppercase">Super Admin</span>
+                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800">SUPER_ADMIN</span>
               </td>
-              <td class="p-6 text-stone-600 font-bold text-xs">Hoy, 10:24 AM</td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-secondary font-mono">HOY 10:24 AM</span>
+              </td>
               <td class="p-6">
                 <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span class="text-[10px] font-black text-green-700 uppercase">En Línea</span>
+                  <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+                  <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest bg-green-50 text-green-700">ONLINE</span>
                 </div>
               </td>
               <td class="p-6 text-right">
-                <button class="material-symbols-outlined text-stone-400 hover:text-stone-900 transition-colors p-1">edit</button>
-                <button class="material-symbols-outlined text-stone-400 hover:text-red-500 transition-colors p-1">lock_reset</button>
+                <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                  <button class="p-2 hover:bg-stone-100 rounded-lg text-stone-400 hover:text-stone-900 transition-all">
+                    <span class="material-symbols-outlined text-lg">edit_note</span>
+                  </button>
+                </div>
               </td>
             </tr>
-            <tr class="hover:bg-primary/5 transition-colors">
+            <tr class="zenith-table-row group transition-colors">
               <td class="p-6">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-stone-100 rounded-full flex items-center justify-center text-stone-400 font-black text-xs border border-stone-200">JO</div>
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 bg-stone-100 border border-stone-200 rounded-xl flex items-center justify-center text-stone-400 font-black text-xs">JO</div>
                   <div>
-                    <p class="font-black text-stone-900">Javier_Ops</p>
-                    <p class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">j.ortega@lacima.com</p>
+                    <p class="zenith-table-main">Javier_Ops</p>
+                    <p class="zenith-table-secondary mt-1">j.ortega@lacima.com</p>
                   </div>
                 </div>
               </td>
               <td class="p-6">
-                <span class="px-2 py-1 bg-stone-100 text-stone-600 text-[9px] font-black rounded uppercase border border-stone-200">Operador</span>
+                <span class="zenith-table-sku">OPERATOR_01</span>
               </td>
-              <td class="p-6 text-stone-500 font-bold text-xs">Ayer, 16:45 PM</td>
+              <td class="p-6 text-center">
+                <span class="zenith-table-secondary font-mono">AYER 16:45 PM</span>
+              </td>
               <td class="p-6">
                 <div class="flex items-center gap-2 opacity-50">
                   <div class="w-2 h-2 bg-stone-400 rounded-full"></div>
-                  <span class="text-[10px] font-black text-stone-500 uppercase">Desconectado</span>
+                  <span class="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest bg-stone-50 text-stone-500">OFFLINE</span>
                 </div>
               </td>
               <td class="p-6 text-right">
-                <button class="material-symbols-outlined text-stone-400 hover:text-stone-900 transition-colors p-1">edit</button>
-                <button class="material-symbols-outlined text-stone-400 hover:text-red-500 transition-colors p-1">block</button>
+                <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                  <button class="p-2 hover:bg-stone-100 rounded-lg text-stone-400 hover:text-stone-900 transition-all">
+                    <span class="material-symbols-outlined text-lg">history</span>
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>

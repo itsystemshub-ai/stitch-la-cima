@@ -60,85 +60,72 @@
                 <div class="flex items-center gap-6 mb-8 pb-6 border-b border-outline">
                     <span id="productSKU" class="bg-black text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest rounded-lg">SKU: ---</span>
                     <div class="flex items-center gap-1">
-                        <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="material-symbols-outlined text-stone-300 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <span class="text-xs font-bold text-on-surface-variant ml-1">(24 reseñas)</span>
+                        <span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-stone-300 text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="text-[12px] font-black text-on-surface-variant ml-2 uppercase tracking-tight">(24 reseñas verificas)</span>
                     </div>
                 </div>
 
-                <div class="bg-white border border-outline rounded-2xl p-8 mb-8 shadow-sm">
-                    <div class="flex items-end gap-4 mb-8">
-                        <span id="productPrice" class="text-5xl font-black text-black tracking-tighter">$0.00</span>
-                        <span id="productOldPrice" class="text-on-surface-variant line-through text-2xl font-bold mb-1 hidden">$0.00</span>
-                        <span id="productDiscount" class="bg-primary text-black px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full mb-1 hidden">-0%</span>
+                <div class="bg-white border border-stone-200 rounded-[40px] p-10 mb-8 shadow-sm relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 opacity-[0.03] pointer-events-none">
+                        <span class="material-symbols-outlined text-[200px]">payments</span>
                     </div>
-                    <p id="productPriceBs" class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-6">Bs. 0.00 aprox. | IVA incluido</p>
 
-                    <div class="flex gap-4 mb-8">
-                        <div class="flex items-center bg-stone-100 rounded-2xl p-1.5 border border-stone-200 shadow-inner">
-                            <button onclick="updateQty(-1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-white hover:shadow-md transition-all text-black active:scale-90">
+                    <div class="flex items-end gap-4 mb-8">
+                        <span id="productPrice" class="text-6xl font-headline font-black text-stone-950 tracking-tighter italic leading-none">$0.00</span>
+                        <span id="productOldPrice" class="text-stone-300 line-through text-2xl font-bold mb-1 hidden">$0.00</span>
+                    </div>
+                    <p id="productPriceBs" class="text-[10.5px] font-black text-stone-400 uppercase tracking-[0.2em] mb-8 bg-stone-50 px-4 py-2 rounded-full inline-block border border-stone-100 italic font-mono">
+                        Ref. Bs. 0.00 aprox. <span class="mx-2 opacity-30">|</span> <span class="text-stone-300 font-bold">Protocolo IVA incluido</span>
+                    </p>
+
+                    <div class="flex gap-4 mb-10">
+                        <div class="flex items-center bg-stone-950 rounded-2xl p-1.5 border border-stone-800 shadow-2xl">
+                            <button onclick="updateQty(-1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-stone-800 text-stone-400 transition-all active:scale-90">
                                 <span class="material-symbols-outlined font-black">remove</span>
                             </button>
-                            <input id="qtyInput" class="w-16 bg-transparent border-none text-center font-black text-xl focus:ring-0 pointer-events-none" type="number" value="1" min="1" max="99" readonly/>
-                            <button onclick="updateQty(1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-white hover:shadow-md transition-all text-black active:scale-90">
+                            <input id="qtyInput" class="w-16 bg-transparent border-none text-center font-black text-xl focus:ring-0 pointer-events-none text-white font-mono" type="number" value="1" min="1" max="99" readonly/>
+                            <button onclick="updateQty(1)" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-stone-800 text-stone-400 transition-all active:scale-90">
                                 <span class="material-symbols-outlined font-black">add</span>
                             </button>
                         </div>
-                        <button onclick="addToCartFromDetail()" class="flex-grow bg-black text-primary hover:bg-primary hover:text-black border border-black font-black uppercase py-3 px-6 tracking-widest text-xs rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl active:scale-95">
-                            <span class="material-symbols-outlined text-2xl">shopping_cart</span>
-                            Añadir al Carrito
+                        <button onclick="addToCartFromDetail()" class="flex-grow bg-primary text-stone-900 hover:bg-white hover:text-stone-900 border border-transparent font-black uppercase py-4 px-8 tracking-[0.2em] text-[11px] rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-primary/20 active:scale-95 group italic">
+                            <span class="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">add_shopping_cart</span>
+                            Garantizar Transacción
                         </button>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-6 pt-6 border-t border-outline">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span class="material-symbols-outlined text-primary text-lg">local_shipping</span>
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-stone-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center flex-shrink-0 text-stone-900 border border-stone-100">
+                                <span class="material-symbols-outlined text-[12px]">local_shipping</span>
                             </div>
-                            <div class="text-[10px] font-black uppercase tracking-widest">
-                                <p class="text-black">Envío Nacional</p>
-                                <p class="text-on-surface-variant">2-4 días hábiles</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span class="material-symbols-outlined text-primary text-lg">verified_user</span>
-                            </div>
-                            <div class="text-[10px] font-black uppercase tracking-widest">
-                                <p class="text-black">Garantía 12 Meses</p>
-                                <p class="text-on-surface-variant">Fabricante directo</p>
+                            <div class="flex flex-col">
+                                <p class="text-stone-900 text-[11px] font-black uppercase tracking-widest leading-none mb-1 italic">Distribución</p>
+                                <p class="text-stone-400 text-[9px] font-bold uppercase tracking-tight">Logística Nacional B2B</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span class="material-symbols-outlined text-primary text-lg">security</span>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center flex-shrink-0 text-stone-900 border border-stone-100">
+                                <span class="material-symbols-outlined text-[12px]">verified_user</span>
                             </div>
-                            <div class="text-[10px] font-black uppercase tracking-widest">
-                                <p class="text-black">Pago Seguro</p>
-                                <p class="text-on-surface-variant">Encriptación SSL</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                                <span class="material-symbols-outlined text-primary text-lg">exchange</span>
-                            </div>
-                            <div class="text-[10px] font-black uppercase tracking-widest">
-                                <p class="text-black">Devolución Fácil</p>
-                                <p class="text-on-surface-variant">30 días garantía</p>
+                            <div class="flex flex-col">
+                                <p class="text-stone-900 text-[11px] font-black uppercase tracking-widest leading-none mb-1 italic">Integridad</p>
+                                <p class="text-stone-400 text-[9px] font-bold uppercase tracking-tight">Garantía OEM Directa</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="technicalNote" class="bg-primary/10 border-l-4 border-primary rounded-r-xl p-6">
-                    <p class="text-xs font-black uppercase tracking-[0.3em] mb-2 text-black flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">engineering</span>
-                        Nota Técnica del Experto
+                <div id="technicalNote" class="bg-stone-50 border-l-4 border-primary rounded-r-[30px] p-8 shadow-sm">
+                    <p class="text-[10px] font-black uppercase tracking-[0.3em] mb-3 text-stone-950 flex items-center gap-2 italic">
+                        <span class="material-symbols-outlined text-primary text-[12px]">terminal</span>
+                        Dictamen Técnico Zenith
                     </p>
-                    <p id="technicalNoteText" class="text-sm font-semibold text-on-surface-variant leading-relaxed">Cargando...</p>
+                    <p id="technicalNoteText" class="text-[12px] font-bold text-stone-500 leading-relaxed uppercase tracking-tight">Cargando metadata técnica...</p>
                 </div>
             </div>
         </div>
@@ -147,29 +134,29 @@
     <!-- Tabs Section -->
     <section class="max-w-screen-2xl mx-auto px-6 md:px-12 mt-24">
         <div class="flex gap-0 border-b-2 border-outline mb-12 overflow-x-auto">
-            <button onclick="switchTab('specs')" id="tab-specs" class="tab-btn pb-4 border-b-4 border-primary text-black text-[11px] font-black uppercase tracking-[0.3em] whitespace-nowrap px-6">Especificaciones</button>
-            <button onclick="switchTab('compatibility')" id="tab-compatibility" class="tab-btn pb-4 border-b-4 border-transparent text-on-surface-variant hover:text-primary transition-all text-[11px] font-black uppercase tracking-[0.3em] whitespace-nowrap px-6">Compatibilidad</button>
-            <button onclick="switchTab('installation')" id="tab-installation" class="tab-btn pb-4 border-b-4 border-transparent text-on-surface-variant hover:text-primary transition-all text-[11px] font-black uppercase tracking-[0.3em] whitespace-nowrap px-6">Instalación</button>
+            <button onclick="switchTab('specs')" id="tab-specs" class="tab-btn pb-4 border-b-4 border-primary text-black text-[11px] font-black uppercase tracking-[0.3em] whitespace-nowrap px-6 italic">Especificaciones</button>
+            <button onclick="switchTab('compatibility')" id="tab-compatibility" class="tab-btn pb-4 border-b-4 border-transparent text-on-surface-variant hover:text-primary transition-all text-[11px] font-black uppercase tracking-[0.3em] whitespace-nowrap px-6 italic">Compatibilidad</button>
+            <button onclick="switchTab('installation')" id="tab-installation" class="tab-btn pb-4 border-b-4 border-transparent text-on-surface-variant hover:text-primary transition-all text-[11px] font-black uppercase tracking-[0.3em] whitespace-nowrap px-6 italic">Instalación</button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div id="content-specs" class="tab-content active">
-                <h3 class="text-3xl font-black text-black uppercase tracking-tighter mb-8">Especificaciones Técnicas</h3>
-                <div id="specsTable" class="border border-outline rounded-2xl overflow-hidden">
+                <h3 class="text-3xl font-black text-black uppercase tracking-tighter mb-8 italic">Ficha Técnica Central</h3>
+                <div id="specsTable" class="border border-outline rounded-2xl overflow-hidden p-6 bg-white shadow-sm text-[12px] uppercase">
                     <!-- Generado dinámicamente -->
                 </div>
             </div>
 
             <div id="content-compatibility" class="tab-content">
-                <h3 class="text-3xl font-black text-black uppercase tracking-tighter mb-8">Compatibilidad</h3>
-                <div id="compatibilityGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <h3 class="text-3xl font-black text-black uppercase tracking-tighter mb-8 italic">Compatibilidad de Sistemas</h3>
+                <div id="compatibilityGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-[12px] uppercase">
                     <!-- Generado dinámicamente -->
                 </div>
             </div>
 
             <div id="content-installation" class="tab-content">
-                <h3 class="text-3xl font-black text-black uppercase tracking-tighter mb-8">Guía de Instalación</h3>
-                <div id="installationSteps" class="space-y-6">
+                <h3 class="text-3xl font-black text-black uppercase tracking-tighter mb-8 italic">Secuencia de Montaje</h3>
+                <div id="installationSteps" class="space-y-6 text-[12px] uppercase">
                     <!-- Generado dinámicamente -->
                 </div>
             </div>
@@ -177,11 +164,11 @@
             <div class="space-y-8">
                 <div class="bg-black p-10 rounded-2xl relative overflow-hidden group">
                     <div class="relative z-10">
-                        <h4 class="text-primary text-2xl font-black uppercase tracking-tighter mb-4 italic">¿Necesitas Soporte Técnico?</h4>
-                        <p class="text-stone-400 text-xs font-medium mb-8 leading-relaxed uppercase tracking-widest">Habla con un ingeniero para especificaciones de torque y secuencia de montaje en tiempo real.</p>
-                        <a href="mailto:soporte@lacima.com" class="inline-flex items-center gap-2 bg-primary text-black px-8 py-3 text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-white transition-all">
-                            <span class="material-symbols-outlined text-sm">support_agent</span>
-                            Conectar con Experto
+                        <h4 class="text-primary text-2xl font-black uppercase tracking-tighter mb-4 italic">Asistencia de Ingeniería</h4>
+                        <p class="text-stone-400 text-[12px] font-bold mb-8 leading-relaxed uppercase tracking-tight">Consulte especificaciones de torque, tolerancia y secuencia de ajuste con nuestro departamento técnico corporativo.</p>
+                        <a href="mailto:soporte@lacima.com" class="inline-flex items-center gap-2 bg-primary text-black px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] rounded-lg hover:bg-white transition-all italic">
+                            <span class="material-symbols-outlined text-[12px]">support_agent</span>
+                            Conectar con Ingeniero
                         </a>
                     </div>
                     <span class="material-symbols-outlined absolute right-[-20px] bottom-[-20px] text-white/5 text-[160px] transform group-hover:scale-110 transition-transform">engineering</span>

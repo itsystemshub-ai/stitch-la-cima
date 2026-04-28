@@ -122,62 +122,76 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-stone-50 border-b border-stone-100">
-                        <th class="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-stone-400">Cliente / Región</th>
-                        <th class="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-stone-400">RIF / Identificación</th>
-                        <th class="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-stone-400 text-right">Saldo Total</th>
-                        <th class="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-stone-400 text-center">Fact. Vencidas</th>
-                        <th class="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-stone-400 text-center">Antigüedad</th>
-                        <th class="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-stone-400">Estado Cartera</th>
-                        <th class="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-stone-400 text-right">Acciones</th>
+                    <tr class="zenith-table-header">
+                        <th class="px-6 py-5">Razón Social / Segmento</th>
+                        <th class="px-6 py-5">Identificación Fiscal</th>
+                        <th class="px-6 py-5 text-right">Saldo en Cartera</th>
+                        <th class="px-6 py-5 text-center">Docs. Vencidos</th>
+                        <th class="px-6 py-5 text-center">Antigüedad Máx.</th>
+                        <th class="px-6 py-5">Criticidad</th>
+                        <th class="px-6 py-5 text-right">Gestión</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-100">
-                    <tr class="hover:bg-amber-50/20 transition-all group">
+                    <tr class="zenith-table-row group">
                         <td class="px-6 py-5">
-                            <p class="text-[12px] font-black text-stone-900 uppercase tracking-tight">REPUESTOS EL MOTOR, C.A.</p>
-                            <p class="text-[9px] text-stone-400 font-black uppercase tracking-widest">Mayorista • Región Central</p>
+                            <p class="zenith-table-main">REPUESTOS EL MOTOR, C.A.</p>
+                            <p class="zenith-table-secondary mt-1">Mayorista • Región Central</p>
                         </td>
-                        <td class="px-6 py-5 text-[11px] font-bold text-stone-500 tracking-wider">J-31245678-0</td>
-                        <td class="px-6 py-5 text-[14px] font-black text-stone-900 text-right">$45,200.00</td>
+                        <td class="px-6 py-5">
+                            <span class="zenith-table-sku">J-31245678-0</span>
+                        </td>
+                        <td class="px-6 py-5 text-right">
+                            <span class="zenith-table-price">$45,200.00</span>
+                        </td>
                         <td class="px-6 py-5 text-center">
                             <span class="px-3 py-1 bg-stone-100 text-stone-600 text-[9px] font-black uppercase rounded-lg border border-stone-200">03 FACT</span>
                         </td>
-                        <td class="px-6 py-5 text-center text-[11px] font-bold text-stone-500">45 Días</td>
-                        <td class="px-6 py-5">
-                            <span class="flex items-center gap-2 text-[10px] font-black uppercase text-amber-600">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        <td class="px-6 py-5 text-center">
+                            <span class="zenith-table-secondary font-mono">45 Días</span>
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest bg-amber-50 text-amber-600">
                                 Pendiente
                             </span>
                         </td>
                         <td class="px-6 py-5 text-right">
-                            <button class="w-10 h-10 rounded-xl flex items-center justify-center text-stone-300 hover:text-stone-900 hover:bg-stone-100 transition-all">
-                                <span class="material-symbols-outlined">more_vert</span>
-                            </button>
+                            <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                                <button class="p-2 hover:bg-stone-100 rounded-lg text-stone-400 hover:text-stone-900 transition-all">
+                                    <span class="material-symbols-outlined text-lg">more_vert</span>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     
-                    <tr class="hover:bg-red-50/20 transition-all group bg-red-50/5">
+                    <tr class="zenith-table-row group bg-red-50/5">
                         <td class="px-6 py-5">
-                            <p class="text-[12px] font-black text-stone-900 uppercase tracking-tight">SERVICIOS INTEGRALES TÉCNICOS</p>
-                            <p class="text-[9px] text-stone-400 font-black uppercase tracking-widest">Taller • Barquisimeto</p>
+                            <p class="zenith-table-main text-red-900">SERVICIOS INTEGRALES TÉCNICOS</p>
+                            <p class="zenith-table-secondary mt-1 text-red-500/70">Taller • Barquisimeto</p>
                         </td>
-                        <td class="px-6 py-5 text-[11px] font-bold text-stone-500 tracking-wider">J-40552132-1</td>
-                        <td class="px-6 py-5 text-[14px] font-black text-red-600 text-right">$12,850.00</td>
+                        <td class="px-6 py-5">
+                            <span class="zenith-table-sku border-red-200 text-red-600">J-40552132-1</span>
+                        </td>
+                        <td class="px-6 py-5 text-right">
+                            <span class="zenith-table-price text-red-600">$12,850.00</span>
+                        </td>
                         <td class="px-6 py-5 text-center">
-                            <span class="px-3 py-1 bg-red-50 text-red-700 text-[9px] font-black uppercase rounded-lg border border-red-200">05 FACT</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 text-[9px] font-black uppercase rounded-lg border border-red-200">05 FACT</span>
                         </td>
-                        <td class="px-6 py-5 text-center text-[11px] font-black text-red-600">94 Días</td>
-                        <td class="px-6 py-5">
-                            <span class="flex items-center gap-2 text-[10px] font-black uppercase text-red-600">
-                                <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                        <td class="px-6 py-5 text-center">
+                            <span class="zenith-table-secondary font-mono text-red-600">94 Días</span>
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest bg-red-600 text-white shadow-lg shadow-red-200">
                                 Riesgo Crítico
                             </span>
                         </td>
                         <td class="px-6 py-5 text-right">
-                            <button class="w-10 h-10 rounded-xl flex items-center justify-center text-stone-300 hover:text-red-600 hover:bg-red-100 transition-all">
-                                <span class="material-symbols-outlined">more_vert</span>
-                            </button>
+                            <div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                                <button class="p-2 hover:bg-red-100 rounded-lg text-red-400 hover:text-red-900 transition-all">
+                                    <span class="material-symbols-outlined text-lg">error</span>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

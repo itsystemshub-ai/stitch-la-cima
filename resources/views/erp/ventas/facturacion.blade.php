@@ -131,44 +131,68 @@
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-stone-50 text-[9px] font-black uppercase tracking-[0.2em] text-stone-400">
-                            <th class="py-5 px-6 rounded-l-2xl">Ref / SKU</th>
-                            <th class="py-5 px-6">Descripción Técnica</th>
+                        <tr class="zenith-table-header">
+                            <th class="py-5 px-6">Identificación / SKU</th>
+                            <th class="py-5 px-6">Descripción Técnica de la Parte</th>
                             <th class="py-5 px-6 text-center">Cant.</th>
                             <th class="py-5 px-6 text-right">P. Unitario ($)</th>
-                            <th class="py-5 px-6 text-right rounded-r-2xl">Base Imponible ($)</th>
+                            <th class="py-5 px-6 text-right">Monto Bruto ($)</th>
                         </tr>
                     </thead>
-                    <tbody class="text-[11px] font-bold text-stone-700 uppercase">
-                        <tr class="border-b border-stone-50 hover:bg-stone-50/50 transition-all group">
-                            <td class="py-6 px-6 text-stone-400 font-mono group-hover:text-primary transition-colors">CUM-3972886</td>
+                    <tbody class="divide-y divide-stone-50">
+                        <tr class="zenith-table-row group">
                             <td class="py-6 px-6">
-                                <p class="text-stone-900 font-black tracking-tight">Crankshaft Main Bearing Set</p>
-                                <p class="text-[9px] text-stone-400 mt-1 uppercase italic">Industrial Grade / heavy Duty Application</p>
+                                <span class="zenith-table-sku border-stone-100 group-hover:text-primary transition-colors">CUM-3972886</span>
                             </td>
-                            <td class="py-6 px-6 text-center font-black">12</td>
-                            <td class="py-6 px-6 text-right font-black">$ 450.00</td>
-                            <td class="py-6 px-6 text-right font-black text-stone-900 italic">$ 5.400,00</td>
+                            <td class="py-6 px-6">
+                                <p class="zenith-table-main">Crankshaft Main Bearing Set</p>
+                                <p class="zenith-table-secondary mt-1">INDUSTRIAL GRADE / HEAVY DUTY APPLICATION</p>
+                            </td>
+                            <td class="py-6 px-6 text-center">
+                                <span class="zenith-table-main font-black">12</span>
+                            </td>
+                            <td class="py-6 px-6 text-right">
+                                <span class="zenith-table-secondary font-bold text-stone-600">$450.00</span>
+                            </td>
+                            <td class="py-6 px-6 text-right">
+                                <span class="zenith-table-price">$5,400.00</span>
+                            </td>
                         </tr>
-                        <tr class="border-b border-stone-50 bg-stone-50/20 hover:bg-stone-50/50 transition-all group">
-                            <td class="py-6 px-6 text-stone-400 font-mono group-hover:text-primary transition-colors">DET-23530663</td>
+                        <tr class="zenith-table-row bg-stone-50/20 group">
                             <td class="py-6 px-6">
-                                <p class="text-stone-900 font-black tracking-tight">Fuel Injector Assembly (Series 60)</p>
-                                <p class="text-[9px] text-stone-400 mt-1 uppercase italic">Precision Calibration / Genuine Parts</p>
+                                <span class="zenith-table-sku border-stone-100 group-hover:text-primary transition-colors">DET-23530663</span>
                             </td>
-                            <td class="py-6 px-6 text-center font-black">06</td>
-                            <td class="py-6 px-6 text-right font-black">$ 820.00</td>
-                            <td class="py-6 px-6 text-right font-black text-stone-900 italic">$ 4.920,00</td>
+                            <td class="py-6 px-6">
+                                <p class="zenith-table-main">Fuel Injector Assembly (Series 60)</p>
+                                <p class="zenith-table-secondary mt-1">PRECISION CALIBRATION / GENUINE PARTS</p>
+                            </td>
+                            <td class="py-6 px-6 text-center">
+                                <span class="zenith-table-main font-black">06</span>
+                            </td>
+                            <td class="py-6 px-6 text-right">
+                                <span class="zenith-table-secondary font-bold text-stone-600">$820.00</span>
+                            </td>
+                            <td class="py-6 px-6 text-right">
+                                <span class="zenith-table-price">$4,920.00</span>
+                            </td>
                         </tr>
-                        <tr class="border-b border-stone-50 hover:bg-stone-50/50 transition-all group">
-                            <td class="py-6 px-6 text-stone-400 font-mono group-hover:text-primary transition-colors">PER-U5ME0034</td>
+                        <tr class="zenith-table-row group">
                             <td class="py-6 px-6">
-                                <p class="text-stone-900 font-black tracking-tight">Upper Gasket Kit - 1104D Series</p>
-                                <p class="text-[9px] text-stone-400 mt-1 uppercase italic">Composite Material / Hi-Temp Resistance</p>
+                                <span class="zenith-table-sku border-stone-100 group-hover:text-primary transition-colors">PER-U5ME0034</span>
                             </td>
-                            <td class="py-6 px-6 text-center font-black">03</td>
-                            <td class="py-6 px-6 text-right font-black">$ 215.50</td>
-                            <td class="py-6 px-6 text-right font-black text-stone-900 italic">$ 646,50</td>
+                            <td class="py-6 px-6">
+                                <p class="zenith-table-main">Upper Gasket Kit - 1104D Series</p>
+                                <p class="zenith-table-secondary mt-1">COMPOSITE MATERIAL / HI-TEMP RESISTANCE</p>
+                            </td>
+                            <td class="py-6 px-6 text-center">
+                                <span class="zenith-table-main font-black">03</span>
+                            </td>
+                            <td class="py-6 px-6 text-right">
+                                <span class="zenith-table-secondary font-bold text-stone-600">$215.50</span>
+                            </td>
+                            <td class="py-6 px-6 text-right">
+                                <span class="zenith-table-price">$646.50</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

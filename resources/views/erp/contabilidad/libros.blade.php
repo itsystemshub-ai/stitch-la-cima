@@ -9,117 +9,136 @@
 @endsection
 
 @section('content')
-<div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <div class="mb-10 text-center">
-        <p class="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3">Registros Legales y Fiscales</p>
-        <h2 class="text-4xl font-headline font-black text-stone-950 italic uppercase tracking-tight">
-            Portal de Libros <span class="text-stone-300 not-italic">Contables</span>
+<div class="max-w-7xl mx-auto">
+    <!-- Header: Industrial Jurisdiction -->
+    <div class="mb-16 text-center">
+        <div class="flex items-center justify-center gap-4 mb-4">
+            <span class="w-12 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(206,255,94,0.4)]"></span>
+            <p class="text-[12px] font-black text-stone-400 uppercase tracking-[0.4em] italic leading-none">Legal & Fiscal Jurisdictions</p>
+            <span class="w-12 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(206,255,94,0.4)]"></span>
+        </div>
+        <h2 class="text-5xl md:text-6xl font-headline font-black text-stone-950 italic uppercase tracking-tighter leading-none">
+            Ledger <span class="text-stone-300 not-italic">Portals</span>
         </h2>
-        <div class="w-16 h-1 bg-primary mx-auto mt-6 rounded-full"></div>
     </div>
 
-    <!-- Portal Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+    <!-- Portal Bento Grid: Master Compliance -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-16">
         
         <!-- Libro Diario -->
-        <a href="{{ route('erp.contabilidad.libro-diario') }}" class="group bg-white border border-stone-100 p-8 rounded-3xl hover:shadow-2xl hover:shadow-stone-200 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
-            <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <span class="material-symbols-outlined text-[140px]">menu_book</span>
+        <a href="{{ route('erp.contabilidad.libro-diario') }}" class="group bg-white border border-stone-100 p-10 rounded-[40px] hover:shadow-2xl hover:shadow-stone-200 transition-all duration-500 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rotate-12">
+                <span class="material-symbols-outlined text-[180px]">menu_book</span>
             </div>
-            <div class="flex items-start gap-6 relative z-10">
-                <div class="w-14 h-14 bg-stone-950 text-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                    <span class="material-symbols-outlined text-3xl">menu_book</span>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-xl font-headline font-black text-stone-900 uppercase italic tracking-tight mb-2">Libro Diario</h3>
-                    <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
-                        Registro cronológico de todas las operaciones contables, asientos y movimientos patrimoniales del ejercicio fiscal actal.
-                    </p>
-                    <div class="mt-6 flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-tighter group-hover:gap-4 transition-all">
-                        <span>Acceder al Registro</span>
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            <div class="flex flex-col h-full relative z-10">
+                <div class="flex items-center gap-6 mb-10">
+                    <div class="w-16 h-16 bg-stone-950 text-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-2xl shadow-stone-950/20">
+                        <span class="material-symbols-outlined text-3xl">menu_book</span>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-headline font-black text-stone-950 uppercase italic tracking-tighter leading-none mb-2">General Ledger</h3>
+                        <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.2em] italic">AE_JOURNAL_MASTER_FEED</p>
+                    </div>
+                </div>
+                <p class="text-stone-400 text-[12px] font-black uppercase tracking-[0.1em] leading-relaxed italic mb-10">
+                    Chronological logic of all accounting operations, asientos, and patrimonial transmissions for the active fiscal cycle.
+                </p>
+                <div class="mt-auto pt-8 border-t border-stone-50 flex items-center justify-between text-[11px] font-black text-primary uppercase tracking-[0.3em] italic">
+                    <span class="group-hover:translate-x-2 transition-transform italic">Initiate Ledger Access</span>
+                    <span class="material-symbols-outlined text-xl group-hover:rotate-45 transition-transform">north_east</span>
                 </div>
             </div>
         </a>
 
         <!-- Libro de Ventas -->
-        <a href="{{ route('erp.contabilidad.libro-ventas') }}" class="group bg-white border border-stone-100 p-8 rounded-3xl hover:shadow-2xl hover:shadow-stone-200 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
-            <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <span class="material-symbols-outlined text-[140px]">chrome_reader_mode</span>
+        <a href="{{ route('erp.contabilidad.libro-ventas') }}" class="group bg-white border border-stone-100 p-10 rounded-[40px] hover:shadow-2xl hover:shadow-stone-200 transition-all duration-500 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rotate-12">
+                <span class="material-symbols-outlined text-[180px]">chrome_reader_mode</span>
             </div>
-            <div class="flex items-start gap-6 relative z-10">
-                <div class="w-14 h-14 bg-primary text-stone-900 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                    <span class="material-symbols-outlined text-3xl">chrome_reader_mode</span>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-xl font-headline font-black text-stone-900 uppercase italic tracking-tight mb-2">Libro de Ventas</h3>
-                    <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
-                        Control detallado de facturación, notas de crédito e IVA debito fiscal generado por las transacciones comerciales.
-                    </p>
-                    <div class="mt-6 flex items-center gap-2 text-[10px] font-black text-stone-900 uppercase tracking-tighter group-hover:gap-4 transition-all">
-                        <span>Generar Libro de Ventas</span>
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            <div class="flex flex-col h-full relative z-10">
+                <div class="flex items-center gap-6 mb-10">
+                    <div class="w-16 h-16 bg-primary text-stone-950 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-2xl shadow-primary/20">
+                        <span class="material-symbols-outlined text-3xl">chrome_reader_mode</span>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-headline font-black text-stone-950 uppercase italic tracking-tighter leading-none mb-2">Sales Ledger</h3>
+                        <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.2em] italic">TX_REVENUE_AUDIT_LOG</p>
+                    </div>
+                </div>
+                <p class="text-stone-400 text-[12px] font-black uppercase tracking-[0.1em] leading-relaxed italic mb-10">
+                    Precision control of invoicing, credit notations, and fiscal tax debit generated by commercial transactions.
+                </p>
+                <div class="mt-auto pt-8 border-t border-stone-50 flex items-center justify-between text-[11px] font-black text-stone-950 uppercase tracking-[0.3em] italic">
+                    <span class="group-hover:translate-x-2 transition-transform italic">Generate Fiscal Report</span>
+                    <span class="material-symbols-outlined text-xl group-hover:rotate-45 transition-transform">north_east</span>
                 </div>
             </div>
         </a>
 
         <!-- Libro de Caja -->
-        <a href="{{ route('erp.contabilidad.libro-caja') }}" class="group bg-white border border-stone-100 p-8 rounded-3xl hover:shadow-2xl hover:shadow-stone-200 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
-            <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <span class="material-symbols-outlined text-[140px]">savings</span>
+        <a href="{{ route('erp.contabilidad.libro-caja') }}" class="group bg-white border border-stone-100 p-10 rounded-[40px] hover:shadow-2xl hover:shadow-stone-200 transition-all duration-500 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity rotate-12">
+                <span class="material-symbols-outlined text-[180px]">savings</span>
             </div>
-            <div class="flex items-start gap-6 relative z-10">
-                <div class="w-14 h-14 bg-stone-100 text-stone-400 rounded-2xl flex items-center justify-center group-hover:bg-green-50 group-hover:text-green-600 transition-colors duration-500">
-                    <span class="material-symbols-outlined text-3xl font-black">savings</span>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-xl font-headline font-black text-stone-900 uppercase italic tracking-tight mb-2">Libro de Caja</h3>
-                    <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
-                        Auditoría de ingresos y egresos de efectivo. Conciliación diaria del flujo de caja de la tesorería corporativa.
-                    </p>
-                    <div class="mt-6 flex items-center gap-2 text-[10px] font-black text-stone-400 uppercase tracking-tighter group-hover:text-green-600 group-hover:gap-4 transition-all">
-                        <span>Auditar Movimientos</span>
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            <div class="flex flex-col h-full relative z-10">
+                <div class="flex items-center gap-6 mb-10">
+                    <div class="w-16 h-16 bg-stone-50 text-stone-300 rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-stone-950 transition-colors duration-500">
+                        <span class="material-symbols-outlined text-3xl">savings</span>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-headline font-black text-stone-950 uppercase italic tracking-tighter leading-none mb-2">Cash Flow Ledger</h3>
+                        <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.2em] italic">LIQUID_ASSET_MONITOR</p>
+                    </div>
+                </div>
+                <p class="text-stone-400 text-[12px] font-black uppercase tracking-[0.1em] leading-relaxed italic mb-10">
+                    High-precision audit of cash influx and outflow. Daily reconciliation of commercial treasury liquidity.
+                </p>
+                <div class="mt-auto pt-8 border-t border-stone-50 flex items-center justify-between text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] italic group-hover:text-primary transition-colors">
+                    <span class="group-hover:translate-x-2 transition-transform italic">Audit Liquid Feed</span>
+                    <span class="material-symbols-outlined text-xl group-hover:rotate-45 transition-transform">north_east</span>
                 </div>
             </div>
         </a>
 
         <!-- Libros Legales -->
-        <a href="{{ route('erp.contabilidad.libros-legales') }}" class="group bg-stone-950 p-8 rounded-3xl shadow-xl hover:shadow-stone-400 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
-            <div class="absolute -right-4 -bottom-4 opacity-10">
-                <span class="material-symbols-outlined text-[140px] text-white">gavel</span>
+        <a href="{{ route('erp.contabilidad.libros-legales') }}" class="group bg-stone-950 p-10 rounded-[40px] shadow-2xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity" style="background-image: radial-gradient(#ceff5e 2px, transparent 2px); background-size: 24px 24px;"></div>
+            <div class="absolute -right-8 -bottom-8 opacity-[0.05] group-hover:opacity-[0.15] transition-opacity rotate-12">
+                <span class="material-symbols-outlined text-[180px] text-white">gavel</span>
             </div>
-            <div class="flex items-start gap-6 relative z-10">
-                <div class="w-14 h-14 bg-primary text-stone-950 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
-                    <span class="material-symbols-outlined text-3xl font-black">law</span>
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-xl font-headline font-black text-white uppercase italic tracking-tight mb-2">Libros Legales</h3>
-                    <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
-                        Preparación de Libros de Compras, Ventas e Inventario según normativas vigentes para declaraciones ante el SENIAT.
-                    </p>
-                    <div class="mt-6 flex items-center gap-2 text-[10px] font-black text-primary uppercase tracking-tighter group-hover:gap-4 transition-all">
-                        <span>Revisar Cumplimiento</span>
-                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            <div class="flex flex-col h-full relative z-10">
+                <div class="flex items-center gap-6 mb-10">
+                    <div class="w-16 h-16 bg-primary text-stone-950 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
+                        <span class="material-symbols-outlined text-3xl">law</span>
                     </div>
+                    <div>
+                        <h3 class="text-2xl font-headline font-black text-white uppercase italic tracking-tighter leading-none mb-2">Regulatory Codex</h3>
+                        <p class="text-[11px] font-black text-stone-500 uppercase tracking-[0.2em] italic">GOV_COMPLIANCE_ENFORCER</p>
+                    </div>
+                </div>
+                <p class="text-stone-400 text-[12px] font-black uppercase tracking-[0.1em] leading-relaxed italic mb-10">
+                    Preparation of Purchase, Sales, and Inventory books according to SENIAT regulations and VEN-NIF protocols.
+                </p>
+                <div class="mt-auto pt-8 border-t border-white/5 flex items-center justify-between text-[11px] font-black text-primary uppercase tracking-[0.3em] italic">
+                    <span class="group-hover:translate-x-2 transition-transform italic">Validate Compliance</span>
+                    <span class="material-symbols-outlined text-xl group-hover:rotate-45 transition-transform">north_east</span>
                 </div>
             </div>
         </a>
 
     </div>
 
-    <!-- Advisory -->
-    <div class="bg-primary/10 border border-primary/20 p-6 rounded-2xl flex items-center gap-6">
-        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-stone-950 flex-shrink-0 animate-pulse">
-            <span class="material-symbols-outlined text-xl">verified</span>
+    <!-- Advisory: Fiduciary Protocol -->
+    <div class="bg-stone-950 border border-stone-800 p-10 rounded-[40px] flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group shadow-2xl">
+        <div class="absolute inset-0 opacity-[0.02] bg-primary group-hover:opacity-[0.04] transition-opacity"></div>
+        <div class="w-16 h-16 bg-stone-900 border border-stone-800 rounded-full flex items-center justify-center text-primary flex-shrink-0 shadow-2xl relative z-10">
+            <span class="material-symbols-outlined text-3xl animate-pulse">verified_user</span>
         </div>
-        <p class="text-[10px] font-black text-stone-900 uppercase tracking-widest leading-normal">
-            Todos los libros generados en este portal cumplen con los estándares contables VEN-NIF y están listos para ser auditados o presentados ante organismos reguladores.
-        </p>
+        <div class="relative z-10">
+            <p class="text-[12px] font-black text-white uppercase tracking-[0.2em] leading-relaxed italic italic">
+                System Advisory: All ledger transmissions within this portal adhere to VEN-NIF fiduciary standards and are cryptographically verified for regulatory audit readiness by the Alpha Finance Node.
+            </p>
+        </div>
     </div>
 </div>
 @endsection

@@ -21,11 +21,15 @@
     </div>
     
     <div class="flex items-center gap-3">
-      <div class="bg-stone-50 border border-stone-100 p-1 rounded-xl flex">
+      <div class="bg-stone-50 border border-stone-100 p-1 rounded-xl flex mr-4">
         <button class="px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest bg-white shadow-sm text-stone-900 transition-all italic">Mensual</button>
         <button class="px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest text-stone-400 hover:text-stone-900 transition-all italic">Trimestral</button>
         <button class="px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest text-stone-400 hover:text-stone-900 transition-all italic">Anual</button>
       </div>
+      <a href="{{ route('erp.export.ventas') }}" class="bg-stone-900 text-primary px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl shadow-xl hover:bg-black transition-all active:scale-95 group/btn flex items-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">table_view</span>
+        Exportar Excel
+      </a>
     </div>
   </div>
 
@@ -36,72 +40,29 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
             <div>
                 <h4 class="text-xs font-black text-stone-400 uppercase tracking-[0.2em] mb-1">Fluctuación de Ingresos Brutos</h4>
-                <p class="text-sm font-bold text-stone-900 uppercase italic">Proyección de Cierre de Año 2024</p>
+                <p class="text-sm font-bold text-stone-900 uppercase italic">Tendencia Últimos 12 Meses</p>
             </div>
             <div class="flex items-center gap-2">
-                <span class="text-2xl font-black text-stone-900 tracking-tighter italic">$ 482,900.00</span>
-                <span class="px-2 py-0.5 bg-green-50 text-green-600 border border-green-100 rounded text-[8px] font-black uppercase tracking-widest">+12.4%</span>
+                <span class="text-2xl font-black text-stone-900 tracking-tighter italic block">$ {{ number_format($total_ventas, 2) }}</span>
             </div>
         </div>
         
-        <!-- Synthetic Chart Representation -->
-        <div class="h-64 flex items-end justify-between items-end gap-2 px-2">
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer group/bar h-[40%] relative">
-                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-stone-900 text-white text-[9px] font-black py-1 px-2 rounded opacity-0 group-hover/bar:opacity-100 transition-opacity uppercase tracking-widest">Ene</div>
-            </div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[55%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[45%]"></div>
-            <div class="flex-1 bg-stone-900 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[75%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[60%]"></div>
-            <div class="flex-1 bg-primary rounded-t-xl hover:bg-stone-900 transition-all cursor-pointer h-[90%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[50%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[65%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[80%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[70%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[85%]"></div>
-            <div class="flex-1 bg-stone-100 rounded-t-xl hover:bg-primary transition-all cursor-pointer h-[95%]"></div>
-        </div>
-        <div class="flex justify-between mt-4 text-[9px] font-black text-stone-300 uppercase tracking-[0.3em] italic">
-            <span>Trimestre 01</span>
-            <span>Trimestre 02</span>
-            <span>Trimestre 03</span>
-            <span>Trimestre 04</span>
-        </div>
+        <div id="monthlyTrendChart" class="h-64"></div>
     </div>
 
     <!-- Right Stats Stack -->
     <div class="col-span-12 lg:col-span-4 space-y-8">
-        <div class="bg-stone-900 rounded-3xl p-8 relative overflow-hidden group">
-            <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #ceff5e 0, #ceff5e 1px, transparent 0, transparent 50%); background-size: 10px 10px;"></div>
-            <div class="relative z-10">
-                <h4 class="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-4">Líder de Ventas (SPOTLIGHT)</h4>
-                <div class="flex items-center gap-5">
-                    <div class="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center text-stone-900 font-black text-2xl shadow-xl shadow-primary/20 italic">EV</div>
-                    <div>
-                        <p class="text-base font-black text-white uppercase italic tracking-tight">Elara Vance</p>
-                        <p class="text-[9px] font-black text-primary uppercase tracking-[0.2em]">Closed: $12.4M</p>
-                    </div>
+        <div class="bg-stone-900 rounded-3xl p-8 relative overflow-hidden group h-full">
+            <h4 class="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-6 italic">Top Categorías</h4>
+            <div id="categoryMixChart" class="w-full"></div>
+            
+            <div class="mt-8 space-y-4">
+                @foreach($categoryMix as $mix)
+                <div class="flex justify-between items-center text-[10px] uppercase font-black">
+                    <span class="text-stone-400">{{ $mix->categoria }}</span>
+                    <span class="text-primary">{{ $mix->percentage }}%</span>
                 </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-8 border border-stone-100 shadow-sm">
-            <h4 class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-6 italic">Top Categorías</h4>
-            <div class="space-y-6">
-                <div class="flex justify-between items-center group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-1 h-1 bg-primary rounded-full group-hover:w-4 transition-all"></div>
-                        <p class="text-[10px] font-black text-stone-700 uppercase tracking-widest">Turbinas V12</p>
-                    </div>
-                    <span class="text-xs font-black italic">$ 124.2M</span>
-                </div>
-                <div class="flex justify-between items-center group text-stone-400">
-                    <div class="flex items-center gap-3">
-                        <div class="w-1 h-1 bg-stone-200 rounded-full group-hover:w-4 group-hover:bg-primary transition-all"></div>
-                        <p class="text-[10px] font-black uppercase tracking-widest">Hydraulics P6</p>
-                    </div>
-                    <span class="text-xs font-black italic">$ 98.5M</span>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -131,7 +92,7 @@
         </div>
     </div>
     
-    <div class="col-span-12 lg:col-span-5 bg-white rounded-3xl border border-stone-100 shadow-sm p-8 flex flex-col justify-between">
+    <div class="col-span-12 lg:col-span-5 bg-white rounded-3xl border border-stone-100 shadow-sm p-8 flex flex-col justify-between text-stone-950">
         <div class="mb-6">
             <h4 class="text-xs font-black text-stone-900 uppercase tracking-[0.2em] italic">Compliance & Legal Audit</h4>
             <p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest mt-2 leading-relaxed">Verificación trimestral del SENIAT / Contribuyente Especial</p>
@@ -149,5 +110,54 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('erp/js/reportes-ventas.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trend Chart
+            const trendData = @json($monthlyTrend);
+            const trendOptions = {
+                series: [{
+                    name: 'Ventas',
+                    data: trendData.map(item => item.total)
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 250,
+                    toolbar: { show: false },
+                    fontFamily: 'Inter, sans-serif'
+                },
+                colors: ['#ceff5e'],
+                plotOptions: {
+                    bar: { borderRadius: 8, columnWidth: '60%' }
+                },
+                xaxis: {
+                    categories: trendData.map(item => 'Mes ' + item.mes),
+                    labels: { style: { colors: '#a8a29e', fontWeight: 600 } }
+                },
+                yaxis: {
+                    labels: { style: { colors: '#a8a29e', fontWeight: 600 } }
+                },
+                grid: { borderColor: '#f5f5f4' },
+                dataLabels: { enabled: false }
+            };
+            new ApexCharts(document.querySelector("#monthlyTrendChart"), trendOptions).render();
+
+            // Category Chart
+            const categoryData = @json($categoryMix);
+            const catOptions = {
+                series: categoryData.map(item => item.percentage),
+                chart: {
+                    type: 'donut',
+                    height: 200,
+                    fontFamily: 'Inter, sans-serif'
+                },
+                labels: categoryData.map(item => item.categoria),
+                colors: ['#ceff5e', '#a8a29e', '#57534e', '#292524'],
+                legend: { show: false },
+                dataLabels: { enabled: false },
+                stroke: { show: false }
+            };
+            new ApexCharts(document.querySelector("#categoryMixChart"), catOptions).render();
+        });
+    </script>
 @endpush

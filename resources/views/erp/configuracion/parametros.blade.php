@@ -35,20 +35,20 @@
     <!-- Section: Identity -->
     <div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
       <div class="px-8 py-6 border-b border-stone-100 bg-stone-50/50">
-        <h3 class="font-headline font-bold text-lg text-stone-900 uppercase">Identidad Corporativa</h3>
+        <h3 class="font-headline font-black text-xs text-stone-900 uppercase tracking-widest">Identidad Corporativa & Fiscal</h3>
       </div>
-      <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="space-y-2">
-          <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400">Razón Social</label>
-          <input type="text" value="MAYOR DE REPUESTO LA CIMA, C.A." class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-sm font-bold text-stone-700 focus:ring-2 focus:ring-primary/50 transition-all"/>
+      <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="space-y-3">
+          <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-stone-400">Razón Social Jurídica</label>
+          <input type="text" value="MAYOR DE REPUESTO LA CIMA, C.A." class="w-full bg-stone-50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-800 uppercase tracking-tight focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all shadow-inner"/>
         </div>
-        <div class="space-y-2">
-          <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400">RIF Principal</label>
-          <input type="text" value="J-40308741-5" class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-sm font-bold text-stone-700 focus:ring-2 focus:ring-primary/50 transition-all"/>
+        <div class="space-y-3">
+          <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-stone-400">RIF Principal (SENIAT)</label>
+          <input type="text" value="J-40308741-5" class="w-full bg-stone-50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-mono font-black text-stone-800 focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all shadow-inner"/>
         </div>
-        <div class="md:col-span-2 space-y-2">
-          <label class="block text-[10px] font-black uppercase tracking-widest text-stone-400">Dirección Fiscal Central</label>
-          <textarea class="w-full bg-stone-50 border-stone-200 rounded-xl px-4 py-3 text-sm font-bold text-stone-700 focus:ring-2 focus:ring-primary/50 transition-all" rows="2">Calle Principal, Zona Industrial Los Jarales, San Diego, Carabobo.</textarea>
+        <div class="md:col-span-2 space-y-3">
+          <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-stone-400">Dirección Fiscal / Sede Principal de Operaciones</label>
+          <textarea class="w-full bg-stone-50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-bold text-stone-700 leading-relaxed focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all shadow-inner" rows="2">Calle Principal, Zona Industrial Los Jarales, San Diego, Edo. Carabobo, Venezuela.</textarea>
         </div>
       </div>
     </div>

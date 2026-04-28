@@ -61,37 +61,39 @@
                     
                     <div class="space-y-6">
                         <!-- Categorías -->
+                        <div class="space-y-6">
+                        <!-- Categorías -->
                         <div>
-                            <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest">Sistemas / Categorías</label>
-                            <div class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                            <label class="font-headline text-[10px] font-black uppercase text-stone-400 block mb-4 tracking-[0.3em] italic">Sistemas / Categorías</label>
+                            <div class="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
                                 @forelse($categories as $category)
                                     <label class="flex items-center gap-3 cursor-pointer group">
-                                        <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" 
+                                        <input class="w-4 h-4 rounded border-stone-200 text-primary focus:ring-primary/20" 
                                                type="checkbox" name="categories[]" value="{{ $category }}"
                                                {{ is_array(request('categories')) && in_array($category, request('categories')) ? 'checked' : '' }}
                                                onchange="this.form.submit()"/>
-                                        <span class="text-sm font-medium group-hover:text-primary transition-colors uppercase">{{ $category }}</span>
+                                        <span class="text-[12px] font-black text-stone-900 group-hover:text-primary transition-colors uppercase tracking-tight">{{ $category }}</span>
                                     </label>
                                 @empty
-                                    <p class="text-[10px] text-stone-400 italic">No hay categorías disponibles</p>
+                                    <p class="text-[10px] text-stone-400 italic font-black uppercase tracking-widest">No hay categorías disponibles</p>
                                 @endforelse
                             </div>
                         </div>
 
                         <!-- Marcas -->
                         <div>
-                            <label class="font-headline text-xs font-bold uppercase text-on-surface-variant block mb-3 tracking-widest text-[#5a5c5e]">Marcas Disponibles</label>
-                            <div class="space-y-2 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+                            <label class="font-headline text-[10px] font-black uppercase text-stone-400 block mb-4 tracking-[0.3em] italic text-[#5a5c5e]">Fabricantes OEM</label>
+                            <div class="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
                                 @forelse($brands as $brand)
                                     <label class="flex items-center gap-3 cursor-pointer group">
-                                        <input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" 
+                                        <input class="w-4 h-4 rounded border-stone-200 text-primary focus:ring-primary/20" 
                                                type="checkbox" name="brands[]" value="{{ $brand }}"
                                                {{ is_array(request('brands')) && in_array($brand, request('brands')) ? 'checked' : '' }}
                                                onchange="this.form.submit()"/>
-                                        <span class="text-sm font-medium group-hover:text-primary transition-colors uppercase">{{ $brand }}</span>
+                                        <span class="text-[12px] font-black text-stone-900 group-hover:text-primary transition-colors uppercase tracking-tight">{{ $brand }}</span>
                                     </label>
                                 @empty
-                                    <p class="text-[10px] text-stone-400 italic">No hay marcas disponibles</p>
+                                    <p class="text-[10px] text-stone-400 italic font-black uppercase tracking-widest">No hay marcas disponibles</p>
                                 @endforelse
                             </div>
                         </div>
@@ -99,17 +101,17 @@
                 </div>
 
                 <!-- Technical Support Card -->
-                <div class="bg-black text-white p-6 rounded-lg relative overflow-hidden group">
+                <div class="bg-stone-950 text-white p-8 rounded-3xl relative overflow-hidden group shadow-2xl border border-white/5">
                     <div class="relative z-10">
-                        <h3 class="font-headline text-xl font-black uppercase leading-none mb-2 text-primary">Soporte Técnico</h3>
-                        <p class="text-stone-400 text-xs mb-4">Piezas críticas y asistencia en instalación industrial.</p>
-                        <a href="{{ url('/tienda/contacto') }}" class="text-primary text-xs font-bold uppercase flex items-center gap-1 group-hover:gap-2 transition-all">
-                            Hablar con Ingeniero
-                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        <h3 class="font-headline text-2xl font-black uppercase leading-none mb-3 text-primary italic">Soporte <br>Técnico</h3>
+                        <p class="text-stone-500 text-[10px] font-black uppercase tracking-widest mb-6 leading-relaxed">Asistencia certificada para instalación industrial.</p>
+                        <a href="{{ url('/tienda/contacto') }}" class="bg-primary/10 text-primary text-[9px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-lg border border-primary/20 flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-black transition-all">
+                            Conectar con Ingeniero
+                            <span class="material-symbols-outlined text-sm">engineering</span>
                         </a>
                     </div>
-                    <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
-                        <span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">engineering</span>
+                    <div class="absolute -right-10 -bottom-10 opacity-[0.03] group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+                        <span class="material-symbols-outlined text-[180px]">settings_accessibility</span>
                     </div>
                 </div>
             </form>
@@ -117,18 +119,18 @@
 
         <!-- Product Listing -->
         <section class="flex-grow">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4 pb-6 border-b border-stone-100">
                 <div>
-                    <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-1">Precision Inventory</span>
-                    <h1 class="font-headline text-4xl font-black uppercase tracking-tighter">Catálogo Completo</h1>
+                    <span class="bg-primary/10 text-primary font-black text-[9px] uppercase tracking-[0.4em] px-3 py-1 rounded-full mb-3 inline-block">Matriz de Inventario Zenith</span>
+                    <h1 class="font-headline text-5xl font-black uppercase tracking-tighter italic text-stone-900 leading-none">Catálogo <span class="text-stone-300">Detallado</span></h1>
                 </div>
                 <div class="text-right w-full sm:w-auto">
-                    <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">
-                        Mostrando {{ $products->firstItem() ?? 0 }} - {{ $products->lastItem() ?? 0 }} de {{ $products->total() }} Items
+                    <p class="text-[10.5px] font-black text-stone-400 uppercase tracking-[0.2em] italic mb-3">
+                        Protocolo: Registros {{ $products->firstItem() ?? 0 }} - {{ $products->lastItem() ?? 0 }} / Total: {{ $products->total() }}
                     </p>
-                    <div class="flex gap-2 mt-2 justify-end">
-                        <button id="gridViewBtn" class="view-btn active w-8 h-8 flex items-center justify-center bg-black text-white rounded" onclick="switchToGrid()"><span class="material-symbols-outlined text-sm">grid_view</span></button>
-                        <button id="listViewBtn" class="view-btn w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-stone-200 rounded transition-colors" onclick="switchToList()"><span class="material-symbols-outlined text-sm">list</span></button>
+                    <div class="flex gap-2 justify-end">
+                        <button id="gridViewBtn" class="view-btn active w-12 h-12 flex items-center justify-center bg-stone-900 text-primary rounded-xl" onclick="switchToGrid()"><span class="material-symbols-outlined text-xl">grid_view</span></button>
+                        <button id="listViewBtn" class="view-btn w-12 h-12 flex items-center justify-center text-stone-400 hover:bg-stone-100 rounded-xl transition-all" onclick="switchToList()"><span class="material-symbols-outlined text-xl">format_list_bulleted</span></button>
                     </div>
                 </div>
             </div>
@@ -137,56 +139,81 @@
                 @forelse($products as $product)
                     <x-product-card :product="$product" />
                 @empty
-                    <div class="col-span-full py-12 text-center">
-                        <span class="material-symbols-outlined text-6xl text-stone-200 mb-4 block">inventory_2</span>
-                        <p class="text-stone-500 font-bold text-sm uppercase tracking-widest">No se encontraron productos con estos parámetros.</p>
+                    <div class="col-span-full py-32 text-center bg-stone-50 rounded-[40px] border-2 border-dashed border-stone-200">
+                        <span class="material-symbols-outlined text-8xl text-stone-200 mb-6 block">inventory_2</span>
+                        <p class="text-stone-400 font-black text-[12px] uppercase tracking-[0.3em] italic">No se detectaron piezas compatibles bajo este filtrado.</p>
                     </div>
                 @endforelse
             </div>
 
             <!-- Pagination -->
-            <div class="mt-12 flex justify-center">
+            <div class="mt-20 flex justify-center">
                 {{ $products->links() }}
             </div>
 
             <!-- Technical Compatibility Table -->
-            <div class="mt-24">
-                <h2 class="font-headline text-2xl font-bold uppercase tracking-widest mb-8 flex items-center gap-4">
-                    <span class="w-12 h-[2px] bg-primary"></span>
-                    Compatibilidad Técnica
+            <div class="mt-32 bg-white p-12 rounded-[50px] border border-stone-200 shadow-sm relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 opacity-[0.02] pointer-events-none">
+                    <span class="material-symbols-outlined text-[400px]">verified</span>
+                </div>
+
+                <h2 class="font-headline text-3xl font-black uppercase tracking-tighter mb-12 flex items-center gap-4 italic text-stone-900">
+                    <span class="w-16 h-2 bg-primary rounded-full"></span>
+                    Protocolo de <span class="text-stone-300">Compatibilidad Técnica</span>
                 </h2>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="font-headline uppercase text-xs tracking-widest text-on-surface-variant border-b border-outline">
+                    <table class="w-full text-left zenith-table-main">
+                        <thead class="zenith-table-header uppercase italic">
                             <tr>
-                                <th class="pb-4 px-4 font-black">Componente</th>
-                                <th class="pb-4 px-4 font-black">Marca Compatible</th>
-                                <th class="pb-4 px-4 font-black">Origen</th>
-                                <th class="pb-4 px-4 font-black">Certificación</th>
-                                <th class="pb-4 px-4 font-black">Disponibilidad</th>
+                                <th class="py-5 px-8">Componente</th>
+                                <th class="py-5 px-8">Fabricante Compatible</th>
+                                <th class="py-5 px-8 text-center">Procedencia</th>
+                                <th class="py-5 px-8 text-center">Calificación SAE</th>
+                                <th class="py-5 px-8 text-right">Estatus Logístico</th>
                             </tr>
                         </thead>
-                        <tbody class="text-sm">
-                            <tr class="bg-white hover:bg-stone-50 transition-colors border-b border-outline">
-                                <td class="py-4 px-4 font-bold">Inyectores de Combustible</td>
-                                <td class="py-4 px-4">CAT / Perkins</td>
-                                <td class="py-4 px-4">USA / Germany</td>
-                                <td class="py-4 px-4 font-medium uppercase text-xs">OEM Specification</td>
-                                <td class="py-4 px-4 text-primary font-bold">In Stock</td>
+                        <tbody class="divide-y divide-stone-100">
+                            <tr class="bg-white hover:bg-stone-50/50 transition-colors">
+                                <td class="py-5 px-8 font-black uppercase text-stone-900 tracking-tight">Inyectores de Precisión</td>
+                                <td class="py-5 px-8 font-bold text-stone-500 uppercase text-[10.5px]">CATERPILLAR / PERKINS HD</td>
+                                <td class="py-5 px-8 text-center text-stone-400 font-mono text-[10.5px] tracking-widest">USA / DE / 442</td>
+                                <td class="py-5 px-8 text-center italic">
+                                    <span class="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[9px] font-black border border-stone-200 tracking-widest">OEM GENUINE SPEC</span>
+                                </td>
+                                <td class="py-5 px-8 text-right">
+                                    <span class="text-green-600 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-end gap-2">
+                                        DISPONIBLE
+                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                    </span>
+                                </td>
                             </tr>
-                            <tr class="bg-white hover:bg-stone-50 transition-colors border-b border-outline">
-                                <td class="py-4 px-4 font-bold">Kits de Empacadura</td>
-                                <td class="py-4 px-4">Detroit Diesel</td>
-                                <td class="py-4 px-4">USA</td>
-                                <td class="py-4 px-4 font-medium uppercase text-[10px]">SAE Standard</td>
-                                <td class="py-4 px-4 text-primary font-bold">In Stock</td>
+                            <tr class="bg-white hover:bg-stone-50/50 transition-colors">
+                                <td class="py-5 px-8 font-black uppercase text-stone-900 tracking-tight">Kits de Empacadura Master</td>
+                                <td class="py-5 px-8 font-bold text-stone-500 uppercase text-[10.5px]">DETROIT DIESEL S60</td>
+                                <td class="py-5 px-8 text-center text-stone-400 font-mono text-[10.5px] tracking-widest">USA / MI / 902</td>
+                                <td class="py-5 px-8 text-center italic">
+                                    <span class="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[9px] font-black border border-stone-200 tracking-widest">SAE-HEAVY-DUTY</span>
+                                </td>
+                                <td class="py-5 px-8 text-right">
+                                    <span class="text-green-600 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-end gap-2">
+                                        DISPONIBLE
+                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                    </span>
+                                </td>
                             </tr>
-                            <tr class="bg-white hover:bg-stone-50 transition-colors">
-                                <td class="py-4 px-4 font-bold">Bombas de Agua</td>
-                                <td class="py-4 px-4">Mack / Volvo</td>
-                                <td class="py-4 px-4">Brazil</td>
-                                <td class="py-4 px-4 font-medium uppercase text-[10px]">Heavy Duty Grade</td>
-                                <td class="py-4 px-4 text-red-600 font-bold">Low Stock</td>
+                            <tr class="bg-white hover:bg-stone-50/50 transition-colors">
+                                <td class="py-5 px-8 font-black uppercase text-stone-900 tracking-tight">Bombas de Flujo Crítico</td>
+                                <td class="py-5 px-8 font-bold text-stone-500 uppercase text-[10.5px]">VOLVO PENTA / MACK</td>
+                                <td class="py-5 px-8 text-center text-stone-400 font-mono text-[10.5px] tracking-widest">BRA / SP / 112</td>
+                                <td class="py-5 px-8 text-center italic">
+                                    <span class="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[9px] font-black border border-stone-200 tracking-widest">SAE-GRADE-A</span>
+                                </td>
+                                <td class="py-5 px-8 text-right">
+                                    <span class="text-amber-600 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-end gap-2">
+                                        STOCK BAJO
+                                        <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

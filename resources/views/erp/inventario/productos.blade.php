@@ -21,7 +21,7 @@
             <h1 class="text-5xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none italic">
                 Maestro <span class="text-stone-400 italic">Productos</span>
             </h1>
-            <p class="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest text-[#9ca3af]">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
+            <p class="text-[12px] text-stone-400 mt-2 font-black uppercase tracking-[0.2em] italic">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
         </div>
         
         <div class="flex items-center gap-3">
@@ -35,266 +35,147 @@
             </button>
         </div>
     </div>
-
-    <!-- Premium Monitoring Context -->
-    <div id="tour-product-filters" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
-        <div class="bg-white border border-stone-200 p-6 rounded-[24px] shadow-sm hover:border-primary/50 transition-all group/card">
-            <div class="flex justify-between items-start mb-6">
-                <div class="w-10 h-10 bg-stone-50 rounded-xl flex items-center justify-center text-stone-400 group-hover/card:bg-stone-950 group-hover/card:text-primary transition-all">
-                    <span class="material-symbols-outlined">analytics</span>
-                </div>
-                <div class="text-right">
-                    <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Filtrar Categoría</p>
-                </div>
-            </div>
-            <div class="relative">
-                <select onchange="this.form.submit()" name="categoria" class="w-full bg-stone-100 border-none rounded-xl py-4 pl-4 pr-10 text-[11px] font-black text-stone-900 uppercase tracking-tight focus:ring-4 focus:ring-primary/10 cursor-pointer appearance-none shadow-inner">
-                    <option value="">Todos los Repuestos</option>
-                    @foreach($products->pluck('categoria')->unique()->filter() as $cat)
-                        <option value="{{ $cat }}" {{ request('categoria') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
-                    @endforeach
-                </select>
-                <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none text-sm">filter_list</span>
-            </div>
-        </div>
-
-        <div class="bg-white border border-stone-200 p-6 rounded-[24px] shadow-sm hover:border-primary/50 transition-all group/card">
-            <div class="flex justify-between items-start mb-6">
-                <div class="w-10 h-10 bg-stone-50 rounded-xl flex items-center justify-center text-stone-400 group-hover/card:bg-stone-950 group-hover/card:text-primary transition-all">
-                    <span class="material-symbols-outlined">verified</span>
-                </div>
-                <div class="text-right">
-                    <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Línea de Marca</p>
-                </div>
-            </div>
-            <div class="relative">
-                <select onchange="this.form.submit()" name="marca" class="w-full bg-stone-100 border-none rounded-xl py-4 pl-4 pr-10 text-[11px] font-black text-stone-900 uppercase tracking-tight focus:ring-4 focus:ring-primary/10 cursor-pointer appearance-none shadow-inner">
-                    <option value="">Cualquier Marca</option>
-                    @foreach($products->pluck('marca')->unique()->filter() as $marca)
-                        <option value="{{ $marca }}" {{ request('marca') == $marca ? 'selected' : '' }}>{{ $marca }}</option>
-                    @endforeach
-                </select>
-                <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none text-sm">branding_watermark</span>
-            </div>
-        </div>
-
-        <div class="bg-white border border-stone-200 p-6 rounded-[24px] shadow-sm relative overflow-hidden group/alert {{ $low_stock_count > 0 ? 'bg-red-50/50' : '' }}">
-            <div class="absolute inset-y-0 left-0 w-1 {{ $low_stock_count > 0 ? 'bg-red-500' : 'bg-green-500' }}"></div>
-            <div class="flex justify-between items-start mb-2">
-                <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Estatus de Criticidad</p>
-                <span class="w-2 h-2 rounded-full {{ $low_stock_count > 0 ? 'bg-red-500 animate-ping' : 'bg-green-500' }}"></span>
-            </div>
-            <h4 class="text-2xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">
-                {{ $low_stock_count > 0 ? 'Nivel Crítico' : 'Stock Operativo' }}
-            </h4>
-            <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest mt-1">
-                {{ $low_stock_count }} items requieren reposición
-            </p>
-            <div class="mt-4 flex gap-1">
-                @for($i=0; $i<12; $i++)
-                    <div class="flex-1 h-3 rounded-sm {{ $i < ($low_stock_count > 0 ? 8 : 12) ? ($low_stock_count > 0 ? 'bg-red-500' : 'bg-green-500') : 'bg-stone-100' }}"></div>
-                @endfor
-            </div>
-        </div>
-
-        <div class="bg-white border border-stone-200 p-6 rounded-[24px] shadow-sm hover:border-primary/50 transition-all group/card">
-            <div class="flex justify-between items-start mb-6">
-                <div class="w-10 h-10 bg-stone-50 rounded-xl flex items-center justify-center text-stone-400 group-hover/card:bg-stone-950 group-hover/card:text-primary transition-all">
-                    <span class="material-symbols-outlined">payments</span>
-                </div>
-                <div class="text-right">
-                    <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Valuación Total</p>
-                </div>
-            </div>
-            <div class="relative">
-                <p class="text-4xl font-headline font-black text-stone-900 tracking-tighter leading-none mb-1">
-                    ${{ number_format($inventory_value / 1000, 1) }}<span class="text-primary tracking-normal">K</span>
+    
+    <!-- Compact Monitoring Metrics -->
+    <div id="tour-product-filters" class="flex flex-wrap gap-4 mb-8">
+        <!-- Status Mini-Card: Criticidad -->
+        <div class="bg-white border border-stone-200 px-6 py-4 rounded-[20px] shadow-sm flex items-center gap-4 hover:border-red-500/30 transition-all group/alert {{ $low_stock_count > 0 ? 'bg-red-50/10' : '' }} min-w-[280px]">
+            <div class="w-2 h-10 rounded-full {{ $low_stock_count > 0 ? 'bg-red-500 animate-pulse' : 'bg-green-500' }}"></div>
+            <div>
+                <p class="text-[8px] font-black text-stone-400 uppercase tracking-widest leading-none mb-1">Estatus de Criticidad</p>
+                <h4 class="text-lg font-headline font-black text-stone-900 uppercase tracking-tighter italic leading-none">
+                    {{ $low_stock_count > 0 ? 'ALERTA STOCK' : 'ÓPTIMO' }}
+                </h4>
+                <p class="text-[9px] font-bold text-stone-500 uppercase tracking-tight mt-1">
+                    {{ $low_stock_count }} ITEMS CRÍTICOS
                 </p>
-                <div class="flex items-center gap-2 mt-2">
-                     <span class="text-[8px] font-black px-2 py-0.5 bg-primary/20 text-primary rounded-full uppercase tracking-widest">Global Vault</span>
-                     <span class="text-[8px] font-bold text-stone-500 uppercase tracking-widest text-[#9ca3af]">Activos al costo</span>
+            </div>
+        </div>
+
+        <!-- Metric Mini-Card: Valuación -->
+        <div class="bg-stone-900 border border-stone-800 px-6 py-4 rounded-[20px] shadow-lg flex items-center gap-4 group/vault min-w-[280px]">
+            <div class="w-10 h-10 bg-stone-800 rounded-xl flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-lg">payments</span>
+            </div>
+            <div>
+                <p class="text-[8px] font-black text-primary uppercase tracking-widest leading-none mb-1">Bóveda de Activos</p>
+                <div class="flex items-baseline gap-1">
+                    <span class="text-xl font-headline font-black text-white tracking-tighter leading-none">${{ number_format($inventory_value / 1000, 1) }}</span>
+                    <span class="text-primary text-xs font-light">K</span>
                 </div>
+                <p class="text-[8px] font-bold text-stone-500 uppercase tracking-widest mt-1 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
+                    USD Global
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- Industrial Data Grid -->
-    <div class="bg-white border-x border-t border-stone-200 rounded-t-[32px] shadow-sm overflow-hidden">
-        <div class="p-8 border-b border-stone-100 bg-stone-50/50 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-            <div>
-                <h3 class="text-[12px] font-black text-stone-900 uppercase tracking-[0.2em] flex items-center gap-3">
-                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                    Maestro de Activos Sincronizado
-                </h3>
-                <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest mt-1 italic">Reflejando registros auditados en tiempo real</p>
+    <!-- Main Data Grid: High-Precision Industrial Table -->
+    <div class="bg-white border border-stone-200 rounded-[32px] shadow-xl overflow-hidden mb-12">
+        <div class="p-8 border-b border-stone-100 bg-stone-50/50 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
+            <div class="flex items-center gap-6">
+                <div class="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center text-primary shadow-lg shadow-stone-900/10">
+                    <span class="material-symbols-outlined text-3xl font-black">inventory_2</span>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-headline font-black text-stone-900 uppercase tracking-tighter leading-none italic">
+                        Inventario <span class="text-stone-400">Maestro</span>
+                    </h2>
+                    <p class="text-[10px] text-stone-400 font-bold uppercase tracking-[0.3em] mt-2">Protocolo de Control J-40308741-5</p>
+                </div>
             </div>
-            <div id="tour-product-search" class="flex items-center gap-4 w-full lg:w-auto">
-                 <form action="{{ route('erp.inventario.productos') }}" method="GET" class="relative w-full lg:w-96 group">
-                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-stone-400 group-focus-within:text-primary transition-colors">
-                      <span class="material-symbols-outlined text-[18px]">hub</span>
-                    </span>
-                    <input name="search" value="{{ request('search') }}" class="bg-white border border-stone-200 text-[11px] pl-12 pr-12 py-3.5 w-full rounded-2xl uppercase font-black focus:ring-8 focus:ring-primary/5 transition-all outline-none placeholder:text-stone-300 shadow-inner" placeholder="Escanear SKU, nombre o marca..." type="text"/>
-                    @if(request('search'))
-                        <a href="{{ route('erp.inventario.productos') }}" class="absolute inset-y-0 right-0 pr-4 flex items-center text-stone-300 hover:text-red-500 transition-colors">
-                            <span class="material-symbols-outlined text-[16px]">cancel</span>
-                        </a>
-                    @endif
-                  </form>
+
+            <div class="flex flex-wrap items-center gap-4 w-full xl:w-auto">
+                <form action="{{ route('erp.inventario.productos') }}" method="GET" class="relative flex-1 xl:flex-none">
+                    <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+                    <input name="search" value="{{ request('search') }}" onblur="this.form.submit()" class="w-full xl:w-80 bg-white border-stone-200 rounded-2xl pl-14 pr-6 py-4 text-[12px] font-black text-stone-900 focus:ring-8 focus:ring-primary/5 focus:border-primary transition-all placeholder:text-stone-300 uppercase tracking-tight" placeholder="BUSCAR POR SKU O NOMBRE...">
+                </form>
+                
+                <div class="flex items-center gap-2 bg-white p-1.5 rounded-2xl border border-stone-100 shadow-sm">
+                    <button class="w-11 h-11 flex items-center justify-center bg-stone-50 hover:bg-stone-950 text-stone-400 hover:text-primary transition-all rounded-xl" title="Configuración">
+                        <span class="material-symbols-outlined text-lg">settings</span>
+                    </button>
+                    <a href="{{ route('erp.inventario.productos') }}" class="w-11 h-11 flex items-center justify-center bg-stone-50 hover:bg-stone-950 text-stone-400 hover:text-primary transition-all rounded-xl" title="Refrescar">
+                        <span class="material-symbols-outlined text-lg">sync</span>
+                    </a>
+                    <button class="w-11 h-11 flex items-center justify-center bg-stone-50 hover:bg-stone-950 text-stone-400 hover:text-primary transition-all rounded-xl" title="Filtros Avanzados">
+                        <span class="material-symbols-outlined text-lg">tune</span>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div id="tour-product-table" class="overflow-x-auto custom-scrollbar border-b border-stone-200">
-            <table class="w-full text-left border-collapse min-w-[1900px]">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[1200px]">
                 <thead>
-                    <tr class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] bg-stone-50/50 border-b border-stone-100">
-                        <th class="p-6 sticky left-0 bg-stone-50 z-20 w-24">
-                            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'codigo_oem', 'sort_order' => ($sortBy == 'codigo_oem' && $sortOrder == 'asc') ? 'desc' : 'asc']) }}" class="flex items-center gap-2 hover:text-stone-950 transition-colors">
-                                <span class="material-symbols-outlined text-sm">qr_code</span> SKU
-                                @if($sortBy == 'codigo_oem')
-                                    <span class="material-symbols-outlined text-[14px] text-primary">{{ $sortOrder == 'asc' ? 'expand_less' : 'expand_more' }}</span>
-                                @endif
+                    <tr class="zenith-table-header">
+                        <th class="py-6 px-8 w-12"><input type="checkbox" class="w-4 h-4 rounded border-stone-300 text-primary focus:ring-primary"></th>
+                        <th class="py-6 px-4">
+                            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'codigo_oem', 'sort_order' => ($sortBy == 'codigo_oem' && $sortOrder == 'asc') ? 'desc' : 'asc']) }}" class="flex items-center gap-2 group hover:text-stone-900">
+                                IDENTIFICADOR SKU
+                                <span class="material-symbols-outlined text-xs {{ $sortBy == 'codigo_oem' ? 'text-primary' : 'text-stone-300' }}">swap_vert</span>
                             </a>
                         </th>
-                        <th class="p-6">Asset Image</th>
-                        <th class="p-6 w-96 sticky left-24 bg-stone-50 z-20 border-r border-stone-100/50">
-                            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'nombre', 'sort_order' => ($sortBy == 'nombre' && $sortOrder == 'asc') ? 'desc' : 'asc']) }}" class="flex items-center gap-2 hover:text-stone-950 transition-colors">
-                                Descripción del Producto
-                                @if($sortBy == 'nombre')
-                                    <span class="material-symbols-outlined text-[14px] text-primary">{{ $sortOrder == 'asc' ? 'expand_less' : 'expand_more' }}</span>
-                                @endif
-                            </a>
-                        </th>
-                        <th class="p-6 text-center">
-                            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'categoria', 'sort_order' => ($sortBy == 'categoria' && $sortOrder == 'asc') ? 'desc' : 'asc']) }}" class="flex items-center justify-center gap-2 hover:text-stone-950 transition-colors">
-                                Categoría
-                                @if($sortBy == 'categoria')
-                                    <span class="material-symbols-outlined text-[14px] text-primary">{{ $sortOrder == 'asc' ? 'expand_less' : 'expand_more' }}</span>
-                                @endif
-                            </a>
-                        </th>
-                        <th class="p-6 text-center">Marca / Fábrica</th>
-                        <th class="p-6 text-center">Material</th>
-                        <th class="p-6 text-center">Espesor</th>
-                        <th class="p-6 text-center">Medidas</th>
-                        <th class="p-6 text-right">
-                            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'precio_mayor', 'sort_order' => ($sortBy == 'precio_mayor' && $sortOrder == 'asc') ? 'desc' : 'asc']) }}" class="flex items-center justify-end gap-2 hover:text-stone-950 transition-colors">
-                                Precio Venta 
-                                @if($sortBy == 'precio_mayor')
-                                    <span class="material-symbols-outlined text-[14px] text-primary">{{ $sortOrder == 'asc' ? 'expand_less' : 'expand_more' }}</span>
-                                @endif
-                            </a>
-                        </th>
-                        <th class="p-6 text-center">
-                            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'stock_actual', 'sort_order' => ($sortBy == 'stock_actual' && $sortOrder == 'asc') ? 'desc' : 'asc']) }}" class="flex items-center justify-center gap-2 hover:text-stone-950 transition-colors">
-                                Existencia
-                                @if($sortBy == 'stock_actual')
-                                    <span class="material-symbols-outlined text-[14px] text-primary">{{ $sortOrder == 'asc' ? 'expand_less' : 'expand_more' }}</span>
-                                @endif
-                            </a>
-                        </th>
-                        <th class="p-6 text-center w-32 bg-stone-50/80 sticky right-0 z-20">Control</th>
+                        <th class="py-6 px-4">DESCRIPCIÓN TÉCNICA DEL REPUESTO</th>
+                        <th class="py-6 px-4">CATEGORÍA / SISTEMA</th>
+                        <th class="py-6 px-4">MARCA OPERATIVA / FAB.</th>
+                        <th class="py-6 px-4 text-right">PRECIO VENTA</th>
+                        <th class="py-6 px-4">DISPONIBILIDAD STOCK</th>
+                        <th class="py-6 px-8 text-center">GESTIÓN</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-stone-100 text-[11px] font-bold">
-                    @forelse($products as $product)
-                    <tr class="hover:bg-stone-50/50 transition-all group border-l-4 {{ request('search') == $product->codigo_oem ? 'border-primary bg-primary/5 shadow-inner' : 'border-transparent hover:border-primary/40' }}">
-                        <td class="p-6 sticky left-0 {{ request('search') == $product->codigo_oem ? 'bg-primary/5' : 'bg-white' }} group-hover:bg-stone-50 z-10">
-                            <div class="flex flex-col gap-2">
-                                <span class="font-mono text-[10px] text-stone-900 bg-stone-900/5 px-3 py-2 rounded-lg border border-stone-200 font-black tracking-widest inline-block w-fit">
-                                    {{ $product->codigo_oem }}
-                                </span>
-                                @if(request('search') == $product->codigo_oem)
-                                    <span class="text-[8px] font-black text-stone-950 bg-primary px-2 py-0.5 rounded-full uppercase tracking-tighter animate-pulse flex items-center gap-1 w-fit shadow-lg shadow-primary/20">
-                                        <span class="material-symbols-outlined text-[10px]">target</span>
-                                        Item Enfocado
-                                    </span>
-                                @endif
-                            </div>
-                        </td>
-                        <td class="p-6">
-                            <div class="w-14 h-14 bg-stone-100 rounded-2xl flex items-center justify-center border border-stone-200 group-hover:border-primary transition-all overflow-hidden relative shadow-sm">
-                                @if($product->foto_path)
-                                    <img src="{{ $product->foto_path }}" class="w-full h-full object-cover">
-                                @else
-                                    <span class="material-symbols-outlined text-stone-300 text-2xl group-hover:text-stone-900 transition-colors">settings_input_component</span>
-                                @endif
-                                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/20 to-transparent"></div>
-                            </div>
-                        </td>
-                        <td class="p-6 sticky left-24 bg-white group-hover:bg-stone-50 z-10 border-r border-stone-100">
-                            <div class="space-y-1">
-                                <p class="text-[13px] font-black text-stone-950 uppercase leading-snug tracking-tight group-hover:text-primary transition-colors">{{ $product->nombre }}</p>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-[8px] font-black text-stone-400 uppercase tracking-widest italic leading-none border-t border-stone-100 pt-1">{{ $product->codigo_interno }}</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="p-6 text-center">
-                            <span class="px-4 py-2 bg-stone-950 text-primary text-[9px] font-black uppercase rounded-lg tracking-[0.1em] shadow-lg shadow-primary/5 inline-block min-w-[120px]">
-                                {{ $product->categoria }}
+                <tbody class="divide-y divide-stone-50">
+                    @forelse($products as $index => $product)
+                    <tr class="zenith-table-row group/row">
+                        <td class="py-5 px-8"><input type="checkbox" class="w-4 h-4 rounded border-stone-300 text-primary focus:ring-primary"></td>
+                        <td class="py-5 px-4 font-mono">
+                            <span class="zenith-table-sku">
+                                {{ $product->codigo_oem }}
                             </span>
                         </td>
-                        <td class="p-6 text-center">
-                            <div class="space-y-0.5">
-                                <p class="text-[11px] font-black text-stone-900 uppercase italic">{{ $product->marca ?? '-' }}</p>
-                                <p class="text-[9px] font-bold text-stone-400 uppercase tracking-wider">{{ $product->fabricante ?? 'Origen Desconocido' }}</p>
+                        <td class="py-5 px-4">
+                            <a href="{{ url('/tienda/detalle_productos?id=' . $product->id) }}" target="_blank" class="zenith-table-main hover:text-primary transition-colors block">
+                                {{ $product->nombre }}
+                            </a>
+                            <p class="zenith-table-secondary mt-1">ID Central: #{{ str_pad($product->id, 5, '0', STR_PAD_LEFT) }}</p>
+                        </td>
+                        <td class="py-5 px-4">
+                            <span class="zenith-table-secondary font-black text-stone-600">{{ $product->categoria ?? 'GENERAL' }}</span>
+                        </td>
+                        <td class="py-5 px-4">
+                            <div class="flex items-center gap-2">
+                                <span class="zenith-table-secondary">{{ $product->marca ?? '-' }}</span>
+                                <span class="text-stone-200">|</span>
+                                <span class="zenith-table-secondary">{{ $product->fabricante ?? '-' }}</span>
                             </div>
                         </td>
-                        <td class="p-6 text-center font-bold text-stone-500 uppercase tracking-tight">
-                            {{ $product->material ?? '-' }}
+                        <td class="py-5 px-4 text-right">
+                            <span class="zenith-table-price">${{ number_format($product->precio_mayor, 2) }}</span>
                         </td>
-                        <td class="p-6 text-center font-mono text-stone-900 text-[10px]">
-                            {{ $product->espesor ?? '-' }}
-                        </td>
-                        <td class="p-6 text-center font-mono text-stone-900 text-[10px]">
-                            {{ $product->medidas ?? '-' }}
-                        </td>
-                        <td class="p-6 text-right">
-                            <div class="relative inline-block">
-                                <p class="text-xl font-headline font-black text-stone-950 tracking-tighter leading-none mb-1 group-hover:scale-105 transition-transform origin-right">${{ number_format($product->precio_mayor, 2) }}</p>
-                                <div class="h-0.5 bg-primary w-full origin-right scale-x-0 group-hover:scale-x-100 transition-transform"></div>
-                            </div>
-                            <p class="text-[8px] text-stone-400 font-bold uppercase tracking-widest italic mt-1">Precio Mayorista</p>
-                        </td>
-                        <td class="p-6 text-center">
-                            <div class="flex flex-col items-center gap-2">
-                                <div class="flex items-baseline gap-1">
-                                    <span class="text-lg font-headline font-black {{ $product->stock_actual <= $product->stock_minimo ? 'text-red-500 animate-pulse' : 'text-stone-950' }}">{{ number_format($product->stock_actual, 0) }}</span>
-                                    <span class="text-[8px] font-black text-stone-400 uppercase">u.</span>
-                                </div>
-                                <div class="w-20 bg-stone-100 h-1.5 rounded-full overflow-hidden border border-stone-200">
-                                     @php $stockPercent = min(100, ($product->stock_actual / ($product->stock_minimo ?: 1 * 5)) * 100); @endphp
-                                    <div class="{{ $product->stock_actual <= $product->stock_minimo ? 'bg-red-500' : 'bg-primary' }} h-full transition-all duration-700" style="width: {{ $stockPercent }}%"></div>
+                        <td class="py-5 px-4">
+                            @php $safeMinimo = max(1, (float)$product->stock_minimo); @endphp
+                            @php $stockPercent = min(100, ($product->stock_actual / ($safeMinimo * 3)) * 100); @endphp
+                            <div class="flex items-center gap-4">
+                                <span class="text-[12px] font-black {{ $product->stock_actual <= $safeMinimo ? 'text-red-600 animate-pulse' : 'text-stone-950' }} min-w-[30px] font-mono leading-none">
+                                    {{ number_format($product->stock_actual, 0) }}
+                                </span>
+                                <div class="w-full max-w-[80px] bg-stone-100 h-1.5 rounded-full overflow-hidden flex-shrink-0">
+                                    <div class="{{ $product->stock_actual <= $safeMinimo ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]' : 'bg-primary' }} h-full transition-all duration-700" style="width: {{ $stockPercent }}%"></div>
                                 </div>
                             </div>
                         </td>
-                        <td class="p-6 sticky right-0 bg-stone-950/2 backdrop-blur-sm z-10 group-hover:bg-primary/5">
-                            <div class="flex justify-center gap-3">
-                                <a href="{{ url('/tienda/detalle_productos?id=' . $product->id) }}" target="_blank" class="w-10 h-10 bg-white border border-stone-200 text-stone-400 hover:text-primary hover:border-primary hover:rotate-6 rounded-xl transition-all shadow-sm flex items-center justify-center group/icon" title="Ver en Tienda">
-                                    <span class="material-symbols-outlined text-lg">visibility</span>
-                                </a>
-                                <button class="w-10 h-10 bg-white border border-stone-200 text-stone-400 hover:text-stone-950 hover:border-stone-950 hover:-rotate-6 rounded-xl transition-all shadow-sm flex items-center justify-center group/icon" title="Editar Ficha">
-                                    <span class="material-symbols-outlined text-lg">edit_square</span>
-                                </button>
-                            </div>
+                        <td class="py-5 px-8 text-center">
+                            <button class="w-10 h-10 bg-white border border-stone-100 text-stone-400 hover:bg-stone-950 hover:text-primary hover:border-stone-950 transition-all rounded-xl shadow-sm flex items-center justify-center mx-auto">
+                                <span class="material-symbols-outlined text-lg">more_vert</span>
+                            </button>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="11" class="p-32 text-center bg-stone-50/20">
-                            <div class="flex flex-col items-center gap-8 border-2 border-dashed border-stone-200 rounded-[40px] p-20">
-                                <div class="w-24 h-24 bg-stone-100 rounded-full flex items-center justify-center text-stone-200">
-                                    <span class="material-symbols-outlined text-5xl">inventory_2</span>
-                                </div>
-                                <div>
-                                    <p class="text-xl font-headline font-black text-stone-900 uppercase tracking-tighter mb-2">Bóveda de Activos Vacía</p>
-                                    <p class="text-xs text-stone-400 font-bold uppercase tracking-widest max-w-sm mx-auto">No se han detectado registros que coincidan con los criterios de búsqueda actuales.</p>
-                                </div>
-                                <a href="{{ route('erp.inventario.productos') }}" class="inline-flex items-center gap-4 bg-stone-950 text-primary px-10 py-5 rounded-[22px] text-[10px] font-black uppercase tracking-[0.3em] hover:scale-105 transition-all shadow-2xl active:scale-95">
-                                    <span class="material-symbols-outlined">restart_alt</span>
-                                    Reinicializar Filtros
-                                </a>
-                            </div>
+                        <td colspan="8" class="py-20 text-center">
+                            <span class="material-symbols-outlined text-5xl text-stone-100 mb-4">inventory_2</span>
+                            <p class="text-[10px] font-black text-stone-300 uppercase tracking-[0.5em]">No se detectaron activos en el maestro</p>
                         </td>
                     </tr>
                     @endforelse
@@ -302,14 +183,20 @@
             </table>
         </div>
 
-        <div class="px-8 py-6 bg-stone-50/50 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-stone-100">
+        <!-- Footer: Pagination & Insights -->
+        <div class="p-8 border-t border-stone-100 bg-stone-50/30 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-4">
-                <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] italic">Catálogo de Activos Sincronizado v4.2 • La Cima Command</p>
+                <span class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Sincronización: 100% OK</span>
+                <span class="w-1 h-4 bg-stone-200 rounded-full"></span>
+                <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Mostrando {{ $products->total() }} Activos Registrados</span>
             </div>
-            <div class="flex gap-2">
+            <div>
                 {{ $products->appends(request()->query())->links('vendor.pagination.tailwind_zenith') }}
             </div>
         </div>
+    </div>
+ </div>
+    </div>  </div>
     </div>
 @endsection
 
@@ -344,11 +231,11 @@
                         </div>
                         <div class="col-span-12 lg:col-span-8 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest ml-1">Descripción Nominal del Activo</label>
-                            <input type="text" name="nombre" placeholder="EJ. EMPAQUEDADURA DE CÁMARA (CULATA)" required class="w-full bg-stone-50 border-stone-100 rounded-2xl px-6 py-5 text-sm font-black text-stone-950 focus:ring-8 focus:ring-primary/5 transition-all uppercase placeholder:text-stone-300">
+                            <input type="text" name="nombre" placeholder="EJ. EMPAQUEDADURA DE CÁMARA (CULATA)" required class="w-full bg-stone-50 border-stone-100 rounded-2xl px-6 py-5 text-[12px] font-black text-stone-950 focus:ring-8 focus:ring-primary/5 transition-all uppercase placeholder:text-stone-300 tracking-tight">
                         </div>
                         <div class="col-span-12 lg:col-span-4 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest ml-1">Código OEM (Identificador)</label>
-                            <input type="text" name="codigo_oem" placeholder="XP-00000" required class="w-full bg-stone-50 border-stone-100 rounded-2xl px-6 py-5 text-sm font-black text-stone-950 focus:ring-8 focus:ring-primary/5 transition-all font-mono uppercase placeholder:text-stone-300">
+                            <input type="text" name="codigo_oem" placeholder="XP-00000" required class="w-full bg-stone-50 border-stone-100 rounded-2xl px-6 py-5 text-[12px] font-black text-stone-950 focus:ring-8 focus:ring-primary/5 transition-all font-mono uppercase placeholder:text-stone-300 tracking-tighter">
                         </div>
                     </div>
 
@@ -362,31 +249,31 @@
                         </div>
                         <div class="col-span-12 md:col-span-4 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Fabricante</label>
-                            <input type="text" name="fabricante" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-xs font-bold text-stone-900 focus:bg-white transition-all uppercase">
+                            <input type="text" name="fabricante" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
                         </div>
                         <div class="col-span-12 md:col-span-4 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Marca Operativa</label>
-                            <input type="text" name="marca" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-xs font-bold text-stone-900 focus:bg-white transition-all uppercase">
+                            <input type="text" name="marca" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
                         </div>
                         <div class="col-span-12 md:col-span-4 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Categoría de Sistema</label>
-                            <input type="text" name="categoria" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-xs font-bold text-stone-900 focus:bg-white transition-all uppercase">
+                            <input type="text" name="categoria" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
                         </div>
                         <div class="col-span-12 md:col-span-3 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Composición (Material)</label>
-                            <input type="text" name="material" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-xs font-bold text-stone-900 focus:bg-white transition-all uppercase">
+                            <input type="text" name="material" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
                         </div>
                         <div class="col-span-12 md:col-span-3 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Espesor Nominal</label>
-                            <input type="text" name="espesor" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-xs font-bold text-stone-900 focus:bg-white transition-all uppercase">
+                            <input type="text" name="espesor" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
                         </div>
                         <div class="col-span-12 md:col-span-3 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Dimensiones</label>
-                            <input type="text" name="medidas" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-xs font-bold text-stone-900 focus:bg-white transition-all uppercase">
+                            <input type="text" name="medidas" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
                         </div>
                         <div class="col-span-12 md:col-span-3 space-y-2">
                             <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Fecha Apertura</label>
-                            <input type="date" name="fecha_incorporacion" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-xs font-bold text-stone-900 focus:bg-white transition-all uppercase">
+                            <input type="date" name="fecha_incorporacion" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
                         </div>
                     </div>
 

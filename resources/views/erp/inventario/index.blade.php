@@ -19,246 +19,234 @@
 @endsection
 
 @section('content')
-    <!-- Page Header: Industrial Identity -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
-        <div>
-            <div class="flex items-center gap-2 mb-2">
-                <span class="w-8 h-[2px] bg-primary"></span>
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em]">Gestión de Activos Físicos</p>
-            </div>
-            <h2 class="text-4xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none">Control de <span class="text-stone-400">Inventario</span></h2>
-            <p class="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
+<!-- Page Header: Industrial Identity -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-12">
+    <div>
+        <div class="flex items-center gap-3 mb-4">
+            <span class="w-10 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(206,255,94,0.4)]"></span>
+            <p class="text-[12px] font-black text-stone-400 uppercase tracking-[0.4em] italic leading-none">Asset Management: Physical Control</p>
         </div>
-        <div class="flex gap-3">
-            <div class="bg-white border border-stone-200 px-5 py-3 rounded-xl shadow-sm text-center">
-                <span class="text-[9px] font-bold text-stone-400 uppercase tracking-widest block mb-1">Stock de Emergencia</span>
-                <p class="text-lg font-headline font-black text-red-600">{{ number_format($stats['low_stock'], 0) }} ITEMS</p>
-            </div>
-            <div class="bg-stone-900 px-5 py-3 rounded-xl shadow-xl text-center border border-stone-800">
-                <span class="text-[9px] font-bold text-primary uppercase tracking-widest block mb-1">Estatus Global</span>
-                <p class="text-lg font-headline font-black text-white">{{ $stats['low_stock'] > 0 ? 'ALERTA' : 'ÓPTIMO' }}</p>
-            </div>
+        <h2 class="text-5xl md:text-6xl font-headline font-black text-stone-950 tracking-tighter uppercase italic leading-none">Inventory <span class="text-stone-300">Hub</span></h2>
+        <p class="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] mt-4 italic italic">
+            MAYOR DE REPUESTO LA CIMA, C.A. • ALPHA_LOGISTICS_NODE_01
+        </p>
+    </div>
+    <div class="flex gap-4">
+        <div class="bg-white border border-stone-100 px-8 py-4 rounded-2xl shadow-sm border-l-4 border-l-red-500">
+            <span class="text-[9px] font-black text-stone-400 uppercase tracking-[0.4em] block mb-2 italic">CRITICAL DEPLETION SCAN</span>
+            <p class="text-2xl font-headline font-black text-red-600 italic tracking-tighter leading-none">{{ number_format($stats['low_stock'], 0) }} SKUs</p>
+        </div>
+        <div class="bg-stone-950 px-8 py-4 rounded-2xl shadow-2xl border border-stone-800 text-center flex flex-col justify-center">
+            <span class="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-2 italic">GLOBAL PROTOCOL</span>
+            <p class="text-xl font-headline font-black text-white italic tracking-tighter leading-none">{{ $stats['low_stock'] > 0 ? 'ALERT_SIG' : 'OPTIMAL_FLG' }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Metric Bento Grid: Precision Analytics -->
+<div id="tour-inventory-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+    <!-- Value Card -->
+    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-sm relative group overflow-hidden transition-all hover:border-primary">
+        <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:scale-125 group-hover:opacity-[0.06] transition-all duration-700">
+            <span class="material-symbols-outlined text-[160px]">account_balance_wallet</span>
+        </div>
+        <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic">Total Asset Valuation</p>
+        <div class="flex items-baseline gap-2">
+            <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['valuation'], 2) }}</span>
+            <span class="text-[12px] font-black text-stone-400 font-mono italic">USD</span>
+        </div>
+        <div class="mt-6 flex items-center gap-3">
+            <span class="flex items-center text-[9px] font-black text-stone-800 bg-primary px-4 py-1 rounded-full uppercase tracking-widest italic ornament shadow-xl shadow-primary/20">
+                Stable_Pulse
+            </span>
+            <span class="text-[9px] text-stone-400 font-black uppercase tracking-[0.2em] italic italic">Real-time Valuation Scan</span>
         </div>
     </div>
 
-    <!-- Metric Bento Grid: Precision Analytics -->
-    <div id="tour-inventory-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <!-- Value Card -->
-        <div class="bg-white border border-stone-200 p-6 rounded-2xl hover:border-primary/50 transition-all group shadow-sm relative overflow-hidden">
-            <div class="absolute -right-4 -top-4 opacity-[0.03] group-hover:scale-110 transition-transform duration-700">
-                <span class="material-symbols-outlined text-8xl">account_balance_wallet</span>
-            </div>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Valor Total Activo</p>
-            <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">${{ number_format($stats['valuation'], 2) }}</span>
-                <span class="text-[10px] font-bold text-stone-400 uppercase">USD</span>
-            </div>
-            <div class="mt-4 flex items-center gap-2">
-                <span class="flex items-center text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
-                    <span class="material-symbols-outlined text-xs mr-1">trending_up</span>Estable
-                </span>
-                <span class="text-[9px] text-stone-400 font-medium uppercase tracking-tighter">Valuación Real</span>
-            </div>
+    <!-- Turnover Card -->
+    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-sm relative group overflow-hidden transition-all hover:border-primary">
+        <div class="absolute -right-6 -top-6 opacity-[0.03] group-hover:scale-125 group-hover:opacity-[0.06] transition-all duration-700">
+            <span class="material-symbols-outlined text-[160px]">sync_alt</span>
         </div>
-
-        <!-- Turnover Card -->
-        <div class="bg-white border border-stone-200 p-6 rounded-2xl hover:border-primary/50 transition-all group shadow-sm relative overflow-hidden">
-            <div class="absolute -right-4 -top-4 opacity-[0.03] group-hover:scale-110 transition-transform duration-700">
-                <span class="material-symbols-outlined text-8xl">sync_alt</span>
-            </div>
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Rotación Promedio</p>
-            <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">4.2x</span>
-                <span class="text-[10px] font-bold text-stone-400 uppercase">Ciclos</span>
-            </div>
-            <div class="mt-4 flex items-center gap-2">
-                <span class="flex items-center text-[10px] font-bold text-primary-dim bg-primary/10 px-2 py-0.5 rounded-full">
-                    <span class="material-symbols-outlined text-xs mr-1">bolt</span>Alto
-                </span>
-                <span class="text-[9px] text-stone-400 font-medium uppercase tracking-tighter">Demanda en Alza</span>
-            </div>
+        <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic">Velocity Logic: Turnover</p>
+        <div class="flex items-baseline gap-2">
+            <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">4.2x</span>
+            <span class="text-[11px] font-black text-stone-400 uppercase italic">Cycles</span>
         </div>
+        <div class="mt-6 flex items-center gap-3">
+            <span class="flex items-center text-[9px] font-black text-primary bg-stone-950 px-4 py-1 rounded-full uppercase tracking-widest italic ornament shadow-xl shadow-stone-950/20">
+                High_Flow
+            </span>
+            <span class="text-[9px] text-stone-400 font-black uppercase tracking-[0.2em] italic italic">Demand Velocity Positive</span>
+        </div>
+    </div>
 
-        <!-- Critical Items Card -->
-        <div class="bg-white border border-stone-200 p-6 rounded-2xl border-amber-200 hover:border-amber-400 transition-all group shadow-sm relative overflow-hidden">
-            <p class="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-4">Nivel de Alerta</p>
-            <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-amber-600">{{ $stats['low_stock'] }} ITEMS</span>
+    <!-- Critical Items Card -->
+    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-sm relative group overflow-hidden transition-all hover:border-red-500 border-l-[12px] border-l-red-500">
+        <p class="text-[10px] font-black text-red-600 uppercase tracking-[0.4em] mb-4 italic">Alert Scan: Priority_1</p>
+        <div class="flex items-baseline gap-2">
+            <span class="text-4xl font-headline font-black text-red-600 italic tracking-tighter leading-none">{{ $stats['low_stock'] }}</span>
+            <span class="text-[11px] font-black text-red-400 uppercase italic">Units Critical</span>
+        </div>
+        <div class="mt-8">
+            <div class="w-full bg-stone-50 h-3 rounded-full overflow-hidden p-[1px] border border-stone-100">
+                @php $low_stock_percent = $stats['total_sku'] > 0 ? ($stats['low_stock'] / $stats['total_sku']) * 100 : 0; @endphp
+                <div class="bg-red-500 h-full rounded-full shadow-[0_0_10px_rgba(239,68,68,0.3)] transition-all duration-1000" style="width: {{ $low_stock_percent }}%"></div>
             </div>
-            <div class="mt-4">
-                <div class="w-full bg-stone-100 h-1 rounded-full overflow-hidden">
-                    @php $low_stock_percent = $stats['total_sku'] > 0 ? ($stats['low_stock'] / $stats['total_sku']) * 100 : 0; @endphp
-                    <div class="bg-amber-500 h-full" style="width: {{ $low_stock_percent }}%"></div>
+            <p class="text-[9px] text-stone-400 font-black uppercase tracking-[0.3em] mt-4 italic italic">{{ round($low_stock_percent, 1) }}% Integrity Risk Identified</p>
+        </div>
+    </div>
+
+    <!-- Inventory Integrity -->
+    <div class="bg-stone-950 border border-stone-800 p-10 rounded-[40px] group shadow-2xl relative overflow-hidden transition-all hover:border-primary/20">
+        <div class="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity" style="background-image: radial-gradient(#ceff5e 1.5px, transparent 1.5px); background-size: 20px 20px;"></div>
+        <p class="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 relative z-10 italic">Ledger Sync Protocol</p>
+        <div class="flex items-baseline gap-2 relative z-10">
+            <span class="text-4xl font-headline font-black text-white italic tracking-tighter leading-none">100%</span>
+        </div>
+        <p class="text-[9px] text-stone-500 font-black uppercase tracking-[0.3em] mt-8 relative z-10 flex items-center gap-3 italic italic">
+            <span class="w-3 h-3 rounded-full bg-primary shadow-[0_0_15px_rgba(206,255,94,0.6)] animate-pulse"></span>
+            Virtual Store Sinc_Lock Active
+        </p>
+    </div>
+</div>
+
+<!-- System Interaction Panel: Quick Access -->
+<div id="tour-inventory-actions" class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-12">
+    <a href="{{ url('/erp/inventario/productos') }}" class="group bg-primary text-stone-950 p-8 rounded-[32px] flex flex-col items-center justify-center gap-4 transition-all hover:bg-stone-950 hover:text-primary active:scale-95 shadow-xl shadow-primary/20">
+        <span class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform">category</span>
+        <span class="text-[11px] font-black uppercase tracking-[0.3em] italic text-center leading-none">Master</span>
+    </a>
+    <a href="{{ url('/erp/inventario/desarrollo') }}" class="group bg-white border border-stone-100 p-8 rounded-[32px] flex flex-col items-center justify-center gap-4 transition-all hover:border-primary group hover:bg-primary/5 active:scale-95 shadow-sm">
+        <span class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform text-stone-300 group-hover:text-primary">biotech</span>
+        <span class="text-[11px] font-black uppercase tracking-[0.3em] italic text-center leading-none">R&D Hub</span>
+    </a>
+    <a href="{{ url('/erp/inventario/lista-precios') }}" class="group bg-white border border-stone-100 p-8 rounded-[32px] flex flex-col items-center justify-center gap-4 transition-all hover:border-primary group hover:bg-primary/5 active:scale-95 shadow-sm">
+        <span class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform text-stone-300 group-hover:text-primary">payments</span>
+        <span class="text-[11px] font-black uppercase tracking-[0.3em] italic text-center leading-none">Price Matrix</span>
+    </a>
+    <a href="{{ url('/erp/inventario/kardex') }}" class="group bg-white border border-stone-100 p-8 rounded-[32px] flex flex-col items-center justify-center gap-4 transition-all hover:border-primary group hover:bg-primary/5 active:scale-95 shadow-sm">
+        <span class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform text-stone-300 group-hover:text-primary">receipt_long</span>
+        <span class="text-[11px] font-black uppercase tracking-[0.3em] italic text-center leading-none">Kardex Log</span>
+    </a>
+    <a href="{{ url('/erp/inventario/ajustes') }}" class="group bg-white border border-stone-100 p-8 rounded-[32px] flex flex-col items-center justify-center gap-4 transition-all hover:border-primary group hover:bg-primary/5 active:scale-95 shadow-sm">
+        <span class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform text-stone-300 group-hover:text-primary">edit_note</span>
+        <span class="text-[11px] font-black uppercase tracking-[0.3em] italic text-center leading-none">Adjustments</span>
+    </a>
+</div>
+
+<!-- Inventory Operational Dashboard -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
+    <!-- Main Movement Table -->
+    <div class="lg:col-span-2 bg-white rounded-[40px] border border-stone-100 overflow-hidden shadow-sm">
+        <div class="p-10 border-b border-stone-50 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <div class="w-12 h-12 bg-stone-950 rounded-2xl flex items-center justify-center text-primary shadow-2xl shadow-stone-950/20">
+                    <span class="material-symbols-outlined text-2xl">swap_vert</span>
                 </div>
-                <p class="text-[9px] text-stone-400 font-medium uppercase tracking-tighter mt-2">{{ round($low_stock_percent, 1) }}% de items críticos</p>
-            </div>
-        </div>
-
-        <!-- Inventory Integrity -->
-        <div class="bg-stone-900 border border-stone-800 p-6 rounded-2xl group shadow-2xl relative overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity" style="background-image: radial-gradient(#ceff5e 1px, transparent 1px); background-size: 15px 15px;"></div>
-            <p class="text-[10px] font-black text-primary uppercase tracking-widest mb-4 relative z-10">Integridad de Stock</p>
-            <div class="flex items-baseline gap-2 relative z-10">
-                <span class="text-3xl font-headline font-black text-white">100%</span>
-            </div>
-            <p class="text-[9px] text-stone-400 font-medium uppercase tracking-tighter mt-4 relative z-10 flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                Sincronizado con Tienda Virtual
-            </p>
-        </div>
-    </div>
-
-    <!-- System Interaction Panel: Quick Access -->
-    <div id="tour-inventory-actions" class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10">
-        <a href="{{ url('/erp/inventario/productos') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
-            <div class="w-14 h-14 bg-stone-900 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <span class="material-symbols-outlined text-3xl">category</span>
-            </div>
-            <div class="min-w-0">
-                <p class="text-sm font-black text-stone-900 uppercase truncate tracking-tight">Maestro</p>
-                <p class="text-xs text-stone-400 font-bold uppercase truncate">{{ number_format($stats['total_sku'], 0) }} SKUs</p>
-            </div>
-        </a>
-        <a href="{{ url('/erp/inventario/desarrollo') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
-            <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-500 group-hover:bg-primary group-hover:text-black transition-all">
-                <span class="material-symbols-outlined text-3xl">biotech</span>
-            </div>
-            <div class="min-w-0">
-                <p class="text-sm font-black text-stone-900 uppercase truncate tracking-tight">Desarrollo</p>
-                <p class="text-xs text-stone-400 font-bold uppercase truncate">Nuevos Items</p>
-            </div>
-        </a>
-        <a href="{{ url('/erp/inventario/lista-precios') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
-            <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-500 group-hover:bg-primary group-hover:text-black transition-all">
-                <span class="material-symbols-outlined text-3xl">payments</span>
-            </div>
-            <div class="min-w-0">
-                <p class="text-sm font-black text-stone-900 uppercase truncate tracking-tight">Lista Precios</p>
-                <p class="text-xs text-stone-400 font-bold uppercase truncate">Carga Masiva</p>
-            </div>
-        </a>
-        <a href="{{ url('/erp/inventario/kardex') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
-            <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-500 group-hover:bg-primary group-hover:text-black transition-all">
-                <span class="material-symbols-outlined text-3xl">receipt_long</span>
-            </div>
-            <div class="min-w-0">
-                <p class="text-sm font-black text-stone-900 uppercase truncate tracking-tight">Kardex</p>
-                <p class="text-xs text-stone-400 font-bold uppercase truncate">Auditoría 24/7</p>
-            </div>
-        </a>
-
-        <a href="{{ url('/erp/inventario/ajustes') }}" class="group bg-white border border-stone-200 p-6 rounded-2xl flex items-center gap-5 hover:border-primary hover:bg-primary/5 transition-all shadow-sm">
-            <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-500 group-hover:bg-primary group-hover:text-black transition-all">
-                <span class="material-symbols-outlined text-3xl">edit_note</span>
-            </div>
-            <div class="min-w-0">
-                <p class="text-sm font-black text-stone-900 uppercase truncate tracking-tight">Ajustes</p>
-                <p class="text-xs text-stone-400 font-bold uppercase truncate">Cuadratura</p>
-            </div>
-        </a>
-    </div>
-
-    <!-- Inventory Operational Dashboard -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-        <!-- Main Movement Table -->
-        <div class="lg:col-span-2 bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
-            <div class="p-6 border-b border-stone-100 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="w-2 h-6 bg-primary rounded-full"></div>
-                    <h3 class="text-lg font-headline font-black text-stone-900 uppercase tracking-tighter">Movimientos de Stock Central</h3>
+                <div>
+                    <h3 class="text-2xl font-headline font-black text-stone-950 uppercase tracking-tighter italic leading-none">Stock Transmission Feed</h3>
+                    <p class="text-[10px] text-stone-400 font-black uppercase tracking-[0.3em] mt-2 italic italic">Real-time Movement Logic</p>
                 </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left font-body">
-                    <thead>
-                        <tr class="bg-stone-50">
-                            <th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-widest text-left">Fecha/Doc</th>
-                            <th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-widest text-left">Producto</th>
-                            <th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-widest text-right">Cant</th>
-                            <th class="px-6 py-4 text-[10px] font-black text-stone-400 uppercase tracking-widest text-center">Estatus</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-stone-100">
-                        @forelse($stats['recent_movements'] as $movement)
-                        <tr class="hover:bg-stone-50/50 transition-colors group">
-                            <td class="px-6 py-4">
-                                <p class="text-[10px] font-bold text-stone-900 uppercase mb-0.5">{{ $movement->created_at->format('d M Y') }}</p>
-                                <p class="text-[9px] font-mono text-stone-400">#{{ $movement->reference_id ?? 'INT-'.str_pad($movement->id, 5, '0', STR_PAD_LEFT) }}</p>
-                            </td>
-                            <td class="px-6 py-4 font-bold text-xs uppercase">{{ $movement->product->nombre }}</td>
-                            <td class="px-6 py-4 text-right">
-                                <span class="text-xs font-black {{ $movement->type == 'IN' ? 'text-green-600' : 'text-red-600' }}">
-                                    {{ $movement->type == 'IN' ? '+' : '-' }}{{ number_format($movement->quantity, 0) }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <span class="badge {{ $movement->type == 'IN' ? 'badge-green' : ($movement->type == 'OUT' ? 'badge-red' : 'badge-stone') }}">
-                                    {{ $movement->type }}
-                                </span>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="4" class="px-6 py-12 text-center">
-                                <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Sin movimientos recientes registrados</p>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            <div class="p-4 bg-stone-50 border-t border-stone-100 flex justify-center">
-                <a href="{{ url('/erp/inventario/kardex') }}" class="text-[10px] font-black text-stone-400 uppercase tracking-widest hover:text-stone-900 transition-colors">Visualizar Historial Maestro de Movimientos</a>
-            </div>
         </div>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="zenith-table-header bg-stone-950 text-white">
+                        <th class="px-8 py-5 text-left">PROTOCOL ID / TIMESTAMP</th>
+                        <th class="px-8 py-5 text-left">ASSET PROFILE</th>
+                        <th class="px-8 py-5 text-right">QUANTUM</th>
+                        <th class="px-8 py-5 text-center">FLOW CODE</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-stone-50">
+                    @forelse($stats['recent_movements'] as $movement)
+                    <tr class="hover:bg-primary/5 transition-colors group">
+                        <td class="px-8 py-6">
+                            <p class="text-[11px] font-black text-stone-950 uppercase tracking-tight italic">{{ $movement->created_at->format('d M Y') }}</p>
+                            <p class="text-[10px] font-mono font-black text-stone-400 italic italic mt-1 uppercase">REF: #{{ $movement->reference_id ?? 'INT-'.str_pad($movement->id, 5, '0', STR_PAD_LEFT) }}</p>
+                        </td>
+                        <td class="px-8 py-6 text-[12px] font-black text-stone-950 uppercase italic tracking-tight">{{ $movement->product->nombre }}</td>
+                        <td class="px-8 py-6 text-right">
+                            <span class="text-[14px] font-mono font-black italic tracking-tighter leading-none {{ $movement->type == 'IN' ? 'text-green-500' : 'text-red-500' }}">
+                                {{ $movement->type == 'IN' ? '+' : '-' }}{{ number_format($movement->quantity, 0) }}
+                            </span>
+                        </td>
+                        <td class="px-8 py-6 text-center italic italic">
+                            <span class="px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] italic border {{ $movement->type == 'IN' ? 'bg-green-100 text-green-700 border-green-200' : ($movement->type == 'OUT' ? 'bg-red-100 text-red-700 border-red-200' : 'bg-stone-100 text-stone-600 border-stone-200') }}">
+                                {{ $movement->type }}
+                            </span>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4" class="py-20 text-center">
+                            <p class="text-[12px] font-black text-stone-300 uppercase tracking-[0.3em] italic">No categorical transmission detected in recent cycles.</p>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <div class="p-8 bg-stone-50 border-t border-stone-100 flex justify-center">
+            <a href="{{ url('/erp/inventario/kardex') }}" class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] hover:text-stone-950 transition-all italic italic">ACCESS MASTER HISTORICAL LOG</a>
+        </div>
+    </div>
 
-        <!-- Right Column: Compliance & Auditoria -->
-        <div class="space-y-6">
-            <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm">
-                <h3 class="text-xs font-black text-stone-900 uppercase tracking-widest mb-6">Composición del Catálogo</h3>
-                <div class="space-y-4">
-                    <div class="group cursor-default">
-                        <div class="flex justify-between items-end mb-1">
-                            <span class="text-[10px] font-bold text-stone-500 uppercase">Motor Heavy Duty</span>
-                            <span class="text-[10px] font-black text-stone-900">45%</span>
-                        </div>
-                        <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
-                            <div class="bg-stone-900 group-hover:bg-primary h-full w-[45%] transition-colors duration-500"></div>
-                        </div>
+    <!-- Right Column: Compliance & Auditoria -->
+    <div class="flex flex-col gap-6">
+        <div class="bg-white rounded-[40px] border border-stone-100 p-10 shadow-sm relative overflow-hidden group">
+            <h3 class="text-[11px] font-black text-stone-950 uppercase tracking-[0.4em] mb-10 flex items-center gap-4 italic italic">
+                <span class="material-symbols-outlined text-stone-300">hub</span>
+                Catalog Structural Mix
+            </h3>
+            <div class="space-y-8">
+                <div class="group cursor-default">
+                    <div class="flex justify-between items-end mb-3">
+                        <span class="text-[11px] font-black text-stone-500 uppercase tracking-widest italic italic">Motor Heavy Duty</span>
+                        <span class="text-[12px] font-mono font-black text-stone-950 italic">45% Population</span>
+                    </div>
+                    <div class="w-full bg-stone-50 h-3 rounded-full overflow-hidden p-[1px] border border-stone-100">
+                        <div class="bg-stone-950 group-hover:bg-primary h-full rounded-full transition-all duration-700 shadow-xl" style="width: 45%"></div>
                     </div>
                 </div>
             </div>
-            
-            <div class="bg-stone-900 rounded-2xl p-6 shadow-xl border border-stone-800">
-                <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-3">Vigencia Fiscal</p>
-                <p class="text-xs text-stone-400 leading-relaxed font-medium uppercase italic">Art. 177 ISLR • Cumplimiento Normativo SENIAT</p>
-            </div>
+            <span class="material-symbols-outlined absolute -right-8 -bottom-8 text-[140px] opacity-[0.02] text-stone-950 pointer-events-none rotate-12 group-hover:opacity-[0.04] transition-opacity">analytics</span>
+        </div>
+        
+        <div class="bg-stone-950 rounded-[40px] p-10 shadow-2xl border border-stone-800 relative overflow-hidden transition-all hover:border-primary/20 group">
+            <p class="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 italic">FISCAL STATUS: COMPLIANT</p>
+            <p class="text-[12px] text-stone-400 leading-relaxed font-black uppercase italic tracking-widest">ART. 177 ISLR PROTOCOL DETECTED • SENIAT NORMATIVE COMPLIANCE SYNC_LOCK ACTIVE</p>
+            <span class="material-symbols-outlined absolute -right-8 -bottom-8 text-[140px] opacity-[0.05] text-primary pointer-events-none rotate-12 group-hover:opacity-[0.1] transition-opacity">policy</span>
         </div>
     </div>
+</div>
 
-    <!-- Dashboard Spotlight Items (Dangling Fix) -->
-    <div class="mt-8">
-        <div class="flex items-center gap-3 mb-6">
-            <div class="w-8 h-[2px] bg-primary"></div>
-            <h3 class="text-sm font-black text-stone-900 uppercase tracking-widest">Items de Inventario Destacados</h3>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          @foreach($stats['featured_products'] as $product)
-          <div class="flex items-center p-4 bg-white border border-stone-200 rounded-xl hover:border-primary transition-all shadow-sm">
-            <div class="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center border border-stone-200 flex-shrink-0">
-               <span class="material-symbols-outlined text-stone-400">inventory_2</span>
-            </div>
-            <div class="ml-4 flex-1 min-w-0">
-              <p class="text-[10px] font-bold text-primary uppercase tracking-wider">SKU: {{ $product->codigo_oem }}</p>
-              <p class="text-sm font-bold text-stone-900 truncate uppercase">{{ $product->nombre }}</p>
-              <div class="flex gap-4 mt-1">
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Stock:</span> <span class="text-[9px] font-black {{ $product->stock_actual <= $product->stock_minimo ? 'text-red-600' : 'text-stone-900' }}">{{ number_format($product->stock_actual, 0) }}</span></div>
-                 <div><span class="text-[9px] text-stone-400 font-bold uppercase">Valor:</span> <span class="text-[9px] font-black text-green-600">${{ number_format($product->stock_actual * $product->costo_compra, 0) }}</span></div>
-              </div>
-            </div>
-          </div>
-          @endforeach
-        </div>
+<!-- Dashboard Spotlight Items -->
+<div class="mt-16 bg-white rounded-[40px] border border-stone-100 p-10 shadow-sm relative overflow-hidden">
+    <div class="flex items-center gap-4 mb-10">
+        <div class="w-3 h-8 bg-primary rounded-full shadow-[0_0_15px_rgba(206,255,94,0.4)]"></div>
+        <h3 class="text-2xl font-headline font-black text-stone-950 uppercase tracking-tighter italic leading-none">Featured Asset Spotlight</h3>
     </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      @foreach($stats['featured_products'] as $product)
+      <div class="flex items-center p-6 bg-stone-50 border border-stone-100 rounded-3xl hover:border-primary hover:bg-white transition-all shadow-inner group">
+        <div class="w-16 h-16 bg-stone-950 rounded-2xl flex items-center justify-center border border-stone-800 flex-shrink-0 shadow-2xl group-hover:bg-primary group-hover:border-primary transition-colors">
+           <span class="material-symbols-outlined text-primary text-2xl group-hover:text-stone-950 transition-colors">inventory_2</span>
+        </div>
+        <div class="ml-6 flex-1 min-w-0">
+          <p class="text-[10px] font-black text-primary uppercase tracking-[0.3em] italic">SKU: {{ $product->codigo_oem }}</p>
+          <p class="text-[14px] font-black text-stone-950 truncate uppercase italic tracking-tight mb-2">{{ $product->nombre }}</p>
+          <div class="flex gap-6">
+             <div class="flex flex-col"><span class="text-[9px] text-stone-400 font-black uppercase tracking-widest italic">Inventory Level</span> <span class="text-[11px] font-mono font-black italic tracking-tighter {{ $product->stock_actual <= $product->stock_minimo ? 'text-red-500' : 'text-stone-950' }}">{{ number_format($product->stock_actual, 0) }} Units</span></div>
+             <div class="flex flex-col"><span class="text-[9px] text-stone-400 font-black uppercase tracking-widest italic">Asset Value</span> <span class="text-[11px] font-mono font-black text-green-500 italic tracking-tighter">${{ number_format($product->stock_actual * $product->costo_compra, 0) }}</span></div>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+</div>
+
 @endsection
 

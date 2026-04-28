@@ -49,7 +49,7 @@
                 <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em]">Gestión de Valorización Global</p>
             </div>
             <h1 class="text-5xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none">Lista de <span class="text-stone-400">Precios</span></h1>
-            <p class="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest text-[#9ca3af]">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
+            <p class="text-[12px] text-stone-400 mt-2 font-black uppercase tracking-[0.2em] italic">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
         </div>
         <div class="flex gap-3">
              <button id="downloadTemplate" class="bg-white border border-stone-200 text-stone-900 px-8 py-4 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 hover:border-primary transition-all rounded-xl shadow-sm">
@@ -132,26 +132,26 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse min-w-[2000px]">
                 <thead>
-                    <tr class="bg-stone-50/50 border-b border-stone-100 text-stone-400">
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center italic">N°</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest">Foto</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest">Código</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest">Categoría</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Fabricante</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Marca</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Material</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Espesor</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest">Descripción</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Medidas</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-right">Precio</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Stock</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Incorporación</th>
+                    <tr class="zenith-table-header">
+                        <th class="p-6 text-center italic">N°</th>
+                        <th class="p-6">Foto</th>
+                        <th class="p-6">Código</th>
+                        <th class="p-6">Categoría</th>
+                        <th class="p-6 text-center">Fabricante</th>
+                        <th class="p-6 text-center">Marca</th>
+                        <th class="p-6 text-center">Material</th>
+                        <th class="p-6 text-center">Espesor</th>
+                        <th class="p-6">Descripción</th>
+                        <th class="p-6 text-center">Medidas</th>
+                        <th class="p-6 text-right">Precio</th>
+                        <th class="p-6 text-center">Stock</th>
+                        <th class="p-6 text-center">Incorporación</th>
                     </tr>
                 </thead>
-                <tbody id="previewTableBody" class="divide-y divide-stone-50 font-body text-xs">
+                <tbody id="previewTableBody" class="divide-y divide-stone-50">
                     @forelse($stats['latest_changes'] as $product)
-                    <tr class="hover:bg-stone-50 transition-colors opacity-80">
-                        <td class="p-6 text-center text-stone-400 font-mono">{{ $product->id }}</td>
+                    <tr class="zenith-table-row">
+                        <td class="p-6 text-center zenith-table-secondary font-mono">{{ $product->id }}</td>
                         <td class="p-6">
                             <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center overflow-hidden">
                                 @if($product->foto_path)
@@ -161,21 +161,43 @@
                                 @endif
                             </div>
                         </td>
-                        <td class="p-6 font-black text-stone-900 uppercase tracking-tighter">{{ $product->codigo_oem }}</td>
-                        <td class="p-6 uppercase text-stone-500">{{ $product->categoria }}</td>
-                        <td class="p-6 text-center uppercase text-stone-500 font-bold">{{ $product->fabricante ?? '-' }}</td>
-                        <td class="p-6 text-center font-bold text-stone-900 uppercase">{{ $product->marca }}</td>
-                        <td class="p-6 text-center text-stone-500 uppercase">{{ $product->material ?? '-' }}</td>
-                        <td class="p-6 text-center font-mono text-stone-500">{{ $product->espesor ?? '-' }}</td>
-                        <td class="p-6 font-medium text-stone-700 uppercase max-w-[300px] truncate">{{ $product->nombre }}</td>
-                        <td class="p-6 text-center font-mono text-stone-500">{{ $product->medidas ?? '-' }}</td>
-                        <td class="p-6 text-right font-headline font-black text-stone-900 text-base">$ {{ number_format($product->precio_mayor, 2) }}</td>
-                        <td class="p-6 text-center font-black {{ $product->stock_actual > 0 ? 'text-stone-900' : 'text-red-500' }}">{{ $product->stock_actual }}</td>
-                        <td class="p-6 text-center text-stone-400 text-[10px] uppercase font-bold">{{ $product->updated_at->format('d/m/Y') }}</td>
+                        <td class="p-6">
+                            <span class="zenith-table-sku">{{ $product->codigo_oem }}</span>
+                        </td>
+                        <td class="p-6">
+                            <span class="zenith-table-secondary">{{ $product->categoria }}</span>
+                        </td>
+                        <td class="p-6 text-center">
+                            <span class="zenith-table-secondary font-black text-stone-600">{{ $product->fabricante ?? '-' }}</span>
+                        </td>
+                        <td class="p-6 text-center">
+                            <span class="zenith-table-main">{{ $product->marca }}</span>
+                        </td>
+                        <td class="p-6 text-center">
+                            <span class="zenith-table-secondary">{{ $product->material ?? '-' }}</span>
+                        </td>
+                        <td class="p-6 text-center font-mono">
+                            <span class="zenith-table-secondary">{{ $product->espesor ?? '-' }}</span>
+                        </td>
+                        <td class="p-6">
+                            <p class="zenith-table-main max-w-[300px] truncate">{{ $product->nombre }}</p>
+                        </td>
+                        <td class="p-6 text-center font-mono">
+                            <span class="zenith-table-secondary">{{ $product->medidas ?? '-' }}</span>
+                        </td>
+                        <td class="p-6 text-right">
+                            <span class="zenith-table-price">$ {{ number_format($product->precio_mayor, 2) }}</span>
+                        </td>
+                        <td class="p-6 text-center font-black {{ $product->stock_actual > 0 ? 'text-stone-900' : 'text-red-500' }}">
+                            <span class="zenith-table-main">{{ $product->stock_actual }}</span>
+                        </td>
+                        <td class="p-6 text-center font-mono">
+                            <span class="zenith-table-secondary">{{ $product->updated_at->format('d/m/Y') }}</span>
+                        </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="13" class="p-20 text-center text-stone-400 italic font-medium">Sube un archivo para pre-visualizar la información aquí...</td>
+                        <td colspan="13" class="p-20 text-center text-stone-400 italic zenith-table-main">Sube un archivo para pre-visualizar la información aquí...</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -317,19 +339,19 @@
             const tr = document.createElement('tr');
             tr.className = 'hover:bg-stone-50 transition-colors';
             tr.innerHTML = `
-                <td class="p-6 text-center text-stone-400 font-mono">${item.id}</td>
+                <td class="p-6 text-center text-stone-400 font-mono text-[11px]">${item.id}</td>
                 <td class="p-6"><div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-stone-300">image</span></div></td>
-                <td class="p-6 font-black text-stone-900 uppercase tracking-tighter">${item.codigo}</td>
-                <td class="p-6 uppercase text-stone-500">${item.categoria}</td>
-                <td class="p-6 text-center uppercase text-stone-500">${item.fabricante}</td>
-                <td class="p-6 text-center font-bold text-stone-900 uppercase">${item.marca}</td>
-                <td class="p-6 text-center text-stone-500 uppercase">${item.material}</td>
-                <td class="p-6 text-center font-mono text-stone-500">${item.espesor}</td>
-                <td class="p-6 font-medium text-stone-700 uppercase max-w-[300px] truncate">${item.descripcion}</td>
-                <td class="p-6 text-center font-mono text-stone-500">${item.medidas}</td>
-                <td class="p-6 text-right font-headline font-black text-stone-900 text-base">$ ${item.precio.toFixed(2)}</td>
-                <td class="p-6 text-center font-black ${item.stock > 0 ? 'text-stone-900' : 'text-red-500'}">${item.stock}</td>
-                <td class="p-6 text-center text-stone-400 text-[10px] uppercase font-bold">${item.incorporacion}</td>
+                <td class="p-6 font-black text-stone-950 uppercase tracking-tighter text-[12px] italic">${item.codigo}</td>
+                <td class="p-6 uppercase text-stone-500 text-[11px] font-bold">${item.categoria}</td>
+                <td class="p-6 text-center uppercase text-stone-500 text-[11px] font-bold">${item.fabricante}</td>
+                <td class="p-6 text-center font-black text-stone-950 uppercase text-[12px] italic tracking-tight">${item.marca}</td>
+                <td class="p-6 text-center text-stone-500 uppercase text-[11px] font-bold">${item.material}</td>
+                <td class="p-6 text-center font-mono text-stone-500 text-[11px]">${item.espesor}</td>
+                <td class="p-6 font-black text-stone-800 uppercase max-w-[300px] truncate text-[12px] tracking-tight">${item.descripcion}</td>
+                <td class="p-6 text-center font-mono text-stone-500 text-[11px]">${item.medidas}</td>
+                <td class="p-6 text-right font-headline font-black text-stone-950 text-base italic">$ ${item.precio.toFixed(2)}</td>
+                <td class="p-6 text-center font-black text-[14px] ${item.stock > 0 ? 'text-stone-950' : 'text-red-500 animate-pulse'}">${item.stock}</td>
+                <td class="p-6 text-center text-stone-400 text-[10px] uppercase font-black italic tracking-widest">${item.incorporacion}</td>
             `;
             previewBody.appendChild(tr);
 

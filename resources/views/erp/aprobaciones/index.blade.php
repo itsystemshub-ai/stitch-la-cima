@@ -118,43 +118,48 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr class="text-[9px] font-black text-stone-400 uppercase tracking-[0.3em] border-b border-stone-100">
-                        <th class="pb-6 px-4">Documento / Tipo</th>
-                        <th class="pb-6 px-4 text-center">Estado Final</th>
-                        <th class="pb-6 px-4">Operador Auditor</th>
-                        <th class="pb-6 px-4 text-right">Timestamp</th>
-                        <th class="pb-6 px-4">Feedback / Razón</th>
+                    <tr class="zenith-table-header">
+                        <th class="px-6 py-5">Referencia / Clase</th>
+                        <th class="px-6 py-5 text-center">Protocolo Final</th>
+                        <th class="px-6 py-5">Auditor Responsable</th>
+                        <th class="px-6 py-5 text-right">Timestamp Auditoría</th>
+                        <th class="px-6 py-5">Justificación de Decisión</th>
                     </tr>
                 </thead>
-                <tbody class="text-sm">
+                <tbody class="divide-y divide-stone-50">
                     @foreach($historyApprovals as $hist)
-                    <tr class="border-b border-stone-50 hover:bg-stone-50/50 transition-colors group">
-                        <td class="py-6 px-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-stone-100 rounded-xl flex items-center justify-center text-stone-400 group-hover:text-primary transition-colors">
+                    <tr class="zenith-table-row group">
+                        <td class="px-6 py-6 border-l-4 border-transparent group-hover:border-primary transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 bg-stone-900 rounded-xl flex items-center justify-center text-primary shadow-lg">
                                     <span class="material-symbols-outlined text-xl">assignment</span>
                                 </div>
                                 <div>
-                                    <p class="font-black text-stone-900 uppercase tracking-tight">#{{ $hist->approvable_id }}</p>
-                                    <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">{{ str_replace(['App\\Models\\', 'Order'], ['', 'Orden'], $hist->approvable_type) }}</p>
+                                    <p class="zenith-table-sku text-stone-900 font-black">#{{ $hist->approvable_id }}</p>
+                                    <p class="zenith-table-secondary mt-0.5">{{ str_replace(['App\\Models\\', 'Order'], ['', 'ORDEN'], $hist->approvable_type) }}</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="py-6 px-4 text-center">
+                        <td class="px-6 py-6 text-center">
                             @if($hist->status == 'approved')
-                                <span class="px-3 py-1 bg-primary text-stone-900 text-[8px] font-black uppercase tracking-widest rounded-lg">Autorizado</span>
+                                <span class="px-3 py-1 bg-stone-900 text-primary text-[9px] font-black uppercase tracking-widest rounded-lg border border-stone-800 italic shadow-sm">AUTORIZADO</span>
                             @else
-                                <span class="px-3 py-1 bg-red-600 text-white text-[8px] font-black uppercase tracking-widest rounded-lg">Denegado</span>
+                                <span class="px-3 py-1 bg-red-600 text-white text-[9px] font-black uppercase tracking-widest rounded-lg shadow-sm italic">DENEGADO</span>
                             @endif
                         </td>
-                        <td class="py-6 px-4 uppercase font-black text-[11px] text-stone-700">
-                            {{ $hist->approver->name ?? 'SYSTEM ADMIN' }}
+                        <td class="px-6 py-6">
+                            <div class="flex flex-col">
+                                <p class="zenith-table-main">{{ $hist->approver->name ?? 'SYSTEM_AUDITOR' }}</p>
+                                <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">NIVEL 4 ACCESS</p>
+                            </div>
                         </td>
-                        <td class="py-6 px-4 text-right text-stone-400 text-[10px] font-black tracking-widest uppercase italic">
-                            {{ $hist->updated_at->format('d/m/Y | H:i') }}
+                        <td class="px-6 py-6 text-right">
+                            <span class="zenith-table-sku bg-stone-100 text-stone-500 border-stone-200">{{ $hist->updated_at->format('d.m.Y / H:i') }}</span>
                         </td>
-                        <td class="py-6 px-4 text-stone-500 italic text-[11px] max-w-[200px] truncate group-hover:text-stone-900 transition-colors">
-                            {{ $hist->reason ?? 'Procesado automáticamente por políticas internas.' }}
+                        <td class="px-6 py-6">
+                            <p class="zenith-table-secondary italic leading-tight max-w-[240px] group-hover:text-stone-900 transition-colors">
+                                "{{ $hist->reason ?? 'PROCESADO SEGÚN POLÍTICA DE SEGURIDAD.' }}"
+                            </p>
                         </td>
                     </tr>
                     @endforeach

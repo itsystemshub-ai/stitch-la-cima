@@ -90,49 +90,51 @@
         <div class="overflow-x-auto custom-scrollbar">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-stone-50/50 border-b border-stone-100 text-stone-400">
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest">Estampa de Tiempo</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest">Referencia Doc.</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest">Concepto</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">∆ Existencia</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-center">Saldo Actual</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-right whitespace-nowrap">Costo Promedio ($)</th>
-                        <th class="p-6 text-[10px] font-black uppercase tracking-widest text-right">Balance Unit.</th>
+                    <tr class="zenith-table-header">
+                        <th class="p-6">Estampa de Tiempo (Timestamp)</th>
+                        <th class="p-6">Referencia / Tracking #</th>
+                        <th class="p-6">Concepto Operativo</th>
+                        <th class="p-6 text-center">∆ Delta Stock</th>
+                        <th class="p-6 text-center">Saldo Disponible</th>
+                        <th class="p-6 text-right">Costo Promedio ($)</th>
+                        <th class="p-6 text-right">Balance Consolidado</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-stone-50 font-body text-xs">
+                <tbody class="divide-y divide-stone-50">
                     @forelse($movements as $movement)
-                        <tr class="hover:bg-stone-50 transition-colors group cursor-pointer">
-                            <td class="p-6 font-bold text-stone-400 uppercase tracking-tighter">
-                                {{ $movement->created_at->format('d M Y') }} <br> 
-                                <span class="text-[9px] opacity-60 italic">{{ $movement->created_at->format('h:i A') }}</span>
-                            </td>
-                            <td class="p-6 font-black text-stone-900 uppercase tracking-tighter">#{{ str_pad($movement->id, 6, '0', STR_PAD_LEFT) }}</td>
+                        <tr class="zenith-table-row group">
                             <td class="p-6">
-                                <span class="text-[10px] font-black text-stone-900 uppercase block mb-1">{{ $movement->product->nombre ?? 'N/A' }}</span>
-                                <span class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">{{ $movement->reason }}</span>
+                                <span class="zenith-table-secondary font-mono">{{ $movement->created_at->format('d M Y') }}</span>
+                                <span class="block text-[9px] text-stone-400 mt-1 uppercase">{{ $movement->created_at->format('h:i A') }}</span>
+                            </td>
+                            <td class="p-6">
+                                <span class="zenith-table-sku bg-stone-900 text-primary border-stone-800 italic">#{{ str_pad($movement->id, 8, '0', STR_PAD_LEFT) }}</span>
+                            </td>
+                            <td class="p-6">
+                                <p class="zenith-table-main">{{ $movement->product->nombre ?? 'DESCONOCIDO' }}</p>
+                                <p class="zenith-table-secondary mt-1">{{ strtoupper($movement->reason) }}</p>
                             </td>
                             <td class="p-6 text-center">
                                 @if($movement->type == 'IN')
-                                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg font-black text-[10px] uppercase">+ {{ number_format($movement->quantity, 0) }}</span>
+                                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-lg font-black text-[9px] border border-green-100 uppercase">+ {{ number_format($movement->quantity, 0) }}</span>
                                 @else
-                                    <span class="px-3 py-1 bg-red-50 text-red-700 rounded-lg font-black text-[10px] uppercase">- {{ number_format($movement->quantity, 0) }}</span>
+                                    <span class="px-3 py-1 bg-red-50 text-red-700 rounded-lg font-black text-[9px] border border-red-100 uppercase">- {{ number_format($movement->quantity, 0) }}</span>
                                 @endif
                             </td>
-                            <td class="p-6 text-center font-black text-stone-900 text-sm">
-                                {{ number_format($movement->product->stock_actual ?? 0, 0) }}
+                            <td class="p-6 text-center">
+                                <span class="zenith-table-main font-black text-stone-900">{{ number_format($movement->product->stock_actual ?? 0, 0) }}</span>
                             </td>
-                            <td class="p-6 text-right font-headline font-bold text-stone-400 text-base">
-                                $ {{ number_format($movement->product->precio_mayor ?? 0, 2) }}
+                            <td class="p-6 text-right">
+                                <span class="zenith-table-secondary font-mono text-stone-500">$ {{ number_format($movement->product->precio_mayor ?? 0, 2) }}</span>
                             </td>
-                            <td class="p-6 text-right font-headline font-black text-stone-900 text-lg group-hover:text-primary transition-colors">
-                                $ {{ number_format(($movement->product->precio_mayor ?? 0) * ($movement->product->stock_actual ?? 0), 2) }}
+                            <td class="p-6 text-right">
+                                <span class="zenith-table-price">$ {{ number_format(($movement->product->precio_mayor ?? 0) * ($movement->product->stock_actual ?? 0), 2) }}</span>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="p-12 text-center text-stone-400 uppercase font-black text-[10px] tracking-widest italic">
-                                No se registran movimientos en el periodo seleccionado
+                            <td colspan="7" class="p-16 text-center zenith-table-main text-stone-400 italic">
+                                NO SE IDENTIFICAN MOVIMIENTOS EN EL CICLO DE AUDITORÍA ACTUAL.
                             </td>
                         </tr>
                     @endforelse

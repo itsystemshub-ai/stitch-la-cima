@@ -60,82 +60,78 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left font-body">
                 <thead>
-                    <tr class="bg-stone-900 text-stone-400 text-[9px] font-black tracking-widest uppercase">
-                        <th class="px-6 py-4">Timestamp / Auth ID</th>
-                        <th class="px-6 py-4">Identidad de Usuario</th>
-                        <th class="px-6 py-4">Vector de Red</th>
-                        <th class="px-6 py-4">Acción de Sistema</th>
-                        <th class="px-6 py-4">Detalle (JSON)</th>
-                        <th class="px-6 py-4 text-right">Estado</th>
+                    <tr class="zenith-table-header bg-stone-950">
+                        <th class="px-6 py-5">Timestamp / Trace ID</th>
+                        <th class="px-6 py-5">Identidad Operativa</th>
+                        <th class="px-6 py-5">Vector de Red (IP)</th>
+                        <th class="px-6 py-5">Acción Ejecutada</th>
+                        <th class="px-6 py-5">Protocolo JSON</th>
+                        <th class="px-6 py-5 text-right">Validación</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-stone-100 text-xs">
-                    <tr class="hover:bg-stone-50/50 transition-colors group">
-                        <td class="px-6 py-5">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-stone-900">2023-10-24 14:22:01</span>
-                                <span class="text-[9px] text-stone-400 font-mono uppercase">AUTH_X99_221</span>
-                            </div>
+                <tbody class="divide-y divide-stone-100">
+                    <tr class="zenith-table-row group">
+                        <td class="px-6 py-6">
+                            <p class="zenith-table-main">2023-10-24 14:22:01</p>
+                            <p class="zenith-table-sku mt-1 border-stone-100 opacity-60 italic">AUTH_X99_221</p>
                         </td>
-                        <td class="px-6 py-5">
-                            <div class="flex items-center gap-3">
-                                <div class="h-8 w-8 bg-stone-900 rounded-lg flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-primary text-sm">person</span>
+                        <td class="px-6 py-6">
+                            <div class="flex items-center gap-4">
+                                <div class="h-9 w-9 bg-stone-900 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="material-symbols-outlined text-primary text-base">person</span>
                                 </div>
-                                <div class="flex flex-col">
-                                    <span class="font-bold text-stone-900">admin.valencia</span>
-                                    <span class="text-[9px] text-stone-400 uppercase font-black">Superuser</span>
+                                <div>
+                                    <p class="zenith-table-main">admin.valencia</p>
+                                    <p class="zenith-table-secondary mt-0.5">NIVEL 4: SUPERUSER</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-5">
-                            <span class="text-xs font-mono bg-stone-100 text-stone-600 px-2 py-1 rounded-md">192.168.***.***</span>
+                        <td class="px-6 py-6">
+                            <span class="zenith-table-sku bg-stone-100 text-stone-500 border-stone-200">192.168.*.*</span>
                         </td>
-                        <td class="px-6 py-5">
-                            <span class="font-headline text-[10px] font-black tracking-widest bg-stone-900 text-primary px-2 py-1 rounded uppercase">LOGIN_SUCCESS</span>
+                        <td class="px-6 py-6">
+                            <span class="px-3 py-1 bg-stone-900 text-primary text-[9px] font-black tracking-widest rounded-lg border border-stone-800 uppercase italic shadow-sm">LOGIN_SUCCESS</span>
                         </td>
-                        <td class="px-6 py-5">
-                            <div class="bg-stone-50 p-2 rounded-lg border-l-2 border-primary text-[9px] font-mono leading-tight max-w-[220px]">
-                                <span class="text-stone-400">OLD:</span> null<br/>
-                                <span class="text-stone-900 font-bold">NEW:</span> {"session_id":"S_881"}
+                        <td class="px-6 py-6">
+                            <div class="bg-stone-50 p-3 rounded-xl border-l-[3px] border-primary text-[10px] font-mono leading-tight max-w-[240px] shadow-inner">
+                                <span class="text-stone-400">SESSION:</span> <span class="text-stone-900 font-bold">"S_881"</span><br/>
+                                <span class="text-stone-400">VECTOR:</span> <span class="text-primary font-bold">"W-SECURE"</span>
                             </div>
                         </td>
-                        <td class="px-6 py-5 text-right">
-                            <span class="material-symbols-outlined text-lime-500">verified_user</span>
+                        <td class="px-6 py-6 text-right">
+                            <span class="material-symbols-outlined text-lime-500 drop-shadow-sm">verified_user</span>
                         </td>
                     </tr>
-                    <tr class="hover:bg-stone-50/50 transition-colors group">
-                        <td class="px-6 py-5">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-stone-900">2023-10-24 14:15:44</span>
-                                <span class="text-[9px] text-stone-400 font-mono uppercase">AUTH_P01_990</span>
-                            </div>
+                    <tr class="zenith-table-row bg-stone-50/20 group">
+                        <td class="px-6 py-6">
+                            <p class="zenith-table-main">2023-10-24 14:15:44</p>
+                            <p class="zenith-table-sku mt-1 border-stone-100 opacity-60 italic">AUTH_P01_990</p>
                         </td>
-                        <td class="px-6 py-5">
-                            <div class="flex items-center gap-3">
-                                <div class="h-8 w-8 bg-red-50 rounded-lg flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-red-500 text-sm">warning</span>
+                        <td class="px-6 py-6" >
+                            <div class="flex items-center gap-4">
+                                <div class="h-9 w-9 bg-red-50 rounded-xl flex items-center justify-center border border-red-100 shadow-sm">
+                                    <span class="material-symbols-outlined text-red-500 text-base">warning</span>
                                 </div>
-                                <div class="flex flex-col">
-                                    <span class="font-bold text-stone-900">inventory.mgr</span>
-                                    <span class="text-[9px] text-stone-400 uppercase font-black">Standard Access</span>
+                                <div>
+                                    <p class="zenith-table-main">inventory.mgr</p>
+                                    <p class="zenith-table-secondary mt-0.5">NIVEL 2: STANDARD</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-5">
-                            <span class="text-xs font-mono bg-stone-100 text-stone-600 px-2 py-1 rounded-md">201.248.***.***</span>
+                        <td class="px-6 py-6">
+                            <span class="zenith-table-sku bg-stone-100 text-stone-500 border-stone-200">201.248.*.*</span>
                         </td>
-                        <td class="px-6 py-5">
-                            <span class="font-headline text-[10px] font-black tracking-widest bg-red-500 text-white px-2 py-1 rounded uppercase">DELETE_PRODUCT</span>
+                        <td class="px-6 py-6">
+                            <span class="px-3 py-1 bg-red-600 text-white text-[9px] font-black tracking-widest rounded-lg shadow-sm uppercase italic">DELETE_PRODUCT</span>
                         </td>
-                        <td class="px-6 py-5">
-                            <div class="bg-stone-50 p-2 rounded-lg border-l-2 border-red-500 text-[9px] font-mono leading-tight max-w-[220px]">
-                                <span class="text-stone-400">OLD:</span> {"pid":"CMA-502"}<br/>
-                                <span class="text-stone-900 font-bold">NEW:</span> null
+                        <td class="px-6 py-6">
+                            <div class="bg-stone-50 p-3 rounded-xl border-l-[3px] border-red-500 text-[10px] font-mono leading-tight max-w-[240px] shadow-inner">
+                                <span class="text-stone-400">PID:</span> <span class="text-red-600 font-bold">"CMA-502"</span><br/>
+                                <span class="text-stone-400">OP:</span> <span class="text-stone-900 font-black">"PURGE"</span>
                             </div>
                         </td>
-                        <td class="px-6 py-5 text-right">
-                            <span class="material-symbols-outlined text-stone-400">visibility</span>
+                        <td class="px-6 py-6 text-right">
+                            <span class="material-symbols-outlined text-stone-300">visibility</span>
                         </td>
                     </tr>
                 </tbody>

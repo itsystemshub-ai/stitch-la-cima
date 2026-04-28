@@ -59,4 +59,43 @@ class ReportesService
             'data' => $totales
         ];
     }
+
+    /**
+     * Obtiene ventas por categoría de producto (Para gráficos de torta)
+     */
+    public function obtenerVentasPorCategoria()
+    {
+        return DB::table('order_items')
+            ->join('products', 'order_items.product_id', '=', 'products.id')
+            ->select('products.categoria', DB::raw('SUM(order_items.subtotal) as total'))
+            ->groupBy('products.categoria')
+            ->orderByDesc('total')
+            ->take(5)
+            ->get();
+    }
+
+    /**
+     * Tendencia de Ventas Mensual (Últimos 6 meses)
+     */
+    public function obtenerTendenciaMensual()
+    {
+        $meses = [];
+        $data = [];
+
+        for ($i = 5; $i >= 0; $i--) {
+            $fecha = Carbon::now()->subMonths($i);
+            $total = Order::whereMonth('created_at', $fecha->month)
+                ->whereYear('created_at', $fecha->year)
+                ->where('status', 'completed')
+                ->sum('total');
+
+            $meses[] = $fecha->translatedFormat('F');
+            $data[] = $total;
+        }
+
+        return [
+            'labels' => $meses,
+            'data' => $data
+        ];
+    }
 }

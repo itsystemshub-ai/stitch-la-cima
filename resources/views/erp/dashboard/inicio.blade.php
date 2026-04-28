@@ -10,55 +10,59 @@
   <!-- Header Dashboard -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
     <div>
-      <p class="text-xs font-bold text-stone-400 tracking-[0.2em] uppercase mb-1">Resumen General</p>
-      <h2 class="text-3xl font-headline font-black text-stone-900 tracking-tight leading-none">MAYOR DE REPUESTO LA CIMA, C.A.</h2>
-      <p class="text-stone-500 text-sm mt-1 uppercase">RIF: J-40308741-5 • Valencia, Venezuela</p>
+      <p class="text-[12px] font-black text-stone-400 tracking-[0.3em] uppercase mb-1 italic">Consola de Control Central</p>
+      <h2 class="text-4xl font-headline font-black text-stone-900 tracking-tighter leading-none italic uppercase">MAYOR DE REPUESTO <span class="text-stone-400 italic">LA CIMA, C.A.</span></h2>
+      <p class="text-stone-500 text-[12px] mt-1 uppercase font-black tracking-tight italic">RIF: J-40308741-5 • VALENCIA, VENEZUELA • ACCESO NIVEL 0</p>
     </div>
     <div class="flex gap-3">
-      <div class="bg-white border border-stone-200 px-4 py-2 rounded-lg">
-        <span class="text-[10px] font-bold text-stone-400 uppercase">Uptime</span>
-        <p class="text-xl font-headline font-bold text-stone-900">99.9%</p>
+      <div class="bg-white border border-stone-200 px-6 py-2 rounded-[15px] shadow-sm">
+        <span class="text-[9px] font-black text-stone-400 uppercase tracking-[0.3em]">Uptime Operativo</span>
+        <p class="text-xl font-headline font-black text-stone-900 italic leading-none mt-1">99.9%</p>
       </div>
-      <div class="bg-primary px-4 py-2 rounded-lg text-stone-900 shadow-xl shadow-primary/20">
-        <span class="text-[10px] font-bold uppercase">Estado</span>
-        <p class="text-xl font-headline font-bold uppercase">ÓPTIMO</p>
+      <div class="bg-primary px-6 py-2 rounded-[15px] text-stone-950 shadow-xl shadow-primary/20">
+        <span class="text-[9px] font-black uppercase tracking-[0.3em]">Estatus Global</span>
+        <p class="text-xl font-headline font-black uppercase italic leading-none mt-1">ÓPTIMO</p>
       </div>
     </div>
   </div>
 
-  <!-- Tarjetas de Resumen -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-    <a href="{{ url('/erp/inventario') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-blue-600 group-hover:text-primary">inventory_2</span></div>
-        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12%</span>
+  <!-- Tarjetas de Resumen Modulares -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+    <a href="{{ url('/erp/inventario') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block shadow-sm relative overflow-hidden">
+      <div class="flex items-center justify-between mb-4 relative z-10">
+        <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-blue-600 group-hover:text-primary text-2xl font-black">inventory_2</span></div>
+        <span class="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-widest">+12%</span>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="stockCount">14,204</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Productos en Stock</p>
+      <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="stockCount">14,204</p>
+      <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Productos en Stock</p>
+      <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">inventory</span>
     </a>
-    <a href="{{ url('/erp/ventas') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-green-600 group-hover:text-primary">payments</span></div>
-        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+8.2%</span>
+    <a href="{{ url('/erp/ventas') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block shadow-sm relative overflow-hidden">
+      <div class="flex items-center justify-between mb-4 relative z-10">
+        <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-green-600 group-hover:text-primary text-2xl font-black">payments</span></div>
+        <span class="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-widest">+8.2%</span>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="salesAmount">$128,450</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Ventas del Mes</p>
+      <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="salesAmount">$128,450</p>
+      <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Ventas del Mes</p>
+      <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">trending_up</span>
     </a>
-    <a href="{{ url('/erp/compras') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-purple-600 group-hover:text-primary">shopping_cart</span></div>
-        <span class="text-[10px] font-bold text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">3 activas</span>
+    <a href="{{ url('/erp/compras') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block shadow-sm relative overflow-hidden">
+      <div class="flex items-center justify-between mb-4 relative z-10">
+        <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-purple-600 group-hover:text-primary text-2xl font-black">shopping_cart</span></div>
+        <span class="text-[10px] font-black text-stone-400 bg-stone-50 px-3 py-1 rounded-full uppercase tracking-widest">3 ACTIVAS</span>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="pendingPurchases">$12,400</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Compras Pendientes</p>
+      <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="pendingPurchases">$12,400</p>
+      <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Compras Pendientes</p>
+      <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">shopping_basket</span>
     </a>
-    <a href="{{ url('/erp/ventas/clientes') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:shadow-lg transition-all group">
-      <div class="flex items-center justify-between mb-3">
-        <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center group-hover:bg-stone-900 transition-colors"><span class="material-symbols-outlined text-orange-600 group-hover:text-primary">people</span></div>
-        <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+5</span>
+    <a href="{{ url('/erp/ventas/clientes') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block shadow-sm relative overflow-hidden">
+      <div class="flex items-center justify-between mb-4 relative z-10">
+        <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-orange-600 group-hover:text-primary text-2xl font-black">people</span></div>
+        <span class="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-widest">+5</span>
       </div>
-      <p class="text-2xl font-headline font-bold text-stone-900" id="customerCount">342</p>
-      <p class="text-xs text-stone-500 mt-1 uppercase font-bold tracking-tighter">Clientes Activos</p>
+      <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="customerCount">342</p>
+      <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Clientes Activos</p>
+      <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">group</span>
     </a>
   </div>
 

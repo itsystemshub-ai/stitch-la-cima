@@ -88,7 +88,7 @@
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead>
-                <tr class="text-[9px] font-black uppercase tracking-[0.2em] text-stone-400 border-b border-stone-50">
+                <tr class="zenith-table-header">
                     <th class="py-6 px-10">Fecha / Control</th>
                     <th class="py-6 px-10">Entidad Cliente</th>
                     <th class="py-6 px-10 text-right">Base Imp. ($)</th>
@@ -97,18 +97,22 @@
                     <th class="py-6 px-10 text-right">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="text-[11px] font-bold text-stone-700 uppercase">
-                <tr class="border-b border-stone-50 hover:bg-stone-50/50 transition-all group">
+            <tbody class="divide-y divide-stone-50">
+                <tr class="zenith-table-row group">
                     <td class="py-6 px-10">
-                        <p class="text-stone-900 font-black tracking-tight italic">24/05/2024</p>
-                        <p class="text-[8px] text-stone-400 mt-1 uppercase tracking-widest">F-0001824</p>
+                        <p class="zenith-table-main italic">24/05/2026</p>
+                        <p class="zenith-table-sku mt-1">F-0001824</p>
                     </td>
                     <td class="py-6 px-10">
-                        <p class="text-stone-900 font-black tracking-tight">Aceros del Orinoco C.A.</p>
-                        <p class="text-[8px] text-stone-400 mt-1 uppercase tracking-widest">J-30456214-0</p>
+                        <p class="zenith-table-main">Aceros del Orinoco C.A.</p>
+                        <p class="zenith-table-secondary mt-1">J-30456214-0</p>
                     </td>
-                    <td class="py-6 px-10 text-right font-black italic text-stone-400">$ 12.450,00</td>
-                    <td class="py-6 px-10 text-right font-black italic text-stone-900">$ 14.442,00</td>
+                    <td class="py-6 px-10 text-right">
+                        <span class="zenith-table-price text-stone-400">$ 12.450,00</span>
+                    </td>
+                    <td class="py-6 px-10 text-right">
+                        <span class="zenith-table-price">$ 14.442,00</span>
+                    </td>
                     <td class="py-6 px-10 text-center">
                         <span class="px-3 py-1 bg-green-50 text-green-600 rounded-lg text-[8px] font-black uppercase tracking-widest italic">Vigente</span>
                     </td>
@@ -123,17 +127,21 @@
                         </div>
                     </td>
                 </tr>
-                <tr class="border-b border-stone-50 bg-stone-50/20 hover:bg-stone-50/50 transition-all group">
-                    <td class="py-6 px-10 italic">
-                        <p class="text-stone-900 font-black tracking-tight italic">23/05/2024</p>
-                        <p class="text-[8px] text-stone-400 mt-1 uppercase tracking-widest">F-0001823</p>
+                <tr class="zenith-table-row group">
+                    <td class="py-6 px-10">
+                        <p class="zenith-table-main italic">23/05/2026</p>
+                        <p class="zenith-table-sku mt-1">F-0001823</p>
                     </td>
                     <td class="py-6 px-10">
-                        <p class="text-stone-900 font-black tracking-tight">Suministros Industriales 2000</p>
-                        <p class="text-[8px] text-stone-400 mt-1 uppercase tracking-widest">J-29877452-1</p>
+                        <p class="zenith-table-main">Suministros Industriales 2000</p>
+                        <p class="zenith-table-secondary mt-1">J-29877452-1</p>
                     </td>
-                    <td class="py-6 px-10 text-right font-black italic text-stone-400">$ 4.200,00</td>
-                    <td class="py-6 px-10 text-right font-black italic text-stone-900">$ 4.872,00</td>
+                    <td class="py-6 px-10 text-right">
+                        <span class="zenith-table-price text-stone-400">$ 4.200,00</span>
+                    </td>
+                    <td class="py-6 px-10 text-right">
+                        <span class="zenith-table-price">$ 4.872,00</span>
+                    </td>
                     <td class="py-6 px-10 text-center">
                         <span class="px-3 py-1 bg-green-50 text-green-600 rounded-lg text-[8px] font-black uppercase tracking-widest italic">Vigente</span>
                     </td>

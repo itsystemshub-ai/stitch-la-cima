@@ -105,32 +105,40 @@
             <div class="bg-white border border-stone-200 mb-10 shadow-2xl rounded-xl overflow-hidden">
                 <table class="w-full text-left">
                     <thead>
-                        <tr class="bg-stone-50 border-b border-stone-200">
-                            <th class="p-6 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">Identificación del Repuesto</th>
-                            <th class="p-6 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] text-center">Cant.</th>
-                            <th class="p-6 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] text-right">Precio Unitario</th>
-                            <th class="p-6 text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] text-right">Subtotal</th>
+                        <tr class="bg-stone-900 border-b border-stone-800">
+                            <th class="p-6 text-[10px] font-black text-primary tracking-[0.3em] uppercase">Identificación Técnica del Repuesto</th>
+                            <th class="p-6 text-[10px] font-black text-primary tracking-[0.3em] uppercase text-center">Cant.</th>
+                            <th class="px-6 py-5 text-[10px] font-black text-primary tracking-[0.3em] uppercase text-right">Precio Unitario</th>
+                            <th class="px-6 py-5 text-[10px] font-black text-primary tracking-[0.3em] uppercase text-right">Subtotal Base</th>
                             <th class="p-6 w-12"></th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-stone-100 font-body">
-                        <!-- Venta Demo conectada por Seeder -->
-                        <tr class="hover:bg-stone-50 transition-colors group checkout-item" data-id="1" data-price="142.50" data-qty="2">
+                        <!-- Transacción Activa -->
+                        <tr class="hover:bg-primary/5 transition-colors group checkout-item" data-id="1" data-price="142.50" data-qty="2">
                             <td class="p-6">
                                 <div class="flex items-center gap-6">
-                                    <div class="w-12 h-12 bg-white border border-stone-200 flex items-center justify-center text-primary shadow-sm rounded-lg">
-                                        <span class="material-symbols-outlined">settings_input_component</span>
+                                    <div class="w-12 h-12 bg-stone-900 flex items-center justify-center text-primary shadow-lg rounded-xl">
+                                        <span class="material-symbols-outlined text-2xl">settings_input_component</span>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-black text-text-dark uppercase tracking-tight font-headline">Filtro Cummins LF9009</p>
-                                        <p class="text-[9px] text-stone-400 font-bold uppercase tracking-[0.2em] mt-1">SKU: LC-102 | OEM: LF9009</p>
+                                        <p class="text-[12px] font-black text-stone-900 uppercase tracking-tight font-headline">Filtro Cummins LF9009 (Especial)</p>
+                                        <p class="text-[10.5px] text-stone-400 font-mono font-bold mt-1 uppercase tracking-widest">SKU: LC-102 | OEM: LF9009</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="p-6 text-center text-sm font-black text-primary tracking-widest">02</td>
-                            <td class="p-6 text-right text-sm font-bold text-stone-400 tracking-tighter">$ 142.50</td>
-                            <td class="p-6 text-right text-sm font-black text-text-dark tracking-widest">$ 285.00</td>
-                            <td class="p-6"></td>
+                            <td class="p-6 text-center">
+                                <span class="bg-stone-100 px-3 py-1.5 rounded-lg text-[12px] font-black text-stone-900 border border-stone-200">02</span>
+                            </td>
+                            <td class="p-6 text-right">
+                                <p class="text-[12px] font-mono font-bold text-stone-400">$ 142.50</p>
+                            </td>
+                            <td class="p-6 text-right">
+                                <p class="text-[12px] font-mono font-black text-stone-900 tracking-tight">$ 285.00</p>
+                            </td>
+                            <td class="p-6 text-right text-red-500">
+                                <button class="material-symbols-outlined hover:scale-110 transition-transform">close</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

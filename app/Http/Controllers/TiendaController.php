@@ -222,6 +222,7 @@ class TiendaController extends Controller
         $request->validate([
             'customer_id' => 'required|exists:customers,id',
             'items' => 'required|array|min:1',
+            'payment_method' => 'required|in:transferencia,paypal,efectivo',
         ]);
 
         $items = $request->items;
@@ -248,6 +249,7 @@ class TiendaController extends Controller
                     'impuestos' => $impuesto,
                     'total' => $total,
                     'estado' => 'Pendiente',
+                    'metodo_pago' => $request->payment_method,
                     'fecha_emision' => now(),
                 ]);
 
@@ -278,6 +280,21 @@ class TiendaController extends Controller
             });
 
             $request->session()->forget('cart');
+
+            // Lógica de PayPal
+            if ($request->payment_method === 'paypal') {
+                $paymentService = app(\App\Services\PaymentService::class);
+                $paypalOrder = $paymentService->createOrder($result->total);
+                
+                $result->update([
+                    'payment_id' => $paypalOrder['id'],
+                ]);
+
+                return response()->json([
+                    'status' => 'redirect',
+                    'url' => $paypalOrder['link']
+                ]);
+            }
 
             return response()->json([
                 'status' => 'success',

@@ -101,20 +101,57 @@
   pointer-events: auto;
 }
 
+.menu-group {
+  padding: 20px 12px 8px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #a8a29e;
+}
+
 .submenu a {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 12px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
   color: #666;
   border-radius: 10px;
   transition: all 0.15s ease;
   text-decoration: none;
+  letter-spacing: 0.02em;
 }
 .submenu a:hover { background: #f8f9fa; color: #1c1c1c; }
   .bg-erp {
     @apply bg-background-erp;
+  }
+}
+
+@layer components {
+  /* Zenith Industrial Table System */
+  .zenith-table-header {
+    @apply text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] bg-stone-50/30 border-b border-stone-100 px-4 py-5;
+  }
+  
+  .zenith-table-sku {
+    @apply font-mono text-[10.5px] font-black px-2.5 py-1.5 bg-stone-100 text-stone-900 rounded-lg border border-stone-200 group-hover:bg-stone-950 group-hover:text-primary transition-all inline-block;
+  }
+  
+  .zenith-table-main {
+    @apply text-[12px] font-black text-stone-900 uppercase leading-tight transition-colors;
+  }
+  
+  .zenith-table-secondary {
+    @apply text-[10px] font-bold text-stone-500 uppercase tracking-tight;
+  }
+  
+  .zenith-table-price {
+    @apply text-[12px] font-black text-stone-950 font-mono;
+  }
+
+  .zenith-table-row {
+    @apply hover:bg-primary/5 transition-all cursor-default;
   }
 }

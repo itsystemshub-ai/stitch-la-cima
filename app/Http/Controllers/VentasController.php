@@ -244,7 +244,21 @@ class VentasController extends Controller
         $total_ventas = $query->sum('total');
         $total_ordenes = $query->count();
 
-        return view('erp.ventas.reportes', compact('ventas', 'total_ventas', 'total_ordenes', 'periodo'));
+        // Datos para Gráficos
+        $trendData = $this->salesService->getSalesKPIs(); // Reusando lógica de KPIs
+        $categoryMix = $this->salesService->getCategoryMix();
+
+        // Tendencia mensual (últimos 12 meses)
+        $monthlyTrend = Order::select(
+            DB::raw("strftime('%m', created_at) as mes"),
+            DB::raw('SUM(total) as total')
+        )
+        ->where('created_at', '>=', now()->subYear())
+        ->groupBy('mes')
+        ->orderBy('mes')
+        ->get();
+
+        return view('erp.ventas.reportes', compact('ventas', 'total_ventas', 'total_ordenes', 'periodo', 'monthlyTrend', 'categoryMix'));
     }
 
     /**

@@ -147,8 +147,7 @@ class InventoryService
             });
         });
 
-        activity()
-            ->useLogName('inventario')
+        activity('inventario')
             ->withProperties(['count' => $count, 'file' => basename($filePath)])
             ->log("Sincronización masiva de inventario completada: $count items procesados.");
 
