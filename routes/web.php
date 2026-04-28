@@ -157,6 +157,8 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/fiscal', [ConfiguracionController::class, 'fiscal'])->name('erp.configuracion.fiscal');
         Route::get('/usuarios', [ConfiguracionController::class, 'usuarios'])->name('erp.configuracion.usuarios');
         Route::get('/base-datos', [ConfiguracionController::class, 'baseDatos'])->name('erp.configuracion.base-datos');
+        Route::get('/gestor-tablas', [ConfiguracionController::class, 'gestorTablas'])->name('erp.configuracion.gestor-tablas');
+        Route::get('/gestor-tablas/{tabla}', [ConfiguracionController::class, 'verContenidoTabla'])->name('erp.configuracion.ver-tabla');
         Route::get('/backups', [ConfiguracionController::class, 'backups'])->name('erp.configuracion.backups');
         Route::get('/estado-sistema', [ConfiguracionController::class, 'estadoSistema'])->name('erp.configuracion.estado-sistema');
         Route::get('/tareas', [ConfiguracionController::class, 'tareas'])->name('erp.configuracion.tareas');

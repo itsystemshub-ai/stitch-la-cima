@@ -7,245 +7,278 @@
 @endsection
 
 @section('content')
-<!-- Page Header: Industrial Identity -->
-<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-12">
-    <div>
-        <div class="flex items-center gap-3 mb-4">
-            <span class="w-10 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(206,255,94,0.4)]"></span>
-            <p class="text-[12px] font-black text-stone-400 uppercase tracking-[0.4em] italic leading-none">Fiduciary Control: Fiscal Node</p>
+<!-- Page Header: Industrial Identity & Transmission Node -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-16 relative">
+    <div class="relative z-10">
+        <div class="flex items-center gap-4 mb-6">
+            <span class="w-12 h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(206,255,94,0.4)]"></span>
+            <p class="text-[12px] font-black text-stone-500 uppercase tracking-[0.4em] italic leading-none">Node_Transmission: FIDUCIARY_MASTER_V1</p>
         </div>
-        <h2 class="text-5xl md:text-6xl font-headline font-black text-stone-950 tracking-tighter uppercase italic leading-none">Accounting <span class="text-stone-300">Hub</span></h2>
-        <p class="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] mt-4 italic italic">
-            MAYOR DE REPUESTO LA CIMA, C.A. • ALPHA_FINANCE_NODE_01
-        </p>
+        <h2 class="text-6xl md:text-8xl font-headline font-black text-stone-950 tracking-tighter uppercase italic leading-[0.8] mb-6">Accounting <br/><span class="text-stone-300 not-italic">Hub</span></h2>
+        <div class="flex items-center gap-3">
+            <span class="px-3 py-1 bg-stone-950 text-primary text-[10px] font-black uppercase tracking-widest rounded italic">LIVE_FEED</span>
+            <p class="text-stone-400 text-[11px] font-black uppercase tracking-[0.3em] italic">
+                LA CIMA, C.A. • ALPHA_FINANCE_GATEWAY_300
+            </p>
+        </div>
     </div>
-    <div class="flex gap-4">
-        <a href="{{ url('/erp/contabilidad/libro-diario') }}" class="bg-primary text-stone-950 px-8 py-4 rounded-2xl flex items-center gap-4 hover:brightness-110 transition-all font-black uppercase text-[10px] tracking-[0.3em] shadow-2xl shadow-primary/20 italic">
-            <span class="material-symbols-outlined text-[20px]">menu_book</span>
-            Access Ledger
+    <div class="flex gap-4 relative z-10">
+        <a href="{{ url('/erp/contabilidad/libro-diario') }}" class="bg-stone-950 text-white px-10 py-5 rounded-[24px] flex items-center gap-5 hover:bg-stone-900 transition-all font-black uppercase text-[12px] tracking-[0.3em] shadow-2xl shadow-stone-950/20 italic group">
+            <span class="material-symbols-outlined text-[24px] text-primary group-hover:rotate-12 transition-transform">menu_book</span>
+            Master_Ledger_Sync
         </a>
     </div>
+    <div class="absolute -top-20 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
 </div>
 
-<!-- KPI Bento Grid: Precision Analytics -->
-<div id="tour-accounting-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+<!-- KPI Bento Grid: Analytical Magnitudes -->
+<div id="tour-accounting-stats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
     <!-- Revenue -->
-    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-sm relative group overflow-hidden transition-all hover:border-primary">
-        <div class="flex items-center justify-between mb-8">
-            <div class="w-12 h-12 bg-stone-950 text-primary rounded-2xl flex items-center justify-center shadow-2xl shadow-stone-950/20">
-                <span class="material-symbols-outlined text-2xl">trending_up</span>
+    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-2xl shadow-stone-200/50 relative group overflow-hidden transition-all hover:border-primary/40">
+        <div class="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="flex items-center justify-between mb-10 relative z-10">
+            <div class="w-14 h-14 bg-stone-950 text-primary rounded-2xl flex items-center justify-center shadow-2xl shadow-stone-950/40 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-3xl">trending_up</span>
             </div>
-            <span class="text-[11px] font-black text-green-500 italic">+12.4% Δ</span>
+            <div class="flex flex-col items-end">
+                <span class="text-[12px] font-black text-green-600 italic tracking-[0.1em]">+12.4%_DELTA</span>
+                <span class="text-[9px] text-stone-400 uppercase font-black italic">MAGNITUDE_ACCEL</span>
+            </div>
         </div>
-        <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic">Monthly Gross Yield</p>
-        <div class="flex items-baseline gap-2">
-            <span class="text-3xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['ingresos_mes'], 2) }}</span>
+        <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic relative z-10">Monthly_Gross_Yield</p>
+        <div class="flex items-baseline gap-2 relative z-10">
+            <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['ingresos_mes'], 2) }}</span>
         </div>
-        <div class="mt-8 pt-8 border-t border-stone-50">
-            <p class="text-[9px] text-stone-400 font-black uppercase tracking-[0.3em] italic italic">Total Commercial Influx Scan</p>
+        <div class="mt-8 pt-8 border-t border-stone-50 relative z-10">
+            <p class="text-[11px] text-stone-400 font-black uppercase tracking-[0.3em] italic">Transmission_Verified_O1</p>
         </div>
     </div>
 
     <!-- Expenses -->
-    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-sm relative group overflow-hidden transition-all hover:border-primary">
-        <div class="flex items-center justify-between mb-8">
-            <div class="w-12 h-12 bg-stone-950 text-red-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-stone-950/20">
-                <span class="material-symbols-outlined text-2xl">trending_down</span>
+    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-2xl shadow-stone-200/50 relative group overflow-hidden transition-all hover:border-red-500/20">
+        <div class="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="flex items-center justify-between mb-10 relative z-10">
+            <div class="w-14 h-14 bg-stone-950 text-red-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-stone-950/40 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-3xl">trending_down</span>
             </div>
-            <span class="text-[11px] font-black text-red-500 italic">-5.2% Δ</span>
+            <div class="flex flex-col items-end">
+                <span class="text-[12px] font-black text-red-600 italic tracking-[0.1em]">-5.2%_DELTA</span>
+                <span class="text-[9px] text-stone-400 uppercase font-black italic">LEAKAGE_REDUCT</span>
+            </div>
         </div>
-        <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic">Operational Outflow</p>
-        <div class="flex items-baseline gap-2">
-            <span class="text-3xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['gastos_mes'], 2) }}</span>
+        <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic relative z-10">Operational_Outflow</p>
+        <div class="flex items-baseline gap-2 relative z-10">
+            <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none text-red-500">${{ number_format($stats['gastos_mes'], 2) }}</span>
         </div>
-        <div class="mt-8 pt-8 border-t border-stone-50">
-            <p class="text-[9px] text-stone-400 font-black uppercase tracking-[0.3em] italic italic">Resource Allocation Matrix</p>
+        <div class="mt-8 pt-8 border-t border-stone-50 relative z-10">
+            <p class="text-[11px] text-stone-400 font-black uppercase tracking-[0.3em] italic">Resource_Drain_Loop</p>
         </div>
     </div>
 
     <!-- Net Utility -->
-    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-sm relative group overflow-hidden transition-all hover:border-primary">
-        <div class="flex items-center justify-between mb-8">
-            <div class="w-12 h-12 bg-stone-950 text-blue-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-stone-950/20">
-                <span class="material-symbols-outlined text-2xl">savings</span>
+    <div class="bg-white border border-stone-100 p-10 rounded-[40px] shadow-2xl shadow-stone-200/50 relative group overflow-hidden transition-all hover:border-primary/40">
+        <div class="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity" style="background-image: radial-gradient(#ceff5e 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="flex items-center justify-between mb-10 relative z-10">
+            <div class="w-14 h-14 bg-stone-950 text-primary rounded-2xl flex items-center justify-center shadow-2xl shadow-stone-950/40 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-3xl">savings</span>
             </div>
-            <span class="text-[11px] font-black text-primary italic font-mono uppercase tracking-widest">33.7% Margin</span>
+            <div class="flex flex-col items-end">
+                <span class="text-[12px] font-black text-primary italic tracking-widest bg-stone-950 px-3 py-1 rounded">33.7%_MARGIN</span>
+            </div>
         </div>
-        <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic">Consolidated Net Utility</p>
-        <div class="flex items-baseline gap-2">
-            <span class="text-3xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['utilidad_neta'], 2) }}</span>
+        <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4 italic relative z-10">Net_Utility_Protocol</p>
+        <div class="flex items-baseline gap-2 relative z-10">
+            <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['utilidad_neta'], 2) }}</span>
         </div>
-        <div class="mt-8 pt-8 border-t border-stone-50">
-            <p class="text-[9px] text-stone-400 font-black uppercase tracking-[0.3em] italic italic">Net Profit Velocity Analysis</p>
+        <div class="mt-8 pt-8 border-t border-stone-50 relative z-10">
+            <p class="text-[11px] text-stone-400 font-black uppercase tracking-[0.3em] italic">Equilibrium_State_Active</p>
         </div>
     </div>
 
     <!-- Tax Liability -->
-    <div class="bg-stone-950 border border-stone-800 p-10 rounded-[40px] group shadow-2xl relative overflow-hidden transition-all hover:border-primary/20">
-        <div class="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity" style="background-image: radial-gradient(#ceff5e 1.5px, transparent 1.5px); background-size: 20px 20px;"></div>
-        <div class="flex items-center justify-between mb-8 relative z-10">
-            <div class="w-12 h-12 bg-stone-900 border border-stone-800 text-primary rounded-2xl flex items-center justify-center shadow-2xl">
-                <span class="material-symbols-outlined text-2xl">gavel</span>
+    <div class="bg-stone-950 border border-stone-800 p-10 rounded-[40px] group shadow-2xl relative overflow-hidden transition-all hover:border-primary/40">
+        <div class="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity" style="background-image: radial-gradient(#ceff5e 1.5px, transparent 1.5px); background-size: 20px 20px;"></div>
+        <div class="flex items-center justify-between mb-10 relative z-10">
+            <div class="w-14 h-14 bg-stone-900 border border-stone-800 text-primary rounded-2xl flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
+                <span class="material-symbols-outlined text-3xl">gavel</span>
             </div>
-            <span class="text-[11px] font-black text-primary italic font-mono uppercase tracking-widest">NEXT_CYCLE: 30D</span>
+            <div class="flex flex-col items-end">
+                <span class="text-[11px] font-black text-primary italic font-mono uppercase tracking-[0.2em] animate-pulse">NEXT_CYCLE: 30D</span>
+            </div>
         </div>
-        <p class="text-[10px] font-black text-stone-500 uppercase tracking-[0.4em] mb-4 relative z-10 italic">IVA Liability Threshold</p>
+        <p class="text-[11px] font-black text-stone-500 uppercase tracking-[0.4em] mb-4 relative z-10 italic">Tax_Liability_Gateway</p>
         <div class="flex items-baseline gap-2 relative z-10">
-            <span class="text-3xl font-headline font-black text-white italic tracking-tighter leading-none">${{ number_format($stats['iva_por_pagar'], 2) }}</span>
+            <span class="text-4xl font-headline font-black text-white italic tracking-tighter leading-none">${{ number_format($stats['iva_por_pagar'], 2) }}</span>
         </div>
         <div class="mt-8 pt-8 border-t border-white/5 relative z-10">
-            <p class="text-[9px] text-stone-600 font-black uppercase tracking-[0.3em] italic italic">Regulatory Compliance Lock Active</p>
+            <p class="text-[11px] text-stone-600 font-black uppercase tracking-[0.3em] italic">Fiscal_Block_Stabilized</p>
         </div>
     </div>
 </div>
 
-<!-- System Interaction Panel: Quick Access -->
-<div id="tour-accounting-actions" class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-12">
-    <a href="{{ url('/erp/contabilidad/plan-cuentas') }}" class="group bg-primary text-stone-950 p-10 rounded-[32px] flex flex-col items-center justify-center gap-6 transition-all hover:bg-stone-950 hover:text-primary active:scale-95 shadow-xl shadow-primary/20">
-        <span class="material-symbols-outlined text-5xl group-hover:scale-110 transition-transform">format_list_numbered</span>
-        <div class="text-center">
-            <p class="text-[12px] font-black uppercase tracking-[0.3em] italic leading-none">Chart of Accounts</p>
-            <p class="text-[10px] font-black uppercase tracking-widest opacity-60 mt-2">{{ $stats['cuentas_count'] }} Entities</p>
+<!-- System Interaction Panel: Quick Architecture Access -->
+<div id="tour-accounting-actions" class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+    <a href="{{ url('/erp/contabilidad/plan-cuentas') }}" class="group bg-primary text-stone-950 p-12 rounded-[40px] flex flex-col items-center justify-center gap-8 transition-all hover:bg-stone-950 hover:text-primary active:scale-95 shadow-2xl shadow-primary/30 border-2 border-transparent hover:border-primary/20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.1] bg-white group-hover:opacity-[0.05] transition-opacity"></div>
+        <span class="material-symbols-outlined text-6xl group-hover:scale-125 group-hover:rotate-[360deg] transition-all duration-700 relative z-10">format_list_numbered</span>
+        <div class="text-center relative z-10">
+            <p class="text-[14px] font-black uppercase tracking-[0.4em] italic leading-none">Chart_Accounts</p>
+            <p class="text-[11px] font-black uppercase tracking-widest opacity-60 mt-4">{{ $stats['cuentas_count'] }} Entities_Mapped</p>
         </div>
     </a>
-    <a href="{{ url('/erp/contabilidad/libros') }}" class="group bg-white border border-stone-100 p-10 rounded-[32px] flex flex-col items-center justify-center gap-6 transition-all hover:border-primary group hover:bg-primary/5 active:scale-95 shadow-sm">
-        <span class="material-symbols-outlined text-5xl group-hover:scale-110 transition-transform text-stone-300 group-hover:text-primary">menu_book</span>
-        <span class="text-[12px] font-black uppercase tracking-[0.3em] italic text-center leading-none">Accounting Books</span>
+    <a href="{{ url('/erp/contabilidad/libros') }}" class="group bg-white border border-stone-100 p-12 rounded-[40px] flex flex-col items-center justify-center gap-8 transition-all hover:border-primary active:scale-95 shadow-2xl shadow-stone-200/50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.05] bg-stone-950 transition-opacity"></div>
+        <span class="material-symbols-outlined text-6xl group-hover:scale-125 transition-all duration-700 text-stone-300 group-hover:text-primary relative z-10">menu_book</span>
+        <span class="text-[14px] font-black uppercase tracking-[0.4em] italic text-center leading-none text-stone-950 relative z-10">Legal_Ledgers</span>
     </a>
-    <a href="{{ url('/erp/contabilidad/balance-general') }}" class="group bg-white border border-stone-100 p-10 rounded-[32px] flex flex-col items-center justify-center gap-6 transition-all hover:border-primary group hover:bg-primary/5 active:scale-95 shadow-sm">
-        <span class="material-symbols-outlined text-5xl group-hover:scale-110 transition-transform text-stone-300 group-hover:text-primary">balance</span>
-        <span class="text-[12px] font-black uppercase tracking-[0.3em] italic text-center leading-none">Balance Sheet</span>
+    <a href="{{ url('/erp/contabilidad/balance-general') }}" class="group bg-white border border-stone-100 p-12 rounded-[40px] flex flex-col items-center justify-center gap-8 transition-all hover:border-primary active:scale-95 shadow-2xl shadow-stone-200/50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.05] bg-stone-950 transition-opacity"></div>
+        <span class="material-symbols-outlined text-6xl group-symbols-outlined group-hover:scale-125 transition-all duration-700 text-stone-300 group-hover:text-primary relative z-10">balance</span>
+        <span class="text-[14px] font-black uppercase tracking-[0.4em] italic text-center leading-none text-stone-950 relative z-10">Balance_Sheet</span>
     </a>
-    <a href="{{ url('/erp/contabilidad/reportes') }}" class="group bg-white border border-stone-100 p-10 rounded-[32px] flex flex-col items-center justify-center gap-6 transition-all hover:border-primary group hover:bg-primary/5 active:scale-95 shadow-sm">
-        <span class="material-symbols-outlined text-5xl group-hover:scale-110 transition-transform text-stone-300 group-hover:text-primary">analytics</span>
-        <span class="text-[12px] font-black uppercase tracking-[0.3em] italic text-center leading-none">Fiscal Analysis</span>
+    <a href="{{ url('/erp/contabilidad/reportes') }}" class="group bg-white border border-stone-100 p-12 rounded-[40px] flex flex-col items-center justify-center gap-8 transition-all hover:border-primary active:scale-95 shadow-2xl shadow-stone-200/50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.05] bg-stone-950 transition-opacity"></div>
+        <span class="material-symbols-outlined text-6xl group-hover:scale-125 transition-all duration-700 text-stone-300 group-hover:text-primary relative z-10">analytics</span>
+        <span class="text-[14px] font-black uppercase tracking-[0.4em] italic text-center leading-none text-stone-950 relative z-10">Fiscal_Analytica</span>
     </a>
 </div>
 
-<!-- Accounting Summary -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+<!-- Accounting Summary: Fiduciary Loops -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
     <!-- Income Statement Summary -->
-    <div class="bg-white rounded-[40px] border border-stone-100 p-10 shadow-sm relative overflow-hidden group">
-        <div class="flex items-center gap-6 mb-12 border-b border-stone-50 pb-8">
-            <div class="w-12 h-12 bg-stone-950 rounded-2xl flex items-center justify-center text-primary shadow-2xl shadow-stone-950/20">
-                <span class="material-symbols-outlined text-2xl">monitoring</span>
+    <div class="bg-white rounded-[40px] border border-stone-100 p-12 shadow-2xl shadow-stone-200/50 relative overflow-hidden group transition-all hover:border-primary/20">
+        <div class="absolute inset-0 opacity-[0.01] group-hover:opacity-[0.03] transition-opacity" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 30px 30px;"></div>
+        <div class="flex items-center gap-8 mb-12 border-b border-stone-50 pb-10 relative z-10">
+            <div class="w-16 h-16 bg-stone-950 rounded-[20px] flex items-center justify-center text-primary shadow-2xl shadow-stone-950/40">
+                <span class="material-symbols-outlined text-3xl">monitoring</span>
             </div>
             <div>
-                <h3 class="text-2xl font-headline font-black text-stone-950 uppercase tracking-tighter italic leading-none">Net Income Lifecycle</h3>
-                <p class="text-[10px] text-stone-400 font-black uppercase tracking-[0.3em] mt-2 italic italic">Current Fiscal Cycle Summary</p>
+                <h3 class="text-3xl font-headline font-black text-stone-950 uppercase tracking-tighter italic leading-none">Net_Profit_Timeline</h3>
+                <p class="text-[11px] text-stone-400 font-black uppercase tracking-[0.3em] mt-3 italic">Current_Cycle: ANALYTICAL_FEED</p>
             </div>
         </div>
 
-        <div class="space-y-4">
-            <div class="flex justify-between items-center p-6 bg-stone-50 rounded-3xl border border-stone-100 transition-all hover:bg-white hover:shadow-md">
-                <span class="text-[12px] font-black text-stone-500 uppercase tracking-widest italic italic">Total Influx Protocol</span>
-                <span class="text-[16px] font-mono font-black text-green-500 italic tracking-tighter">${{ number_format($balances['ingresos'], 2) }}</span>
+        <div class="space-y-6 relative z-10">
+            <div class="flex justify-between items-center p-8 bg-stone-50 rounded-[28px] border border-stone-100 transition-all hover:bg-white hover:shadow-xl hover:border-primary/10">
+                <span class="text-[12px] font-black text-stone-500 uppercase tracking-[0.3em] italic">Magnitude: TOTAL_INFLUX</span>
+                <span class="text-[20px] font-mono font-black text-green-600 italic tracking-tighter">${{ number_format($balances['ingresos'], 2) }}</span>
             </div>
-            <div class="flex justify-between items-center p-6 bg-stone-50 rounded-3xl border border-stone-100 transition-all hover:bg-white hover:shadow-md">
-                <span class="text-[12px] font-black text-stone-500 uppercase tracking-widest italic italic">Total Resource Drain</span>
-                <span class="text-[16px] font-mono font-black text-red-500 italic tracking-tighter">(${{ number_format($balances['egresos'], 2) }})</span>
+            <div class="flex justify-between items-center p-8 bg-stone-50 rounded-[28px] border border-stone-100 transition-all hover:bg-white hover:shadow-xl hover:border-red-500/10">
+                <span class="text-[12px] font-black text-stone-500 uppercase tracking-[0.3em] italic">Magnitude: RESOURCE_DRAIN</span>
+                <span class="text-[20px] font-mono font-black text-red-500 italic tracking-tighter">(${{ number_format($balances['egresos'], 2) }})</span>
             </div>
-            <div class="mt-10 pt-10 border-t border-stone-100 flex justify-between items-center px-4">
-                <span class="text-[12px] font-black text-stone-950 uppercase tracking-[0.3em] italic">Net Profit Magnitude</span>
-                <span class="text-4xl font-headline font-black text-green-600 italic tracking-tighter leading-none">${{ number_format($balances['ingresos'] - $balances['egresos'], 2) }}</span>
+            <div class="mt-12 pt-12 border-t border-stone-100 flex justify-between items-center px-6">
+                <div class="flex flex-col">
+                    <span class="text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] italic mb-2 italic">Yield_Consolidation</span>
+                    <span class="text-[12px] font-black text-stone-950 uppercase tracking-[0.4em] italic leading-none">Final_Magnitude</span>
+                </div>
+                <span class="text-5xl font-headline font-black text-green-600 italic tracking-tighter leading-none">${{ number_format($balances['ingresos'] - $balances['egresos'], 2) }}</span>
             </div>
         </div>
-        <span class="material-symbols-outlined absolute -right-8 -bottom-8 text-[140px] opacity-[0.02] text-stone-950 pointer-events-none rotate-12 group-hover:opacity-[0.04] transition-opacity">receipt</span>
+        <span class="material-symbols-outlined absolute -right-12 -bottom-12 text-[200px] opacity-[0.03] text-stone-950 pointer-events-none rotate-12 group-hover:opacity-[0.06] group-hover:rotate-0 transition-all duration-1000">receipt</span>
     </div>
 
     <!-- Balance Sheet Summary -->
-    <div class="bg-white rounded-[40px] border border-stone-100 p-10 shadow-sm relative overflow-hidden group">
-        <div class="flex items-center gap-6 mb-12 border-b border-stone-50 pb-8">
-            <div class="w-12 h-12 bg-stone-950 rounded-2xl flex items-center justify-center text-primary shadow-2xl shadow-stone-950/20">
-                <span class="material-symbols-outlined text-2xl">balance</span>
+    <div class="bg-white rounded-[40px] border border-stone-100 p-12 shadow-2xl shadow-stone-200/50 relative overflow-hidden group transition-all hover:border-primary/20">
+        <div class="absolute inset-0 opacity-[0.01] group-hover:opacity-[0.03] transition-opacity" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 30px 30px;"></div>
+        <div class="flex items-center gap-8 mb-12 border-b border-stone-50 pb-10 relative z-10">
+            <div class="w-16 h-16 bg-stone-950 rounded-[20px] flex items-center justify-center text-primary shadow-2xl shadow-stone-950/40">
+                <span class="material-symbols-outlined text-3xl">balance</span>
             </div>
             <div>
-                <h3 class="text-2xl font-headline font-black text-stone-950 uppercase tracking-tighter italic leading-none">Consolidated Ledger Balance</h3>
-                <p class="text-[10px] text-stone-400 font-black uppercase tracking-[0.3em] mt-2 italic italic">Aggregated Fiduciary Totals</p>
+                <h3 class="text-3xl font-headline font-black text-stone-950 uppercase tracking-tighter italic leading-none">EQUILIBRIUM_INTEGRITY</h3>
+                <p class="text-[11px] text-stone-400 font-black uppercase tracking-[0.3em] mt-3 italic">Aggregated_Fiduciary_Gate</p>
             </div>
         </div>
 
-        <div class="space-y-4">
-            <div class="grid grid-cols-3 gap-3">
-                <div class="bg-stone-50 p-6 rounded-3xl border border-stone-100 transition-all hover:bg-white hover:shadow-md text-center">
-                    <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-2 italic">Assets</p>
-                    <p class="text-[14px] font-mono font-black text-stone-950 italic tracking-tighter">${{ number_format($balances['activo'], 2) }}</p>
+        <div class="space-y-6 relative z-10">
+            <div class="grid grid-cols-3 gap-4">
+                <div class="bg-stone-50 p-8 rounded-[28px] border border-stone-100 transition-all hover:bg-stone-950 hover:text-white hover:shadow-2xl group/card text-center">
+                    <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic group-hover/card:text-primary transition-colors">Assets</p>
+                    <p class="text-[18px] font-mono font-black text-stone-950 italic tracking-tighter group-hover/card:text-white transition-colors">${{ number_format($balances['activo'], 2) }}</p>
                 </div>
-                <div class="bg-stone-50 p-6 rounded-3xl border border-stone-100 transition-all hover:bg-white hover:shadow-md text-center">
-                    <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-2 italic">Liabilities</p>
-                    <p class="text-[14px] font-mono font-black text-stone-950 italic tracking-tighter">${{ number_format($balances['pasivo'], 2) }}</p>
+                <div class="bg-stone-50 p-8 rounded-[28px] border border-stone-100 transition-all hover:bg-stone-950 hover:text-white hover:shadow-2xl group/card text-center">
+                    <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic group-hover/card:text-primary transition-colors">Liability</p>
+                    <p class="text-[18px] font-mono font-black text-stone-950 italic tracking-tighter group-hover/card:text-white transition-colors">${{ number_format($balances['pasivo'], 2) }}</p>
                 </div>
-                <div class="bg-stone-50 p-6 rounded-3xl border border-stone-100 transition-all hover:bg-white hover:shadow-md text-center">
-                    <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-2 italic">Equity</p>
-                    <p class="text-[14px] font-mono font-black text-stone-950 italic tracking-tighter">${{ number_format($balances['patrimonio'], 2) }}</p>
+                <div class="bg-stone-50 p-8 rounded-[28px] border border-stone-100 transition-all hover:bg-stone-950 hover:text-white hover:shadow-2xl group/card text-center">
+                    <p class="text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic group-hover/card:text-primary transition-colors">Equity</p>
+                    <p class="text-[18px] font-mono font-black text-stone-950 italic tracking-tighter group-hover/card:text-white transition-colors">${{ number_format($balances['patrimonio'], 2) }}</p>
                 </div>
             </div>
             
-            <div class="mt-10 pt-10 border-t border-stone-100 flex justify-between items-center px-4">
-                <span class="text-[12px] font-black text-stone-950 uppercase tracking-[0.3em] italic">Equation Verification</span>
-                <span class="px-6 py-2 rounded-full text-[11px] font-black uppercase tracking-[0.3em] italic border-2 {{ abs($balances['activo'] - ($balances['pasivo'] + $balances['patrimonio'])) < 0.01 ? 'bg-green-100 text-green-700 border-green-200 shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'bg-red-100 text-red-700 border-red-200' }}">
-                    {{ abs($balances['activo'] - ($balances['pasivo'] + $balances['patrimonio'])) < 0.01 ? 'INTEGRITY_CHECK_OK' : 'INTEGRITY_VIOLATION' }}
+            <div class="mt-12 pt-12 border-t border-stone-100 flex flex-col md:flex-row justify-between items-center gap-8 px-6">
+                <div class="flex flex-col">
+                    <span class="text-[11px] font-black text-stone-400 uppercase tracking-[0.3em] italic mb-2 italic">Duality_Loop_Protocol</span>
+                    <span class="text-[12px] font-black text-stone-950 uppercase tracking-[0.4em] italic leading-none italic">Integrity_Verification</span>
+                </div>
+                <span class="px-10 py-3 rounded-2xl text-[12px] font-black uppercase tracking-[0.3em] italic border-2 transition-all duration-500 shadow-2xl {{ abs($balances['activo'] - ($balances['pasivo'] + $balances['patrimonio'])) < 0.01 ? 'bg-primary/10 text-stone-950 border-primary shadow-primary/20' : 'bg-red-500/10 text-red-600 border-red-500 shadow-red-500/20 animate-pulse' }}">
+                    {{ abs($balances['activo'] - ($balances['pasivo'] + $balances['patrimonio'])) < 0.01 ? 'INTEGRITY_CHECK: PASS' : 'INTEGRITY_VIOLATION' }}
                 </span>
             </div>
         </div>
-        <span class="material-symbols-outlined absolute -right-8 -bottom-8 text-[140px] opacity-[0.02] text-stone-950 pointer-events-none rotate-12 group-hover:opacity-[0.04] transition-opacity">account_balance</span>
+        <span class="material-symbols-outlined absolute -right-12 -bottom-12 text-[200px] opacity-[0.03] text-stone-950 pointer-events-none rotate-12 group-hover:opacity-[0.06] group-hover:rotate-0 transition-all duration-1000">account_balance</span>
     </div>
 </div>
 
-<!-- Recent Journal Entries -->
-<div class="bg-white rounded-[40px] border border-stone-100 shadow-sm p-10 mb-12">
-    <div class="flex flex-col md:flex-row justify-between items-center mb-12 border-b border-stone-50 pb-8 gap-6">
-        <div class="flex items-center gap-6">
-            <div class="w-12 h-12 bg-stone-950 rounded-2xl flex items-center justify-center text-primary shadow-2xl shadow-stone-950/20">
-                <span class="material-symbols-outlined text-2xl">receipt_long</span>
+<!-- Recent Journal Entries: Live Data Transmission -->
+<div class="bg-stone-950 rounded-[40px] border border-stone-800 shadow-2xl p-12 mb-16 relative overflow-hidden group">
+    <div class="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity" style="background-image: radial-gradient(#ceff5e 1.5px, transparent 1.5px); background-size: 30px 30px;"></div>
+    <div class="flex flex-col md:flex-row justify-between items-center mb-16 border-b border-white/5 pb-10 gap-10 relative z-10">
+        <div class="flex items-center gap-8">
+            <div class="w-16 h-16 bg-stone-900 border border-stone-800 rounded-[20px] flex items-center justify-center text-primary shadow-2xl">
+                <span class="material-symbols-outlined text-3xl">receipt_long</span>
             </div>
             <div>
-                <h3 class="text-2xl font-headline font-black text-stone-950 uppercase tracking-tighter italic leading-none">Journal Transmission Feed</h3>
-                <p class="text-[10px] text-stone-400 font-black uppercase tracking-[0.3em] mt-2 italic italic">Live Accounting Entry Logic</p>
+                <h3 class="text-3xl font-headline font-black text-white uppercase tracking-tighter italic leading-none">Journal_Transmission_Feed</h3>
+                <p class="text-[11px] text-stone-500 font-black uppercase tracking-[0.3em] mt-3 italic">Live_Accounting_Logic_Loop</p>
             </div>
         </div>
-        <a href="{{ url('/erp/contabilidad/libro-diario') }}" class="text-[11px] font-black uppercase tracking-[0.4em] text-primary hover:text-stone-950 transition-all flex items-center gap-3 italic italic">
-            ACCESS MASTER LEDGER
-            <span class="material-symbols-outlined text-[20px] group-hover:translate-x-2 transition-transform">arrow_forward</span>
+        <a href="{{ url('/erp/contabilidad/libro-diario') }}" class="text-[12px] font-black uppercase tracking-[0.4em] text-primary hover:brightness-110 transition-all flex items-center gap-5 italic group/link">
+            ACCESS_MASTER_FEED
+            <span class="material-symbols-outlined text-[24px] group-hover/link:translate-x-3 transition-transform">arrow_forward</span>
         </a>
     </div>
 
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto relative z-10">
         <table class="w-full border-collapse">
             <thead>
-                <tr class="zenith-table-header bg-stone-950 text-white">
-                    <th class="px-8 py-5 text-left">PROTOCOL ID</th>
-                    <th class="px-8 py-5 text-left">TIMESTAMP</th>
-                    <th class="px-8 py-5 text-left">CONCEPT LOG</th>
-                    <th class="px-8 py-5 text-right">QUANTUM</th>
-                    <th class="px-8 py-5 text-center">STATUS</th>
+                <tr class="bg-stone-900/50 text-stone-500 text-[11px] uppercase font-black italic">
+                    <th class="px-10 py-6 text-left tracking-[0.3em]">Protocol_ID</th>
+                    <th class="px-10 py-6 text-left tracking-[0.3em]">Timestamp</th>
+                    <th class="px-10 py-6 text-left tracking-[0.3em]">Concept_Entropy</th>
+                    <th class="px-10 py-6 text-right tracking-[0.3em]">Quantum</th>
+                    <th class="px-10 py-6 text-center tracking-[0.3em]">Status_Code</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-stone-50">
+            <tbody class="divide-y divide-white/5">
                 @forelse($stats['asientos_recientes'] as $asiento)
-                <tr class="group hover:bg-primary/5 transition-colors">
-                    <td class="px-8 py-6">
-                        <span class="text-[11px] font-mono font-black text-stone-400 group-hover:text-stone-950 transition-colors uppercase italic italic">AE-{{ str_pad($asiento->id, 5, '0', STR_PAD_LEFT) }}</span>
+                <tr class="group/row hover:bg-primary/5 transition-all">
+                    <td class="px-10 py-8">
+                        <span class="text-[11px] font-mono font-black text-stone-600 group-hover/row:text-primary transition-colors italic uppercase">AE_{{ str_pad($asiento->id, 5, '0', STR_PAD_LEFT) }}</span>
                     </td>
-                    <td class="px-8 py-6">
-                        <span class="text-[12px] font-black text-stone-950 uppercase tracking-tight italic">{{ $asiento->fecha }}</span>
+                    <td class="px-10 py-8">
+                        <span class="text-[12px] font-black text-stone-400 group-hover/row:text-white uppercase tracking-tighter italic">{{ $asiento->fecha }}</span>
                     </td>
-                    <td class="px-8 py-6">
-                        <p class="text-[12px] font-black text-stone-950 uppercase italic tracking-tight leading-tight">{{ $asiento->concepto }}</p>
+                    <td class="px-10 py-8">
+                        <p class="text-[12px] font-black text-stone-300 group-hover/row:text-white uppercase italic tracking-tight leading-tight max-w-md">{{ $asiento->concepto }}</p>
                     </td>
-                    <td class="px-8 py-6 text-right">
-                        <span class="text-[14px] font-mono font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($asiento->total_debe, 2) }}</span>
+                    <td class="px-10 py-8 text-right">
+                        <span class="text-[18px] font-mono font-black text-white italic tracking-tighter leading-none group-hover/row:scale-110 transition-transform inline-block">${{ number_format($asiento->total_debe, 2) }}</span>
                     </td>
-                    <td class="px-8 py-6 text-center italic italic">
-                        <span class="px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] border italic {{ $asiento->estado === 'CONTABILIZADO' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-amber-100 text-amber-700 border-amber-200' }}">
+                    <td class="px-10 py-8 text-center italic">
+                        <span class="px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border italic transition-all {{ $asiento->estado === 'CONTABILIZADO' ? 'bg-primary/10 text-primary border-primary/30 group-hover/row:bg-primary group-hover/row:text-stone-950' : 'bg-stone-800 text-stone-500 border-white/5' }}">
                             {{ $asiento->estado }}
                         </span>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="py-20 text-center">
-                        <p class="text-[12px] font-black text-stone-300 uppercase tracking-[0.3em] italic italic">Fiduciary transmission void in current cycle.</p>
+                    <td colspan="5" class="py-32 text-center">
+                        <div class="flex flex-col items-center gap-6 opacity-20">
+                            <span class="material-symbols-outlined text-8xl">database_off</span>
+                            <p class="text-[14px] font-black text-stone-400 uppercase tracking-[0.4em] italic">Transmission_Void: NO_ENTRIES_SYNCED</p>
+                        </div>
                     </td>
                 </tr>
                 @endforelse
@@ -253,6 +286,7 @@
         </table>
     </div>
 </div>
+
 
 @endsection
 

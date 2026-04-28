@@ -3,179 +3,172 @@
 @section('title', 'Maestro de Productos')
 
 @section('breadcrumb')
-    <a href="{{ url('/erp/dashboard') }}" class="hover:text-stone-900 transition-colors">ERP</a>
-    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-    <a href="{{ url('/erp/inventario') }}" class="hover:text-stone-900 transition-colors">Inventario</a>
-    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-    <span class="text-stone-900">Maestro de Productos</span>
+    <a href="{{ url('/erp/inicio') }}" class="text-stone-500 hover:text-primary transition-colors font-black text-[12px] uppercase tracking-widest italic">ERP_CORE</a>
+    <span class="material-symbols-outlined text-[14px] text-stone-700">chevron_right</span>
+    <a href="{{ url('/erp/inventario') }}" class="text-stone-500 hover:text-primary transition-colors font-black text-[12px] uppercase tracking-widest italic">INVENTORY_NODE</a>
+    <span class="material-symbols-outlined text-[14px] text-stone-700">chevron_right</span>
+    <span class="text-stone-300 font-black text-[12px] uppercase tracking-widest italic">MASTER_CATALOG</span>
 @endsection
 
 @section('content')
-    <!-- Unified Page Header (Match Lista de Precios Style) -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 pb-8 border-b border-stone-100">
+    <!-- Header: Master Catalog Identity Trace -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-16 pb-12 border-b border-primary/20 relative z-10">
         <div>
-            <div class="flex items-center gap-2 mb-2">
-                <span class="w-8 h-[2px] bg-primary"></span>
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em]">Gestión de Activos en Producción</p>
+            <div class="flex items-center gap-4 mb-6">
+                <span class="w-12 h-1 bg-primary shadow-[0_0_15px_#ceff5e]"></span>
+                <p class="text-[11px] font-black text-stone-500 uppercase tracking-[0.5em] italic leading-none">ASSET_REGISTRY_PROTOCOL: MASTER_LOGIC</p>
             </div>
-            <h1 class="text-5xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none italic">
-                Maestro <span class="text-stone-400 italic">Productos</span>
+            <h1 class="text-6xl md:text-7xl font-headline font-black text-white tracking-tighter uppercase italic leading-none">
+                MASTER_<span class="text-primary italic">CATALOG_X</span>
             </h1>
-            <p class="text-[12px] text-stone-400 mt-2 font-black uppercase tracking-[0.2em] italic">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
+            <p class="text-stone-600 text-[11px] font-black uppercase tracking-[0.4em] mt-6 italic">MAYOR_REPUESTO_LA_CIMA // RIF: J-40308741-5</p>
         </div>
         
-        <div class="flex items-center gap-3">
-            <a href="{{ route('erp.inventario.lista-precios') }}" class="bg-white border border-stone-200 text-stone-900 px-8 py-4 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 hover:border-primary transition-all rounded-xl shadow-sm group">
-                <span class="material-symbols-outlined text-lg text-stone-400 group-hover:text-primary transition-colors">dataset</span>
-                Carga Masiva Excel
+        <div class="flex items-center gap-6">
+            <a href="{{ route('erp.inventario.lista-precios') }}" class="bg-stone-900 border border-white/5 text-stone-400 px-10 py-6 text-[12px] font-black uppercase tracking-[0.3em] flex items-center gap-4 hover:border-primary hover:text-white transition-all rounded-[32px] shadow-3xl group italic">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">dataset</span>
+                XLSX_BULK_LOAD
             </a>
-            <button onclick="openModal('createProductModal')" class="bg-primary text-stone-950 px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-3 hover:brightness-110 transition-all shadow-lg active:scale-95">
-                <span class="material-symbols-outlined font-black text-lg">add</span>
-                Añadir Producto
+            <button onclick="openModal('createProductModal')" class="bg-primary text-stone-950 px-10 py-6 rounded-[32px] text-[12px] font-black uppercase tracking-[0.3em] flex items-center gap-4 hover:bg-white transition-all shadow-[0_0_30px_#ceff5e22] active:scale-95 italic">
+                <span class="material-symbols-outlined font-black text-2xl">add</span>
+                APPEND_ASSET
             </button>
         </div>
     </div>
     
-    <!-- Compact Monitoring Metrics -->
-    <div id="tour-product-filters" class="flex flex-wrap gap-4 mb-8">
-        <!-- Status Mini-Card: Criticidad -->
-        <div class="bg-white border border-stone-200 px-6 py-4 rounded-[20px] shadow-sm flex items-center gap-4 hover:border-red-500/30 transition-all group/alert {{ $low_stock_count > 0 ? 'bg-red-50/10' : '' }} min-w-[280px]">
-            <div class="w-2 h-10 rounded-full {{ $low_stock_count > 0 ? 'bg-red-500 animate-pulse' : 'bg-green-500' }}"></div>
+    <!-- Operational Monitoring: Global Integrity -->
+    <div id="tour-product-filters" class="flex flex-wrap gap-8 mb-16 relative z-10">
+        <!-- Status Node: Criticality -->
+        <div class="bg-stone-900 border border-white/5 px-10 py-6 rounded-[40px] shadow-3xl flex items-center gap-8 hover:border-red-500/30 transition-all group/alert min-w-[320px] {{ $low_stock_count > 0 ? 'border-l-[12px] border-l-red-500' : 'border-l-[12px] border-l-primary' }}">
+            <div class="w-2 h-12 rounded-full {{ $low_stock_count > 0 ? 'bg-red-500 animate-pulse' : 'bg-primary shadow-[0_0_15px_#ceff5e]' }}"></div>
             <div>
-                <p class="text-[8px] font-black text-stone-400 uppercase tracking-widest leading-none mb-1">Estatus de Criticidad</p>
-                <h4 class="text-lg font-headline font-black text-stone-900 uppercase tracking-tighter italic leading-none">
-                    {{ $low_stock_count > 0 ? 'ALERTA STOCK' : 'ÓPTIMO' }}
+                <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] leading-none mb-3 italic">CRITICALITY_SCAN</p>
+                <h4 class="text-2xl font-headline font-black text-white uppercase tracking-tighter italic leading-none">
+                    {{ $low_stock_count > 0 ? 'ALERT_STOCK_SIG' : 'OPTIMAL_FLOW' }}
                 </h4>
-                <p class="text-[9px] font-bold text-stone-500 uppercase tracking-tight mt-1">
-                    {{ $low_stock_count }} ITEMS CRÍTICOS
+                <p class="text-[11px] font-black text-stone-500 uppercase tracking-widest mt-2 font-mono">
+                    {{ $low_stock_count }} ITEMS_CRITICAL_MAG
                 </p>
             </div>
         </div>
 
-        <!-- Metric Mini-Card: Valuación -->
-        <div class="bg-stone-900 border border-stone-800 px-6 py-4 rounded-[20px] shadow-lg flex items-center gap-4 group/vault min-w-[280px]">
-            <div class="w-10 h-10 bg-stone-800 rounded-xl flex items-center justify-center text-primary">
-                <span class="material-symbols-outlined text-lg">payments</span>
+        <!-- Value Node: Asset Vault -->
+        <div class="bg-stone-950 border border-primary/10 px-10 py-6 rounded-[40px] shadow-inner flex items-center gap-8 group/vault min-w-[320px] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#ceff5e 2px, transparent 2px); background-size: 24px 24px;"></div>
+            <div class="w-14 h-14 bg-stone-900 border border-white/5 rounded-2xl flex items-center justify-center text-primary shadow-33xl relative z-10">
+                <span class="material-symbols-outlined text-2xl">payments</span>
             </div>
-            <div>
-                <p class="text-[8px] font-black text-primary uppercase tracking-widest leading-none mb-1">Bóveda de Activos</p>
-                <div class="flex items-baseline gap-1">
-                    <span class="text-xl font-headline font-black text-white tracking-tighter leading-none">${{ number_format($inventory_value / 1000, 1) }}</span>
-                    <span class="text-primary text-xs font-light">K</span>
+            <div class="relative z-10">
+                <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] leading-none mb-3 italic">ASSET_VAULT_LIQUIDITY</p>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-3xl font-headline font-black text-white italic tracking-tighter leading-none">${{ number_format($inventory_value / 1000, 1) }}</span>
+                    <span class="text-primary text-[12px] font-black font-mono">K_MAG</span>
                 </div>
-                <p class="text-[8px] font-bold text-stone-500 uppercase tracking-widest mt-1 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
-                    USD Global
+                <p class="text-[11px] font-black text-stone-700 uppercase tracking-widest mt-2 flex items-center gap-3 font-mono italic">
+                    <span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_#ceff5e]"></span>
+                    GLOBAL_USD_TRANS
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Main Data Grid: High-Precision Industrial Table -->
-    <div class="bg-white border border-stone-200 rounded-[32px] shadow-xl overflow-hidden mb-12">
-        <div class="p-8 border-b border-stone-100 bg-stone-50/50 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
-            <div class="flex items-center gap-6">
-                <div class="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center text-primary shadow-lg shadow-stone-900/10">
-                    <span class="material-symbols-outlined text-3xl font-black">inventory_2</span>
+    <!-- Main Data Matrix: High-Precision Catalog -->
+    <div class="bg-stone-900 border border-white/5 rounded-[48px] shadow-33xl overflow-hidden mb-20 relative z-10">
+        <div class="p-12 border-b border-white/5 bg-stone-950/50 backdrop-blur-3xl flex flex-col xl:flex-row justify-between items-start xl:items-center gap-10">
+            <div class="flex items-center gap-8">
+                <div class="w-20 h-20 bg-stone-950 border border-white/5 rounded-3xl flex items-center justify-center text-primary shadow-inner group">
+                    <span class="material-symbols-outlined text-4xl group-hover:scale-110 transition-transform">inventory_2</span>
                 </div>
                 <div>
-                    <h2 class="text-2xl font-headline font-black text-stone-900 uppercase tracking-tighter leading-none italic">
-                        Inventario <span class="text-stone-400">Maestro</span>
+                    <h2 class="text-3xl font-headline font-black text-white uppercase tracking-tighter leading-none italic">
+                        INVENTORY_<span class="text-stone-700">MASTER_X</span>
                     </h2>
-                    <p class="text-[10px] text-stone-400 font-bold uppercase tracking-[0.3em] mt-2">Protocolo de Control J-40308741-5</p>
+                    <p class="text-[11px] text-stone-600 font-black uppercase tracking-[0.4em] mt-3 italic">CONTROL_PROTOCOL: J-40308741-5</p>
                 </div>
             </div>
 
-            <div class="flex flex-wrap items-center gap-4 w-full xl:w-auto">
+            <div class="flex flex-wrap items-center gap-6 w-full xl:w-auto">
                 <form action="{{ route('erp.inventario.productos') }}" method="GET" class="relative flex-1 xl:flex-none">
-                    <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-stone-400">search</span>
-                    <input name="search" value="{{ request('search') }}" onblur="this.form.submit()" class="w-full xl:w-80 bg-white border-stone-200 rounded-2xl pl-14 pr-6 py-4 text-[12px] font-black text-stone-900 focus:ring-8 focus:ring-primary/5 focus:border-primary transition-all placeholder:text-stone-300 uppercase tracking-tight" placeholder="BUSCAR POR SKU O NOMBRE...">
+                    <span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-stone-600 transition-colors">search</span>
+                    <input name="search" value="{{ request('search') }}" onblur="this.form.submit()" class="w-full xl:w-96 bg-stone-950 border border-white/5 rounded-[24px] pl-16 pr-8 py-5 text-[12px] font-black text-white focus:border-primary transition-all placeholder:text-stone-800 uppercase tracking-[0.2em] italic font-mono shadow-inner" placeholder="SCAN_SKU_OR_NOMINAL...">
                 </form>
                 
-                <div class="flex items-center gap-2 bg-white p-1.5 rounded-2xl border border-stone-100 shadow-sm">
-                    <button class="w-11 h-11 flex items-center justify-center bg-stone-50 hover:bg-stone-950 text-stone-400 hover:text-primary transition-all rounded-xl" title="Configuración">
-                        <span class="material-symbols-outlined text-lg">settings</span>
+                <div class="flex items-center gap-3 bg-stone-950 p-2 rounded-[28px] border border-white/5 shadow-inner">
+                    <button class="w-12 h-12 flex items-center justify-center bg-stone-900 hover:bg-white text-stone-600 hover:text-stone-950 transition-all rounded-2xl shadow-3xl" title="CONFIG_NODE">
+                        <span class="material-symbols-outlined text-xl">settings</span>
                     </button>
-                    <a href="{{ route('erp.inventario.productos') }}" class="w-11 h-11 flex items-center justify-center bg-stone-50 hover:bg-stone-950 text-stone-400 hover:text-primary transition-all rounded-xl" title="Refrescar">
-                        <span class="material-symbols-outlined text-lg">sync</span>
+                    <a href="{{ route('erp.inventario.productos') }}" class="w-12 h-12 flex items-center justify-center bg-stone-900 hover:bg-white text-stone-600 hover:text-stone-950 transition-all rounded-2xl shadow-3xl" title="FORCE_SYNC">
+                        <span class="material-symbols-outlined text-xl">sync</span>
                     </a>
-                    <button class="w-11 h-11 flex items-center justify-center bg-stone-50 hover:bg-stone-950 text-stone-400 hover:text-primary transition-all rounded-xl" title="Filtros Avanzados">
-                        <span class="material-symbols-outlined text-lg">tune</span>
-                    </button>
                 </div>
             </div>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[1200px]">
+        <div class="overflow-x-auto font-mono italic">
+            <table class="w-full text-left border-collapse min-w-[1400px]">
                 <thead>
-                    <tr class="zenith-table-header">
-                        <th class="py-6 px-8 w-12"><input type="checkbox" class="w-4 h-4 rounded border-stone-300 text-primary focus:ring-primary"></th>
-                        <th class="py-6 px-4">
-                            <a href="{{ request()->fullUrlWithQuery(['sort_by' => 'codigo_oem', 'sort_order' => ($sortBy == 'codigo_oem' && $sortOrder == 'asc') ? 'desc' : 'asc']) }}" class="flex items-center gap-2 group hover:text-stone-900">
-                                IDENTIFICADOR SKU
-                                <span class="material-symbols-outlined text-xs {{ $sortBy == 'codigo_oem' ? 'text-primary' : 'text-stone-300' }}">swap_vert</span>
-                            </a>
-                        </th>
-                        <th class="py-6 px-4">DESCRIPCIÓN TÉCNICA DEL REPUESTO</th>
-                        <th class="py-6 px-4">CATEGORÍA / SISTEMA</th>
-                        <th class="py-6 px-4">MARCA OPERATIVA / FAB.</th>
-                        <th class="py-6 px-4 text-right">PRECIO VENTA</th>
-                        <th class="py-6 px-4">DISPONIBILIDAD STOCK</th>
-                        <th class="py-6 px-8 text-center">GESTIÓN</th>
+                    <tr class="bg-stone-950 text-stone-700">
+                        <th class="py-8 px-10 w-16"><input type="checkbox" class="w-5 h-5 rounded-lg border-white/10 bg-stone-900 text-primary focus:ring-primary shadow-inner"></th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">IDENTIFIER_SKU</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">TECHNICAL_NOMINAL_XMIT</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">CAT_SYSTEM_NODE</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">OP_BRAND / FAB_CMD</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase text-right">VALUATION</th>
+                        <th class="py-8 px-6 text-[11px] font-black tracking-[0.3em] uppercase">DISPONIBILITY_MAG</th>
+                        <th class="py-8 px-10 text-[11px] font-black tracking-[0.3em] uppercase text-center">CMD_HUB</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-stone-50">
+                <tbody class="divide-y divide-white/5 font-mono">
                     @forelse($products as $index => $product)
-                    <tr class="zenith-table-row group/row">
-                        <td class="py-5 px-8"><input type="checkbox" class="w-4 h-4 rounded border-stone-300 text-primary focus:ring-primary"></td>
-                        <td class="py-5 px-4 font-mono">
-                            <span class="zenith-table-sku">
+                    <tr class="hover:bg-primary/5 transition-all group/row">
+                        <td class="py-8 px-10"><input type="checkbox" class="w-5 h-5 rounded-lg border-white/10 bg-stone-900 text-primary focus:ring-primary shadow-inner"></td>
+                        <td class="py-8 px-6">
+                            <span class="text-[14px] font-black text-white tracking-tighter drop-shadow-sm uppercase">
                                 {{ $product->codigo_oem }}
                             </span>
                         </td>
-                        <td class="py-5 px-4">
-                            <a href="{{ url('/tienda/detalle_productos?id=' . $product->id) }}" target="_blank" class="zenith-table-main hover:text-primary transition-colors block">
+                        <td class="py-8 px-6">
+                            <a href="{{ url('/tienda/detalle_productos?id=' . $product->id) }}" target="_blank" class="text-[14px] font-black text-stone-300 group-hover/row:text-primary transition-colors block uppercase leading-tight tracking-tight max-w-xs">
                                 {{ $product->nombre }}
                             </a>
-                            <p class="zenith-table-secondary mt-1">ID Central: #{{ str_pad($product->id, 5, '0', STR_PAD_LEFT) }}</p>
+                            <p class="text-[11px] text-stone-700 font-black mt-2 uppercase tracking-widest italic group-hover/row:text-stone-500 transition-colors">ID_TRANS: #{{ str_pad($product->id, 5, '0', STR_PAD_LEFT) }}</p>
                         </td>
-                        <td class="py-5 px-4">
-                            <span class="zenith-table-secondary font-black text-stone-600">{{ $product->categoria ?? 'GENERAL' }}</span>
+                        <td class="py-8 px-6">
+                            <span class="text-[11px] font-black text-stone-500 uppercase tracking-widest bg-stone-950 px-4 py-2 rounded-xl group-hover/row:text-white transition-all shadow-inner border border-white/5">{{ $product->categoria ?? 'GENERAL_BLOCK' }}</span>
                         </td>
-                        <td class="py-5 px-4">
-                            <div class="flex items-center gap-2">
-                                <span class="zenith-table-secondary">{{ $product->marca ?? '-' }}</span>
-                                <span class="text-stone-200">|</span>
-                                <span class="zenith-table-secondary">{{ $product->fabricante ?? '-' }}</span>
+                        <td class="py-8 px-6">
+                            <div class="flex items-center gap-4 text-[11px] font-black tracking-widest uppercase">
+                                <span class="text-stone-400 group-hover/row:text-white transition-colors">{{ $product->marca ?? '---' }}</span>
+                                <span class="text-stone-800">//</span>
+                                <span class="text-stone-600 group-hover/row:text-stone-400 transition-colors italic">{{ $product->fabricante ?? '---' }}</span>
                             </div>
                         </td>
-                        <td class="py-5 px-4 text-right">
-                            <span class="zenith-table-price">${{ number_format($product->precio_mayor, 2) }}</span>
+                        <td class="py-8 px-6 text-right">
+                            <span class="text-[18px] font-black text-primary italic tracking-tighter shadow-primary/10 drop-shadow-md">${{ number_format($product->precio_mayor, 2) }}</span>
                         </td>
-                        <td class="py-5 px-4">
+                        <td class="py-8 px-6">
                             @php $safeMinimo = max(1, (float)$product->stock_minimo); @endphp
                             @php $stockPercent = min(100, ($product->stock_actual / ($safeMinimo * 3)) * 100); @endphp
-                            <div class="flex items-center gap-4">
-                                <span class="text-[12px] font-black {{ $product->stock_actual <= $safeMinimo ? 'text-red-600 animate-pulse' : 'text-stone-950' }} min-w-[30px] font-mono leading-none">
-                                    {{ number_format($product->stock_actual, 0) }}
+                            <div class="flex items-center gap-6">
+                                <span class="text-[16px] font-black {{ $product->stock_actual <= $safeMinimo ? 'text-red-500 animate-pulse' : 'text-white' }} min-w-[50px] leading-none shadow-inner italic">
+                                    {{ number_format($product->stock_actual, 0) }}_QTY
                                 </span>
-                                <div class="w-full max-w-[80px] bg-stone-100 h-1.5 rounded-full overflow-hidden flex-shrink-0">
-                                    <div class="{{ $product->stock_actual <= $safeMinimo ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]' : 'bg-primary' }} h-full transition-all duration-700" style="width: {{ $stockPercent }}%"></div>
+                                <div class="w-full max-w-[100px] bg-stone-950 h-3 rounded-full overflow-hidden border border-white/5 relative shadow-inner">
+                                    <div class="{{ $product->stock_actual <= $safeMinimo ? 'bg-red-500 shadow-[0_0_15px_#ef4444]' : 'bg-primary shadow-[0_0_15px_#ceff5e]' }} h-full transition-all duration-1000" style="width: {{ $stockPercent }}%"></div>
                                 </div>
                             </div>
                         </td>
-                        <td class="py-5 px-8 text-center">
-                            <button class="w-10 h-10 bg-white border border-stone-100 text-stone-400 hover:bg-stone-950 hover:text-primary hover:border-stone-950 transition-all rounded-xl shadow-sm flex items-center justify-center mx-auto">
-                                <span class="material-symbols-outlined text-lg">more_vert</span>
+                        <td class="py-8 px-10 text-center">
+                            <button class="w-12 h-12 bg-stone-950 border border-white/5 text-stone-700 hover:bg-white hover:text-stone-950 transition-all rounded-2xl shadow-inner flex items-center justify-center mx-auto group">
+                                <span class="material-symbols-outlined text-xl group-hover:rotate-90 transition-transform">more_vert</span>
                             </button>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8" class="py-20 text-center">
-                            <span class="material-symbols-outlined text-5xl text-stone-100 mb-4">inventory_2</span>
-                            <p class="text-[10px] font-black text-stone-300 uppercase tracking-[0.5em]">No se detectaron activos en el maestro</p>
+                        <td colspan="8" class="py-32 text-center">
+                            <span class="material-symbols-outlined text-7xl text-stone-900 mb-6 block animate-bounce">inventory_2</span>
+                            <p class="text-[12px] font-black text-stone-800 uppercase tracking-[0.6em] italic">NO_CATEGORICAL_TRACE_DETECTED_IN_MASTER_HUB</p>
                         </td>
                     </tr>
                     @endforelse
@@ -183,128 +176,115 @@
             </table>
         </div>
 
-        <!-- Footer: Pagination & Insights -->
-        <div class="p-8 border-t border-stone-100 bg-stone-50/30 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-4">
-                <span class="text-[10px] font-black text-stone-400 uppercase tracking-widest">Sincronización: 100% OK</span>
-                <span class="w-1 h-4 bg-stone-200 rounded-full"></span>
-                <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Mostrando {{ $products->total() }} Activos Registrados</span>
+        <!-- Matrix Footer: Sync Trace -->
+        <div class="p-12 border-t border-white/5 bg-stone-950/80 backdrop-blur-3xl flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex items-center gap-6">
+                <span class="text-[11px] font-black text-primary uppercase tracking-[0.4em] italic shadow-[0_0_10px_#ceff5e22]">SYNC_STATUS: 100%_SECURE</span>
+                <span class="w-1.5 h-6 bg-stone-800 rounded-full"></span>
+                <span class="text-[11px] font-black text-stone-500 uppercase tracking-[0.3em] italic">{{ $products->total() }}_REGISTERED_ASSETS_DETECTED</span>
             </div>
             <div>
                 {{ $products->appends(request()->query())->links('vendor.pagination.tailwind_zenith') }}
             </div>
         </div>
     </div>
- </div>
-    </div>  </div>
-    </div>
 @endsection
 
 @section('modals')
-    <!-- Technical Data Sheet Modal (Create) -->
-    <div id="createProductModal" class="hidden fixed inset-0 bg-stone-950/60 backdrop-blur-xl z-[100] flex items-center justify-center p-4">
-        <div class="bg-white rounded-[40px] w-full max-w-5xl shadow-2xl border border-white/10 overflow-hidden animate-in fade-in zoom-in duration-500 max-h-[90vh] flex flex-col">
-            <div class="p-10 border-b border-stone-100 flex justify-between items-start bg-stone-50/50">
-                <div class="flex items-center gap-6">
-                    <div class="w-16 h-16 bg-stone-900 rounded-3xl flex items-center justify-center text-primary shadow-2xl">
-                        <span class="material-symbols-outlined text-3xl font-black">inventory_2</span>
+    <!-- Asset Technical Data Sheet Modal (Append) -->
+    <div id="createProductModal" class="hidden fixed inset-0 bg-stone-950/80 backdrop-blur-3xl z-[100] flex items-center justify-center p-8">
+        <div class="bg-stone-900 rounded-[56px] w-full max-w-6xl shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden animate-in fade-in zoom-in slide-in-from-bottom-12 duration-700 max-h-[92vh] flex flex-col relative">
+            <!-- Modal Industrial Accent -->
+            <div class="absolute top-0 inset-x-0 h-2 bg-primary group-hover:h-3 transition-all duration-700 shadow-[0_0_20px_#ceff5e33]"></div>
+            
+            <div class="p-16 border-b border-white/5 flex justify-between items-start bg-stone-950/40 backdrop-blur-3xl">
+                <div class="flex items-center gap-10">
+                    <div class="w-24 h-24 bg-stone-950 border border-white/10 rounded-[32px] flex items-center justify-center text-primary shadow-inner">
+                        <span class="material-symbols-outlined text-[48px] font-black animate-pulse">inventory_2</span>
                     </div>
                     <div>
-                        <h3 class="text-4xl font-headline font-black text-stone-950 uppercase tracking-tighter leading-none">Apertura de <span class="text-primary italic">Ficha Técnica</span></h3>
-                        <p class="text-[10px] text-stone-400 font-bold uppercase tracking-[0.3em] mt-2">Protocolo de Registro Central de Almacén</p>
+                        <h3 class="text-5xl font-headline font-black text-white uppercase tracking-tighter leading-none italic">APPEND_<span class="text-primary">ASSET_X</span></h3>
+                        <p class="text-[12px] text-stone-600 font-black uppercase tracking-[0.4em] mt-5 italic">ASSET_REGISTRY_PROTOCOL: CALIBRATION_REQUIRED</p>
                     </div>
                 </div>
-                <button onclick="closeModal('createProductModal')" class="group p-3 bg-white hover:bg-red-50 text-stone-400 hover:text-red-500 rounded-2xl border border-stone-100 transition-all shadow-sm">
-                    <span class="material-symbols-outlined text-xl">close</span>
+                <button onclick="closeModal('createProductModal')" class="group p-5 bg-stone-950 border border-white/5 hover:bg-red-500 hover:text-white text-stone-600 rounded-[28px] transition-all shadow-inner">
+                    <span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform">close</span>
                 </button>
             </div>
-            <form action="{{ route('erp.inventario.productos.store') }}" method="POST" class="flex-1 overflow-y-auto">
+            
+            <form action="{{ route('erp.inventario.productos.store') }}" method="POST" class="flex-1 overflow-y-auto custom-scrollbar">
                 @csrf
-                <div class="p-10 space-y-12">
-                    <!-- Section: Core Specifications -->
-                    <div class="grid grid-cols-12 gap-8">
+                <div class="p-16 space-y-16">
+                    <!-- Section: Core Calibration -->
+                    <div class="grid grid-cols-12 gap-10">
                         <div class="col-span-12">
-                            <div class="flex items-center gap-4 mb-4">
-                                <span class="w-1 h-4 bg-primary rounded-full"></span>
-                                <h4 class="text-[11px] font-black text-stone-900 uppercase tracking-[0.2em]">Especificaciones Nucleares</h4>
+                            <div class="flex items-center gap-6 mb-4">
+                                <span class="w-1.5 h-6 bg-primary rounded-full shadow-[0_0_15px_#ceff5e]"></span>
+                                <h4 class="text-[12px] font-black text-white uppercase tracking-[0.4em] italic">CORE_SPECIFICATION_BLOCK</h4>
                             </div>
                         </div>
-                        <div class="col-span-12 lg:col-span-8 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest ml-1">Descripción Nominal del Activo</label>
-                            <input type="text" name="nombre" placeholder="EJ. EMPAQUEDADURA DE CÁMARA (CULATA)" required class="w-full bg-stone-50 border-stone-100 rounded-2xl px-6 py-5 text-[12px] font-black text-stone-950 focus:ring-8 focus:ring-primary/5 transition-all uppercase placeholder:text-stone-300 tracking-tight">
+                        <div class="col-span-12 lg:col-span-8 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">ASSET_NOMINAL_DESCRIPTION</label>
+                            <input type="text" name="nombre" placeholder="EJ. EMPAQUEDADURA_CÁMARA_CORE_X7" required class="w-full bg-stone-950 border border-white/5 rounded-[24px] px-8 py-6 text-[14px] font-black text-white focus:border-primary transition-all uppercase placeholder:text-stone-800 tracking-[0.1em] italic shadow-inner">
                         </div>
-                        <div class="col-span-12 lg:col-span-4 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest ml-1">Código OEM (Identificador)</label>
-                            <input type="text" name="codigo_oem" placeholder="XP-00000" required class="w-full bg-stone-50 border-stone-100 rounded-2xl px-6 py-5 text-[12px] font-black text-stone-950 focus:ring-8 focus:ring-primary/5 transition-all font-mono uppercase placeholder:text-stone-300 tracking-tighter">
+                        <div class="col-span-12 lg:col-span-4 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">SKU_OEM_IDENTIFIER</label>
+                            <input type="text" name="codigo_oem" placeholder="XP_PROTO_0000X" required class="w-full bg-stone-950 border border-white/5 rounded-[24px] px-8 py-6 text-[14px] font-black text-white focus:border-primary transition-all font-mono uppercase placeholder:text-stone-800 tracking-tighter italic shadow-inner">
                         </div>
                     </div>
 
-                    <!-- Section: Technical Metadata -->
-                    <div class="grid grid-cols-12 gap-6">
+                    <!-- Section: Technical Parameter Matrix -->
+                    <div class="grid grid-cols-12 gap-10">
                         <div class="col-span-12">
-                            <div class="flex items-center gap-4 mb-4">
-                                <span class="w-1 h-4 bg-stone-900 rounded-full"></span>
-                                <h4 class="text-[11px] font-black text-stone-900 uppercase tracking-[0.2em]">Metadatos Técnicos</h4>
+                            <div class="flex items-center gap-6 mb-4">
+                                <span class="w-1.5 h-6 bg-stone-600 rounded-full"></span>
+                                <h4 class="text-[12px] font-black text-stone-400 uppercase tracking-[0.4em] italic">TECHNICAL_METADATA_MATRIX</h4>
                             </div>
                         </div>
-                        <div class="col-span-12 md:col-span-4 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Fabricante</label>
-                            <input type="text" name="fabricante" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
+                        <div class="col-span-12 md:col-span-4 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">FAB_CMD_ORIGIN</label>
+                            <input type="text" name="fabricante" class="w-full bg-stone-950 border border-white/5 rounded-[20px] px-8 py-5 text-[12px] font-black text-stone-300 focus:border-primary transition-all uppercase tracking-widest italic font-mono shadow-inner">
                         </div>
-                        <div class="col-span-12 md:col-span-4 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Marca Operativa</label>
-                            <input type="text" name="marca" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
+                        <div class="col-span-12 md:col-span-4 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">OPERATIONAL_BRAND_TAG</label>
+                            <input type="text" name="marca" class="w-full bg-stone-950 border border-white/5 rounded-[20px] px-8 py-5 text-[12px] font-black text-stone-300 focus:border-primary transition-all uppercase tracking-widest italic font-mono shadow-inner">
                         </div>
-                        <div class="col-span-12 md:col-span-4 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Categoría de Sistema</label>
-                            <input type="text" name="categoria" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
-                        </div>
-                        <div class="col-span-12 md:col-span-3 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Composición (Material)</label>
-                            <input type="text" name="material" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
-                        </div>
-                        <div class="col-span-12 md:col-span-3 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Espesor Nominal</label>
-                            <input type="text" name="espesor" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
-                        </div>
-                        <div class="col-span-12 md:col-span-3 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Dimensiones</label>
-                            <input type="text" name="medidas" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
-                        </div>
-                        <div class="col-span-12 md:col-span-3 space-y-2">
-                            <label class="text-[9px] font-black text-stone-400 uppercase tracking-widest">Fecha Apertura</label>
-                            <input type="date" name="fecha_incorporacion" class="w-full bg-stone-100/50 border-stone-100 rounded-xl px-5 py-4 text-[12px] font-black text-stone-900 focus:bg-white transition-all uppercase tracking-tight">
+                        <div class="col-span-12 md:col-span-4 space-y-3">
+                            <label class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] ml-2 italic">SYS_CATEGORY_NODE</label>
+                            <input type="text" name="categoria" class="w-full bg-stone-950 border border-white/5 rounded-[20px] px-8 py-5 text-[12px] font-black text-stone-300 focus:border-primary transition-all uppercase tracking-widest italic font-mono shadow-inner">
                         </div>
                     </div>
 
-                    <!-- Section: Commercial Controls -->
-                    <div class="bg-stone-50 border border-stone-100 p-10 rounded-[32px] shadow-inner relative overflow-hidden group">
-                        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <div class="space-y-4">
-                                <label class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] block">Precio Venta (USD)</label>
+                    <!-- Section: Operational Magnitudes -->
+                    <div class="bg-stone-950 border border-white/5 p-16 rounded-[48px] shadow-inner relative overflow-hidden group">
+                        <div class="absolute inset-0 opacity-[0.02] transition-opacity group-hover:opacity-[0.05]" style="background-image: radial-gradient(#ceff5e 2px, transparent 2px); background-size: 32px 32px;"></div>
+                        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16">
+                            <div class="space-y-6">
+                                <label class="text-[12px] font-black text-stone-500 uppercase tracking-[0.5em] block italic">VALUATION_USD_TRANS</label>
                                 <div class="relative">
-                                    <span class="absolute left-6 top-1/2 -translate-y-1/2 text-stone-200 font-headline font-black text-3xl">$</span>
-                                    <input type="number" name="precio_mayor" step="0.01" required class="w-full bg-white border border-stone-200 rounded-[22px] pl-14 pr-6 py-6 text-3xl font-headline font-black text-stone-900 focus:border-primary transition-all outline-none shadow-sm">
+                                    <span class="absolute left-10 top-1/2 -translate-y-1/2 text-stone-800 font-headline font-black text-5xl italic drop-shadow-md">$</span>
+                                    <input type="number" name="precio_mayor" step="0.01" required class="w-full bg-stone-900 border border-white/5 rounded-[32px] pl-20 pr-10 py-10 text-5xl font-headline font-black text-white focus:border-primary transition-all outline-none shadow-33xl italic tracking-tighter">
                                 </div>
-                                <p class="text-[8px] text-stone-400 font-bold uppercase tracking-widest italic">Sujeto a márgenes de distribución autorizados</p>
+                                <p class="text-[11px] text-stone-700 font-black uppercase tracking-[0.4em] italic mt-4 ml-2">AUTHORIZED_DISTRIBUTION_MARGINS_SYNC</p>
                             </div>
-                            <div class="space-y-4">
-                                <label class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] block">Stock de Apertura</label>
+                            <div class="space-y-6">
+                                <label class="text-[12px] font-black text-stone-500 uppercase tracking-[0.5em] block italic">INERTIAL_OPEN_STOCK</label>
                                 <div class="relative">
-                                    <input type="number" name="stock_actual" value="0" required class="w-full bg-white border border-stone-200 rounded-[22px] px-6 py-6 text-3xl font-headline font-black text-stone-900 focus:border-primary transition-all outline-none shadow-sm">
-                                    <span class="absolute right-6 top-1/2 -translate-y-1/2 text-stone-300 font-black uppercase text-[10px] tracking-widest">Unidades</span>
+                                    <input type="number" name="stock_actual" value="0" required class="w-full bg-stone-900 border border-white/5 rounded-[32px] px-10 py-10 text-5xl font-headline font-black text-white focus:border-primary transition-all outline-none shadow-33xl italic tracking-tighter">
+                                    <span class="absolute right-10 top-1/2 -translate-y-1/2 text-stone-800 font-black uppercase text-[12px] tracking-[0.4em] italic font-mono">UNITS_MAG</span>
                                 </div>
-                                <p class="text-[8px] text-stone-400 font-bold uppercase tracking-widest italic">Inventario inicial disponible en almacén</p>
+                                <p class="text-[11px] text-stone-700 font-black uppercase tracking-[0.4em] italic mt-4 ml-2">MASTER_DEPOT_INITIAL_AVAILABILITY</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-10 bg-stone-50 border-t border-stone-100 flex flex-col md:flex-row gap-6">
-                    <button type="button" onclick="closeModal('createProductModal')" class="flex-1 py-6 text-[11px] font-black uppercase text-stone-400 hover:text-red-500 transition-colors tracking-[0.2em] border border-transparent hover:border-red-100 rounded-2xl">Abortar Operación</button>
-                    <button type="submit" class="flex-[2] py-6 bg-stone-900 text-primary text-[11px] font-black uppercase tracking-[0.4em] rounded-2xl shadow-2xl hover:bg-black transition-all active:scale-[0.98] flex items-center justify-center gap-4">
-                        Sincronizar Bóveda de Activos
-                        <span class="material-symbols-outlined text-sm">sync</span>
+                <!-- Modal Actions: Command Terminal -->
+                <div class="p-16 bg-stone-950/60 backdrop-blur-3xl border-t border-white/5 flex flex-col md:flex-row gap-8">
+                    <button type="button" onclick="closeModal('createProductModal')" class="flex-1 py-8 text-[12px] font-black uppercase text-stone-600 hover:text-red-500 transition-all tracking-[0.4em] italic border border-white/5 hover:border-red-500/20 rounded-[32px] shadow-inner font-mono">ABORT_TRANSMISSION</button>
+                    <button type="submit" class="flex-[2] py-8 bg-primary text-stone-950 text-[14px] font-black uppercase tracking-[0.5em] rounded-[32px] shadow-[0_0_50px_#ceff5e22] hover:bg-white transition-all active:scale-[0.98] flex items-center justify-center gap-6 italic">
+                        SYNC_ASSET_VAULT_X7
+                        <span class="material-symbols-outlined text-[24px] font-black animate-spin-slow">sync</span>
                     </button>
                 </div>
             </form>
@@ -322,3 +302,4 @@
         }
     </script>
 @endsection
+

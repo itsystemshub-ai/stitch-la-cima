@@ -16,188 +16,210 @@
 @endpush
 
 @section('breadcrumb')
-    <a href="{{ url('/erp/dashboard') }}" class="hover:text-stone-900 transition-colors">ERP</a>
-    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-    <a href="{{ url('/erp/inventario') }}" class="hover:text-stone-900 transition-colors">Inventario</a>
-    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-    <span class="text-stone-900">Lista de Precios</span>
+    <a href="{{ url('/erp/inicio') }}" class="text-stone-500 hover:text-primary transition-colors font-black text-[12px] uppercase tracking-widest italic">ERP_CORE</a>
+    <span class="material-symbols-outlined text-[14px] text-stone-700">chevron_right</span>
+    <a href="{{ url('/erp/inventario') }}" class="text-stone-500 hover:text-primary transition-colors font-black text-[12px] uppercase tracking-widest italic">ASSET_CONTROL</a>
+    <span class="material-symbols-outlined text-[14px] text-stone-700">chevron_right</span>
+    <span class="text-primary font-black text-[12px] uppercase tracking-widest italic">PRICE_MATRIX</span>
 @endsection
 
 @section('content')
     <!-- Alert System for Feedback -->
-    <div class="mb-6">
+    <div class="mb-8">
         @if(session('success'))
-            <div class="bg-green-500/10 border border-green-500/20 text-green-600 p-6 rounded-[24px] flex items-center gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
-                <span class="material-symbols-outlined text-green-500">check_circle</span>
-                <p class="text-[11px] font-black uppercase tracking-widest">{{ session('success') }}</p>
+            <div class="bg-primary/10 border border-primary/20 text-primary p-6 rounded-[24px] flex items-center gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
+                <span class="material-symbols-outlined text-primary">check_circle</span>
+                <p class="text-[12px] font-black uppercase tracking-widest italic">{{ session('success') }}</p>
             </div>
         @endif
 
         @if(session('error'))
-            <div class="bg-red-500/10 border border-red-500/20 text-red-600 p-6 rounded-[24px] flex items-center gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
+            <div class="bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-[24px] flex items-center gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
                 <span class="material-symbols-outlined text-red-500">error</span>
-                <p class="text-[11px] font-black uppercase tracking-widest">{{ session('error') }}</p>
+                <p class="text-[12px] font-black uppercase tracking-widest italic">{{ session('error') }}</p>
             </div>
         @endif
     </div>
 
     <!-- Page Header: High-Performance Bulk Operations -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 pb-8 border-b border-stone-100">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12 pb-10 border-b border-white/5">
         <div>
-            <div class="flex items-center gap-2 mb-2">
-                <span class="w-8 h-[2px] bg-primary"></span>
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em]">Gestión de Valorización Global</p>
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-12 h-[2px] bg-primary"></span>
+                <p class="text-[12px] font-black text-stone-500 uppercase tracking-[0.4em] italic">GLOBAL_VALUATION_LOGIC</p>
             </div>
-            <h1 class="text-5xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none">Lista de <span class="text-stone-400">Precios</span></h1>
-            <p class="text-[12px] text-stone-400 mt-2 font-black uppercase tracking-[0.2em] italic">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
+            <h1 class="text-6xl font-headline font-black text-white tracking-tighter uppercase leading-none">Price <span class="text-stone-600">Matrix</span></h1>
+            <p class="text-[12px] text-stone-500 mt-4 font-black uppercase tracking-[0.2em] italic">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
         </div>
-        <div class="flex gap-3">
-             <button id="downloadTemplate" class="bg-white border border-stone-200 text-stone-900 px-8 py-4 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 hover:border-primary transition-all rounded-xl shadow-sm">
-                <span class="material-symbols-outlined text-lg">download</span>
-                Descargar Plantilla
+        <div class="flex gap-4">
+             <button id="downloadTemplate" class="bg-stone-900 border border-white/10 text-white px-10 py-5 text-[12px] font-black uppercase tracking-widest flex items-center gap-4 hover:border-primary/40 transition-all rounded-xl shadow-2xl relative group overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                <span class="material-symbols-outlined text-xl text-primary">download</span>
+                GET_TEMPLATE.XLSX
             </button>
         </div>
     </div>
 
     <!-- Live Sync Status -->
-    <div class="grid grid-cols-12 gap-8 mb-12">
-        <div class="col-span-12 lg:col-span-8 bg-white border border-stone-200 rounded-[40px] p-10 relative overflow-hidden flex flex-col justify-between min-h-[400px] shadow-sm">
-            <div class="absolute -right-10 -bottom-10 opacity-[0.03]">
-                <span class="material-symbols-outlined text-[200px] text-stone-900">cloud_upload</span>
+    <div class="grid grid-cols-12 gap-10 mb-16">
+        <div class="col-span-12 lg:col-span-8 bg-stone-900 border border-white/5 rounded-[40px] p-12 relative overflow-hidden flex flex-col justify-between min-h-[450px] shadow-3xl">
+            <div class="absolute -right-20 -bottom-20 opacity-[0.02]">
+                <span class="material-symbols-outlined text-[300px] text-white">cloud_upload</span>
             </div>
             
             <div class="relative z-10 w-full h-full flex flex-col">
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-4">Procesador de Lotes Inteligente (.xlsx / .xls)</p>
+                <p class="text-[12px] font-black text-stone-500 uppercase tracking-[0.4em] mb-6 italic">BATCH_PROCESSOR_CORE_v2.0</p>
                 
-                <div id="dropZone" class="flex-1 border-2 border-dashed border-stone-100 rounded-[32px] flex flex-col items-center justify-center p-8 cursor-pointer drop-zone hover:border-primary group transition-all bg-stone-50/30">
+                <div id="dropZone" class="flex-1 border-2 border-dashed border-white/5 rounded-[32px] flex flex-col items-center justify-center p-12 cursor-pointer drop-zone hover:border-primary/30 group transition-all bg-stone-950/50">
                     <input type="file" id="fileInput" class="hidden" accept=".xlsx, .xls">
                     <div id="dropZoneUI" class="text-center">
-                        <span class="material-symbols-outlined text-6xl text-stone-200 group-hover:text-primary transition-colors mb-4">upload_file</span>
-                        <h4 class="text-stone-900 font-headline font-bold text-xl uppercase tracking-tight">Arrastra tu Excel aquí</h4>
-                        <p class="text-stone-400 text-[10px] uppercase font-bold tracking-widest mt-2">O haz click para seleccionar el archivo oficial</p>
+                        <div class="w-20 h-20 bg-stone-900 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-white/5">
+                            <span class="material-symbols-outlined text-4xl text-stone-700 group-hover:text-primary transition-colors">upload_file</span>
+                        </div>
+                        <h4 class="text-white font-headline font-black text-2xl uppercase tracking-tighter italic">DRAG_DATA_STREAM</h4>
+                        <p class="text-stone-500 text-[12px] uppercase font-black tracking-[0.2em] mt-3 italic">OR SELECT OFFICIAL SPREADSHEET</p>
                     </div>
                     <div id="fileInfo" class="hidden text-center">
-                        <span class="material-symbols-outlined text-6xl text-primary mb-4">description</span>
-                        <h4 id="fileName" class="text-stone-900 font-headline font-bold text-xl uppercase tracking-tight">nombre_archivo.xlsx</h4>
-                        <p id="fileSize" class="text-primary text-[10px] uppercase font-bold tracking-widest mt-2">0.0 MB</p>
-                        <button id="removeFile" class="mt-4 text-[10px] font-black text-red-500 uppercase hover:text-red-600 transition-colors">Quitar archivo</button>
+                        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 border border-primary/20">
+                            <span class="material-symbols-outlined text-4xl text-primary">description</span>
+                        </div>
+                        <h4 id="fileName" class="text-white font-headline font-black text-2xl uppercase tracking-tighter italic">FILE_NAME.XLSX</h4>
+                        <p id="fileSize" class="text-primary text-[12px] uppercase font-black tracking-[0.2em] mt-3 italic">0.00 MB_DETECTED</p>
+                        <button id="removeFile" class="mt-6 text-[12px] font-black text-red-500 uppercase hover:text-red-400 transition-colors tracking-widest italic underline decoration-red-500/30">TERMINATE_PROCESS</button>
                     </div>
                 </div>
 
-                <form id="massUpdateForm" action="{{ route('erp.inventario.lista-precios.update') }}" method="POST" class="mt-6">
+                <form id="massUpdateForm" action="{{ route('erp.inventario.lista-precios.update') }}" method="POST" class="mt-8">
                     @csrf
                     <input type="hidden" name="excel_data" id="excelDataInput">
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-4 bg-stone-950 px-6 py-3 rounded-full border border-white/5">
                             <span class="flex h-3 w-3 relative">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
                             </span>
-                            <span class="text-[10px] font-black text-stone-900 uppercase tracking-widest">Pre-procesamiento en cliente: <span class="text-primary">ACTIVO</span></span>
+                            <span class="text-[12px] font-black text-stone-400 uppercase tracking-widest italic">PRE_SYNC_STATE: <span class="text-primary">ACTIVE</span></span>
                         </div>
-                        <button type="submit" id="submitBtn" disabled class="bg-stone-100 text-stone-400 px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-not-allowed">
-                            Sincronizar Lote Digital
+                        <button type="submit" id="submitBtn" disabled class="bg-stone-800 text-stone-600 px-12 py-5 rounded-xl text-[12px] font-black uppercase tracking-[0.2em] transition-all cursor-not-allowed border border-white/5 italic">
+                            EXECUTE_DATABASE_OVERWRITE
                         </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
-            <div class="bg-white border border-stone-200 p-8 rounded-[32px] shadow-sm flex-1 group">
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Última Actualización</p>
-                <h3 class="text-3xl font-headline font-black text-stone-900 uppercase leading-tight group-hover:text-primary transition-colors">{{ $stats['last_sync'] }}</h3>
-                <p class="text-[10px] text-stone-500 mt-2 font-bold uppercase">Base de Datos Centralizada</p>
+        <div class="col-span-12 lg:col-span-4 flex flex-col gap-8">
+            <div class="bg-stone-900 border border-white/5 p-10 rounded-[40px] shadow-3xl flex-1 group relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4">
+                    <span class="material-symbols-outlined text-stone-800 text-4xl group-hover:text-primary/20 transition-colors">history</span>
+                </div>
+                <p class="text-[12px] font-black text-stone-600 uppercase tracking-[0.3em] mb-6 italic">LAST_SYNC_LATENCY</p>
+                <h3 class="text-4xl font-headline font-black text-white uppercase leading-tight group-hover:text-primary transition-colors tracking-tighter">{{ $stats['last_sync'] }}</h3>
+                <p class="text-[12px] text-stone-600 mt-4 font-black uppercase tracking-widest italic">CIMA_CENTRAL_DB</p>
             </div>
-            <div class="bg-primary border border-primary p-8 rounded-[32px] shadow-sm flex-1 group hover:bg-stone-900 transition-all duration-500 cursor-pointer">
-                <p class="text-[10px] font-black text-stone-900 group-hover:text-primary uppercase tracking-widest mb-4">Items en Maestro</p>
-                <h3 id="itemsToProcess" class="text-5xl font-headline font-black text-stone-900 group-hover:text-white uppercase leading-tight tracking-tighter">{{ number_format($stats['total_items']) }}</h3>
-                <div class="mt-4 flex items-center justify-between">
-                    <span class="text-[10px] font-black text-stone-900/60 group-hover:text-primary/60 uppercase">Detección de Columnas</span>
-                    <span class="material-symbols-outlined text-stone-900 group-hover:text-primary">check_circle</span>
+            <div class="bg-primary border border-primary p-10 rounded-[40px] shadow-3xl flex-1 group hover:bg-stone-950 transition-all duration-700 cursor-pointer relative overflow-hidden">
+                <div class="absolute -right-8 -bottom-8 opacity-10 rotate-12">
+                    <span class="material-symbols-outlined text-[150px] text-stone-900">inventory_2</span>
+                </div>
+                <p class="text-[12px] font-black text-stone-900 group-hover:text-primary uppercase tracking-[0.3em] mb-6 italic">MASTER_SKU_COUNT</p>
+                <h3 id="itemsToProcess" class="text-7xl font-headline font-black text-stone-900 group-hover:text-white uppercase leading-tight tracking-[calc(-0.05em)] italic">{{ number_format($stats['total_items']) }}</h3>
+                <div class="mt-8 flex items-center justify-between">
+                    <span class="text-[12px] font-black text-stone-900/40 group-hover:text-primary/40 uppercase tracking-widest italic">SCHEMA_VALIDATED</span>
+                    <span class="material-symbols-outlined text-stone-900 group-hover:text-primary text-3xl">verified</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Integrity Dashboard: Preview Table -->
-    <section class="bg-white border border-stone-200 rounded-[32px] shadow-sm overflow-hidden mb-12">
-        <div class="p-8 border-b border-stone-50 flex justify-between items-center">
-            <h3 class="text-[10px] font-black text-stone-900 uppercase tracking-[0.2em]">Pre-visualización de Datos (Excel Oficial)</h3>
-            <div class="flex gap-4">
-                <button type="button" onclick="location.reload()" class="text-[10px] font-black text-stone-400 uppercase hover:text-red-500 transition-colors">Limpiar Vista</button>
+    <section class="bg-stone-900 border border-white/5 rounded-[40px] shadow-3xl overflow-hidden mb-20 relative">
+        <div class="p-10 border-b border-white/5 flex justify-between items-center bg-stone-950/30">
+            <div class="flex items-center gap-4">
+                <span class="w-3 h-3 bg-primary rounded-full"></span>
+                <h3 class="text-[12px] font-black text-white uppercase tracking-[0.3em] italic">DATA_STREAM_PREVIEW [OFFICIAL_CIMA_SPEC]</h3>
+            </div>
+            <div class="flex gap-6">
+                <button type="button" onclick="location.reload()" class="text-[12px] font-black text-stone-500 uppercase hover:text-red-400 transition-colors tracking-widest italic underline decoration-stone-800">PURGE_BUFFER</button>
             </div>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[2000px]">
+        <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left border-collapse min-w-[2200px]">
                 <thead>
-                    <tr class="zenith-table-header">
-                        <th class="p-6 text-center italic">N°</th>
-                        <th class="p-6">Foto</th>
-                        <th class="p-6">Código</th>
-                        <th class="p-6">Categoría</th>
-                        <th class="p-6 text-center">Fabricante</th>
-                        <th class="p-6 text-center">Marca</th>
-                        <th class="p-6 text-center">Material</th>
-                        <th class="p-6 text-center">Espesor</th>
-                        <th class="p-6">Descripción</th>
-                        <th class="p-6 text-center">Medidas</th>
-                        <th class="p-6 text-right">Precio</th>
-                        <th class="p-6 text-center">Stock</th>
-                        <th class="p-6 text-center">Incorporación</th>
+                    <tr class="bg-stone-950">
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center w-20">REF_ID</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic">VISUAL</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic">SKU_PROTOCOL</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic">CATEGORY</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center">OEM_VENDOR</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center">BRAND</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center">METAL_COMP</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center">GAUGE</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic">NOMENCLATURE</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center">DIMENSIONS</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-right">VALUATION</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center">MAGNITUDE</th>
+                        <th class="p-8 text-[11px] font-black text-stone-600 uppercase tracking-widest italic text-center">TIMESTAMP</th>
                     </tr>
                 </thead>
-                <tbody id="previewTableBody" class="divide-y divide-stone-50">
+                <tbody id="previewTableBody" class="divide-y divide-white/5">
                     @forelse($stats['latest_changes'] as $product)
-                    <tr class="zenith-table-row">
-                        <td class="p-6 text-center zenith-table-secondary font-mono">{{ $product->id }}</td>
-                        <td class="p-6">
-                            <div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center overflow-hidden">
+                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                        <td class="p-8 text-center text-stone-700 font-mono text-[12px] italic">{{ str_pad($product->id, 4, '0', STR_PAD_LEFT) }}</td>
+                        <td class="p-8">
+                            <div class="w-14 h-14 bg-stone-950 border border-white/5 rounded-xl flex items-center justify-center overflow-hidden group-hover:border-primary/30 transition-all">
                                 @if($product->foto_path)
                                     <img src="{{ $product->foto_path }}" class="w-full h-full object-cover">
                                 @else
-                                    <span class="material-symbols-outlined text-stone-300">image</span>
+                                    <span class="material-symbols-outlined text-stone-800 group-hover:text-primary/20 transition-colors">image</span>
                                 @endif
                             </div>
                         </td>
-                        <td class="p-6">
-                            <span class="zenith-table-sku">{{ $product->codigo_oem }}</span>
+                        <td class="p-8">
+                            <span class="text-[14px] font-black text-white italic tracking-tighter uppercase group-hover:text-primary transition-colors">{{ $product->codigo_oem }}</span>
                         </td>
-                        <td class="p-6">
-                            <span class="zenith-table-secondary">{{ $product->categoria }}</span>
+                        <td class="p-8">
+                            <span class="text-[12px] font-black text-stone-500 uppercase tracking-widest italic">{{ $product->categoria }}</span>
                         </td>
-                        <td class="p-6 text-center">
-                            <span class="zenith-table-secondary font-black text-stone-600">{{ $product->fabricante ?? '-' }}</span>
+                        <td class="p-8 text-center">
+                            <span class="text-[12px] font-black text-stone-600 uppercase tracking-widest italic">{{ $product->fabricante ?? 'N/A' }}</span>
                         </td>
-                        <td class="p-6 text-center">
-                            <span class="zenith-table-main">{{ $product->marca }}</span>
+                        <td class="p-8 text-center">
+                            <span class="text-[13px] font-black text-stone-400 uppercase italic tracking-tight">{{ $product->marca }}</span>
                         </td>
-                        <td class="p-6 text-center">
-                            <span class="zenith-table-secondary">{{ $product->material ?? '-' }}</span>
+                        <td class="p-8 text-center">
+                            <span class="text-[12px] font-black text-stone-600 uppercase tracking-widest italic">{{ $product->material ?? '-' }}</span>
                         </td>
-                        <td class="p-6 text-center font-mono">
-                            <span class="zenith-table-secondary">{{ $product->espesor ?? '-' }}</span>
+                        <td class="p-8 text-center">
+                            <span class="text-[13px] font-black text-white italic">{{ $product->espesor ?? '-' }}</span>
                         </td>
-                        <td class="p-6">
-                            <p class="zenith-table-main max-w-[300px] truncate">{{ $product->nombre }}</p>
+                        <td class="p-8">
+                            <p class="text-[13px] font-black text-stone-400 uppercase tracking-tight italic max-w-[350px] truncate group-hover:text-white transition-colors">{{ $product->nombre }}</p>
                         </td>
-                        <td class="p-6 text-center font-mono">
-                            <span class="zenith-table-secondary">{{ $product->medidas ?? '-' }}</span>
+                        <td class="p-8 text-center">
+                            <span class="text-[12px] font-black text-stone-600 italic tracking-widest uppercase">{{ $product->medidas ?? '-' }}</span>
                         </td>
-                        <td class="p-6 text-right">
-                            <span class="zenith-table-price">$ {{ number_format($product->precio_mayor, 2) }}</span>
+                        <td class="p-8 text-right">
+                            <span class="text-[18px] font-black text-primary italic tracking-tighter">$ {{ number_format($product->precio_mayor, 2) }}</span>
                         </td>
-                        <td class="p-6 text-center font-black {{ $product->stock_actual > 0 ? 'text-stone-900' : 'text-red-500' }}">
-                            <span class="zenith-table-main">{{ $product->stock_actual }}</span>
+                        <td class="p-8 text-center">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[16px] font-black {{ $product->stock_actual > 0 ? 'text-white' : 'text-red-500' }} italic tracking-tighter">{{ $product->stock_actual }}</span>
+                                <span class="text-[9px] font-black text-stone-700 uppercase tracking-[0.2em] mt-1">UNITS</span>
+                            </div>
                         </td>
-                        <td class="p-6 text-center font-mono">
-                            <span class="zenith-table-secondary">{{ $product->updated_at->format('d/m/Y') }}</span>
+                        <td class="p-8 text-center">
+                            <span class="text-[12px] font-black text-stone-600 uppercase tracking-widest italic">{{ $product->updated_at->format('d/m/Y') }}</span>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="13" class="p-20 text-center text-stone-400 italic zenith-table-main">Sube un archivo para pre-visualizar la información aquí...</td>
+                        <td colspan="13" class="p-32 text-center text-stone-700 italic font-black uppercase text-[14px] tracking-[0.5em]">
+                            <div class="flex flex-col items-center gap-6">
+                                <span class="material-symbols-outlined text-6xl opacity-10">database_off</span>
+                                AWAITING_DATA_STREAM_INJECTION...
+                            </div>
+                        </td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -232,11 +254,15 @@
     });
 
     ['dragenter', 'dragover'].forEach(eventName => {
-        dropZone.addEventListener(eventName, () => dropZone.classList.add('drop-zone--over'));
+        dropZone.addEventListener(eventName, () => {
+            dropZone.classList.add('border-primary/50', 'bg-primary/5');
+        });
     });
 
     ['dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, () => dropZone.classList.remove('drop-zone--over'));
+        dropZone.addEventListener(eventName, () => {
+            dropZone.classList.remove('border-primary/50', 'bg-primary/5');
+        });
     });
 
     dropZone.addEventListener('drop', e => {
@@ -250,8 +276,8 @@
 
     function handleFile(file) {
         // UI Update
-        fileName.textContent = file.name;
-        fileSize.textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+        fileName.textContent = file.name.toUpperCase();
+        fileSize.textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB_DETECTED';
         dropZoneUI.classList.add('hidden');
         fileInfo.classList.remove('hidden');
 
@@ -271,17 +297,13 @@
 
     function processExcelData(rows) {
         if (rows.length < 2) {
-            alert('El archivo parece estar vacío o no contiene suficientes filas.');
+            alert('ERROR: EMPTY_STREAM_DETECTED');
             return;
         }
 
-        // Get headers (first row with data)
         let headerRow = rows[0];
         let dataRows = rows.slice(1);
 
-        console.log("Headers detectados:", headerRow);
-
-        // Map column indices based on the user's header structure (Fuzzy matching)
         const findIdx = (regex) => {
             const idx = headerRow.findIndex(h => h && regex.test(h.toString()));
             return idx !== -1 ? idx : null;
@@ -303,19 +325,15 @@
             incorporacion: findIdx(/incorporacion/i)
         };
 
-        console.log("Mapeo resultante:", mapIndices);
-
-        // Validar que al menos tengamos Código/SKU para procesar
         if (mapIndices.codigo === null) {
-            alert('EROR: No se encontró la columna "Código" o "SKU" en el archivo. Por favor verifica los encabezados.');
+            alert('FATAL: SKU_COLUMN_NOT_FOUND');
             location.reload();
             return;
         }
 
-        // Filter empty rows
         dataRows = dataRows.filter(row => row.length > 0 && row[mapIndices.codigo]);
 
-        itemsCount.textContent = dataRows.length.toString().padStart(2, '0');
+        itemsCount.textContent = dataRows.length.toLocaleString();
         previewBody.innerHTML = '';
 
         const finalData = dataRows.map((row, index) => {
@@ -335,33 +353,37 @@
                 incorporacion: row[mapIndices.incorporacion] || ''
             };
 
-            // HTML for Preview
             const tr = document.createElement('tr');
-            tr.className = 'hover:bg-stone-50 transition-colors';
+            tr.className = 'hover:bg-white/[0.02] transition-colors group';
             tr.innerHTML = `
-                <td class="p-6 text-center text-stone-400 font-mono text-[11px]">${item.id}</td>
-                <td class="p-6"><div class="w-10 h-10 bg-stone-100 rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-stone-300">image</span></div></td>
-                <td class="p-6 font-black text-stone-950 uppercase tracking-tighter text-[12px] italic">${item.codigo}</td>
-                <td class="p-6 uppercase text-stone-500 text-[11px] font-bold">${item.categoria}</td>
-                <td class="p-6 text-center uppercase text-stone-500 text-[11px] font-bold">${item.fabricante}</td>
-                <td class="p-6 text-center font-black text-stone-950 uppercase text-[12px] italic tracking-tight">${item.marca}</td>
-                <td class="p-6 text-center text-stone-500 uppercase text-[11px] font-bold">${item.material}</td>
-                <td class="p-6 text-center font-mono text-stone-500 text-[11px]">${item.espesor}</td>
-                <td class="p-6 font-black text-stone-800 uppercase max-w-[300px] truncate text-[12px] tracking-tight">${item.descripcion}</td>
-                <td class="p-6 text-center font-mono text-stone-500 text-[11px]">${item.medidas}</td>
-                <td class="p-6 text-right font-headline font-black text-stone-950 text-base italic">$ ${item.precio.toFixed(2)}</td>
-                <td class="p-6 text-center font-black text-[14px] ${item.stock > 0 ? 'text-stone-950' : 'text-red-500 animate-pulse'}">${item.stock}</td>
-                <td class="p-6 text-center text-stone-400 text-[10px] uppercase font-black italic tracking-widest">${item.incorporacion}</td>
+                <td class="p-8 text-center text-stone-700 font-mono text-[12px] italic">${item.id.toString().padStart(4, '0')}</td>
+                <td class="p-8"><div class="w-14 h-14 bg-stone-950 border border-white/5 rounded-xl flex items-center justify-center group-hover:border-primary/30 transition-all"><span class="material-symbols-outlined text-stone-800">image</span></div></td>
+                <td class="p-8 font-black text-white italic tracking-tighter uppercase text-[14px] group-hover:text-primary transition-colors">${item.codigo}</td>
+                <td class="p-8 uppercase text-stone-500 text-[12px] font-black italic tracking-widest">${item.categoria}</td>
+                <td class="p-8 text-center uppercase text-stone-600 text-[12px] font-black italic tracking-widest">${item.fabricante}</td>
+                <td class="p-8 text-center font-black text-stone-400 uppercase text-[13px] italic tracking-tight">${item.marca}</td>
+                <td class="p-8 text-center text-stone-600 uppercase text-[12px] font-black italic tracking-widest">${item.material}</td>
+                <td class="p-8 text-center font-black text-white italic text-[13px]">${item.espesor}</td>
+                <td class="p-8 font-black text-stone-400 uppercase max-w-[350px] truncate text-[13px] italic tracking-tight group-hover:text-white transition-colors">${item.descripcion}</td>
+                <td class="p-8 text-center font-black text-stone-600 text-[12px] italic tracking-widest uppercase">${item.medidas}</td>
+                <td class="p-8 text-right font-black text-primary text-[18px] italic tracking-tighter">$ ${item.precio.toFixed(2)}</td>
+                <td class="p-8 text-center">
+                     <div class="flex flex-col items-center">
+                        <span class="text-[16px] font-black italic tracking-tighter ${item.stock > 0 ? 'text-white' : 'text-red-500 animate-pulse'}">${item.stock}</span>
+                        <span class="text-[9px] font-black text-stone-700 uppercase tracking-[0.2em] mt-1">UNITS</span>
+                    </div>
+                </td>
+                <td class="p-8 text-center text-stone-600 text-[12px] font-black italic tracking-widest uppercase">${item.incorporacion}</td>
             `;
             previewBody.appendChild(tr);
 
             return item;
         });
 
-        // Enable Submit
         excelDataInput.value = JSON.stringify(finalData);
         submitBtn.disabled = false;
-        submitBtn.className = 'bg-primary text-stone-900 px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg active:scale-95';
+        submitBtn.className = 'bg-primary text-stone-900 px-12 py-5 rounded-xl text-[12px] font-black uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-2xl active:scale-95 italic';
+        submitBtn.textContent = 'EXECUTE_DATABASE_OVERWRITE';
     }
 
     document.getElementById('removeFile').addEventListener('click', (e) => {
@@ -373,8 +395,9 @@
         const headers = [["N°", "FOTO", "Código", "Categoria", "Fabricante", "Marca", "Material", "espesor", "Descripción", "Medidas", "Precio", "Stock", "incorporacion"]];
         const ws = XLSX.utils.aoa_to_sheet(headers);
         const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Plantilla");
-        XLSX.writeFile(wb, "Plantilla_Inventario_CIMA.xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "PLANTILLA_CIMA");
+        XLSX.writeFile(wb, "CIMA_INVENTARIO_SPEC_v2.xlsx");
     });
 </script>
 @endpush
+

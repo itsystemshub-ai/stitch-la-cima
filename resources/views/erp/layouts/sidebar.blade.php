@@ -13,16 +13,6 @@
     <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Portal ERP Corporativo</p>
   </div>
 
-  <!-- Busqueda -->
-  <div id="tour-sidebar-search" class="px-4 mb-4">
-    <div class="relative">
-      <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
-        <span class="material-symbols-outlined text-lg">search</span>
-      </span>
-      <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar..." type="text"/>
-    </div>
-  </div>
-
   <!-- Menu Principal -->
   <nav id="tour-nav" class="flex-1 px-3 space-y-0.5 pb-24">
 
@@ -41,7 +31,7 @@
         <span>Inventario</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu submenu-up {{ Request::is('erp/inventario*') ? 'show' : '' }}">
+      <div class="submenu {{ Request::is('erp/inventario*') ? 'show' : '' }}">
         <a href="{{ url('/erp/inventario') }}" class="{{ Request::is('erp/inventario') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/inventario/productos') }}" class="{{ Request::is('erp/inventario/productos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">category</span> Productos</a>
         <a href="{{ url('/erp/inventario/busqueda-ia') }}" class="{{ Request::is('erp/inventario/busqueda-ia*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">psychology</span> Búsqueda IA</a>
@@ -61,7 +51,7 @@
         <span>Ventas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu submenu-up {{ Request::is('erp/ventas*') ? 'show' : '' }}">
+      <div class="submenu {{ Request::is('erp/ventas*') ? 'show' : '' }}">
         <a href="{{ url('/erp/ventas') }}" class="{{ Request::is('erp/ventas') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/ventas/pos') }}" id="tour-pos" class="{{ Request::is('erp/ventas/pos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">point_of_sale</span> Punto de Venta</a>
         <a href="{{ url('/erp/ventas/registro') }}" class="{{ Request::is('erp/ventas/registro*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">list_alt</span> Registro</a>
@@ -83,7 +73,7 @@
         <span>Compras</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu submenu-up {{ Request::is('erp/compras*') ? 'show' : '' }}">
+      <div class="submenu {{ Request::is('erp/compras*') ? 'show' : '' }}">
         <a href="{{ url('/erp/compras') }}" class="{{ Request::is('erp/compras') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/compras/proveedores') }}" class="{{ Request::is('erp/compras/proveedores*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">local_shipping</span> Proveedores</a>
         <a href="{{ url('/erp/compras/historial') }}" class="{{ Request::is('erp/compras/historial*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">history</span> Historial</a>
@@ -100,7 +90,7 @@
         <span>Contabilidad</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
-      <div class="submenu submenu-up {{ Request::is('erp/contabilidad*') ? 'show' : '' }}">
+      <div class="submenu {{ Request::is('erp/contabilidad*') ? 'show' : '' }}">
         <a href="{{ url('/erp/contabilidad') }}" class="{{ Request::is('erp/contabilidad') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/contabilidad/plan-cuentas') }}" class="{{ Request::is('erp/contabilidad/plan-cuentas*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">format_list_numbered</span> Plan Cuentas</a>
         <a href="{{ url('/erp/contabilidad/libros') }}" class="{{ Request::is('erp/contabilidad/libros*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">menu_book</span> Libros Contables</a>

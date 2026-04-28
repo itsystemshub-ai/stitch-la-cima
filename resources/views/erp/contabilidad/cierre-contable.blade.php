@@ -9,137 +9,146 @@
 @endsection
 
 @section('content')
-<header class="mb-10 relative">
-    <div class="absolute -left-8 top-0 w-1 h-16 bg-primary"></div>
-    <p class="text-primary font-label text-xs font-bold tracking-widest uppercase mb-1">Module: FISCAL_CLOSURE_v4</p>
-    <h1 class="text-stone-900 font-headline text-5xl font-bold uppercase tracking-tighter leading-none">Fiscal Closing &amp; <br/><span class="text-primary">Tax Summary</span></h1>
-    <div class="mt-4 flex gap-4 items-center">
-        <span class="bg-stone-100 px-3 py-1 text-[10px] font-bold tracking-widest uppercase border border-stone-200">PERIOD: DEC 2023</span>
-        <span class="bg-primary/10 text-primary border border-primary/20 px-3 py-1 text-[10px] font-bold tracking-widest uppercase flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> IN PROGRESS
-        </span>
+<header class="mb-16 relative z-10 border-b border-primary/20 pb-12">
+    <div class="absolute -left-12 top-0 w-2 h-24 bg-primary shadow-[0_0_20px_rgba(206,255,94,0.3)]"></div>
+    <div class="flex items-center gap-4 mb-6">
+        <span class="bg-primary/20 text-primary border border-primary/30 px-5 py-2 text-[12px] font-black uppercase tracking-[0.4em] italic">FISCAL_CLOSURE_PROTOCOL_v4.2</span>
+        <span class="text-stone-600 font-mono text-[11px] uppercase tracking-widest italic font-black">NODE_ID: CLOSE_0x99A1</span>
+    </div>
+    <h1 class="text-stone-50 font-headline text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none italic">FISCAL_CLOSURE & <br/><span class="text-primary">TAX_SUMMARY_MAG</span></h1>
+    <div class="mt-8 flex gap-6 items-center">
+        <div class="bg-stone-900 px-6 py-3 rounded-2xl border border-white/5 shadow-inner">
+            <span class="text-stone-400 font-mono text-[12px] font-black tracking-[0.2em] uppercase italic">PERIOD: DEC_2026 // FISCAL_MAG_SYNC</span>
+        </div>
+        <div class="bg-primary/5 text-primary border border-primary/20 px-6 py-3 rounded-2xl flex items-center gap-4">
+            <span class="w-3 h-3 rounded-full bg-primary animate-pulse shadow-[0_0_10px_#ceff5e]"></span>
+            <span class="text-[12px] font-black tracking-[0.3em] uppercase italic">RECONCILIATION_IN_PROGRESS</span>
+        </div>
     </div>
 </header>
 
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-12 gap-6 items-stretch">
-    <!-- Left Column: Reconciliations & Inventory -->
-    <div class="col-span-12 lg:col-span-7 space-y-6">
-        <!-- Pending Reconciliations Card -->
-        <section class="bg-white border border-stone-200 p-8 relative overflow-hidden group shadow-sm rounded-xl">
-            <div class="absolute top-0 right-0 w-24 h-24 bg-stone-50 -mr-12 -mt-12 rotate-45 transition-transform group-hover:scale-110"></div>
-            <div class="flex items-center gap-3 mb-8">
-                <span class="material-symbols-outlined text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
-                <h3 class="font-headline text-xl font-bold uppercase tracking-tight text-stone-900">Pending Reconciliations</h3>
+<!-- Bento Grid Layout: Closure Diagnostics -->
+<div class="grid grid-cols-12 gap-8 items-stretch relative z-10 mb-20">
+    <!-- Left Column: Reconciliations & Integrity Feed -->
+    <div class="col-span-12 lg:col-span-7 space-y-8">
+        <!-- Pending Reconciliations Node -->
+        <section class="bg-stone-950 border border-stone-800 p-10 relative overflow-hidden group shadow-3xl rounded-[40px]">
+            <div class="absolute top-0 right-0 w-48 h-48 bg-primary/5 -mr-24 -mt-24 rotate-45 transition-all duration-1000 group-hover:bg-primary/10"></div>
+            <div class="flex items-center gap-4 mb-10 border-b border-white/5 pb-6">
+                <span class="material-symbols-outlined text-primary text-[24px]">account_balance_wallet</span>
+                <h3 class="font-headline text-2xl font-black uppercase tracking-tight text-white italic">PENDING_RECON_NODES</h3>
             </div>
             <div class="space-y-6">
-                <div class="flex items-start justify-between bg-stone-50 p-4 relative rounded border border-stone-100">
-                    <div class="absolute left-0 top-0 h-full w-1 bg-primary"></div>
+                <div class="group/item flex items-start justify-between bg-stone-900/50 p-8 relative rounded-[24px] border border-stone-800 hover:border-primary/30 transition-all shadow-xl">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 h-16 w-1 bg-primary shadow-[0_0_15px_#ceff5e]"></div>
                     <div>
-                        <p class="font-label text-xs font-bold text-stone-500 uppercase tracking-widest mb-1">Bank vs Ledger</p>
-                        <p class="font-headline text-2xl font-bold text-stone-900">$14,203.45 <span class="text-sm font-medium text-red-500 ml-2 uppercase tracking-normal font-body">Unmatched Variance</span></p>
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] mb-3 italic group-hover/item:text-stone-400 transition-colors">Bank_vs_Ledger_Sync</p>
+                        <p class="font-headline text-3xl font-black text-white italic tracking-tighter">14.203,45 <span class="text-[12px] font-black text-red-500 ml-4 uppercase tracking-[0.2em] not-italic animate-pulse">UNMATCHED_VARIANCE</span></p>
                     </div>
-                    <button class="bg-white border border-stone-200 px-4 py-2 text-[10px] font-bold tracking-widest uppercase hover:bg-primary hover:text-stone-900 transition-all rounded shadow-sm">Review Details</button>
+                    <button class="bg-stone-950 border border-stone-800 px-6 py-3 text-[11px] font-black tracking-[0.3em] uppercase text-stone-400 hover:bg-primary hover:text-stone-950 transition-all rounded-xl shadow-inner group-hover/item:text-white group-hover/item:border-white/10">REVIEW_SYNC_DATA</button>
                 </div>
-                <div class="flex items-start justify-between bg-stone-50 p-4 relative rounded border border-stone-100">
-                    <div class="absolute left-0 top-0 h-full w-1 bg-stone-900"></div>
+                <div class="group/item flex items-start justify-between bg-stone-900/50 p-8 relative rounded-[24px] border border-stone-800 hover:border-primary/30 transition-all shadow-xl">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 h-16 w-1 bg-stone-700"></div>
                     <div>
-                        <p class="font-label text-xs font-bold text-stone-500 uppercase tracking-widest mb-1">Inventory vs Ledger</p>
-                        <p class="font-headline text-2xl font-bold text-stone-900">$2,840.10 <span class="text-sm font-medium text-primary ml-2 uppercase tracking-normal font-body">Within Margin</span></p>
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] mb-3 italic group-hover/item:text-stone-400 transition-colors">Inventory_vs_Ledger_Audit</p>
+                        <p class="font-headline text-3xl font-black text-white italic tracking-tighter">2.840,10 <span class="text-[12px] font-black text-primary ml-4 uppercase tracking-[0.2em] not-italic opacity-60">WITHIN_MARGIN_OK</span></p>
                     </div>
-                    <button class="bg-white border border-stone-200 px-4 py-2 text-[10px] font-bold tracking-widest uppercase hover:bg-primary hover:text-stone-900 transition-all rounded shadow-sm">Audit Logs</button>
+                    <button class="bg-stone-950 border border-stone-800 px-6 py-3 text-[11px] font-black tracking-[0.3em] uppercase text-stone-400 hover:bg-primary hover:text-stone-950 transition-all rounded-xl shadow-inner group-hover/item:text-white group-hover/item:border-white/10">VIEW_AUDIT_LOGS</button>
                 </div>
             </div>
         </section>
 
-        <!-- Status Progress -->
-        <section class="bg-white p-8 border border-stone-200 rounded-xl shadow-sm">
-            <h3 class="font-headline text-xl font-bold uppercase tracking-tight mb-6 text-stone-900">Closure Integrity Checklist</h3>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-stone-50 p-4 flex items-center gap-4 rounded border border-stone-100">
-                    <span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+        <!-- Integrity Checklist Trace -->
+        <section class="bg-stone-900/40 p-10 border border-stone-800 rounded-[40px] shadow-2xl backdrop-blur-3xl">
+            <h3 class="font-headline text-2xl font-black uppercase tracking-tight mb-10 text-white italic border-b border-white/5 pb-6">CLOSURE_INTEGRITY_CHECKLIST</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono uppercase italic">
+                <div class="bg-stone-950/50 p-6 flex items-center gap-6 rounded-2xl border border-stone-800 hover:border-primary/20 transition-all group">
+                    <span class="material-symbols-outlined text-primary text-[28px] group-hover:scale-125 transition-transform shadow-[0_0_15px_#ceff5e33]">check_circle</span>
                     <div>
-                        <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Asset Depreciation</p>
-                        <p class="text-sm font-bold uppercase text-stone-900">Finalized</p>
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.3em] mb-1">Asset_Depreciation_MAG</p>
+                        <p class="text-[14px] font-black text-white tracking-widest uppercase">NODE_FINALIZED</p>
                     </div>
                 </div>
-                <div class="bg-stone-50 p-4 flex items-center gap-4 rounded border border-stone-100">
-                    <span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div class="bg-stone-950/50 p-6 flex items-center gap-6 rounded-2xl border border-stone-800 hover:border-primary/20 transition-all group">
+                    <span class="material-symbols-outlined text-primary text-[28px] group-hover:scale-125 transition-transform shadow-[0_0_15px_#ceff5e33]">check_circle</span>
                     <div>
-                        <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Accounts Payable</p>
-                        <p class="text-sm font-bold uppercase text-stone-900">Locked</p>
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.3em] mb-1">Accounts_Payable_Sync</p>
+                        <p class="text-[14px] font-black text-white tracking-widest uppercase">PROTOCOL_LOCKED</p>
                     </div>
                 </div>
-                <div class="bg-stone-50 p-4 flex items-center gap-4 rounded border border-stone-100">
-                    <span class="material-symbols-outlined text-stone-400" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+                <div class="bg-stone-950/50 p-6 flex items-center gap-6 rounded-2xl border border-stone-800 hover:border-red-500/20 transition-all group">
+                    <span class="material-symbols-outlined text-stone-800 text-[28px] group-hover:text-red-500 transition-colors">circle</span>
                     <div>
-                        <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Payroll Accrual</p>
-                        <p class="text-sm font-bold uppercase text-stone-900">Awaiting HR</p>
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.3em] mb-1">Payroll_Accrual_Node</p>
+                        <p class="text-[14px] font-black text-stone-500 tracking-widest uppercase group-hover:text-stone-300">AWAITING_HR_XMIT</p>
                     </div>
                 </div>
-                <div class="bg-stone-50 p-4 flex items-center gap-4 rounded border border-stone-100">
-                    <span class="material-symbols-outlined text-stone-400" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+                <div class="bg-stone-950/50 p-6 flex items-center gap-6 rounded-2xl border border-stone-800 hover:border-white/10 transition-all group">
+                    <span class="material-symbols-outlined text-stone-800 text-[28px]">pending</span>
                     <div>
-                        <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Inter-Co. Balance</p>
-                        <p class="text-sm font-bold uppercase text-stone-900">Pending Sync</p>
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.3em] mb-1">Inter_Co_Balance_Link</p>
+                        <p class="text-[14px] font-black text-stone-500 tracking-widest uppercase group-hover:text-stone-300">PENDING_SYNC_X6</p>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Right Column: Tax Provisions & Auth -->
-    <div class="col-span-12 lg:col-span-5 space-y-6">
-        <!-- Tax Provision Card -->
-        <section class="bg-stone-900 text-stone-100 p-8 flex flex-col justify-between min-h-[400px] relative overflow-hidden rounded-xl shadow-lg">
-            <div class="absolute top-0 right-0 p-4">
-                <span class="material-symbols-outlined text-orange-500 text-4xl opacity-20" data-icon="description">description</span>
+    <!-- Right Column: Tax Provisions & Certification -->
+    <div class="col-span-12 lg:col-span-5 space-y-8">
+        <!-- Tax Provision Transmission Card -->
+        <section class="bg-stone-900 border border-primary/20 p-10 flex flex-col justify-between min-h-[480px] relative overflow-hidden rounded-[40px] shadow-3xl group">
+            <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-30 transition-opacity">
+                <span class="material-symbols-outlined text-primary text-6xl">description</span>
             </div>
             <div>
-                <h3 class="font-headline text-2xl font-bold uppercase tracking-tight mb-8">Tax Provision <span class="text-orange-500">FY2023</span></h3>
-                <div class="space-y-8">
-                    <div class="border-l-2 border-orange-500/50 pl-6">
-                        <p class="text-stone-400 font-label text-[10px] font-bold uppercase tracking-widest mb-2">ISLR Calculation (34%)</p>
-                        <p class="font-headline text-4xl font-bold text-white">$184,290.00</p>
-                        <p class="text-stone-500 text-xs mt-1">Estimated Net Taxable Income: $542,029.41</p>
+                <div class="bg-primary/20 text-primary border border-primary/30 px-5 py-2 text-[11px] font-black uppercase tracking-[0.4em] italic w-fit mb-8 rounded-lg">TAX_PROVISION_ FY2026</div>
+                <div class="space-y-12">
+                    <div class="border-l-4 border-primary/40 pl-8 group/mag">
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] mb-4 italic group-hover/mag:text-stone-400 transition-colors uppercase">ISLR_PROJECTION_TRANS (34%)</p>
+                        <p class="font-headline text-5xl font-black text-white italic tracking-tighter mb-2 shadow-primary/10 drop-shadow-lg">184.290,00</p>
+                        <p class="text-[11px] font-black text-stone-500 font-mono tracking-widest uppercase italic">EST_NET_TAXABLE_NODE: 542.029,41</p>
                     </div>
-                    <div class="border-l-2 border-stone-700 pl-6">
-                        <p class="text-stone-400 font-label text-[10px] font-bold uppercase tracking-widest mb-2">IVA Liquidations (NET)</p>
-                        <p class="font-headline text-3xl font-bold text-stone-300">$42,105.12</p>
-                        <div class="flex gap-4 mt-2">
-                            <span class="text-[10px] text-stone-500 uppercase">Input: $82K</span>
-                            <span class="text-[10px] text-stone-500 uppercase">Output: $124K</span>
+                    <div class="border-l-4 border-stone-800 pl-8 group/mag">
+                        <p class="text-[11px] font-black text-stone-600 uppercase tracking-[0.4em] mb-4 italic group-hover/mag:text-stone-400 transition-colors uppercase">IVA_LIQUIDATION_NET_MAG</p>
+                        <p class="font-headline text-4xl font-black text-stone-400 italic tracking-tighter mb-4 shadow-inner">42.105,12</p>
+                        <div class="flex gap-6">
+                            <span class="bg-stone-950 px-3 py-1 rounded text-[11px] text-stone-600 font-black tracking-widest uppercase border border-white/5 font-mono italic">INPUT: 82K</span>
+                            <span class="bg-stone-950 px-3 py-1 rounded text-[11px] text-stone-600 font-black tracking-widest uppercase border border-white/5 font-mono italic">OUTPUT: 124K</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-12 pt-8 border-t border-stone-800">
-                <button class="w-full bg-orange-500 text-stone-950 font-bold py-4 uppercase tracking-tighter hover:bg-orange-400 transition-all active:scale-95 rounded">
-                    PROVISION SETTLEMENT
+            <div class="mt-12">
+                <button class="w-full bg-primary text-stone-950 font-black p-6 text-[14px] uppercase tracking-[0.5em] hover:brightness-110 transition-all active:scale-[0.98] rounded-[24px] shadow-[0_0_30px_rgba(206,255,94,0.2)] italic">
+                    PROVISION_SETTLEMENT_EXEC
                 </button>
             </div>
         </section>
 
-        <!-- Certification Section -->
-        <section class="bg-white p-8 border-l-[8px] border-primary rounded-r-xl border-y border-r border-stone-200 shadow-sm">
-            <div class="flex justify-between items-start mb-6">
+        <!-- Integrity Certificate: Formal Authority -->
+        <section class="bg-stone-950 border border-stone-800 border-l-[12px] border-l-primary p-10 rounded-[32px] shadow-3xl hover:border-white/5 transition-all group">
+            <div class="flex justify-between items-start mb-8 border-b border-white/5 pb-6">
                 <div>
-                    <h3 class="font-headline text-lg font-bold uppercase tracking-tight text-stone-900">Certificate of Integrity</h3>
-                    <p class="text-xs text-stone-500 mt-1">Validation Hash: 8F-22-E9-01-TITAN</p>
+                    <h3 class="font-headline text-2xl font-black uppercase tracking-tighter text-white italic">CERTIFICATE_OF_INTEGRITY</h3>
+                    <p class="text-[11px] font-mono text-stone-700 mt-2 uppercase tracking-widest font-black italic group-hover:text-stone-500 transition-colors">VALIDATION_HASH: 8F-22-E9-01-TITAN-SECURE</p>
                 </div>
-                <span class="material-symbols-outlined text-primary text-3xl" data-icon="verified">verified</span>
+                <span class="material-symbols-outlined text-primary text-[36px] shadow-[0_0_20px_#ceff5e44]">verified</span>
             </div>
-            <div class="space-y-4">
-                <div class="bg-stone-50 p-4 font-mono text-[11px] leading-relaxed border border-stone-200 rounded">
-                    <p class="text-stone-500 italic mb-2">"I hereby certify that the financial records presented for the period ending DEC-2023 reflect the true industrial fiscal position of TITAN ERP according to International Accounting Standards..."</p>
-                    <div class="flex justify-between items-end border-t border-dashed border-stone-300 pt-2 mt-4">
+            <div class="space-y-6">
+                <div class="bg-stone-900 border border-stone-800 p-8 font-mono text-[11px] leading-loose rounded-2xl relative overflow-hidden group/text">
+                     <div class="absolute inset-0 bg-primary/2 opacity-0 group-hover/text:opacity-100 transition-opacity"></div>
+                    <p class="text-stone-500 italic uppercase font-black relative z-10 transition-colors group-hover/text:text-stone-300">
+                        "I HEREBY CERTIFY THAT THE FINANCIAL RECORDS PRESENTED FOR THE PERIOD ENDING DEC-2026 REFLECT THE TRUE INDUSTRIAL FISCAL POSITION OF ZENITH_ERP ACCORDING TO GLOBAL_STANDARDS_X09-22B..."
+                    </p>
+                    <div class="flex justify-between items-end border-t border-dashed border-stone-800 pt-6 mt-10 relative z-10">
                         <div>
-                            <p class="font-bold text-stone-900">DR. ELARA VANCE</p>
-                            <p class="text-[9px] text-stone-500">Chief Financial Officer</p>
+                            <p class="font-black text-white text-[14px] italic tracking-tight uppercase">DR_ELARA_VANCE</p>
+                            <p class="text-[11px] text-stone-700 font-black uppercase tracking-widest italic">CHIEF_FINANCIAL_NODE</p>
                         </div>
                         <div class="text-right">
-                            <p class="font-bold text-stone-900">SENIAT AUTH CODE</p>
-                            <p class="text-[10px] text-primary font-bold tracking-widest">#SNT-2023-X99L-412</p>
+                            <p class="font-black text-stone-400 text-[11px] uppercase tracking-widest mb-1 italic">FISCAL_AUTH_CODE</p>
+                            <p class="text-[12px] text-primary font-black tracking-[0.2em] font-mono shadow-[0_0_10px_#ceff5e22]">SNT-2026-X99L-412_CMD</p>
                         </div>
                     </div>
                 </div>
@@ -148,39 +157,40 @@
     </div>
 </div>
 
-<!-- Analytical Overlay Section -->
-<section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-white p-6 border-b-2 border-primary/20 rounded-t-xl border border-stone-200 shadow-sm">
-        <div class="flex justify-between items-center mb-4">
-            <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">EBITDA Margin</p>
-            <span class="text-primary text-xs font-bold">+2.4%</span>
+<!-- Analytical Magnitudes: Periodic Insight -->
+<section class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+    <div class="bg-stone-900/50 p-8 border border-white/5 rounded-[32px] backdrop-blur-3xl group transition-all hover:bg-stone-900">
+        <div class="flex justify-between items-center mb-6">
+            <p class="text-[12px] font-black text-stone-600 uppercase tracking-[0.4em] italic group-hover:text-stone-400">EBITDA_Margin_XG</p>
+            <span class="text-primary text-[12px] font-black font-mono shadow-[0_0_10px_#ceff5e44]">+2.42%_DELTA</span>
         </div>
-        <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
-            <div class="h-full bg-primary w-[74%]"></div>
+        <div class="h-3 bg-stone-950 rounded-full overflow-hidden border border-white/5">
+            <div class="h-full bg-primary w-[74%] shadow-[0_0_15px_#ceff5e]"></div>
         </div>
-        <p class="font-headline text-xl font-bold mt-4 text-stone-900">32.4% <span class="text-xs font-medium text-stone-500">vs prev. yr</span></p>
+        <p class="font-headline text-4xl font-black mt-8 text-white italic tracking-tighter">32.42% <span class="text-[12px] font-black text-stone-700 ml-4 uppercase not-italic opacity-40">VS_PREV_CYCLE</span></p>
     </div>
-    <div class="bg-white p-6 border-b-2 border-primary/20 rounded-t-xl border border-stone-200 shadow-sm">
-        <div class="flex justify-between items-center mb-4">
-            <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Liquidity Ratio</p>
-            <span class="text-red-500 text-xs font-bold">-0.1%</span>
+    <div class="bg-stone-900/50 p-8 border border-white/5 rounded-[32px] backdrop-blur-3xl group transition-all hover:bg-stone-900">
+        <div class="flex justify-between items-center mb-6">
+            <p class="text-[12px] font-black text-stone-600 uppercase tracking-[0.4em] italic group-hover:text-stone-400">Liquidity_Ratio_Probe</p>
+            <span class="text-red-500 text-[12px] font-black font-mono shadow-[0_0_10px_#ef444444]">-0.1%_RISK</span>
         </div>
-        <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
-            <div class="h-full bg-stone-900 w-[62%]"></div>
+        <div class="h-3 bg-stone-950 rounded-full overflow-hidden border border-white/5">
+            <div class="h-full bg-stone-700 w-[62%]"></div>
         </div>
-        <p class="font-headline text-xl font-bold mt-4 text-stone-900">1.8 <span class="text-xs font-medium text-stone-500">Quick Ratio</span></p>
+        <p class="font-headline text-4xl font-black mt-8 text-white italic tracking-tighter">1.84 <span class="text-[12px] font-black text-stone-700 ml-4 uppercase not-italic opacity-40">QUICK_RATIO_MAG</span></p>
     </div>
-    <div class="bg-white p-6 border-b-2 border-primary/20 rounded-t-xl border border-stone-200 shadow-sm">
-        <div class="flex justify-between items-center mb-4">
-            <p class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">Deferred Taxes</p>
-            <span class="text-stone-500 text-xs font-bold">Stable</span>
+    <div class="bg-stone-900/50 p-8 border border-white/5 rounded-[32px] backdrop-blur-3xl group transition-all hover:bg-stone-900">
+        <div class="flex justify-between items-center mb-6">
+            <p class="text-[12px] font-black text-stone-600 uppercase tracking-[0.4em] italic group-hover:text-stone-400">Deferred_Tax_Provision</p>
+            <span class="text-stone-700 text-[12px] font-black font-mono tracking-widest italic uppercase">STABLE_TRANSMIT</span>
         </div>
-        <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
-            <div class="h-full bg-lime-200 w-[45%]"></div>
+        <div class="h-3 bg-stone-950 rounded-full overflow-hidden border border-white/5">
+            <div class="h-full bg-primary/20 w-[45%] opacity-40"></div>
         </div>
-        <p class="font-headline text-xl font-bold mt-4 text-stone-900">$12,400 <span class="text-xs font-medium text-stone-500">Asset value</span></p>
+        <p class="font-headline text-4xl font-black mt-8 text-white italic tracking-tighter">12.400 <span class="text-[12px] font-black text-stone-700 ml-4 uppercase not-italic opacity-40">VES_EST_VALUE</span></p>
     </div>
 </section>
+
 @endsection
 
 @push('scripts')
