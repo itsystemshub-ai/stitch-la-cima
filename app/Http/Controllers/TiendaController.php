@@ -110,28 +110,83 @@ class TiendaController extends Controller
         return view('tienda.catalogo_detallado', compact('products', 'brands', 'categories'));
     }
 
-    /**
-     * Muestra el detalle de un producto específico
-     */
-    public function detalleProducto(Request $request)
-    {
-        $id = $request->id;
-        $product = Product::find($id);
+     /**
+      * Muestra el detalle de un producto específico
+      * Soporta tanto /tienda/producto/{id} como /tienda/detalle_productos?id=X
+      */
+     public function detalleProducto($id = null, Request $request)
+     {
+         // Si el ID viene como query param (ruta antigua)
+         if (!$id && $request->has('id')) {
+             $id = $request->id;
+         }
 
-        if (! $product) {
-            return redirect('/tienda/catalogo_general')->with('error', 'Producto no encontrado');
-        }
+         $product = Product::find($id);
 
-        $relatedProducts = Product::where('categoria', $product->categoria)
-            ->where('id', '!=', $product->id)
-            ->take(4)
-            ->get();
+         if (! $product) {
+             return redirect('/tienda/catalogo_general')->with('error', 'Producto no encontrado');
+         }
 
-        return view('tienda.detalle_productos', compact('product', 'relatedProducts'));
-    }
+         $relatedProducts = Product::where('categoria', $product->categoria)
+             ->where('id', '!=', $product->id)
+             ->take(4)
+             ->get();
 
-    /**
-     * Muestra el carrito de compras (página ahora lee de localStorage vía JS)
+         return view('tienda.detalle_productos', compact('product', 'relatedProducts'));
+     }
+
+     /**
+      * Devuelve un producto en formato JSON (para API)
+      */
+     public function getProductoJson($id)
+     {
+         $product = Product::find($id);
+
+         if (! $product) {
+             return response()->json([
+                 'status' => 'error',
+                 'message' => 'Producto no encontrado'
+             ], 404);
+         }
+
+         $relatedProducts = Product::where('categoria', $product->categoria)
+             ->where('id', '!=', $product->id)
+             ->take(4)
+             ->get()
+             ->map(function($p) {
+                 return [
+                     'id' => $p->id,
+                     'nombre' => $p->nombre,
+                     'precio_mayor' => $p->precio_mayor,
+                     'imagen_url' => $p->imagen_url,
+                     'categoria' => $p->categoria,
+                     'codigo_oem' => $p->codigo_oem,
+                 ];
+             });
+
+         return response()->json([
+             'status' => 'success',
+             'product' => [
+                 'id' => $product->id,
+                 'nombre' => $product->nombre,
+                 'precio_mayor' => $product->precio_mayor,
+                 'imagen_url' => $product->imagen_url,
+                 'categoria' => $product->categoria,
+                 'marca' => $product->marca,
+                 'codigo_oem' => $product->codigo_oem,
+                 'material' => $product->material,
+                 'espesor' => $product->espesor,
+                 'peso' => $product->peso,
+                 'fabricante' => $product->fabricante,
+                 'medidas' => $product->medidas,
+                 'created_at' => $product->created_at,
+             ],
+             'relatedProducts' => $relatedProducts
+         ]);
+     }
+
+     /**
+      * Muestra el carrito de compras (página ahora lee de localStorage vía JS)
      * Mantenemos este método para backwards compatibility pero la vista principal
      * usa Cart.js (localStorage) directamente.
      */

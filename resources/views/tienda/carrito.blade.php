@@ -7,7 +7,7 @@
     
     <!-- Título y Breadcrumb -->
     <div class="mb-8">
-        <h1 class="text-5xl font-black text-black uppercase tracking-tighter leading-none mb-2">Tu <span class="text-primary">Carrito</span></h1>
+        <h1 class="text-4xl font-black text-black uppercase tracking-tighter leading-none mb-2">Tu <span class="text-primary">Carrito</span></h1>
         <p class="text-[10px] font-bold text-stone-500 uppercase tracking-[0.3em]">Revisa tus productos antes de realizar tu pedido</p>
     </div>
 
@@ -34,7 +34,7 @@
                 <!-- Security Header -->
                 <div class="bg-black text-white rounded-3xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 opacity-5">
-                        <span class="material-symbols-outlined text-8xl">verified_user</span>
+                        <span class="material-symbols-outlined text-4xl">verified_user</span>
                     </div>
                     <div class="flex items-center gap-6 relative z-10">
                         <span class="material-symbols-outlined text-primary text-4xl italic">security</span>
@@ -103,7 +103,7 @@
                                     <span class="text-[10px] uppercase tracking-[0.4em] font-black text-primary mb-1 italic">Total Neto</span>
                                     <span class="text-[8px] text-stone-600 uppercase tracking-widest font-black font-mono">Dólares Estadounidenses (USD)</span>
                                 </div>
-                                <span id="ui-total" class="text-4xl font-headline font-black text-primary tracking-tighter italic">$0.00</span>
+                                <span id="ui-total" class="text-3xl font-headline font-black text-primary tracking-tighter italic">$0.00</span>
                             </div>
                         </div>
                     </div>

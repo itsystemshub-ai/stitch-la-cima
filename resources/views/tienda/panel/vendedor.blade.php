@@ -4,7 +4,7 @@
 <div class="max-w-[1920px] mx-auto px-6 py-12">
     <div class="mb-12">
         <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block italic">División de Inteligencia Comercial</span>
-        <h2 class="text-5xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Panel de <span class="text-stone-300">Vendedor</span></h2>
+         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Panel de <span class="text-stone-300">Vendedor</span></h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -12,7 +12,7 @@
         <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group">
             <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Volumen Acumulado</p>
             <div class="flex items-end justify-between">
-                <p class="text-4xl font-headline font-black text-stone-950 tracking-tighter leading-none">{{ $totalVentas }} <span class="text-[12px] text-stone-300">TRANSACCIONES</span></p>
+                 <p class="text-2xl font-headline font-black text-stone-950 tracking-tighter leading-none">{{ $totalVentas }} <span class="text-[12px] text-stone-300">TRANSACCIONES</span></p>
                 <span class="material-symbols-outlined text-green-500 text-3xl">analytics</span>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <span class="material-symbols-outlined text-primary text-3xl italic">payments</span>
             </div>
             <div class="absolute -right-4 -bottom-4 opacity-[0.05]">
-                <span class="material-symbols-outlined text-8xl text-white">paid</span>
+                     <span class="material-symbols-outlined text-4xl text-white">paid</span>
             </div>
         </div>
     </div>

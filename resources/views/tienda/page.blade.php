@@ -11,10 +11,10 @@
 <main class="flex-grow pt-32 pb-12 px-6 max-w-7xl mx-auto w-full">
     <!-- Header Decorativo del CMS -->
     <div class="text-center mb-16 relative">
-        <h1 class="font-headline text-5xl md:text-6xl font-black uppercase tracking-tighter relative z-10 text-black">
+        <h1 class="font-headline text-2xl md:text-3xl font-black uppercase tracking-tighter relative z-10 text-black">
             {{ $page->title }}
         </h1>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl font-black text-stone-100 opacity-50 z-0 pointer-events-none uppercase w-full overflow-hidden truncate">
+         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-black text-stone-100 opacity-50 z-0 pointer-events-none uppercase w-full overflow-hidden truncate">
             {{ $page->title }}
         </div>
     </div>

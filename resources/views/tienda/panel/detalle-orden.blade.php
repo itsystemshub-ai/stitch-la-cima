@@ -16,7 +16,7 @@
         <div class="p-10 border-b border-stone-100 bg-stone-50/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
                 <span class="text-primary font-black text-[9px] uppercase tracking-[0.4em] mb-2 block italic">Registro de Transacción Consolidado</span>
-                <h2 class="text-4xl font-headline font-black text-stone-900 uppercase tracking-tighter italic leading-none">Orden <span class="text-stone-300">#{{ $order->id }}</span></h2>
+                <h2 class="text-2xl font-headline font-black text-stone-900 uppercase tracking-tighter italic leading-none">Orden <span class="text-stone-300">#{{ $order->id }}</span></h2>
                 <p class="text-[11px] font-mono font-bold text-stone-400 mt-2 tracking-widest">{{ $order->created_at->format('d/M/Y - H:i') }} VET</p>
             </div>
             

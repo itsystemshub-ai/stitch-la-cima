@@ -8,197 +8,182 @@
 
 @section('content')
   <!-- Header Dashboard -->
-  <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6 border-b border-stone-200 pb-4">
     <div>
-      <p class="text-[13px] font-black text-stone-400 tracking-[0.3em] uppercase mb-1 italic">Resumen Operativo Central</p>
-      <h2 class="text-4xl font-headline font-black text-stone-900 tracking-tighter leading-none italic uppercase">MAYOR DE REPUESTO <span class="text-stone-400 italic">LA CIMA, C.A.</span></h2>
-      <p class="text-stone-500 text-[12px] mt-1 uppercase font-black tracking-tight italic">RIF: J-40308741-5 • VALENCIA, VENEZUELA • PROTOCOLO ACTIVADO</p>
+      <h2 class="text-xl font-headline font-black text-stone-900 tracking-tighter leading-none italic uppercase">MAYOR DE REPUESTO <span class="text-stone-500">LA CIMA, C.A.</span></h2>
+      <p class="text-stone-500 text-[11px] mt-1.5 uppercase font-black tracking-tight flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_5px_#ceff5e]"></span>
+        RIF: J-40308741-5 • RESUMEN OPERATIVO CENTRAL
+      </p>
     </div>
-    <div class="flex gap-3">
-      <a href="{{ url('/sync') }}" class="bg-white border border-stone-200 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-primary transition-all group shadow-sm">
-        <span class="material-symbols-outlined text-stone-400 group-hover:text-primary transition-colors text-[14px]">sync</span>
-        <span class="text-[10px] font-black text-stone-400 group-hover:text-stone-900 uppercase tracking-widest">Sincronizar Legacy</span>
+    <div class="flex gap-2">
+      <a href="{{ url('/sync') }}" class="bg-white border border-stone-200 px-3 py-1.5 rounded-lg flex items-center gap-1.5 hover:border-primary transition-all shadow-sm">
+        <span class="material-symbols-outlined text-stone-400 text-[14px]">sync</span>
+        <span class="text-[10px] font-black text-stone-600 uppercase tracking-widest">Sincronizar Legacy</span>
       </a>
-      <div class="bg-white border border-stone-200 px-6 py-2 rounded-[15px] shadow-sm">
-        <span class="text-[9px] font-black text-stone-400 uppercase tracking-[0.3em]">Uptime Operativo</span>
-        <p class="text-xl font-headline font-black text-stone-900 italic leading-none mt-1">99.9%</p>
+      <div class="bg-white border border-stone-200 px-4 py-1.5 rounded-lg shadow-sm flex items-center gap-3">
+        <div>
+          <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest block leading-none">Uptime</span>
+          <p class="text-sm font-headline font-black text-stone-900 leading-none">99.9%</p>
+        </div>
       </div>
-      <div class="bg-primary px-6 py-2 rounded-[15px] text-stone-950 shadow-xl shadow-primary/20">
-        <span class="text-[9px] font-black uppercase tracking-[0.3em]">Estatus Global</span>
-        <p class="text-xl font-headline font-black uppercase italic leading-none mt-1">ÓPTIMO</p>
+      <div class="bg-primary px-4 py-1.5 rounded-lg text-stone-950 flex items-center gap-3">
+         <div>
+          <span class="text-[9px] font-black text-stone-900/60 uppercase tracking-widest block leading-none">Global</span>
+          <p class="text-sm font-headline font-black uppercase leading-none">ÓPTIMO</p>
+         </div>
       </div>
     </div>
   </div>
 
-  <!-- Tarjetas de Resumen Modulares (GridStack) -->
-  <div class="grid-stack mb-10" id="tour-dashboard">
-    <div class="grid-stack-item" gs-w="3" gs-h="2">
-      <div class="grid-stack-item-content">
-        <a href="{{ url('/erp/inventario') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block h-full shadow-sm relative overflow-hidden">
-          <div class="flex items-center justify-between mb-4 relative z-10">
-            <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-blue-600 group-hover:text-primary text-2xl font-black">inventory_2</span></div>
-            <span class="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-widest">+12% SIGMA</span>
-          </div>
-          <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="stockCount">{{ number_format($stats['stock_total'], 0) }}</p>
-          <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Productos en Stock</p>
-          <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">inventory</span>
-        </a>
+  <!-- Tarjetas de Resumen KPI (Densidad Industrial) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" id="tour-dashboard">
+    <a href="{{ url('/erp/inventario') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:border-primary transition-all group shadow-sm flex flex-col justify-between h-28">
+      <div class="flex justify-between items-start">
+        <div>
+          <p class="text-[10px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Stock General</p>
+          <p class="text-2xl font-mono font-black text-stone-900 tracking-tighter" id="stockCount">{{ number_format($stats['stock_total'], 0) }}</p>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+          <span class="material-symbols-outlined text-stone-400 group-hover:text-stone-950 text-sm">inventory_2</span>
+        </div>
       </div>
-    </div>
+      <span class="text-[9px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase self-start">+12% COBERTURA</span>
+    </a>
     
-    <div class="grid-stack-item" gs-w="3" gs-h="2">
-      <div class="grid-stack-item-content">
-        <a href="{{ url('/erp/ventas') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block h-full shadow-sm relative overflow-hidden">
-          <div class="flex items-center justify-between mb-4 relative z-10">
-            <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-green-600 group-hover:text-primary text-2xl font-black">payments</span></div>
-            <span class="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-widest">+8.2% ROI</span>
-          </div>
-          <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="salesAmount">${{ number_format($stats['ingresos_mes'], 2) }}</p>
-          <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Ingresos del Mes</p>
-          <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">trending_up</span>
-        </a>
+    <a href="{{ url('/erp/ventas') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:border-primary transition-all group shadow-sm flex flex-col justify-between h-28">
+      <div class="flex justify-between items-start">
+        <div>
+          <p class="text-[10px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Ingresos de Mes</p>
+          <p class="text-2xl font-mono font-black text-stone-900 tracking-tighter" id="salesAmount">${{ number_format($stats['ingresos_mes'], 2) }}</p>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+          <span class="material-symbols-outlined text-stone-400 group-hover:text-stone-950 text-sm">payments</span>
+        </div>
       </div>
-    </div>
+      <span class="text-[9px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase self-start">+8.2% CRECIMIENTO</span>
+    </a>
 
-    <div class="grid-stack-item" gs-w="3" gs-h="2">
-      <div class="grid-stack-item-content">
-        <a href="{{ url('/erp/compras') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block h-full shadow-sm relative overflow-hidden">
-          <div class="flex items-center justify-between mb-4 relative z-10">
-            <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-purple-600 group-hover:text-primary text-2xl font-black">shopping_cart</span></div>
-            <span class="text-[10px] font-black text-stone-400 bg-stone-50 px-3 py-1 rounded-full uppercase tracking-widest">3 ACTIVAS</span>
-          </div>
-          <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="pendingPurchases">{{ $stats['ordenes_pendientes'] }}</p>
-          <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Órdenes a Procesar</p>
-          <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">shopping_basket</span>
-        </a>
+    <a href="{{ url('/erp/compras') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:border-primary transition-all group shadow-sm flex flex-col justify-between h-28">
+      <div class="flex justify-between items-start">
+        <div>
+          <p class="text-[10px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Órdenes Abiertas</p>
+          <p class="text-2xl font-mono font-black text-stone-900 tracking-tighter" id="pendingPurchases">{{ $stats['ordenes_pendientes'] }}</p>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+          <span class="material-symbols-outlined text-stone-400 group-hover:text-stone-950 text-sm">shopping_cart</span>
+        </div>
       </div>
-    </div>
+      <span class="text-[9px] font-bold text-stone-600 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded uppercase self-start">EN TRÁNSITO</span>
+    </a>
 
-    <div class="grid-stack-item" gs-w="3" gs-h="2">
-      <div class="grid-stack-item-content">
-        <a href="{{ url('/erp/ventas/clientes') }}" class="bg-white border border-stone-200 rounded-[28px] p-8 hover:shadow-2xl hover:border-primary transition-all group block h-full shadow-sm relative overflow-hidden">
-          <div class="flex items-center justify-between mb-4 relative z-10">
-            <div class="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center group-hover:bg-stone-950 transition-colors shadow-inner"><span class="material-symbols-outlined text-orange-600 group-hover:text-primary text-2xl font-black">people</span></div>
-            <span class="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-widest">+5 NUEVOS</span>
-          </div>
-          <p class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter relative z-10" id="customerCount">{{ $stats['clientes_activos'] }}</p>
-          <p class="text-[12px] text-stone-400 mt-2 uppercase font-black tracking-[0.2em] relative z-10 italic">Clientes Activos</p>
-          <span class="material-symbols-outlined absolute right-[-10px] bottom-[-10px] text-stone-50 text-[100px] z-0 opacity-0 group-hover:opacity-100 transition-opacity">group</span>
-        </a>
+    <a href="{{ url('/erp/ventas/clientes') }}" class="bg-white border border-stone-200 rounded-xl p-5 hover:border-primary transition-all group shadow-sm flex flex-col justify-between h-28">
+      <div class="flex justify-between items-start">
+        <div>
+          <p class="text-[10px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Clientes Activos</p>
+          <p class="text-2xl font-mono font-black text-stone-900 tracking-tighter" id="customerCount">{{ $stats['clientes_activos'] }}</p>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
+          <span class="material-symbols-outlined text-stone-400 group-hover:text-stone-950 text-sm">people</span>
+        </div>
       </div>
-    </div>
+      <span class="text-[9px] font-bold text-stone-600 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded uppercase self-start">VER LISTADO</span>
+    </a>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-    <div class="lg:col-span-2 bg-white border border-stone-200 rounded-[32px] p-10 shadow-sm relative overflow-hidden">
-      <div class="flex justify-between items-center mb-10 relative z-10">
-        <div class="flex items-center gap-6">
-          <div class="w-14 h-14 bg-stone-950 rounded-2xl flex items-center justify-center text-primary shadow-xl"><span class="material-symbols-outlined text-3xl font-black">analytics</span></div>
-          <div><h3 class="text-2xl font-headline font-black text-stone-900 uppercase italic tracking-tighter leading-none">Tendencias Operativas</h3><p class="text-[12px] text-stone-400 font-black uppercase tracking-[0.3em] mt-1">Análisis de Flujo de Stock SIGMA</p></div>
+  <!-- Contenido Secundario -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    
+    <!-- Gráfico y Trends -->
+    <div class="lg:col-span-2 bg-white border border-stone-200 rounded-xl p-6 shadow-sm">
+      <div class="flex justify-between items-center mb-6">
+        <div>
+            <h3 class="text-sm font-black text-stone-900 uppercase tracking-widest">Tendencias Operativas</h3>
+            <p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Análisis de Flujo de Stock & Ventas</p>
         </div>
-        <a href="{{ url('/erp/inventario') }}" class="px-6 py-3 bg-stone-50 text-[10px] font-black uppercase text-stone-400 hover:text-stone-950 flex items-center gap-2 transition-all rounded-xl border border-transparent hover:border-stone-200 italic tracking-widest">Informes Completos <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+        <a href="{{ url('/erp/inventario') }}" class="px-3 py-1.5 bg-stone-50 text-[9px] font-black uppercase text-stone-500 hover:text-stone-900 flex items-center gap-1 transition-all roundedborder border-stone-200 hover:bg-stone-100">Informes <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
       </div>
-      <div class="grid grid-cols-3 gap-8 mb-10 relative z-10">
-        <div class="bg-stone-50 p-6 rounded-2xl border border-stone-100 flex flex-col justify-between h-32">
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest leading-none mb-2">Stock Central</p>
-            <p class="text-3xl font-headline font-black text-stone-950 italic leading-none">{{ number_format($stats['stock_total'], 0) }}</p>
-            <div class="w-full bg-stone-200 h-1 rounded-full mt-4 overflow-hidden"><div class="bg-green-500 h-full w-[85%]"></div></div>
+      
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-stone-50 p-4 rounded-lg border border-stone-100 flex flex-col justify-between h-24">
+            <p class="text-[9px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Stock Central</p>
+            <p class="text-lg font-mono font-black text-stone-900">{{ number_format($stats['stock_total'], 0) }}</p>
+            <div class="w-full bg-stone-200 h-1 rounded-full mt-2 overflow-hidden"><div class="bg-green-500 h-full w-[85%]"></div></div>
         </div>
-        <div class="bg-red-50/50 p-6 rounded-2xl border border-red-100 flex flex-col justify-between h-32">
-            <p class="text-[10px] font-black text-red-400 uppercase tracking-widest leading-none mb-2">Vulnerabilidades</p>
-            <p class="text-3xl font-headline font-black text-red-500 italic leading-none">{{ $stats['stock_risks'] }}</p>
-            <div class="w-full bg-red-100 h-1 rounded-full mt-4 overflow-hidden"><div class="bg-red-500 h-full w-[40%] animate-pulse"></div></div>
+        <div class="bg-red-50/50 p-4 rounded-lg border border-red-100 flex flex-col justify-between h-24">
+            <p class="text-[9px] font-black text-red-500 uppercase tracking-widest leading-none mb-1">Vulnerabilidades</p>
+            <p class="text-lg font-mono font-black text-red-600">{{ $stats['stock_risks'] }}</p>
+            <div class="w-full bg-red-100 h-1 rounded-full mt-2 overflow-hidden"><div class="bg-red-500 h-full w-[40%] animate-pulse"></div></div>
         </div>
-        <div class="bg-stone-50 p-6 rounded-2xl border border-stone-100 flex flex-col justify-between h-32">
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest leading-none mb-2">Validaciones</p>
-            <p class="text-3xl font-headline font-black text-stone-950 italic leading-none">{{ $stats['aprobaciones_count'] }}</p>
-            <div class="w-full bg-stone-200 h-1 rounded-full mt-4 overflow-hidden"><div class="bg-primary h-full w-[60%]"></div></div>
+        <div class="bg-stone-50 p-4 rounded-lg border border-stone-100 flex flex-col justify-between h-24">
+            <p class="text-[9px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Validaciones Pendientes</p>
+            <p class="text-lg font-mono font-black text-stone-900">{{ $stats['aprobaciones_count'] }}</p>
+            <div class="w-full bg-stone-200 h-1 rounded-full mt-2 overflow-hidden"><div class="bg-primary h-full w-[60%]"></div></div>
         </div>
       </div>
-      <div id="salesTrendChart" class="w-full -ml-3"></div>
+      
+      <!-- Contenedor del Gráfico -->
+      <div id="salesTrendChart" class="w-full h-[220px]"></div>
     </div>
 
-    <div class="bg-stone-950 text-white rounded-[40px] p-10 relative overflow-hidden shadow-2xl">
-        <div class="absolute right-[-40px] top-[-40px] opacity-[0.05]">
-            <span class="material-symbols-outlined text-[300px]">payments</span>
-        </div>
-      <div class="relative z-10 mb-10">
-          <div class="flex items-center gap-2 mb-2">
-              <span class="w-8 h-[2px] bg-primary"></span>
-              <p class="text-[10px] font-black text-primary uppercase tracking-[0.4em] italic">Consolidado Bancario Mensual</p>
-          </div>
-          <h3 class="text-5xl font-headline font-black text-white tracking-tighter italic leading-none">${{ number_format($stats['ingresos_mes'], 2) }}</h3>
-          <p class="text-[11px] text-stone-500 font-black uppercase tracking-widest mt-4">Transacciones Liquidadas • 100% OK</p>
+    <!-- Consolidado y Transacciones -->
+    <div class="bg-white border border-stone-200 rounded-xl p-6 shadow-sm flex flex-col">
+      <div class="mb-6 flex flex-col justify-center items-center py-4 bg-stone-50 rounded-lg border border-stone-100">
+          <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest mb-1">Caja Mensual Acumulada</p>
+          <h3 class="text-3xl font-mono font-black text-stone-900 tracking-tighter leading-none">${{ number_format($stats['ingresos_mes'], 2) }}</h3>
+          <span class="bg-primary text-stone-950 text-[9px] font-black px-2 mt-3 rounded uppercase tracking-widest">100% Conciliado</span>
       </div>
 
-      <div class="space-y-4 mb-10 relative z-10">
-        @foreach($recentOrders as $order)
-        <div class="flex items-center justify-between bg-white/5 backdrop-blur-xl rounded-2xl p-5 border border-white/10 hover:bg-white/10 transition-all cursor-pointer group">
-            <div>
-                <p class="text-[10px] font-black text-stone-500 group-hover:text-primary transition-colors uppercase mb-1 tracking-widest font-mono">{{ $order->numero_orden }}</p>
-                <p class="text-[12px] font-black uppercase italic tracking-tight text-white/90 truncate max-w-[150px]">{{ $order->customer->razon_social ?? 'Cliente General' }}</p>
+      <p class="text-[10px] font-black text-stone-900 uppercase border-b border-stone-100 pb-2 mb-3">Últimos Movimientos</p>
+      
+      <div class="flex-1 space-y-2 overflow-y-auto pr-1">
+        @forelse($recentOrders as $order)
+        <div class="flex items-center justify-between p-2.5 hover:bg-stone-50 rounded bg-white border border-transparent hover:border-stone-100 transition-all cursor-pointer group">
+            <div class="flex flex-col">
+                <span class="text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-0.5">{{ $order->numero_orden }}</span>
+                <span class="text-[11px] font-black uppercase tracking-tight text-stone-800 truncate max-w-[140px]">{{ $order->customer->razon_social ?? 'Cliente General' }}</span>
             </div>
             <div class="text-right">
-                <span class="font-headline font-black text-primary text-xl leading-none italic">${{ number_format($order->total, 2) }}</span>
-                <p class="text-[9px] font-black text-stone-600 uppercase tracking-tight mt-1">{{ $order->created_at->diffForHumans() }}</p>
+                <span class="font-mono font-black text-stone-900 text-[13px] group-hover:text-primary transition-colors">${{ number_format($order->total, 2) }}</span>
+                <p class="text-[8px] font-bold text-stone-400 uppercase mt-0.5">{{ $order->created_at->diffForHumans() }}</p>
             </div>
         </div>
-        @endforeach
+        @empty
+            <p class="text-[11px] text-stone-500 uppercase text-center py-4">No hay órdenes recientes</p>
+        @endforelse
       </div>
 
-      <a href="{{ url('/erp/ventas') }}" class="group block bg-primary text-stone-950 py-5 font-black text-[11px] uppercase tracking-[0.4em] rounded-[20px] hover:bg-white transition-all text-center shadow-2xl shadow-primary/20 relative z-10 mb-8 italic">
-          AUDITAR FLUJO DE CAJA
-          <span class="material-symbols-outlined text-sm ml-2 group-hover:translate-x-2 transition-transform">arrow_forward</span>
-      </a>
-
       @if($stats['categoria_mix']->count() > 0)
-      <div class="mt-8 pt-10 border-t border-white/5 relative z-10">
-        <p class="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-6 italic">Mix Operativo de Activos</p>
-        <div class="space-y-6">
+      <div class="mt-6 pt-4 border-t border-stone-100">
+        <p class="text-[10px] font-black text-stone-900 uppercase border-b border-stone-100 pb-2 mb-3">Mix Inventario</p>
+        <div class="space-y-3">
           @foreach($stats['categoria_mix'] as $mix)
-          <div class="flex items-center justify-between text-[11px] mb-2">
-            <span class="text-stone-400 font-black uppercase tracking-tight italic">{{ $mix->categoria }}</span>
-            <span class="text-white font-black font-mono tracking-tighter">{{ $mix->total }} UNITS.</span>
-          </div>
-          <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-            <div class="bg-primary h-full rounded-full transition-all duration-1000" style="width: {{ min(100, $mix->total * 10) }}%"></div>
+          <div>
+            <div class="flex justify-between text-[9px] font-black mb-1">
+              <span class="text-stone-500 uppercase">{{ $mix->categoria }}</span>
+              <span class="text-stone-900">{{ $mix->total }} Und.</span>
+            </div>
+            <div class="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-stone-400 h-full rounded-full transition-all" style="width: {{ min(100, $mix->total * 10) }}%"></div>
+            </div>
           </div>
           @endforeach
         </div>
       </div>
       @endif
+
     </div>
   </div>
-/div>
 
-  <!-- Industrial Design System Reference (Oculto/Técnico) -->
-  <div class="mt-12 pt-8 border-t border-stone-100 opacity-40 hover:opacity-100 transition-opacity">
-    <div class="flex items-center gap-3 mb-6">
-        <span class="w-8 h-[1px] bg-stone-300"></span>
-        <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.4em]">Protocolo de Diseño Zenith Gold</p>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div>
-            <p class="text-[8px] font-black text-stone-500 uppercase mb-2">Tipografía Core</p>
-            <div class="space-y-1">
-                <div class="flex justify-between text-[10px] font-bold uppercase"><span>H1 Giga</span> <span class="text-stone-300">48px+</span></div>
-                <div class="flex justify-between text-[10px] font-bold uppercase"><span>Sub-menus</span> <span class="text-stone-300">11.5px</span></div>
-                <div class="flex justify-between text-[10px] font-bold uppercase"><span>Data Base</span> <span class="text-stone-300">12px</span></div>
-            </div>
-        </div>
-        <div>
-            <p class="text-[8px] font-black text-stone-500 uppercase mb-2">Paleta Técnica</p>
-            <div class="flex gap-2">
-                <div class="w-4 h-4 rounded bg-primary border border-stone-200" title="Zenith High-Vis"></div>
-                <div class="w-4 h-4 rounded bg-stone-900" title="Deep Stone"></div>
-                <div class="w-4 h-4 rounded bg-[#f8fafc]" title="Cloud Surface"></div>
-            </div>
-        </div>
-        <div class="col-span-2">
-            <p class="text-[8px] font-black text-stone-500 uppercase mb-2">Estatus del Repositorio</p>
-            <p class="text-[10px] text-stone-400 leading-tight">Sistema optimizado bajo arquitectura modular. Tablas estandarizadas a 12px con renderizado OCR-Style para máxima precisión contable e industrial.</p>
-        </div>
-    </div>
+  <!-- Footer Compacto del Dashboard -->
+  <div class="text-center pt-6 border-t border-stone-200">
+    <p class="text-[9px] font-bold text-stone-400 uppercase tracking-[0.2em] flex justify-center items-center gap-4">
+        <span>Arquitectura Modular Activada</span>
+        <span class="w-1 h-1 bg-stone-300 rounded-full"></span>
+        <span>UI Optimizado a 12px</span>
+        <span class="w-1 h-1 bg-stone-300 rounded-full"></span>
+        <span>Zenith Industrial Design</span>
+    </p>
   </div>
 @endsection
 

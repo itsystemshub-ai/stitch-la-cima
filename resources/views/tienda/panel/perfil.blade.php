@@ -4,7 +4,7 @@
 <div class="max-w-4xl mx-auto px-6 py-12">
     <div class="mb-12">
         <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block italic">Protocolo de Identidad</span>
-        <h2 class="text-5xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Mi Perfil <span class="text-stone-300">Corporativo</span></h2>
+         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Mi Perfil <span class="text-stone-300">Corporativo</span></h2>
     </div>
 
     @if(session('success'))

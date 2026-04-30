@@ -9,7 +9,7 @@
 @section('content')
 <main class="flex-grow w-full max-w-screen-2xl mx-auto px-6 md:px-12 pt-32 pb-24 relative z-10">
     <div class="mb-16">
-        <h1 class="text-6xl font-black text-black uppercase tracking-tighter leading-none mb-4 italic">Finalizar <span class="text-primary italic">Pedido</span></h1>
+        <h1 class="text-4xl font-black text-black uppercase tracking-tighter leading-none mb-4 italic">Finalizar <span class="text-primary italic">Pedido</span></h1>
         <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.4em]">Confirma tu orden de repuestos industriales</p>
     </div>
 
@@ -97,7 +97,7 @@
                             <span class="text-primary text-[10px] font-black uppercase tracking-[0.4em] mb-1 leading-none">Total Orden</span>
                             <span class="text-stone-600 text-[8px] font-bold uppercase font-mono leading-none">Cálculo en Divisas</span>
                         </div>
-                        <span class="text-5xl font-headline font-black text-primary tracking-tighter leading-none italic">$ {{ number_format($total, 2) }}</span>
+                        <span class="text-4xl font-headline font-black text-primary tracking-tighter italic leading-none">$ {{ number_format($total, 2) }}</span>
                     </div>
                 </div>
 

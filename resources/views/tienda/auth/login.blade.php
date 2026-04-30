@@ -5,7 +5,7 @@
 @section('content')
 <div class="min-h-screen bg-stone-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 mt-16">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-center text-3xl font-black uppercase text-black tracking-tight tracking-widest">
+        <h2 class="mt-6 text-center text-2xl font-black uppercase text-black tracking-tight tracking-widest">
             Ingreso de Clientes
         </h2>
         <p class="mt-2 text-center text-sm text-stone-600">

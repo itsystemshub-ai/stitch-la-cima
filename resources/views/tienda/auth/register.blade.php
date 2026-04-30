@@ -6,7 +6,7 @@
 <div class="min-h-screen bg-stone-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 mt-24">
     <div class="sm:mx-auto sm:w-full sm:max-w-xl text-center px-6">
         <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block italic">Protocolo de Incorporación B2B</span>
-        <h2 class="text-5xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Crear Cuenta <span class="text-stone-300">Corporativa</span></h2>
+         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Crear Cuenta <span class="text-stone-300">Corporativa</span></h2>
         <p class="mt-4 text-center text-[12px] text-stone-500 font-bold uppercase tracking-tight">
             ¿Ya posee credenciales activas?
             <a href="/tienda/auth/login" class="text-primary hover:text-stone-900 transition-colors italic">Inicie Sesión Aquí</a>

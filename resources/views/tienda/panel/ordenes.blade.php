@@ -4,7 +4,7 @@
 <div class="max-w-[1920px] mx-auto px-6 py-12">
     <div class="mb-12">
         <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">Protocolo de Registro B2B</span>
-        <h2 class="text-5xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Historial de <span class="text-stone-300">Transacciones</span></h2>
+         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Historial de <span class="text-stone-300">Transacciones</span></h2>
     </div>
 
     <div class="bg-white rounded-[40px] shadow-2xl border border-stone-200 overflow-hidden relative">
@@ -52,7 +52,7 @@
                 @empty
                 <tr>
                     <td colspan="5" class="py-32 text-center">
-                        <span class="material-symbols-outlined text-7xl text-stone-200 mb-4 block">history_toggle_off</span>
+                         <span class="material-symbols-outlined text-4xl text-stone-200 mb-4 block">history_toggle_off</span>
                         <p class="text-stone-400 font-black text-[12px] uppercase tracking-[0.3em] italic">No se detectaron transacciones en este registro fiscal.</p>
                     </td>
                 </tr>

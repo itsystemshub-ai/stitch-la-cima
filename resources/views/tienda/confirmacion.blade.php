@@ -9,8 +9,8 @@
 @section('content')
 <main class="flex-grow w-full max-w-screen-2xl mx-auto px-6 md:px-12 pt-32 pb-24 relative z-10">
     <div class="text-center mb-16">
-        <span class="material-symbols-outlined text-8xl text-green-500 mb-4">check_circle</span>
-        <h1 class="text-6xl font-black text-black uppercase tracking-tighter leading-none mb-4">Pedido <span class="text-primary italic">Confirmado</span></h1>
+        <span class="material-symbols-outlined text-4xl text-green-500 mb-4">check_circle</span>
+        <h1 class="text-4xl font-black text-black uppercase tracking-tighter leading-none mb-4">Pedido <span class="text-primary italic">Confirmado</span></h1>
         <p class="text-stone-500 text-lg">Tu orden ha sido procesada exitosamente</p>
     </div>
 
@@ -56,7 +56,7 @@
                 <span class="text-stone-400 text-[10px] font-black uppercase tracking-[0.4em] mb-1">Total Liquidado</span>
                 <span class="text-stone-300 text-[8px] font-bold uppercase font-mono italic">Transacción B2B Exitosa</span>
             </div>
-            <span class="text-5xl font-headline font-black text-stone-950 tracking-tighter italic leading-none">$ {{ number_format($order->total, 2) }}</span>
+            <span class="text-4xl font-headline font-black text-stone-950 tracking-tighter italic leading-none">$ {{ number_format($order->total, 2) }}</span>
         </div>
 
         <div class="mt-12 flex flex-col md:flex-row gap-4">

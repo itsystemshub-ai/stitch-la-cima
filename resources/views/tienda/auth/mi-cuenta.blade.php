@@ -56,7 +56,7 @@
                     <h3 class="font-black text-xs uppercase tracking-widest text-primary border-b border-stone-800 pb-3 mb-4">Límite de Crédito</h3>
                     <div class="flex items-end justify-between">
                         <div>
-                            <p class="text-3xl font-black tracking-tighter">${{ number_format($customer->limite_credito ?? 0, 2) }}</p>
+                             <p class="text-2xl font-black tracking-tighter">${{ number_format($customer->limite_credito ?? 0, 2) }}</p>
                             <p class="text-[9px] text-stone-400 uppercase tracking-widest">Disponible</p>
                         </div>
                         <span class="material-symbols-outlined text-stone-500 text-4xl">credit_card</span>
@@ -74,7 +74,7 @@
                     
                     <div class="p-6">
                         <div class="text-center py-12">
-                            <span class="material-symbols-outlined text-6xl text-stone-200 mb-4">receipt_long</span>
+                            <span class="material-symbols-outlined text-4xl text-stone-200 mb-4">receipt_long</span>
                             <p class="text-stone-500 font-bold text-sm">Aún no has realizado pedidos.</p>
                             <a href="/tienda/catalogo_general" class="mt-4 inline-block bg-black text-white px-6 py-2 rounded-md font-black uppercase text-[10px] tracking-widest hover:bg-stone-800 transition-colors">
                                 Explorar Catálogo

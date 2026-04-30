@@ -203,12 +203,16 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
 Route::get('/tienda/index', [TiendaController::class, 'index']);
 Route::get('/tienda/catalogo_general', [TiendaController::class, 'catalogoGeneral']);
 Route::get('/tienda/catalogo_detallado', [TiendaController::class, 'catalogoDetallado']);
+// Página de detalle de producto
+Route::get('/tienda/producto/{id}', [TiendaController::class, 'detalleProducto'])->name('tienda.producto.show');
+// Mantener ruta antigua por compatibilidad
 Route::get('/tienda/detalle_productos', [TiendaController::class, 'detalleProducto']);
 Route::get('/tienda/carrito', [TiendaController::class, 'verCarrito']);
 Route::get('/tienda/checkout', [TiendaController::class, 'checkout']);
 Route::get('/tienda/confirmacion/{orderId}', [TiendaController::class, 'confirmacion']);
 Route::get('/tienda/contacto', fn () => view('tienda.contacto'));
 Route::post('/tienda/contacto/enviar', [TiendaController::class, 'enviarContacto']);
+Route::get('/tienda/nosotros', fn () => view('tienda.nosotros'));
 
 // Rutas de Autenticación de la Tienda
 Route::prefix('tienda/auth')->group(function () {
@@ -253,7 +257,7 @@ Route::prefix('api/erp/invoice')->group(function () {
 // Rutas API Tienda (Público)
 Route::prefix('api/tienda')->group(function () {
     Route::get('/productos', [TiendaController::class, 'catalogoGeneral']);
-    Route::get('/productos/{id}', [TiendaController::class, 'detalleProducto']);
+    Route::get('/productos/{id}', [TiendaController::class, 'getProductoJson']);
     Route::post('/carrito', [TiendaController::class, 'agregarCarrito']);
     Route::put('/carrito/{id}', [TiendaController::class, 'updateCarrito']);
     Route::delete('/carrito/{id}', [TiendaController::class, 'eliminarDeCarrito']);

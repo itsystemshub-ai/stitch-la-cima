@@ -18,7 +18,7 @@
 <div class="max-w-5xl mx-auto">
 <div class="text-center mb-10">
 <span class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-4">E-commerce Público &amp; Mayorista</span>
-<h1 class="text-5xl md:text-5xl font-black text-white leading-tight tracking-tighter mb-4 uppercase">
+ <h1 class="text-2xl md:text-3xl font-black text-white leading-tight tracking-tighter mb-4 uppercase">
                        MAYOR DE REPUESTO <span class="text-primary">LA CIMA, C.A.</span>
 </h1>
 <p class="text-stone-300 text-lg max-w-2xl mx-auto font-light leading-relaxed">
@@ -111,7 +111,7 @@
 <div class="flex justify-between items-end mb-10">
 <div>
 <span class="text-primary font-black text-[10px] uppercase tracking-[0.3em]">Ofertas de la Semana</span>
-<h2 class="text-3xl font-black uppercase tracking-tighter text-black mt-1">Repuestos Destacados</h2>
+<h2 class="text-2xl font-black uppercase tracking-tighter text-black mt-1">Repuestos Destacados</h2>
 </div>
 <a class="text-[10px] font-black uppercase tracking-widest text-black border-b-2 border-primary pb-1" href="{{ url('/tienda/' . 'catalogo_detallado') }}">Ver Catálogo Completo</a>
 </div>
@@ -134,7 +134,7 @@
 <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 <div class="absolute bottom-0 left-0 p-10">
 <span class="text-primary text-xs font-black uppercase tracking-[0.4em]">Industrial Forge</span>
-<h3 class="text-5xl font-black text-white uppercase tracking-tighter mt-2">Sistemas de Motor</h3>
+ <h3 class="text-3xl font-black text-white uppercase tracking-tighter mt-2">Sistemas de Motor</h3>
 <a href="{{ url('/tienda/catalogo_general') }}" class="mt-6 inline-block bg-primary text-black px-8 py-3 rounded-md font-black text-xs uppercase tracking-widest hover:bg-white transition-all">Explorar Motor</a>
 </div>
 </div>
@@ -149,7 +149,7 @@
 </div>
 <div class="md:col-span-4 group relative overflow-hidden rounded-2xl bg-primary">
 <div class="p-10 h-full flex flex-col justify-between">
-<span class="material-symbols-outlined text-6xl text-black">settings_input_component</span>
+ <span class="material-symbols-outlined text-4xl text-black">settings_input_component</span>
 <div>
 <h3 class="text-3xl font-black text-black uppercase tracking-tighter italic">Transmisión</h3>
 <p class="text-black/70 text-[12px] font-bold uppercase tracking-tight mt-2 leading-relaxed">Cajas, embragues y diferenciales industriales certificados bajo normas OEM.</p>
@@ -159,7 +159,7 @@
 <div class="md:col-span-8 group relative overflow-hidden rounded-2xl bg-black">
 <img alt="Suspension" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHtNySrP8HrGI66TLOsvDPkaDg0OsqNHGb13gCFvCGw0QIBbKbi8njt_UPgaMng-OmtqIcDmx0wAhZUrdUXCmDeFIZM1XG2w7u_7l-k80z1giO2h8A-I1XxRLmt3-W6Idk23flMeIDf660-0qi_Dc3Uczsjnu_ZMz4jIfiTbyh7AkLSoXLrM58e4ggXYxH_nVG2JNEMfP0fVELVbhRLEirDlLmeSZR96Sd4mKGltM7moFTxvlb8IZZgiNy_dX4rJRNFQjnr-pwkw"/>
 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors">
-<h3 class="text-6xl font-black text-white uppercase tracking-[0.2em] drop-shadow-2xl">Suspensión</h3>
+ <h3 class="text-4xl font-black text-white uppercase tracking-[0.2em] drop-shadow-2xl">Suspensión</h3>
 </div>
 </div>
 </div>
@@ -172,7 +172,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 <div>
 <span class="text-primary font-black text-[10.5px] uppercase tracking-[0.4em] mb-4 block italic">Portal Corporativo</span>
-<h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-8 italic">
+ <h2 class="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-8 italic">
                         SOLUCIONES <br/> <span class="text-primary">ERP B2B</span>
 </h2>
 <p class="text-stone-400 mb-10 text-[12px] font-bold uppercase tracking-tight leading-[1.8]">
@@ -204,21 +204,21 @@
 <div class="grid grid-cols-2 gap-4">
 <div class="space-y-4 pt-12">
 <div class="aspect-square bg-zinc-900 border border-white/5 rounded-2xl p-8 flex flex-col justify-center items-center text-center">
-<span class="text-5xl font-black text-primary mb-3">+15k</span>
+<span class="text-4xl font-black text-primary mb-3">+15k</span>
 <span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">SKUs ERP</span>
 </div>
 <div class="aspect-square bg-zinc-900 border border-white/5 rounded-2xl p-8 flex flex-col justify-center items-center text-center">
-<span class="text-5xl font-black text-primary mb-3">24h</span>
+ <span class="text-4xl font-black text-primary mb-3">24h</span>
 <span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Despacho Nacional</span>
 </div>
 </div>
 <div class="space-y-4">
 <div class="aspect-square bg-zinc-800 border border-white/5 rounded-2xl p-8 flex flex-col justify-center items-center text-center">
-<span class="text-5xl font-black text-primary mb-3">100%</span>
+<span class="text-4xl font-black text-primary mb-3">100%</span>
 <span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Calidad OEM</span>
 </div>
 <div class="aspect-square bg-zinc-900 border border-white/5 rounded-2xl p-8 flex flex-col justify-center items-center text-center">
-<span class="material-symbols-outlined text-primary text-5xl mb-3">support_agent</span>
+ <span class="material-symbols-outlined text-primary text-4xl mb-3">support_agent</span>
 <span class="text-[10px] text-stone-500 font-bold uppercase tracking-widest">Soporte Técnico</span>
 </div>
 </div>

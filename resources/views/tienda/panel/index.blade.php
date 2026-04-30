@@ -4,7 +4,7 @@
 <div class="max-w-[1920px] mx-auto px-6 py-12">
     <header class="mb-12">
         <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">Terminal de Cliente v4.0</span>
-        <h2 class="text-5xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Bienvenido, <span class="text-stone-300">{{ $user->name }}</span></h2>
+         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Bienvenido, <span class="text-stone-300">{{ $user->name }}</span></h2>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="absolute -right-4 -bottom-4 opacity-[0.02] group-hover:scale-110 transition-transform duration-700">
-                <span class="material-symbols-outlined text-7xl">grid_view</span>
+                <span class="material-symbols-outlined text-4xl">grid_view</span>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="absolute -right-4 -bottom-4 opacity-[0.02] group-hover:scale-110 transition-transform duration-700">
-                <span class="material-symbols-outlined text-7xl">schedule</span>
+                <span class="material-symbols-outlined text-4xl">schedule</span>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="absolute -right-4 -bottom-4 opacity-[0.05]">
-                <span class="material-symbols-outlined text-7xl text-white">check_circle</span>
+                <span class="material-symbols-outlined text-4xl text-white">check_circle</span>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
             <div class="relative z-10">
                 <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Anulaciones</p>
                 <div class="flex items-end justify-between">
-                    <p class="text-4xl font-headline font-black text-stone-900 tracking-tighter leading-none">{{ $cancelledOrders }}</p>
+                     <p class="text-2xl font-headline font-black text-stone-900 tracking-tighter leading-none">{{ $cancelledOrders }}</p>
                     <span class="material-symbols-outlined text-red-500 text-3xl">block</span>
                 </div>
             </div>
@@ -66,7 +66,7 @@
     <div class="bg-stone-950 rounded-[40px] p-10 mb-12 text-white relative overflow-hidden border border-white/5 shadow-2xl flex flex-col md:flex-row justify-between items-center gap-8">
         <div class="relative z-10 text-center md:text-left">
             <span class="text-primary font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Inversión Logística Acumulada</span>
-            <h3 class="text-6xl font-headline font-black tracking-tighter italic leading-none">$ {{ number_format($totalSpent, 2) }}</h3>
+            <h3 class="text-4xl font-headline font-black tracking-tighter italic leading-none">$ {{ number_format($totalSpent, 2) }}</h3>
             <p class="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] mt-4 font-mono">Consolidado Fiscal - Cauplas Vzla C.A.</p>
         </div>
         <div class="relative z-10">

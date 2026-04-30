@@ -119,7 +119,7 @@
 
                 <!-- Empty State -->
                 <div x-show="filteredModules.length === 0 && products.length === 0 && search.length > 1" class="py-12 text-center">
-                    <span class="material-symbols-outlined text-5xl text-stone-100 mb-4 animate-bounce">satellite_alt</span>
+                     <span class="material-symbols-outlined text-4xl text-stone-100 mb-4 animate-bounce">satellite_alt</span>
                     <p class="text-sm font-black text-stone-400 uppercase tracking-widest">No hay señales de "<span x-text="search" class="text-stone-900"></span>" en la base de datos</p>
                 </div>
             </div>

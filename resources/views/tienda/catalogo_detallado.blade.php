@@ -1,40 +1,9 @@
 @extends('layouts.ecommerce')
 
-@section('title', 'Catálogo Detallado | Mayor de Repuesto LA CIMA, C.A.')
+@section('title', 'Catálogo Detallado | Mayor de REPUESTO LA CIMA, C.A.')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/catalogo_detallado.css') }}">
-    <style>
-        /* Estilos dinámicos para la vista de lista */
-        #productGrid.view-list {
-            grid-template-columns: 1fr !important;
-            gap: 1.5rem;
-        }
-        #productGrid.view-list article {
-            display: flex;
-            flex-direction: row;
-            height: auto;
-            min-height: 200px;
-            align-items: stretch;
-        }
-        #productGrid.view-list article > a {
-            width: 250px;
-            flex-shrink: 0;
-            display: flex;
-            border-right: 1px solid #e5e7eb;
-        }
-        @media (max-width: 640px) {
-            #productGrid.view-list article {
-                flex-direction: column;
-                height: auto;
-            }
-            #productGrid.view-list article .aspect-square {
-                width: 100%;
-                height: auto;
-                aspect-ratio: 1/1;
-            }
-        }
-    </style>
 @endpush
 
 @section('content')
@@ -47,6 +16,7 @@
                 @if(request('q'))
                     <input type="hidden" name="q" value="{{ request('q') }}">
                 @endif
+                <input type="hidden" name="view" value="{{ request('view', 'grid') }}">
                 
                 <div class="bg-white border border-outline p-5 rounded-[20px] shadow-sm">
                     <div class="flex justify-between items-center mb-5">
@@ -54,9 +24,6 @@
                             <span class="material-symbols-outlined text-primary">filter_list</span>
                             Filtrado Técnico
                         </h2>
-                        @if(request('brands') || request('categories'))
-                            <a href="{{ url()->current() }}{{ request('q') ? '?q='.request('q') : '' }}" class="text-[9px] font-black text-stone-400 hover:text-primary uppercase tracking-widest">Limpiar</a>
-                        @endif
                     </div>
                     
                     <div class="space-y-5">
@@ -73,14 +40,14 @@
                                         <span class="text-[12px] font-black text-stone-900 group-hover:text-primary transition-colors uppercase tracking-tight">{{ $category }}</span>
                                     </label>
                                 @empty
-                                    <p class="text-[10px] text-stone-400 italic font-black uppercase tracking-widest">No hay categorías disponibles</p>
+                                    <p class="text-[10px] text-stone-400 italic font-black uppercase tracking-widest">No hay categorías</p>
                                 @endforelse
                             </div>
                         </div>
 
                         <!-- Marcas -->
                         <div>
-                            <label class="font-headline text-[10px] font-black uppercase text-stone-400 block mb-4 tracking-[0.3em] italic text-[#5a5c5e]">Fabricantes OEM</label>
+                            <label class="font-headline text-[10px] font-black uppercase text-stone-400 block mb-4 tracking-[0.3em] italic text-stone-500">Fabricantes OEM</label>
                             <div class="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
                                 @forelse($brands as $brand)
                                     <label class="flex items-center gap-3 cursor-pointer group">
@@ -91,15 +58,35 @@
                                         <span class="text-[12px] font-black text-stone-900 group-hover:text-primary transition-colors uppercase tracking-tight">{{ $brand }}</span>
                                     </label>
                                 @empty
-                                    <p class="text-[10px] text-stone-400 italic font-black uppercase tracking-widest">No hay marcas disponibles</p>
+                                    <p class="text-[10px] text-stone-400 italic font-black uppercase tracking-widest">No hay marcas</p>
                                 @endforelse
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Technical Support Card -->
-                <div class="bg-stone-950 text-white p-8 rounded-3xl relative overflow-hidden group shadow-2xl border border-white/5">
+                <!-- Vista compacta: Botones Grid/List -->
+                <div class="bg-stone-50 p-4 rounded-[20px] border border-outline">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-stone-400 block mb-3">Vista</label>
+                    <div class="flex gap-2">
+                        @php
+                            $currentParams = request()->except(['view', 'page']);
+                            $gridUrl = request()->fullUrlWithQuery(array_merge($currentParams, ['view' => 'grid']));
+                            $listUrl = request()->fullUrlWithQuery(array_merge($currentParams, ['view' => 'list']));
+                        @endphp
+                        <a href="{{ $gridUrl }}" 
+                           class="flex-1 text-center py-2 px-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all {{ request('view', 'grid') === 'grid' ? 'bg-black text-white' : 'bg-white text-stone-500 hover:bg-stone-100' }}">
+                            Cuadrada
+                        </a>
+                        <a href="{{ $listUrl }}" 
+                           class="flex-1 text-center py-2 px-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all {{ request('view', 'grid') === 'list' ? 'bg-black text-white' : 'bg-white text-stone-500 hover:bg-stone-100' }}">
+                            Lista
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Soporte Técnico Card -->
+                <div class="bg-stone-950 text-white p-8 rounded-[32px] relative overflow-hidden group shadow-2xl border border-white/5">
                     <div class="relative z-10">
                         <h3 class="font-headline text-2xl font-black uppercase leading-none mb-3 text-primary italic">Soporte <br>Técnico</h3>
                         <p class="text-stone-500 text-[10px] font-black uppercase tracking-widest mb-6 leading-relaxed">Asistencia certificada para instalación industrial.</p>
@@ -115,306 +102,236 @@
             </form>
         </aside>
 
-        <!-- Product Listing -->
-        <!-- Product Listing -->
-        <section class="flex-grow">
-            <!-- Consolidated Industrial Header: High Fidelity & Density -->
-            <div class="mb-10 space-y-4">
-                <div class="bg-white border border-stone-100 rounded-[24px] shadow-sm p-3 xl:p-4 flex flex-col xl:flex-row items-center gap-6 relative overflow-hidden group/header transition-all hover:shadow-md">
-                    <div class="absolute inset-0 opacity-[0.02] pointer-events-none" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 15px 15px;"></div>
-                    
-                    <!-- Identification Segment -->
-                    <div class="flex items-center gap-5 min-w-max border-r border-stone-100 pr-6 relative z-10">
-                        <div class="flex flex-col">
-                            <span class="text-[9px] font-black uppercase text-primary tracking-[0.3em] italic mb-1.5">DB_CORE: MASTER</span>
-                            <h1 class="font-headline text-3xl font-black uppercase tracking-tighter italic text-stone-900 leading-none">
-                                CATÁLOG<span class="text-stone-300">O_X</span>
-                            </h1>
-                        </div>
-                        <div class="flex flex-col border-l border-stone-100 pl-5">
-                            <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest italic mb-0.5">ESTADO_MATRIZ</span>
-                            <p class="text-[14px] font-black text-stone-900 italic leading-none tracking-tighter">
-                                {{ $products->total() }} <span class="text-primary text-[10px]">REGS</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- AI Search Engine Segment -->
-                    <div class="flex-grow w-full xl:w-auto relative group/search z-10">
-                        <form action="{{ url('/tienda/catalogo_detallado') }}" method="GET" class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                                <span class="material-symbols-outlined text-primary font-black text-lg">search_spark</span>
-                            </div>
-                            <input type="text" 
-                                   name="search" 
-                                   value="{{ request('search') }}"
-                                   class="w-full bg-stone-50 border border-stone-100 rounded-[20px] pl-14 pr-32 py-3.5 text-[14px] font-black text-stone-900 placeholder:text-stone-300 focus:bg-white focus:border-stone-950 focus:ring-0 transition-all italic tracking-tight"
-                                   placeholder="SMART_SEARCH_v6.4: SKU, CATEGORÍA, NOMBRE..."/>
-                            
-                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 gap-2">
-                                @if(request('search'))
-                                    <a href="{{ url('/tienda/catalogo_detallado') }}" class="w-8 h-8 flex items-center justify-center text-stone-300 hover:text-red-500 transition-colors">
-                                        <span class="material-symbols-outlined font-black text-sm">close</span>
-                                    </a>
-                                @endif
-                                <button type="submit" class="bg-stone-950 text-white px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-stone-950 transition-all active:scale-95 italic">
-                                    SCAN_DB
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Operations & Toggles Segment -->
-                    <div class="flex items-center gap-6 min-w-max border-l border-stone-100 pl-6 relative z-10">
-                        <div class="flex flex-col text-right">
-                            <span class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] italic mb-1 leading-none">PAG_PROTOCOL</span>
-                            <p class="text-[11px] font-black text-stone-500 uppercase tracking-tight italic leading-none whitespace-nowrap">
-                                {{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}
-                            </p>
-                        </div>
-                        <div class="flex p-1 bg-stone-50 rounded-xl border border-stone-100 gap-1">
-                            <button id="gridViewBtn" title="Vista Cuadrícula" class="view-btn active w-9 h-9 flex items-center justify-center bg-stone-950 text-white rounded-lg transition-all shadow-sm active:scale-95" onclick="switchToGrid()">
-                                <span class="material-symbols-outlined text-lg font-black">grid_view</span>
-                            </button>
-                            <button id="listViewBtn" title="Vista Lista" class="view-btn w-9 h-9 flex items-center justify-center text-stone-400 hover:bg-white hover:text-stone-950 rounded-lg transition-all active:scale-95" onclick="switchToList()">
-                                <span class="material-symbols-outlined text-lg font-black">format_list_bulleted</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Compact Smart Suggestions Chips -->
-                <div class="flex flex-wrap items-center gap-3 px-4">
-                    <span class="text-[9px] font-black text-stone-400 uppercase tracking-[0.3em] italic">AI_MATCH_TRENDS:</span>
-                    @foreach(['Empacadura', 'Cámara', 'Culata', 'Retén', 'Kit'] as $sug)
-                        <a href="{{ url('/tienda/catalogo_detallado?search='.$sug) }}" 
-                           class="text-[9px] font-black text-stone-500 hover:text-primary transition-colors uppercase italic tracking-tighter">#{{ $sug }}</a>
-                        @if(!$loop->last)
-                            <span class="w-1 h-1 bg-stone-200 rounded-full"></span>
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-
-            <div id="gridViewContainer">
-                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    @forelse($products as $product)
-                        <x-product-card :product="$product" />
-                    @empty
-                        <div class="col-span-full py-32 text-center bg-stone-50 rounded-[40px] border-2 border-dashed border-stone-200">
-                            <span class="material-symbols-outlined text-8xl text-stone-200 mb-6 block">inventory_2</span>
-                            <p class="text-stone-400 font-black text-[12px] uppercase tracking-[0.3em] italic">No se detectaron piezas compatibles bajo este filtrado.</p>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <!-- List View (Table Mode) - Inspired by Photo 2 -->
-            <div id="listViewContainer" class="hidden overflow-x-auto rounded-[32px] border border-stone-200 bg-white shadow-sm overflow-hidden">
-                <table class="w-full text-left border-collapse min-w-[1000px]">
-                    <thead class="bg-stone-50/80 border-b border-stone-100">
-                        <tr class="text-[10px] font-black uppercase tracking-widest text-stone-400 italic">
-                            <th class="py-5 px-6 w-10 text-center">N°</th>
-                            <th class="py-5 px-6">CÓDIGO SKU</th>
-                            <th class="py-5 px-6">CATEGORÍA</th>
-                            <th class="py-5 px-6">FABRICANTE</th>
-                            <th class="py-5 px-6">MARCA</th>
-                            <th class="py-5 px-6">MATERIAL</th>
-                            <th class="py-5 px-6">ESPESOR</th>
-                            <th class="py-5 px-6">DESCRIPCIÓN</th>
-                            <th class="py-5 px-6">MEDIDAS</th>
-                            <th class="py-5 px-6 text-right">PRECIO</th>
-                            <th class="py-5 px-6 text-center">CANT.</th>
-                            <th class="py-5 px-6 text-right">MONTO</th>
-                            <th class="py-5 px-6 text-center">ESTATUS</th>
-                            <th class="py-5 px-6 text-right w-16">ACCION</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-stone-50">
-                        @foreach($products as $product)
-                        <tr class="hover:bg-stone-50/50 transition-all group">
-                            <td class="py-4 px-6 text-center text-[11px] font-black text-stone-300 italic">
-                                {{ $loop->iteration }}
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="font-mono text-[11px] font-black text-stone-900 bg-stone-100 px-2 py-1 rounded border border-stone-200/50">
-                                    {{ $product->codigo_oem ?? '---' }}
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="text-[10px] font-black text-stone-500 uppercase tracking-tight">{{ $product->categoria ?? '---' }}</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="text-[10px] font-black text-stone-500 uppercase tracking-tight">{{ $product->fabricante ?? '---' }}</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="text-[10px] font-black text-stone-500 uppercase tracking-tight">{{ $product->marca ?? '---' }}</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="text-[10px] font-bold text-stone-400 uppercase">{{ $product->material ?? '---' }}</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="text-[10px] font-bold text-stone-400 uppercase">{{ $product->espesor ?? '---' }}</span>
-                            </td>
-                            <td class="py-4 px-6 max-w-xs">
-                                <a href="{{ url('/tienda/producto/' . $product->id) }}" class="font-headline text-[12px] font-black uppercase text-stone-900 hover:text-primary transition-colors italic leading-tight block">
-                                    {{ $product->nombre }}
-                                </a>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span class="text-[10px] font-bold text-stone-400 uppercase">{{ $product->medidas ?? '---' }}</span>
-                            </td>
-                            <td class="py-4 px-6 text-right text-stone-900 font-headline font-black text-lg italic tracking-tighter">
-                                ${{ number_format($product->precio_mayor ?? 0, 2) }}
-                            </td>
-                            <td class="py-4 px-6 text-center">
-                                <input type="number" value="1" min="1" 
-                                       data-price="{{ $product->precio_mayor ?? 0 }}"
-                                       oninput="updateRowTotal(this)"
-                                       class="w-10 h-8 text-center bg-stone-50 border border-stone-200 rounded-lg font-black text-[12px] focus:ring-1 focus:ring-primary focus:outline-none transition-all qty-input">
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <span class="font-headline text-lg font-black text-primary tracking-tighter italic row-total shadow-primary/5">
-                                    ${{ number_format($product->precio_mayor ?? 0, 2) }}
-                                </span>
-                            </td>
-                            <td class="py-4 px-6 text-center">
-                                @if($product->created_at && $product->created_at->diffInDays(now()) < 15)
-                                    <span class="inline-flex items-center gap-1.5 bg-primary text-stone-900 text-[8px] font-black uppercase px-2 py-1 rounded shadow-sm border border-black/5">
-                                        Incorporado
-                                    </span>
-                                @endif
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <button onclick="Cart.add({{ $product->id }}, '{{ addslashes($product->nombre) }}', {{ $product->precio_mayor ?? 0 }}, '{{ $product->imagen_url ?? '' }}', '{{ $product->categoria ?? '' }}', this.closest('tr').querySelector('.qty-input').value)"
-                                        class="w-9 h-9 bg-stone-950 text-white hover:bg-primary hover:text-stone-900 rounded-xl font-black flex items-center justify-center transition-all shadow-md active:scale-90 group/cart">
-                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                                </button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="mt-12 flex justify-center">
-                {{ $products->links() }}
-            </div>
-
-            <!-- Technical Compatibility Table -->
-            <div class="mt-16 bg-white p-8 rounded-[32px] border border-stone-200 shadow-sm relative overflow-hidden">
-                <div class="absolute -right-20 -top-20 opacity-[0.02] pointer-events-none">
-                    <span class="material-symbols-outlined text-[400px]">verified</span>
-                </div>
-
-                <h2 class="font-headline text-2xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4 italic text-stone-900">
-                    <span class="w-12 h-1.5 bg-primary rounded-full"></span>
-                    Protocolo de <span class="text-stone-300">Compatibilidad Técnica</span>
-                </h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left zenith-table-main">
-                        <thead class="zenith-table-header uppercase italic">
-                            <tr>
-                                <th class="py-5 px-8">Componente</th>
-                                <th class="py-5 px-8">Fabricante Compatible</th>
-                                <th class="py-5 px-8 text-center">Procedencia</th>
-                                <th class="py-5 px-8 text-center">Calificación SAE</th>
-                                <th class="py-5 px-8 text-right">Estatus Logístico</th>
+            <!-- Product Listing -->
+            <section class="flex-grow">
+                @php
+                    $currentView = request('view', 'grid');
+                @endphp
+                
+                @if($currentView === 'list')
+                    <!-- VISTA LISTA: Compacta, SIN FOTO -->
+                <div class="bg-white border border-outline rounded-[32px] overflow-hidden">
+                    <table class="w-full text-left min-w-[800px]">
+                        <thead class="bg-stone-50/80 border-b border-stone-200">
+                            <tr class="text-[9px] font-black uppercase tracking-widest text-stone-400">
+                                <th class="py-4 px-4">Referencia</th>
+                                <th class="py-4 px-4">Descripción</th>
+                                <th class="py-4 px-4">Marca</th>
+                                <th class="py-4 px-4">Categoría</th>
+                                <th class="py-4 px-4 text-center">Stock</th>
+                                <th class="py-4 px-4 text-right">Precio</th>
+                                <th class="py-4 px-4 text-center w-16">Cant.</th>
+                                <th class="py-4 px-4 text-center w-16"></th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-stone-100">
-                            <tr class="bg-white hover:bg-stone-50/50 transition-colors">
-                                <td class="py-5 px-8 font-black uppercase text-stone-900 tracking-tight">Inyectores de Precisión</td>
-                                <td class="py-5 px-8 font-bold text-stone-500 uppercase text-[10.5px]">CATERPILLAR / PERKINS HD</td>
-                                <td class="py-5 px-8 text-center text-stone-400 font-mono text-[10.5px] tracking-widest">USA / DE / 442</td>
-                                <td class="py-5 px-8 text-center italic">
-                                    <span class="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[9px] font-black border border-stone-200 tracking-widest">OEM GENUINE SPEC</span>
-                                </td>
-                                <td class="py-5 px-8 text-right">
-                                    <span class="text-green-600 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-end gap-2">
-                                        DISPONIBLE
-                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <tbody class="divide-y divide-stone-50">
+                            @forelse($products as $product)
+                            <tr class="hover:bg-stone-50/50 transition-all text-[12px]">
+                                <td class="py-3 px-4">
+                                    <span class="font-mono text-[10px] font-black text-black bg-stone-100 px-2 py-0.5 rounded">
+                                        {{ $product->codigo_oem ?? 'N/A' }}
                                     </span>
                                 </td>
-                            </tr>
-                            <tr class="bg-white hover:bg-stone-50/50 transition-colors">
-                                <td class="py-5 px-8 font-black uppercase text-stone-900 tracking-tight">Kits de Empacadura Master</td>
-                                <td class="py-5 px-8 font-bold text-stone-500 uppercase text-[10.5px]">DETROIT DIESEL S60</td>
-                                <td class="py-5 px-8 text-center text-stone-400 font-mono text-[10.5px] tracking-widest">USA / MI / 902</td>
-                                <td class="py-5 px-8 text-center italic">
-                                    <span class="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[9px] font-black border border-stone-200 tracking-widest">SAE-HEAVY-DUTY</span>
+                                <td class="py-3 px-4">
+                                    <a href="{{ url('/tienda/producto/' . $product->id) }}" class="font-black text-stone-900 hover:text-primary transition-colors line-clamp-1">
+                                        {{ $product->nombre }}
+                                    </a>
                                 </td>
-                                <td class="py-5 px-8 text-right">
-                                    <span class="text-green-600 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-end gap-2">
-                                        DISPONIBLE
-                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                <td class="py-3 px-4">
+                                    <span class="text-stone-600 font-bold uppercase">{{ $product->marca ?? '-' }}</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <span class="text-[10px] text-stone-500">{{ $product->categoria ?? '-' }}</span>
+                                </td>
+                                <td class="py-3 px-4 text-center">
+                                    <span class="inline-flex items-center gap-1">
+                                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                        <span class="text-stone-600 text-[11px]">Disponible</span>
                                     </span>
                                 </td>
-                            </tr>
-                            <tr class="bg-white hover:bg-stone-50/50 transition-colors">
-                                <td class="py-5 px-8 font-black uppercase text-stone-900 tracking-tight">Bombas de Flujo Crítico</td>
-                                <td class="py-5 px-8 font-bold text-stone-500 uppercase text-[10.5px]">VOLVO PENTA / MACK</td>
-                                <td class="py-5 px-8 text-center text-stone-400 font-mono text-[10.5px] tracking-widest">BRA / SP / 112</td>
-                                <td class="py-5 px-8 text-center italic">
-                                    <span class="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[9px] font-black border border-stone-200 tracking-widest">SAE-GRADE-A</span>
-                                </td>
-                                <td class="py-5 px-8 text-right">
-                                    <span class="text-amber-600 font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-end gap-2">
-                                        STOCK BAJO
-                                        <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                                <td class="py-3 px-4 text-right">
+                                    <span class="font-headline font-black text-stone-900">
+                                        ${{ number_format($product->precio_mayor ?? 0, 2) }}
                                     </span>
                                 </td>
+                                <td class="py-3 px-4 text-center">
+                                    <input type="number" value="1" min="1" 
+                                           class="w-14 h-7 text-center bg-stone-100 border border-stone-200 rounded text-[11px] font-bold focus:ring-1 focus:ring-primary focus:outline-none"
+                                           onchange="this.value = this.value || 1;">
+                                </td>
+                                <td class="py-3 px-4 text-center">
+                                    <button class="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-stone-800 transition-all" 
+                                            onclick="addToCartList({{ $product->id }}, '{{ addslashes($product->nombre) }}', {{ $product->precio_mayor ?? 0 }}, this.closest('tr').querySelector('input').value)"
+                                            title="Agregar al carrito">
+                                        <span class="material-symbols-outlined text-sm">shopping_cart</span>
+                                    </button>
+                                </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="8" class="py-20 text-center">
+                                    <span class="material-symbols-outlined text-4xl text-stone-200 mb-4 block">inventory_2</span>
+                                    <p class="text-stone-500 font-black uppercase tracking-widest">No se encontraron productos</p>
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
-            </div>
+                
+                <!-- Paginación lista -->
+                <div class="mt-8 flex justify-center">
+                    {{ $products->appends(request()->except('page'))->links() }}
+                </div>
+
+            @else
+                <!-- VISTA GRID: Cuadrada con galería -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="productGrid">
+                    @forelse($products as $product)
+                    <article class="bg-white border border-outline rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer" 
+                             onclick="window.location.href='{{ url('/tienda/producto/' . $product->id) }}'">
+                        
+                        <!-- Galería de imágenes -->
+                        <div class="aspect-square bg-stone-50 relative overflow-hidden">
+                            @php
+                                $images = [];
+                                if($product->imagen_url) $images[] = $product->imagen_url;
+                                if($product->imagen_galeria) {
+                                    $extra = explode(',', $product->imagen_galeria);
+                                    $images = array_merge($images, $extra);
+                                }
+                                if(empty($images)) $images[] = asset('assets/images/default-product.png');
+                                $totalImgs = count($images);
+                                $hasMultiple = $totalImgs > 1;
+                            @endphp
+                            
+                            @foreach($images as $idx => $img)
+                                <img src="{{ $img }}" 
+                                     alt="{{ $product->nombre }}"
+                                     class="w-full h-full object-contain transition-opacity duration-500 absolute inset-0 {{ $idx === 0 ? 'opacity-100' : 'opacity-0' }}" />
+                            @endforeach
+                            
+                            <!-- Badges -->
+                            <div class="absolute top-3 left-3 flex gap-2">
+                                @if($hasMultiple)
+                                    <span class="bg-black/60 backdrop-blur text-white text-[9px] font-black px-2 py-0.5 rounded flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[10px]">image</span>
+                                        {{ $totalImgs }}
+                                    </span>
+                                @endif
+                                @if($product->created_at && $product->created_at->diffInDays(now()) < 15)
+                                    <span class="bg-primary text-stone-900 text-[9px] font-black px-2 py-0.5 rounded">NUEVO</span>
+                                @endif
+                            </div>
+                            
+                            <!-- Controles galería -->
+                            @if($hasMultiple)
+                                <button class="nav-prev absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-black z-10" onclick="event.stopPropagation(); navigateProductImg(this, -1)">
+                                    <span class="material-symbols-outlined text-white text-sm">chevron_left</span>
+                                </button>
+                                <button class="nav-next absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-black z-10" onclick="event.stopPropagation(); navigateProductImg(this, 1)">
+                                    <span class="material-symbols-outlined text-white text-sm">chevron_right</span>
+                                </button>
+                                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                                    @for($i = 0; $i < $totalImgs; $i++)
+                                        <span class="w-1.5 h-1.5 rounded-full bg-white/{{ $i === 0 ? '100' : '30' }}"></span>
+                                    @endfor
+                                </div>
+                            @endif
+                        </div>
+                        
+                        <!-- Info -->
+                        <div class="p-4">
+                            <span class="text-[9px] font-mono font-black text-black bg-stone-100 px-2 py-0.5 rounded">
+                                {{ $product->codigo_oem ?? 'N/A' }}
+                            </span>
+                            <h3 class="text-[13px] font-black text-stone-900 mt-2 leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+                                {{ $product->nombre }}
+                            </h3>
+                            <div class="flex items-center gap-2 mt-2 text-[10px] text-stone-500">
+                                <span>{{ $product->categoria ?? '-' }}</span>
+                                <span>•</span>
+                                <span>{{ $product->marca ?? '-' }}</span>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between">
+                                <span class="text-lg font-headline font-black text-stone-900">
+                                    ${{ number_format($product->precio_mayor ?? 0, 2) }}
+                                </span>
+                                <button class="w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-stone-800 transition-all" onclick="event.stopPropagation();">
+                                    <span class="material-symbols-outlined text-sm">add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    @empty
+                    <div class="col-span-full py-20 text-center">
+                        <span class="material-symbols-outlined text-5xl text-stone-200 mb-6 block">inventory_2</span>
+                        <p class="text-stone-500 font-black uppercase tracking-widest">Sin productos disponibles</p>
+                    </div>
+                    @endforelse
+                </div>
+                
+                <!-- Paginación grid -->
+                <div class="mt-12 flex justify-center">
+                    {{ $products->appends(request()->except('page'))->links() }}
+                </div>
+            @endif
         </section>
     </div>
 </main>
 @endsection
 
 @push('scripts')
-    <script>
+<script>
+// Navegación de imágenes en cards
+function navigateProductImg(btn, direction) {
+    const card = btn.closest('.group');
+    const images = card.querySelectorAll('.aspect-square > img');
+    const dots = card.querySelectorAll('.absolute.bottom-3 span');
+    let current = -1;
+    
+    images.forEach((img, idx) => {
+        if (img.classList.contains('opacity-100')) current = idx;
+    });
+    
+    const next = (current + direction + images.length) % images.length;
+    
+    images.forEach(img => img.classList.replace('opacity-100', 'opacity-0'));
+    images[next].classList.replace('opacity-0', 'opacity-100');
+    
+    dots.forEach((dot, idx) => {
+        dot.classList.toggle('bg-white', idx === next);
+        dot.classList.toggle('bg-white/30', idx !== next);
+    });
+}
 
-    function updateRowTotal(input) {
-        const price = parseFloat(input.getAttribute('data-price'));
-        const qty = parseInt(input.value) || 0;
-        const total = price * qty;
-        const totalElement = input.closest('tr').querySelector('.row-total');
-        if (totalElement) {
-            totalElement.textContent = '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// Función para agregar al carrito desde la vista LISTA
+function addToCartList(productId, productName, price, qty) {
+    fetch('/api/tienda/carrito', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            product_id: productId,
+            cantidad: qty
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert(productName + ' agregado al carrito');
+            const badge = document.getElementById('cart-count');
+            if (badge) badge.textContent = data.cart_count;
+        } else {
+            alert('Error: ' + (data.message || 'No se pudo agregar'));
         }
-    }
-
-    // Funcionalidad global del API carrito
-    window.addToCart = function(productId, productName, price, imageUrl, category) {
-        fetch('/api/tienda/carrito', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({
-                product_id: productId,
-                cantidad: 1
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert(productName + ' agregado exitosamente al carrito.');
-                // Update badge if exists
-            } else {
-                alert('No se pudo agregar al carrito: ' + (data.message || 'Error'));
-            }
-        })
-        .catch(err => {
-            console.error('Error adding to cart', err);
-            alert('Error técnico al agregar al carrito.');
-        });
-    }
-    </script>
-    <script src="{{ asset('js/catalogo_detallado.js') }}"></script>
+    })
+    .catch(err => {
+        console.error('Error:', err);
+        alert('Error técnico al agregar al carrito.');
+    });
+}
+</script>
 @endpush

@@ -27,9 +27,9 @@
             class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-6"
             >Distribuidor Autorizado</span
           >
-          <h1
-            class="text-6xl md:text-8xl font-headline font-black text-white uppercase tracking-tighter leading-[0.9] mb-8"
-          >
+           <h1
+             class="text-2xl md:text-3xl font-headline font-black text-white uppercase tracking-tighter leading-[0.9] mb-8"
+           >
             IMPULSADO POR <br />
             <span class="text-primary-dim">LA PRECISIÓN.</span>
           </h1>
@@ -78,7 +78,7 @@
       >
         <div class="max-w-xl">
           <h2
-            class="text-5xl font-black uppercase tracking-tighter text-black mb-4"
+            class="text-3xl font-black uppercase tracking-tighter text-black mb-4"
           >
             Componentes de Precisión
           </h2>
@@ -120,7 +120,7 @@
             <x-product-card :product="$product" />
         @empty
             <div class="col-span-full py-20 text-center">
-                <span class="material-symbols-outlined text-6xl text-stone-300 mb-4">inventory_2</span>
+                 <span class="material-symbols-outlined text-4xl text-stone-300 mb-4">inventory_2</span>
                 <p class="text-stone-500 font-bold uppercase tracking-widest">No se encontraron productos</p>
             </div>
         @endforelse
@@ -132,49 +132,50 @@
       </div>
     </main>
 
-    <!-- Features Section -->
-    <section class="bg-black py-24 px-6 text-white border-y border-stone-800">
-      <div
-        class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"
-      >
-        <div class="flex flex-col gap-4">
-          <span class="material-symbols-outlined text-primary text-5xl"
-            >precision_manufacturing</span
-          >
-          <h4 class="text-2xl font-black uppercase tracking-tight">
-            Estándares O.E.M.
-          </h4>
-          <p class="text-stone-400 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
-            Todas las piezas cumplen o superan las especificaciones del
-            fabricante de equipo original para aplicaciones industriales
-            críticas.
-          </p>
+     <!-- Features Section (Hero Style) -->
+     <section class="relative min-h-[80vh] flex items-center overflow-hidden bg-black">
+        <div class="absolute inset-0 z-0">
+            <img
+              src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920&q=80"
+              class="w-full h-full object-cover opacity-30"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
         </div>
-        <div class="flex flex-col gap-4">
-          <span class="material-symbols-outlined text-primary text-5xl"
-            >local_shipping</span
-          >
-          <h4 class="text-2xl font-black uppercase tracking-tight">
-            Logística Rápida
-          </h4>
-          <p class="text-stone-400 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
-            Distribución estratégica desde Valencia garantiza cobertura nacional
-            y tiempo de inactividad mínimo para su flota.
-          </p>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl">
+                <span class="inline-block px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] mb-6">Ventajas Comparativas</span>
+                <h2 class="text-2xl md:text-3xl font-headline font-black text-white uppercase tracking-tighter leading-[0.9] mb-12">
+                    CALIDAD <br/>
+                    <span class="text-primary-dim">EN CADA ENTREGA.</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
+                    <!-- Feature 1 -->
+                    <div class="flex flex-col gap-4">
+                        <span class="material-symbols-outlined text-primary text-5xl">precision_manufacturing</span>
+                        <h4 class="text-xl font-black uppercase tracking-tight text-white">Estándares O.E.M.</h4>
+                        <p class="text-stone-300 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
+                            Todas las piezas cumplen o superan las especificaciones del fabricante de equipo original para aplicaciones industriales críticas.
+                        </p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="flex flex-col gap-4">
+                        <span class="material-symbols-outlined text-primary text-5xl">local_shipping</span>
+                        <h4 class="text-xl font-black uppercase tracking-tight text-white">Logística Rápida</h4>
+                        <p class="text-stone-300 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
+                            Distribución estratégica desde Valencia garantiza cobertura nacional y tiempo de inactividad mínimo para su flota.
+                        </p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="flex flex-col gap-4">
+                        <span class="material-symbols-outlined text-primary text-5xl">verified</span>
+                        <h4 class="text-xl font-black uppercase tracking-tight text-white">Soporte Experto</h4>
+                        <p class="text-stone-300 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
+                            Nuestro equipo técnico proporciona consulta especializada para compatibilidad de motores y mantenimiento.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex flex-col gap-4">
-          <span class="material-symbols-outlined text-primary text-5xl"
-            >verified</span
-          >
-          <h4 class="text-2xl font-black uppercase tracking-tight">
-            Soporte Experto
-          </h4>
-          <p class="text-stone-400 text-[12px] leading-relaxed font-bold uppercase tracking-tight">
-            Nuestro equipo técnico proporciona consulta especializada para
-            compatibilidad de motores y mantenimiento.
-          </p>
-        </div>
-      </div>
     </section>
 
     <!-- Scroll to Top Button -->

@@ -4,7 +4,7 @@
 <div class="max-w-[1920px] mx-auto px-6 py-12">
     <div class="mb-12">
         <span class="text-red-500 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block italic">Registro de Excepciones Operativas</span>
-        <h2 class="text-5xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Compras <span class="text-stone-300">Anuladas</span></h2>
+         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Compras <span class="text-stone-300">Anuladas</span></h2>
     </div>
 
     <div class="bg-white rounded-[40px] shadow-2xl border border-stone-200 overflow-hidden relative border-red-500/10">
