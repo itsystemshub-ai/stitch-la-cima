@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MAYOR DE REPUESTO LA CIMA, C.A. - ERP">
 <link rel="manifest" href="{{ asset('manifest.json') }}">
-<link rel="icon" type="image/png" href="{{ asset('image.png') }}">
-<link rel="apple-touch-icon" href="{{ asset('image.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
 <title>@yield('title', 'Zenith ERP') | MAYOR DE REPUESTO LA CIMA, C.A. - RIF: J-40308741-5</title>
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])

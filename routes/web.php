@@ -16,6 +16,7 @@ use App\Http\Controllers\RrhhController;
 use App\Http\Controllers\TiendaAuthController;
 use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\VentasController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +72,10 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
     // Dashboard Principal
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('erp.dashboard');
 
+    // Rutas específicas para vendedores
+    Route::middleware('role:vendedor')->prefix('vendedor')->group(function () {
+        Route::get('/dashboard', [VendedorController::class, 'dashboard'])->name('erp.vendedor.dashboard');
+    });
     // Redirección de compatibilidad
     Route::get('/inicio', function () {
         return redirect()->route('erp.dashboard');

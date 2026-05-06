@@ -11,33 +11,44 @@
     <div class="bg-white rounded-lg shadow p-6">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold">Lista de Usuarios ({{ $users->count() }})</h2>
-            <button onclick="openCreateModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-                <span class="material-symbols-outlined text-sm">person_add</span>
-                Añadir Usuario
-            </button>
+            <div class="flex gap-2">
+                <button onclick="testFunction()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
+                    Test JS
+                </button>
+                <button onclick="openCreateModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                    <span class="material-symbols-outlined text-sm">person_add</span>
+                    Añadir Usuario
+                </button>
+            </div>
         </div>
 
         <div class="overflow-x-auto">
             <table class="min-w-full table-auto">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase">#</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Cédula/RIF</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Rol</th>
-                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
-                        <th class="px-3 py-2 text-center text-xs font-medium text-gray-500 uppercase">Acciones</th>
+                        <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">#</th>
+                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Cédula/RIF</th>
+                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
+                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Rol</th>
+                        <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">
+                            Contraseña
+                            @if(!auth()->user()->is_admin)
+                                <span class="material-symbols-outlined text-xs text-red-400 ml-1" title="Solo administradores">admin_panel_settings</span>
+                            @endif
+                        </th>
+                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
+                        <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach($users as $index => $user)
                     <tr class="hover:bg-gray-50">
-                        <td class="px-3 py-2 text-center text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
-                        <td class="px-3 py-2 text-sm font-mono text-gray-600">{{ $user->cedula_rif ?: '-' }}</td>
-                        <td class="px-3 py-2 text-sm font-medium text-gray-900">{{ $user->name }}</td>
-                        <td class="px-3 py-2 text-sm text-gray-500">{{ $user->email }}</td>
-                        <td class="px-3 py-2 text-sm text-gray-500">
+                        <td class="px-2 py-2 text-center text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
+                        <td class="px-2 py-2 text-sm font-mono text-gray-600">{{ $user->cedula_rif ?: '-' }}</td>
+                        <td class="px-2 py-2 text-sm font-medium text-gray-900">{{ $user->name }}</td>
+                        <td class="px-2 py-2 text-sm text-gray-500">{{ $user->email }}</td>
+                        <td class="px-2 py-2 text-sm text-gray-500">
                             <span class="px-2 py-1 text-xs font-medium rounded-full
                                 @if($user->role === 'admin') bg-purple-100 text-purple-800
                                 @elseif($user->role === 'vendedor') bg-blue-100 text-blue-800
@@ -46,24 +57,39 @@
                                 {{ $user->role }}
                             </span>
                         </td>
-                        <td class="px-3 py-2 text-sm text-gray-500">
+                        <td class="px-2 py-2 text-center text-sm text-gray-500">
+                            @if(auth()->user()->is_admin)
+                                <div class="flex items-center justify-center space-x-1">
+                                    <span id="password-{{ $user->id }}" class="font-mono text-sm select-none cursor-pointer" onclick="togglePassword({{ $user->id }}, '{{ $passwords[$user->email] ?? 'N/A' }}')">••••••••</span>
+                                    <span class="material-symbols-outlined text-base text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" onclick="togglePassword({{ $user->id }}, '{{ $passwords[$user->email] ?? 'N/A' }}')" title="Hacer clic para mostrar/ocultar contraseña" id="eye-{{ $user->id }}">visibility_off</span>
+                                </div>
+                            @else
+                                <div class="flex items-center justify-center space-x-1">
+                                    <span class="text-gray-300 font-mono text-sm">••••••••</span>
+                                    <span class="material-symbols-outlined text-base text-gray-300" title="Solo administradores pueden ver contraseñas">visibility_off</span>
+                                </div>
+                            @endif
+                        </td>
+                        <td class="px-2 py-2 text-sm text-gray-500">
                             <span class="px-2 py-1 text-xs font-medium rounded-full
                                 {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                 {{ $user->is_active ? 'Activo' : 'Inactivo' }}
                             </span>
                         </td>
-                        <td class="px-3 py-2 text-center text-sm text-gray-500">
-                            <div class="flex space-x-2 justify-center">
+                        <td class="px-2 py-2 text-center text-sm text-gray-500">
+                            <div class="flex space-x-1 justify-center">
+                                @if($user->role !== 'admin' || auth()->user()->is_admin)
+                                <button onclick="editUser({{ $user->id }})" class="p-1.5 text-blue-600 hover:bg-blue-100 rounded-md transition-colors" title="Editar usuario">
+                                    <span class="material-symbols-outlined text-base">edit</span>
+                                </button>
                                 @if($user->role !== 'admin')
-                                <button onclick="editUser({{ $user->id }})" class="p-2 text-blue-600 hover:bg-blue-100 rounded-md transition-colors" title="Editar usuario">
-                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                <button onclick="deleteUser({{ $user->id }}, '{{ addslashes($user->name) }}')" class="p-1.5 text-red-600 hover:bg-red-100 rounded-md transition-colors" title="Eliminar usuario">
+                                    <span class="material-symbols-outlined text-base">delete</span>
                                 </button>
-                                <button onclick="deleteUser({{ $user->id }}, '{{ $user->name }}')" class="p-2 text-red-600 hover:bg-red-100 rounded-md transition-colors" title="Eliminar usuario">
-                                    <span class="material-symbols-outlined text-lg">delete</span>
-                                </button>
+                                @endif
                                 @else
-                                <div class="p-2 text-gray-400" title="Usuario administrador - acciones restringidas">
-                                    <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
+                                <div class="p-1.5 text-gray-400" title="Usuario administrador - acciones restringidas">
+                                    <span class="material-symbols-outlined text-base">admin_panel_settings</span>
                                 </div>
                                 @endif
                             </div>
@@ -168,6 +194,57 @@
 
 @push('scripts')
 <script>
+// Estado de visibilidad de contraseñas
+const passwordVisibility = {};
+
+// Función para alternar visibilidad de contraseña
+function togglePassword(userId, realPassword) {
+    console.log('Función togglePassword llamada con ID:', userId, 'Contraseña:', realPassword);
+
+    // Obtener elementos
+    const passwordSpan = document.getElementById('password-' + userId);
+    const eyeIcon = document.getElementById('eye-' + userId);
+
+    console.log('Elementos encontrados - Span:', !!passwordSpan, ' Icono:', !!eyeIcon);
+
+    if (!passwordSpan || !eyeIcon) {
+        console.error('No se encontraron los elementos para el usuario', userId);
+        return;
+    }
+
+    // Inicializar estado si no existe
+    if (passwordVisibility[userId] === undefined) {
+        passwordVisibility[userId] = false;
+        console.log('Estado inicializado para usuario', userId);
+    }
+
+    console.log('Estado actual para usuario', userId, ':', passwordVisibility[userId]);
+
+    if (passwordVisibility[userId]) {
+        // Ocultar contraseña
+        passwordSpan.textContent = '••••••••';
+        eyeIcon.textContent = 'visibility_off';
+        passwordVisibility[userId] = false;
+        console.log('✅ Contraseña OCULTA para usuario', userId);
+    } else {
+        // Mostrar contraseña
+        passwordSpan.textContent = realPassword;
+        eyeIcon.textContent = 'visibility';
+        passwordVisibility[userId] = true;
+        console.log('✅ Contraseña MOSTRADA para usuario', userId);
+    }
+}
+
+// Debug inicial
+console.log('Script de contraseñas cargado correctamente');
+
+// Función de prueba
+window.testFunction = function() {
+    console.log('Test function ejecutada');
+    alert('JavaScript funciona correctamente');
+};
+
+
 function openCreateModal() {
     // Limpiar el formulario
     document.getElementById('createForm').reset();
@@ -188,7 +265,8 @@ function editUser(userId) {
     const name = row.cells[2].textContent.trim();
     const email = row.cells[3].textContent.trim();
     const roleText = row.cells[4].textContent.trim().toLowerCase();
-    const statusText = row.cells[5].textContent.trim().toLowerCase();
+    // Saltar columna de contraseña (5) y obtener estado (6)
+    const statusText = row.cells[6].textContent.trim().toLowerCase();
 
     // Mapear texto a valores
     let role = 'trabajador';

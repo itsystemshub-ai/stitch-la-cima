@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth.erp' => AuthMiddleware::class,
             'permiso.modulo' => VerificarPermisoModulo::class,
+            'role' => VerificarRolUsuario::class,
             'security.headers' => SecurityHeadersMiddleware::class,
         ]);
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test JavaScript</title>
+</head>
+<body>
+    <h1>Test de JavaScript</h1>
+    <div id="test-output"></div>
+
+    <script>
+        console.log('JavaScript básico funciona');
+
+        // Estado de visibilidad de contraseñas
+        const passwordVisibility = {};
+
+        function togglePassword(userId, realPassword, event) {
+            console.log('togglePassword called with userId:', userId, 'realPassword:', realPassword);
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            const passwordSpan = document.getElementById('password-' + userId);
+            const eyeIcon = document.getElementById('eye-' + userId);
+
+            console.log('passwordSpan found:', !!passwordSpan);
+            console.log('eyeIcon found:', !!eyeIcon);
+
+            if (!passwordSpan || !eyeIcon) {
+                console.error('Elementos no encontrados para userId:', userId);
+                return;
+            }
+
+            // Inicializar estado si no existe
+            if (typeof passwordVisibility[userId] === 'undefined') {
+                passwordVisibility[userId] = false;
+            }
+
+            if (passwordVisibility[userId]) {
+                // Ocultar contraseña
+                passwordSpan.textContent = '••••••••';
+                eyeIcon.textContent = 'visibility_off';
+                passwordVisibility[userId] = false;
+                console.log('Contraseña OCULTA para userId:', userId);
+            } else {
+                // Mostrar contraseña
+                passwordSpan.textContent = realPassword;
+                eyeIcon.textContent = 'visibility';
+                passwordVisibility[userId] = true;
+                console.log('Contraseña MOSTRADA para userId:', userId);
+            }
+        }
+
+        // Crear elementos de prueba
+        document.addEventListener('DOMContentLoaded', function() {
+            const output = document.getElementById('test-output');
+
+            // Crear un elemento de prueba
+            const testDiv = document.createElement('div');
+            testDiv.innerHTML = `
+                <div class="flex items-center justify-center space-x-1">
+                    <span id="password-1" class="font-mono text-sm select-none cursor-pointer" onclick="togglePassword(1, 'TestPassword123', event)">••••••••</span>
+                    <button onclick="togglePassword(1, 'TestPassword123', event)" class="text-gray-400 hover:text-gray-600 transition-colors" title="Hacer clic para mostrar/ocultar contraseña">
+                        <span class="material-symbols-outlined text-base" id="eye-1">visibility_off</span>
+                    </button>
+                </div>
+                <p>Haz clic en los elementos para probar la funcionalidad</p>
+            `;
+
+            output.appendChild(testDiv);
+        });
+    </script>
+</body>
+</html>

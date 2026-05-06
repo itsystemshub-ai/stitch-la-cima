@@ -1,4 +1,4 @@
-REGION	ESTADO	NOMBRE APELLIDO	CORREO ELECTRONICO	TIPO	CONTRASENA
+REGION	ESTADO	NOMBRE APELLIDO	CORREO ELECTRONICO	ROL	CONTRASENA
 REGION CAPITAL	Distrito Capital	Pedro Romera	pedrofromera@outlook.com	Vendedor	NRQDcSALFL7S
 REGION CENTRAL	Carabobo	ENMANUEL ESCORCHE	enmanuelcontreras10@gmail.com	Vendedor	cHACUXzJLrw8
 REGION CENTRAL	Carabobo	Carla Rodriguez	carlarodriguezga88@gmail.com	Vendedor	n76XGD8sHR7v
@@ -109,3 +109,4 @@ REGION ZULIANA	Zulia	RUSTYNORTE, C.A	rustinorte@gmail.com	Cliente	SbrBSWBLCd3s
 REGION CENTRAL	Carabobo	REPUESTOS FILIPENSES 4:13	arfilipenses413@gmail.com	Cliente	7u9JmHbwwTcg
 REGION CENTRAL	Carabobo	CARABOBOPARTS, C.A	carlosgonzalez67@gmail.com	Cliente	n7JtBKFw7Md8
 REGION LOS ANDES	Trujillo	COMERCIAL CONTESSI, C.A	comercialcontessi@gmail.com	Cliente	rshNg9GXMZ6R
+REGION CENTRAL	Carabobo	Elias Tapias	admin@lacima.com	superusuario	Admin123
