@@ -21,16 +21,21 @@
             <h2 class="font-headline text-4xl font-black uppercase tracking-tighter text-white">
                 Sistemas: <span class="text-primary">Nominal</span>
             </h2>
-            <div class="flex flex-wrap items-center gap-8 mt-6">
-                <div>
-                    <span class="block text-[9px] uppercase tracking-widest text-stone-500 mb-1">Uptime (30d)</span>
-                    <span class="font-headline text-2xl font-bold text-white">99.98%</span>
-                </div>
-                <div class="w-px h-10 bg-stone-800 hidden sm:block"></div>
-                <div>
-                    <span class="block text-[9px] uppercase tracking-widest text-stone-500 mb-1">Latencia Promedio</span>
-                    <span class="font-headline text-2xl font-bold text-white">42ms</span>
-                </div>
+                <div class="flex flex-wrap items-center gap-8 mt-6">
+                    <div>
+                        <span class="block text-[9px] uppercase tracking-widest text-stone-500 mb-1">Total Usuarios</span>
+                        <span class="font-headline text-2xl font-bold text-white">{{ $users->count() }}</span>
+                    </div>
+                    <div class="w-px h-10 bg-stone-800 hidden sm:block"></div>
+                    <div>
+                        <span class="block text-[9px] uppercase tracking-widest text-stone-500 mb-1">Vendedores Activos</span>
+                        <span class="font-headline text-2xl font-bold text-white">{{ $users->where('role', 'vendedor')->where('is_active', true)->count() }}</span>
+                    </div>
+                    <div class="w-px h-10 bg-stone-800 hidden sm:block"></div>
+                    <div>
+                        <span class="block text-[9px] uppercase tracking-widest text-stone-500 mb-1">Clientes Registrados</span>
+                        <span class="font-headline text-2xl font-bold text-white">{{ $users->where('role', 'cliente')->count() }}</span>
+                    </div>
                 <div class="ml-auto">
                     <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-3 transition-all active:scale-95 group shadow-lg shadow-red-500/20">
                         <span class="material-symbols-outlined group-hover:rotate-12 transition-transform">report_problem</span>
@@ -95,19 +100,19 @@
                 <div>
                     <div class="flex justify-between text-[10px] font-black uppercase tracking-widest mb-1">
                         <span>CPU Usage</span>
-                        <span>42%</span>
+                        <span>{{ $health['cpu_usage'] ?? 'N/A' }}%</span>
                     </div>
                     <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-primary w-[42%]"></div>
+                        <div class="h-full bg-primary w-[{{ $health['cpu_usage'] ?? 0 }}%]"></div>
                     </div>
                 </div>
                 <div>
                     <div class="flex justify-between text-[10px] font-black uppercase tracking-widest mb-1">
-                        <span>RAM (16GB)</span>
-                        <span>6.8GB</span>
+                        <span>RAM ({{ $health['total_ram'] ?? 'N/A' }})</span>
+                        <span>{{ $health['used_ram'] ?? 'N/A' }}</span>
                     </div>
                     <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-stone-900 w-[45%]"></div>
+                        <div class="h-full bg-stone-900 w-[{{ $health['ram_percentage'] ?? 0 }}%]"></div>
                     </div>
                 </div>
                 <div>
@@ -145,7 +150,7 @@
                 <div class="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
             </div>
             <h3 class="text-sm font-bold text-stone-900 uppercase tracking-tight">Inventario</h3>
-            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">Sincronizado: 2m atrás</p>
+            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">{{ $dbStats['last_sync'] ?? 'Última sincronización: 2m atrás' }}</p>
         </div>
 
         <!-- Module: Sales -->
@@ -203,33 +208,23 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-100">
+                    @forelse($users->take(5) as $user)
                     <tr class="hover:bg-stone-50/50 transition-colors">
-                        <td class="px-6 py-4 text-xs text-stone-500">2023-10-24 04:00</td>
-                        <td class="px-6 py-4 text-xs text-stone-900 font-bold uppercase">Main DB Cluster</td>
-                        <td class="px-6 py-4 text-xs text-stone-600 italic">Optimización programada</td>
-                        <td class="px-6 py-4 text-xs text-stone-500 font-mono">SYS-ADM-01</td>
+                        <td class="px-6 py-4 text-xs text-stone-500">{{ $user->created_at->format('Y-m-d H:i') }}</td>
+                        <td class="px-6 py-4 text-xs text-stone-900 font-bold uppercase">{{ $user->role }}</td>
+                        <td class="px-6 py-4 text-xs text-stone-600 italic">Registro de usuario</td>
+                        <td class="px-6 py-4 text-xs text-stone-500 font-mono">{{ $user->email }}</td>
                         <td class="px-6 py-4 text-right">
-                            <span class="px-2 py-1 bg-lime-100 text-lime-700 text-[9px] font-black uppercase rounded-md tracking-widest">Éxito</span>
+                            <span class="px-2 py-1 {{ $user->is_active ? 'bg-lime-100 text-lime-700' : 'bg-stone-100 text-stone-600' }} text-[9px] font-black uppercase rounded-md tracking-widest">{{ $user->is_active ? 'Activo' : 'Inactivo' }}</span>
                         </td>
                     </tr>
-                    <tr class="hover:bg-stone-50/50 transition-colors">
-                        <td class="px-6 py-4 text-xs text-stone-500">2023-10-22 18:15</td>
-                        <td class="px-6 py-4 text-xs text-stone-900 font-bold uppercase">API Gateway</td>
-                        <td class="px-6 py-4 text-xs text-stone-600 italic">Hotfix de Emergencia</td>
-                        <td class="px-6 py-4 text-xs text-stone-500 font-mono">DEV-SEC-09</td>
-                        <td class="px-6 py-4 text-right">
-                            <span class="px-2 py-1 bg-lime-100 text-lime-700 text-[9px] font-black uppercase rounded-md tracking-widest">Éxito</span>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="px-6 py-4 text-center text-stone-500">
+                            No hay usuarios registrados
                         </td>
                     </tr>
-                    <tr class="hover:bg-stone-50/50 transition-colors">
-                        <td class="px-6 py-4 text-xs text-stone-500">2023-10-21 02:00</td>
-                        <td class="px-6 py-4 text-xs text-stone-900 font-bold uppercase">Inventario Node</td>
-                        <td class="px-6 py-4 text-xs text-stone-600 italic">Migración de Hardware</td>
-                        <td class="px-6 py-4 text-xs text-stone-500 font-mono">INF-OPS-04</td>
-                        <td class="px-6 py-4 text-right">
-                            <span class="px-2 py-1 bg-stone-100 text-stone-600 text-[9px] font-black uppercase rounded-md tracking-widest">Diferido</span>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

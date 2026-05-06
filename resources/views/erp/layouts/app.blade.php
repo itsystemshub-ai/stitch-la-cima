@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="description" content="Zenith ERP - MAYOR DE REPUESTO LA CIMA, C.A."/>
 <meta name="theme-color" content="#ceff5e">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MAYOR DE REPUESTO LA CIMA, C.A. - ERP">
 <link rel="manifest" href="{{ asset('manifest.json') }}">
-<link rel="icon" type="image/png" href="{{ asset('assets/images/logo.png') }}">
-<link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('image.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('image.png') }}">
 <title>@yield('title', 'Zenith ERP') | MAYOR DE REPUESTO LA CIMA, C.A. - RIF: J-40308741-5</title>
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -28,7 +29,9 @@
 </head>
 <body class="bg-erp text-stone-900 min-h-screen flex" style="color-scheme: light;">
 
+@if(!isset($disableSmartNavigator) || !$disableSmartNavigator)
 <x-smart-navigator />
+@endif
 
 @include('erp.layouts.sidebar')
 

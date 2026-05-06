@@ -156,6 +156,10 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/parametros', [ConfiguracionController::class, 'parametros'])->name('erp.configuracion.parametros');
         Route::get('/fiscal', [ConfiguracionController::class, 'fiscal'])->name('erp.configuracion.fiscal');
         Route::get('/usuarios', [ConfiguracionController::class, 'usuarios'])->name('erp.configuracion.usuarios');
+        Route::post('/usuarios', [ConfiguracionController::class, 'storeUser'])->name('erp.configuracion.usuarios.store');
+        Route::put('/usuarios/{id}', [ConfiguracionController::class, 'updateUser'])->name('erp.configuracion.usuarios.update');
+        Route::delete('/usuarios/{id}', [ConfiguracionController::class, 'destroyUser'])->name('erp.configuracion.usuarios.destroy');
+        Route::get('/test-usuarios', [ConfiguracionController::class, 'testUsuarios'])->name('erp.configuracion.test-usuarios');
         Route::get('/base-datos', [ConfiguracionController::class, 'baseDatos'])->name('erp.configuracion.base-datos');
         Route::get('/gestor-tablas', [ConfiguracionController::class, 'gestorTablas'])->name('erp.configuracion.gestor-tablas');
         Route::get('/gestor-tablas/{tabla}', [ConfiguracionController::class, 'verContenidoTabla'])->name('erp.configuracion.ver-tabla');
