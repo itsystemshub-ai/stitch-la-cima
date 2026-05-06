@@ -16,8 +16,8 @@
       <span class="w-3 h-8 bg-primary rounded-sm shadow-[0_0_15px_rgba(206,255,94,0.4)]"></span>
       <p class="text-[12px] font-black text-stone-400 uppercase tracking-[0.4em] italic leading-none">Command Center: Commercial Div.</p>
     </div>
-    <h2 class="text-5xl md:text-6xl font-headline font-black text-stone-950 tracking-tighter leading-none uppercase italic">Trading <span class="text-stone-300">Hub</span></h2>
-    <p class="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] italic italic">
+    <h2 class="text-2xl font-headline font-black text-stone-950 tracking-tighter leading-none uppercase italic">Trading <span class="text-stone-300">Hub</span></h2>
+    <p class="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] italic">
       MAYOR DE REPUESTO LA CIMA, C.A. • ALPHA_SALES_NODE_01
     </p>
   </div>
@@ -50,11 +50,11 @@
       </div>
       <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-2 italic">Consolidated Revenue</p>
       <div class="flex items-baseline gap-2">
-        <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['ventas_mes'], 0) }}</span>
-        <span class="text-[12px] font-black text-stone-400 font-mono">.00</span>
+        <span class="text-xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['ventas_mes'], 0) }}</span>
+        <span class="text-[10px] font-black text-stone-400 font-mono">.00</span>
       </div>
-      <div class="mt-6 pt-6 border-t border-stone-50">
-        <p class="text-[9px] text-stone-500 font-black uppercase tracking-widest italic italic">842 Authorized Packets Detected</p>
+      <div class="mt-4 pt-4 border-t border-stone-50">
+        <p class="text-[9px] text-stone-500 font-black uppercase tracking-widest italic">842 Authorized Packets Detected</p>
       </div>
     </div>
   </div>
@@ -73,11 +73,11 @@
       </div>
       <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-2 italic">Outstanding Receivables</p>
       <div class="flex items-baseline gap-2">
-        <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['cuentas_por_cobrar'], 0) }}</span>
-        <span class="text-[12px] font-black text-stone-400 font-mono">.00</span>
+        <span class="text-xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['cuentas_por_cobrar'], 0) }}</span>
+        <span class="text-[10px] font-black text-stone-400 font-mono">.00</span>
       </div>
-      <div class="mt-6 pt-6 border-t border-stone-50">
-        <p class="text-[9px] text-stone-500 font-black uppercase tracking-widest italic italic">System flagged as High Priority</p>
+      <div class="mt-4 pt-4 border-t border-stone-50">
+        <p class="text-[9px] text-stone-500 font-black uppercase tracking-widest italic">System flagged as High Priority</p>
       </div>
     </div>
   </div>
@@ -96,11 +96,11 @@
       </div>
       <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] mb-2 italic">Avg. Order Value</p>
       <div class="flex items-baseline gap-2">
-        <span class="text-4xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['ticket_promedio'], 0) }}</span>
-        <span class="text-[12px] font-black text-stone-400 font-mono">.00</span>
+        <span class="text-xl font-headline font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($stats['ticket_promedio'], 0) }}</span>
+        <span class="text-[10px] font-black text-stone-400 font-mono">.00</span>
       </div>
-      <div class="mt-6 pt-6 border-t border-stone-50">
-        <p class="text-[9px] text-stone-500 font-black uppercase tracking-widest italic italic">+5% Volume Velocity Increment</p>
+      <div class="mt-4 pt-4 border-t border-stone-50">
+        <p class="text-[9px] text-stone-500 font-black uppercase tracking-widest italic">+5% Volume Velocity Increment</p>
       </div>
     </div>
   </div>
@@ -116,8 +116,8 @@
       </div>
       <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.4em] mb-2 italic">Network Retention Pulse</p>
       <div class="flex items-baseline gap-2">
-        <span class="text-4xl font-headline font-black text-white italic tracking-tighter leading-none">85.4%</span>
-        <span class="text-[11px] font-black text-primary italic font-mono uppercase">LTV</span>
+        <span class="text-xl font-headline font-black text-white italic tracking-tighter leading-none">85.4%</span>
+        <span class="text-[10px] font-black text-primary italic font-mono uppercase">LTV</span>
       </div>
       <div class="mt-6 pt-6 border-t border-white/5">
         <div class="w-full bg-stone-900 h-2 rounded-full overflow-hidden p-[1px] border border-stone-800">
@@ -140,8 +140,8 @@
           <span class="material-symbols-outlined text-2xl">dynamic_feed</span>
         </div>
         <div>
-          <h3 class="text-2xl font-headline font-black text-stone-950 uppercase tracking-tighter italic">Live Transmission Feed</h3>
-          <p class="text-[10px] text-stone-400 font-black uppercase tracking-[0.3em] mt-1 italic italic">Recent Terminal Activity</p>
+          <h3 class="text-xl font-headline font-black text-stone-950 uppercase tracking-tighter italic">Live Transmission Feed</h3>
+          <p class="text-[10px] text-stone-400 font-black uppercase tracking-[0.3em] mt-1 italic">Recent Terminal Activity</p>
         </div>
       </div>
       <a href="{{ url('/erp/ventas/registro') }}" class="text-[10px] font-black uppercase tracking-[0.4em] text-primary hover:text-stone-950 transition-all flex items-center gap-3 italic italic">
@@ -179,7 +179,7 @@
               </p>
             </td>
             <td class="px-8 py-6 text-right">
-              <span class="text-[14px] font-mono font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($order->total, 2) }}</span>
+              <span class="text-[12px] font-mono font-black text-stone-950 italic tracking-tighter leading-none">${{ number_format($order->total, 2) }}</span>
             </td>
             <td class="px-8 py-6 text-center">
               <span class="px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] border italic {{ $order->estado == 'Pagado' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-amber-100 text-amber-700 border-amber-200' }}">

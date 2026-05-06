@@ -60,8 +60,8 @@
                         <td class="px-2 py-2 text-center text-sm text-gray-500">
                             @if(auth()->user()->is_admin)
                                 <div class="flex items-center justify-center space-x-1">
-                                    <span id="password-{{ $user->id }}" class="font-mono text-sm select-none cursor-pointer" onclick="togglePassword({{ $user->id }}, '{{ $passwords[$user->email] ?? 'N/A' }}')">••••••••</span>
-                                    <span class="material-symbols-outlined text-base text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" onclick="togglePassword({{ $user->id }}, '{{ $passwords[$user->email] ?? 'N/A' }}')" title="Hacer clic para mostrar/ocultar contraseña" id="eye-{{ $user->id }}">visibility_off</span>
+                                    <span id="password-{{ $user->id }}" class="font-mono text-sm select-none cursor-pointer" onclick="togglePassword({{ $user->id }})">••••••••</span>
+                                    <span class="material-symbols-outlined text-base text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" onclick="togglePassword({{ $user->id }})" title="Hacer clic para mostrar/ocultar contraseña" id="eye-{{ $user->id }}">visibility_off</span>
                                 </div>
                             @else
                                 <div class="flex items-center justify-center space-x-1">
@@ -194,49 +194,70 @@
 
 @push('scripts')
 <script>
+// Array global de contraseñas
+const userPasswords = {
+    @foreach($users as $user)
+        @if(auth()->user()->is_admin)
+            {{ $user->id }}: '{{ $passwords[$user->email] ?? 'N/A' }}',
+        @endif
+    @endforeach
+};
+
 // Estado de visibilidad de contraseñas
 const passwordVisibility = {};
 
 // Función para alternar visibilidad de contraseña
-function togglePassword(userId, realPassword) {
-    console.log('Función togglePassword llamada con ID:', userId, 'Contraseña:', realPassword);
+function togglePassword(userId) {
+    console.log('🔄 togglePassword ejecutada para usuario:', userId);
 
-    // Obtener elementos
-    const passwordSpan = document.getElementById('password-' + userId);
-    const eyeIcon = document.getElementById('eye-' + userId);
+    try {
+        // Obtener elementos
+        const passwordSpan = document.getElementById('password-' + userId);
+        const eyeIcon = document.getElementById('eye-' + userId);
 
-    console.log('Elementos encontrados - Span:', !!passwordSpan, ' Icono:', !!eyeIcon);
+        if (!passwordSpan) {
+            console.error('❌ No se encontró el elemento password-' + userId);
+            return;
+        }
 
-    if (!passwordSpan || !eyeIcon) {
-        console.error('No se encontraron los elementos para el usuario', userId);
-        return;
-    }
+        if (!eyeIcon) {
+            console.error('❌ No se encontró el elemento eye-' + userId);
+            return;
+        }
 
-    // Inicializar estado si no existe
-    if (passwordVisibility[userId] === undefined) {
-        passwordVisibility[userId] = false;
-        console.log('Estado inicializado para usuario', userId);
-    }
+        console.log('✅ Elementos encontrados correctamente');
 
-    console.log('Estado actual para usuario', userId, ':', passwordVisibility[userId]);
+        // Inicializar estado si no existe
+        if (passwordVisibility[userId] === undefined) {
+            passwordVisibility[userId] = false;
+        }
 
-    if (passwordVisibility[userId]) {
-        // Ocultar contraseña
-        passwordSpan.textContent = '••••••••';
-        eyeIcon.textContent = 'visibility_off';
-        passwordVisibility[userId] = false;
-        console.log('✅ Contraseña OCULTA para usuario', userId);
-    } else {
-        // Mostrar contraseña
-        passwordSpan.textContent = realPassword;
-        eyeIcon.textContent = 'visibility';
-        passwordVisibility[userId] = true;
-        console.log('✅ Contraseña MOSTRADA para usuario', userId);
+        // Obtener contraseña real
+        const realPassword = userPasswords[userId] || 'N/A';
+
+        // Alternar visibilidad
+        if (passwordVisibility[userId]) {
+            // Ocultar
+            passwordSpan.textContent = '••••••••';
+            eyeIcon.textContent = 'visibility_off';
+            passwordVisibility[userId] = false;
+            console.log('👁️ Contraseña OCULTA para usuario', userId);
+        } else {
+            // Mostrar
+            passwordSpan.textContent = realPassword;
+            eyeIcon.textContent = 'visibility';
+            passwordVisibility[userId] = true;
+            console.log('👁️ Contraseña MOSTRADA para usuario', userId);
+        }
+
+    } catch (error) {
+        console.error('💥 Error en togglePassword:', error);
     }
 }
 
 // Debug inicial
 console.log('Script de contraseñas cargado correctamente');
+console.log('Contraseñas disponibles para', Object.keys(userPasswords).length, 'usuarios');
 
 // Función de prueba
 window.testFunction = function() {

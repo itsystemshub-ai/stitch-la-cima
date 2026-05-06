@@ -1,4 +1,4 @@
-@extends('layouts.erp')
+@extends('erp.layouts.app')
 
 @section('title', 'Dashboard Principal | Mayor de Repuesto La Cima, C.A.')
 @section('breadcrumb_active', 'Inicio')

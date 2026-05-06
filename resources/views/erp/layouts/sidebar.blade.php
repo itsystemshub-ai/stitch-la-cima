@@ -6,8 +6,8 @@
         <img src="{{ asset('assets/images/logo.png') }}" class="w-7 h-7 object-contain" alt="Logo">
       </div>
       <div>
-        <h2 class="font-headline font-bold text-sm text-stone-700 leading-none uppercase">MAYOR DE REPUESTO LA CIMA, C.A</h2>
-        <span class="text-[12px] font-mono text-stone-400">RIF: J-40308741-5</span>
+        <h2 class="font-headline font-bold text-[12px] text-stone-700 leading-none uppercase">MAYOR DE REPUESTO LA CIMA, C.A</h2>
+        <span class="text-[10px] font-mono text-stone-400">RIF: J-40308741-5</span>
       </div>
     </div>
     <p class="text-[10px] font-bold text-stone-400 tracking-wider uppercase">Portal ERP Corporativo</p>
@@ -21,14 +21,14 @@
       <span class="material-symbols-outlined text-[20px]">storefront</span><span>Tienda Virtual</span>
     </a>
     <a href="{{ url('/erp/dashboard') }}" class="menu-item {{ Request::is('erp/dashboard') ? 'menu-item-active' : 'menu-item-inactive' }}">
-      <span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard Central</span>
+      <span class="material-symbols-outlined text-[20px]">dashboard</span><span class="text-[12px]">Dashboard Central</span>
     </a>
 
     <!-- INVENTARIO -->
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/inventario*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">inventory_2</span>
-        <span>Inventario</span>
+        <span class="text-[12px]">Inventario</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu {{ Request::is('erp/inventario*') ? 'show' : '' }}">
@@ -48,7 +48,7 @@
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/ventas*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">payments</span>
-        <span>Ventas</span>
+        <span class="text-[12px]">Ventas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu {{ Request::is('erp/ventas*') ? 'show' : '' }}">
@@ -70,7 +70,7 @@
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/compras*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-        <span>Compras</span>
+        <span class="text-[12px]">Compras</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu {{ Request::is('erp/compras*') ? 'show' : '' }}">
@@ -87,7 +87,7 @@
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/contabilidad*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">account_balance</span>
-        <span>Contabilidad</span>
+        <span class="text-[12px]">Contabilidad</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu {{ Request::is('erp/contabilidad*') ? 'show' : '' }}">
@@ -108,7 +108,7 @@
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/finanzas*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">monetization_on</span>
-        <span>Finanzas</span>
+        <span class="text-[12px]">Finanzas</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu submenu-up {{ Request::is('erp/finanzas*') ? 'show' : '' }}">
@@ -125,7 +125,7 @@
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/rrhh*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">groups</span>
-        <span>RRHH</span>
+        <span class="text-[12px]">RRHH</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu submenu-up {{ Request::is('erp/rrhh*') ? 'show' : '' }}">
@@ -142,7 +142,7 @@
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/configuracion*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">settings</span>
-        <span>Configuración</span>
+        <span class="text-[12px]">Configuración</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu submenu-up {{ Request::is('erp/configuracion*') ? 'show' : '' }}">
@@ -164,7 +164,7 @@
     <div class="menu-parent">
       <div class="menu-item {{ Request::is('erp/ayuda*') ? 'menu-item-active' : 'menu-item-inactive' }}" onclick="toggleDropdown(this)">
         <span class="material-symbols-outlined text-[20px]">help</span>
-        <span>Ayuda</span>
+        <span class="text-[12px]">Ayuda</span>
         <span class="material-symbols-outlined dropdown-arrow">chevron_right</span>
       </div>
       <div class="submenu submenu-up {{ Request::is('erp/ayuda*') ? 'show' : '' }}">

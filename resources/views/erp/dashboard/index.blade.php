@@ -10,8 +10,8 @@
   <!-- Header Dashboard -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6 border-b border-stone-200 pb-4">
     <div>
-      <h2 class="text-xl font-headline font-black text-stone-900 tracking-tighter leading-none italic uppercase">MAYOR DE REPUESTO <span class="text-stone-500">LA CIMA, C.A.</span></h2>
-      <p class="text-stone-500 text-[11px] mt-1.5 uppercase font-black tracking-tight flex items-center gap-2">
+      <h2 class="text-lg font-headline font-black text-stone-900 tracking-tighter leading-none italic uppercase">MAYOR DE REPUESTO <span class="text-stone-500">LA CIMA, C.A.</span></h2>
+      <p class="text-stone-500 text-[10px] mt-1.5 uppercase font-black tracking-tight flex items-center gap-2">
         <span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_5px_#ceff5e]"></span>
         RIF: J-40308741-5 • RESUMEN OPERATIVO CENTRAL
       </p>
@@ -24,13 +24,13 @@
       <div class="bg-white border border-stone-200 px-4 py-1.5 rounded-lg shadow-sm flex items-center gap-3">
         <div>
           <span class="text-[9px] font-black text-stone-400 uppercase tracking-widest block leading-none">Uptime</span>
-          <p class="text-sm font-headline font-black text-stone-900 leading-none">99.9%</p>
+          <p class="text-[12px] font-headline font-black text-stone-900 leading-none">99.9%</p>
         </div>
       </div>
       <div class="bg-primary px-4 py-1.5 rounded-lg text-stone-950 flex items-center gap-3">
          <div>
           <span class="text-[9px] font-black text-stone-900/60 uppercase tracking-widest block leading-none">Global</span>
-          <p class="text-sm font-headline font-black uppercase leading-none">ÓPTIMO</p>
+          <p class="text-[12px] font-headline font-black uppercase leading-none">ÓPTIMO</p>
          </div>
       </div>
     </div>
@@ -98,26 +98,26 @@
     <div class="lg:col-span-2 bg-white border border-stone-200 rounded-xl p-6 shadow-sm">
       <div class="flex justify-between items-center mb-6">
         <div>
-            <h3 class="text-sm font-black text-stone-900 uppercase tracking-widest">Tendencias Operativas</h3>
-            <p class="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Análisis de Flujo de Stock & Ventas</p>
+            <h3 class="text-[12px] font-black text-stone-900 uppercase tracking-widest">Tendencias Operativas</h3>
+            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest">Análisis de Flujo de Stock & Ventas</p>
         </div>
-        <a href="{{ url('/erp/inventario') }}" class="px-3 py-1.5 bg-stone-50 text-[9px] font-black uppercase text-stone-500 hover:text-stone-900 flex items-center gap-1 transition-all roundedborder border-stone-200 hover:bg-stone-100">Informes <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+        <a href="{{ url('/erp/inventario') }}" class="px-3 py-1.5 bg-stone-50 text-[9px] font-black uppercase text-stone-500 hover:text-stone-900 flex items-center gap-1 transition-all rounded border border-stone-200 hover:bg-stone-100">Informes <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
       </div>
       
       <div class="grid grid-cols-3 gap-4 mb-6">
         <div class="bg-stone-50 p-4 rounded-lg border border-stone-100 flex flex-col justify-between h-24">
             <p class="text-[9px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Stock Central</p>
-            <p class="text-lg font-mono font-black text-stone-900">{{ number_format($stats['stock_total'], 0) }}</p>
+            <p class="text-base font-mono font-black text-stone-900">{{ number_format($stats['stock_total'], 0) }}</p>
             <div class="w-full bg-stone-200 h-1 rounded-full mt-2 overflow-hidden"><div class="bg-green-500 h-full w-[85%]"></div></div>
         </div>
         <div class="bg-red-50/50 p-4 rounded-lg border border-red-100 flex flex-col justify-between h-24">
             <p class="text-[9px] font-black text-red-500 uppercase tracking-widest leading-none mb-1">Vulnerabilidades</p>
-            <p class="text-lg font-mono font-black text-red-600">{{ $stats['stock_risks'] }}</p>
+            <p class="text-base font-mono font-black text-red-600">{{ $stats['stock_risks'] }}</p>
             <div class="w-full bg-red-100 h-1 rounded-full mt-2 overflow-hidden"><div class="bg-red-500 h-full w-[40%] animate-pulse"></div></div>
         </div>
         <div class="bg-stone-50 p-4 rounded-lg border border-stone-100 flex flex-col justify-between h-24">
             <p class="text-[9px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Validaciones Pendientes</p>
-            <p class="text-lg font-mono font-black text-stone-900">{{ $stats['aprobaciones_count'] }}</p>
+            <p class="text-base font-mono font-black text-stone-900">{{ $stats['aprobaciones_count'] }}</p>
             <div class="w-full bg-stone-200 h-1 rounded-full mt-2 overflow-hidden"><div class="bg-primary h-full w-[60%]"></div></div>
         </div>
       </div>
@@ -144,7 +144,7 @@
                 <span class="text-[11px] font-black uppercase tracking-tight text-stone-800 truncate max-w-[140px]">{{ $order->customer->razon_social ?? 'Cliente General' }}</span>
             </div>
             <div class="text-right">
-                <span class="font-mono font-black text-stone-900 text-[13px] group-hover:text-primary transition-colors">${{ number_format($order->total, 2) }}</span>
+                <span class="font-mono font-black text-stone-900 text-[12px] group-hover:text-primary transition-colors">${{ number_format($order->total, 2) }}</span>
                 <p class="text-[8px] font-bold text-stone-400 uppercase mt-0.5">{{ $order->created_at->diffForHumans() }}</p>
             </div>
         </div>

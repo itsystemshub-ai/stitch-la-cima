@@ -1,11 +1,11 @@
-@extends('layouts.erp')
+@extends('erp.layouts.app')
 
 @section('title', 'Sincronizador Access | Mayor de Repuesto La Cima, C.A.')
 @section('breadcrumb_active', 'Sincronizador')
 
 @section('content')
     <div class="px-5 py-6 border-b border-stone-200 bg-white flex justify-between items-center sticky top-0 z-40 shadow-sm rounded-t-2xl">
-        <h1 class="text-2xl font-headline font-black text-stone-900 flex items-center gap-2">
+        <h1 class="text-lg font-headline font-black text-stone-900 flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">sync</span>
             Sincronización Avanzada (DB Legacy)
         </h1>
@@ -14,8 +14,8 @@
     <div class="p-6 md:p-10 max-w-4xl w-full">
         <div class="bg-white p-8 rounded-b-2xl rounded-tr-2xl shadow-sm border border-stone-200">
             <div class="mb-8">
-                <h2 class="text-xl font-headline font-bold text-stone-900 mb-2">Motor de Extracción ODBC (Access -> MySQL)</h2>
-                <p class="text-sm text-stone-500">Sube el archivo <code>CIMA2026.accdb</code> para sincronizar automáticamente el Inventario, Clientes y Lista de Precios de tu sistema Legacy a la nube.</p>
+                <h2 class="text-base font-headline font-bold text-stone-900 mb-2">Motor de Extracción ODBC (Access -> MySQL)</h2>
+                <p class="text-[12px] text-stone-500">Sube el archivo <code>CIMA2026.accdb</code> para sincronizar automáticamente el Inventario, Clientes y Lista de Precios de tu sistema Legacy a la nube.</p>
             </div>
 
             <!-- Zona de Carga -->

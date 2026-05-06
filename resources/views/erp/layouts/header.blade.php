@@ -5,8 +5,8 @@
       <button id="menuToggle" class="lg:hidden p-2 text-stone-500 hover:bg-stone-100 rounded-lg">
         <span class="material-symbols-outlined">menu</span>
       </button>
-      <div class="hidden md:flex items-center gap-2 text-sm text-stone-500">
-        <a href="{{ url('/erp/dashboard') }}" class="hover:text-stone-900">Inicio</a>
+      <div class="hidden md:flex items-center gap-2 text-[12px] text-stone-500 font-bold uppercase tracking-tight">
+        <a href="{{ url('/erp/dashboard') }}" class="hover:text-stone-900 transition-colors">Inicio</a>
         @yield('breadcrumb')
       </div>
       <button id="tour-quick-tour" onclick="startErpTour()" class="ml-4 px-3 py-1.5 bg-stone-900 text-primary text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-stone-800 transition-all flex items-center gap-2">
@@ -22,7 +22,7 @@
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
           <span class="material-symbols-outlined text-lg">search</span>
         </span>
-        <input class="bg-stone-100 border-none text-sm pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all" placeholder="Buscar repuestos, ventas, clientes..." type="text"/>
+        <input class="bg-stone-100 border-none text-[12px] font-medium pl-10 pr-3 py-2 w-64 rounded-lg focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all shadow-inner" placeholder="Buscar repuestos, ventas, clientes..." type="text"/>
       </div>
 
       <!-- Notificaciones -->
@@ -79,8 +79,8 @@
       <div id="tour-profile" class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="flex items-center gap-3 ml-2 pl-4 border-l border-stone-200 hover:bg-stone-50 rounded-lg px-3 py-2 transition-all">
           <div class="text-right hidden md:block">
-            <p class="text-sm font-bold text-stone-900 leading-none">{{ Auth::user()->name }}</p>
-            <p class="text-[10px] text-stone-500">{{ Auth::user()->email }}</p>
+            <p class="text-[12px] font-black text-stone-900 leading-none uppercase">{{ Auth::user()->name }}</p>
+            <p class="text-[9px] font-bold text-stone-400 mt-0.5">{{ Auth::user()->email }}</p>
           </div>
           <div class="w-9 h-9 bg-stone-900 rounded-full flex items-center justify-center text-primary font-bold text-sm">
             {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
@@ -110,15 +110,15 @@
 
           <!-- Menu Items -->
           <div class="py-2">
-            <a href="{{ url('/erp/dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-colors uppercase">
+            <a href="{{ url('/erp/dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-[11px] font-black text-stone-700 hover:bg-stone-50 transition-colors uppercase tracking-widest">
               <span class="material-symbols-outlined text-lg">dashboard</span>
               Dashboard
             </a>
-            <a href="{{ url('/erp/perfil') }}" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-colors uppercase">
+            <a href="{{ url('/erp/perfil') }}" class="flex items-center gap-3 px-4 py-3 text-[11px] font-black text-stone-700 hover:bg-stone-50 transition-colors uppercase tracking-widest">
               <span class="material-symbols-outlined text-lg">person</span>
               Mi Perfil
             </a>
-            <a href="{{ url('/erp/configuracion') }}" class="flex items-center gap-3 px-4 py-3 text-xs font-bold text-stone-700 hover:bg-stone-50 transition-colors uppercase">
+            <a href="{{ url('/erp/configuracion') }}" class="flex items-center gap-3 px-4 py-3 text-[11px] font-black text-stone-700 hover:bg-stone-50 transition-colors uppercase tracking-widest">
               <span class="material-symbols-outlined text-lg">settings</span>
               Configuración
             </a>

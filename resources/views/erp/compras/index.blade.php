@@ -15,8 +15,8 @@
                 <span class="w-8 h-[2px] bg-primary"></span>
                 <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em]">Gestión de Adquisiciones</p>
             </div>
-            <h2 class="text-4xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none">Módulo de <span class="text-stone-400">Compras</span></h2>
-            <p class="text-xs text-stone-400 mt-2 font-medium uppercase tracking-widest">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
+            <h2 class="text-2xl font-headline font-black text-stone-900 tracking-tighter uppercase leading-none">Módulo de <span class="text-stone-400">Compras</span></h2>
+            <p class="text-[10px] text-stone-400 mt-2 font-medium uppercase tracking-widest">MAYOR DE REPUESTO LA CIMA, C.A. • RIF: J-40308741-5</p>
         </div>
         <div id="tour-purchase-actions" class="flex gap-3">
             <a href="{{ url('/erp/compras/factura') }}" class="bg-stone-900 text-primary px-6 py-3 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 hover:bg-stone-800 transition-all rounded-xl shadow-xl group active:scale-95">
@@ -35,8 +35,8 @@
         <div class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm relative overflow-hidden group hover:border-primary/50 transition-all">
             <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Gasto Mensual (Neto)</p>
             <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">${{ number_format($stats['compras_mes'], 2) }}</span>
-                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">USD</span>
+                <span class="text-xl font-headline font-black text-stone-900">${{ number_format($stats['compras_mes'], 2) }}</span>
+                <span class="text-[9px] font-bold text-stone-400 uppercase tracking-widest">USD</span>
             </div>
             <div class="mt-4 flex items-center gap-2">
                 <span class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">Periodo Actual</span>
@@ -47,8 +47,8 @@
         <div class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm relative overflow-hidden group hover:border-primary/50 transition-all">
             <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Órdenes Pendientes</p>
             <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">{{ str_pad($stats['ordenes_pendientes'], 2, '0', STR_PAD_LEFT) }}</span>
-                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Activas</span>
+                <span class="text-xl font-headline font-black text-stone-900">{{ str_pad($stats['ordenes_pendientes'], 2, '0', STR_PAD_LEFT) }}</span>
+                <span class="text-[9px] font-bold text-stone-400 uppercase tracking-widest">Activas</span>
             </div>
             <div class="mt-4">
                 <div class="w-full bg-stone-100 h-1.5 rounded-full overflow-hidden">
@@ -61,8 +61,8 @@
         <div class="bg-white border border-stone-200 p-6 rounded-2xl shadow-sm relative overflow-hidden group hover:border-primary/50 transition-all">
             <p class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-4">Cartera de Aliados</p>
             <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-headline font-black text-stone-900">{{ $stats['proveedores_activos'] }}</span>
-                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Proveedores</span>
+                <span class="text-xl font-headline font-black text-stone-900">{{ $stats['proveedores_activos'] }}</span>
+                <span class="text-[9px] font-bold text-stone-400 uppercase tracking-widest">Proveedores</span>
             </div>
             <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter mt-4 flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Gestión Centralizada
@@ -74,8 +74,8 @@
             <div class="absolute inset-x-0 bottom-0 h-1 bg-primary"></div>
             <p class="text-[10px] font-black text-primary uppercase tracking-widest mb-4 relative z-10">Cuentas por Pagar</p>
             <div class="flex items-baseline gap-2 relative z-10">
-                <span class="text-3xl font-headline font-black text-white">${{ number_format($stats['cuentas_por_pagar'] ?? 0, 2) }}</span>
-                <span class="text-[10px] font-bold text-stone-500 uppercase tracking-widest">USD</span>
+                <span class="text-xl font-headline font-black text-white">${{ number_format($stats['cuentas_por_pagar'] ?? 0, 2) }}</span>
+                <span class="text-[9px] font-bold text-stone-500 uppercase tracking-widest">USD</span>
             </div>
             <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter mt-4 relative z-10">Facturas pendientes</p>
         </div>
@@ -133,7 +133,7 @@
                         @forelse($recentOrders as $order)
                         <tr class="hover:bg-stone-50/50 transition-colors group">
                             <td class="px-6 py-4">
-                                <p class="text-xs font-black text-stone-900 uppercase">{{ $order->numero_orden }}</p>
+                                <p class="text-[12px] font-black text-stone-900 uppercase">{{ $order->numero_orden }}</p>
                                 <p class="text-[9px] font-bold text-stone-400 font-mono tracking-widest">FECHA: {{ $order->created_at->format('d/m/Y') }}</p>
                             </td>
                             <td class="px-6 py-4">
@@ -142,13 +142,13 @@
                                         {{ substr($order->supplier->nombre, 0, 2) }}
                                     </div>
                                     <div>
-                                        <p class="text-xs font-black text-stone-900 uppercase">{{ $order->supplier->nombre }}</p>
+                                        <p class="text-[12px] font-black text-stone-900 uppercase">{{ $order->supplier->nombre }}</p>
                                         <p class="text-[9px] text-stone-400 font-bold uppercase tracking-tighter">{{ $order->supplier->rif }}</p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <span class="text-sm font-headline font-black text-stone-900">${{ number_format($order->total, 2) }}</span>
+                                <span class="text-[12px] font-headline font-black text-stone-900">${{ number_format($order->total, 2) }}</span>
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <span class="px-3 py-1 bg-green-50 text-green-600 text-[9px] font-black uppercase rounded-full border border-green-100">{{ $order->estado }}</span>
