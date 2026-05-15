@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AccessImportController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AyudaController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FinanzasController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\UniversalLoaderController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\RrhhController;
 use App\Http\Controllers\TiendaAuthController;
@@ -26,32 +26,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
-// --- RUTA DE EMERGENCIA (PARA DESARROLLO) ---
-Route::get('/direct-login', function() {
-    $user = \App\Models\User::where('email', 'admin@lacima.com')->first();
-    if (!$user) {
-        $user = \App\Models\User::create([
-            'name' => 'Administrador Supremo',
-            'email' => 'admin@lacima.com',
-            'password' => bcrypt('admin123'),
-            'role' => 'admin',
-            'is_active' => 1,
-            'modulos' => ['inventario','ventas','compras','contabilidad','rrhh','configuracion','finanzas','aprobaciones','ayuda']
-        ]);
-    } else {
-        $user->update([
-            'password' => bcrypt('admin123'),
-            'is_active' => 1,
-            'role' => 'admin',
-            'modulos' => ['inventario','ventas','compras','contabilidad','rrhh','configuracion','finanzas','aprobaciones','ayuda']
-        ]);
-    }
-    Auth::login($user);
-    return redirect('/erp/dashboard');
-});
+Route::get('/force-import-global', [App\Http\Controllers\DiagnosticController::class, 'forceImport']);
+Route::get('/direct-login', [App\Http\Controllers\DiagnosticController::class, 'emergencyLogin']);
 
-// Punto de Entrada Principal (Storefront)
-Route::get('/', [TiendaController::class, 'index'])->name('home');
+// Punto de Entrada Principal (Storefront deshabilitado - Redirección al ERP)
+Route::get('/', fn() => redirect()->route('login'))->name('home');
 
 // Ruta ERP simple SIN middleware para debug
 Route::get('/erp', function () {
@@ -66,18 +45,28 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/frontend/{path}', [App\Http\Controllers\StaticAssetController::class, 'serve'])->where('path', '.*');
 
 // ========== GRUPOS DE RUTAS ERP (MODULAR) ==========
-
 Route::prefix('erp')->middleware('auth.erp')->group(function () {
 
-    // Dashboard Principal
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('erp.dashboard');
-
-    // Rutas específicas para vendedores
-    Route::middleware('role:vendedor')->prefix('vendedor')->group(function () {
-        Route::get('/dashboard', [VendedorController::class, 'dashboard'])->name('erp.vendedor.dashboard');
+    // ==========================================
+    // 🏛️ ERP ADMINISTRATIVO (Solo Admin/Trabajador)
+    // ==========================================
+    Route::middleware('role:admin,trabajador')->group(function() {
+        // Dashboard Principal para Admin/Trabajadores
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('erp.dashboard');
+        
+        // Módulo Inventario
+        Route::prefix('inventario')->middleware('permiso.modulo:inventario')->group(function () {
+            // ... (todas las rutas de inventario)
+        });
+        
+        // ... otros módulos administrativos
     });
-    // Redirección de compatibilidad
+
+    // Redirección de compatibilidad para Vendedores/Clientes que intenten entrar al ERP
     Route::get('/inicio', function () {
+        $role = auth()->user()->role;
+        if ($role === 'vendedor') return redirect()->route('tienda.panel.vendedor');
+        if ($role === 'cliente') return redirect()->route('tienda.panel.index');
         return redirect()->route('erp.dashboard');
     });
 
@@ -86,6 +75,9 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/', [InventoryController::class, 'index'])->name('erp.inventario.index');
         Route::get('/productos', [InventoryController::class, 'productos'])->name('erp.inventario.productos');
         Route::post('/productos', [InventoryController::class, 'store'])->name('erp.inventario.productos.store');
+        Route::get('/productos/edit/{id}', [InventoryController::class, 'edit'])->name('erp.inventario.productos.edit');
+        Route::put('/productos/update/{id}', [InventoryController::class, 'update'])->name('erp.inventario.productos.update');
+        Route::delete('/productos/destroy/{id}', [InventoryController::class, 'destroy'])->name('erp.inventario.productos.destroy');
         Route::get('/desarrollo', [InventoryController::class, 'desarrollo'])->name('erp.inventario.desarrollo');
         Route::post('/desarrollo/promote/{id}', [InventoryController::class, 'promoteToMaster'])->name('erp.inventario.desarrollo.promote');
         Route::get('/lista-precios', [InventoryController::class, 'massUpdate'])->name('erp.inventario.lista-precios');
@@ -155,8 +147,13 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
         Route::get('/reportes', [RrhhController::class, 'reportes'])->name('erp.rrhh.reportes');
     });
 
+
+
     // Módulo Configuracion
     Route::prefix('configuracion')->middleware('permiso.modulo:configuracion')->group(function () {
+        Route::get('/debug-users', function() {
+            return \App\Models\User::pluck('email')->toArray();
+        });
         Route::get('/', [ConfiguracionController::class, 'index'])->name('erp.configuracion.index');
         Route::get('/parametros', [ConfiguracionController::class, 'parametros'])->name('erp.configuracion.parametros');
         Route::get('/fiscal', [ConfiguracionController::class, 'fiscal'])->name('erp.configuracion.fiscal');
@@ -208,7 +205,8 @@ Route::prefix('erp')->middleware('auth.erp')->group(function () {
 
 });
 
-// Rutas Específicas Dinámicas del Storefront
+// Rutas Específicas Dinámicas del Storefront (Deshabilitadas en Fase 4)
+/*
 Route::get('/tienda/index', [TiendaController::class, 'index']);
 Route::get('/tienda/catalogo_general', [TiendaController::class, 'catalogoGeneral']);
 Route::get('/tienda/catalogo_detallado', [TiendaController::class, 'catalogoDetallado']);
@@ -222,11 +220,12 @@ Route::get('/tienda/confirmacion/{orderId}', [TiendaController::class, 'confirma
 Route::get('/tienda/contacto', fn () => view('tienda.contacto'));
 Route::post('/tienda/contacto/enviar', [TiendaController::class, 'enviarContacto']);
 Route::get('/tienda/nosotros', fn () => view('tienda.nosotros'));
+*/
 
-// Rutas de Autenticación de la Tienda
+// Rutas de Autenticación de la Tienda (Registro Deshabilitado)
 Route::prefix('tienda/auth')->group(function () {
-    Route::get('/register', [TiendaAuthController::class, 'showRegisterForm']);
-    Route::post('/register', [TiendaAuthController::class, 'register']);
+    // Route::get('/register', [TiendaAuthController::class, 'showRegisterForm']);
+    // Route::post('/register', [TiendaAuthController::class, 'register']);
     Route::get('/login', fn () => redirect('/auth/login'));
 });
 
@@ -252,8 +251,8 @@ Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('logi
 Route::post('/auth/login', [LoginController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Rutas CMS Dinámicas (SIEMPRE al final para no superponer rutas específicas)
-Route::get('/tienda/{slug}', [TiendaController::class, 'getPage'])->where('slug', '[a-zA-Z0-9_-]+');
+// Rutas CMS Dinámicas (Deshabilitadas en Fase 4)
+// Route::get('/tienda/{slug}', [TiendaController::class, 'getPage'])->where('slug', '[a-zA-Z0-9_-]+');
 
 // Enrutador Dinámico para Autenticación (Registro, Recuperación)
 Route::get('/auth/{page?}', [App\Http\Controllers\AuthPageController::class, 'show'])->where('page', '.*');
@@ -263,7 +262,8 @@ Route::prefix('api/erp/invoice')->group(function () {
     Route::post('/checkout', [InvoiceController::class, 'processCheckout']);
 });
 
-// Rutas API Tienda (Público)
+// Rutas API Tienda (Público) - (Deshabilitadas en Fase 4)
+/*
 Route::prefix('api/tienda')->group(function () {
     Route::get('/productos', [TiendaController::class, 'catalogoGeneral']);
     Route::get('/productos/{id}', [TiendaController::class, 'getProductoJson']);
@@ -272,11 +272,11 @@ Route::prefix('api/tienda')->group(function () {
     Route::delete('/carrito/{id}', [TiendaController::class, 'eliminarDeCarrito']);
     Route::post('/checkout', [TiendaController::class, 'procesarCheckout']);
 });
-
-// Herramientas de Sincronización (Protegidas)
+*/
+// Herramientas de Sincronización e Importación (Protegidas)
 Route::prefix('sync')->group(function () {
-    Route::get('/', [ConfiguracionController::class, 'showSync']);
-    Route::post('/upload-accdb', [AccessImportController::class, 'syncAccessDatabase']);
+    Route::get('/', [ConfiguracionController::class, 'showSync'])->name('erp.sync.index');
+    Route::post('/import-entities', [UniversalLoaderController::class, 'importEntities'])->name('erp.sync.import-entities');
 });
 
 // Ruta Única de Mantenimiento para Desbloqueo de Base de Datos

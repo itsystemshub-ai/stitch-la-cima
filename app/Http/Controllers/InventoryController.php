@@ -233,6 +233,48 @@ class InventoryController extends Controller
 
 
     /**
+     * Formulario de Edición de Producto
+     */
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('erp.inventario.edit', compact('product'));
+    }
+
+    /**
+     * Actualizar Producto
+     */
+    public function update(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'codigo_oem' => 'required|string|unique:products,codigo_oem,'.$product->id,
+            'precio_mayor' => 'required|numeric',
+            'stock_actual' => 'required|numeric',
+            'categoria' => 'nullable|string',
+            'marca' => 'nullable|string',
+        ]);
+
+        $product->update($request->all());
+
+        return redirect()->route('erp.inventario.productos')
+            ->with('success', 'Producto actualizado con éxito.');
+    }
+
+    /**
+     * Eliminar Producto (Soft Delete o Inactivar)
+     */
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->update(['activo' => false]); // Preferimos inactivar por integridad de historial
+
+        return back()->with('success', 'Producto marcado como inactivo.');
+    }
+
+    /**
      * API para Búsqueda Inteligente (Usada por Smart Navigator)
      */
     public function smartSearch(Request $request)

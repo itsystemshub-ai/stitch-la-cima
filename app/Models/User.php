@@ -23,9 +23,10 @@ class User extends Authenticatable
         'email',
         'password',
         'cedula_rif',
-        'role',
-        'is_active',
+        'departamento',
         'modulos',
+        'region',
+        'estado',
     ];
 
     /**

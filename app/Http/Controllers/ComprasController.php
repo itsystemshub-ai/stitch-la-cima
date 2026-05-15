@@ -83,54 +83,17 @@ class ComprasController extends Controller
             'items.*.cantidad' => 'required|integer|min:1',
             'items.*.costo_unitario' => 'required|numeric|min:0',
         ]);
-
-        $items = $request->items;
         
         try {
-            $result = DB::transaction(function () use ($request, $items) {
-                $subtotal = 0;
-                
-                foreach ($items as $item) {
-                    $subtotal += $item['cantidad'] * $item['costo_unitario'];
-                }
-
-                $impuesto = $subtotal * 0.16;
-                $total = $subtotal + $impuesto;
-
-                $orden = PurchaseOrder::create([
-                    'numero_orden' => 'OC-' . date('Ymd') . '-' . str_pad(PurchaseOrder::count() + 1, 4, '0', STR_PAD_LEFT),
-                    'supplier_id' => $request->supplier_id,
-                    'user_id' => Auth::id(),
-                    'subtotal' => $subtotal,
-                    'impuesto' => $impuesto,
-                    'total' => $total,
-                    'estado' => 'Recibida',
-                    'fecha_recepcion' => now(),
-                ]);
-
-                foreach ($items as $item) {
-                    $product = Product::find($item['product_id']);
-                    
-                    $product->increment('stock_actual', $item['cantidad']);
-                    $product->update(['costo_compra' => $item['costo_unitario']]);
-
-                    StockMovement::create([
-                        'product_id' => $product->id,
-                        'type' => 'IN',
-                        'quantity' => $item['cantidad'],
-                        'reason' => "Compra Proveedor: {$orden->numero_orden}",
-                        'user_id' => Auth::id(),
-                        'reference_id' => $orden->id,
-                    ]);
-                }
-
-                return $orden;
-            });
+            $orden = $this->purchaseService->registerPurchase(
+                $request->supplier_id,
+                $request->items
+            );
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Compra registrada exitosamente',
-                'data' => $result
+                'message' => 'Compra registrada exitosamente y auditada contablemente.',
+                'data' => $orden
             ]);
 
         } catch (\Exception $e) {

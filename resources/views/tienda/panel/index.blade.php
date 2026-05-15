@@ -1,132 +1,132 @@
 @extends('tienda.panel.layout')
 @section('title', 'Dashboard - Mi Cuenta')
-@section('content')
-<div class="max-w-[1920px] mx-auto px-6 py-12">
-    <header class="mb-12">
-        <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">Terminal de Cliente v4.0</span>
-         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Bienvenido, <span class="text-stone-300">{{ $user->name }}</span></h2>
+@section('panel_content')
+<div class="animate-reveal">
+    <header class="mb-20">
+        <div class="flex items-center gap-4 mb-4">
+            <span class="w-12 h-[1px] bg-black/10"></span>
+            <span class="text-stone-400 font-black text-[10px] uppercase tracking-[0.5em] italic">Platinum Corporate Terminal</span>
+        </div>
+        <h1 class="text-6xl font-display font-black text-black uppercase tracking-tighter leading-none">
+            Welcome, <span class="font-light text-stone-300 italic">{{ explode(' ', auth()->user()->name)[0] }}</span>
+        </h1>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <!-- KPI: Total Ordenes -->
-        <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group hover:border-primary/20 transition-all">
-            <div class="relative z-10">
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Volumen Operativo</p>
-                <div class="flex items-end justify-between">
-                    <p class="text-4xl font-headline font-black text-stone-900 tracking-tighter leading-none">{{ $totalOrders }}</p>
-                    <span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
+        <!-- Luxury KPI: Orders -->
+        <div class="bg-white rounded-[48px] p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] border border-stone-100 group hover:scale-[1.02] transition-all duration-700">
+            <div class="flex justify-between items-start mb-8">
+                <p class="text-[10px] font-black text-stone-300 uppercase tracking-[0.4em] italic leading-none">Global Orders</p>
+                <span class="material-symbols-outlined text-stone-200 group-hover:text-black transition-colors">shopping_cart</span>
             </div>
-            <div class="absolute -right-4 -bottom-4 opacity-[0.02] group-hover:scale-110 transition-transform duration-700">
-                <span class="material-symbols-outlined text-4xl">grid_view</span>
+            <p class="text-6xl font-display font-black text-black tracking-tighter leading-none mb-2">{{ $ordenesTotales }}</p>
+            <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest leading-none">Unidades Procesadas</p>
+        </div>
+
+        <!-- Luxury KPI: Investment -->
+        <div class="bg-white rounded-[48px] p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] border border-stone-100 group hover:scale-[1.02] transition-all duration-700">
+            <div class="flex justify-between items-start mb-8">
+                <p class="text-[10px] font-black text-stone-300 uppercase tracking-[0.4em] italic leading-none">Total Investment</p>
+                <span class="material-symbols-outlined text-stone-200 group-hover:text-black transition-colors">account_balance_wallet</span>
+            </div>
+            <p class="text-4xl font-display font-black text-black tracking-tighter leading-none mb-2">$ {{ number_format($saldoTotal, 2) }}</p>
+            <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest leading-none">Capital Movilizado</p>
+        </div>
+
+        <!-- Luxury KPI: Status -->
+        <div class="bg-black rounded-[48px] p-12 shadow-2xl group hover:shadow-black/20 transition-all duration-700">
+            <div class="flex justify-between items-start mb-8">
+                <p class="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] italic leading-none">Account Status</p>
+                <span class="material-symbols-outlined text-white/20">verified</span>
+            </div>
+            <p class="text-3xl font-display font-black text-white tracking-tighter leading-none mb-2 italic">PLATINUM <br/> MEMBER</p>
+            <div class="w-full bg-white/10 h-[2px] mt-4 overflow-hidden rounded-full">
+                <div class="bg-white h-full w-[85%] animate-pulse"></div>
             </div>
         </div>
 
-        <!-- KPI: Pendientes -->
-        <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group hover:border-amber-500/20 transition-all">
-            <div class="relative z-10">
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">En Tránsito</p>
-                <div class="flex items-end justify-between">
-                    <p class="text-4xl font-headline font-black text-stone-900 tracking-tighter leading-none">{{ $pendingOrders }}</p>
-                    <span class="material-symbols-outlined text-amber-500 text-3xl">pending_actions</span>
+        <!-- Luxury KPI: Action -->
+        <a href="{{ url('/tienda/index') }}" class="bg-stone-50 rounded-[48px] p-12 border border-dashed border-stone-200 group hover:bg-white hover:border-black transition-all duration-500 flex flex-col justify-between">
+            <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.4em] italic">Open Catalog</p>
+            <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black text-stone-900 uppercase tracking-[0.2em] group-hover:translate-x-2 transition-transform">Nueva Orden</span>
+                <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center border border-stone-100 group-hover:bg-black group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-base">add</span>
                 </div>
             </div>
-            <div class="absolute -right-4 -bottom-4 opacity-[0.02] group-hover:scale-110 transition-transform duration-700">
-                <span class="material-symbols-outlined text-4xl">schedule</span>
-            </div>
-        </div>
-
-        <!-- KPI: Completadas -->
-        <div class="bg-stone-900 rounded-[32px] shadow-xl p-8 border border-white/5 relative overflow-hidden group transition-all">
-            <div class="relative z-10">
-                <p class="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-4 italic">Liquidadas</p>
-                <div class="flex items-end justify-between">
-                    <p class="text-4xl font-headline font-black text-white tracking-tighter leading-none">{{ $completedOrders }}</p>
-                    <span class="material-symbols-outlined text-green-500 text-3xl">verified</span>
-                </div>
-            </div>
-            <div class="absolute -right-4 -bottom-4 opacity-[0.05]">
-                <span class="material-symbols-outlined text-4xl text-white">check_circle</span>
-            </div>
-        </div>
-
-        <!-- KPI: Canceladas -->
-        <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group hover:border-red-500/20 transition-all">
-            <div class="relative z-10">
-                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Anulaciones</p>
-                <div class="flex items-end justify-between">
-                     <p class="text-2xl font-headline font-black text-stone-900 tracking-tighter leading-none">{{ $cancelledOrders }}</p>
-                    <span class="material-symbols-outlined text-red-500 text-3xl">block</span>
-                </div>
-            </div>
-        </div>
+        </a>
     </div>
 
-    <!-- Spending Banner -->
-    <div class="bg-stone-950 rounded-[40px] p-10 mb-12 text-white relative overflow-hidden border border-white/5 shadow-2xl flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="relative z-10 text-center md:text-left">
-            <span class="text-primary font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">Inversión Logística Acumulada</span>
-            <h3 class="text-4xl font-headline font-black tracking-tighter italic leading-none">$ {{ number_format($totalSpent, 2) }}</h3>
-            <p class="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] mt-4 font-mono">Consolidado Fiscal - Cauplas Vzla C.A.</p>
-        </div>
-        <div class="relative z-10">
-            <a href="{{ route('tienda.panel.ordenes') }}" class="bg-primary text-black font-black uppercase py-4 px-10 rounded-2xl tracking-[0.2em] text-[10px] hover:scale-105 transition-all shadow-xl shadow-primary/20">
-                Auditar Historial Completo
-            </a>
-        </div>
-        <!-- Decoration -->
-        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
-    </div>
-
-    <!-- Recent Orders Table -->
-    <div class="bg-white rounded-[40px] shadow-2xl border border-stone-200 overflow-hidden relative">
-        <div class="p-10 border-b border-stone-50 flex justify-between items-center bg-stone-50/30">
-            <h3 class="text-[14px] font-black text-stone-900 uppercase tracking-[0.2em] italic flex items-center gap-3">
-                <span class="w-2 h-8 bg-primary rounded-full"></span>
-                Transacciones Recientes
-            </h3>
-            <a href="{{ route('tienda.panel.ordenes') }}" class="text-[10px] font-black text-stone-400 hover:text-primary uppercase tracking-widest transition-all">Ver Todas →</a>
+    <!-- Luxury Table Section -->
+    <div class="bg-white rounded-[64px] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] border border-stone-100 overflow-hidden">
+        <div class="p-16 border-b border-stone-50 flex items-center justify-between bg-stone-50/30">
+            <div class="flex items-center gap-6">
+                <div class="w-1.5 h-12 bg-black rounded-full"></div>
+                <div>
+                    <h2 class="text-[18px] font-black text-black uppercase tracking-tight italic leading-none">Recent Activity</h2>
+                    <p class="text-[10px] font-bold text-stone-400 uppercase tracking-[0.3em] mt-2 italic">Logística y Despacho en tiempo real</p>
+                </div>
+            </div>
+            <a href="{{ route('tienda.panel.ordenes') }}" class="text-[10px] font-black text-black uppercase tracking-[0.3em] bg-white border border-stone-200 px-10 py-5 rounded-full hover:bg-black hover:text-white transition-all duration-500 shadow-sm">View Archive</a>
         </div>
         
-        <table class="w-full text-left zenith-table-main">
-            <thead class="zenith-table-header uppercase italic">
-                <tr>
-                    <th class="py-5 px-10">Registro</th>
-                    <th class="py-5 px-10">Fecha</th>
-                    <th class="py-5 px-10 text-center">Estatus</th>
-                    <th class="py-5 px-10 text-right">Liquidez</th>
-                    <th class="py-5 px-10 text-center">Acción</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-stone-50">
-                @forelse($recentOrders as $order)
-                <tr class="bg-white hover:bg-stone-50/50 transition-colors group">
-                    <td class="py-6 px-10 font-mono text-[10.5px] font-bold text-stone-400 group-hover:text-primary tracking-tighter">ZEN-{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</td>
-                    <td class="py-6 px-10 font-black uppercase text-stone-900 italic tracking-tight">{{ $order->created_at->format('d/M/y') }}</td>
-                    <td class="py-6 px-10 text-center">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border bg-stone-900
-                            @if($order->estado == 'Pagado') text-green-500 border-green-500/20 
-                            @elseif($order->estado == 'Pendiente') text-amber-500 border-amber-500/20 
-                            @elseif($order->estado == 'Cancelado') text-red-500 border-red-500/20 
-                            @else text-stone-400 border-stone-800 @endif leading-none">
-                            <span class="w-1.5 h-1.5 rounded-full @if($order->estado == 'Pagado') bg-green-500 @elseif($order->estado == 'Pendiente') bg-amber-500 @else bg-red-500 @endif"></span>
-                            {{ $order->estado }}
-                        </span>
-                    </td>
-                    <td class="py-6 px-10 text-right font-mono text-[11px] font-bold text-stone-950 tracking-tighter">$ {{ number_format($order->total, 2) }}</td>
-                    <td class="py-6 px-10 text-center">
-                        <a href="{{ route('tienda.panel.detalle-orden', $order->id) }}" class="text-[10px] font-black uppercase tracking-widest text-stone-400 hover:text-black transition-all flex items-center justify-center gap-2">
-                             Auditar <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-                        </a>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="5" class="py-32 text-center text-stone-400 font-black uppercase tracking-[0.2em] italic text-[11px]">No se detectó actividad comercial reciente.</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-[10px] font-black text-stone-300 uppercase tracking-[0.4em] italic">
+                        <th class="py-10 px-16">Registry ID</th>
+                        <th class="py-10 px-16">Date</th>
+                        <th class="py-10 px-16">Cargo Info</th>
+                        <th class="py-10 px-16 text-right">Investment</th>
+                        <th class="py-10 px-16 text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-stone-50">
+                    @forelse($ordenes as $orden)
+                    <tr class="group hover:bg-stone-50/50 transition-all">
+                        <td class="py-10 px-16">
+                            <span class="font-mono text-[12px] font-black text-stone-300 group-hover:text-black transition-colors">ZN-{{ str_pad($orden->id, 8, '0', STR_PAD_LEFT) }}</span>
+                        </td>
+                        <td class="py-10 px-16">
+                            <span class="text-[11px] font-black text-stone-400 uppercase tracking-widest">{{ $orden->created_at->format('d M, Y') }}</span>
+                        </td>
+                        <td class="py-10 px-16">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-stone-100"></div>
+                                <span class="text-[13px] font-black text-black uppercase tracking-tight">{{ $orden->items_count ?? 0 }} SKUs Procesados</span>
+                            </div>
+                        </td>
+                        <td class="py-10 px-16 text-right">
+                            <span class="text-2xl font-display font-black text-black tracking-tighter">$ {{ number_format($orden->total, 2) }}</span>
+                        </td>
+                        <td class="py-10 px-16 text-center">
+                            <span class="inline-flex items-center gap-3 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border transition-all
+                                @if($orden->estado == 'Entregado') bg-black text-white border-black 
+                                @elseif($orden->estado == 'Pendiente') bg-stone-50 text-stone-400 border-stone-200 
+                                @else bg-white text-red-500 border-red-100 @endif">
+                                {{ $orden->estado }}
+                            </span>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="py-48 text-center">
+                            <div class="flex flex-col items-center gap-4">
+                                <span class="material-symbols-outlined text-5xl text-stone-100">inventory</span>
+                                <span class="text-[12px] font-black text-stone-200 uppercase tracking-[0.6em] italic">No Logistics Found</span>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<style>
+    @keyframes reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-reveal { animation: reveal 1s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+</style>
 @endsection

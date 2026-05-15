@@ -100,20 +100,56 @@ class DiagnosticController extends Controller
     }
 
     /**
-     * Prueba simple de credenciales admin.
+     * Acceso directo de emergencia (Solo local).
      */
-    public function loginTest()
+    public function emergencyLogin()
     {
-        $credentials = ['email' => 'admin@lacima.com', 'password' => 'admin123'];
-
-        if (Auth::attempt($credentials)) {
-            return response()->json([
-                'status' => 'success', 
-                'user' => Auth::user()->name, 
-                'role' => Auth::user()->role
-            ]);
+        if (!app()->environment('local')) {
+            abort(403, 'Solo permitido en entorno local.');
         }
 
-        return response()->json(['status' => 'failed', 'message' => 'Autenticación fallida con credenciales por defecto.']);
+        $user = User::where('email', 'admin@lacima.com')->first();
+        if (!$user) {
+            $user = User::create([
+                'name' => 'Administrador Supremo',
+                'email' => 'admin@lacima.com',
+                'password' => bcrypt('admin123'),
+                'role' => 'admin',
+                'is_active' => 1,
+                'modulos' => ['inventario','ventas','compras','contabilidad','rrhh','configuracion','finanzas','aprobaciones','ayuda']
+            ]);
+        } else {
+            $user->update([
+                'password' => bcrypt('admin123'),
+                'is_active' => 1,
+                'role' => 'admin',
+                'modulos' => ['inventario','ventas','compras','contabilidad','rrhh','configuracion','finanzas','aprobaciones','ayuda']
+            ]);
+        }
+        
+        Auth::login($user);
+        return redirect('/erp/dashboard');
+    }
+
+    /**
+     * Forzar migración e importación (Solo local).
+     */
+    public function forceImport()
+    {
+        if (!app()->environment('local')) {
+            abort(403, 'Solo permitido en entorno local.');
+        }
+
+        try {
+            \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            $mig = \Illuminate\Support\Facades\Artisan::output();
+            
+            \Illuminate\Support\Facades\Artisan::call('zenith:import-users');
+            $imp = \Illuminate\Support\Facades\Artisan::output();
+            
+            return "MIGRACIONES: " . $mig . "\n\nIMPORTACION: " . $imp;
+        } catch (\Exception $e) {
+            return "ERROR: " . $e->getMessage();
+        }
     }
 }

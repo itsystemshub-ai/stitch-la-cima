@@ -32,14 +32,11 @@ class RrhhController extends Controller
             ->orderBy('total', 'desc')
             ->get();
             
-        // Resumen de Nómina Pendiente
-        $payrollSummary = [
-            'salarios_base' => Payroll::where('estatus', 'PENDIENTE')->sum('salario_base'),
-            'horas_extra' => Payroll::where('estatus', 'PENDIENTE')->sum('horas_extra'),
-            'bonos' => Payroll::where('estatus', 'PENDIENTE')->sum('bonos'),
-            'deducciones' => Payroll::where('estatus', 'PENDIENTE')->sum('deducciones'),
-            'total_neto' => Payroll::where('estatus', 'PENDIENTE')->sum('total_pagar'),
-        ];
+        // Resumen de Nómina Pendiente (Consolidado en una sola consulta)
+        $payrollSummary = Payroll::where('estatus', 'PENDIENTE')
+            ->selectRaw('SUM(salario_base) as salarios_base, SUM(horas_extra) as horas_extra, SUM(bonos) as bonos, SUM(deducciones) as deducciones, SUM(total_pagar) as total_neto')
+            ->first()
+            ->toArray();
 
         return view('erp.rrhh.index', compact('stats', 'recentEmployees', 'deptMix', 'payrollSummary'));
     }

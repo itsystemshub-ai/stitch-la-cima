@@ -185,9 +185,18 @@
                             </div>
                         </td>
                         <td class="py-8 px-10 text-center">
-                            <button class="w-12 h-12 bg-stone-950 border border-white/5 text-stone-700 hover:bg-white hover:text-stone-950 transition-all rounded-2xl shadow-inner flex items-center justify-center mx-auto group/btn">
-                                <span class="material-symbols-outlined text-xl group-hover/btn:rotate-90 transition-transform">more_vert</span>
-                            </button>
+                            <div class="flex items-center justify-center gap-4">
+                                <a href="{{ route('erp.inventario.productos.edit', $product->id) }}" class="w-10 h-10 bg-stone-950 border border-white/5 text-stone-700 hover:bg-primary hover:text-stone-950 transition-all rounded-xl shadow-inner flex items-center justify-center group/btn" title="EDIT_ASSET">
+                                    <span class="material-symbols-outlined text-xl">edit_square</span>
+                                </a>
+                                <form action="{{ route('erp.inventario.productos.destroy', $product->id) }}" method="POST" onsubmit="return confirm('¿CONFIRMAR_DESACTIVACIÓN_ACTIVO?')" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="w-10 h-10 bg-stone-950 border border-white/5 text-stone-800 hover:bg-red-500 hover:text-white transition-all rounded-xl shadow-inner flex items-center justify-center group/btn" title="DEACTIVATE_NODE">
+                                        <span class="material-symbols-outlined text-xl">delete</span>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty

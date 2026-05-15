@@ -1,6 +1,6 @@
 @extends('tienda.panel.layout')
 @section('title', 'Mis Ordenes')
-@section('content')
+@section('panel_content')
 <div class="max-w-[1920px] mx-auto px-6 py-12">
     <div class="mb-12">
         <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">Protocolo de Registro B2B</span>

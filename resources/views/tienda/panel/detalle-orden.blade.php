@@ -1,6 +1,6 @@
 @extends('tienda.panel.layout')
 @section('title', 'Orden ' . $order->id)
-@section('content')
+@section('panel_content')
 <div class="max-w-4xl mx-auto px-6 py-12">
     <a href="{{ route('tienda.panel.ordenes') }}" class="inline-flex items-center gap-2 text-stone-400 hover:text-black font-black uppercase text-[10px] tracking-[0.3em] mb-10 transition-all group">
         <span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>

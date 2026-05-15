@@ -43,7 +43,11 @@ class VentasController extends Controller
             ->where('stock_actual', '>', 0)
             ->orderBy('nombre')
             ->get();
-        return view('erp.ventas.pos', compact('customers', 'products'));
+            
+        $currencyService = resolve(\App\Services\CurrencyService::class);
+        $currentRate = $currencyService->getCurrentRate();
+
+        return view('erp.ventas.pos', compact('customers', 'products', 'currentRate'));
     }
 
     public function clientes(Request $request)
@@ -174,7 +178,7 @@ class VentasController extends Controller
         }
 
         $nota = NotaCredito::create([
-            'numero_nota' => 'NC-' . date('Ymd') . '-' . str_pad(NotaCredito::count() + 1, 4, '0', STR_PAD_LEFT),
+            'numero_nota' => NotaCredito::generateNextNumber('NC', 'numero_nota'),
             'order_id' => $request->order_id,
             'cliente_id' => $order->customer_id,
             'vendedor_id' => Auth::id(),
@@ -216,47 +220,14 @@ class VentasController extends Controller
     public function reportes(Request $request)
     {
         $periodo = $request->get('periodo', 'mes');
+        $reportData = $this->salesService->getSalesReport($periodo);
         
-        $query = Order::query();
+        $ventas = $reportData['ventas'];
+        $total_ventas = $reportData['total_ventas'];
+        $total_ordenes = $reportData['total_ordenes'];
+        $monthlyTrend = $reportData['monthlyTrend'];
         
-        switch ($periodo) {
-            case 'dia':
-                $query->whereDate('created_at', today());
-                break;
-            case 'semana':
-                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
-                break;
-            case 'mes':
-            default:
-                $query->whereMonth('created_at', now()->month);
-                break;
-        }
-
-        $ventas = $query->select(
-            DB::raw('DATE(created_at) as fecha'),
-            DB::raw('COUNT(*) as total_ordenes'),
-            DB::raw('SUM(total) as monto_total')
-        )
-        ->groupBy('fecha')
-        ->orderBy('fecha')
-        ->get();
-
-        $total_ventas = $query->sum('total');
-        $total_ordenes = $query->count();
-
-        // Datos para Gráficos
-        $trendData = $this->salesService->getSalesKPIs(); // Reusando lógica de KPIs
         $categoryMix = $this->salesService->getCategoryMix();
-
-        // Tendencia mensual (últimos 12 meses)
-        $monthlyTrend = Order::select(
-            DB::raw("strftime('%m', created_at) as mes"),
-            DB::raw('SUM(total) as total')
-        )
-        ->where('created_at', '>=', now()->subYear())
-        ->groupBy('mes')
-        ->orderBy('mes')
-        ->get();
 
         return view('erp.ventas.reportes', compact('ventas', 'total_ventas', 'total_ordenes', 'periodo', 'monthlyTrend', 'categoryMix'));
     }
@@ -266,34 +237,10 @@ class VentasController extends Controller
      */
     public function reporteGanancias()
     {
-        $mesActual = now()->month;
-        $anioActual = now()->year;
-
-        // Cálculo de Ganancias: Sum( (Precio Venta - Costo Compra) * Cantidad )
-        $reporte = OrderItem::join('orders', 'order_items.order_id', '=', 'orders.id')
-            ->join('products', 'order_items.product_id', '=', 'products.id')
-            ->whereMonth('orders.created_at', $mesActual)
-            ->whereYear('orders.created_at', $anioActual)
-            ->where('orders.estado', 'Pagado')
-            ->select(
-                DB::raw('SUM(order_items.subtotal) as ingresos_brutos'),
-                DB::raw('SUM(order_items.cantidad * products.costo_compra) as total_costo'),
-                DB::raw('SUM(order_items.subtotal - (order_items.cantidad * products.costo_compra)) as ganancia_neta'),
-                DB::raw('COUNT(DISTINCT orders.id) as total_ventas')
-            )
-            ->first();
-
-        // Ventas por día para el gráfico
-        $ventasGrafico = Order::whereMonth('created_at', $mesActual)
-            ->whereYear('created_at', $anioActual)
-            ->where('estado', 'Pagado')
-            ->select(
-                DB::raw('DATE(created_at) as fecha'),
-                DB::raw('SUM(total) as total')
-            )
-            ->groupBy('fecha')
-            ->orderBy('fecha')
-            ->get();
+        $profitData = $this->salesService->getProfitReport();
+        
+        $reporte = $profitData['reporte'];
+        $ventasGrafico = $profitData['ventasGrafico'];
 
         return view('erp.ventas.reporte-ganancias', compact('reporte', 'ventasGrafico'));
     }

@@ -61,14 +61,14 @@ class LoginController extends Controller
     protected function redirectBasedOnRole($user)
     {
         if ($user->role === 'cliente') {
-            return redirect()->intended('/tienda/mi-cuenta')->with('success', 'Bienvenido a La Cima B2B.');
+            return redirect()->intended('/tienda/panel')->with('success', 'Bienvenido a tu Portal B2B.');
         }
 
         if ($user->role === 'vendedor') {
-            return redirect()->intended('/erp/vendedor/dashboard')->with('success', 'Bienvenido al Sistema de Ventas.');
+            return redirect()->intended('/tienda/panel/vendedor')->with('success', 'Bienvenido a tu Panel de Ventas.');
         }
 
         // Si es admin o trabajador
-        return redirect()->intended('/erp/dashboard')->with('success', 'Sesión iniciada. Bienvenido al ERP.');
+        return redirect()->intended('/erp/dashboard')->with('success', 'Sesión iniciada. Bienvenido al ERP Administrativo.');
     }
 }

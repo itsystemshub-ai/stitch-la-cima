@@ -299,7 +299,7 @@ class TiendaController extends Controller
                 $total = $subtotal + $impuesto;
 
                 $order = Order::create([
-                    'numero_orden' => 'WEB-'.date('Ymd').'-'.str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT),
+                    'numero_orden' => Order::generateNextNumber('WEB', 'numero_orden'),
                     'customer_id' => $request->customer_id,
                     'subtotal' => $subtotal,
                     'impuestos' => $impuesto,
@@ -308,6 +308,10 @@ class TiendaController extends Controller
                     'metodo_pago' => $request->payment_method,
                     'fecha_emision' => now(),
                 ]);
+
+                // INTERFAZ CONTABLE: Registro automático del asiento para venta web
+                $accountingService = app(\App\Services\AccountingService::class);
+                $accountingService->createEntryFromOrder($order);
 
                 foreach ($items as $item) {
                     $product = Product::find($item['product_id']);

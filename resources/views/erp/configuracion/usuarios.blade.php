@@ -1,404 +1,259 @@
 @extends('erp.layouts.app')
 
-@section('title', 'Usuarios - Test')
+@section('title', 'Gestión de Acceso | Zenith ERP')
 
 @section('content')
-@php $disableSmartNavigator = true; @endphp
-
-<div class="p-6">
-    <h1 class="text-2xl font-bold mb-6">Usuarios del Sistema</h1>
-
-    <div class="bg-white rounded-lg shadow p-6">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold">Lista de Usuarios ({{ $users->count() }})</h2>
-            <div class="flex gap-2">
-                <button onclick="testFunction()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
-                    Test JS
-                </button>
-                <button onclick="openCreateModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-                    <span class="material-symbols-outlined text-sm">person_add</span>
-                    Añadir Usuario
-                </button>
+<div class="p-8 bg-stone-50 min-h-screen">
+    <!-- Header Industrial Light -->
+    <header class="flex justify-between items-end mb-10 gap-8 border-b border-stone-200 pb-10">
+        <div class="flex-1">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="w-1 h-3 bg-primary rounded-full"></span>
+                <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em]">Seguridad > Usuarios & Departamentos</p>
             </div>
+            <h1 class="text-4xl font-black text-stone-900 uppercase tracking-tighter leading-none">Control de <span class="text-primary-dark">Acceso</span></h1>
+            <p class="text-[11px] text-stone-500 font-medium mt-3 max-w-xl leading-relaxed uppercase tracking-widest">
+                Administración de credenciales y roles. Protocolos restringidos para <span class="font-bold text-stone-800">Vendedores</span> y <span class="font-bold text-stone-800">Clientes</span>.
+            </p>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full table-auto">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">#</th>
-                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Cédula/RIF</th>
-                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Rol</th>
-                        <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">
-                            Contraseña
-                            @if(!auth()->user()->is_admin)
-                                <span class="material-symbols-outlined text-xs text-red-400 ml-1" title="Solo administradores">admin_panel_settings</span>
-                            @endif
-                        </th>
-                        <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
-                        <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($users as $index => $user)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-2 py-2 text-center text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
-                        <td class="px-2 py-2 text-sm font-mono text-gray-600">{{ $user->cedula_rif ?: '-' }}</td>
-                        <td class="px-2 py-2 text-sm font-medium text-gray-900">{{ $user->name }}</td>
-                        <td class="px-2 py-2 text-sm text-gray-500">{{ $user->email }}</td>
-                        <td class="px-2 py-2 text-sm text-gray-500">
-                            <span class="px-2 py-1 text-xs font-medium rounded-full
-                                @if($user->role === 'admin') bg-purple-100 text-purple-800
-                                @elseif($user->role === 'vendedor') bg-blue-100 text-blue-800
-                                @elseif($user->role === 'cliente') bg-green-100 text-green-800
-                                @else bg-gray-100 text-gray-800 @endif">
-                                {{ $user->role }}
-                            </span>
-                        </td>
-                        <td class="px-2 py-2 text-center text-sm text-gray-500">
-                            @if(auth()->user()->is_admin)
-                                <div class="flex items-center justify-center space-x-1">
-                                    <span id="password-{{ $user->id }}" class="font-mono text-sm select-none cursor-pointer" onclick="togglePassword({{ $user->id }})">••••••••</span>
-                                    <span class="material-symbols-outlined text-base text-gray-400 hover:text-gray-600 cursor-pointer transition-colors" onclick="togglePassword({{ $user->id }})" title="Hacer clic para mostrar/ocultar contraseña" id="eye-{{ $user->id }}">visibility_off</span>
-                                </div>
-                            @else
-                                <div class="flex items-center justify-center space-x-1">
-                                    <span class="text-gray-300 font-mono text-sm">••••••••</span>
-                                    <span class="material-symbols-outlined text-base text-gray-300" title="Solo administradores pueden ver contraseñas">visibility_off</span>
-                                </div>
-                            @endif
-                        </td>
-                        <td class="px-2 py-2 text-sm text-gray-500">
-                            <span class="px-2 py-1 text-xs font-medium rounded-full
-                                {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                {{ $user->is_active ? 'Activo' : 'Inactivo' }}
-                            </span>
-                        </td>
-                        <td class="px-2 py-2 text-center text-sm text-gray-500">
-                            <div class="flex space-x-1 justify-center">
-                                @if($user->role !== 'admin' || auth()->user()->is_admin)
-                                <button onclick="editUser({{ $user->id }})" class="p-1.5 text-blue-600 hover:bg-blue-100 rounded-md transition-colors" title="Editar usuario">
-                                    <span class="material-symbols-outlined text-base">edit</span>
-                                </button>
-                                @if($user->role !== 'admin')
-                                <button onclick="deleteUser({{ $user->id }}, '{{ addslashes($user->name) }}')" class="p-1.5 text-red-600 hover:bg-red-100 rounded-md transition-colors" title="Eliminar usuario">
-                                    <span class="material-symbols-outlined text-base">delete</span>
-                                </button>
-                                @endif
-                                @else
-                                <div class="p-1.5 text-gray-400" title="Usuario administrador - acciones restringidas">
-                                    <span class="material-symbols-outlined text-base">admin_panel_settings</span>
-                                </div>
-                                @endif
+        <div class="flex gap-3">
+            <button onclick="openCreateModal()" class="h-12 px-6 flex items-center justify-center gap-2 bg-stone-900 text-white font-black uppercase text-[10px] tracking-widest hover:bg-stone-800 transition-all rounded-lg shadow-xl shadow-stone-200">
+                <span class="material-symbols-outlined text-lg">person_add</span> Nuevo Operador
+            </button>
+        </div>
+    </header>
+
+    <!-- Stats Row Light -->
+    <div class="grid grid-cols-4 gap-6 mb-8">
+        <div class="bg-white border border-stone-200 p-6 rounded-xl shadow-sm">
+            <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] mb-1">Base de Usuarios</p>
+            <p class="text-2xl font-black text-stone-900 tracking-tighter">{{ $users->count() }} <span class="text-[10px] text-stone-400 font-bold ml-1 uppercase">Registros</span></p>
+        </div>
+        <div class="bg-white border border-stone-200 p-6 rounded-xl shadow-sm">
+            <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] mb-1">Administradores</p>
+            <p class="text-2xl font-black text-stone-900 tracking-tighter">{{ $users->where('role', 'admin')->count() }} <span class="text-[10px] text-stone-400 font-bold ml-1 uppercase">Privilegiados</span></p>
+        </div>
+        <div class="bg-white border border-stone-200 p-6 rounded-xl shadow-sm">
+            <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] mb-1">Áreas Operativas</p>
+            <p class="text-2xl font-black text-stone-900 tracking-tighter">{{ $users->pluck('departamento')->unique()->count() }} <span class="text-[10px] text-stone-400 font-bold ml-1 uppercase">Depts</span></p>
+        </div>
+        <div class="bg-white border border-stone-200 p-6 rounded-xl shadow-sm">
+            <p class="text-[9px] font-black text-stone-400 uppercase tracking-[0.2em] mb-1">Accesos Externos</p>
+            <p class="text-2xl font-black text-stone-900 tracking-tighter">{{ $users->whereIn('role', ['vendedor', 'cliente'])->count() }} <span class="text-[10px] text-stone-400 font-bold ml-1 uppercase">Restringidos</span></p>
+        </div>
+    </div>
+
+    <!-- Table Container Light -->
+    <div class="bg-white border border-stone-200 rounded-xl overflow-hidden shadow-sm">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-stone-50 border-b border-stone-200">
+                    <th class="py-4 px-6 text-[10px] font-black text-stone-500 uppercase tracking-[0.2em]">Identidad</th>
+                    <th class="py-4 px-6 text-[10px] font-black text-stone-500 uppercase tracking-[0.2em]">Departamento</th>
+                    <th class="py-4 px-6 text-[10px] font-black text-stone-500 uppercase tracking-[0.2em] text-center">Rol</th>
+                    <th class="py-4 px-6 text-[10px] font-black text-stone-500 uppercase tracking-[0.2em] text-center">Credenciales</th>
+                    <th class="py-4 px-6 text-[10px] font-black text-stone-500 uppercase tracking-[0.2em] text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-100">
+                @foreach($users as $user)
+                <tr class="hover:bg-stone-50/50 transition-colors group">
+                    <td class="py-5 px-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-stone-100 border border-stone-200 flex items-center justify-center text-stone-500 font-black text-[10px] uppercase">
+                                {{ substr($user->name, 0, 2) }}
                             </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                            <div>
+                                <p class="text-[12px] font-black text-stone-900 uppercase tracking-tight">{{ $user->name }}</p>
+                                <p class="text-[10px] text-stone-400 font-medium lowercase tracking-tight">{{ $user->email }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-5 px-6">
+                        <div class="flex flex-col">
+                            <span class="text-[11px] font-black text-stone-600 uppercase tracking-widest">{{ $user->departamento ?: 'GENERAL' }}</span>
+                            <span class="text-[8px] text-stone-400 uppercase tracking-tighter">ID: {{ $user->cedula_rif ?: 'N/A' }}</span>
+                        </div>
+                    </td>
+                    <td class="py-5 px-6 text-center">
+                        <span class="inline-block px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-widest border
+                            @if($user->role === 'admin') bg-primary/10 border-primary/20 text-primary-dark @else bg-stone-100 border-stone-200 text-stone-600 @endif">
+                            {{ $user->role }}
+                        </span>
+                    </td>
+                    <td class="py-5 px-6 text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <span id="pass-{{ $user->id }}" class="text-[12px] font-mono text-stone-300 tracking-[0.2em]">••••••••</span>
+                            <button onclick="togglePass({{ $user->id }}, '{{ $passwords[$user->email] ?? 'N/A' }}')" class="p-1.5 hover:text-primary transition-colors text-stone-400">
+                                <span class="material-symbols-outlined text-base">visibility</span>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="py-5 px-6 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button onclick="editUser('{{ base64_encode(json_encode($user)) }}')" class="w-8 h-8 flex items-center justify-center bg-stone-50 border border-stone-200 text-stone-400 hover:bg-stone-900 hover:text-white transition-all rounded-lg">
+                                <span class="material-symbols-outlined text-base">edit</span>
+                            </button>
+                            @if($user->email !== 'admin@lacima.com')
+                            <button onclick="deleteUser({{ $user->id }})" class="w-8 h-8 flex items-center justify-center bg-stone-50 border border-stone-200 text-stone-400 hover:bg-red-500 hover:text-white transition-all rounded-lg">
+                                <span class="material-symbols-outlined text-base">delete</span>
+                            </button>
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
+
+<!-- Modal Creation Light -->
+<div id="userModal" class="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-6">
+    <div class="bg-white w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-stone-200">
+        <div class="p-8 border-b border-stone-100 bg-stone-50">
+            <h3 class="text-2xl font-black text-stone-900 uppercase tracking-tighter" id="modalTitle">Nuevo <span class="text-primary-dark">Operador</span></h3>
+            <p class="text-[10px] text-stone-400 font-black uppercase tracking-widest mt-2">Configuración de credenciales institucionales.</p>
+        </div>
+        <form id="userForm" class="p-8 space-y-6">
+            @csrf
+            <input type="hidden" id="userId">
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[9px] font-black uppercase tracking-widest text-stone-400">Nombre Completo</label>
+                    <input type="text" name="name" id="userName" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl text-[12px] font-bold text-stone-900 outline-none focus:border-primary/50 transition-colors">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[9px] font-black uppercase tracking-widest text-stone-400">ID / Cédula / RIF</label>
+                    <input type="text" name="cedula_rif" id="userCedula" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl text-[12px] font-bold text-stone-900 outline-none focus:border-primary/50 transition-colors">
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[9px] font-black uppercase tracking-widest text-stone-400">Correo Institucional</label>
+                <input type="email" name="email" id="userEmail" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl text-[12px] font-bold text-stone-900 outline-none focus:border-primary/50 transition-colors">
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[9px] font-black uppercase tracking-widest text-stone-400">Contraseña (Mín. 6 caracteres)</label>
+                <input type="password" name="password" id="userPass" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl text-[12px] font-bold text-stone-900 outline-none focus:border-primary/50 transition-colors" placeholder="••••••••">
+                <p class="text-[8px] text-stone-400 uppercase tracking-tighter">Dejar en blanco para mantener la contraseña actual (solo en edición).</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[9px] font-black uppercase tracking-widest text-stone-400">Departamento</label>
+                    <select name="departamento" id="userDept" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl text-[10px] font-black text-stone-900 uppercase outline-none appearance-none">
+                        <option value="ADMINISTRACIÓN">ADMINISTRACIÓN</option>
+                        <option value="CONTABILIDAD">CONTABILIDAD</option>
+                        <option value="VENTAS">VENTAS</option>
+                        <option value="LOGÍSTICA">LOGÍSTICA</option>
+                        <option value="RECURSOS HUMANOS">RECURSOS HUMANOS</option>
+                        <option value="EXTERNO">EXTERNO (VENDEDOR/CLIENTE)</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[9px] font-black uppercase tracking-widest text-stone-400">Rol Operativo</label>
+                    <select name="role" id="userRole" class="w-full bg-stone-50 border border-stone-200 p-4 rounded-xl text-[10px] font-black text-stone-900 uppercase outline-none appearance-none">
+                        <option value="admin">ADMINISTRADOR</option>
+                        <option value="trabajador">TRABAJADOR</option>
+                        <option value="vendedor">VENDEDOR (LIMITADO)</option>
+                        <option value="cliente">CLIENTE (LIMITADO)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex gap-3 pt-6">
+                <button type="button" onclick="closeModal()" class="flex-1 h-12 bg-stone-100 text-stone-500 font-black uppercase text-[10px] tracking-widest hover:bg-stone-200 transition-all rounded-xl">Cancelar</button>
+                <button type="submit" class="flex-1 h-12 bg-stone-900 text-white font-black uppercase text-[10px] tracking-widest hover:bg-stone-800 transition-all rounded-xl shadow-lg">Guardar Operador</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
-
-<!-- Modal de Creación -->
-<div id="createModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3">
-            <h3 class="text-lg font-medium text-gray-900 mb-4">Crear Nuevo Usuario</h3>
-            <form id="createForm">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Cédula/RIF</label>
-                    <input type="text" id="createCedulaRif" name="cedula_rif" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="V-12345678 o J-12345678-9">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
-                    <input type="text" id="createName" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input type="email" id="createEmail" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
-                    <input type="password" id="createPassword" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required minlength="8">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Rol</label>
-                    <select id="createRole" name="role" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        <option value="trabajador">Trabajador</option>
-                        <option value="vendedor">Vendedor</option>
-                        <option value="cliente">Cliente</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="flex items-center">
-                        <input type="checkbox" id="createIsActive" name="is_active" class="mr-2" checked>
-                        <span class="text-sm font-medium text-gray-700">Usuario Activo</span>
-                    </label>
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" onclick="closeCreateModal()" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">Cancelar</button>
-                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Crear Usuario</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de Edición -->
-<div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3">
-            <h3 class="text-lg font-medium text-gray-900 mb-4">Editar Usuario</h3>
-            <form id="editForm">
-                <input type="hidden" id="editUserId" name="user_id">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Cédula/RIF</label>
-                    <input type="text" id="editCedulaRif" name="cedula_rif" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="V-12345678 o J-12345678-9">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                    <input type="text" id="editName" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input type="email" id="editEmail" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Rol</label>
-                    <select id="editRole" name="role" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        <option value="trabajador">Trabajador</option>
-                        <option value="vendedor">Vendedor</option>
-                        <option value="cliente">Cliente</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="flex items-center">
-                        <input type="checkbox" id="editIsActive" name="is_active" class="mr-2">
-                        <span class="text-sm font-medium text-gray-700">Usuario Activo</span>
-                    </label>
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">Cancelar</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Guardar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 @push('scripts')
 <script>
-// Array global de contraseñas
-const userPasswords = {
-    @foreach($users as $user)
-        @if(auth()->user()->is_admin)
-            {{ $user->id }}: '{{ $passwords[$user->email] ?? 'N/A' }}',
-        @endif
-    @endforeach
-};
-
-// Estado de visibilidad de contraseñas
-const passwordVisibility = {};
-
-// Función para alternar visibilidad de contraseña
-function togglePassword(userId) {
-    console.log('🔄 togglePassword ejecutada para usuario:', userId);
-
-    try {
-        // Obtener elementos
-        const passwordSpan = document.getElementById('password-' + userId);
-        const eyeIcon = document.getElementById('eye-' + userId);
-
-        if (!passwordSpan) {
-            console.error('❌ No se encontró el elemento password-' + userId);
-            return;
-        }
-
-        if (!eyeIcon) {
-            console.error('❌ No se encontró el elemento eye-' + userId);
-            return;
-        }
-
-        console.log('✅ Elementos encontrados correctamente');
-
-        // Inicializar estado si no existe
-        if (passwordVisibility[userId] === undefined) {
-            passwordVisibility[userId] = false;
-        }
-
-        // Obtener contraseña real
-        const realPassword = userPasswords[userId] || 'N/A';
-
-        // Alternar visibilidad
-        if (passwordVisibility[userId]) {
-            // Ocultar
-            passwordSpan.textContent = '••••••••';
-            eyeIcon.textContent = 'visibility_off';
-            passwordVisibility[userId] = false;
-            console.log('👁️ Contraseña OCULTA para usuario', userId);
+    function togglePass(id, pass) {
+        const span = document.getElementById('pass-' + id);
+        if(span.innerText === '••••••••') {
+            span.innerText = pass;
+            span.classList.remove('text-stone-300');
+            span.classList.add('text-primary-dark');
+            span.classList.add('font-bold');
         } else {
-            // Mostrar
-            passwordSpan.textContent = realPassword;
-            eyeIcon.textContent = 'visibility';
-            passwordVisibility[userId] = true;
-            console.log('👁️ Contraseña MOSTRADA para usuario', userId);
+            span.innerText = '••••••••';
+            span.classList.add('text-stone-300');
+            span.classList.remove('text-primary-dark');
+            span.classList.remove('font-bold');
         }
-
-    } catch (error) {
-        console.error('💥 Error en togglePassword:', error);
     }
-}
 
-// Debug inicial
-console.log('Script de contraseñas cargado correctamente');
-console.log('Contraseñas disponibles para', Object.keys(userPasswords).length, 'usuarios');
+    function openCreateModal() {
+        document.getElementById('modalTitle').innerHTML = 'Nuevo <span class="text-primary-dark">Operador</span>';
+        document.getElementById('userForm').reset();
+        document.getElementById('userId').value = '';
+        document.getElementById('userModal').classList.remove('hidden');
+    }
 
-// Función de prueba
-window.testFunction = function() {
-    console.log('Test function ejecutada');
-    alert('JavaScript funciona correctamente');
-};
+    function closeModal() {
+        document.getElementById('userModal').classList.add('hidden');
+    }
 
+    function editUser(userBase64) {
+        const user = JSON.parse(atob(userBase64));
+        document.getElementById('modalTitle').innerHTML = 'Editar <span class="text-primary-dark">Operador</span>';
+        document.getElementById('userId').value = user.id;
+        document.getElementById('userName').value = user.name;
+        document.getElementById('userEmail').value = user.email;
+        document.getElementById('userCedula').value = user.cedula_rif || '';
+        document.getElementById('userDept').value = user.departamento || 'ADMINISTRACIÓN';
+        document.getElementById('userRole').value = user.role;
+        document.getElementById('userPass').value = ''; // Reset password field
+        document.getElementById('userModal').classList.remove('hidden');
+    }
 
-function openCreateModal() {
-    // Limpiar el formulario
-    document.getElementById('createForm').reset();
-    document.getElementById('createIsActive').checked = true;
+    document.getElementById('userForm').onsubmit = function(e) {
+        e.preventDefault();
+        const id = document.getElementById('userId').value;
+        const url = id ? `/erp/configuracion/usuarios/${id}` : '/erp/configuracion/usuarios';
+        const method = id ? 'PUT' : 'POST';
+        
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
 
-    // Mostrar modal
-    document.getElementById('createModal').classList.remove('hidden');
-}
+        fetch(url, {
+            method: method,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(res => {
+            if(res.success) {
+                location.reload();
+            } else {
+                alert('Error: ' + (res.error || 'Verifique los datos'));
+            }
+        });
+    }
 
-function closeCreateModal() {
-    document.getElementById('createModal').classList.add('hidden');
-}
-
-function editUser(userId) {
-    // Buscar datos del usuario (simulado - en producción usar AJAX)
-    const row = document.querySelector(`button[onclick="editUser(${userId})"]`).closest('tr');
-    const cedulaRif = row.cells[1].textContent.trim() === '-' ? '' : row.cells[1].textContent.trim();
-    const name = row.cells[2].textContent.trim();
-    const email = row.cells[3].textContent.trim();
-    const roleText = row.cells[4].textContent.trim().toLowerCase();
-    // Saltar columna de contraseña (5) y obtener estado (6)
-    const statusText = row.cells[6].textContent.trim().toLowerCase();
-
-    // Mapear texto a valores
-    let role = 'trabajador';
-    if (roleText.includes('admin')) role = 'admin';
-    else if (roleText.includes('vendedor')) role = 'vendedor';
-    else if (roleText.includes('cliente')) role = 'cliente';
-
-    const isActive = statusText.includes('activo');
-
-    // Llenar el modal
-    document.getElementById('editUserId').value = userId;
-    document.getElementById('editCedulaRif').value = cedulaRif;
-    document.getElementById('editName').value = name;
-    document.getElementById('editEmail').value = email;
-    document.getElementById('editRole').value = role;
-    document.getElementById('editIsActive').checked = isActive;
-
-    // Mostrar modal
-    document.getElementById('editModal').classList.remove('hidden');
-}
-
-function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
-}
-
-// Formulario de creación
-document.getElementById('createForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-
-    fetch('/erp/configuracion/usuarios', {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Usuario creado exitosamente');
-            location.reload();
-        } else {
-            alert('Error: ' + (data.error || 'Error desconocido'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error al crear el usuario');
-    });
-});
-
-// Formulario de edición
-document.getElementById('editForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const userId = formData.get('user_id');
-
-    fetch('/erp/configuracion/usuarios/' + userId, {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'X-HTTP-Method-Override': 'PUT',
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Usuario actualizado exitosamente');
-            location.reload();
-        } else {
-            alert('Error: ' + (data.error || 'Error desconocido'));
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error al actualizar el usuario');
-    });
-});
-
-function deleteUser(userId, userName) {
-    if (confirm('¿Está seguro de que desea eliminar al usuario "' + userName + '"? Esta acción no se puede deshacer.')) {
-        if (confirm('¿CONFIRMA que desea eliminar permanentemente al usuario "' + userName + '"?')) {
-            // Enviar petición de eliminación
-            fetch('/erp/configuracion/usuarios/' + userId, {
+    function deleteUser(id) {
+        if(confirm('¿CONFIRMAR ELIMINACIÓN PERMANENTE?')) {
+            fetch(`/erp/configuracion/usuarios/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Usuario eliminado exitosamente');
-                    location.reload();
-                } else {
-                    alert('Error: ' + (data.error || 'Error desconocido'));
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al eliminar el usuario');
-            });
+            }).then(() => location.reload());
         }
     }
-}
 </script>
 @endpush

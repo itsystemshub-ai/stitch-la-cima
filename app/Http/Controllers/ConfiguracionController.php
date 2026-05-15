@@ -223,14 +223,19 @@ class ConfiguracionController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
                 'cedula_rif' => 'nullable|string|max:20',
-                'password' => 'required|string|min:8',
+                'departamento' => 'nullable|string|max:100',
+                'password' => 'required|string|min:6',
                 'role' => 'required|in:admin,vendedor,cliente,trabajador',
                 'is_active' => 'boolean',
             ]);
 
             $validated['password'] = bcrypt($validated['password']);
+            $validated['is_active'] = $request->has('is_active') ? $request->is_active : true;
 
-            \App\Models\User::create($validated);
+            $user = new \App\Models\User($validated);
+            $user->role = $validated['role'];
+            $user->is_active = $validated['is_active'] ?? true;
+            $user->save();
 
             return response()->json(['success' => 'Usuario creado exitosamente']);
 
@@ -244,21 +249,34 @@ class ConfiguracionController extends Controller
         try {
             $user = \App\Models\User::findOrFail($id);
 
-            $validated = $request->validate([
+            $rules = [
                 'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email|unique:users,email,' . $user->id,
                 'cedula_rif' => 'nullable|string|max:20',
-                'password' => 'required|string|min:8',
+                'departamento' => 'nullable|string|max:100',
                 'role' => 'required|in:admin,vendedor,cliente,trabajador',
                 'is_active' => 'boolean',
-            ]);
+            ];
+
+            if ($request->filled('password')) {
+                $rules['password'] = 'required|string|min:6';
+            }
+
+            $validated = $request->validate($rules);
 
             // No permitir cambiar el rol del admin principal
             if ($user->email === 'admin@lacima.com' && $validated['role'] !== 'admin') {
                 return response()->json(['error' => 'No se puede cambiar el rol del administrador principal'], 403);
             }
 
-            $user->update($validated);
+            if ($request->filled('password')) {
+                $validated['password'] = bcrypt($validated['password']);
+            }
+
+            $user->fill($validated);
+            $user->role = $validated['role'];
+            $user->is_active = $validated['is_active'] ?? $user->is_active;
+            $user->save();
 
             return response()->json(['success' => 'Usuario actualizado exitosamente']);
 

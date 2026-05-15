@@ -5,47 +5,76 @@ namespace App\Services;
 use App\Models\Account;
 use App\Models\AccountingEntry;
 use App\Models\AccountingEntryLine;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AccountingService
 {
     /**
-     * Crear un asiento contable.
-     * $lines: [['codigo' => '1.1.01', 'debe' => 100, 'haber' => 0], ...]
+     * Generar asiento contable automático desde una Orden de Venta.
      */
-    public function createEntry(string $concepto, string $fecha, array $lines)
+    public function createEntryFromOrder(Order $order)
     {
-        return DB::transaction(function () use ($concepto, $fecha, $lines) {
+        return DB::transaction(function () use ($order) {
+            // 1. Crear el Asiento (Cabecera)
             $entry = AccountingEntry::create([
-                'concepto' => $concepto,
-                'fecha' => $fecha,
-                'total_debe' => collect($lines)->sum('debe'),
-                'total_haber' => collect($lines)->sum('haber'),
-                'estado' => 'BORRADOR'
+                'numero' => 'AS-V-' . $order->numero_orden,
+                'fecha' => now(),
+                'concepto' => "Venta de Mercancía - Orden #{$order->numero_orden} - Cliente: {$order->customer->razon_social}",
+                'user_id' => Auth::id() ?? 1,
+                'tipo' => 'Ingreso',
             ]);
 
-            foreach ($lines as $line) {
-                // Si viene codigo, buscamos el id
-                if (isset($line['codigo'])) {
-                    $account = Account::where('codigo', $line['codigo'])->firstOrFail();
-                    $line['account_id'] = $account->id;
-                    unset($line['codigo']);
-                } else {
-                    $account = Account::findOrFail($line['account_id']);
-                }
+            // 2. Definir Cuentas (Búsqueda o Creación por defecto)
+            $ctaIngresos = $this->getAccount('4.1.01.01', 'Ventas de Repuestos', 'Ingreso');
+            $ctaCxC = $this->getAccount('1.1.02.01', 'Cuentas por Cobrar Clientes', 'Activo');
+            $ctaCosto = $this->getAccount('5.1.01.01', 'Costo de Ventas', 'Egreso');
+            $ctaInventario = $this->getAccount('1.2.01.01', 'Inventario de Mercancía', 'Activo');
 
-                $entry->lines()->create($line);
-                
-                // Actualizar saldo de la cuenta (Estrategia: +Debe, -Haber para activos)
-                // Dependiendo del tipo de cuenta, el saldo aumenta o disminuye.
-                // Simplificación: Incrementamos el saldo contable neto.
-                if (in_array($account->tipo, ['Activo', 'Costo', 'Gasto'])) {
-                    $neto = $line['debe'] - $line['haber'];
-                } else {
-                    $neto = $line['haber'] - $line['debe'];
-                }
-                
-                $account->increment('saldo', $neto);
+            // 3. Líneas del Asiento
+            
+            // Cargo a Cuentas por Cobrar (Debe)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaCxC->id,
+                'debe' => $order->total,
+                'haber' => 0,
+                'referencia' => $order->numero_orden,
+            ]);
+
+            // Abono a Ventas (Haber)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaIngresos->id,
+                'debe' => 0,
+                'haber' => $order->total,
+                'referencia' => $order->numero_orden,
+            ]);
+
+            // Asiento de Costo de Ventas (Opcional pero recomendado)
+            $costoTotal = $order->items->sum(function($item) {
+                return $item->cantidad * ($item->product->costo_compra ?? 0);
+            });
+
+            if ($costoTotal > 0) {
+                // Cargo a Costo de Ventas (Debe)
+                AccountingEntryLine::create([
+                    'entry_id' => $entry->id,
+                    'account_id' => $ctaCosto->id,
+                    'debe' => $costoTotal,
+                    'haber' => 0,
+                    'referencia' => 'COSTO-' . $order->numero_orden,
+                ]);
+
+                // Abono a Inventario (Haber)
+                AccountingEntryLine::create([
+                    'entry_id' => $entry->id,
+                    'account_id' => $ctaInventario->id,
+                    'debe' => 0,
+                    'haber' => $costoTotal,
+                    'referencia' => 'COSTO-' . $order->numero_orden,
+                ]);
             }
 
             return $entry;
@@ -53,61 +82,116 @@ class AccountingService
     }
 
     /**
-     * Registrar Contabilidad de Venta.
+     * Registro automático de Nómina.
      */
-    public function registerSale(float $subtotal, float $impuestos, string $referencia)
+    public function registerPayroll($neto, $deducciones, $periodo)
     {
-        $total = $subtotal + $impuestos;
-        $lines = [
-            ['codigo' => '1.1.01', 'debe' => $total, 'haber' => 0], // Caja
-            ['codigo' => '4.1.01', 'debe' => 0, 'haber' => $subtotal], // Ventas
-            ['codigo' => '2.1.02', 'debe' => 0, 'haber' => $impuestos], // IVA por Pagar
-        ];
+        return DB::transaction(function () use ($neto, $deducciones, $periodo) {
+            $entry = AccountingEntry::create([
+                'numero' => 'AS-NOM-' . date('Ym') . '-' . str_replace(' ', '-', $periodo),
+                'fecha' => now(),
+                'concepto' => "Pago de Nómina Periodo: {$periodo}",
+                'user_id' => Auth::id() ?? 1,
+                'tipo' => 'Egreso',
+            ]);
 
-        return $this->createEntry("Venta Realizada - REF: $referencia", now()->toDateString(), $lines);
+            $ctaGasto = $this->getAccount('6.1.01.01', 'Sueldos y Salarios', 'Egreso');
+            $ctaPasivo = $this->getAccount('2.1.03.01', 'Retenciones por Pagar', 'Pasivo');
+            $ctaBanco = $this->getAccount('1.1.01.01', 'Banco Principal', 'Activo');
+
+            $totalBruto = $neto + $deducciones;
+
+            // Gasto (Debe)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaGasto->id,
+                'debe' => $totalBruto,
+                'haber' => 0,
+                'referencia' => $periodo,
+            ]);
+
+            // Retenciones (Haber)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaPasivo->id,
+                'debe' => 0,
+                'haber' => $deducciones,
+                'referencia' => $periodo,
+            ]);
+
+            // Salida de Banco (Haber)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaBanco->id,
+                'debe' => 0,
+                'haber' => $neto,
+                'referencia' => $periodo,
+            ]);
+
+            return $entry;
+        });
     }
 
     /**
-     * Registrar Contabilidad de Compra.
+     * Registro automático de Compra de Inventario.
      */
-    public function registerPurchase(float $subtotal, float $impuestos, string $referencia)
+    public function registerPurchase($subtotal, $impuesto, $referencia)
     {
-        $total = $subtotal + $impuestos;
-        $lines = [
-            ['codigo' => '1.1.04', 'debe' => $subtotal, 'haber' => 0], // Inventarios
-            ['codigo' => '1.1.05', 'debe' => $impuestos, 'haber' => 0], // IVA Acreditable
-            ['codigo' => '1.1.01', 'debe' => 0, 'haber' => $total], // Caja (Pago Efectivo)
-        ];
+        return DB::transaction(function () use ($subtotal, $impuesto, $referencia) {
+            $entry = AccountingEntry::create([
+                'numero' => 'AS-COM-' . $referencia,
+                'fecha' => now(),
+                'concepto' => "Compra de Mercancía - Doc: {$referencia}",
+                'user_id' => Auth::id() ?? 1,
+                'tipo' => 'Egreso',
+            ]);
 
-        return $this->createEntry("Compra Proveedor - OC: $referencia", now()->toDateString(), $lines);
+            $ctaInventario = $this->getAccount('1.2.01.01', 'Inventario de Mercancía', 'Activo');
+            $ctaIvaCr = $this->getAccount('1.1.03.01', 'IVA Crédito Fiscal', 'Activo');
+            $ctaCxP = $this->getAccount('2.1.01.01', 'Cuentas por Pagar Proveedores', 'Pasivo');
+
+            // Inventario (Debe)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaInventario->id,
+                'debe' => $subtotal,
+                'haber' => 0,
+                'referencia' => $referencia,
+            ]);
+
+            // IVA (Debe)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaIvaCr->id,
+                'debe' => $impuesto,
+                'haber' => 0,
+                'referencia' => $referencia,
+            ]);
+
+            // Cuenta por Pagar (Haber)
+            AccountingEntryLine::create([
+                'entry_id' => $entry->id,
+                'account_id' => $ctaCxP->id,
+                'debe' => 0,
+                'haber' => $subtotal + $impuesto,
+                'referencia' => $referencia,
+            ]);
+
+            return $entry;
+        });
     }
 
-    /**
-     * Registrar Contabilidad de Nómina.
-     */
-    public function registerPayroll(float $montoTotal, float $deducciones, string $periodo)
+    private function getAccount($codigo, $nombre, $tipo)
     {
-        $salarioBruto = $montoTotal + $deducciones;
-        $lines = [
-            ['codigo' => '6.1.01', 'debe' => $salarioBruto, 'haber' => 0], // Gastos de Personal
-            ['codigo' => '1.1.01', 'debe' => 0, 'haber' => $montoTotal], // Caja (Pago Neto)
-            ['codigo' => '2.1.03', 'debe' => 0, 'haber' => $deducciones], // Retenciones por Pagar (Pasivo)
-        ];
-
-        return $this->createEntry("Pago de Nómina Periodo: $periodo", now()->toDateString(), $lines);
-    }
-
-    /**
-     * Obtener balance general resumido.
-     */
-    public function getBalanceSummary()
-    {
-        return [
-            'activo' => Account::where('tipo', 'ACTIVO')->sum('saldo'),
-            'pasivo' => Account::where('tipo', 'PASIVO')->sum('saldo'),
-            'patrimonio' => Account::where('tipo', 'PATRIMONIO')->sum('saldo'),
-            'ingresos' => Account::where('tipo', 'INGRESO')->sum('saldo'),
-            'egresos' => Account::where('tipo', 'EGRESO')->sum('saldo'),
-        ];
+        return Account::firstOrCreate(
+            ['codigo' => $codigo],
+            [
+                'nombre' => $nombre,
+                'tipo' => $tipo,
+                'nivel' => 4,
+                'movimiento' => true,
+                'auxiliar' => false,
+            ]
+        );
     }
 }

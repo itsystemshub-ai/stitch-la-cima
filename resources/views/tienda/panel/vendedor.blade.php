@@ -1,98 +1,130 @@
 @extends('tienda.panel.layout')
 @section('title', 'Panel Vendedor')
-@section('content')
-<div class="max-w-[1920px] mx-auto px-6 py-12">
-    <div class="mb-12">
-        <span class="text-primary font-black text-[10px] uppercase tracking-[0.4em] mb-2 block italic">División de Inteligencia Comercial</span>
-         <h2 class="text-3xl font-headline font-black text-stone-900 uppercase tracking-tighter italic">Panel de <span class="text-stone-300">Vendedor</span></h2>
+@section('panel_content')
+<div class="animate-reveal">
+    <header class="mb-20">
+        <div class="flex items-center gap-4 mb-4">
+            <span class="w-12 h-[1px] bg-black/10"></span>
+            <span class="text-stone-400 font-black text-[10px] uppercase tracking-[0.5em] italic">Comercial Intelligence Division</span>
+        </div>
+        <h1 class="text-6xl font-display font-black text-black uppercase tracking-tighter leading-none">
+            Commercial <span class="font-light text-stone-300 italic">Terminal</span>
+        </h1>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+        <!-- Luxury KPI: Total Sales -->
+        <div class="bg-white rounded-[48px] p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] border border-stone-100 group hover:scale-[1.02] transition-all duration-700">
+            <div class="flex justify-between items-start mb-8">
+                <p class="text-[10px] font-black text-stone-300 uppercase tracking-[0.4em] italic leading-none">Accumulated Volume</p>
+                <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-base">monitoring</span>
+                </div>
+            </div>
+            <p class="text-5xl font-display font-black text-black tracking-tighter leading-none mb-2">{{ $totalVentas }} <span class="text-[11px] text-stone-200 tracking-widest">UNIT</span></p>
+            <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest leading-none">Transacciones Totales</p>
+        </div>
+
+        <!-- Luxury KPI: Monthly Sales -->
+        <div class="bg-white rounded-[48px] p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] border border-stone-100 group hover:scale-[1.02] transition-all duration-700">
+            <div class="flex justify-between items-start mb-8">
+                <p class="text-[10px] font-black text-stone-300 uppercase tracking-[0.4em] italic leading-none">Monthly Performance</p>
+                <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-base">calendar_today</span>
+                </div>
+            </div>
+            <p class="text-5xl font-display font-black text-black tracking-tighter leading-none mb-2">{{ $ventasDelMes }} <span class="text-[11px] text-stone-200 tracking-widest">SALE</span></p>
+            <p class="text-[9px] font-bold text-stone-400 uppercase tracking-widest leading-none">Operaciones del Mes</p>
+        </div>
+
+        <!-- Luxury KPI: Commissions -->
+        <div class="bg-black rounded-[48px] p-12 shadow-2xl group hover:shadow-black/20 transition-all duration-700 relative overflow-hidden">
+            <div class="flex justify-between items-start mb-8 relative z-10">
+                <p class="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] italic leading-none">Net Incentives</p>
+                <span class="material-symbols-outlined text-white/20">payments</span>
+            </div>
+            <p class="text-4xl font-display font-black text-white tracking-tighter leading-none mb-2 relative z-10">$ {{ number_format($comisionTotal, 2) }}</p>
+            <p class="text-[9px] font-bold text-white/30 uppercase tracking-widest leading-none relative z-10">Comisión Acumulada</p>
+            
+            <div class="absolute -right-4 -bottom-4 opacity-5">
+                 <span class="material-symbols-outlined text-8xl text-white">diamond</span>
+            </div>
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <!-- KPI: Total Ventas -->
-        <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group">
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Volumen Acumulado</p>
-            <div class="flex items-end justify-between">
-                 <p class="text-2xl font-headline font-black text-stone-950 tracking-tighter leading-none">{{ $totalVentas }} <span class="text-[12px] text-stone-300">TRANSACCIONES</span></p>
-                <span class="material-symbols-outlined text-green-500 text-3xl">analytics</span>
+    <!-- Luxury Sales Table -->
+    <div class="bg-white rounded-[64px] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] border border-stone-100 overflow-hidden">
+        <div class="p-16 border-b border-stone-50 flex items-center justify-between bg-stone-50/30">
+            <div class="flex items-center gap-6">
+                <div class="w-1.5 h-12 bg-black rounded-full"></div>
+                <div>
+                    <h2 class="text-[18px] font-black text-black uppercase tracking-tight italic leading-none">Management Log</h2>
+                    <p class="text-[10px] font-bold text-stone-400 uppercase tracking-[0.3em] mt-2 italic">Registro de operaciones comerciales verificadas</p>
+                </div>
             </div>
+            <button class="text-[10px] font-black text-black uppercase tracking-[0.3em] bg-white border border-stone-200 px-10 py-5 rounded-full hover:bg-black hover:text-white transition-all duration-500 shadow-sm">Export Data</button>
         </div>
 
-        <!-- KPI: Ventas Mes -->
-        <div class="bg-white rounded-[32px] shadow-xl p-8 border border-stone-100 relative overflow-hidden group">
-            <p class="text-[10px] font-black text-stone-400 uppercase tracking-[0.3em] mb-4 italic">Cierre Mensual Actual</p>
-            <div class="flex items-end justify-between">
-                <p class="text-4xl font-headline font-black text-stone-950 tracking-tighter leading-none">{{ $ventasDelMes }} <span class="text-[12px] text-stone-300">OPERACIONES</span></p>
-                <span class="material-symbols-outlined text-primary text-3xl">calendar_month</span>
-            </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-[10px] font-black text-stone-300 uppercase tracking-[0.4em] italic">
+                        <th class="py-10 px-16">Transaction</th>
+                        <th class="py-10 px-16">Client Entity</th>
+                        <th class="py-10 px-16">Timestamp</th>
+                        <th class="py-10 px-16 text-right">Investment</th>
+                        <th class="py-10 px-16 text-center">Incentive</th>
+                        <th class="py-10 px-16 text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-stone-50">
+                    @forelse($misVentas as $venta)
+                    <tr class="group hover:bg-stone-50/50 transition-all">
+                        <td class="py-10 px-16">
+                            <span class="font-mono text-[12px] font-black text-stone-300 group-hover:text-black transition-colors">ZN-SL-{{ str_pad($venta->id, 6, '0', STR_PAD_LEFT) }}</span>
+                        </td>
+                        <td class="py-10 px-16">
+                            <div class="flex flex-col">
+                                <span class="text-[15px] font-black text-black uppercase tracking-tight leading-none mb-1">{{ $venta->customer->name ?? 'INSTITUTIONAL' }}</span>
+                                <span class="text-[9px] font-bold text-stone-300 uppercase tracking-widest leading-none">ID: {{ $venta->customer->document_number ?? '000000' }}</span>
+                            </div>
+                        </td>
+                        <td class="py-10 px-16">
+                            <span class="text-[11px] font-black text-stone-400 uppercase tracking-widest">{{ $venta->created_at->format('d/m/Y') }}</span>
+                        </td>
+                        <td class="py-10 px-16 text-right">
+                            <span class="text-2xl font-display font-black text-black tracking-tighter leading-none">$ {{ number_format($venta->total_amount, 2) }}</span>
+                        </td>
+                        <td class="py-10 px-16 text-center">
+                            <span class="inline-flex items-center font-mono text-[11px] font-black text-black bg-stone-100 px-4 py-2 rounded-lg border border-stone-200">+ $ {{ number_format($venta->commission_amount, 2) }}</span>
+                        </td>
+                        <td class="py-10 px-16 text-center">
+                            <span class="inline-flex items-center gap-3 px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border transition-all
+                                @if($venta->status == 'completed') bg-black text-white border-black 
+                                @elseif($venta->status == 'pending') bg-stone-50 text-stone-400 border-stone-200 
+                                @else bg-white text-red-500 border-red-100 @endif">
+                                {{ $venta->status }}
+                            </span>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="py-48 text-center">
+                            <div class="flex flex-col items-center gap-4">
+                                <span class="material-symbols-outlined text-5xl text-stone-100">receipt</span>
+                                <span class="text-[12px] font-black text-stone-200 uppercase tracking-[0.6em] italic">No Transactions Logged</span>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-
-        <!-- KPI: Comision -->
-        <div class="bg-stone-900 rounded-[32px] shadow-xl p-8 border border-white/5 relative overflow-hidden group">
-            <p class="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-4 italic">Liquidación de Comisiones</p>
-            <div class="flex items-end justify-between">
-                <p class="text-4xl font-headline font-black text-white tracking-tighter leading-none">$ {{ number_format($comisionTotal, 2) }}</p>
-                <span class="material-symbols-outlined text-primary text-3xl italic">payments</span>
-            </div>
-            <div class="absolute -right-4 -bottom-4 opacity-[0.05]">
-                     <span class="material-symbols-outlined text-4xl text-white">paid</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sales Table -->
-    <div class="bg-white rounded-[40px] shadow-2xl border border-stone-200 overflow-hidden relative">
-        <div class="p-10 border-b border-stone-50 flex justify-between items-center bg-stone-50/30">
-            <h3 class="text-[14px] font-black text-stone-900 uppercase tracking-[0.2em] italic flex items-center gap-3">
-                <span class="w-2 h-8 bg-primary rounded-full"></span>
-                Registro de Gestión Comercial
-            </h3>
-        </div>
-
-        <table class="w-full text-left zenith-table-main">
-            <thead class="zenith-table-header uppercase italic">
-                <tr>
-                    <th class="py-5 px-10">Referencia</th>
-                    <th class="py-5 px-10">Identidad Cliente</th>
-                    <th class="py-5 px-10">Fecha Registro</th>
-                    <th class="py-5 px-10 text-right">Inversión</th>
-                    <th class="py-5 px-10 text-center">Incentivo</th>
-                    <th class="py-5 px-10 text-center">Estado Gestión</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-stone-50">
-                @forelse($misVentas as $venta)
-                <tr class="bg-white hover:bg-stone-50/50 transition-colors group">
-                    <td class="py-6 px-10 font-mono text-[10.5px] font-bold text-stone-400 group-hover:text-primary tracking-tighter">ZEN-S-{{ str_pad($venta->id, 6, '0', STR_PAD_LEFT) }}</td>
-                    <td class="py-6 px-10 font-black uppercase text-stone-900 tracking-tight leading-none group-hover:translate-x-1 transition-transform">
-                        {{ $venta->customer->name ?? 'INSTITUCIONAL N/A' }}
-                    </td>
-                    <td class="py-6 px-10 text-stone-400 font-bold uppercase text-[10px] tracking-widest italic">
-                        {{ $venta->created_at->format('d/M/Y') }}
-                    </td>
-                    <td class="py-6 px-10 text-right font-mono text-[11px] font-bold text-stone-950 tracking-tighter">
-                        $ {{ number_format($venta->total_amount, 2) }}
-                    </td>
-                    <td class="py-6 px-10 text-center">
-                        <span class="text-green-600 font-mono text-[10.5px] font-black tracking-widest">+ $ {{ number_format($venta->commission_amount, 2) }}</span>
-                    </td>
-                    <td class="py-6 px-10 text-center">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border bg-stone-900 leading-none
-                            @if($venta->status == 'completed') text-green-500 border-green-500/20 
-                            @elseif($venta->status == 'pending') text-amber-500 border-amber-500/20 
-                            @elseif($venta->status == 'cancelled') text-red-500 border-red-500/20 
-                            @else text-stone-400 border-stone-800 @endif">
-                            <span class="w-1.5 h-1.5 rounded-full @if($venta->status == 'completed') bg-green-500 animate-pulse @elseif($venta->status == 'pending') bg-amber-500 @else bg-red-500 @endif"></span>
-                            {{ $venta->status }}
-                        </span>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="py-32 text-center text-stone-400 font-black uppercase tracking-[0.2em] italic text-[11px]">No se detectaron operaciones comerciales asignadas.</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
     </div>
 </div>
+
+<style>
+    @keyframes reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-reveal { animation: reveal 1s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+</style>
 @endsection

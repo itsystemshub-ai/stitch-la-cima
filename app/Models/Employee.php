@@ -16,6 +16,7 @@ class Employee extends Model
         'email',
         'telefono',
         'cargo',
+        'departamento',
         'salario',
         'fecha_ingreso',
         'tipo_contrato',

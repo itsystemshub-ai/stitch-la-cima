@@ -1,21 +1,21 @@
 @extends('erp.layouts.app')
 
-@section('title', 'Sincronizador Access | Mayor de Repuesto La Cima, C.A.')
-@section('breadcrumb_active', 'Sincronizador')
+@section('title', 'Cargador Universal | Mayor de Repuesto La Cima, C.A.')
+@section('breadcrumb_active', 'Importación de Datos')
 
 @section('content')
     <div class="px-5 py-6 border-b border-stone-200 bg-white flex justify-between items-center sticky top-0 z-40 shadow-sm rounded-t-2xl">
         <h1 class="text-lg font-headline font-black text-stone-900 flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary">sync</span>
-            Sincronización Avanzada (DB Legacy)
+            <span class="material-symbols-outlined text-primary">upload_file</span>
+            Cargador Universal de Datos (Excel/CSV)
         </h1>
     </div>
 
     <div class="p-6 md:p-10 max-w-4xl w-full">
         <div class="bg-white p-8 rounded-b-2xl rounded-tr-2xl shadow-sm border border-stone-200">
             <div class="mb-8">
-                <h2 class="text-base font-headline font-bold text-stone-900 mb-2">Motor de Extracción ODBC (Access -> MySQL)</h2>
-                <p class="text-[12px] text-stone-500">Sube el archivo <code>CIMA2026.accdb</code> para sincronizar automáticamente el Inventario, Clientes y Lista de Precios de tu sistema Legacy a la nube.</p>
+                <h2 class="text-base font-headline font-bold text-stone-900 mb-2">Motor de Importación Inteligente</h2>
+                <p class="text-[12px] text-stone-500">Sube tus archivos de Excel (.xlsx) o CSV para actualizar masivamente el Inventario, Clientes y Vendedores directamente en la base de datos del ERP.</p>
             </div>
 
             <!-- Zona de Carga -->
@@ -24,13 +24,13 @@
                 <meta name="csrf-token" content="{{ csrf_token() }}">
 
                 <div class="border-2 border-dashed border-stone-300 rounded-xl p-10 text-center hover:bg-stone-50 transition-colors">
-                    <span class="material-symbols-outlined text-5xl text-stone-400 mb-4 block">database</span>
-                    <h3 class="text-stone-900 font-bold mb-1">Cargar Archivo Microsoft Access</h3>
-                    <p class="text-xs text-stone-500 mb-4">Soporta: .accdb o .mdb (Max 100MB)</p>
+                    <span class="material-symbols-outlined text-5xl text-stone-400 mb-4 block">cloud_upload</span>
+                    <h3 class="text-stone-900 font-bold mb-1">Cargar Archivo de Datos</h3>
+                    <p class="text-xs text-stone-500 mb-4">Soporta: .xlsx, .csv (Max 50MB)</p>
                     
-                    <input type="file" id="accdbFile" accept=".accdb, .mdb" class="hidden">
+                    <input type="file" id="accdbFile" accept=".xlsx, .csv" class="hidden">
                     <button type="button" onclick="document.getElementById('accdbFile').click()" class="bg-black text-white px-6 py-2 rounded-lg text-sm font-bold shadow-md hover:-translate-y-0.5 transition-transform">
-                        Seleccionar Archivo
+                        Seleccionar Excel o CSV
                     </button>
                     <p id="fileNameDisplay" class="mt-4 text-xs font-mono font-bold text-primary bg-black inline-block px-2 py-1 rounded hidden"></p>
                 </div>
@@ -87,28 +87,29 @@
             progressBar.style.width = '30%';
 
             const formData = new FormData();
-            formData.append('accdb_file', fileInput.files[0]);
+            formData.append('file', fileInput.files[0]);
 
             try {
                 // Animación simulada de procesamiento antes del request real
                 setTimeout(() => { progressBar.style.width = '60%'; }, 1000);
 
-                // Fetch a nuestra API route asegurada
-                const response = await fetch('/erp/sync/upload-accdb', {
+                const response = await fetch('/sync/import-entities', {
                     method: 'POST',
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: formData
                 });
 
                 const data = await response.json();
-                progressBar.style.width = '100%';
                 
-                resultMessage.classList.remove('hidden', 'bg-red-50', 'text-red-700');
-                if (response.ok) {
+                if (data.success) {
+                    progressBar.style.width = '100%';
+                    progressBar.classList.remove('bg-primary');
+                    progressBar.classList.add('bg-green-500');
+                    resultMessage.classList.remove('hidden', 'bg-red-50', 'text-red-700');
                     resultMessage.classList.add('bg-green-50', 'text-green-700');
-                    resultMessage.innerHTML = `<span class="material-symbols-outlined align-middle mr-2">check_circle</span> ${data.message}`;
+                    resultMessage.innerHTML = `<span class="material-symbols-outlined align-middle mr-2">check_circle</span> ¡Éxito! Se han importado los clientes y vendedores correctamente.`;
                 } else {
                     throw new Error(data.message || 'Error en validación Server');
                 }

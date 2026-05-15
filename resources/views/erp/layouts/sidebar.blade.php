@@ -34,7 +34,6 @@
       <div class="submenu {{ Request::is('erp/inventario*') ? 'show' : '' }}">
         <a href="{{ url('/erp/inventario') }}" class="{{ Request::is('erp/inventario') ? 'active-link' : '' }}"><span class="material-symbols-outlined">dashboard</span> Dashboard</a>
         <a href="{{ url('/erp/inventario/productos') }}" class="{{ Request::is('erp/inventario/productos*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">category</span> Productos</a>
-        <a href="{{ url('/erp/inventario/busqueda-ia') }}" class="{{ Request::is('erp/inventario/busqueda-ia*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">psychology</span> Búsqueda IA</a>
         <a href="{{ url('/erp/inventario/desarrollo') }}" class="{{ Request::is('erp/inventario/desarrollo*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">biotech</span> Desarrollo</a>
         <a href="{{ url('/erp/inventario/lista-precios') }}" class="{{ Request::is('erp/inventario/lista-precios*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">payments</span> Lista de Precios</a>
         <a href="{{ url('/erp/inventario/kardex') }}" class="{{ Request::is('erp/inventario/kardex*') ? 'active-link' : '' }}"><span class="material-symbols-outlined">receipt_long</span> Kardex</a>

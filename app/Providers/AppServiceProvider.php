@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Notification;
 use App\Models\StockMovement;
+use App\Models\Order;
 use App\Observers\StockMovementObserver;
+use App\Observers\OrderObserver;
 use App\Console\Commands\ServeCommand;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,12 +40,14 @@ class AppServiceProvider extends ServiceProvider
         }
         
         StockMovement::observe(StockMovementObserver::class);
+        Order::observe(OrderObserver::class);
 
-        View::composer('*', function ($view) {
+        View::composer('erp.layouts.*', function ($view) {
             try {
                 if (auth()->check() && Schema::hasTable('notifications')) {
-                    $view->with('unreadNotificationsCount', Notification::where('user_id', auth()->id())->where('read', false)->count());
-                    $view->with('latestNotifications', Notification::where('user_id', auth()->id())->latest()->take(5)->get());
+                    $userId = auth()->id();
+                    $view->with('unreadNotificationsCount', Notification::where('user_id', $userId)->where('read', false)->count());
+                    $view->with('latestNotifications', Notification::where('user_id', $userId)->latest()->take(5)->get());
                 } else {
                     $view->with('unreadNotificationsCount', 0);
                     $view->with('latestNotifications', collect());

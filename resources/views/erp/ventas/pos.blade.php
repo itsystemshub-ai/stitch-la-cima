@@ -57,7 +57,16 @@
         </div>
     </div>
 
-    <div class="flex gap-4 mb-1 relative z-10">
+    <div class="flex gap-4 mb-1 relative z-10 items-center">
+        <!-- BCV Rate Monitor -->
+        <div class="flex flex-col items-end mr-6 bg-white/5 px-6 py-3 rounded-2xl border border-white/5">
+            <span class="text-[8px] font-black text-primary uppercase tracking-[0.3em] mb-1">Tasa BCV (Ref)</span>
+            <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-xl font-black text-white tracking-widest">Bs. {{ number_format($currentRate, 2) }}</span>
+            </div>
+        </div>
+
         <button id="tour-quick-tour" onclick="startErpTour()" class="h-14 px-8 flex items-center justify-center gap-3 bg-primary/10 border border-primary/20 text-primary font-black uppercase text-[10px] tracking-widest hover:bg-primary hover:text-stone-900 transition-all rounded-xl">
             <span class="material-symbols-outlined text-lg">auto_awesome</span> Quick Tour
         </button>
@@ -192,7 +201,10 @@
             <div class="bg-primary/5 border border-primary/20 p-10 rounded-3xl relative overflow-hidden group shadow-2xl">
                 <div class="absolute inset-0 bg-primary/5 group-hover:scale-110 transition-transform duration-700"></div>
                 <p class="text-xs font-black text-primary uppercase tracking-[0.4em] mb-4 relative z-10">Total a Liquidar</p>
-                <p class="text-7xl font-black text-white tracking-tighter relative z-10">$ 1,287<span class="text-primary">.60</span></p>
+                <div class="flex flex-col">
+                    <p class="text-7xl font-black text-white tracking-tighter relative z-10">$ 1,287<span class="text-primary">.60</span></p>
+                    <p class="text-xl font-black text-stone-400 tracking-widest relative z-10 mt-2">Bs. {{ number_format(1287.60 * $currentRate, 2) }}</p>
+                </div>
             </div>
             
             <div id="tour-pos-total" class="space-y-6">

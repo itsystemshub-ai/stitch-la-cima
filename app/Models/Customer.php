@@ -13,11 +13,14 @@ class Customer extends Model
         'user_id',
         'rif',
         'razon_social',
+        'email',
         'telefono',
         'direccion',
         'tipo_cliente',
         'limite_credito',
         'vendedor_id',
+        'region',
+        'estado',
         'activo',
     ];
 

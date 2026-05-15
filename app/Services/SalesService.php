@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\StockMovement;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class SalesService
 {
@@ -26,20 +27,22 @@ class SalesService
     {
         return DB::transaction(function () use ($customerId, $items) {
             $subtotal = 0;
+            $productMap = [];
             
             foreach ($items as $item) {
-                $product = Product::find($item['product_id']);
+                $product = Product::findOrFail($item['product_id']);
                 if ($product->stock_actual < $item['cantidad']) {
                     throw new \Exception("Stock insuficiente para: {$product->nombre}");
                 }
                 $subtotal += $item['cantidad'] * $item['precio_unitario'];
+                $productMap[$product->id] = $product;
             }
 
             $impuesto = $subtotal * 0.16;
             $total = $subtotal + $impuesto;
 
             $order = Order::create([
-                'numero_orden' => 'ORD-' . date('Ymd') . '-' . str_pad(Order::count() + 1, 4, '0', STR_PAD_LEFT),
+                'numero_orden' => Order::generateNextNumber('ORD', 'numero_orden'),
                 'customer_id' => $customerId,
                 'vendedor_id' => Auth::id(),
                 'subtotal' => $subtotal,
@@ -51,10 +54,10 @@ class SalesService
             ]);
 
             // INTERFAZ CONTABLE: Registro automático del asiento
-            $this->accountingService->registerSale($subtotal, $impuesto, $order->numero_orden);
+            $this->accountingService->createEntryFromOrder($order);
 
             foreach ($items as $item) {
-                $product = Product::find($item['product_id']);
+                $product = $productMap[$item['product_id']];
                 $lineSubtotal = $item['cantidad'] * $item['precio_unitario'];
 
                 OrderItem::create([
@@ -114,5 +117,102 @@ class SalesService
         }
 
         return $mix;
+    }
+
+    /**
+     * Obtener reporte de ventas por período.
+     */
+    public function getSalesReport(string $periodo = 'mes')
+    {
+        $query = Order::query();
+        
+        switch ($periodo) {
+            case 'dia':
+                $query->whereDate('created_at', today());
+                break;
+            case 'semana':
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+                break;
+            case 'mes':
+            default:
+                $query->whereMonth('created_at', now()->month);
+                break;
+        }
+
+        $ventas = $query->select(
+            DB::raw('created_at'),
+            DB::raw('total')
+        )
+        ->orderBy('created_at')
+        ->get()
+        ->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('Y-m-d');
+        })
+        ->map(function($day) {
+            return [
+                'fecha' => Carbon::parse($day[0]->created_at)->format('Y-m-d'),
+                'total_ordenes' => $day->count(),
+                'monto_total' => $day->sum('total')
+            ];
+        })
+        ->values();
+
+        $total_ventas = $query->sum('total');
+        $total_ordenes = $query->count();
+
+        // Tendencia mensual (últimos 12 meses) - Refactorizado para ser agnóstico (Procesado en PHP)
+        $monthlyTrend = Order::where('created_at', '>=', now()->subYear())
+            ->get()
+            ->groupBy(function($order) {
+                return $order->created_at->format('m');
+            })
+            ->map(function($month, $key) {
+                return (object)[
+                    'mes' => $key,
+                    'total' => $month->sum('total')
+                ];
+            })
+            ->values();
+
+        return compact('ventas', 'total_ventas', 'total_ordenes', 'monthlyTrend');
+    }
+
+    /**
+     * Obtener reporte detallado de ganancias (BI).
+     */
+    public function getProfitReport()
+    {
+        $mesActual = now()->month;
+        $anioActual = now()->year;
+
+        $reporte = OrderItem::join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->join('products', 'order_items.product_id', '=', 'products.id')
+            ->whereMonth('orders.created_at', $mesActual)
+            ->whereYear('orders.created_at', $anioActual)
+            ->where('orders.estado', 'Pagado')
+            ->select(
+                DB::raw('SUM(order_items.subtotal) as ingresos_brutos'),
+                DB::raw('SUM(order_items.cantidad * products.costo_compra) as total_costo'),
+                DB::raw('SUM(order_items.subtotal - (order_items.cantidad * products.costo_compra)) as ganancia_neta'),
+                DB::raw('COUNT(DISTINCT orders.id) as total_ventas')
+            )
+            ->first();
+
+        $ventasGrafico = Order::whereMonth('created_at', $mesActual)
+            ->whereYear('created_at', $anioActual)
+            ->where('estado', 'Pagado')
+            ->get()
+            ->groupBy(function($order) {
+                return $order->created_at->format('Y-m-d');
+            })
+            ->map(function($day, $key) {
+                return (object)[
+                    'fecha' => $key,
+                    'total' => $day->sum('total')
+                ];
+            })
+            ->values();
+
+        return compact('reporte', 'ventasGrafico');
     }
 }

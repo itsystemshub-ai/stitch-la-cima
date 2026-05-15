@@ -17,9 +17,8 @@ class AuthMiddleware
 
         $user = Auth::user();
 
-        if ($user->role === 'cliente') {
-            return redirect('/tienda/mi-cuenta')->with('error', 'No tienes acceso al sistema ERP.');
-        }
+        // Permitir clientes pero el sistema los redirigirá a su área específica en las rutas
+        // o a través del LoginController. Solo bloqueamos si no están activos.
 
         if ($user->is_active === false) {
             Auth::logout();

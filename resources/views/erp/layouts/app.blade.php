@@ -33,7 +33,18 @@
 <x-smart-navigator />
 @endif
 
-@include('erp.layouts.sidebar')
+@php
+    $sidebar = 'erp.layouts.sidebar'; // Default Admin
+    if (auth()->check()) {
+        if (auth()->user()->role === 'vendedor') {
+            $sidebar = 'erp.layouts.sidebar-vendedor';
+        } elseif (auth()->user()->role === 'cliente') {
+            $sidebar = 'erp.layouts.sidebar-cliente';
+        }
+    }
+@endphp
+
+@include($sidebar)
 
 @include('erp.layouts.header')
 

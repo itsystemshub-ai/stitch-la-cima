@@ -10,10 +10,8 @@ use App\Models\Customer;
 
 class UserPanelController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware("auth");
-    }
+    // Constructor eliminado ya que el middleware se maneja en las rutas
+
 
     public function index()
     {
@@ -54,6 +52,10 @@ class UserPanelController extends Controller
         $user = Auth::user();
         $customer = $user->customer;
 
+        if (!$customer) {
+            return redirect('/tienda/index')->with('error', 'Su cuenta no tiene un perfil comercial asociado.');
+        }
+
         $orders = Order::where("customer_id", $customer->id)
             ->orderBy("created_at", "desc")
             ->paginate(10);
@@ -65,6 +67,10 @@ class UserPanelController extends Controller
     {
         $user = Auth::user();
         $customer = $user->customer;
+
+        if (!$customer) {
+            return redirect('/tienda/index')->with('error', 'Acceso restringido.');
+        }
 
         $order = Order::where("customer_id", $customer->id)
             ->with("items.product")
@@ -144,8 +150,10 @@ class UserPanelController extends Controller
             ->where("estado", "Pagado")
             ->sum("total");
 
+        $comisionTotal = $ventasCobradas * 0.05; // 5% de comisión por defecto
+
         return view("tienda.panel.vendedor", compact(
-            "user","misVentas","totalVentas","ventasDelMes","ventasCobradas"
+            "user","misVentas","totalVentas","ventasDelMes","ventasCobradas","comisionTotal"
         ));
     }
 

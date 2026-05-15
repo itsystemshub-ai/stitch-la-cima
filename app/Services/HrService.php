@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\Employee;
 use App\Models\Payroll;
 use App\Models\Notification;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -38,10 +40,34 @@ class HrService
             $periodTotalPagar = 0;
             $periodTotalDeducciones = 0;
 
+            // Pre-calcular comisiones de todos los vendedores para este mes
+            $emails = $employees->pluck('email')->filter()->toArray();
+            $sellerUsers = User::whereIn('email', $emails)->get()->keyBy('email');
+            $sellerIds = $sellerUsers->pluck('id')->toArray();
+
+            $commissions = Order::whereIn('vendedor_id', $sellerIds)
+                ->where('estado', 'Pagado')
+                ->whereMonth('created_at', now()->month)
+                ->whereYear('created_at', now()->year)
+                ->select('vendedor_id', DB::raw('SUM(total) as total_ventas'))
+                ->groupBy('vendedor_id')
+                ->get()
+                ->keyBy('vendedor_id');
+
             foreach ($employees as $employee) {
                 $salarioBase = $employee->salario;
                 $bonos = 0; 
-                $deducciones = $salarioBase * 0.04; 
+                
+                // CÁLCULO DE COMISIONES
+                if ($employee->cargo === 'Vendedor Externo' || $employee->cargo === 'Vendedor') {
+                    $user = $sellerUsers->get($employee->email);
+                    if ($user && isset($commissions[$user->id])) {
+                        $ventasMes = $commissions[$user->id]->total_ventas;
+                        $bonos = $ventasMes * 0.05; // 5% de comisión por defecto
+                    }
+                }
+
+                $deducciones = $salarioBase * 0.04; // 4% S.S.O y otros
                 $totalPagar = $salarioBase + $bonos - $deducciones;
 
                 $periodTotalPagar += $totalPagar;

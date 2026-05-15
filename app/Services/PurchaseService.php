@@ -28,7 +28,7 @@ class PurchaseService
             $total = $subtotal + $impuesto;
 
             $orden = PurchaseOrder::create([
-                'numero_orden' => 'OC-' . date('Ymd') . '-' . str_pad(PurchaseOrder::count() + 1, 4, '0', STR_PAD_LEFT),
+                'numero_orden' => PurchaseOrder::generateNextNumber('OC', 'numero_orden'),
                 'supplier_id' => $supplierId,
                 'user_id' => Auth::id(),
                 'subtotal' => $subtotal,

@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
+use App\Traits\GeneratesDocumentNumbers;
+
 class Order extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory, LogsActivity, GeneratesDocumentNumbers;
 
     protected $fillable = [
         'numero_orden',

@@ -36,13 +36,14 @@ class TiendaAuthController extends Controller
 
         DB::transaction(function () use ($validated, &$user) {
             // 1. Crear el Auth User Base
-            $user = User::create([
+            $user = new User([
                 'name' => $validated['razon_social'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
-                'role' => 'cliente',
-                'is_active' => true,
             ]);
+            $user->role = 'cliente';
+            $user->is_active = true;
+            $user->save();
 
             // 2. Crear el Perfil "Customer"
             Customer::create([
